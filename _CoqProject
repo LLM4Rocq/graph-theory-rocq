@@ -39,3 +39,6 @@ theories/applications/k5/obstructions.v
 theories/applications/k5/coverage.v
 theories/applications/k5/k5_upper.v
 theories/applications/k5/main.v
+
+# --- the CK3 application (M7+) ---
+theories/applications/ck3/lemma7.v

@@ -113,6 +113,14 @@ rewrite -{3}(cat_take_drop j.+1 s) last_cat.
 by rewrite (last_take x jlt).
 Qed.
 
+(** Endpoint of a prefix, on the (x :: s) indexing. *)
+Lemma take_path_last x s j : j <= size s ->
+  last x (take j s) = nth x (x :: s) j.
+Proof.
+case: j => [|j] jle; first by rewrite take0.
+exact: last_take.
+Qed.
+
 Lemma dipath_take x s n : dipath x s -> dipath x (take n s).
 Proof.
 case/andP=> ps us; rewrite /dipath.
@@ -276,6 +284,20 @@ Qed.
 End DiPathDef.
 
 Arguments ell D : clear implicits.
+
+(** [prev] of the head of a uniq seq is its last element (eqType-level
+    helper for cycle predecessor reasoning). *)
+Lemma prev_head (T : eqType) (c : seq T) (y : T) :
+  uniq c -> 0 < size c -> prev c (head y c) = last y c.
+Proof.
+case: c => //= h t /andP[hNt _] _.
+rewrite /prev.
+have helper : forall t' w, h \notin t' -> prev_at h h w t' = last w t'.
+  elim=> [|h2 t' IH] w /=; first by rewrite eqxx.
+  rewrite inE negb_or => /andP[hDh2 hNt'].
+  by rewrite (negbTE hDh2) IH.
+exact: helper.
+Qed.
 
 (** ** M-ℓ: ℓ is monotone under injective arc-preserving embeddings *)
 
