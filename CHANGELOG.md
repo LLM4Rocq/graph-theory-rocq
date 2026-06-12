@@ -5,6 +5,33 @@ The format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added — the statement-audit site + PDF (PLAN_WEB M18–M21), 2026-06-12
+- **`https://llm4rocq.github.io/digraph-theory/` — the interactive
+  blueprint site** (rocqblueprint, deployed by
+  `.github/workflows/blueprint.yml` with coqdoc under `/doc` and the
+  companion PDF at `/digraph_formal.pdf`): one page per headline result
+  with the verbatim formal statement, a Decoded paragraph, and
+  `uses`-links to every definition the statement depends on; clickable
+  dependency graph; **no proofs shown** (all results axiom-free).
+- **`docs/formal/digraph_formal.pdf`** — the same content as a
+  self-contained PDF: primer on reading formal statements, the
+  23-entry Dictionary with faithfulness notes, the six result
+  chapters with generated "Everything this statement needs" panels,
+  MathComp glossary, 474-entry auto-generated catalog.
+- **The audit contract** (`scripts/`): `statement_closure.py` computes
+  each catalog result's statement-dependency closure from the build's
+  `.glob` files (statements only — never proofs) and gates CI: every
+  closure constant must map to a Dictionary entry
+  (`docs/web/defblocks.json`); `extract_quotes.py` extracts all
+  verbatim quotes from source at build time; `gen_panels.py` /
+  `gen_blueprint.py` generate the panels and the site chapters from
+  the same data; `extract_catalog.py` the catalog; `axiom_audit.py`
+  re-verifies `Print Assumptions` for all 33 catalog results in CI;
+  the deploy workflow regenerates everything and fails on any diff
+  with the committed artifacts.
+- Plan: `docs/PLAN_WEB.md` (D16–D20 resolved: rocqblueprint, 33-result
+  catalog, glob-derived closures, GitHub Pages, PDF-first content).
+
 ### Added — K34 M13–M17 (the unified k = 3, 4, 5 theorem), 2026-06-12
 - **`applications/unified.v` — the headline (`conjecture_5_10_at_345`):
   for every k ∈ {3, 4, 5} there are infinitely many k-ω̄-critical

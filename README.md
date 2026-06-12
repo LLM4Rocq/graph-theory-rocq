@@ -103,6 +103,25 @@ self-contained proof dossier in `docs/ck3_dossier.md`.
 | Application (CK3) | `applications/ck3/{lemma7,ck3_main}` ✅ + `core/{oriented,dipath}` ✅, `invariants/strong` ✅ | M7–M12 |
 | Application (k=4) + unified | `applications/k4/{k4_lower,k4_value,k4_del,k4_main}` ✅, `applications/{acn_bands,unified}` ✅ | M13–M17 |
 
+## For mathematicians: the statement-audit site and PDF
+
+**You do not need Rocq to check what was proved.**
+The interactive site
+
+> **https://llm4rocq.github.io/digraph-theory/**
+
+gives one page per headline result with the *verbatim* formal
+statement, a plain-mathematics decoding, and links to **every**
+definition the statement depends on (with faithfulness notes), plus a
+clickable dependency graph — and no proofs (the kernel checked those;
+every result is axiom-free). The same content with a notation primer
+and the full declaration catalog is the companion PDF
+[`digraph_formal.pdf`](https://llm4rocq.github.io/digraph-theory/digraph_formal.pdf)
+(source in [`docs/formal/`](docs/formal/)). The definition lists are
+*generated from the compiled library* and CI fails if a statement's
+dependency closure ever escapes the documented dictionary
+(`scripts/statement_closure.py`, see [`docs/PLAN_WEB.md`](docs/PLAN_WEB.md)).
+
 ## Build
 
 Requires Rocq/Coq ≥ 8.19, MathComp ≥ 2.5.0, mathcomp-classical ≥ 1.16.0,

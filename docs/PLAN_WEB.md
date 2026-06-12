@@ -32,8 +32,13 @@ by `.github/workflows/blueprint.yml` to
 nearly verbatim; what is *new* here is the statement-closure machinery
 (item 4) — the eulerian site is narrative-first, ours is result-first.
 
-**Status:** v1.0 (2026-06-12) — decisions D16–D20 pending sign-off.
-Milestones **M18–M21**.
+**Status:** v1.1 (2026-06-12) — **ALL MILESTONES M18–M21 COMPLETE**
+(D16–D20 resolved with the recommended options). Exits: the closure
+extractor + audit gate (33 results, 41 constants, 23 def-blocks,
+8 tests), `docs/formal/digraph_formal.pdf` (47 pp), the blueprint site
+(builds locally; deployed by `.github/workflows/blueprint.yml` with
+coqdoc + PDF), CI gates: closure coverage, artifact freshness,
+axiom audit (33/33 closed).
 
 ---
 

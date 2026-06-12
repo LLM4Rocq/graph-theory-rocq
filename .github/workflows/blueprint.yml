@@ -49,6 +49,9 @@ jobs:
               git -c core.fileMode=false diff --exit-code -- \
                 docs/web docs/formal/lemma_catalog.tex blueprint/src
             endGroup
+            startGroup "Axiom audit: every catalog result closed"
+              python3 scripts/axiom_audit.py
+            endGroup
             startGroup "Generate coqdoc"
               make html || make -f Makefile.coq html
             endGroup
