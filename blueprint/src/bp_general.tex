@@ -17,7 +17,7 @@ Theorem omegabar_lexprod_ge :
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants_advanced/substitution.v\#L168}{Source: \code{theories/invariants\_advanced/substitution.v:168}}
 
 
-\paragraph{Decoded.} $\bar\omega(S) + \bar\omega(H) \le \bar\omega(S[H]) + 1$ for any
+\par\textbf{Decoded.} $\bar\omega(S) + \bar\omega(H) \le \bar\omega(S[H]) + 1$ for any
 tournaments $S, H$ (quoted inside a section fixing nonempty
 \code{S}, \code{H}): substitution composes criticality
 levels. This is what makes the tower $\mathrm{AC}_n \to
@@ -41,7 +41,7 @@ Theorem vt_kcritical (k : nat) (v0 : T) :
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants_advanced/transitive.v\#L57}{Source: \code{theories/invariants\_advanced/transitive.v:57}}
 
 
-\paragraph{Decoded.} In a vertex-transitive tournament all single-vertex deletions have
+\par\textbf{Decoded.} In a vertex-transitive tournament all single-vertex deletions have
 the same $\bar\omega$ (second statement), so $k$-criticality reduces
 to the value of $\bar\omega(T)$ and of one deletion
 $\bar\omega(T - v_0)$ (first statement, a Boolean equivalence).
@@ -78,7 +78,7 @@ Theorem domnum_le_omegabar : domnum <= ω̄(T).
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/domination.v\#L114}{Source: \code{theories/invariants/domination.v:114}}
 
 
-\paragraph{Decoded.} $\mathrm{dom}(T) \le \bar\omega(T)$ for every tournament: a minimum
+\par\textbf{Decoded.} $\mathrm{dom}(T) \le \bar\omega(T)$ for every tournament: a minimum
 backedge-clique under an optimal order dominates
 (\ref{def:domination}). This is the standard lower-bound tool for
 $\bar\omega$.
@@ -99,7 +99,7 @@ Theorem kcritical2_uniq : dgiso (C3 : diGraphType) T.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/critical.v\#L124}{Source: \code{theories/invariants/critical.v:124}}
 
 
-\paragraph{Decoded.} Every $2$-$\bar\omega$-critical tournament is isomorphic
+\par\textbf{Decoded.} Every $2$-$\bar\omega$-critical tournament is isomorphic
 (\ref{def:dgiso}) to the directed triangle (\ref{def:C3}): the
 base of the criticality hierarchy is unique.
 
@@ -120,7 +120,7 @@ Lemma kcritical_proper_sub (k : nat) (T : tournament) (S : {set T}) :
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/critical.v\#L46}{Source: \code{theories/invariants/critical.v:46}}
 
 
-\paragraph{Decoded.} If $T$ is $k$-$\bar\omega$-critical and $S \subsetneq V(T)$, then the
+\par\textbf{Decoded.} If $T$ is $k$-$\bar\omega$-critical and $S \subsetneq V(T)$, then the
 induced subtournament on $S$ has $\bar\omega \le k - 1$: criticality
 leaves no proper witness inside. This single lemma is what refutes
 Question 5.9 at every $k$ (\ref{ch:unified}).
@@ -141,7 +141,7 @@ Lemma omegabar_transb : 0 < #|T| -> (ω̄(T) == 1) = transb T.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/omegabar.v\#L74}{Source: \code{theories/invariants/omegabar.v:74}}
 
 
-\paragraph{Decoded.} For a nonempty tournament, $\bar\omega(T) = 1$ iff $T$ is transitive
+\par\textbf{Decoded.} For a nonempty tournament, $\bar\omega(T) = 1$ iff $T$ is transitive
 (\ref{def:transb}) --- the sanity anchor for reading $\bar\omega$ as
 a distance from transitivity. (The statement is a Boolean equation
 between $\bar\omega(T) = 1$ and \code{transb T},

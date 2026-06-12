@@ -16,7 +16,7 @@ Theorem AC_kcritical3 : (3 <= m)%N -> kcritical 3 (AC m' : tournament).
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/acn_base.v\#L431}{Source: \code{theories/applications/k5/acn\_base.v:431}}
 
 
-\paragraph{Decoded.} $\mathrm{AC}_n$ is $3$-$\bar\omega$-critical (\ref{def:kcritical}),
+\par\textbf{Decoded.} $\mathrm{AC}_n$ is $3$-$\bar\omega$-critical (\ref{def:kcritical}),
 has exactly $n$ vertices, and is vertex-transitive (\ref{def:vt}).
 
 \end{theorem}
@@ -35,7 +35,7 @@ Theorem omegabar_AC : (3 <= m)%N -> ω̄((AC m' : tournament)) = 3.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/acn_base.v\#L374}{Source: \code{theories/applications/k5/acn\_base.v:374}}
 
 
-\paragraph{Decoded.} For every odd $n = 2m+1$ with $m \ge 3$, the tournament clique number
+\par\textbf{Decoded.} For every odd $n = 2m+1$ with $m \ge 3$, the tournament clique number
 of $\mathrm{AC}_n$ is exactly $3$. (\code{(AC m' : tournament)}
 is $\mathrm{AC}_n$ viewed as a tournament; the hypothesis
 \code{3 <= m} is $m \ge 3$.)
@@ -57,7 +57,7 @@ Theorem omegabar_AC_del (v : ACm) :
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/acn_base.v\#L423}{Source: \code{theories/applications/k5/acn\_base.v:423}}
 
 
-\paragraph{Decoded.} Deleting any single vertex $v$ from $\mathrm{AC}_n$ drops the
+\par\textbf{Decoded.} Deleting any single vertex $v$ from $\mathrm{AC}_n$ drops the
 invariant to $2$.
 
 \end{theorem}
@@ -104,7 +104,7 @@ Theorem T4_kcritical4 : kcritical 4 T4.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_main.v\#L59}{Source: \code{theories/applications/k4/k4\_main.v:59}}
 
 
-\paragraph{Decoded.} The two previous values say precisely that $\mathrm{AC}_n[C_3]$ is
+\par\textbf{Decoded.} The two previous values say precisely that $\mathrm{AC}_n[C_3]$ is
 $4$-$\bar\omega$-critical; its order is $n \cdot 3$.
 
 \end{theorem}
@@ -123,7 +123,7 @@ Theorem omegabar_T4 : ω̄(T4) = 4.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_value.v\#L511}{Source: \code{theories/applications/k4/k4\_value.v:511}}
 
 
-\paragraph{Decoded.} Here \code{T4} abbreviates the substitution
+\par\textbf{Decoded.} Here \code{T4} abbreviates the substitution
 $\mathrm{AC}_n[C_3]$ (\ref{def:T4family}). For every odd
 $n = 2m{+}1 \ge 7$, its tournament clique number is exactly $4$.
 
@@ -143,7 +143,7 @@ Theorem omegabar_T4_del (v : T4) : ω̄(del_tournament v) = 3.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_main.v\#L51}{Source: \code{theories/applications/k4/k4\_main.v:51}}
 
 
-\paragraph{Decoded.} Deleting any vertex of $\mathrm{AC}_n[C_3]$ drops the invariant to
+\par\textbf{Decoded.} Deleting any vertex of $\mathrm{AC}_n[C_3]$ drops the invariant to
 $3$ (by vertex-transitivity all deletions are isomorphic, so this is
 one computation plus symmetry --- see \ref{res:vt_kcritical}).
 
@@ -193,7 +193,7 @@ Theorem omegabar_T5 : ω̄(T5) = 5.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v\#L54}{Source: \code{theories/applications/k5/main.v:54}}
 
 
-\paragraph{Decoded.} \code{T5} abbreviates $\mathrm{AC}_n[\mathrm{AC}_n]$
+\par\textbf{Decoded.} \code{T5} abbreviates $\mathrm{AC}_n[\mathrm{AC}_n]$
 (\ref{def:T5family}); its tournament clique number is exactly $5$,
 for every odd $n = 2m{+}1 \ge 7$.
 
@@ -211,7 +211,7 @@ Theorem omegabar_T5_del (v : T5) : ω̄(del_tournament v) = 4.
 \href{https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v\#L62}{Source: \code{theories/applications/k5/main.v:62}}
 
 
-\paragraph{Decoded.} Every single-vertex deletion has $\bar\omega = 4$; hence
+\par\textbf{Decoded.} Every single-vertex deletion has $\bar\omega = 4$; hence
 $\mathrm{AC}_n[\mathrm{AC}_n]$ is $5$-$\bar\omega$-critical, on
 $n \cdot n$ vertices.
 
