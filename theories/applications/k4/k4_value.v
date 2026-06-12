@@ -137,36 +137,36 @@ Proof. exact: (ltp_realizeE rv_irr rv_trans rv_total). Qed.
 
 (** ** Residue arithmetic helpers (pure nat, m-relative) *)
 
-Let n_sub_ge_Sm (d : nat) : (d <= m)%N -> (m.+1 <= n - d)%N.
+Lemma n_sub_ge_Sm (d : nat) : (d <= m)%N -> (m.+1 <= n - d)%N.
 Proof. by move=> dm; rewrite ltn_subRL ltnS -addnn leq_add2r. Qed.
 
-Let n_sub_gt_Sm (d : nat) : (d < m)%N -> (m.+1 < n - d)%N.
+Lemma n_sub_gt_Sm (d : nat) : (d < m)%N -> (m.+1 < n - d)%N.
 Proof. by move=> dm; rewrite ltn_subRL addnS ltnS -addnn ltn_add2r. Qed.
 
-Let n_sub_eq_Sm (d : nat) : (d <= m.*2)%N -> ((n - d)%N == m.+1) = (d == m)%N.
+Lemma n_sub_eq_Sm (d : nat) : (d <= m.*2)%N -> ((n - d)%N == m.+1) = (d == m)%N.
 Proof.
 move=> dle; rewrite -(eqn_add2r d) subnK ?(leqW dle) //.
 by rewrite -addnn -addSn eqn_add2l eq_sym.
 Qed.
 
-Let sub_eq_m (a : nat) : (a <= m)%N -> ((m.+1 - a)%N == m) = (a == 1)%N.
+Lemma sub_eq_m (a : nat) : (a <= m)%N -> ((m.+1 - a)%N == m) = (a == 1)%N.
 Proof.
 move=> am; rewrite -(eqn_add2r a) subnK ?(leqW am) //.
 by rewrite -[in X in (X == _) = _]addn1 eqn_add2l eq_sym.
 Qed.
 
 (** Connection-set refutations by value. *)
-Let mem_m_F (z : 'Z_n) : val z = m -> (z \in ACset m') = false.
+Lemma mem_m_F (z : 'Z_n) : val z = m -> (z \in ACset m') = false.
 Proof.
 by move=> vz; rewrite AC_mem_val vz ltnn andbF (ltn_eqF (ltnSn m)).
 Qed.
 
-Let mem_mid_F (z : 'Z_n) : (m.+1 < val z)%N -> (z \in ACset m') = false.
+Lemma mem_mid_F (z : 'Z_n) : (m.+1 < val z)%N -> (z \in ACset m') = false.
 Proof.
 by move=> h; rewrite (AC_mem_Hi (ltnW h)) (gtn_eqF h).
 Qed.
 
-Let vals12 (a b : nat) : (a < b)%N -> (b < 3)%N -> a != 0%N ->
+Lemma vals12 (a b : nat) : (a < b)%N -> (b < 3)%N -> a != 0%N ->
   a = 1%N /\ b = 2%N.
 Proof. by case: a => [|[|?]] //; case: b => [|[|[|?]]]. Qed.
 

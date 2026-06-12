@@ -48,3 +48,4 @@ theories/applications/ck3/ck3_main.v
 # --- the k=4 application (M14+) ---
 theories/applications/k4/k4_lower.v
 theories/applications/k4/k4_value.v
+theories/applications/k4/k4_del.v
