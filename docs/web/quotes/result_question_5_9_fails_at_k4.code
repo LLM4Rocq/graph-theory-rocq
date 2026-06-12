@@ -1,0 +1,5 @@
+% theories/applications/k4/k4_main.v:89
+Theorem question_5_9_fails_at_k4 (L : nat) :
+  exists T : tournament,
+    [/\ kcritical 4 T, (L < #|T|)%N
+      & forall S : {set T}, (4 <= ω̄(sub_tournament S))%N -> S = [set: T]].

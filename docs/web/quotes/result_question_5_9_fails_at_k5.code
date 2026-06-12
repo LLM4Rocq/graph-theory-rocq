@@ -1,0 +1,5 @@
+% theories/applications/k5/main.v:127
+Theorem question_5_9_fails_at_k5 (L : nat) :
+  exists T : tournament,
+    [/\ kcritical 5 T, (L < #|T|)%N
+      & forall S : {set T}, (5 <= ω̄(sub_tournament S))%N -> S = [set: T]].

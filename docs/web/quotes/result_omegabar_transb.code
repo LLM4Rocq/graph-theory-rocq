@@ -1,0 +1,2 @@
+% theories/invariants/omegabar.v:74
+Lemma omegabar_transb : 0 < #|T| -> (ω̄(T) == 1) = transb T.

@@ -1,0 +1,25 @@
+% Printable (PDF) version of the blueprint.
+% Uses xeLaTeX / luaLaTeX (unicode-math + Latin Modern Math).
+
+\documentclass[a4paper]{report}
+
+\usepackage{geometry}
+\usepackage{expl3}
+
+\usepackage{amssymb, amsthm, mathtools}
+\usepackage[unicode,colorlinks=true,linkcolor=blue,urlcolor=magenta,citecolor=blue]{hyperref}
+
+\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+
+\input{macros/common}
+\input{macros/print}
+
+\title{Tournaments, $\bar\omega$-criticality, and directed paths\\
+  \large The formal statements of the \texttt{digraph-theory} library,
+  for mathematicians}
+\author{The LLM4Rocq project}
+
+\begin{document}
+\maketitle
+\input{content}
+\end{document}

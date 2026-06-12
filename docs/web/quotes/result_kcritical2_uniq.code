@@ -1,0 +1,2 @@
+% theories/invariants/critical.v:124
+Theorem kcritical2_uniq : dgiso (C3 : diGraphType) T.

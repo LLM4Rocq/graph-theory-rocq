@@ -1,0 +1,4 @@
+% theories/invariants_advanced/transitive.v:47
+Theorem omegabar_del_vt :
+  vertex_transitiveb (T : diGraphType) ->
+  forall u v : T, ω̄(del_tournament u) = ω̄(del_tournament v).

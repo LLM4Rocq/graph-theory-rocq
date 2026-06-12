@@ -8,9 +8,13 @@ PDF      = digraph_formal.pdf
 ROOT     = ../..
 PY       = python3
 
-.PHONY: all check generated clean
+.PHONY: all pdf check generated clean
 
-all: generated
+all: generated pdf
+
+# pdf only — used by CI, which consumes the committed generated
+# artifacts (the audit job regenerates and diffs them separately).
+pdf:
 	pdflatex -interaction=nonstopmode -halt-on-error digraph_formal.tex
 	pdflatex -interaction=nonstopmode -halt-on-error digraph_formal.tex
 

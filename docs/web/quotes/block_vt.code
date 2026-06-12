@@ -1,0 +1,4 @@
+% theories/constructions/automorphism.v:55
+Definition vertex_transitiveb : bool :=
+  [forall u : D, [forall v : D,
+    [exists p : {perm D}, (p \in dgaut) && (p u == v)]]].

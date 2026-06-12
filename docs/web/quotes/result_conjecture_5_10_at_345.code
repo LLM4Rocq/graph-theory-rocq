@@ -1,0 +1,3 @@
+% theories/applications/unified.v:66
+Theorem conjecture_5_10_at_345 (k : nat) : (3 <= k <= 5)%N ->
+  forall N : nat, exists T : tournament, kcritical k T /\ (N < #|T|)%N.

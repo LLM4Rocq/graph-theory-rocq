@@ -1,0 +1,20 @@
+% Print-only macros. The dependency-graph commands provided by
+% the rocqblueprint plasTeX plugin must be stubbed here so that
+% latexmk does not error.
+
+\newcommand{\rocq}[1]{}
+\newcommand{\discussion}[1]{}
+\newcommand{\rocqok}{}
+\newcommand{\mathcompok}{}
+\newcommand{\notready}{}
+
+% \uses{...} and \proves{...} expand to invisible refs so LaTeX still
+% checks the labels exist.
+\ExplSyntaxOn
+\NewDocumentCommand{\uses}{m}
+ {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
+  \ignorespaces}
+\NewDocumentCommand{\proves}{m}
+ {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
+  \ignorespaces}
+\ExplSyntaxOff

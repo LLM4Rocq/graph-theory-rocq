@@ -1,0 +1,25 @@
+% Web (HTML) version of the blueprint.
+% See blueprint/src/print.tex for the PDF version.
+
+\documentclass{report}
+
+\usepackage{amssymb, amsthm, amsmath}
+\usepackage{hyperref}
+\usepackage[dep_graph]{blueprint}
+
+\input{macros/common}
+\input{macros/web}
+
+\home{https://llm4rocq.github.io/digraph-theory/}
+\github{https://github.com/LLM4Rocq/digraph-theory}
+\dochome{https://llm4rocq.github.io/digraph-theory/doc}
+
+\title{Tournaments, $\bar\omega$-criticality, and directed paths\\
+  \large The formal statements of the \texttt{digraph-theory} library,
+  for mathematicians}
+\author{The LLM4Rocq project}
+
+\begin{document}
+\maketitle
+\input{content}
+\end{document}

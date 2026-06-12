@@ -1,0 +1,8 @@
+% theories/core/tournament.v:171
+Definition sub_tournament (T : tournament) (S : {set T}) : tournament :=
+  {x : T | x \in S} : tournament.
+
+Definition del_tournament (T : tournament) (v : T) : tournament :=
+  sub_tournament [set~ v].
+
+Lemma sub_arcE (u v : {x | P x}) : (u --> v) = (val u --> val v).

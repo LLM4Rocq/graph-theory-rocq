@@ -1,0 +1,5 @@
+% theories/applications/unified.v:47
+Theorem question_5_9_fails_at_k3 (L : nat) :
+  exists T : tournament,
+    [/\ kcritical 3 T, (L < #|T|)%N
+      & forall S : {set T}, (3 <= ω̄(sub_tournament S))%N -> S = [set: T]].

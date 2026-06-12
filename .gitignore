@@ -37,3 +37,7 @@ __pycache__/
 # rocq-mcp / pet interactive-session droppings
 rocq_mcp_cache_*.v
 .Makefile.coq.d
+
+# website build outputs
+blueprint/src/web/
+blueprint/src/print/

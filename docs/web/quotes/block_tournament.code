@@ -1,0 +1,4 @@
+% theories/core/tournament.v:32
+HB.mixin Record Oriented_IsTournament V of Oriented V := {
+  arc_total : forall u v : V, (u != v) = (arc u v) (+) (arc v u)
+}.

@@ -1,0 +1,8 @@
+% theories/core/order.v:136
+Definition backedge_rel : rel T :=
+  [rel u v | ltp p u v && (v --> u) || ltp p v u && (u --> v)].
+
+Definition backedge : sgraph := SGraph backedge_sym backedge_irrefl.
+
+Lemma backedgeE (u v : backedge) :
+  (u -- v) = ltp p u v && (v --> u) || ltp p v u && (u --> v).

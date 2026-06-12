@@ -69,6 +69,15 @@ def listing(code: str, vrel: str, line: int) -> str:
             f"\\rocqsource{{{vrel}}}{{{line}}}\n")
 
 
+def emit(stem: str, code: str, vrel: str, line: int) -> None:
+    """Write both the LaTeX listing (PDF) and the raw code + source
+    location (consumed by gen_blueprint.py for the website)."""
+    (QUOTES / f"{stem}.tex").write_text(
+        listing(code, vrel, line), encoding="utf-8")
+    (QUOTES / f"{stem}.code").write_text(
+        f"% {vrel}:{line}\n{code.rstrip()}\n", encoding="utf-8")
+
+
 def decl_quote(cl: sc.Closure, vrel: str, name: str) -> tuple[str, int]:
     g = cl.glob_for(vrel)
     lo, hi, kind = g.statement_span(name)
@@ -114,8 +123,7 @@ def main() -> None:
         stmt = g.src[bol:hi].decode("utf-8").rstrip()
         if not stmt.endswith("."):
             stmt += "."
-        (QUOTES / f"result_{result}.tex").write_text(
-            listing(stmt, vrel, g.line_of(lo)), encoding="utf-8")
+        emit(f"result_{result}", stmt, vrel, g.line_of(lo))
 
     # 2. def-block quotes ("HB" sentinel, or a list of declaration
     #    names / {file, name} pairs concatenated into one listing)
@@ -137,8 +145,7 @@ def main() -> None:
                 if line is None:
                     line, vrel = ln, qfile
             code = "\n\n".join(chunks)
-        (QUOTES / f"block_{fid}.tex").write_text(
-            listing(code, vrel, line), encoding="utf-8")
+        emit(f"block_{fid}", code, vrel, line)
 
     n = len(list(QUOTES.glob("*.tex")))
     print(f"{n} quote files -> {QUOTES.relative_to(ROOT)}/")

@@ -1,0 +1,3 @@
+% theories/core/digraph.v:35
+HB.mixin Record HasArc V := { arc : rel V }.
+Notation "u --> v" := (arc u v) (at level 30) : digraph_scope.

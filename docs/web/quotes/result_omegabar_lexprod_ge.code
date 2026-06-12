@@ -1,0 +1,3 @@
+% theories/invariants_advanced/substitution.v:168
+Theorem omegabar_lexprod_ge :
+  ω̄(S) + ω̄(H) <= ω̄(lexprod_tournament S H) + 1.
