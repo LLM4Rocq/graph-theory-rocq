@@ -53,3 +53,9 @@ theories/applications/k4/k4_main.v
 
 # --- the unified k=3,4,5 theorem (M17) ---
 theories/applications/unified.v
+
+# --- conjecture statements + implication edges (docs/CONJECTURES_FORMALIZATION_PLAN.md) ---
+theories/conjectures/external.v
+theories/conjectures/clique_cluster.v
+theories/conjectures/long_dipath.v
+theories/conjectures/classic_core.v
