@@ -59,3 +59,4 @@ theories/conjectures/external.v
 theories/conjectures/clique_cluster.v
 theories/conjectures/long_dipath.v
 theories/conjectures/classic_core.v
+theories/conjectures/dichromatic.v
