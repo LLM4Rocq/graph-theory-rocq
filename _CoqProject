@@ -61,3 +61,4 @@ theories/conjectures/long_dipath.v
 theories/conjectures/classic_core.v
 theories/conjectures/dichromatic.v
 theories/conjectures/heroes.v
+theories/conjectures/heroes_dichotomy.v
