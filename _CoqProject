@@ -73,3 +73,7 @@ theories/conjectures/two_extremal_hajos.v
 theories/conjectures/twinwidth.v
 theories/conjectures/colouring_variants.v
 theories/conjectures/implications2.v
+theories/conjectures/reals_growth.v
+theories/conjectures/two_extremal_glue.v
+theories/conjectures/twinwidth_ordered.v
+theories/conjectures/hero_isoclosure.v

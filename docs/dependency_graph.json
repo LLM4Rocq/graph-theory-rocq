@@ -91,6 +91,46 @@
       "kind": "statement"
     },
     {
+      "id": "majority_3col_statement",
+      "file": "colouring_variants.v",
+      "kind": "statement"
+    },
+    {
+      "id": "majority_k1col_statement",
+      "file": "colouring_variants.v",
+      "kind": "statement"
+    },
+    {
+      "id": "majority_3col_tournament_statement",
+      "file": "colouring_variants.v",
+      "kind": "statement"
+    },
+    {
+      "id": "majority_3col_eulerian_statement",
+      "file": "colouring_variants.v",
+      "kind": "statement"
+    },
+    {
+      "id": "oriented_chromatic_planar_bounded_statement",
+      "file": "colouring_variants.v",
+      "kind": "statement"
+    },
+    {
+      "id": "mono_reach_or_rainbow_statement",
+      "file": "colouring_variants.v",
+      "kind": "statement"
+    },
+    {
+      "id": "sands_sauer_woodrow_statement",
+      "file": "colouring_variants.v",
+      "kind": "statement"
+    },
+    {
+      "id": "tt_is_TT",
+      "file": "hero_isoclosure.v",
+      "kind": "statement"
+    },
+    {
       "id": "berger_characterization",
       "file": "heroes.v",
       "kind": "statement"
@@ -191,6 +231,41 @@
       "kind": "statement"
     },
     {
+      "id": "conj_3_12_statement",
+      "file": "twinwidth.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_3_12_classwise",
+      "file": "twinwidth.v",
+      "kind": "statement"
+    },
+    {
+      "id": "otww_dominates_tww",
+      "file": "twinwidth.v",
+      "kind": "statement"
+    },
+    {
+      "id": "otww_total",
+      "file": "twinwidth.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_3_13_statement",
+      "file": "twinwidth.v",
+      "kind": "statement"
+    },
+    {
+      "id": "bst_order_exists",
+      "file": "twinwidth.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_3_16_statement",
+      "file": "twinwidth.v",
+      "kind": "statement"
+    },
+    {
       "id": "conjecture_P",
       "file": "two_extremal.v",
       "kind": "statement"
@@ -228,6 +303,36 @@
     {
       "id": "conj_9_2",
       "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "realises_loopless",
+      "file": "two_extremal_hajos.v",
+      "kind": "statement"
+    },
+    {
+      "id": "realises_Eulerian",
+      "file": "two_extremal_hajos.v",
+      "kind": "statement"
+    },
+    {
+      "id": "realises_digonG_forest",
+      "file": "two_extremal_hajos.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_9_2_concrete",
+      "file": "two_extremal_hajos.v",
+      "kind": "statement"
+    },
+    {
+      "id": "in_H2_closed_treejoin",
+      "file": "two_extremal_hajos.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_9_2_treejoin",
+      "file": "two_extremal_hajos.v",
       "kind": "statement"
     },
     {
@@ -271,6 +376,34 @@
       "kind": "implies"
     },
     {
+      "src": "majority_k1col_statement",
+      "dst": "majority_3col_statement",
+      "thm": "majority_k1col_implies_majority_3col",
+      "file": "colouring_variants.v",
+      "kind": "implies"
+    },
+    {
+      "src": "majority_3col_statement",
+      "dst": "majority_3col_tournament_statement",
+      "thm": "majority_3col_implies_tournament",
+      "file": "colouring_variants.v",
+      "kind": "implies"
+    },
+    {
+      "src": "majority_3col_statement",
+      "dst": "majority_3col_eulerian_statement",
+      "thm": "majority_3col_implies_eulerian",
+      "file": "colouring_variants.v",
+      "kind": "implies"
+    },
+    {
+      "src": "tt_is_TT",
+      "dst": "transitive_is_hero",
+      "thm": "tt_is_TT_implies_transitive_is_hero",
+      "file": "hero_isoclosure.v",
+      "kind": "implies"
+    },
+    {
       "src": "caccetta_haggkvist_statement",
       "dst": "caccetta_haggkvist_triangle_statement",
       "thm": "caccetta_haggkvist_implies_triangle",
@@ -289,6 +422,62 @@
       "dst": "conj_4_4",
       "thm": "conj_4_2_implies_conj_4_4",
       "file": "implications.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj2_1605_statement",
+      "dst": "conj4_1605_statement",
+      "thm": "conj2_implies_conj4",
+      "file": "implications2.v",
+      "kind": "implies"
+    },
+    {
+      "src": "tvec_core_statement",
+      "dst": "m3_landmark_statement",
+      "thm": "tvec_reaches3_implies_m3",
+      "file": "implications2.v",
+      "kind": "refutes"
+    },
+    {
+      "src": "bermond_thomassen_statement",
+      "dst": "one_cycle",
+      "thm": "bermond_thomassen_implies_one_cycle",
+      "file": "implications2.v",
+      "kind": "implies"
+    },
+    {
+      "src": "hoang_reed_statement",
+      "dst": "bermond_thomassen_k1",
+      "thm": "hoang_reed_implies_bermond_thomassen_k1",
+      "file": "implications2.v",
+      "kind": "implies"
+    },
+    {
+      "src": "bang_jensen_yeo_SAD_statement",
+      "dst": "strong",
+      "thm": "BJY_SAD_implies_strong",
+      "file": "implications2.v",
+      "kind": "implies"
+    },
+    {
+      "src": "WC3_statement",
+      "dst": "3arcstrong_strong",
+      "thm": "WC3_implies_3arcstrong_strong",
+      "file": "implications2.v",
+      "kind": "implies"
+    },
+    {
+      "src": "matchingFAS",
+      "dst": "pathFAS",
+      "thm": "matchingFAS_implies_pathFAS",
+      "file": "implications2.v",
+      "kind": "implies"
+    },
+    {
+      "src": "matchingFAS_iff_dw1_statement",
+      "dst": "pathFAS",
+      "thm": "dw1_implies_pathFAS",
+      "file": "implications2.v",
       "kind": "implies"
     },
     {
@@ -327,6 +516,27 @@
       "kind": "implies"
     },
     {
+      "src": "conj_3_13_statement",
+      "dst": "conj_3_16_statement",
+      "thm": "conj_3_13_implies_3_16",
+      "file": "twinwidth.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_3_16_statement",
+      "dst": "conj_3_12_statement",
+      "thm": "conj_3_16_implies_3_12",
+      "file": "twinwidth.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_3_12_statement",
+      "dst": "conj_3_12_classwise",
+      "thm": "conj_3_12_single_implies_classwise",
+      "file": "twinwidth.v",
+      "kind": "implies"
+    },
+    {
       "src": "conj_9_2",
       "dst": "conjecture_P",
       "thm": "conj_9_2_implies_conjecture_P",
@@ -345,6 +555,34 @@
       "dst": "three_connected_digonG_connected",
       "thm": "H6_implies_three_connected_digonG_connected",
       "file": "two_extremal.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_9_2_concrete",
+      "dst": "conj_9_2",
+      "thm": "conj_9_2_concrete_implies_conj_9_2",
+      "file": "two_extremal_hajos.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_9_2_concrete",
+      "dst": "conj_9_2_treejoin",
+      "thm": "conj_9_2_concrete_implies_treejoin",
+      "file": "two_extremal_hajos.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_9_2_concrete",
+      "dst": "conjecture_P",
+      "thm": "conj_9_2_concrete_implies_conjecture_P",
+      "file": "two_extremal_hajos.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_9_2_concrete",
+      "dst": "three_connected_generalised_wheel",
+      "thm": "conj_9_2_concrete_implies_three_connected_gw",
+      "file": "two_extremal_hajos.v",
       "kind": "implies"
     }
   ]
