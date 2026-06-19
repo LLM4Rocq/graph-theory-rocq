@@ -1,0 +1,108 @@
+digraph conjecture_dependencies {
+  rankdir=LR;
+  node [shape=box, style=rounded, fontsize=10];
+  edge [fontsize=8];
+  subgraph cluster_0 {
+    label="chi_bounded.v"; style=filled; color=lightgrey;
+    "conj2_1605_statement";
+    "conj4_1605_statement";
+    "conj5_1605_statement";
+    "chordal_not_dichromatic_bounded_statement";
+    "avec_core_statement";
+    "tvec_core_statement";
+    "m3_landmark_statement";
+  }
+  subgraph cluster_1 {
+    label="classic_core.v"; style=filled; color=lightgrey;
+    "seymour_second_neighbourhood_statement";
+    "caccetta_haggkvist_statement";
+    "caccetta_haggkvist_triangle_statement";
+    "long_dicycle_diregular_statement";
+    "jackson_hamilton_small_diregular_statement";
+    "splitting_min_outdegree_statement";
+    "stable_meeting_longest_dipaths_statement";
+  }
+  subgraph cluster_2 {
+    label="clique_cluster.v"; style=filled; color=lightgrey;
+    "conjecture_5_10_statement";
+    "question_5_9_statement";
+    "conjecture_5_8_statement";
+    "dom_omega_cluster_statement";
+  }
+  subgraph cluster_3 {
+    label="heroes.v"; style=filled; color=lightgrey;
+    "berger_characterization";
+  }
+  subgraph cluster_4 {
+    label="heroes_dichotomy.v"; style=filled; color=lightgrey;
+    "conj_6_2";
+    "thm_6_1";
+    "conj_4_4";
+    "conj_4_2";
+  }
+  subgraph cluster_5 {
+    label="long_dipath.v"; style=filled; color=lightgrey;
+    "cheng_keevash_conj1_statement";
+  }
+  subgraph cluster_6 {
+    label="packing.v"; style=filled; color=lightgrey;
+    "bermond_thomassen_statement";
+    "hoang_reed_statement";
+    "woodall_statement";
+    "linial_berge_statement";
+    "erdos_posa_long_dicycles_statement";
+  }
+  subgraph cluster_7 {
+    label="path_fas.v"; style=filled; color=lightgrey;
+    "pathFAS_iff_LFO_statement";
+    "matchingFAS_iff_dw1_statement";
+    "LFO_iff_34transversal_statement";
+    "minimal_LFO_no_infinite_statement";
+  }
+  subgraph cluster_8 {
+    label="sad.v"; style=filled; color=lightgrey;
+    "in_arcset";
+    "spanning_strong";
+    "bang_jensen_yeo_SAD_statement";
+    "WC3_statement";
+    "CL1_statement";
+  }
+  subgraph cluster_9 {
+    label="two_extremal.v"; style=filled; color=lightgrey;
+    "conjecture_P";
+    "two_extremal_digonG_forest";
+    "three_connected_digonG_connected";
+    "H6_no_full_cover";
+    "three_connected_generalised_wheel";
+    "in_H2_contains_base";
+    "in_H2_closed_dhajos";
+    "conj_9_2";
+  }
+  subgraph cluster_10 {
+    label="unvd.v"; style=filled; color=lightgrey;
+    "conj_9";
+    "prob_6";
+  }
+  "2bound" [style=dashed, color=gray50, fontcolor=gray40];
+  "delta3" [style=dashed, color=gray50, fontcolor=gray40];
+  "delta4" [style=dashed, color=gray50, fontcolor=gray40];
+  "hoang_reed_weak" [style=dashed, color=gray50, fontcolor=gray40];
+  "indfree_TT" [style=dashed, color=gray50, fontcolor=gray40];
+  "noKl" [style=dashed, color=gray50, fontcolor=gray40];
+  "one_cycle" [style=dashed, color=gray50, fontcolor=gray40];
+  "m3_landmark_statement" -> "2bound" [color=red, style=dashed, arrowhead=tee, label="refutes"];
+  "conjecture_5_10_statement" -> "question_5_9_statement" [color=red, style=dashed, arrowhead=tee, label="refutes"];
+  "question_5_9_statement" -> "conjecture_5_8_statement" [color=black];
+  "conjecture_5_8_statement" -> "dom_omega_cluster_statement" [color=black];
+  "caccetta_haggkvist_statement" -> "caccetta_haggkvist_triangle_statement" [color=black];
+  "noKl" -> "indfree_TT" [color=black];
+  "conj_4_2" -> "conj_4_4" [color=black];
+  "cheng_keevash_conj1_statement" -> "delta3" [color=black];
+  "cheng_keevash_conj1_statement" -> "delta4" [color=black];
+  "bermond_thomassen_statement" -> "hoang_reed_weak" [color=black];
+  "hoang_reed_statement" -> "one_cycle" [color=black];
+  "WC3_statement" -> "bang_jensen_yeo_SAD_statement" [color=black];
+  "conj_9_2" -> "conjecture_P" [color=black];
+  "conj_9_2" -> "three_connected_generalised_wheel" [color=black];
+  "H6_no_full_cover" -> "three_connected_digonG_connected" [color=black];
+}

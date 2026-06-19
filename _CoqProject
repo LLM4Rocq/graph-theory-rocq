@@ -69,3 +69,7 @@ theories/conjectures/packing.v
 theories/conjectures/chi_bounded.v
 theories/conjectures/two_extremal.v
 theories/conjectures/implications.v
+theories/conjectures/two_extremal_hajos.v
+theories/conjectures/twinwidth.v
+theories/conjectures/colouring_variants.v
+theories/conjectures/implications2.v

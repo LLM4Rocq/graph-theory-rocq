@@ -1,0 +1,351 @@
+{
+  "nodes": [
+    {
+      "id": "conj2_1605_statement",
+      "file": "chi_bounded.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj4_1605_statement",
+      "file": "chi_bounded.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj5_1605_statement",
+      "file": "chi_bounded.v",
+      "kind": "statement"
+    },
+    {
+      "id": "chordal_not_dichromatic_bounded_statement",
+      "file": "chi_bounded.v",
+      "kind": "statement"
+    },
+    {
+      "id": "avec_core_statement",
+      "file": "chi_bounded.v",
+      "kind": "statement"
+    },
+    {
+      "id": "tvec_core_statement",
+      "file": "chi_bounded.v",
+      "kind": "statement"
+    },
+    {
+      "id": "m3_landmark_statement",
+      "file": "chi_bounded.v",
+      "kind": "statement"
+    },
+    {
+      "id": "seymour_second_neighbourhood_statement",
+      "file": "classic_core.v",
+      "kind": "statement"
+    },
+    {
+      "id": "caccetta_haggkvist_statement",
+      "file": "classic_core.v",
+      "kind": "statement"
+    },
+    {
+      "id": "caccetta_haggkvist_triangle_statement",
+      "file": "classic_core.v",
+      "kind": "statement"
+    },
+    {
+      "id": "long_dicycle_diregular_statement",
+      "file": "classic_core.v",
+      "kind": "statement"
+    },
+    {
+      "id": "jackson_hamilton_small_diregular_statement",
+      "file": "classic_core.v",
+      "kind": "statement"
+    },
+    {
+      "id": "splitting_min_outdegree_statement",
+      "file": "classic_core.v",
+      "kind": "statement"
+    },
+    {
+      "id": "stable_meeting_longest_dipaths_statement",
+      "file": "classic_core.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conjecture_5_10_statement",
+      "file": "clique_cluster.v",
+      "kind": "statement"
+    },
+    {
+      "id": "question_5_9_statement",
+      "file": "clique_cluster.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conjecture_5_8_statement",
+      "file": "clique_cluster.v",
+      "kind": "statement"
+    },
+    {
+      "id": "dom_omega_cluster_statement",
+      "file": "clique_cluster.v",
+      "kind": "statement"
+    },
+    {
+      "id": "berger_characterization",
+      "file": "heroes.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_6_2",
+      "file": "heroes_dichotomy.v",
+      "kind": "statement"
+    },
+    {
+      "id": "thm_6_1",
+      "file": "heroes_dichotomy.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_4_4",
+      "file": "heroes_dichotomy.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_4_2",
+      "file": "heroes_dichotomy.v",
+      "kind": "statement"
+    },
+    {
+      "id": "cheng_keevash_conj1_statement",
+      "file": "long_dipath.v",
+      "kind": "statement"
+    },
+    {
+      "id": "bermond_thomassen_statement",
+      "file": "packing.v",
+      "kind": "statement"
+    },
+    {
+      "id": "hoang_reed_statement",
+      "file": "packing.v",
+      "kind": "statement"
+    },
+    {
+      "id": "woodall_statement",
+      "file": "packing.v",
+      "kind": "statement"
+    },
+    {
+      "id": "linial_berge_statement",
+      "file": "packing.v",
+      "kind": "statement"
+    },
+    {
+      "id": "erdos_posa_long_dicycles_statement",
+      "file": "packing.v",
+      "kind": "statement"
+    },
+    {
+      "id": "pathFAS_iff_LFO_statement",
+      "file": "path_fas.v",
+      "kind": "statement"
+    },
+    {
+      "id": "matchingFAS_iff_dw1_statement",
+      "file": "path_fas.v",
+      "kind": "statement"
+    },
+    {
+      "id": "LFO_iff_34transversal_statement",
+      "file": "path_fas.v",
+      "kind": "statement"
+    },
+    {
+      "id": "minimal_LFO_no_infinite_statement",
+      "file": "path_fas.v",
+      "kind": "statement"
+    },
+    {
+      "id": "in_arcset",
+      "file": "sad.v",
+      "kind": "statement"
+    },
+    {
+      "id": "spanning_strong",
+      "file": "sad.v",
+      "kind": "statement"
+    },
+    {
+      "id": "bang_jensen_yeo_SAD_statement",
+      "file": "sad.v",
+      "kind": "statement"
+    },
+    {
+      "id": "WC3_statement",
+      "file": "sad.v",
+      "kind": "statement"
+    },
+    {
+      "id": "CL1_statement",
+      "file": "sad.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conjecture_P",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "two_extremal_digonG_forest",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "three_connected_digonG_connected",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "H6_no_full_cover",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "three_connected_generalised_wheel",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "in_H2_contains_base",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "in_H2_closed_dhajos",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_9_2",
+      "file": "two_extremal.v",
+      "kind": "statement"
+    },
+    {
+      "id": "conj_9",
+      "file": "unvd.v",
+      "kind": "statement"
+    },
+    {
+      "id": "prob_6",
+      "file": "unvd.v",
+      "kind": "statement"
+    }
+  ],
+  "edges": [
+    {
+      "src": "m3_landmark_statement",
+      "dst": "2bound",
+      "thm": "m3_landmark_refutes_2bound",
+      "file": "chi_bounded.v",
+      "kind": "refutes"
+    },
+    {
+      "src": "conjecture_5_10_statement",
+      "dst": "question_5_9_statement",
+      "thm": "conj_5_10_implies_neg_Q5_9",
+      "file": "clique_cluster.v",
+      "kind": "refutes"
+    },
+    {
+      "src": "question_5_9_statement",
+      "dst": "conjecture_5_8_statement",
+      "thm": "Q5_9_implies_conj_5_8",
+      "file": "clique_cluster.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conjecture_5_8_statement",
+      "dst": "dom_omega_cluster_statement",
+      "thm": "conj_5_8_implies_dom_cluster",
+      "file": "clique_cluster.v",
+      "kind": "implies"
+    },
+    {
+      "src": "caccetta_haggkvist_statement",
+      "dst": "caccetta_haggkvist_triangle_statement",
+      "thm": "caccetta_haggkvist_implies_triangle",
+      "file": "implications.v",
+      "kind": "implies"
+    },
+    {
+      "src": "noKl",
+      "dst": "indfree_TT",
+      "thm": "noKl_implies_indfree_TT",
+      "file": "implications.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_4_2",
+      "dst": "conj_4_4",
+      "thm": "conj_4_2_implies_conj_4_4",
+      "file": "implications.v",
+      "kind": "implies"
+    },
+    {
+      "src": "cheng_keevash_conj1_statement",
+      "dst": "delta3",
+      "thm": "conj1_implies_delta3",
+      "file": "long_dipath.v",
+      "kind": "implies"
+    },
+    {
+      "src": "cheng_keevash_conj1_statement",
+      "dst": "delta4",
+      "thm": "conj1_implies_delta4",
+      "file": "long_dipath.v",
+      "kind": "implies"
+    },
+    {
+      "src": "bermond_thomassen_statement",
+      "dst": "hoang_reed_weak",
+      "thm": "bermond_thomassen_implies_hoang_reed_weak",
+      "file": "packing.v",
+      "kind": "implies"
+    },
+    {
+      "src": "hoang_reed_statement",
+      "dst": "one_cycle",
+      "thm": "hoang_reed_implies_one_cycle",
+      "file": "packing.v",
+      "kind": "implies"
+    },
+    {
+      "src": "WC3_statement",
+      "dst": "bang_jensen_yeo_SAD_statement",
+      "thm": "WC3_implies_SAD",
+      "file": "sad.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_9_2",
+      "dst": "conjecture_P",
+      "thm": "conj_9_2_implies_conjecture_P",
+      "file": "two_extremal.v",
+      "kind": "implies"
+    },
+    {
+      "src": "conj_9_2",
+      "dst": "three_connected_generalised_wheel",
+      "thm": "conj_9_2_implies_three_connected_gw",
+      "file": "two_extremal.v",
+      "kind": "implies"
+    },
+    {
+      "src": "H6_no_full_cover",
+      "dst": "three_connected_digonG_connected",
+      "thm": "H6_implies_three_connected_digonG_connected",
+      "file": "two_extremal.v",
+      "kind": "implies"
+    }
+  ]
+}
