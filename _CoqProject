@@ -79,3 +79,4 @@ theories/conjectures/twinwidth_ordered.v
 theories/conjectures/hero_isoclosure.v
 theories/conjectures/generalised_wheel.v
 theories/conjectures/glue_tree.v
+theories/conjectures/glue_eul_subtype.v
