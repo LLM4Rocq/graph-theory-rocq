@@ -130,8 +130,14 @@ Theorem tvec_reaches3_implies_m3 :
   m3_landmark_statement.
 Proof.
 move=> [h Hh] reach.
-have [n [npos hn3]] := reach h Hh.
-have [D [Dcard Dor Dtf Dnc]] := Hh n npos.
+(* tvec_core now pins h to the max (upper bound /\ attained); take the attained part *)
+have Hatt : forall n : nat, (0 < n)%N ->
+    exists D : diGraphType,
+      [/\ #|D| = n, oriented_dg D, underlying_triangle_free D
+        & ~~ dicolorableb D (h n).-1].
+  by move=> n npos; exact: (proj2 (Hh n npos)).
+have [n [npos hn3]] := reach h Hatt.
+have [D [Dcard Dor Dtf Dnc]] := Hatt n npos.
 have Dpos : (0 < #|D|)%N by rewrite Dcard.
 exists D; split=> //.
 apply: contra Dnc => Dc2.

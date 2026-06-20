@@ -118,8 +118,12 @@ Definition splitting_min_outdegree_statement : Prop :=
     forall (D : diGraphType) (d : nat),
       (forall v : D, (f d <= outdeg v)%N) ->
       exists V1 : {set D},
-        (forall v : D, v \in V1 -> (d <= outdeg_in V1 v)%N) /\
-        (forall v : D, v \notin V1 -> (d <= outdeg_in (~: V1) v)%N).
+        [/\ (* a PROPER bipartition: both parts nonempty (without this, V1 := setT makes
+               the complement-side constraint vacuous, trivializing the statement) *)
+            V1 != set0,
+            V1 != [set: D],
+            (forall v : D, v \in V1 -> (d <= outdeg_in V1 v)%N)
+          & (forall v : D, v \notin V1 -> (d <= outdeg_in (~: V1) v)%N)].
 
 (** ** Stable set meeting all longest directed paths (Laborde–Payan–Xuong) *)
 

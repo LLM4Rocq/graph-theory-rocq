@@ -194,10 +194,16 @@ Definition acyclic_number_ge (D : diGraphType) (m : nat) : Prop := has_acyclic_s
     order exists.) *)
 Definition avec_core_statement : Prop :=
   exists g : nat -> nat,
-    (forall n : nat, (0 < n)%N -> (0 < g n)%N) /\
-    forall (D : diGraphType),
-      (0 < #|D|)%N -> oriented_dg D -> underlying_triangle_free D ->
-      acyclic_number_ge D (g #|D|).
+    forall n : nat, (0 < n)%N ->
+      (* lower bound: every order-n oriented triangle-free D has an acyclic set of size g n *)
+      (forall D : diGraphType,
+         #|D| = n -> oriented_dg D -> underlying_triangle_free D ->
+         acyclic_number_ge D (g n)) /\
+      (* attained — pins g to the MINIMUM a⃗(n): some order-n such D has no acyclic set of
+         size g n + 1 (without this, g := 1 satisfies the lower bound vacuously). *)
+      (exists D : diGraphType,
+         [/\ #|D| = n, oriented_dg D, underlying_triangle_free D
+           & ~ acyclic_number_ge D (g n).+1]).
 
 (** Conjecture 4 core (t⃗): the maximum dichromatic number over oriented triangle-free
     graphs of order [n] grows — there is an order-[n] oriented triangle-free graph whose
@@ -206,9 +212,16 @@ Definition avec_core_statement : Prop :=
 Definition tvec_core_statement : Prop :=
   exists h : nat -> nat,
     forall n : nat, (0 < n)%N ->
-      exists D : diGraphType,
-        [/\ #|D| = n, oriented_dg D, underlying_triangle_free D
-          & ~~ dicolorableb D (h n).-1].
+      (* upper bound: every order-n oriented triangle-free D is h n-dicolourable *)
+      (forall D : diGraphType,
+         #|D| = n -> oriented_dg D -> underlying_triangle_free D ->
+         dicolorableb D (h n)) /\
+      (* attained — pins h to the MAXIMUM t⃗(n): some order-n such D is not
+         (h n − 1)-dicolourable (without the upper bound, h := 1 makes (h n).-1 = 0 and
+         the clause holds vacuously). *)
+      (exists D : diGraphType,
+         [/\ #|D| = n, oriented_dg D, underlying_triangle_free D
+           & ~~ dicolorableb D (h n).-1]).
 
 (** The m(3) landmark: there exists an oriented triangle-free graph that is NOT
     2-dicolourable (its dichromatic number is at least 3) — so the least order m(3)

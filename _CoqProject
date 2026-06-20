@@ -90,3 +90,11 @@ theories/conjectures/grounding_fas_unvd.v
 theories/conjectures/grounding_tww_chi_col.v
 theories/conjectures/grounding_reals.v
 theories/conjectures/grounding_two_extremal.v
+
+# --- extended grounding: statement-level non-vacuity + falsification sweep ---
+theories/conjectures/grounding_clique_long.v
+theories/conjectures/grounding_heroes_dichotomy.v
+theories/conjectures/grounding_twinwidth.v
+theories/conjectures/grounding_chi_col.v
+theories/conjectures/grounding_unvd_sad.v
+theories/conjectures/grounding_falsification_report.v
