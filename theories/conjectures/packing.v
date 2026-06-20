@@ -181,6 +181,7 @@ Arguments pp_knorm {D}.
     /\ all (dicycle D) cs].) Min out-degree is pointwise [forall v, 2*k-1 <= outdeg v]. *)
 Definition bermond_thomassen_statement : Prop :=
   forall (D : diGraphType) (k : nat),
+    (0 < #|D|)%N ->
     (forall v : D, (2 * k - 1 <= outdeg v)%N) ->
     exists P : seq (seq D),
       [/\ cycle_pack P, vtx_disjoint_pack P & size P = k].
@@ -194,6 +195,7 @@ Definition bermond_thomassen_statement : Prop :=
     forall j, 2<=j<=k -> #|verts (Cs j) :&: ⋃_{i<j} verts (Cs i)| <= 1].) *)
 Definition hoang_reed_statement : Prop :=
   forall (D : diGraphType) (k : nat),
+    (0 < #|D|)%N ->
     (forall v : D, (k <= outdeg v)%N) ->
     exists P : seq (seq D),
       [/\ cycle_pack P,
@@ -280,6 +282,7 @@ Definition erdos_posa_long_dicycles_statement : Prop :=
 Theorem bermond_thomassen_implies_hoang_reed_weak :
   bermond_thomassen_statement ->
   forall (D : diGraphType) (k : nat),
+    (0 < #|D|)%N ->
     (forall v : D, (2 * k - 1 <= outdeg v)%N) ->
     exists P : seq (seq D),
       [/\ cycle_pack P,
@@ -288,8 +291,8 @@ Theorem bermond_thomassen_implies_hoang_reed_weak :
             (#|[set v : D | (v \in nth [::] P j) &&
                  [exists i : 'I_(size P), (i < j)%N && (v \in nth [::] P i)]]| <= 1)%N].
 Proof.
-move=> BT D k hdeg.
-have [P [cp vdp szP]] := BT D k hdeg.
+move=> BT D k Dpos hdeg.
+have [P [cp vdp szP]] := BT D k Dpos hdeg.
 exists P; split=> // j jpos.
 have -> : [set v : D | (v \in nth [::] P j) &&
             [exists i : 'I_(size P), (i < j)%N && (v \in nth [::] P i)]] = set0.
@@ -306,10 +309,10 @@ Qed.
     the packing has size 1, its single member is a dicycle. *)
 Theorem hoang_reed_implies_one_cycle :
   hoang_reed_statement ->
-  forall D : diGraphType, (forall v : D, (1 <= outdeg v)%N) ->
+  forall D : diGraphType, (0 < #|D|)%N -> (forall v : D, (1 <= outdeg v)%N) ->
     exists c : seq D, dicycle c.
 Proof.
-move=> HR D hdeg.
-have [P [cp szP _]] := HR D 1 hdeg.
+move=> HR D Dpos hdeg.
+have [P [cp szP _]] := HR D 1 Dpos hdeg.
 case: P cp szP => [|c tl] // /andP[dc _] _; by exists c.
 Qed.

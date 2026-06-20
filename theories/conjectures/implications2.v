@@ -144,12 +144,12 @@ Qed.
     cycle: the packing has size 1, whose single member is a dicycle. *)
 Theorem bermond_thomassen_implies_one_cycle :
   bermond_thomassen_statement ->
-  forall D : diGraphType, (forall v : D, (1 <= outdeg v)%N) ->
+  forall D : diGraphType, (0 < #|D|)%N -> (forall v : D, (1 <= outdeg v)%N) ->
     exists c : seq D, dicycle c.
 Proof.
-move=> BT D hdeg.
+move=> BT D Dpos hdeg.
 have hdeg' : forall v : D, (2 * 1 - 1 <= outdeg v)%N by move=> v; rewrite muln1.
-have [P [cp _ szP]] := BT D 1 hdeg'.
+have [P [cp _ szP]] := BT D 1 Dpos hdeg'.
 case: P cp szP => [|c tl] // /andP[dc _] _; by exists c.
 Qed.
 
@@ -158,11 +158,11 @@ Qed.
     conclusion.  (The two diverge at [k ≥ 2] by the degree threshold.) *)
 Theorem hoang_reed_implies_bermond_thomassen_k1 :
   hoang_reed_statement ->
-  forall D : diGraphType, (forall v : D, (1 <= outdeg v)%N) ->
+  forall D : diGraphType, (0 < #|D|)%N -> (forall v : D, (1 <= outdeg v)%N) ->
     exists P : seq (seq D), [/\ cycle_pack P, vtx_disjoint_pack P & size P = 1].
 Proof.
-move=> HR D hdeg.
-have [P [cp szP _]] := HR D 1 hdeg.
+move=> HR D Dpos hdeg.
+have [P [cp szP _]] := HR D 1 Dpos hdeg.
 exists P; split=> //.
 (* a singleton packing is trivially vertex-disjoint: no two distinct indices *)
 apply/forallP=> i; apply/forallP=> j; apply/implyP=> ij.

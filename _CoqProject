@@ -80,3 +80,13 @@ theories/conjectures/hero_isoclosure.v
 theories/conjectures/generalised_wheel.v
 theories/conjectures/glue_tree.v
 theories/conjectures/glue_eul_subtype.v
+
+# --- grounding lemmas: easy textbook/paper facts validating the definitions ---
+theories/conjectures/grounding_dichromatic.v
+theories/conjectures/grounding_classic_core.v
+theories/conjectures/grounding_heroes.v
+theories/conjectures/grounding_sad_packing.v
+theories/conjectures/grounding_fas_unvd.v
+theories/conjectures/grounding_tww_chi_col.v
+theories/conjectures/grounding_reals.v
+theories/conjectures/grounding_two_extremal.v
