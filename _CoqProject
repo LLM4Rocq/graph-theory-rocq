@@ -103,3 +103,5 @@ theories/conjectures/grounding_h2_concrete.v
 theories/conjectures/grounding_edges.v
 theories/conjectures/grounding_sad2.v
 theories/conjectures/grounding_omegabar_unvd.v
+theories/conjectures/grounding_pathfas_tww.v
+theories/conjectures/grounding_reals2.v
