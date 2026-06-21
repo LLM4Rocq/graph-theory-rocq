@@ -313,13 +313,33 @@ exfalso; move/negP: XnT; apply; apply/eqP/setP=> j; rewrite in_setT.
 by have [k Ek] := p_reaches x0 j; rewrite -Ek iterIn.
 Qed.
 
+(** GROUNDING: the bidirected n-cycle is 2-ARC-STRONG.  Every nonempty proper cut [X] has a
+    forward boundary arc [(x, s x)] and a backward boundary arc [(y, p y)]; these two arcs are
+    distinct (if [x = y] then [s x ≠ p x] by [s_neq_p]), so [#|δ⁺(X)| ≥ 2].  Together with
+    [SAD_Bicyc] this grounds [arc_strong] (= λ ≥ 2) on a concrete witness — the bidirected
+    cycle is the canonical 2-arc-strong digraph admitting a Strong Arc Decomposition. *)
+Lemma bicyc_arc_strong : arc_strong Bicyc 2.
+Proof.
+move=> X X0 XT.
+have [x [xX sxN]] := bicyc_fwd_boundary X0 XT.
+have [y [yX pyN]] := bicyc_bwd_boundary X0 XT.
+apply/card_gt1P; exists (x, s x), (y, p y); split.
+- by rewrite in_outcutE; apply/and3P;
+     split; [rewrite bicyc_arcE eqxx | exact: xX | exact: sxN].
+- by rewrite in_outcutE; apply/and3P;
+     split; [rewrite bicyc_arcE eqxx orbT | exact: yX | exact: pyN].
+- rewrite xpair_eqE negb_and; have [exy|xny] := eqVneq x y; last by [].
+  by rewrite exy /=; exact: s_neq_p.
+Qed.
+
 End Bicyc.
 
 (** NOTE — salvaged from a stalled agent run (transient API rate-limiting).  The centerpiece
     [SAD_Bicyc] (a concrete Strong Arc Decomposition of the bidirected n-cycle for every
     [n >= 3]:
     the forward cycle [Afwd] and backward cycle [Abwd] are two arc-disjoint spanning strong
-    subdigraphs) and its colouring form [SAD_colouring_Bicyc] are PROVED above.  The further
-    lemmas the agent left unfinished — [bicyc_arc_strong], [TT2_not_SAD], and the
-    [CL1_bridge_*] witnesses — were broken at compile and dropped; they can be redone when
+    subdigraphs), its colouring form [SAD_colouring_Bicyc], and its 2-arc-strength
+    [bicyc_arc_strong] are PROVED above.  The remaining trailers the agent left unfinished —
+    [TT2_not_SAD] and the [CL1_bridge_*] witnesses — were broken at compile and dropped; they
+    can be redone when
     the agent fleet recovers. *)
