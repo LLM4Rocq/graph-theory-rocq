@@ -334,12 +334,28 @@ Qed.
 
 End Bicyc.
 
+(** GROUNDING (discriminating probe): a Strong Arc Decomposition is NOT automatic — the
+    transitive tournament [TT 2] (a single arc 0 → 1) has NONE.  Its only arc set cannot
+    contain a spanning strong subdigraph: vertex 1 is a sink (no arc leaves it, since
+    [arc u v = u < v]), so it never reaches 0.  Confirms [SAD] is a non-trivial property,
+    not satisfied by every digraph. *)
+Lemma TT2_not_SAD : ~ SAD (TT 2).
+Proof.
+case=> A1 [A2 [_ _ [A1sub A1conn] _]].
+pose v1 : TT 2 := ord_max.
+pose v0 : TT 2 := ord0.
+have sink : forall w : TT 2, (v1, w) \notin A1.
+  move=> w; apply/negP => /(subsetP A1sub); rewrite in_arcsetE arcTTE /=.
+  by have := ltn_ord w; case: (val w) => [|[|]].
+have := A1conn v1 v0 => /connectP[[|z s'] /= pth lst].
+- by move: lst => /(congr1 val).
+- by move: pth => /andP[]; rewrite /subrel_of (negbTE (sink z)).
+Qed.
+
 (** NOTE — salvaged from a stalled agent run (transient API rate-limiting).  The centerpiece
     [SAD_Bicyc] (a concrete Strong Arc Decomposition of the bidirected n-cycle for every
-    [n >= 3]:
-    the forward cycle [Afwd] and backward cycle [Abwd] are two arc-disjoint spanning strong
-    subdigraphs), its colouring form [SAD_colouring_Bicyc], and its 2-arc-strength
-    [bicyc_arc_strong] are PROVED above.  The remaining trailers the agent left unfinished —
-    [TT2_not_SAD] and the [CL1_bridge_*] witnesses — were broken at compile and dropped; they
-    can be redone when
-    the agent fleet recovers. *)
+    [n >= 3]: the forward cycle [Afwd] and backward cycle [Abwd] are two arc-disjoint spanning
+    strong subdigraphs), its colouring form [SAD_colouring_Bicyc], its 2-arc-strength
+    [bicyc_arc_strong], and the discriminating probe [TT2_not_SAD] are all PROVED.  The only
+    remaining trailers the agent left unfinished are the [CL1_bridge_*] witnesses (CL1
+    non-vacuity), which had a deeper type confusion in the original attempt and are left open. *)
