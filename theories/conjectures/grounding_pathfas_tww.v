@@ -13,9 +13,8 @@
       - concrete ordered twin-width refines (unordered) [tww_le] (the twinwidth_ordered ↔
         twinwidth bridge).
 
-    DEFERRED (needs the backedge-graph forest computation over C₃ = ℤ₃ ring arithmetic,
-    best done by the agent fleet): the marquee non-transitive value Δ*(C₃) = 1 and
-    has_LFO(C₃) (the directed triangle's single-back-arc order is a linear forest). *)
+    The marquee non-transitive value Δ*(C₃) = 1 and has_LFO(C₃) (the directed triangle's
+    single-back-arc order is a linear forest) are now PROVED in grounding_degreewidth_c3.v. *)
 
 From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.

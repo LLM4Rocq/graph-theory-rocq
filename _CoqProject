@@ -105,3 +105,4 @@ theories/conjectures/grounding_sad2.v
 theories/conjectures/grounding_omegabar_unvd.v
 theories/conjectures/grounding_pathfas_tww.v
 theories/conjectures/grounding_reals2.v
+theories/conjectures/grounding_degreewidth_c3.v
