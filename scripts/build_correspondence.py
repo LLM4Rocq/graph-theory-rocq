@@ -83,6 +83,30 @@ CLUSTER_BY_FILE = {
     "theories/invariants/domination.v": "G",
     "theories/invariants/critical.v": "G",
     "theories/invariants/omegabar.v": "G",
+    # grounding / proof files (the lemmas that TEST the definitions) cluster
+    # with the conjecture family they validate.
+    "theories/conjectures/grounding_sad2.v": "P3",
+    "theories/conjectures/grounding_sad_packing.v": "P3",
+    "theories/conjectures/grounding_unvd_sad.v": "P3",
+    "theories/conjectures/grounding_classic_core.v": "P9",
+    "theories/conjectures/grounding_clique_long.v": "P1",
+    "theories/conjectures/grounding_dichromatic.v": "P2",
+    "theories/conjectures/grounding_dichromatic_cycle.v": "P2",
+    "theories/conjectures/grounding_chi_col.v": "P2",
+    "theories/conjectures/grounding_tww_chi_col.v": "P2",
+    "theories/conjectures/grounding_colouring2.v": "P11",
+    "theories/conjectures/grounding_degreewidth_c3.v": "P4",
+    "theories/conjectures/grounding_pathfas_tww.v": "P4",
+    "theories/conjectures/grounding_fas_unvd.v": "P4",
+    "theories/conjectures/grounding_reals.v": "P8",
+    "theories/conjectures/grounding_reals2.v": "P8",
+    "theories/conjectures/grounding_twinwidth.v": "P12",
+    "theories/conjectures/grounding_two_extremal.v": "P12",
+    "theories/conjectures/grounding_heroes.v": "P6",
+    "theories/conjectures/grounding_heroes_dichotomy.v": "P6",
+    "theories/conjectures/grounding_h2_concrete.v": "P6",
+    "theories/conjectures/grounding_edges.v": "G",
+    "theories/conjectures/grounding_falsification_report.v": "G",
 }
 
 # Definition <name> [params] : Prop := ...   (statement-shaped Props)
@@ -142,8 +166,11 @@ def doc_comment_above(raw: str, name: str, kinds: str) -> str:
 
 
 def verbatim(closure: sc.Closure, vrel: str, name: str):
-    """(code, line) for NAME's statement span, from the built .glob."""
+    """(code, line) for NAME's statement span, from the built .glob; None if the
+    name is not declared in that file's glob (e.g. a curated typo)."""
     g = closure.glob_for(vrel)
+    if name not in g.decls:
+        return None
     lo, hi, _kind = g.statement_span(name)
     bol = g.src.rfind(b"\n", 0, lo) + 1
     text = g.src[bol:hi].decode("utf-8").rstrip()
@@ -268,17 +295,23 @@ def main(check: bool):
     rows = []
     missing_decoded = []
     bad_specializes = []
+    skipped = []
     for name in sorted(entries):
         ent = entries[name]
         vrel = ent["vrel"]
         cur = cur_entries.get(name, {})
-        code, line = verbatim(closure, vrel, name)
+        vb = verbatim(closure, vrel, name)
+        if vb is None:                       # curated name not in the built glob
+            skipped.append((name, vrel))
+            continue
+        code, line = vb
         doc = doc_comment_above(raw_of(ent), name, ent["doc_kinds"])
         informal, status, title = resolve_informal(
             cur, by_slug, by_ltitle, by_ctitle, doc)
         if not status:
             status = {"conjecture": "open", "proved-result": "proved",
-                      "refutation": "refuted"}.get(ent["kind"], "open")
+                      "refutation": "refuted", "grounding": "proved"}.get(
+                          ent["kind"], "open")
 
         decoded = cur.get("decoded", "").strip()
         decoded_authored = bool(decoded)
@@ -317,9 +350,21 @@ def main(check: bool):
             "axiom_free": axiom_free,
             "edges": edges,
             "specializes": specializes,
-            "grounding": cur.get("grounding", []),
+            "grounds": cur.get("grounds", []),       # grounding -> conjectures it tests
+            "grounded_by": [],                        # filled by the reverse index below
+            "grounding": cur.get("grounding", []),    # free-form notes (legacy/extra)
             "faithfulness": cur.get("faithfulness", "").strip(),
         })
+
+    # reverse index: each conjecture/result lists the grounding entries testing it
+    by_row = {r["id"]: r for r in rows}
+    for r in rows:
+        if r["kind"] != "grounding":
+            continue
+        for gid in r["grounds"]:
+            tgt = by_row.get(gid)
+            if tgt is not None:
+                tgt["grounded_by"].append({"id": r["id"], "title": r["title"]})
 
     registry = {
         "meta": {
@@ -333,6 +378,11 @@ def main(check: bool):
 
     if check:
         problems = []
+        if skipped:
+            problems.append(
+                f"{len(skipped)} curated entries name a declaration absent from "
+                f"the built glob (typo? rebuild?):\n    " +
+                "\n    ".join(f"{n}  ({v})" for n, v in skipped))
         if missing_decoded:
             problems.append(
                 f"{len(missing_decoded)} entries lack an authored `decoded` "
@@ -362,6 +412,9 @@ def main(check: bool):
     REGISTRY.write_text(json.dumps(registry, indent=2, ensure_ascii=False) + "\n",
                         encoding="utf-8")
     n_auth = sum(1 for r in rows if r["decoded_authored"])
+    if skipped:
+        print(f"  WARNING: skipped {len(skipped)} curated names absent from glob: "
+              + ", ".join(n for n, _ in skipped))
     print(f"registry: {len(rows)} entries -> {REGISTRY.relative_to(ROOT)}")
     print(f"  authored decoded: {n_auth}/{len(rows)}")
     print(f"  by kind: " + ", ".join(

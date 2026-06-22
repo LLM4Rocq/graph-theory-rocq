@@ -27,6 +27,10 @@ MUST_EXIST = [
     "conjecture_5_10_at_345",
     "cheng_keevash_conj1_statement",
     "ck_conj1_delta3",
+    # grounding / test proofs
+    "CL1_premises_inhabited",
+    "SAD_Bicyc",
+    "TT2_not_SAD",
 ]
 
 
@@ -60,10 +64,15 @@ def main() -> None:
             check(sp in by_id or sp in dep_nodes,
                   f"{i}: specializes target {sp!r} unresolved")
 
+    n_ground = sum(1 for e in entries if e["kind"] == "grounding")
+    check(n_ground >= 100, f"expected >= 100 grounding entries, got {n_ground}")
     cl1 = by_id.get("CL1_statement", {})
-    check(any(g.get("name") == "CL1_premises_inhabited"
-              for g in cl1.get("grounding", [])),
-          "CL1_statement missing grounding CL1_premises_inhabited")
+    check(any(g.get("id") == "CL1_premises_inhabited"
+              for g in cl1.get("grounded_by", [])),
+          "CL1_statement not linked to grounding CL1_premises_inhabited (grounded_by)")
+    cpi = by_id.get("CL1_premises_inhabited", {})
+    check(cpi.get("kind") == "grounding" and "CL1_statement" in cpi.get("grounds", []),
+          "CL1_premises_inhabited should be a grounding entry validating CL1_statement")
     c510 = by_id.get("conjecture_5_10_at_345", {})
     check("conjecture_5_10_statement" in c510.get("specializes", []),
           "conjecture_5_10_at_345 should specialize conjecture_5_10_statement")

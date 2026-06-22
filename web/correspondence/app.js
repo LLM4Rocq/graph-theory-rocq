@@ -92,18 +92,23 @@ function card(e) {
     body.append(sec);
   }
 
-  // decoded (informal reading of the formal)
-  const dh = el("h4", {}, "Informal reading of the formal statement");
+  // decoded (informal reading of the formal; or "what this proof establishes")
+  const grounding = e.kind === "grounding";
+  const dh = el("h4", {}, grounding
+    ? "What this proof establishes"
+    : "Informal reading of the formal statement");
   if (!e.decoded_authored) dh.append(el("span", { class: "auto-tag" }, "auto — from doc-comment"));
   body.append(el("div", { class: "sec" }, dh, el("p", { class: "decoded" }, e.decoded || "—")));
 
-  // formal verbatim
+  // formal verbatim (for grounding entries this is the lemma statement; the
+  // full proof is at the GitHub line anchor)
   const f = e.formal;
-  body.append(el("div", { class: "sec" }, el("h4", {}, "Formal statement (Rocq)"),
+  body.append(el("div", { class: "sec" },
+    el("h4", {}, grounding ? "Lemma statement (Rocq) — proof at source" : "Formal statement (Rocq)"),
     el("pre", { class: "formal", html: esc(f.verbatim) }),
     el("div", { class: "formal-links" },
       el("a", { href: f.github_url, target: "_blank", rel: "noopener" },
-        "Source: " + f.file + ":" + f.line),
+        (grounding ? "Proof: " : "Source: ") + f.file + ":" + f.line),
       el("a", { href: f.coqdoc_url, target: "_blank", rel: "noopener" }, "coqdoc"))));
 
   // edges + specializes
@@ -138,12 +143,39 @@ function card(e) {
     body.append(el("div", { class: "sec" }, el("h4", {}, "Related statements"),
       el("div", { class: "edges" }, ...edgeRows)));
 
-  // grounding evidence
+  // formal proofs that TEST this definition (reverse index)
+  if (e.grounded_by && e.grounded_by.length) {
+    const rows = el("div", { class: "edges" });
+    for (const g of e.grounded_by)
+      rows.append(el("div", { class: "edge" },
+        el("span", { class: "rel" }, "tested by"),
+        el("span", { class: "arrow" }, "✓ "),
+        el("a", { href: "#" + g.id }, g.id),
+        g.title ? document.createTextNode(" — " + g.title) : null));
+    body.append(el("div", { class: "sec" },
+      el("h4", {}, "Tested by (formal proofs)"), rows));
+  }
+
+  // (grounding entries:) the definitions/conjectures this proof validates
+  if (e.grounds && e.grounds.length) {
+    const rows = el("div", { class: "edges" });
+    for (const gid of e.grounds) {
+      const known = DATA.some(x => x.id === gid);
+      rows.append(el("div", { class: "edge" },
+        el("span", { class: "rel" }, "validates"),
+        el("span", { class: "arrow" }, "⊨ "),
+        known ? el("a", { href: "#" + gid }, gid) : el("code", {}, gid)));
+    }
+    body.append(el("div", { class: "sec" },
+      el("h4", {}, "Validates (definitions tested)"), rows));
+  }
+
+  // free-form grounding notes (legacy)
   if (e.grounding && e.grounding.length) {
     const ul = el("ul", { class: "ground" });
     for (const g of e.grounding)
       ul.append(el("li", {}, el("code", {}, g.name), " — " + (g.gloss || "")));
-    body.append(el("div", { class: "sec" }, el("h4", {}, "Grounding evidence"), ul));
+    body.append(el("div", { class: "sec" }, el("h4", {}, "Grounding notes"), ul));
   }
 
   // faithfulness note
@@ -193,6 +225,7 @@ function buildSidebar() {
     el("div", { class: "stat" }, el("b", {}, String(DATA.length)), el("span", {}, "entries")),
     el("div", { class: "stat" }, el("b", {}, String(byKind("conjecture"))), el("span", {}, "conjectures")),
     el("div", { class: "stat" }, el("b", {}, String(byKind("proved-result"))), el("span", {}, "proved")),
+    el("div", { class: "stat" }, el("b", {}, String(byKind("grounding"))), el("span", {}, "tests")),
     el("div", { class: "stat" }, el("b", {}, String(DATA.filter(e => e.axiom_free).length)), el("span", {}, "axiom-free")));
 
   // status + kind chips
@@ -206,7 +239,7 @@ function buildSidebar() {
     }
   };
   mkChips($("#filter-status"), "status", ["open", "proved", "refuted", "partial"]);
-  mkChips($("#filter-kind"), "kind", ["conjecture", "proved-result", "refutation"]);
+  mkChips($("#filter-kind"), "kind", ["conjecture", "proved-result", "grounding", "refutation"]);
 
   // cluster TOC
   const toc = $("#toc");

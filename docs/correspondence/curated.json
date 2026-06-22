@@ -3,11 +3,102 @@
   "entries": {
     "AC_kcritical3": {
       "title": "ACₙ is 3-ω̄-critical",
-      "decoded": "For m ≥ 3 (so the circulant tournament ACₙ has n = 2m+1 ≥ 7 vertices), ACₙ is 3-ω̄-critical: its directed clique number ω̄(ACₙ) = 3, and deleting any single vertex leaves ω̄ = 2. This is the building block giving the infinite k = 3 family for Conjecture 5.10."
+      "decoded": "For m ≥ 3 (so the circulant tournament ACₙ has n = 2m+1 ≥ 7 vertices), ACₙ is 3-ω̄-critical: its directed clique number ω̄(ACₙ) = 3, and deleting any single vertex leaves ω̄ = 2. This is the building block giving the infinite k = 3 family for Conjecture 5.10.",
+      "informal": "For m ≥ 3, the circulant tournament ACₙ (on n = 2m+1 ≥ 7 vertices) is 3-ω̄-critical: ω̄(ACₙ) = 3 and deleting any single vertex drops the directed clique number to 2."
     },
     "AC_vertex_transitive": {
       "title": "ACₙ is vertex-transitive",
-      "decoded": "The circulant tournament ACₙ is vertex-transitive: its automorphism group acts transitively on the vertices (for any two vertices there is a digraph automorphism — here a translation, as for any Cayley digraph — sending one to the other). This is the symmetry fact that reduces the criticality check to a single deleted vertex."
+      "decoded": "The circulant tournament ACₙ is vertex-transitive: its automorphism group acts transitively on the vertices (for any two vertices there is a digraph automorphism — here a translation, as for any Cayley digraph — sending one to the other). This is the symmetry fact that reduces the criticality check to a single deleted vertex.",
+      "informal": "The circulant tournament ACₙ is vertex-transitive: its automorphism group acts transitively on the vertices."
+    },
+    "BJY_SAD_implies_strong'": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "BJY_SAD_implies_strong'",
+        "kind": "grounding"
+      },
+      "title": "Bang-Jensen-Yeo SAD ⇒ K-arc-strong implies strong connectivity",
+      "decoded": "Re-derives, against the committed sad.v API, the edge that the Strong Arc Decomposition guaranteed by Bang-Jensen-Yeo yields a strongly connected digraph — i.e. the SAD colour class spans a strong host. Validates the actual content of the BJY-SAD ⇒ strong edge.",
+      "cluster": "G",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement"
+      ]
+    },
+    "C3_diregular1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "C3_diregular1",
+        "kind": "grounding"
+      },
+      "title": "The directed triangle C3 is 1-diregular",
+      "decoded": "Computes that the directed 3-cycle has out-degree and in-degree equal to 1 at every vertex, i.e. it is 1-diregular. This is a concrete value-computation witness that the diregular predicate is satisfiable on a real digraph rather than vacuous.",
+      "cluster": "P9",
+      "grounds": []
+    },
+    "C3_has_seymour_vertex": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "C3_has_seymour_vertex",
+        "kind": "grounding"
+      },
+      "title": "C3 has a Seymour vertex (SNC conclusion is satisfiable)",
+      "decoded": "Exhibits a concrete vertex v of the directed triangle with outdeg v <= #|Nout2 v| (both equal 1), confirming that the conclusion of Seymour's Second Neighbourhood Conjecture is achievable — the predicate is satisfiable, not an empty class.",
+      "cluster": "P9",
+      "grounds": [
+        "seymour_second_neighbourhood_statement"
+      ]
+    },
+    "C3_seymour_all": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "C3_seymour_all",
+        "kind": "grounding"
+      },
+      "title": "Every vertex of C3 satisfies the Seymour inequality",
+      "decoded": "Strengthens the satisfiability check: every vertex v of the directed triangle satisfies outdeg v <= #|Nout2 v|, so the second-neighbourhood inequality of SNC is realised at all vertices of a genuine digraph, a stronger non-vacuity test of the Seymour conclusion shape.",
+      "cluster": "P9",
+      "grounds": [
+        "seymour_second_neighbourhood_statement"
+      ]
+    },
+    "CH_source_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "CH_source_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Caccetta-Häggkvist source class is inhabited (directed triangle C₃ at r=1)",
+      "decoded": "Exhibits the directed triangle C₃ as a concrete member of the Caccetta-Häggkvist antecedent class — nonempty, loopless, with every vertex of out-degree ≥ 1 = r — so the CH hypothesis class is non-vacuous and the implication edge transports something.",
+      "cluster": "G",
+      "grounds": [
+        "caccetta_haggkvist_statement"
+      ]
+    },
+    "CH_triangle_realised_on_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "CH_triangle_realised_on_C3",
+        "kind": "grounding"
+      },
+      "title": "The Caccetta-Häggkvist-triangle conclusion is realised on C₃",
+      "decoded": "Shows C₃ actually contains a directed cycle of length 3, i.e. the conclusion of the CH-triangle conjecture is reached on a concrete witness rather than being vacuously about an empty class.",
+      "cluster": "G",
+      "grounds": [
+        "caccetta_haggkvist_triangle_statement"
+      ]
+    },
+    "CL1_premises_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad2.v",
+        "name": "CL1_premises_inhabited",
+        "kind": "grounding"
+      },
+      "title": "CL1 hypothesis class is inhabited (6-vertex two-triangle host)",
+      "decoded": "Establishes that every premise of CL1 is simultaneously satisfiable: a vertex split V = V1 + V2 with both sides >= 2, each induced side admitting a SAD, and each bridge out-cut splitting into two nonempty colour parts. The honest witness is the 6-vertex host H6 (two bidirected triangles joined by a two-way bridge), since no 2-vertex side can admit a SAD. So CL1 is neither vacuously true nor obviously false on its witness.",
+      "cluster": "P3",
+      "grounds": [
+        "CL1_statement"
+      ]
     },
     "CL1_statement": {
       "title": "CL1 — bilateral controlled-lifting for Strong Arc Decompositions",
@@ -16,13 +107,110 @@
         "slug": "arc_disjoint_strongly_connected_spanning_subdigraphs",
         "attribution": "library-internal lifting lemma toward Bang-Jensen–Yeo SAD"
       },
-      "grounding": [
-        {
-          "name": "CL1_premises_inhabited",
-          "gloss": "the six premises are simultaneously satisfiable — witnessed by the 6-vertex host H6 (two bidirected triangles + a two-way bridge); axiom-free."
-        }
-      ],
       "faithfulness": "Each side needs a SAD, and the smallest SAD-admitting digraph is the bidirected triangle (no 2-vertex digraph has a SAD), so the non-vacuity witness uses 3-vertex sides, not 2-vertex ones."
+    },
+    "Delta_star_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_degreewidth_c3.v",
+        "name": "Delta_star_C3",
+        "kind": "grounding"
+      },
+      "title": "Degreewidth of the directed triangle is 1",
+      "decoded": "Computes Δ*(C₃) = 1 for the directed triangle C₃: every vertex order leaves at least one back-arc, and the identity order leaves exactly one, giving back-arc max-degree 1. This is the marquee non-transitive value of degreewidth, validating the Delta_star definition (the smallest non-sparse tournament, with Δ* > 0) underlying the matching-FAS = degreewidth-≤-1 fact.",
+      "cluster": "P4",
+      "grounds": [
+        "matchingFAS_iff_dw1_statement"
+      ]
+    },
+    "Delta_star_C3_le2_via_LFO": {
+      "extra": {
+        "file": "theories/conjectures/grounding_degreewidth_c3.v",
+        "name": "Delta_star_C3_le2_via_LFO",
+        "kind": "grounding"
+      },
+      "title": "C₃ consistency cross-check: has_LFO forces Δ*(C₃) ≤ 2",
+      "decoded": "Cross-checks the two definitions on C₃: feeding has_LFO_C3 through the proved reduction has_LFO_Delta_star_le2 yields Δ*(C₃) ≤ 2, consistent with the exact computed value Δ*(C₃) = 1. Confirms the Path-FAS/LFO and degreewidth definitions agree on a concrete witness.",
+      "cluster": "P4",
+      "grounds": [
+        "pathFAS_iff_LFO_statement",
+        "matchingFAS_iff_dw1_statement"
+      ]
+    },
+    "Delta_star_TT": {
+      "extra": {
+        "file": "theories/conjectures/grounding_fas_unvd.v",
+        "name": "Delta_star_TT",
+        "kind": "grounding"
+      },
+      "title": "Degreewidth of a transitive tournament is 0",
+      "decoded": "Computes Δ*(TTₙ) = 0 for every transitive tournament: its identity (acyclic) order has an edgeless back-arc graph, so no order leaves any back-arc. The extreme sparse case that grounds the Delta_star definition (a transitive tournament is the maximally sparse tournament).",
+      "cluster": "P4",
+      "grounds": [
+        "matchingFAS_iff_dw1_statement"
+      ]
+    },
+    "Digon2_not_tournament": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes.v",
+        "name": "Digon2_not_tournament",
+        "kind": "grounding"
+      },
+      "title": "The digon is not a tournament (hero ceiling)",
+      "decoded": "Refutation probe: the two-vertex digon (arcs both ways) fails asymmetry, so it is not a tournament and hence not a hero. The second sanity ceiling confirming the hero predicate is discriminating.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "E2_no_dicycle": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "E2_no_dicycle",
+        "kind": "grounding"
+      },
+      "title": "The edgeless digraph E₂ has no dicycle",
+      "decoded": "The edgeless digraph E₂ contains no directed cycle, so 'has a dicycle' is discriminating (true on C₃, false on E₂) — the packing edges' (Bermond-Thomassen / Hoang-Reed at k=1) conclusion is not a triviality.",
+      "cluster": "G",
+      "grounds": [
+        "bermond_thomassen_statement",
+        "hoang_reed_statement"
+      ]
+    },
+    "E2_no_triangle": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "E2_no_triangle",
+        "kind": "grounding"
+      },
+      "title": "The edgeless digraph E₂ has no directed triangle",
+      "decoded": "The edgeless two-vertex digraph E₂ contains no directed 3-cycle, so 'has a directed triangle' is a discriminating property (true on C₃, false on E₂) — the CH-triangle edge's conclusion is not a triviality that every digraph satisfies.",
+      "cluster": "G",
+      "grounds": [
+        "caccetta_haggkvist_triangle_statement"
+      ]
+    },
+    "E2_not_strongb": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "E2_not_strongb",
+        "kind": "grounding"
+      },
+      "title": "The edgeless digraph E₂ is not strongly connected",
+      "decoded": "The two-vertex edgeless digraph E₂ is not strongly connected (its vertices cannot inter-reach), so strong connectivity is a discriminating target (true on C₃, false on E₂) — the SAD edges' conclusion is not a triviality.",
+      "cluster": "G",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement"
+      ]
+    },
+    "Edgeless2_not_tournament": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes.v",
+        "name": "Edgeless2_not_tournament",
+        "kind": "grounding"
+      },
+      "title": "The edgeless 2-vertex digraph is not a tournament (hero ceiling)",
+      "decoded": "Refutation probe: the two-vertex digraph with no arcs fails semicompleteness, so it is not a tournament and (since heroes are tournaments) cannot be a hero. A red-flag ceiling showing [hero] is not vacuously 'every digraph'.",
+      "cluster": "P6",
+      "grounds": []
     },
     "LFO_iff_34transversal_statement": {
       "title": "Linear-forest ordering = 3/4-cycle transversal (the equivalence target)",
@@ -33,9 +221,107 @@
         "attribution": "Aboulker, Aubian, Lopes"
       }
     },
+    "Loop1_not_dicol2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "Loop1_not_dicol2",
+        "kind": "grounding"
+      },
+      "title": "A single looped vertex is not 2-dicolourable",
+      "decoded": "The one-vertex digraph with a self-loop is not 2-dicolourable, so dicolourability by 2 colours is discriminating — the twin-width chain's conj_3_12 target (χ⃗ ≤ 2) is not a triviality satisfied by every digraph.",
+      "cluster": "G",
+      "grounds": [
+        "conj_3_12_statement"
+      ]
+    },
+    "Nout2_disjoint_Nout": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "Nout2_disjoint_Nout",
+        "kind": "grounding"
+      },
+      "title": "Second out-neighbourhood is disjoint from the out-neighbourhood",
+      "decoded": "Proves that Nout2 v (vertices at directed distance exactly two) is disjoint from Nout v (distance-one out-neighbours). A correctness probe of the Nout2 definition underlying Seymour's conjecture: a definition where these overlapped would be wrong.",
+      "cluster": "P9",
+      "grounds": [
+        "seymour_second_neighbourhood_statement"
+      ]
+    },
+    "SAD_BT3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "SAD_BT3",
+        "kind": "grounding"
+      },
+      "title": "Bidirected triangle BT3 has a Strong Arc Decomposition",
+      "decoded": "Exhibits a SAD of the bidirected triangle BT3 (a fresh 3-element carrier): its 6 arcs split into the forward triangle 0->1->2->0 and the backward triangle 0->2->1->0, each a spanning dicycle hence spanning-strong. The smallest honest SAD witness (a 2-vertex digon has none), making SAD a satisfiable predicate.",
+      "cluster": "P3",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement"
+      ]
+    },
+    "SAD_Bicyc": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad2.v",
+        "name": "SAD_Bicyc",
+        "kind": "grounding"
+      },
+      "title": "Bidirected n-cycle has a Strong Arc Decomposition",
+      "decoded": "Exhibits a concrete Strong Arc Decomposition of the bidirected n-cycle Bicyc n (n >= 3): its arcs split into the forward directed Hamilton cycle i -> i+1 and the backward one i -> i-1, each spanning and strongly connected. This is the smallest nontrivial witness that SAD is a satisfiable predicate, so the Bang-Jensen-Yeo / WC3 nodes do not quantify SAD over an empty class.",
+      "cluster": "P3",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement"
+      ]
+    },
+    "SAD_colouring_Bicyc": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad2.v",
+        "name": "SAD_colouring_Bicyc",
+        "kind": "grounding"
+      },
+      "title": "Bidirected n-cycle has a SAD via the 2-colouring presentation",
+      "decoded": "Re-proves the SAD of the bidirected n-cycle through the colouring form SAD_colouring (an arc is coloured by whether it is a forward arc), validating that the colouring presentation of SAD agrees with the arc-set-partition presentation on a concrete witness.",
+      "cluster": "P3",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement"
+      ]
+    },
+    "SAD_complete3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad2.v",
+        "name": "SAD_complete3",
+        "kind": "grounding"
+      },
+      "title": "Every 3-vertex bidirected (complete-symmetric) digraph has a SAD",
+      "decoded": "Generic grounding: any digraph on 3 vertices whose arc relation is inequality (the bidirected triangle) has a Strong Arc Decomposition, its 6 arcs splitting into the two oriented Hamilton 3-cycles. Provides the reusable smallest-SAD building block underpinning the CL1 non-vacuity witness.",
+      "cluster": "P3",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement",
+        "CL1_statement"
+      ]
+    },
+    "SAD_predicate_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "SAD_predicate_inhabited",
+        "kind": "grounding"
+      },
+      "title": "SAD is a satisfiable predicate",
+      "decoded": "States the existence of a nonempty digraph with a Strong Arc Decomposition (witnessed by BT3). Confirms bang_jensen_yeo_SAD_statement and WC3_statement do not quantify SAD D over an empty class.",
+      "cluster": "P3",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement"
+      ]
+    },
     "T4_kcritical4": {
       "title": "T4 = ACₙ[C₃] is 4-ω̄-critical",
-      "decoded": "The tournament T4 (the lexicographic product ACₙ[C₃], for n = 2m+1 with m ≥ 3) is 4-ω̄-critical: kcritical 4 T4 unfolds to ω̄(T4) = 4 and, for EVERY vertex v, ω̄(T4 − v) = 4.-1 = 3. This is the single-witness criticality fact (the building block); the arbitrarily-large family statement of Conjecture 5.10 is conjecture_5_10_at_k4, not this lemma."
+      "decoded": "The tournament T4 (the lexicographic product ACₙ[C₃], for n = 2m+1 with m ≥ 3) is 4-ω̄-critical: kcritical 4 T4 unfolds to ω̄(T4) = 4 and, for EVERY vertex v, ω̄(T4 − v) = 4.-1 = 3. This is the single-witness criticality fact (the building block); the arbitrarily-large family statement of Conjecture 5.10 is conjecture_5_10_at_k4, not this lemma.",
+      "informal": "The tournament T4 = ACₙ[C₃] is 4-ω̄-critical: ω̄(T4) = 4 and deleting any single vertex drops the directed clique number to 3."
     },
     "T5_kcritical5": {
       "title": "AACL Conj 5.10 — the host T₅ is 5-ω̄-critical",
@@ -47,6 +333,55 @@
         "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
       }
     },
+    "TT2_not_SAD": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad2.v",
+        "name": "TT2_not_SAD",
+        "kind": "grounding"
+      },
+      "title": "The single-arc digraph TT 2 has no SAD",
+      "decoded": "A discriminating probe: the transitive tournament TT 2 (one arc 0 -> 1) has NO Strong Arc Decomposition, since vertex 1 is a sink and no arc set on it can be spanning-strong. Confirms SAD is a non-trivial property, not satisfied by every digraph, so the SAD conjecture nodes are not vacuously true.",
+      "cluster": "P3",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement"
+      ]
+    },
+    "TT_has_sink": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "TT_has_sink",
+        "kind": "grounding"
+      },
+      "title": "Transitive tournament TT(n+1) has a sink of in-degree n",
+      "decoded": "Proves that in the transitive tournament TT(n+1) the greatest vertex ord_max is beaten by every other vertex, so indeg ord_max = n. The dual value-computation witness for the indeg encoding on the canonical transitive tournament.",
+      "cluster": "P9",
+      "grounds": []
+    },
+    "TT_has_source": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "TT_has_source",
+        "kind": "grounding"
+      },
+      "title": "Transitive tournament TT(n+1) has a source of out-degree n",
+      "decoded": "Proves that in the transitive tournament TT(n+1) (arcs u-->v iff u<v) the least vertex ord0 beats every other vertex, so outdeg ord0 = n. A key value computation validating the outdeg encoding on the canonical transitive tournament, and a probe showing degrees can be as large as n-1.",
+      "cluster": "P9",
+      "grounds": []
+    },
+    "WC3_implies_3arcstrong_strong'": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "WC3_implies_3arcstrong_strong'",
+        "kind": "grounding"
+      },
+      "title": "WC3 ⇒ every nonempty 3-arc-strong digraph is strongly connected",
+      "decoded": "Re-derives the WC3 ⇒ strong edge: under WC3, the SAD of any nonempty 3-arc-strong digraph spans a strong host, so the digraph is strongly connected. Validates the WC3 ⇒ strong-connectivity edge.",
+      "cluster": "G",
+      "grounds": [
+        "WC3_statement"
+      ]
+    },
     "WC3_statement": {
       "title": "Bang-Jensen–Yeo SAD at K = 3 (working conjecture WC3)",
       "decoded": "Every nonempty digraph D (0 < #|D|) that is 3-arc-strong admits a Strong Arc Decomposition, i.e. its arc set partitions into two disjoint arc classes that each span all vertices and are each strongly connected. This is the K = 3 instance of the Bang-Jensen–Yeo SAD conjecture: if true it settles that conjecture with K = 3, and a 3-arc-strong counterexample would refute it.",
@@ -56,6 +391,57 @@
         "attribution": "Bang-Jensen, Yeo (K = 3 form)"
       },
       "specializes": "bang_jensen_yeo_SAD_statement"
+    },
+    "acyclic_number_ge1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_falsification_report.v",
+        "name": "acyclic_number_ge1",
+        "kind": "grounding"
+      },
+      "title": "Every oriented digraph has acyclic number ≥ 1",
+      "decoded": "Proves any oriented digraph has acyclic_number_ge D 1 (a single vertex induces an acyclic subdigraph); this is exactly why avec_core_statement was trivially satisfiable by the constant g≡1 binder, the RF2 defect that prompted pinning g to the true minimum a⃗(n).",
+      "cluster": "G",
+      "grounds": [
+        "avec_core_statement"
+      ]
+    },
+    "acyclicb_TT": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic.v",
+        "name": "acyclicb_TT",
+        "kind": "grounding"
+      },
+      "title": "Transitive tournament is acyclic (χ⃗(TTₙ) = 1)",
+      "decoded": "Proves the transitive tournament TT n is acyclic, since arcs force vertex values to strictly increase along every path. This is the textbook value χ⃗(TTₙ) = 1 and a sanity witness that acyclicb is satisfiable on a nontrivial tournament.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "arc_strong_C3_1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "arc_strong_C3_1",
+        "kind": "grounding"
+      },
+      "title": "Directed triangle C3 is 1-arc-strong",
+      "decoded": "Proves arc_strong C3 1: every nonempty proper out-cut of the directed triangle has size >= 1. Grounds arc_strong / outcut on the canonical strongly connected example.",
+      "cluster": "P3",
+      "grounds": []
+    },
+    "avec_antecedent_TT2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "avec_antecedent_TT2",
+        "kind": "grounding"
+      },
+      "title": "a⃗/t⃗ core antecedent is inhabited (TT 2)",
+      "decoded": "Proves the single arc TT 2 is nonempty, oriented, and underlying-triangle-free — the full antecedent of the a⃗/t⃗ combinatorial cores. This non-vacuity witness shows the oriented triangle-free class of Conjectures 3 and 4 (arXiv:2403.02298) is inhabited.",
+      "cluster": "P2",
+      "grounds": [
+        "avec_core_statement",
+        "tvec_core_statement",
+        "conj3_avec_exists_statement",
+        "conj4_tvec_exists_statement"
+      ]
     },
     "avec_core_statement": {
       "title": "Minimum acyclic number of oriented triangle-free graphs — combinatorial core (a⃗)",
@@ -76,6 +462,32 @@
         "attribution": "Bang-Jensen, Yeo (2004)"
       }
     },
+    "bermond_thomassen_antecedent_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "bermond_thomassen_antecedent_C3",
+        "kind": "grounding"
+      },
+      "title": "Bermond-Thomassen antecedent is inhabited at k = 1",
+      "decoded": "Shows C3 is nonempty and every vertex has out-degree >= 2*1-1, so the now-guarded Bermond-Thomassen antecedent is satisfied by C3. Confirms the 0 < #|D| guard fix yields a non-empty hypothesis class (excludes only the empty-digraph counterexample).",
+      "cluster": "P3",
+      "grounds": [
+        "bermond_thomassen_statement"
+      ]
+    },
+    "bermond_thomassen_k1_holds": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad_packing.v",
+        "name": "bermond_thomassen_k1_holds",
+        "kind": "grounding"
+      },
+      "title": "Bermond-Thomassen holds at k = 1 on nonempty digraphs",
+      "decoded": "The k = 1 slice of Bermond-Thomassen is a theorem: every nonempty digraph of min out-degree >= 1 has a vertex-disjoint cycle packing of size 1. Confirms the (guarded) bermond_thomassen_statement is correctly calibrated at k = 1.",
+      "cluster": "P3",
+      "grounds": [
+        "bermond_thomassen_statement"
+      ]
+    },
     "bermond_thomassen_statement": {
       "title": "Bermond–Thomassen Conjecture",
       "decoded": "For every nonempty digraph D (0 < #|D|) and every k, if every vertex has out-degree at least 2k−1 (pointwise, forall v: 2*k−1 ≤ outdeg v), then D contains a packing of k directed cycles that are pairwise vertex-disjoint: there is a list P of seqs, each a directed cycle (cycle_pack P), with all members pairwise sharing no vertex (vtx_disjoint_pack P) and size P = k.",
@@ -84,6 +496,20 @@
         "slug": "the_bermond_thomassen_conjecture"
       },
       "status": "open"
+    },
+    "bicyc_arc_strong": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad2.v",
+        "name": "bicyc_arc_strong",
+        "kind": "grounding"
+      },
+      "title": "Bidirected n-cycle is 2-arc-strong",
+      "decoded": "Proves arc_strong (Bicyc n) 2 for n >= 3: every nonempty proper out-cut has a forward and a backward boundary arc (distinct by s x != p x), so its size is at least 2. Grounds arc_strong at a value strictly above 1 and supplies the inhabited hypothesis-class witness for the SAD conjectures, where the premise is k-arc-strong and the conclusion (SAD) is achievable.",
+      "cluster": "P3",
+      "grounds": [
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement"
+      ]
     },
     "caccetta_haggkvist_statement": {
       "title": "Caccetta–Häggkvist Conjecture",
@@ -102,13 +528,26 @@
       },
       "specializes": "caccetta_haggkvist_statement"
     },
+    "canon_tree_legal": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "canon_tree_legal",
+        "kind": "grounding"
+      },
+      "title": "The Def-9.1 base plane-tree datum is legal",
+      "decoded": "Proves is_two_hajos_data holds for canon_tree (a root with two B-leaves: ≥2 edges, even-B-parity, ≥1 leaf, no illegal A-blocks), so the legality predicate is inhabited and the tree-join generator inH2_treejoin is not vacuous.",
+      "cluster": "P12",
+      "grounds": []
+    },
     "card_AC": {
       "title": "ACₙ has n vertices",
-      "decoded": "The circulant tournament ACₙ has exactly n vertices (n = 2m+1, the order of the underlying cyclic group ℤ/nℤ)."
+      "decoded": "The circulant tournament ACₙ has exactly n vertices (n = 2m+1, the order of the underlying cyclic group ℤ/nℤ).",
+      "informal": "The circulant tournament ACₙ has exactly n vertices."
     },
     "card_T4": {
       "title": "Order of T4 = ACₙ[C₃] is 3n",
-      "decoded": "The tournament T4 = ACₙ[C₃] (with n = 2m+1, m ≥ 3) has exactly 3n vertices (#|T4| = n·3), since ACₙ has n vertices and C₃ has 3 and the lexicographic product multiplies orders."
+      "decoded": "The tournament T4 = ACₙ[C₃] (with n = 2m+1, m ≥ 3) has exactly 3n vertices (#|T4| = n·3), since ACₙ has n vertices and C₃ has 3 and the lexicographic product multiplies orders.",
+      "informal": "The tournament T4 = ACₙ[C₃] has exactly 3n vertices."
     },
     "card_T5": {
       "title": "AACL Conj 5.10 — order of the host T₅ is n²",
@@ -120,6 +559,32 @@
         "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
       }
     },
+    "ch_hyp_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "ch_hyp_C3",
+        "kind": "grounding"
+      },
+      "title": "C3 satisfies the Caccetta-Häggkvist hypotheses (non-vacuity witness)",
+      "decoded": "Verifies that the directed triangle meets all antecedents of the Caccetta-Häggkvist statement: positive order, looplessness, r=1, and minimum out-degree at least 1. This shows the universally-quantified CH statement is not vacuous — it genuinely quantifies over a nonempty class of digraphs.",
+      "cluster": "P9",
+      "grounds": [
+        "caccetta_haggkvist_statement"
+      ]
+    },
+    "ch_triangle_hyp_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "ch_triangle_hyp_C3",
+        "kind": "grounding"
+      },
+      "title": "C3 satisfies the CH triangle-case hypothesis (non-vacuity witness)",
+      "decoded": "Verifies that the directed triangle meets the triangle-case antecedent forall v, #|C3| <= 3 * outdeg v (3 <= 3*1), so the CH triangle-case (r = n/3) statement is satisfiable by a genuine instance: the universally-quantified statement is not vacuous. (C3 also happens to contain a directed triangle, consistent with — but not proved by — this hypothesis check.)",
+      "cluster": "P9",
+      "grounds": [
+        "caccetta_haggkvist_triangle_statement"
+      ]
+    },
     "cheng_keevash_conj1_statement": {
       "title": "Cheng–Keevash Conjecture 1 — directed path of length 2·δ⁺",
       "decoded": "For every oriented digraph D (loopless, digon-free) with 0 < #|D| and every d such that every vertex has out-degree at least d (d ≤ outdeg v for all v), the longest directed path of D has length at least 2d (2·d ≤ ell D, where ell D is the number of arcs on a longest dipath). Equivalently: minimum out-degree ≥ d forces a directed path with 2d arcs.",
@@ -127,6 +592,84 @@
       "source": {
         "slug": "directed_path_of_length_twice_the_minimum_outdegree"
       }
+    },
+    "chi_bounded_bounded_order": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "chi_bounded_bounded_order",
+        "kind": "grounding"
+      },
+      "title": "Any bounded-order class is χ-bounded (wrapper satisfiable)",
+      "decoded": "Proves any class of digraphs of order at most N is χ-bounded by the constant N, since χ(underlying G) ≤ #|G| ≤ N. This shows the chi_bounded_under wrapper is genuinely satisfiable, so the open χ-boundedness conjectures are not trivially refutable.",
+      "cluster": "P2",
+      "grounds": [
+        "conj2_1605_statement",
+        "conj4_1605_statement",
+        "conj5_1605_statement"
+      ]
+    },
+    "chi_bounded_empty": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "chi_bounded_empty",
+        "kind": "grounding"
+      },
+      "title": "The empty class is vacuously χ-bounded",
+      "decoded": "Proves the empty digraph class is χ-bounded, pinning the wrapper at its degenerate pole (it says nothing). Together with the bounded-order witness this shows chi_bounded_under is non-degenerate, so no encoding accident makes the open conjectures provable for free.",
+      "cluster": "P2",
+      "grounds": [
+        "conj2_1605_statement",
+        "conj4_1605_statement",
+        "conj5_1605_statement"
+      ]
+    },
+    "chi_dcycle_C4": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic_cycle.v",
+        "name": "chi_dcycle_C4",
+        "kind": "grounding"
+      },
+      "title": "χ⃗(directed C₄) = 2 — heroes tightness witness",
+      "decoded": "Specialises χ⃗ = 2 to the directed C₄, the canonical tightness witness for the Forb_ind(digon, C₃, S₂⁺) χ⃗ ≤ 2 bound: C₄ is oriented, C₃-free and S₂⁺-free yet attains the bound. This shows the conjectured bound is exactly attained, not merely vacuously satisfied.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "chi_dcycle_eq2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic_cycle.v",
+        "name": "chi_dcycle_eq2",
+        "kind": "grounding"
+      },
+      "title": "χ⃗(directed n-cycle) = 2 for n ≥ 2",
+      "decoded": "Headline value computation: the directed n-cycle is not 1-dicolourable (χ⃗ ≥ 2) yet 2-dicolourable (χ⃗ ≤ 2), so its dichromatic number is exactly 2. This extends the C₃ keystone to the whole family of directed cycles, validating dicolorableb across an infinite family.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "chordal_C3_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_tww_chi_col.v",
+        "name": "chordal_C3_C3",
+        "kind": "grounding"
+      },
+      "title": "C₃ lies in the chordal directed-graph class",
+      "decoded": "Proves the directed triangle is oriented, has no induced transitive TT₃, and no induced long dicycle, so it inhabits the chordal_C3 class of arXiv:2202.01006. This non-vacuity witness shows the class over which the not-χ⃗-bounded statement ranges is inhabited.",
+      "cluster": "P2",
+      "grounds": [
+        "chordal_not_dichromatic_bounded_statement"
+      ]
+    },
+    "chordal_C3_not_TT3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_tww_chi_col.v",
+        "name": "chordal_C3_not_TT3",
+        "kind": "grounding"
+      },
+      "title": "TT₃ is NOT in the chordal class (class is proper)",
+      "decoded": "Red-flag probe: the transitive tournament TT₃ contains an induced transitive triangle, so it is excluded from chordal_C3. This shows the chordal class genuinely separates objects (neither empty nor everything), so the not-χ⃗-bounded statement is not vacuously about a degenerate class.",
+      "cluster": "P2",
+      "grounds": [
+        "chordal_not_dichromatic_bounded_statement"
+      ]
     },
     "chordal_not_dichromatic_bounded_statement": {
       "title": "Chordal directed graphs are not χ⃗-bounded",
@@ -174,6 +717,21 @@
       },
       "specializes": "cheng_keevash_conj1_statement"
     },
+    "clique_forward_chain": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "clique_forward_chain",
+        "kind": "grounding"
+      },
+      "title": "Forward clique chain: Question 5.9 ⇒ domination-ω̄ cluster",
+      "decoded": "Composes the committed edges Q5.9 ⇒ 5.8 ⇒ dom-cluster, confirming transitivity lands on the domination-ω̄ cluster statement.",
+      "cluster": "G",
+      "grounds": [
+        "question_5_9_statement",
+        "conjecture_5_8_statement",
+        "dom_omega_cluster_statement"
+      ]
+    },
     "conj2_1605_statement": {
       "title": "Aboulker–Charbit–Naserasr Conjecture 2 — Forb(H) is χ-bounded iff underlying H is a forest",
       "decoded": "For every digon-free (oriented) graph H: the class of oriented graphs that contain no induced copy of H is χ-bounded if and only if the underlying undirected graph of H is a forest. Here χ-bounded means a single binding function f bounds the ordinary undirected chromatic number χ(underlying G) ≤ f(ω(underlying G)) for every nonempty member G of the class.",
@@ -183,6 +741,33 @@
         "url": "https://arxiv.org/abs/1605.07411",
         "attribution": "Aboulker, Charbit, Naserasr"
       }
+    },
+    "conj2_antecedent_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "conj2_antecedent_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Conjecture 2 antecedent (oriented_dg) is inhabited",
+      "decoded": "Exhibits C₃ as a concrete oriented digraph, so the oriented_dg hypothesis class of Aboulker-Charbit-Naserasr Conjecture 2 is non-empty. A forall over an empty antecedent class would say nothing; this confirms the statement has content.",
+      "cluster": "P2",
+      "grounds": [
+        "conj2_1605_statement"
+      ]
+    },
+    "conj2_specialises_tournament": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "conj2_specialises_tournament",
+        "kind": "grounding"
+      },
+      "title": "Majority 3-colouring specialises to tournaments",
+      "decoded": "Re-exposes majority_3col_statement -> majority_3col_tournament_statement as an honest specialisation, confirming the tournament version is a genuine restriction of the general majority 3-colouring conjecture.",
+      "cluster": "P11",
+      "grounds": [
+        "majority_3col_statement",
+        "majority_3col_tournament_statement"
+      ]
     },
     "conj3_avec_Theta_statement": {
       "title": "Conjecture 3 (Aboulker–Bousquet et al.) — a⃗(n) = Θ(√(n·ln n))",
@@ -215,6 +800,19 @@
       },
       "specializes": "conj2_1605_statement"
     },
+    "conj4_antecedent_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "conj4_antecedent_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Conjecture 4 antecedent (oriented_star) is inhabited",
+      "decoded": "Exhibits the single arc TT 2 as an oriented star (orientation of K_{1,1}), so the oriented_star hypothesis class of Conjecture 4 is non-empty. This non-vacuity check ensures the χ-bounding-star statement is not over an empty class.",
+      "cluster": "P2",
+      "grounds": [
+        "conj4_1605_statement"
+      ]
+    },
     "conj4_tvec_Theta_statement": {
       "title": "Conjecture 4 (Aboulker–Bousquet et al.) — t⃗(n) = Θ(√(n/ln n))",
       "decoded": "For every nat-sequence tv that genuinely equals the extremal maximum dichromatic number t⃗ (is_tvec tv: for each order n > 0, every n-vertex oriented triangle-free digraph is tv n-dicolourable, χ⃗ ≤ tv n, and this is attained by some such digraph), the real sequence n ↦ tv n is Θ of env_t(n) = √(n/ln n). Θ here means there exist positive reals c₁, c₂ and a threshold N with c₁·√(n/ln n) ≤ tv n ≤ c₂·√(n/ln n) for all n ≥ N.",
@@ -245,6 +843,59 @@
         "attribution": "Aboulker, Charbit, Naserasr"
       }
     },
+    "conj5_antecedent_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "conj5_antecedent_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Conjecture 5 antecedent (P4_underlying) is inhabited",
+      "decoded": "Builds the all-forward directed path dP4 (0→1→2→3), proves it realises is_dirP4, and concludes the P4_underlying hypothesis class of Conjecture 5 is non-empty. This confirms the P₄-orientation conjecture ranges over a genuine class.",
+      "cluster": "P2",
+      "grounds": [
+        "conj5_1605_statement"
+      ]
+    },
+    "conj9_implies_conj2_edge": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "conj9_implies_conj2_edge",
+        "kind": "grounding"
+      },
+      "title": "Conj 9 (fractional majority) implies Conj 2 (majority 3-colouring)",
+      "decoded": "Re-exposes the committed implication majority_k1col_statement -> majority_3col_statement as a clean, content-bearing edge, confirming the fractional majority conjecture specialises to the majority 3-colouring conjecture and the encodings are faithfully linked.",
+      "cluster": "P11",
+      "grounds": [
+        "majority_k1col_statement",
+        "majority_3col_statement"
+      ]
+    },
+    "conj_3_12_class_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_twinwidth.v",
+        "name": "conj_3_12_class_inhabited",
+        "kind": "grounding"
+      },
+      "title": "The antecedent class of Conjecture 3.12 is inhabited for every k",
+      "decoded": "For every k exhibits a nonempty tournament T with 0 < #|T| and tww_le T k (namely TT 1), proving the antecedent of conj_3_12_statement is satisfiable for each k so the conjecture is not a vacuous quantification over an empty class.",
+      "cluster": "P12",
+      "grounds": [
+        "conj_3_12_statement"
+      ]
+    },
+    "conj_3_12_has_teeth": {
+      "extra": {
+        "file": "theories/conjectures/grounding_twinwidth.v",
+        "name": "conj_3_12_has_teeth",
+        "kind": "grounding"
+      },
+      "title": "Conjecture 3.12 has teeth on the concrete tournament TT 1",
+      "decoded": "Falsification probe: assuming conj_3_12_statement, any binding function it provides forces TT 1 to be m-dicolourable for some m on the real datum ω̄(TT 1)=1, showing the statement is not secretly vacuous (a misencoded True would impose no such constraint).",
+      "cluster": "P12",
+      "grounds": [
+        "conj_3_12_statement"
+      ]
+    },
     "conj_3_12_statement": {
       "title": "AACL Conjecture 3.12 — bounded-twin-width tournaments are ω̄-bounded",
       "match_title": "Conjecture 3.12",
@@ -274,6 +925,75 @@
         "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments)"
       },
       "decoded": "There is a single function f (one ∃f over all tournaments) such that every nonempty tournament T (0 < #|T|) admits an ordering p that is a BST-ordering (bst_order p) whose backedge clique number ω(T^p) is at most f(ω̄(T)) (bclique p ≤ f(ω̄(T)))."
+    },
+    "conj_4_2_RHS_both_nonvacuous": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes_dichotomy.v",
+        "name": "conj_4_2_RHS_both_nonvacuous",
+        "kind": "grounding"
+      },
+      "title": "Both disjuncts of the conj_4_2 dichotomy RHS are non-vacuous",
+      "decoded": "Proves the hero-dichotomy RHS quantifies over real objects on both sides: Empty2's underlying graph is a (star) forest AND TT 2 is a transitive tournament. Guards the biconditional against a vacuous disjunction.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "conj_5_10_and_Q5_9_incompatible": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "conj_5_10_and_Q5_9_incompatible",
+        "kind": "grounding"
+      },
+      "title": "Conjecture 5.10 and Question 5.9 are mutually exclusive",
+      "decoded": "From the committed refuting edge (5.10 ⇒ ¬Q5.9), proves Conjecture 5.10 and Question 5.9 cannot both hold; this guarantees the clique chain never loops back into a contradiction even though one branch refutes Q5.9 and another assumes it.",
+      "cluster": "G",
+      "grounds": [
+        "conjecture_5_10_statement",
+        "question_5_9_statement"
+      ]
+    },
+    "conj_6_2_witness": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes_dichotomy.v",
+        "name": "conj_6_2_witness",
+        "kind": "grounding"
+      },
+      "title": "Empty2 witnesses the full conj_6_2 antecedent and conclusion",
+      "decoded": "Packages that Empty2 is oriented, C₃-free, S₂⁺-free AND 2-dicolourable, so the conj_6_2 forall-statement has a real witness on which it holds and its antecedent class is non-empty (thm_6_1_witness does the same for the →K₂+K₁-free variant).",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "conj_9_2_both_sides_nonvacuous": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "conj_9_2_both_sides_nonvacuous",
+        "kind": "grounding"
+      },
+      "title": "The H₂ side of the Conjecture 9.2 biconditional is inhabited",
+      "decoded": "Shows the H₂ class is inhabited by both the symmetric triangle and the wheel W₃ (each satisfies in_H2_concrete realises_gw), so the right-hand side of the AACL Conjecture 9.2 biconditional (two_extremal <-> in_H2) instantiated at in_H2_concrete realises_gw ranges over real objects rather than an empty class. This grounds only the in_H2 side; it does not exhibit a two_extremal witness.",
+      "cluster": "P12",
+      "grounds": []
+    },
+    "conj_9_2_gw_H2_nonvacuous": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "conj_9_2_gw_H2_nonvacuous",
+        "kind": "grounding"
+      },
+      "title": "The wheel-realisation H₂ side of conj_9_2 is non-vacuous",
+      "decoded": "Proves [in_H2_concrete realises_gw] is inhabited by both the symmetric-triangle base and the wheel gwheel 3, so the H₂ side of the conj_9_2_concrete biconditional under the wheel realisation quantifies over real objects (companion lemmas do the same for realises_W and realises_E).",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "conj_9_antecedent_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "conj_9_antecedent_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Acyclic digraph with > 1 vertex exists (conj_9 antecedent)",
+      "decoded": "Exhibits TT 2 as an acyclic digraph with at least 2 vertices, so deleting a vertex leaves something. Confirms the antecedent class of Conjecture 9 (acyclic D with 1 < #|D|) is inhabited and its universal is not over an empty class. (Conjecture 9 — the unavoidability-ratio conjecture, distinct from Problem 6 — has no Prop-node in the correspondence registry, so no statement id is grounded here.)",
+      "cluster": "P3",
+      "grounds": []
     },
     "conjecture_5_10_at_345": {
       "title": "AACL Conjecture 5.10 — proved at k ∈ {3,4,5}",
@@ -338,6 +1058,164 @@
         "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
       }
     },
+    "contains_subdigraph_C3_bigger": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "contains_subdigraph_C3_bigger",
+        "kind": "grounding"
+      },
+      "title": "C3 is contained in a strictly larger tournament",
+      "decoded": "A non-reflexive containment witness: C3 embeds via inl into the 4-vertex tournament djoin C3 K1, arc-preservingly. Grounds the contains_subdigraph relation with a genuine smaller-into-larger example (rather than the identity embedding).",
+      "cluster": "P3",
+      "grounds": []
+    },
+    "contains_subdigraph_refl": {
+      "extra": {
+        "file": "theories/conjectures/grounding_fas_unvd.v",
+        "name": "contains_subdigraph_refl",
+        "kind": "grounding"
+      },
+      "title": "Subdigraph containment is reflexive",
+      "decoded": "Proves contains_subdigraph D D for every digraph D (the identity map is injective and arc-preserving), validating the contains_subdigraph relation that the unavoidability number unvd is defined in terms of.",
+      "cluster": "P4",
+      "grounds": [
+        "prob6_unvd_statement"
+      ]
+    },
+    "cyc_arc_strong": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad_packing.v",
+        "name": "cyc_arc_strong",
+        "kind": "grounding"
+      },
+      "title": "Directed cycle is 1-arc-strong",
+      "decoded": "Proves arc_strong (Cyc n) 1 for n >= 1: every nonempty proper vertex set has a boundary out-arc, so the directed cycle is arc-strongly connected. Grounds the new arc-connectivity definitions outcut / arc_strong against the textbook fact lambda(directed cycle) >= 1.",
+      "cluster": "P3",
+      "grounds": []
+    },
+    "dcycle_not_acyclic": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic_cycle.v",
+        "name": "dcycle_not_acyclic",
+        "kind": "grounding"
+      },
+      "title": "Directed n-cycle is not acyclic (χ⃗ ≥ 2)",
+      "decoded": "Proves the directed n-cycle is not acyclic: its successor map is a permutation, so it is strongly connected and every vertex lies on a directed cycle. This is the lower-bound half of χ⃗(cycle) = 2 and grounds acyclicb rejecting a cyclic digraph.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "dgiso_dtri_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes.v",
+        "name": "dgiso_dtri_C3",
+        "kind": "grounding"
+      },
+      "title": "The hero dtri is digraph-isomorphic to C₃",
+      "decoded": "Builds an explicit digraph isomorphism from dtri (= c3sub K1 (TT 1) K1) to the directed 3-cycle C3, confirming that the hero constructed by substitution really is the directed triangle. Validates that the [hero]/[c3sub] machinery produces the intended concrete object.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "dhajos_added_arc": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "dhajos_added_arc",
+        "kind": "grounding"
+      },
+      "title": "The directed Hajós join adds the expected arc u→w",
+      "decoded": "On the single-arc factors, the directed Hajós join dhajos puts the arc U --> W (the new u→w arc of Def 1.5), validating that the join construction adds exactly the advertised arc.",
+      "cluster": "P12",
+      "grounds": []
+    },
+    "dhajos_deleted_arc": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "dhajos_deleted_arc",
+        "kind": "grounding"
+      },
+      "title": "The directed Hajós join deletes the original arc u→v₁",
+      "decoded": "On the single-arc factors, proves ~~ (U --> M): the original arc u→v₁ is absent in the Hajós join, validating the deletion half of Def 1.5 (complementing dhajos_added_arc).",
+      "cluster": "P12",
+      "grounds": []
+    },
+    "dichromatic_bounded_acyclic": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic.v",
+        "name": "dichromatic_bounded_acyclic",
+        "kind": "grounding"
+      },
+      "title": "The acyclic class is χ⃗-bounded (wrapper satisfiable)",
+      "decoded": "Proves the class of acyclic digraphs is dichromatic_bounded by the constant 1, exhibiting a concrete inhabitant of the dichromatic_bounded wrapper. This shows the χ⃗-bounded predicate is satisfiable and not vacuous.",
+      "cluster": "P2",
+      "grounds": [
+        "chordal_not_dichromatic_bounded_statement"
+      ]
+    },
+    "dicolorableb1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic.v",
+        "name": "dicolorableb1",
+        "kind": "grounding"
+      },
+      "title": "χ⃗ ≤ 1 iff acyclic: dicolorableb D 1 = acyclicb D",
+      "decoded": "Proves that a digraph is 1-dicolourable exactly when it is acyclic, anchoring the base of the Neumann-Lara dichromatic hierarchy. This validates that the boolean dicolorableb encodes χ⃗ faithfully at its smallest value.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "dicolorableb2_two_sided": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes_dichotomy.v",
+        "name": "dicolorableb2_two_sided",
+        "kind": "grounding"
+      },
+      "title": "2-dicolourability is two-sided (discriminating probe)",
+      "decoded": "Proves [dicolorableb _ 2] is TRUE on Empty2 but FALSE on a single looped vertex (Loop1), so the conclusion of conj_6_2 / thm_6_1 is genuinely discriminating, not vacuously always-true. A red-flag guard that the conjectures retain open content.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "dicolorableb_C3_2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic.v",
+        "name": "dicolorableb_C3_2",
+        "kind": "grounding"
+      },
+      "title": "Directed triangle C₃ is 2-dicolourable (χ⃗(C₃) ≤ 2)",
+      "decoded": "Exhibits a concrete 2-colouring of C₃ where each colour class induces an oriented digraph on at most 2 vertices, hence acyclic. Together with not_dicolorableb_C3_1 this pins χ⃗(C₃) = 2, the smallest nontrivial Neumann-Lara value.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "dicolorableb_Empty2_2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes_dichotomy.v",
+        "name": "dicolorableb_Empty2_2",
+        "kind": "grounding"
+      },
+      "title": "χ⃗(Empty2) ≤ 2 — the conjectured dichromatic value",
+      "decoded": "Proves the edgeless digraph Empty2 is 2-dicolourable (all-zero colouring induces an acyclic class). Grounds the 'value 2' conclusion of the C₃-free / S₂⁺-free / →K₂+K₁-free dichromatic conjectures (conj_6_2 / thm_6_1) on a concrete class member.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "dicolorableb_monoS": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic.v",
+        "name": "dicolorableb_monoS",
+        "kind": "grounding"
+      },
+      "title": "Dicolourability is monotone in the number of colours",
+      "decoded": "Proves dicolorableb D k implies dicolorableb D k+1 by widening the colour codomain (the new colour class is empty hence acyclic). This validates that a faithful χ⃗-bound predicate is upward closed in k.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "dicyc3_digonfree": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "dicyc3_digonfree",
+        "kind": "grounding"
+      },
+      "title": "The directed rim di_cycle 3 is digon-free",
+      "decoded": "Proves the smallest directed rim di_cycle 3 has no digon (never u-->v and v-->u together). A red-flag check that the rim is a single directed cycle, not a bidirected one; dicyc3_Eulerian additionally grounds in = out = 1.",
+      "cluster": "P6",
+      "grounds": []
+    },
     "dom_omega_cluster_statement": {
       "title": "AACL Conjecture 5.3 — large domination forces a bounded ω̄-cluster",
       "decoded": "There exist two functions f, ℓ : ℕ → ℕ such that for every tournament T and every k, if the domination number dom(T) ≥ f(k), then T has a vertex subset S of size at most ℓ(k) whose induced subtournament satisfies ω̄(sub_tournament S) ≥ k. Same bounded-witness conclusion as Conjecture 5.8 but with a domination-number hypothesis in place of the ω̄ hypothesis.",
@@ -361,11 +1239,100 @@
     "ec_log_c6_statement": {
       "title": "EC-log Eulerian SAD milestone (open conjecture) — explicit constant C = 6",
       "decoded": "For every digraph D on at least 3 vertices that is Eulerian (in-degree = out-degree at every vertex), if D is k-arc-strong and the real inequality k ≥ 6·log₂(#|D|) holds (log₂ x = ln x / ln 2), then D admits a Strong Arc Decomposition. The concrete C = 6, n₀ = 3 instance of the Bang-Jensen–Yeo Eulerian logarithmic threshold; it implies the ∃C form.",
-      "specializes": "ec_log_statement"
+      "specializes": "ec_log_statement",
+      "informal": "Every Eulerian digraph on at least 3 vertices whose arc-strength k satisfies k ≥ 6·log₂ n admits a Strong Arc Decomposition (the explicit C = 6 form of the Eulerian logarithmic threshold)."
     },
     "ec_log_statement": {
       "title": "EC-log Eulerian SAD milestone — there is an absolute constant C",
-      "decoded": "There is a positive real constant c such that for every digraph D on at least 3 vertices that is Eulerian (in-degree = out-degree at every vertex), if D is k-arc-strong and k ≥ c·log₂(#|D|) (the comparison is over the reals, log₂ x = ln x / ln 2), then D admits a Strong Arc Decomposition. A logarithmic-arc-strength threshold guaranteeing SAD in the Eulerian regime of Bang-Jensen–Yeo, guarded by 3 ≤ #|D|."
+      "decoded": "There is a positive real constant c such that for every digraph D on at least 3 vertices that is Eulerian (in-degree = out-degree at every vertex), if D is k-arc-strong and k ≥ c·log₂(#|D|) (the comparison is over the reals, log₂ x = ln x / ln 2), then D admits a Strong Arc Decomposition. A logarithmic-arc-strength threshold guaranteeing SAD in the Eulerian regime of Bang-Jensen–Yeo, guarded by 3 ≤ #|D|.",
+      "informal": "There is an absolute positive constant C such that every Eulerian digraph on at least 3 vertices whose arc-strength k satisfies k ≥ C·log₂ n admits a Strong Arc Decomposition."
+    },
+    "edg_oriented": {
+      "extra": {
+        "file": "theories/conjectures/grounding_falsification_report.v",
+        "name": "edg_oriented",
+        "kind": "grounding"
+      },
+      "title": "The edgeless digraph of every order is oriented",
+      "decoded": "Proves the edgeless digraph Edg n is oriented for every order n; combined with edge-freeness it is the witness of every order that made the weakened core conjectures (tvec_core / avec_core) trivially provable, motivating their fix.",
+      "cluster": "G",
+      "grounds": [
+        "tvec_core_statement",
+        "avec_core_statement"
+      ]
+    },
+    "edg_tfree": {
+      "extra": {
+        "file": "theories/conjectures/grounding_falsification_report.v",
+        "name": "edg_tfree",
+        "kind": "grounding"
+      },
+      "title": "The edgeless digraph of every order is underlying-triangle-free",
+      "decoded": "Proves the edgeless digraph Edg n is underlying-triangle-free for every n, supplying the oriented + triangle-free witness used in the falsification sweep that exposed the trivially-provable 'core' encodings (RF1/RF2) of the t⃗(n)/a⃗(n) growth conjectures.",
+      "cluster": "G",
+      "grounds": [
+        "tvec_core_statement",
+        "avec_core_statement"
+      ]
+    },
+    "edges_sources_inhabited_targets_two_sided": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "edges_sources_inhabited_targets_two_sided",
+        "kind": "grounding"
+      },
+      "title": "All implication-edge sources inhabited and targets two-sided",
+      "decoded": "Packages the verdict of the edge sweep into one machine-checked record: every edge's source class is inhabited (CH out-degree, arc-strong C₃, C₃ dicycle, has_LFO TT) and every target is discriminating (strong/¬strong, dicycle/no dicycle, Δ*≤2 realised), so no edge is trivial or vacuous.",
+      "cluster": "G",
+      "grounds": [
+        "caccetta_haggkvist_statement",
+        "bang_jensen_yeo_SAD_statement",
+        "WC3_statement",
+        "bermond_thomassen_statement",
+        "hoang_reed_statement",
+        "pathFAS_iff_LFO_statement"
+      ]
+    },
+    "env_a_pos": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals.v",
+        "name": "env_a_pos",
+        "kind": "grounding"
+      },
+      "title": "Acyclic-number envelope is strictly positive for n ≥ 2",
+      "decoded": "Proves that the growth envelope env_a n = √(n·ln n) is strictly positive for all n ≥ 2. A Θ-tight bound on a positive combinatorial quantity (the acyclic number a⃗) must itself be positive, so this is the minimal sanity check on the env_a envelope of Conjecture 3.",
+      "cluster": "P8",
+      "grounds": [
+        "conj3_avec_Theta_statement",
+        "conj3_avec_exists_statement"
+      ]
+    },
+    "env_t_pos": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals.v",
+        "name": "env_t_pos",
+        "kind": "grounding"
+      },
+      "title": "Dichromatic envelope is strictly positive for n ≥ 2",
+      "decoded": "Proves that the growth envelope env_t n = √(n/ln n) is strictly positive for all n ≥ 2. Sanity-checks that the env_t envelope of Conjecture 4 is a positive bound, as required for it to be a Θ-tight bound on the positive quantity t⃗.",
+      "cluster": "P8",
+      "grounds": [
+        "conj4_tvec_Theta_statement",
+        "conj4_tvec_exists_statement"
+      ]
+    },
+    "erdos_posa_empty_ok": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "erdos_posa_empty_ok",
+        "kind": "grounding"
+      },
+      "title": "Erdos-Posa for long dicycles is not refutable on the empty digraph",
+      "decoded": "Shows the empty transversal T = set0 meets every long dicycle vacuously on TT 0, satisfying the bounded-transversal disjunct of erdos_posa_long_dicycles_statement. Confirms the statement holds on the empty digraph (no counterexample).",
+      "cluster": "P3",
+      "grounds": [
+        "erdos_posa_long_dicycles_statement"
+      ]
     },
     "erdos_posa_long_dicycles_statement": {
       "title": "Erdős–Pósa property for long directed cycles",
@@ -375,6 +1342,288 @@
         "slug": "erdos_posa_property_for_long_directed_cycles"
       }
     },
+    "gdhajos_v2w_deleted": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "gdhajos_v2w_deleted",
+        "kind": "grounding"
+      },
+      "title": "The directed Hajós join deletes the second original arc v₂w",
+      "decoded": "Proves that in the directed Hajós join dhajos, the original arc v₂→w of the second factor is gone between the merged vertex and w (M --> W is false). Grounds the second arc-deletion clause of the Def-1.5 Hajós-join encoding, completing the added-arc/deleted-arc faithfulness check.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "gr_C3_card_gt0": {
+      "extra": {
+        "file": "theories/conjectures/grounding_clique_long.v",
+        "name": "gr_C3_card_gt0",
+        "kind": "grounding"
+      },
+      "title": "C₃ is nonempty (0 < #|C₃|)",
+      "decoded": "The directed 3-cycle C₃ has at least one vertex (0 < #|C₃|), discharging the nonemptiness guard used by the classic-core and Cheng–Keevash statements on a concrete witness.",
+      "cluster": "P1",
+      "grounds": [
+        "cheng_keevash_conj1_statement",
+        "caccetta_haggkvist_statement"
+      ]
+    },
+    "gr_C3_minoutdeg1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_clique_long.v",
+        "name": "gr_C3_minoutdeg1",
+        "kind": "grounding"
+      },
+      "title": "C₃ has minimum out-degree ≥ 1",
+      "decoded": "Every vertex of C₃ has out-degree at least 1, so C₃ meets the minimum-out-degree hypothesis (δ⁺ ≥ 1) of the long-path / cycle statements at the smallest nontrivial value.",
+      "cluster": "P1",
+      "grounds": [
+        "cheng_keevash_conj1_statement"
+      ]
+    },
+    "gr_C3_outdeg": {
+      "extra": {
+        "file": "theories/conjectures/grounding_clique_long.v",
+        "name": "gr_C3_outdeg",
+        "kind": "grounding"
+      },
+      "title": "Every vertex of C₃ has out-degree 1",
+      "decoded": "In the directed 3-cycle C₃ every vertex has out-degree exactly 1, exercising the outdeg invariant on a concrete oriented graph (the δ⁺ = 1 regime of Caccetta–Häggkvist and Cheng–Keevash).",
+      "cluster": "P1",
+      "grounds": [
+        "caccetta_haggkvist_statement",
+        "cheng_keevash_conj1_statement"
+      ]
+    },
+    "gr_Delta_star_le_id": {
+      "extra": {
+        "file": "theories/conjectures/grounding_pathfas_tww.v",
+        "name": "gr_Delta_star_le_id",
+        "kind": "grounding"
+      },
+      "title": "Degreewidth is bounded by the identity order's back-degree",
+      "decoded": "Confirms Δ*(T) is genuinely a minimum over orders by exhibiting the identity order as an upper-bound witness: Δ*(T) ≤ maxbackdeg(1). Tests that the Delta_star definition is the min-over-orders quantity it is meant to be.",
+      "cluster": "P4",
+      "grounds": [
+        "matchingFAS_iff_dw1_statement"
+      ]
+    },
+    "gr_Theta_2n_n": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals2.v",
+        "name": "gr_Theta_2n_n",
+        "kind": "grounding"
+      },
+      "title": "Θ is satisfiable with explicit constants: 2n = Θ(n)",
+      "decoded": "Exhibits a concrete instance 2·n = Θ(n) with explicit witnessing constants c1 = 1, c2 = 2 and threshold N = 0. Shows is_Theta is a satisfiable, non-vacuous predicate, so the Θ-conjectures of reals_growth.v do not quantify over an empty relation.",
+      "cluster": "P8",
+      "grounds": [
+        "conj3_avec_Theta_statement",
+        "conj4_tvec_Theta_statement",
+        "conj3_avec_exists_statement",
+        "conj4_tvec_exists_statement"
+      ]
+    },
+    "gr_concrete_otww_refines": {
+      "extra": {
+        "file": "theories/conjectures/grounding_pathfas_tww.v",
+        "name": "gr_concrete_otww_refines",
+        "kind": "grounding"
+      },
+      "title": "Concrete ordered twin-width refines (unordered) twin-width",
+      "decoded": "Bridges the ordered and unordered twin-width definitions: a concrete ordered-tww bound (concrete_otww_le) entails the unordered tww_le bound, since an ordered contraction sequence is a contraction sequence. Validates the twinwidth_ordered ↔ twinwidth definitions used by the bounded-twin-width tournament conjectures.",
+      "cluster": "P4",
+      "grounds": [
+        "conj_3_12_statement",
+        "conj_3_13_statement"
+      ]
+    },
+    "gr_di3_not_di4": {
+      "extra": {
+        "file": "theories/conjectures/grounding_pathfas_tww.v",
+        "name": "gr_di3_not_di4",
+        "kind": "grounding"
+      },
+      "title": "A directed 3-cycle is not a directed 4-cycle",
+      "decoded": "Discriminating probe: the length-3 and length-4 directed-cycle predicates di3cycle and di4cycle are mutually exclusive, so they genuinely separate by cycle length. Validates that these refined cycle-length predicates are not collapsed.",
+      "cluster": "P4",
+      "grounds": []
+    },
+    "gr_di3cycle_dicycle": {
+      "extra": {
+        "file": "theories/conjectures/grounding_pathfas_tww.v",
+        "name": "gr_di3cycle_dicycle",
+        "kind": "grounding"
+      },
+      "title": "A directed 3-cycle is a directed cycle",
+      "decoded": "Confirms di3cycle is a genuine refinement of dicycle (every length-3 directed cycle is a directed cycle), validating that the di3cycle predicate strengthens rather than diverges from the base dicycle definition.",
+      "cluster": "P4",
+      "grounds": []
+    },
+    "gr_ell_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_clique_long.v",
+        "name": "gr_ell_C3",
+        "kind": "grounding"
+      },
+      "title": "Longest directed path of C₃ has length 2 (ℓ(C₃) = 2)",
+      "decoded": "The longest-directed-simple-path invariant ℓ equals 2 on the directed 3-cycle. This grounds the ℓ used in Cheng–Keevash and shows the bound ℓ ≥ 2δ is tight at δ = 1 (ℓ(C₃) = 2 = 2·1).",
+      "cluster": "P1",
+      "grounds": [
+        "cheng_keevash_conj1_statement"
+      ]
+    },
+    "gr_eulerian_TT1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals2.v",
+        "name": "gr_eulerian_TT1",
+        "kind": "grounding"
+      },
+      "title": "The one-vertex digraph is Eulerian (eulerian non-vacuous)",
+      "decoded": "Proves that the single-vertex transitive tournament TT 1 is Eulerian (in-degree = out-degree = 0 at its only vertex). Inhabits the antecedent class of the EC-log / SAD milestone, confirming the eulerian hypothesis of ec_log_statement is non-vacuous.",
+      "cluster": "P8",
+      "grounds": [
+        "ec_log_statement",
+        "ec_log_c6_statement"
+      ]
+    },
+    "gr_has_LFO_Delta_le2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_pathfas_tww.v",
+        "name": "gr_has_LFO_Delta_le2",
+        "kind": "grounding"
+      },
+      "title": "has_LFO implies degreewidth ≤ 2",
+      "decoded": "Re-exposes the proved Path-FAS reduction as a clean edge: any tournament with a linear-forest ordering has degreewidth at most 2 (a linear-forest order has max back-degree ≤ 2). Links the has_LFO and Delta_star definitions of the two FAS conjectures.",
+      "cluster": "P4",
+      "grounds": [
+        "pathFAS_iff_LFO_statement",
+        "matchingFAS_iff_dw1_statement"
+      ]
+    },
+    "gr_log2_2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals2.v",
+        "name": "gr_log2_2",
+        "kind": "grounding"
+      },
+      "title": "log₂ 2 = 1 (independent re-grounding of the base-2 log)",
+      "decoded": "Independently re-proves log2 2 = 1 in the deeper grounding pass, confirming reals_growth.v's log2 is the genuine base-2 logarithm used in the EC-log SAD threshold.",
+      "cluster": "P8",
+      "grounds": [
+        "ec_log_statement",
+        "ec_log_c6_statement"
+      ]
+    },
+    "grounding_hero_dtri": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes.v",
+        "name": "grounding_hero_dtri",
+        "kind": "grounding"
+      },
+      "title": "The directed triangle is a Berger hero",
+      "decoded": "Proves the directed triangle (the substitution dtri = c3sub K1 (TT 1) K1) satisfies the inductive predicate [hero] via one [hero_c3L] step. Exhibits the simplest non-transitive hero, so [hero] is a satisfiable predicate beyond the base vertex.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "grounding_transitive_TT_is_hero": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes.v",
+        "name": "grounding_transitive_TT_is_hero",
+        "kind": "grounding"
+      },
+      "title": "Every nonempty transitive tournament is a hero (iso-closure)",
+      "decoded": "Re-derives Berger's fact that every nonempty transitive tournament TT n.+1 is a hero, in the iso-closure sense [is_hero] (since the inductive [hero] only yields djoin/c3sub vertex types), via the key isomorphism TT l.+1 ≅ djoin K1 (TT l). Grounds that transitive tournaments populate the hero class.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "gw3_is_wheel": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "gw3_is_wheel",
+        "kind": "grounding"
+      },
+      "title": "The smallest generalised wheel W₃ has the full advertised structure",
+      "decoded": "Instantiates the committed structural package at the smallest generalised wheel gwheel 3: Eulerian, digon graph a forest, underlying graph 2-connected, and a member of the concretely-generated H₂. Grounds that the smallest H₂ tree-join family member is a faithful wheel.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "gwheel3_in_H2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "gwheel3_in_H2",
+        "kind": "grounding"
+      },
+      "title": "The wheel W₃ inhabits the concretely-generated H₂",
+      "decoded": "Proves in_H2_concrete realises_gw (gwheel 3): the generalised wheel W₃ is a member of the concretely-generated family H₂ via the star datum, so the tree-join membership predicate is non-vacuous with a real digraph witness.",
+      "cluster": "P12",
+      "grounds": []
+    },
+    "has_LFO_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_degreewidth_c3.v",
+        "name": "has_LFO_C3",
+        "kind": "grounding"
+      },
+      "title": "The directed triangle has a linear-forest ordering",
+      "decoded": "Exhibits a concrete linear-forest ordering of the directed triangle C₃ (the identity order, whose back-arc graph is the single edge {0,2}), so has_LFO is a satisfiable predicate even on a non-transitive tournament. Validates the linear-forest-ordering definition that the Path-FAS = LFO reduction quantifies over.",
+      "cluster": "P4",
+      "grounds": [
+        "pathFAS_iff_LFO_statement"
+      ]
+    },
+    "has_LFO_TT": {
+      "extra": {
+        "file": "theories/conjectures/grounding_fas_unvd.v",
+        "name": "has_LFO_TT",
+        "kind": "grounding"
+      },
+      "title": "Every transitive tournament has a linear-forest ordering",
+      "decoded": "Shows has_LFO(TTₙ) holds for every n: the identity order of a transitive tournament has an edgeless (hence linear-forest) back-arc graph. The transitive non-vacuity witness for the has_LFO predicate of the Path-FAS = LFO reduction.",
+      "cluster": "P4",
+      "grounds": [
+        "pathFAS_iff_LFO_statement"
+      ]
+    },
+    "has_LFO_edge_on_TT": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "has_LFO_edge_on_TT",
+        "kind": "grounding"
+      },
+      "title": "Δ*(TT n) ≤ 2 — the has-LFO edge realised on TT n",
+      "decoded": "Applies the committed has_LFO ⇒ Δ* ≤ 2 edge to the witness TT n, computing Δ*(TT n) ≤ 2; confirms the edge's conclusion is reachable on a concrete tournament.",
+      "cluster": "G",
+      "grounds": [
+        "pathFAS_iff_LFO_statement",
+        "LFO_iff_34transversal_statement"
+      ]
+    },
+    "hoang_reed_antecedent_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "hoang_reed_antecedent_C3",
+        "kind": "grounding"
+      },
+      "title": "Hoang-Reed antecedent is inhabited at k = 1",
+      "decoded": "Shows C3 is nonempty and every vertex has out-degree >= 1, so the now-guarded Hoang-Reed antecedent is satisfied by C3. Confirms the guard fix yields a non-empty hypothesis class.",
+      "cluster": "P3",
+      "grounds": [
+        "hoang_reed_statement"
+      ]
+    },
+    "hoang_reed_k1_holds": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad_packing.v",
+        "name": "hoang_reed_k1_holds",
+        "kind": "grounding"
+      },
+      "title": "Hoang-Reed holds at k = 1 on nonempty digraphs",
+      "decoded": "The k = 1 slice of Hoang-Reed is a theorem: every nonempty digraph of min out-degree >= 1 has a cycle pack of size 1 of dicycles. Confirms the (guarded) hoang_reed_statement is correctly calibrated at k = 1, where it must be true and is.",
+      "cluster": "P3",
+      "grounds": [
+        "hoang_reed_statement"
+      ]
+    },
     "hoang_reed_statement": {
       "title": "Hoàng–Reed Conjecture",
       "decoded": "For every nonempty digraph D (0 < #|D|) and every k, if every vertex has out-degree at least k (pointwise, forall v: k ≤ outdeg v), then D contains a pack P of k directed cycles (cycle_pack P, size P = k) with the intersection-forest property: for each position j > 0, the set of vertices on cycle j that also lie on some earlier cycle i < j has size at most one — i.e. each cycle meets the union of all the previous ones in at most one vertex.",
@@ -382,6 +1631,92 @@
       "source": {
         "slug": "hoang_reed_conjecture"
       }
+    },
+    "in_H2_concrete_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes_dichotomy.v",
+        "name": "in_H2_concrete_inhabited",
+        "kind": "grounding"
+      },
+      "title": "The H₂ class is inhabited by the symmetric triangle (any realisation)",
+      "decoded": "Proves the symmetric triangle sym_cycle 3 is a base member of [in_H2_concrete] for any realisation relation, so the H₂ side of the conj_9_2_concrete biconditional is non-vacuous and the statement is well-formed on both sides.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "is_Theta_const_mul": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals.v",
+        "name": "is_Theta_const_mul",
+        "kind": "grounding"
+      },
+      "title": "Constant factors are absorbed by Θ: 2·f = Θ(f)",
+      "decoded": "Proves that doubling a sequence leaves its Θ-class unchanged (2·f = Θ(f)). Validates the textbook law that constant factors do not matter for Θ, confirming is_Theta is non-degenerate and behaves as required by the Θ-conjectures.",
+      "cluster": "P8",
+      "grounds": [
+        "conj3_avec_Theta_statement",
+        "conj4_tvec_Theta_statement",
+        "conj3_avec_exists_statement",
+        "conj4_tvec_exists_statement"
+      ]
+    },
+    "is_Theta_refl": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals.v",
+        "name": "is_Theta_refl",
+        "kind": "grounding"
+      },
+      "title": "Θ is reflexive: f = Θ(f)",
+      "decoded": "Proves that every real sequence f is Θ(f) (with constants c1 = c2 = 1). Reflexivity is one of the three textbook properties of an asymptotically-tight Landau bound, so this validates that reals_growth.v's is_Theta really encodes a tight-bound relation underlying the Θ-conjectures.",
+      "cluster": "P8",
+      "grounds": [
+        "conj3_avec_Theta_statement",
+        "conj4_tvec_Theta_statement",
+        "conj3_avec_exists_statement",
+        "conj4_tvec_exists_statement"
+      ]
+    },
+    "is_Theta_sym": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals.v",
+        "name": "is_Theta_sym",
+        "kind": "grounding"
+      },
+      "title": "Θ is symmetric: f = Θ(g) ⟹ g = Θ(f)",
+      "decoded": "Proves that is_Theta is symmetric, inverting the two bounding constants (c1, c2) ↦ (1/c2, 1/c1). Symmetry is the red-flag property: if it failed, is_Theta would not encode a two-sided tight bound and the Θ-conjectures would be mis-stated.",
+      "cluster": "P8",
+      "grounds": [
+        "conj3_avec_Theta_statement",
+        "conj4_tvec_Theta_statement",
+        "conj3_avec_exists_statement",
+        "conj4_tvec_exists_statement"
+      ]
+    },
+    "is_Theta_trans": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals.v",
+        "name": "is_Theta_trans",
+        "kind": "grounding"
+      },
+      "title": "Θ is transitive: f = Θ(g), g = Θ(h) ⟹ f = Θ(h)",
+      "decoded": "Proves that is_Theta composes (via the Big-O / Big-Omega preorder split), completing the verification that reals_growth.v's Θ is a genuine equivalence relation rather than an arbitrary predicate.",
+      "cluster": "P8",
+      "grounds": [
+        "conj3_avec_Theta_statement",
+        "conj4_tvec_Theta_statement",
+        "conj3_avec_exists_statement",
+        "conj4_tvec_exists_statement"
+      ]
+    },
+    "is_tournament_TT": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes.v",
+        "name": "is_tournament_TT",
+        "kind": "grounding"
+      },
+      "title": "Every transitive tournament TT n satisfies the spelled-out is_tournament predicate",
+      "decoded": "Shows the hand-written predicate [is_tournament] (irreflexive + semicomplete + asymmetric) holds for every TT n. A definitional sanity check that the spelled-out predicate agrees with the [tournament] HB structure on the canonical instances (and likewise is_tournament_C3 for C₃).",
+      "cluster": "P6",
+      "grounds": []
     },
     "jackson_hamilton_small_diregular_statement": {
       "title": "Jackson's Conjecture — Hamilton cycle in small d-diregular oriented graphs",
@@ -394,12 +1729,51 @@
     "kcritical2_uniq": {
       "title": "Uniqueness of the 2-ω̄-critical tournament (C₃)",
       "decoded": "Every 2-ω̄-critical tournament T (i.e. T satisfying kcritical 2 T: ω̄(T) = 2 and deleting any single vertex drops ω̄ to 1) is digraph-isomorphic to C₃, the directed triangle. Hence C₃ is the unique 2-ω̄-critical tournament.",
-      "specializes": "conjecture_5_10_statement"
+      "specializes": "conjecture_5_10_statement",
+      "informal": "Up to digraph isomorphism the only 2-ω̄-critical tournament is the directed 3-cycle C₃."
     },
     "kcritical_proper_sub": {
       "title": "Proper subtournaments of a k-ω̄-critical tournament have ω̄ ≤ k−1",
       "decoded": "For every natural number k and every k-ω̄-critical tournament T, any vertex subset S that is NOT the whole vertex set (S ≠ [set: T], a proper subset) induces a subtournament with ω̄(sub_tournament S) ≤ k−1. A proper subset omits some vertex, so it embeds into that vertex's deletion, which has ω̄ = k−1 by criticality.",
-      "specializes": "conjecture_5_10_statement"
+      "specializes": "conjecture_5_10_statement",
+      "informal": "In a k-ω̄-critical tournament every proper subtournament has directed clique number ω̄ ≤ k − 1."
+    },
+    "kmajority_col_TT2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "kmajority_col_TT2",
+        "kind": "grounding"
+      },
+      "title": "TT 2 admits a (1/k)-fractional majority colouring for every k",
+      "decoded": "The identity 2-colouring of TT 2 makes every same-colour out-neighbourhood empty, so kmajority_col k holds for every k, validating the parametric (1/k)·deg⁺ head of the fractional majority colouring conjecture (Conj 9) as a satisfiable predicate.",
+      "cluster": "P11",
+      "grounds": [
+        "majority_k1col_statement"
+      ]
+    },
+    "kmajority_k1_head_TT2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "kmajority_k1_head_TT2",
+        "kind": "grounding"
+      },
+      "title": "Conj 9 existential head at k = 2 holds on TT 2 with 3 colours",
+      "decoded": "Exhibits a 3-colouring of TT 2 satisfying kmajority_col 2 (the k+1 = 3 colour, (1/2)·deg⁺ bound), confirming the existential head of the fractional majority colouring conjecture is realisable at k = 2 on a concrete digraph.",
+      "cluster": "P11",
+      "grounds": [
+        "majority_k1col_statement"
+      ]
+    },
+    "lambda_Cyc": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad_packing.v",
+        "name": "lambda_Cyc",
+        "kind": "grounding"
+      },
+      "title": "Arc-connectivity of the directed cycle equals 1",
+      "decoded": "Computes lambda (Cyc n) = 1 for n >= 2 by combining the >= 1 bound with a singleton out-cut of size exactly 1. A key value computation grounding the lambda big-min definition: the minimum out-cut of a directed cycle is exactly one arc.",
+      "cluster": "P3",
+      "grounds": []
     },
     "lemma7": {
       "title": "Lemma 7 (Cheng–Keevash) — dichotomy: long path or a deficient set",
@@ -410,6 +1784,19 @@
       },
       "specializes": "cheng_keevash_conj1_statement"
     },
+    "linial_berge_empty_ok": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "linial_berge_empty_ok",
+        "kind": "grounding"
+      },
+      "title": "Linial-Berge is not refutable on the empty digraph",
+      "decoded": "Exhibits the empty path-partition and S = set0 as witnesses satisfying every clause of linial_berge_statement on TT 0 for each colour bound k >= 1, so it holds there. Confirms Linial-Berge has no empty-digraph counterexample.",
+      "cluster": "P3",
+      "grounds": [
+        "linial_berge_statement"
+      ]
+    },
     "linial_berge_statement": {
       "title": "Linial–Berge path-partition duality",
       "decoded": "For every digraph D and every k there exist a path-partition Q of V(D) (Q partitions every vertex into vertex-disjoint directed paths, pp_partition Q) and a vertex set S inducing a subdigraph with directed chromatic number ≤ k (dicolorableb (D[S]) k, i.e. χ⃗(D[S]) ≤ k) such that the k-norm of Q — the sum over paths of min(k, number of vertices on the path) — equals |S| (pp_knorm k Q = #|S|), and this is optimal: no path-partition Q' has k-norm smaller than |S| (forall Q' path-partition, #|S| ≤ pp_knorm k Q'). In other words the minimum k-norm over path-partitions equals the maximum order of an induced χ⃗ ≤ k subdigraph.",
@@ -417,6 +1804,20 @@
       "source": {
         "slug": "linial_berge_path_partition_duality"
       }
+    },
+    "log2_2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_reals.v",
+        "name": "log2_2",
+        "kind": "grounding"
+      },
+      "title": "log₂ 2 = 1 (base-2 logarithm sanity)",
+      "decoded": "Proves that log2 2 = 1, the defining value of a base-2 logarithm. Grounds the log2 (= ln x / ln 2) used in the EC-log SAD threshold k ≥ c·log₂ n, confirming log2 really is the base-2 logarithm.",
+      "cluster": "P8",
+      "grounds": [
+        "ec_log_statement",
+        "ec_log_c6_statement"
+      ]
     },
     "long_dicycle_diregular_statement": {
       "title": "Long directed cycles in diregular oriented graphs (Bermond–Germa–Heydemann–Sotteau)",
@@ -426,6 +1827,30 @@
         "slug": "long_directed_cycles_in_digraph_with_minimum_in_and_out_degree"
       }
     },
+    "loop_not_dicolorable": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic.v",
+        "name": "loop_not_dicolorable",
+        "kind": "grounding"
+      },
+      "title": "A loop kills dicolourability at every k",
+      "decoded": "Proves that if any vertex carries a loop then D is not k-dicolourable for any k, since the loop is a length-1 dicycle inside its own colour class. This discriminating probe confirms dicolorableb correctly rejects degenerate (non-acyclic) inputs.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "m3_edge_is_theorem": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "m3_edge_is_theorem",
+        "kind": "grounding"
+      },
+      "title": "m(3) landmark implies the triangle-free class is not 2-χ⃗-bounded",
+      "decoded": "Re-exposes the clean implication that IF the m(3) witness (a triangle-free oriented graph with χ⃗ ≥ 3) exists THEN the oriented triangle-free class is not 2-dicolourable-bounded. This confirms the m(3) edge is a genuine Qed implication, while the open m3_landmark_statement itself stays correctly unproven.",
+      "cluster": "P2",
+      "grounds": [
+        "m3_landmark_statement"
+      ]
+    },
     "m3_landmark_statement": {
       "title": "The m(3) landmark — a triangle-free oriented graph with dichromatic number ≥ 3",
       "decoded": "There exists a nonempty (0 < #|D|), digon-free digraph D whose underlying graph is triangle-free and that is NOT 2-dicolourable (its vertices cannot be split into 2 acyclic-inducing classes), so its dichromatic number is at least 3. This witnesses that the least order m(3) realizing dichromatic number 3 among oriented triangle-free graphs is finite.",
@@ -434,6 +1859,46 @@
         "url": "https://arxiv.org/abs/2403.02298",
         "attribution": "Aboulker, Bousquet, de Verclos et al."
       }
+    },
+    "mad_C3_eq2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "mad_C3_eq2",
+        "kind": "grounding"
+      },
+      "title": "Maximum average degree of C3 equals 2",
+      "decoded": "Computes mad C3 = 2 (3 vertices, 3 arcs, density 2; no denser subset). A key value computation grounding the mad / density / narcs_in definitions used in Problem 6's mad-bounded hypothesis.",
+      "cluster": "P3",
+      "grounds": [
+        "prob6_unvd_statement"
+      ]
+    },
+    "majority_3col_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "majority_3col_C3",
+        "kind": "grounding"
+      },
+      "title": "Directed triangle C3 has a majority 3-colouring",
+      "decoded": "Exhibits a concrete majority 3-colouring of C3 (the rainbow identity colouring, where every vertex's unique out-neighbour gets a different colour), validating the existential head of the majority 3-colouring conjecture on a small instance and confirming majority_col is satisfiable.",
+      "cluster": "P11",
+      "grounds": [
+        "majority_3col_statement",
+        "majority_3col_tournament_statement"
+      ]
+    },
+    "majority_3col_TT2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "majority_3col_TT2",
+        "kind": "grounding"
+      },
+      "title": "The directed path TT 2 admits a majority 3-colouring",
+      "decoded": "Exhibits a 3-colouring of the single arc TT 2 whose same-colour out-neighbourhood is empty everywhere, so the existential head of the majority 3-colouring conjecture holds on the path. This grounds majority_3col as satisfiable on a concrete small digraph.",
+      "cluster": "P2",
+      "grounds": [
+        "majority_3col_statement"
+      ]
     },
     "majority_3col_eulerian_statement": {
       "title": "Majority 3-colouring of Eulerian digraphs (KOSvZW, Open Problem 3)",
@@ -467,6 +1932,19 @@
       },
       "specializes": "majority_3col_statement"
     },
+    "majority_col_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_tww_chi_col.v",
+        "name": "majority_col_C3",
+        "kind": "grounding"
+      },
+      "title": "C₃ admits a majority colouring (the proper 'Z₃ colouring)",
+      "decoded": "Proves the proper colouring of C₃ (each vertex its own colour) is a majority colouring, since no vertex shares its colour with its out-neighbour so the same-colour out-neighbourhood is empty. This grounds majority_col as satisfiable, validating the existential head of the majority-colouring conjecture.",
+      "cluster": "P2",
+      "grounds": [
+        "majority_3col_statement"
+      ]
+    },
     "majority_k1col_statement": {
       "title": "Fractional majority colouring (Kreutzer–Oum–Seymour–van der Zypen–Wood, Conj 9)",
       "decoded": "For every k ≥ 2, every digraph D admits a vertex colouring with k+1 colours such that at every vertex v at most a (1/k)-fraction of its out-neighbours share v's colour (encoded fraction-free as k·#{w : v→w, col w = col v} ≤ outdeg v for all v). At k = 2 this is exactly the majority 3-colouring condition.",
@@ -487,6 +1965,33 @@
         "attribution": "Davot, Isenmann, Roy, Thiebaut"
       }
     },
+    "merge_step_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_twinwidth.v",
+        "name": "merge_step_C3",
+        "kind": "grounding"
+      },
+      "title": "The contraction machinery can take an honest merge step on C₃",
+      "decoded": "Discriminating probe: on the 3-vertex graph C3 the discrete partition admits a real merge_step fusing two inequivalent vertices, witnessing that the contraction trigraph machinery underlying tww_le is non-degenerate (not stuck at the singleton sequence). The contraction machinery underlies tww_le, which appears only in Conjecture 3.12.",
+      "cluster": "P12",
+      "grounds": [
+        "conj_3_12_statement"
+      ]
+    },
+    "min_outdeg_dicycle": {
+      "extra": {
+        "file": "theories/conjectures/grounding_sad_packing.v",
+        "name": "min_outdeg_dicycle",
+        "kind": "grounding"
+      },
+      "title": "Min out-degree >= 1 forces a directed cycle (packing base case)",
+      "decoded": "Proves that any finite nonempty digraph in which every vertex has out-degree >= 1 contains a dicycle (follow out-arcs until a vertex repeats). This is the k = 1 base case of Hoang-Reed / Bermond-Thomassen, established unconditionally under the explicit 0 < #|D| guard (the same guard the two statements now carry to exclude the empty-digraph counterexample).",
+      "cluster": "P3",
+      "grounds": [
+        "hoang_reed_statement",
+        "bermond_thomassen_statement"
+      ]
+    },
     "minimal_LFO_no_infinite_statement": {
       "title": "Infinitely many vertex-minimal LFO obstructions",
       "decoded": "There are arbitrarily large vertex-minimal LFO-obstructions: for every N there is a tournament T on more than N vertices (N < #|T|) that has no linear-forest ordering, yet is vertex-minimal — deleting ANY single vertex yields a tournament that DOES have a linear-forest ordering. So the family of vertex-minimal LFO-NO tournaments is infinite, which (via the conjectured Path-FAS ⇔ LFO reduction) would rule out any finite forbidden-subtournament characterization of Path-FAS.",
@@ -496,6 +2001,19 @@
         "attribution": "Aboulker, Aubian, Lopes"
       }
     },
+    "mono_reach_or_rainbow_class_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "mono_reach_or_rainbow_class_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Non-vacuity: a nonempty 3-arc-coloured tournament exists",
+      "decoded": "Exhibits the directed triangle C3 as a nonempty tournament carrying a 3-arc-colouring, so the antecedent class of mono_reach_or_rainbow_statement is inhabited and the universal quantification is not vacuously about an empty class.",
+      "cluster": "P11",
+      "grounds": [
+        "mono_reach_or_rainbow_statement"
+      ]
+    },
     "mono_reach_or_rainbow_statement": {
       "title": "Monochromatic reachability or rainbow triangles (Sands–Sauer–Woodrow variant)",
       "decoded": "For every nonempty tournament T (0 < #|T|) whose arcs are coloured with 3 colours, either T contains a rainbow directed triangle (a directed 3-cycle a→b→c→a whose three arcs carry three distinct colours) or T has a monochromatic-reachability root: a vertex v from which every vertex w is reachable by a single-colour directed path (the colour may depend on w).",
@@ -504,25 +2022,170 @@
         "slug": "monochromatic_reachability_vs_rainbow_triangles"
       }
     },
+    "mono_root_tt2_0": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "mono_root_tt2_0",
+        "kind": "grounding"
+      },
+      "title": "TT 2 has a monochromatic-reachability root",
+      "decoded": "On the 1-arc-coloured TT 2, vertex 0 reaches every vertex in a single colour (itself reflexively, vertex 1 via the coloured arc), so mono_root is a satisfiable predicate and the right disjunct of mono_reach_or_rainbow_statement is realisable.",
+      "cluster": "P11",
+      "grounds": [
+        "mono_reach_or_rainbow_statement"
+      ]
+    },
+    "no_rainbow_c3const3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "no_rainbow_c3const3",
+        "kind": "grounding"
+      },
+      "title": "Refutation probe: constant-coloured C3 has no rainbow triangle",
+      "decoded": "The constant 3-arc-colouring of C3 has NO rainbow triangle (all three arcs share a colour), so rainbow_triangle is genuinely falsifiable; the rainbow disjunct of mono_reach_or_rainbow_statement is not provable for free.",
+      "cluster": "P11",
+      "grounds": [
+        "mono_reach_or_rainbow_statement"
+      ]
+    },
     "no_short_strong3": {
       "title": "Cheng–Keevash δ = 3 endgame — no short strong 3-out-regular oriented digraph",
-      "decoded": "It is NOT the case that a nonempty (0 < #|H|), strongly connected (strongb H), oriented digraph H (no loops, no digons) in which every vertex has out-degree EXACTLY 3 has its longest directed simple path of length at most 5: such an H with ℓ(H) ≤ 5 yields a contradiction (False). The internal endgame lemma forcing ℓ(H) ≥ 6 in the strong 3-out-regular case that underlies the δ = 3 theorem."
+      "decoded": "It is NOT the case that a nonempty (0 < #|H|), strongly connected (strongb H), oriented digraph H (no loops, no digons) in which every vertex has out-degree EXACTLY 3 has its longest directed simple path of length at most 5: such an H with ℓ(H) ≤ 5 yields a contradiction (False). The internal endgame lemma forcing ℓ(H) ≥ 6 in the strong 3-out-regular case that underlies the δ = 3 theorem.",
+      "informal": "No nonempty strongly connected oriented digraph in which every vertex has out-degree exactly 3 has its longest directed simple path of length ≤ 5; equivalently, every such digraph has a directed path of length ≥ 6."
+    },
+    "not_arc_strong_C3_2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "not_arc_strong_C3_2",
+        "kind": "grounding"
+      },
+      "title": "Directed triangle C3 is not 2-arc-strong",
+      "decoded": "A discriminating probe: C3 is NOT 2-arc-strong because the singleton {0} has out-cut exactly the one arc 0 -> 1, of size 1 < 2. Pins the minimum out-cut of C3 to 1 and confirms arc_strong is a genuine sliding threshold, not trivially satisfied at higher k.",
+      "cluster": "P3",
+      "grounds": []
+    },
+    "not_dicolorableb_C3_1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_dichromatic.v",
+        "name": "not_dicolorableb_C3_1",
+        "kind": "grounding"
+      },
+      "title": "Directed triangle C₃ is not 1-dicolourable (χ⃗(C₃) > 1)",
+      "decoded": "Red-flag probe: proves C₃ is NOT 1-dicolourable (its negation is the theorem), so χ⃗(C₃) > 1. If dicolorableb C3 1 were provable the dichromatic encoding would be broken; this confirms the directed triangle is the smallest non-acyclic example.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "not_kmajority_col2_c3const2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "not_kmajority_col2_c3const2",
+        "kind": "grounding"
+      },
+      "title": "Refutation probe: constant-coloured C3 fails majority (kmajority_col 2)",
+      "decoded": "The constant 2-colouring of C3 violates kmajority_col 2 (each vertex's unique out-neighbour shares its colour: 2·1 > 1 = outdeg), so the majority condition is not vacuously satisfied by every colouring and majority_3col_statement is non-trivial.",
+      "cluster": "P11",
+      "grounds": [
+        "majority_3col_statement",
+        "majority_k1col_statement"
+      ]
+    },
+    "not_majority_col_c3const": {
+      "extra": {
+        "file": "theories/conjectures/grounding_tww_chi_col.v",
+        "name": "not_majority_col_c3const",
+        "kind": "grounding"
+      },
+      "title": "Constant colouring of C₃ is not a majority colouring",
+      "decoded": "Red-flag probe: the constant colouring of C₃ fails majority_col, because each vertex's single out-neighbour shares its colour (2·1 = 2 > 1 = outdeg). This shows majority_col genuinely constrains colourings and is not vacuously true, so the existential in the majority-colouring conjecture has real content.",
+      "cluster": "P2",
+      "grounds": [
+        "majority_3col_statement"
+      ]
+    },
+    "not_mono_reach_tt2_col0": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "not_mono_reach_tt2_col0",
+        "kind": "grounding"
+      },
+      "title": "Refutation probe: no monochromatic root when the colour is absent",
+      "decoded": "On a TT 2 whose only arc carries colour 1, vertex 0 does NOT reach vertex 1 in colour 0 (the colour-0 sub-relation is empty), so mono_root genuinely depends on the colouring and the disjunction in mono_reach_or_rainbow_statement has real content.",
+      "cluster": "P11",
+      "grounds": [
+        "mono_reach_or_rainbow_statement"
+      ]
+    },
+    "not_unvd_K1_0": {
+      "extra": {
+        "file": "theories/conjectures/grounding_fas_unvd.v",
+        "name": "not_unvd_K1_0",
+        "kind": "grounding"
+      },
+      "title": "Red-flag probe: unvd(K₁) ≠ 0",
+      "decoded": "Refutes the degenerate value unvd(K₁) = 0: the empty tournament TT 0 admits no injection from K₁, so 0 is not unavoidable. A discriminating probe ensuring the 'least unavoidable N' framing of unvd is not vacuously satisfiable at 0.",
+      "cluster": "P4",
+      "grounds": [
+        "prob6_unvd_statement"
+      ]
+    },
+    "ochi_le_TT2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_chi_col.v",
+        "name": "ochi_le_TT2",
+        "kind": "grounding"
+      },
+      "title": "A single arc is 2-oriented-colourable (ochi ≤ 2)",
+      "decoded": "Proves the single arc TT 2 maps homomorphically onto the 2-vertex tournament, so ochi_le (TT 2) 2 holds. This is the smallest non-vacuous value of the oriented chromatic number, grounding oriented_kcolouring / ochi_le.",
+      "cluster": "P2",
+      "grounds": [
+        "oriented_chromatic_planar_bounded_statement"
+      ]
+    },
+    "odd_par_tree_fails": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "odd_par_tree_fails",
+        "kind": "grounding"
+      },
+      "title": "A mismatched-parity tree fails even-B-parity",
+      "decoded": "Refutation probe: exhibits odd_par_tree (one B-leaf, one A-then-B leaf of opposite B-parity) and proves ~~ even_B_parity, showing the Def-9.1 parity check is a genuine discriminating filter rather than an always-true predicate.",
+      "cluster": "P12",
+      "grounds": []
     },
     "omegabar_AC": {
       "title": "ω̄(ACₙ) = 3",
-      "decoded": "For m ≥ 3 (ACₙ a circulant tournament on n = 2m+1 ≥ 7 vertices), the directed clique number of ACₙ equals 3."
+      "decoded": "For m ≥ 3 (ACₙ a circulant tournament on n = 2m+1 ≥ 7 vertices), the directed clique number of ACₙ equals 3.",
+      "informal": "For m ≥ 3, the circulant tournament ACₙ (on n = 2m+1 vertices) has directed clique number ω̄(ACₙ) = 3."
     },
     "omegabar_AC_del": {
       "title": "ω̄(ACₙ − v) = 2",
-      "decoded": "For m ≥ 3 and any vertex v of ACₙ, deleting v from the circulant tournament ACₙ yields a tournament with directed clique number ω̄ = 2."
+      "decoded": "For m ≥ 3 and any vertex v of ACₙ, deleting v from the circulant tournament ACₙ yields a tournament with directed clique number ω̄ = 2.",
+      "informal": "For m ≥ 3 and any vertex v, deleting v from the circulant tournament ACₙ yields a tournament with directed clique number ω̄ = 2."
+    },
+    "omegabar_C3_val": {
+      "extra": {
+        "file": "theories/conjectures/grounding_twinwidth.v",
+        "name": "omegabar_C3_val",
+        "kind": "grounding"
+      },
+      "title": "ω̄(C₃) = 2",
+      "decoded": "Pins the backedge clique number invariant ω̄(C3) = 2 on the directed triangle, anchoring the genuinely-computed RHS quantity that the binding-function conjectures bound (so the conjecture statements range over a real invariant, not a placeholder).",
+      "cluster": "P12",
+      "grounds": [
+        "conj_3_12_statement",
+        "conj_3_13_statement",
+        "conj_3_16_statement"
+      ]
     },
     "omegabar_T4": {
       "title": "ω̄(T4 = ACₙ[C₃]) = 4",
-      "decoded": "The tournament T4 = ACₙ[C₃] (with n = 2m+1, m ≥ 3) has ω̄(T4) = 4, where ω̄ is the AACL clique-number invariant of a tournament. This is the value pinned for the 4-ω̄-criticality argument."
+      "decoded": "The tournament T4 = ACₙ[C₃] (with n = 2m+1, m ≥ 3) has ω̄(T4) = 4, where ω̄ is the AACL clique-number invariant of a tournament. This is the value pinned for the 4-ω̄-criticality argument.",
+      "informal": "The tournament T4 = ACₙ[C₃] has directed clique number ω̄(T4) = 4."
     },
     "omegabar_T4_del": {
       "title": "ω̄(T4 − v) = 3 for every vertex",
-      "decoded": "For every vertex v of T4 = ACₙ[C₃] (n = 2m+1, m ≥ 3), the tournament obtained by deleting v has ω̄(T4 − v) = 3. (One value suffices for all v by vertex-transitivity of T4.) This is the criticality drop feeding T4_kcritical4."
+      "decoded": "For every vertex v of T4 = ACₙ[C₃] (n = 2m+1, m ≥ 3), the tournament obtained by deleting v has ω̄(T4 − v) = 3. (One value suffices for all v by vertex-transitivity of T4.) This is the criticality drop feeding T4_kcritical4.",
+      "informal": "For every vertex v, deleting v from the tournament T4 = ACₙ[C₃] yields a tournament with directed clique number ω̄ = 3."
     },
     "omegabar_T5": {
       "title": "ω̄(T₅) = 5",
@@ -579,6 +2242,45 @@
         "slug": "oriented_chromatic_number_of_planar_graphs"
       }
     },
+    "oriented_dg_tournament": {
+      "extra": {
+        "file": "theories/conjectures/grounding_tww_chi_col.v",
+        "name": "oriented_dg_tournament",
+        "kind": "grounding"
+      },
+      "title": "Every tournament is oriented",
+      "decoded": "Proves the arc relation of any tournament is asymmetric, so oriented_dg holds of every tournament (and of C₃). This validates that the oriented_dg predicate is correct: its negation on C₃ is unprovable, confirming the antecedent class of the Forb(H) conjectures is faithfully captured.",
+      "cluster": "P2",
+      "grounds": [
+        "conj2_1605_statement",
+        "conj4_1605_statement",
+        "conj5_1605_statement"
+      ]
+    },
+    "oriented_forest_Empty2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes_dichotomy.v",
+        "name": "oriented_forest_Empty2",
+        "kind": "grounding"
+      },
+      "title": "The edgeless 2-vertex digraph is an oriented forest (antecedent non-vacuity)",
+      "decoded": "Proves the underlying graph of the edgeless digraph Empty2 is a forest, giving a ≥2-vertex witness that the 'F an oriented forest / star forest' antecedent of the hero dichotomy (and its conj_4_2 RHS disjunct) is satisfiable, not an empty class.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "oriented_kcolouring_C3": {
+      "extra": {
+        "file": "theories/conjectures/grounding_tww_chi_col.v",
+        "name": "oriented_kcolouring_C3",
+        "kind": "grounding"
+      },
+      "title": "C₃ has an oriented 3-colouring (onto itself)",
+      "decoded": "Proves C₃ maps homomorphically onto a 3-vertex tournament (itself), so oriented_kcolouring C3 3 holds. This non-vacuity witness shows the oriented chromatic number predicate is inhabited and finite.",
+      "cluster": "P2",
+      "grounds": [
+        "oriented_chromatic_planar_bounded_statement"
+      ]
+    },
     "pathFAS_iff_LFO_statement": {
       "title": "Path-FAS = linear-forest ordering (the LFO reduction)",
       "decoded": "For every tournament T, T has a path-shaped feedback arc set if and only if T has a linear-forest ordering. The left side (has_pathFAS) asks for a set F of genuine arcs that meets every directed cycle and whose underlying simple graph (vertices adjacent iff F has an arc between them in either direction) is a linear forest — acyclic with every vertex of degree at most 2. The right side (has_LFO) asks for a vertex order whose back-arc graph is such a linear forest. Stated as a Prop target; its proof is the open reduction.",
@@ -587,6 +2289,19 @@
         "url": "https://arxiv.org/abs/2402.10782",
         "attribution": "Aboulker, Aubian, Lopes (Problem 4.4)"
       }
+    },
+    "planar_class_loopless_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "planar_class_loopless_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Non-vacuity: a loopless oriented digraph exists",
+      "decoded": "Exhibits TT 2 (a single arc) as a concrete loopless digraph, inhabiting the looplessness side-condition of oriented_chromatic_planar_bounded_statement's antecedent (the lemma proves only loopless; planarity of the single edge is supplied at the two_extremal level), so the antecedent class is not quantified over an empty looplessness universe.",
+      "cluster": "P11",
+      "grounds": [
+        "oriented_chromatic_planar_bounded_statement"
+      ]
     },
     "prob6_unvd_statement": {
       "title": "Problem 6 (Aboulker–Bang-Jensen et al.) — bounded-mad ⇒ polynomial unavoidability bound",
@@ -597,6 +2312,19 @@
         "url": "https://arxiv.org/abs/2410.23566",
         "attribution": "Aboulker, Bang-Jensen, Bousquet, Charbit, Havet et al."
       }
+    },
+    "prob_6_class_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "prob_6_class_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Problem 6 hypothesis class is inhabited at alpha = 2",
+      "decoded": "Shows C3 is a nonempty digraph with mad C3 <= 2, so for alpha = 2 the mad-bounded family quantified by Problem 6 is non-empty. Confirms prob_6's per-alpha universal is not a statement about an empty class.",
+      "cluster": "P3",
+      "grounds": [
+        "prob6_unvd_statement"
+      ]
     },
     "question_5_9_fails_at_k3": {
       "title": "AACL Question 5.9 — refuted at k = 3",
@@ -640,6 +2368,19 @@
         "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
       }
     },
+    "rainbow_triangle_c3head": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "rainbow_triangle_c3head",
+        "kind": "grounding"
+      },
+      "title": "C3 has a rainbow directed triangle under a head-index colouring",
+      "decoded": "Colouring each arc by its head's index gives C3's three cyclic arcs three distinct colours, so rainbow_triangle is satisfiable and the left disjunct of mono_reach_or_rainbow_statement is realisable.",
+      "cluster": "P11",
+      "grounds": [
+        "mono_reach_or_rainbow_statement"
+      ]
+    },
     "sands_sauer_woodrow_statement": {
       "title": "Sands–Sauer–Woodrow monochromatic reachability (arc-coloured digraphs)",
       "decoded": "For every number of colours k there is a bound f such that every k-arc-coloured digraph D has a vertex set S which is a union of at most f stable sets and such that every vertex v of D reaches some vertex of S by a monochromatic directed path (a path whose arcs all carry one colour; the colour and target may depend on v).",
@@ -647,6 +2388,17 @@
       "source": {
         "slug": "monochromatoc_reachability_in_arc_colored_digraphs"
       }
+    },
+    "sdeg_le1_is_forest": {
+      "extra": {
+        "file": "theories/conjectures/grounding_degreewidth_c3.v",
+        "name": "sdeg_le1_is_forest",
+        "kind": "grounding"
+      },
+      "title": "A simple graph of maximum degree ≤ 1 is a forest",
+      "decoded": "Proves the reusable structural fact that any simple graph whose every vertex has degree at most 1 (a matching plus isolated vertices) is a forest: any two irredundant paths with the same endpoints coincide. This is the engine behind linear_forest back-arc-graph arguments and tests the is_forest / linear_forest primitives.",
+      "cluster": "P4",
+      "grounds": []
     },
     "seymour_second_neighbourhood_statement": {
       "title": "Seymour's Second Neighbourhood Conjecture",
@@ -664,6 +2416,19 @@
         "slug": "splitting_a_digraph_with_minimum_outdegree_constraints"
       }
     },
+    "ssw_class_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_colouring2.v",
+        "name": "ssw_class_inhabited",
+        "kind": "grounding"
+      },
+      "title": "Non-vacuity: a k-arc-coloured digraph exists for every k ≥ 1",
+      "decoded": "For every k ≥ 1 exhibits C3 with a constant k-arc-colouring, so the antecedent class of sands_sauer_woodrow_statement is inhabited; the quantification over k-arc-coloured digraphs is not vacuous (k = 0 is correctly degenerate since 'I_0 admits no colour).",
+      "cluster": "P11",
+      "grounds": [
+        "sands_sauer_woodrow_statement"
+      ]
+    },
     "stable_meeting_longest_dipaths_statement": {
       "title": "Stable set meeting all longest directed paths (Laborde–Payan–Xuong)",
       "decoded": "Every digraph D (no nonemptiness guard) has a stable set S (an independent set: no two of its vertices are joined by an arc in either direction) that meets every longest directed path — for every directed path x :: s whose LENGTH (number of arcs, size s) attains the maximum ell(D) = max over dipaths of size s (so the path has ell(D) arcs and ell(D)+1 vertices, NOT ell(D) vertices), some vertex of S lies on that path (v ∈ x :: s).",
@@ -671,6 +2436,87 @@
       "source": {
         "slug": "stable_set_meeting_all_longest_directed_paths"
       }
+    },
+    "symcyc3_in_H2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "symcyc3_in_H2",
+        "kind": "grounding"
+      },
+      "title": "The symmetric 3-cycle is a base member of H₂",
+      "decoded": "Proves the symmetric triangle sym_cycle 3 inhabits [in_H2_concrete] (for any realisation) via the inH2_base constructor, validating that the H₂ base class of the conj_9_2 conjectures is non-empty.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "symcyc3_outdeg0": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "symcyc3_outdeg0",
+        "kind": "grounding"
+      },
+      "title": "Each symmetric-3-cycle vertex has out-degree 2 (discriminating value)",
+      "decoded": "Computes the out-degree of a sym_cycle 3 vertex as exactly 2 (two reciprocal neighbours), distinguishing the symmetric triangle from the directed rim di_cycle (out-degree 1). A discriminating value check on the base block; symcyc3_Eulerian similarly grounds in = out = 2.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "symcyc3_strong": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "symcyc3_strong",
+        "kind": "grounding"
+      },
+      "title": "The bidirected triangle is strongly connected",
+      "decoded": "Verifies strongb (sym_cycle 3) by exhibiting connectivity on every ordered pair, grounding the textbook fact that a bidirected cycle is strong — a required property of the H₂ base members.",
+      "cluster": "P12",
+      "grounds": []
+    },
+    "symmetric_odd_cycle_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_two_extremal.v",
+        "name": "symmetric_odd_cycle_inhabited",
+        "kind": "grounding"
+      },
+      "title": "The symmetric triangle is a symmetric odd cycle",
+      "decoded": "Proves symmetric_odd_cycle (sym_cycle 3), so the base class of the family H₂ (the symmetric odd cycles) is non-vacuous — without an inhabitant the entire base of the H₂ construction would say nothing.",
+      "cluster": "P12",
+      "grounds": []
+    },
+    "tournament_indeg_outdeg": {
+      "extra": {
+        "file": "theories/conjectures/grounding_classic_core.v",
+        "name": "tournament_indeg_outdeg",
+        "kind": "grounding"
+      },
+      "title": "Tournament degree identity: indeg v + outdeg v = n - 1",
+      "decoded": "Proves the textbook tournament degree identity — in any tournament on n vertices, every vertex v satisfies indeg v + outdeg v = n - 1, since every other vertex is joined to v by exactly one arc. This validates that the new indeg / outdeg (Nout / Nin) primitives partition the non-v vertices correctly, the foundation on which the Seymour and Caccetta-Häggkvist statements are built.",
+      "cluster": "P9",
+      "grounds": [
+        "seymour_second_neighbourhood_statement",
+        "caccetta_haggkvist_statement",
+        "caccetta_haggkvist_triangle_statement"
+      ]
+    },
+    "transitive_tournament_TT": {
+      "extra": {
+        "file": "theories/conjectures/grounding_heroes_dichotomy.v",
+        "name": "transitive_tournament_TT",
+        "kind": "grounding"
+      },
+      "title": "Every TT n is a transitive tournament (dichotomy RHS non-vacuity)",
+      "decoded": "Proves every TT n satisfies [transitive_tournament] (semicomplete + asymmetric + irreflexive with transitive arc = <). Grounds that the 'transitive tournament' disjunct of the hero-dichotomy RHS is inhabited.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "transitive_tournament_TT'": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "transitive_tournament_TT'",
+        "kind": "grounding"
+      },
+      "title": "Every TT l is a transitive tournament",
+      "decoded": "Proves each transitive tournament TT l is genuinely a transitive tournament (irreflexive, total, antisymmetric, transitive), inhabiting the right disjunct of the hero dichotomy (conj_4_2) and the no-induced-Kₗ / hero antecedent class.",
+      "cluster": "G",
+      "grounds": []
     },
     "tvec_core_statement": {
       "title": "Maximum dichromatic number of oriented triangle-free graphs — combinatorial core (t⃗)",
@@ -682,6 +2528,130 @@
         "attribution": "Aboulker, Bousquet, de Verclos et al."
       }
     },
+    "twinwidth_chain_consistent": {
+      "extra": {
+        "file": "theories/conjectures/grounding_edges.v",
+        "name": "twinwidth_chain_consistent",
+        "kind": "grounding"
+      },
+      "title": "Twin-width chain 3.16 ⇒ 3.13 ⇒ 3.16 ⇒ 3.12 is consistent with the direct edge",
+      "decoded": "Composes the committed twin-width implication edges and confirms that the composite route 3.16⇒3.13⇒3.16⇒3.12 lands on the same conj_3_12 target as the direct 3.16⇒3.12 edge, so the edges are transitive and never contradict.",
+      "cluster": "G",
+      "grounds": [
+        "conj_3_12_statement",
+        "conj_3_13_statement",
+        "conj_3_16_statement"
+      ]
+    },
+    "two_extremal_card_pos": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "two_extremal_card_pos",
+        "kind": "grounding"
+      },
+      "title": "A two-extremal digraph has positive order (non-degeneracy)",
+      "decoded": "Proves any two_extremal digraph has at least one vertex, so the conj_9_2 quantifier is not over the empty digraph. A non-degeneracy guard against the vacuously-false reading that caused prior bugs.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "two_extremal_is_four_conjuncts": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "two_extremal_is_four_conjuncts",
+        "kind": "grounding"
+      },
+      "title": "two_extremal unfolds to its four intended conjuncts",
+      "decoded": "Exposes that [two_extremal] is exactly the 4-way conjunction strong + 2-connected underlying + arc-connectivity 2 + χ⃗ = 3. A faithfulness datum: a mis-encoding that silently dropped a conjunct would fail to typecheck against this statement.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "tww_le_TT1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_twinwidth.v",
+        "name": "tww_le_TT1",
+        "kind": "grounding"
+      },
+      "title": "The one-vertex tournament has twin-width 0",
+      "decoded": "Computes that the concrete one-vertex tournament TT 1 satisfies tww_le (TT 1) 0, validating tww_le as a non-vacuous predicate with an explicit witness (the textbook fact that graphs on at most one vertex have twin-width 0). tww_le is the antecedent only of Conjecture 3.12.",
+      "cluster": "P12",
+      "grounds": [
+        "conj_3_12_statement"
+      ]
+    },
+    "tww_le_TT1_all": {
+      "extra": {
+        "file": "theories/conjectures/grounding_twinwidth.v",
+        "name": "tww_le_TT1_all",
+        "kind": "grounding"
+      },
+      "title": "TT 1 lies in every twin-width class {tww ≤ k}",
+      "decoded": "Shows tww_le (TT 1) k holds for every k, so the bounded-twin-width antecedent tww_le T k of Conjecture 3.12 has a concrete inhabitant at every width bound k — the for-all is not over an empty class.",
+      "cluster": "P12",
+      "grounds": [
+        "conj_3_12_statement"
+      ]
+    },
+    "tww_le_mono": {
+      "extra": {
+        "file": "theories/conjectures/grounding_tww_chi_col.v",
+        "name": "tww_le_mono",
+        "kind": "grounding"
+      },
+      "title": "Twin-width bound tww_le is monotone in k",
+      "decoded": "Proves tww_le D k implies tww_le D k+1 by reusing the same contraction-sequence witness with a looser bound. This validates the shape of the twin-width 'at most k' predicate: a real minimum-width bound must be upward closed in k.",
+      "cluster": "P2",
+      "grounds": []
+    },
+    "unvd_K1": {
+      "extra": {
+        "file": "theories/conjectures/grounding_fas_unvd.v",
+        "name": "unvd_K1",
+        "kind": "grounding"
+      },
+      "title": "The unavoidability number of a single vertex is exactly 1",
+      "decoded": "Computes unvd(K₁) = 1: every 1-vertex tournament contains the single-vertex digraph K₁, and the value 0 fails because the empty tournament TT 0 contains no vertex. A concrete value witness grounding the unvd (least-N-unavoidable) definition behind Problem 6.",
+      "cluster": "P4",
+      "grounds": [
+        "prob6_unvd_statement"
+      ]
+    },
+    "unvd_K2": {
+      "extra": {
+        "file": "theories/conjectures/grounding_fas_unvd.v",
+        "name": "unvd_K2",
+        "kind": "grounding"
+      },
+      "title": "The unavoidability number of a single arc is exactly 2",
+      "decoded": "Computes unvd(K₂) = 2 for the single-arc digraph: every 2-vertex tournament is an arc (so contains K₂), while no tournament on fewer than 2 vertices does. A second concrete value witness grounding the unvd definition of Problem 6.",
+      "cluster": "P4",
+      "grounds": [
+        "prob6_unvd_statement"
+      ]
+    },
+    "unvd_relation_inhabited": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "unvd_relation_inhabited",
+        "kind": "grounding"
+      },
+      "title": "The unvd relation is satisfiable",
+      "decoded": "Proves unvd K1 1 holds: a concrete (digraph, value) pair satisfies the unvd relation (a least-unavoidable value exists for a nonempty digraph). Confirms the unvd-based conjectures range over a non-empty relation, not an empty graph of pairs.",
+      "cluster": "P3",
+      "grounds": [
+        "prob6_unvd_statement"
+      ]
+    },
+    "vglue_singletons_card": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "vglue_singletons_card",
+        "kind": "grounding"
+      },
+      "title": "Vertex-gluing two singletons collapses to one vertex",
+      "decoded": "Computes #|vglue o1 o1| = 1: the categorical-pushout vertex amalgam vglue of two single-vertex digraphs identifies the two chosen vertices, collapsing the 2-vertex sum to one class. Grounds that the vglue amalgam really merges as intended.",
+      "cluster": "P6",
+      "grounds": []
+    },
     "vt_kcritical": {
       "title": "k-ω̄-criticality of a vertex-transitive tournament reduces to one deletion",
       "decoded": "For a vertex-transitive tournament T (vertex_transitiveb T) and any fixed vertex v₀, T is k-ω̄-critical if and only if ω̄(T) = k and ω̄(del_tournament v₀) = k−1. Vertex-transitivity makes all single-vertex deletions interchangeable, so the universally-quantified deletion test in the definition of kcritical collapses to a single arbitrary deletion at v₀.",
@@ -691,6 +2661,30 @@
         "url": "https://arxiv.org/abs/2310.04265",
         "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
       }
+    },
+    "wheel_tree3_even_B_parity": {
+      "extra": {
+        "file": "theories/conjectures/grounding_h2_concrete.v",
+        "name": "wheel_tree3_even_B_parity",
+        "kind": "grounding"
+      },
+      "title": "The wheel hub star satisfies even-B-parity",
+      "decoded": "Proves the star hub tree wheel_tree 3 has even-B-parity (every leaf-to-leaf path crosses an even number of B-edges). A second independent witness, beyond canon_tree, that the Def-9.1 parity legality predicate is satisfiable on a non-trivial tree.",
+      "cluster": "P6",
+      "grounds": []
+    },
+    "woodall_empty_ok": {
+      "extra": {
+        "file": "theories/conjectures/grounding_unvd_sad.v",
+        "name": "woodall_empty_ok",
+        "kind": "grounding"
+      },
+      "title": "Woodall is not refutable on the empty digraph",
+      "decoded": "Shows the Woodall antecedent (a one-way set of a given dicut size) is unsatisfiable on the empty digraph TT 0, so the implication holds vacuously there. Confirms Woodall has no empty-digraph counterexample (the bug class that earlier hit Bermond-Thomassen / Hoang-Reed).",
+      "cluster": "P3",
+      "grounds": [
+        "woodall_statement"
+      ]
     },
     "woodall_statement": {
       "title": "Woodall's Conjecture (directed Lucchesi–Younger)",

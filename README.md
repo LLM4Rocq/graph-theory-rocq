@@ -124,8 +124,10 @@ dependency closure ever escapes the documented dictionary
 
 For the **informal ⇄ formal correspondence** — every conjecture *and* proved
 result paired with its informal source, a plain-English readback of the formal
-statement, the verbatim Rocq, and the proved implication edges — see the
-interactive auditor at
+statement, the verbatim Rocq, the proved implication edges, and the
+**machine-checked grounding proofs that test each definition** (the non-vacuity
+/ satisfiability witnesses and discriminating refutations, browsable on their
+own and cross-linked from each statement) — see the interactive auditor at
 
 > **https://llm4rocq.github.io/digraph-theory/correspondence/**
 
