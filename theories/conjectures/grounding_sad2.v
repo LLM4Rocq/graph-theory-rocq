@@ -34,8 +34,12 @@
         "[0 < #|D|] ∧ arc_strong D k" is INHABITED (witness [Bicyc 3], k ≤ 2) AND
         the conclusion [SAD] is achievable there — so neither node is vacuously
         true nor obviously false on its witness.
-      - [CL1_statement] hypothesis class is inhabited (a vertex split with both
-        sides ≥ 2 and a bipartitioned bridge set exists), checked on [Bicyc 4].
+      - [CL1_statement] hypothesis class is inhabited ([CL1_premises_inhabited]): a vertex
+        split [V = V1 ⊎ V2] with both sides ≥ 2, each induced side admitting a SAD, and each
+        bridge out-cut split into two nonempty colour parts.  The witness is the 6-vertex host
+        [H6] (two bidirected triangles + a two-way bridge), NOT [Bicyc 4]: a SAD-admitting
+        side must be ≥ 3 vertices (no 2-vertex digraph has a SAD), so each side is a
+        bidirected triangle (SAD via the generic [SAD_complete3]).
 
     TRIVIALITY / FALSIFICATION probes (reported, all benign here):
       - [SAD] is NOT trivially-true: a digraph that is not strongly connected has
@@ -352,10 +356,198 @@ have := A1conn v1 v0 => /connectP[[|z s'] /= pth lst].
 - by move: pth => /andP[]; rewrite /subrel_of (negbTE (sink z)).
 Qed.
 
-(** NOTE — salvaged from a stalled agent run (transient API rate-limiting).  The centerpiece
-    [SAD_Bicyc] (a concrete Strong Arc Decomposition of the bidirected n-cycle for every
-    [n >= 3]: the forward cycle [Afwd] and backward cycle [Abwd] are two arc-disjoint spanning
-    strong subdigraphs), its colouring form [SAD_colouring_Bicyc], its 2-arc-strength
-    [bicyc_arc_strong], and the discriminating probe [TT2_not_SAD] are all PROVED.  The only
-    remaining trailers the agent left unfinished are the [CL1_bridge_*] witnesses (CL1
-    non-vacuity), which had a deeper type confusion in the original attempt and are left open. *)
+(** ** GROUNDING 4 — CL1 non-vacuity: the hypothesis class of [CL1_statement] is INHABITED.
+
+    [CL1_statement] is a bilateral SAD-from-SAD lifting: from a vertex split [V = V1 ⊎ V2]
+    (each side ≥ 2, each induced side admitting a SAD, each bridge out-cut split into two
+    nonempty colour parts) it concludes [SAD D].  Establishing that this premise class is
+    not vacuous is subtle: a side admitting a SAD must ITSELF be a 2-arc-strong digraph,
+    and the SMALLEST digraph with a SAD is the bidirected TRIANGLE (a 2-vertex side, e.g.
+    a digon or a slice of [Bicyc 4], can never have a SAD — a spanning-strong subdigraph on
+    2 vertices needs both arcs, leaving none for the second class).  So the honest witness
+    is a 6-vertex host [H6] = two bidirected triangles [{0,1,2}] and [{3,4,5}] joined by a
+    two-way bridge ([0↔3], [1↔4]).  Then [V1 = {0,1,2}], [V2 = {3,4,5}] each induce a
+    bidirected triangle (hence a SAD, via the generic [SAD_complete3] below), each side has
+    ≥ 2 vertices, and each bridge out-cut ([δ⁺(V1) = {0→3, 1→4}], [δ⁺(V2) = {3→0, 4→1}])
+    has two arcs, so it splits into two nonempty colour parts.  Hence every premise of CL1
+    is simultaneously satisfiable: [CL1_statement] is neither vacuously true nor obviously
+    false on its witness. *)
+
+(** A complete-symmetric 3-vertex digraph (arcs = [≠], i.e. the bidirected triangle) has a
+    Strong Arc Decomposition: its 6 arcs split into the two oriented Hamilton 3-cycles
+    [a→b→c→a] and [a→c→b→a], each spanning and strongly connected. *)
+Section Complete3.
+Variable T : diGraphType.
+
+Lemma connect_3cycle (r : rel T) (a b c : T) :
+  r a b -> r b c -> r c a ->
+  forall x y, x \in [:: a; b; c] -> y \in [:: a; b; c] -> connect r x y.
+Proof.
+move=> rab rbc rca x y.
+have ab : connect r a b by apply: connect1.
+have bc : connect r b c by apply: connect1.
+have ca : connect r c a by apply: connect1.
+have ac : connect r a c by apply: connect_trans ab bc.
+have ba : connect r b a by apply: connect_trans bc ca.
+have cb : connect r c b by apply: connect_trans ca ab.
+rewrite !inE => /or3P[] /eqP-> /or3P[] /eqP->;
+  by [exact: connect0|exact: ab|exact: ac|exact: ba|exact: bc|exact: ca|exact: cb].
+Qed.
+
+Lemma SAD_complete3 :
+  #|T| = 3 -> (forall x y : T, (x --> y) = (x != y)) -> SAD T.
+Proof.
+move=> card3 arcE.
+have szT : size (enum T) = 3 by rewrite -cardE.
+case E: (enum T) szT => [|a [|b [|c [|d l]]]] // _.
+have memabc : forall x : T, x \in [:: a; b; c] by move=> x; rewrite -E mem_enum.
+have memacb : forall x : T, x \in [:: a; c; b]
+  by move=> x; move: (memabc x); rewrite !inE => /orP[->|/orP[->|->]]; rewrite ?eqxx ?orbT.
+have uabc : uniq [:: a; b; c] by rewrite -E enum_uniq.
+move: uabc; rewrite cons_uniq => /andP[Ha]; rewrite cons_uniq => /andP[Hb _].
+move: Ha; rewrite !inE negb_or => /andP[ab0 ac0].
+move: Hb; rewrite mem_seq1 => bc0.
+pose Afwd : {set T * T} := [set p | p \in [:: (a, b); (b, c); (c, a)]].
+pose Abwd : {set T * T} := [set p | p \in [:: (b, a); (c, b); (a, c)]].
+have inA : in_arcset Afwd.
+  apply/subsetP=> p; rewrite !inE => /or3P[] /eqP-> /=; rewrite arcE.
+  + exact: ab0.
+  + exact: bc0.
+  + by rewrite eq_sym.
+have inB : in_arcset Abwd.
+  apply/subsetP=> p; rewrite !inE => /or3P[] /eqP-> /=; rewrite arcE.
+  + by rewrite eq_sym.
+  + by rewrite eq_sym.
+  + exact: ac0.
+exists Afwd, Abwd; split.
+- apply/preliminaries.disjointP=> p; rewrite !inE => /or3P[] /eqP-> /or3P[] /eqP[] *; subst;
+    by [move: ab0; rewrite eqxx | move: ac0; rewrite eqxx | move: bc0; rewrite eqxx].
+- apply/eqP; rewrite eqEsubset; apply/andP; split.
+    apply/subsetP=> p; rewrite inE => /orP[]; [exact: (subsetP inA) | exact: (subsetP inB)].
+  apply/subsetP; case=> x y; rewrite in_arcsetE arcE => xy.
+  move: (memabc x) (memabc y); rewrite !inE => /or3P[] /eqP ex /or3P[] /eqP ey; subst;
+    by rewrite eqxx in xy || (rewrite !xpair_eqE !eqxx /= ?orbT).
+- split; first exact: inA.
+  move=> u v; apply: (connect_3cycle (a := a) (b := b) (c := c)); try exact: memabc;
+    by rewrite /subrel_of !inE eqxx ?orbT.
+- split; first exact: inB.
+  move=> u v; apply: (connect_3cycle (a := a) (b := c) (c := b)); try exact: memacb;
+    by rewrite /subrel_of !inE eqxx ?orbT.
+Qed.
+
+End Complete3.
+
+(** The 6-vertex host [H6]: two bidirected triangles [{0,1,2}], [{3,4,5}] joined by the
+    two-way bridge [0↔3], [1↔4].  Same-side vertices are completely joined ([i≠j]); the
+    only cross-side arcs are the four bridge arcs. *)
+Definition hbridge (i j : 'I_6) : bool :=
+  [|| (i == 0 :> nat) && (j == 3 :> nat), (i == 3 :> nat) && (j == 0 :> nat),
+      (i == 1 :> nat) && (j == 4 :> nat) | (i == 4 :> nat) && (j == 1 :> nat)].
+
+Definition hrel (i j : 'I_6) : bool :=
+  if ((i < 3)%N == (j < 3)%N) then i != j else hbridge i j.
+
+Definition h6 : Type := 'I_6.
+HB.instance Definition _ := Finite.on h6.
+HB.instance Definition _ := HasArc.Build h6 hrel.
+Definition H6 : diGraphType := h6.
+
+Lemma h6_arcE (x y : H6) : (x --> y) = hrel x y.
+Proof. by []. Qed.
+
+(** The left side [V1 = {0,1,2}]; its complement is the right side [{3,4,5}]. *)
+Definition V1 : {set H6} := [set x : H6 | (x < 3)%N].
+
+Lemma inV1 (x : H6) : (x \in V1) = (val x < 3)%N.
+Proof. by rewrite inE. Qed.
+
+Lemma card_H6 : #|H6| = 6.
+Proof. by rewrite /H6 /h6 card_ord. Qed.
+
+Lemma card_V1 : #|V1| = 3.
+Proof. by rewrite /V1 cardsE -sum1_card big_mkcond /= !big_ord_recl big_ord0 /=. Qed.
+
+Lemma card_V2 : #|~: V1| = 3.
+Proof. by rewrite cardsCs setCK card_V1 card_H6. Qed.
+
+(** Both induced sides are complete-symmetric: any two vertices on the SAME side of [H6]
+    are joined (the [hrel] "same side" branch is [i ≠ j]). *)
+Lemma induced_complete (W : {set H6}) :
+  {in W &, forall x y : H6, ((x < 3)%N == (y < 3)%N)} ->
+  forall u v : induced_digraph W, (u --> v) = (u != v).
+Proof.
+move=> Hside u v; rewrite sub_arcE h6_arcE /hrel.
+rewrite (Hside (val u) (val v) (valP u) (valP v)).
+by rewrite val_eqE.
+Qed.
+
+(** Each induced side is a bidirected triangle, hence has a SAD. *)
+Lemma SAD_induced_V1 : SAD (induced_digraph V1).
+Proof.
+apply: SAD_complete3; first by rewrite card_sig card_V1.
+by apply: induced_complete => x y; rewrite 2!inV1 => hx hy; rewrite hx hy.
+Qed.
+
+Lemma SAD_induced_V2 : SAD (induced_digraph (~: V1)).
+Proof.
+apply: SAD_complete3; first by rewrite card_sig card_V2.
+by apply: induced_complete => x y; rewrite !inE => /negbTE hx /negbTE hy; rewrite hx hy.
+Qed.
+
+(** A set holding two elements separated by a predicate splits into two nonempty parts —
+    the mechanism behind "each bridge out-cut splits into two nonempty colour parts". *)
+Lemma split_set (U : finType) (S : {set U}) (f : pred U) (p q : U) :
+  p \in S -> q \in S -> f p -> ~~ f q ->
+  exists B1 B2 : {set U},
+    [/\ [disjoint B1 & B2], B1 :|: B2 = S, B1 != set0 & B2 != set0].
+Proof.
+move=> pS qS fp fq.
+exists [set x in S | f x], [set x in S | ~~ f x]; split.
+- by apply/preliminaries.disjointP=> z; rewrite !inE => /andP[_ fz] /andP[_]; rewrite fz.
+- by apply/setP=> z; rewrite !inE -andb_orr orbN andbT.
+- by apply/set0Pn; exists p; rewrite !inE pS fp.
+- by apply/set0Pn; exists q; rewrite !inE qS fq.
+Qed.
+
+(** The four bridge endpoints of [H6]. *)
+Definition e0 : H6 := @Ordinal 6 0 isT.
+Definition e1 : H6 := @Ordinal 6 1 isT.
+Definition e3 : H6 := @Ordinal 6 3 isT.
+Definition e4 : H6 := @Ordinal 6 4 isT.
+
+(** GROUNDING 4 — every premise of [CL1_statement] is simultaneously satisfiable. *)
+Lemma CL1_premises_inhabited :
+  exists (D : diGraphType) (W : {set D}),
+    let W2 := ~: W in
+    (2 <= #|W|)%N /\ (2 <= #|W2|)%N /\
+    SAD (induced_digraph W) /\ SAD (induced_digraph W2) /\
+    (exists B1 B2 : {set (D * D)},
+       [/\ [disjoint B1 & B2], B1 :|: B2 = outcut W, B1 != set0 & B2 != set0]) /\
+    (exists C1 C2 : {set (D * D)},
+       [/\ [disjoint C1 & C2], C1 :|: C2 = outcut W2, C1 != set0 & C2 != set0]).
+Proof.
+exists H6, V1; rewrite /=.
+split; first by rewrite card_V1.
+split; first by rewrite card_V2.
+split; first exact: SAD_induced_V1.
+split; first exact: SAD_induced_V2.
+split.
+- apply: (split_set (f := fun x : H6 * H6 => val x.1 == 0) (p := (e0, e3)) (q := (e1, e4))).
+  + by rewrite in_outcutE !inE.
+  + by rewrite in_outcutE !inE.
+  + by [].
+  + by [].
+- apply: (split_set (f := fun x : H6 * H6 => val x.1 == 3) (p := (e3, e0)) (q := (e4, e1))).
+  + by rewrite in_outcutE !inE.
+  + by rewrite in_outcutE !inE.
+  + by [].
+  + by [].
+Qed.
+
+(** NOTE — the SAD cluster of [sad.v] is now fully grounded.  The centerpiece [SAD_Bicyc]
+    (a concrete Strong Arc Decomposition of the bidirected n-cycle for every [n >= 3]),
+    its colouring form [SAD_colouring_Bicyc], its 2-arc-strength [bicyc_arc_strong], the
+    discriminating probe [TT2_not_SAD], and the CL1 non-vacuity witness
+    [CL1_premises_inhabited] (the previously-open [CL1_bridge_*] trailer, here closed via
+    the generic [SAD_complete3] and the 6-vertex two-triangle host [H6]) are all PROVED,
+    [Qed], axiom-free. *)
