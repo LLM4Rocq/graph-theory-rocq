@@ -1,0 +1,3141 @@
+{
+  "meta": {
+    "count": 81,
+    "github_blob": "https://github.com/LLM4Rocq/digraph-theory/blob/main",
+    "coqdoc": "https://llm4rocq.github.io/digraph-theory/doc",
+    "generator": "scripts/build_correspondence.py"
+  },
+  "entries": [
+    {
+      "id": "AC_kcritical3",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ACₙ is 3-ω̄-critical",
+      "informal": {
+        "text": "",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "For m ≥ 3 (so the circulant tournament ACₙ has n = 2m+1 ≥ 7 vertices), ACₙ is 3-ω̄-critical: its directed clique number ω̄(ACₙ) = 3, and deleting any single vertex leaves ω̄ = 2. This is the building block giving the infinite k = 3 family for Conjecture 5.10.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "AC_kcritical3",
+        "file": "theories/applications/k5/acn_base.v",
+        "line": 431,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/acn_base.v#L431",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.acn_base.html#Digraph.applications.k5.acn_base.AC_kcritical3",
+        "verbatim": "Theorem AC_kcritical3 : (3 <= m)%N -> kcritical 3 (AC m' : tournament)."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "AC_vertex_transitive",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ACₙ is vertex-transitive",
+      "informal": {
+        "text": "ACₙ is vertex-transitive (as any Cayley digraph: translations act transitively) — the M2 exit fact feeding the M3 criticality reduction.",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "The circulant tournament ACₙ is vertex-transitive: its automorphism group acts transitively on the vertices (for any two vertices there is a digraph automorphism — here a translation, as for any Cayley digraph — sending one to the other). This is the symmetry fact that reduces the criticality check to a single deleted vertex.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "AC_vertex_transitive",
+        "file": "theories/constructions/circulant.v",
+        "line": 134,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/constructions/circulant.v#L134",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.constructions.circulant.html#Digraph.constructions.circulant.AC_vertex_transitive",
+        "verbatim": "Lemma AC_vertex_transitive : vertex_transitiveb AC."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "CL1_statement",
+      "kind": "conjecture",
+      "cluster": "P3",
+      "title": "CL1 — bilateral controlled-lifting for Strong Arc Decompositions",
+      "informal": {
+        "text": "Conjecture There exists an ineteger $ k $ so that every $ k $ -arc-connected digraph contains a pair of arc-disjoint strongly connected spanning subdigraphs?",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/arc_disjoint_strongly_connected_spanning_subdigraphs",
+          "attribution": "library-internal lifting lemma toward Bang-Jensen–Yeo SAD"
+        }
+      },
+      "decoded": "For every digraph D and every vertex set V1 (with V2 its complement) such that both sides have at least 2 vertices, if each induced subdigraph D[V1] and D[V2] admits a Strong Arc Decomposition, and each of the two bridge out-cuts — the arcs leaving V1 (outcut V1) and the arcs leaving V2 (outcut V2) — can be split into two disjoint, nonempty, covering arc parts, then D itself admits a Strong Arc Decomposition. A relative (SAD-from-SAD) lifting target, provable without resolving WC3 or the general Bang-Jensen–Yeo conjecture.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "CL1_statement",
+        "file": "theories/conjectures/sad.v",
+        "line": 218,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/sad.v#L218",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.sad.html#Digraph.conjectures.sad.CL1_statement",
+        "verbatim": "Definition CL1_statement : Prop :=\n  forall (D : diGraphType) (V1 : {set D}),\n    let V2 := ~: V1 in\n    (2 <= #|V1|)%N -> (2 <= #|V2|)%N ->\n    SAD (induced_digraph V1) -> SAD (induced_digraph V2) ->\n    (exists B1 B2 : {set (D * D)},\n       [/\\ [disjoint B1 & B2], B1 :|: B2 = outcut V1, B1 != set0 & B2 != set0]) ->\n    (exists C1 C2 : {set (D * D)},\n       [/\\ [disjoint C1 & C2], C1 :|: C2 = outcut V2, C1 != set0 & C2 != set0]) ->\n    SAD D."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [
+        {
+          "name": "CL1_premises_inhabited",
+          "gloss": "the six premises are simultaneously satisfiable — witnessed by the 6-vertex host H6 (two bidirected triangles + a two-way bridge); axiom-free."
+        }
+      ],
+      "faithfulness": "Each side needs a SAD, and the smallest SAD-admitting digraph is the bidirected triangle (no 2-vertex digraph has a SAD), so the non-vacuity witness uses 3-vertex sides, not 2-vertex ones."
+    },
+    {
+      "id": "LFO_iff_34transversal_statement",
+      "kind": "conjecture",
+      "cluster": "P4",
+      "title": "Linear-forest ordering = 3/4-cycle transversal (the equivalence target)",
+      "informal": {
+        "text": "The equivalence target: [T] has a linear-forest ordering iff there is an arc set whose underlying simple graph is a linear forest and which hits every directed 3-cycle and every directed 4-cycle. (For tournaments the back-arc graph of a degree-2 order being acyclic is governed by short cycles; this is the open characterization in path_matching_fas/docs/q2_acyclicity_core.md.)",
+        "source": {
+          "name": "arXiv 2402.10782",
+          "url": "https://arxiv.org/abs/2402.10782",
+          "attribution": "Aboulker, Aubian, Lopes"
+        }
+      },
+      "decoded": "For every tournament T, T has a linear-forest ordering if and only if there exists an arc set F whose underlying simple graph is a linear forest (acyclic, every vertex of degree at most 2) AND which hits every directed 3-cycle and every directed 4-cycle (every directed triangle and every directed 4-cycle uses some arc of F). Note F is only required to meet 3- and 4-cycles here — a strictly weaker hitting requirement than a full feedback arc set. Stated as a Prop target; the characterization is open.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "LFO_iff_34transversal_statement",
+        "file": "theories/conjectures/path_fas.v",
+        "line": 199,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/path_fas.v#L199",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.path_fas.html#Digraph.conjectures.path_fas.LFO_iff_34transversal_statement",
+        "verbatim": "Definition LFO_iff_34transversal_statement : Prop :=\n  forall T : tournament,\n    has_LFO T <->\n    (exists F : {set T * T}, linear_forest (farc_graph F) /\\ hits_34cycles F)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "T4_kcritical4",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "T4 = ACₙ[C₃] is 4-ω̄-critical",
+      "informal": {
+        "text": "T4 is 4-ω̄-critical",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "The tournament T4 (the lexicographic product ACₙ[C₃], for n = 2m+1 with m ≥ 3) is 4-ω̄-critical: kcritical 4 T4 unfolds to ω̄(T4) = 4 and, for EVERY vertex v, ω̄(T4 − v) = 4.-1 = 3. This is the single-witness criticality fact (the building block); the arbitrarily-large family statement of Conjecture 5.10 is conjecture_5_10_at_k4, not this lemma.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "T4_kcritical4",
+        "file": "theories/applications/k4/k4_main.v",
+        "line": 59,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_main.v#L59",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k4.k4_main.html#Digraph.applications.k4.k4_main.T4_kcritical4",
+        "verbatim": "Theorem T4_kcritical4 : kcritical 4 T4."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "T5_kcritical5",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Conj 5.10 — the host T₅ is 5-ω̄-critical",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
+        }
+      },
+      "decoded": "The tournament T₅ = ACₙ[ACₙ] (the lexicographic product of the circulant ACₙ with itself, for odd n = 2m+1 with m ≥ 3) is 5-ω̄-critical: its directed clique number ω̄(T₅) equals 5, and deleting any single vertex v drops it to ω̄(T₅ − v) = 4.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "T5_kcritical5",
+        "file": "theories/applications/k5/main.v",
+        "line": 71,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v#L71",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.main.html#Digraph.applications.k5.main.T5_kcritical5",
+        "verbatim": "Theorem T5_kcritical5 : kcritical 5 T5."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "WC3_statement",
+      "kind": "conjecture",
+      "cluster": "P3",
+      "title": "Bang-Jensen–Yeo SAD at K = 3 (working conjecture WC3)",
+      "informal": {
+        "text": "Conjecture There exists an ineteger $ k $ so that every $ k $ -arc-connected digraph contains a pair of arc-disjoint strongly connected spanning subdigraphs?",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/arc_disjoint_strongly_connected_spanning_subdigraphs",
+          "attribution": "Bang-Jensen, Yeo (K = 3 form)"
+        }
+      },
+      "decoded": "Every nonempty digraph D (0 < #|D|) that is 3-arc-strong admits a Strong Arc Decomposition, i.e. its arc set partitions into two disjoint arc classes that each span all vertices and are each strongly connected. This is the K = 3 instance of the Bang-Jensen–Yeo SAD conjecture: if true it settles that conjecture with K = 3, and a 3-arc-strong counterexample would refute it.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "WC3_statement",
+        "file": "theories/conjectures/sad.v",
+        "line": 196,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/sad.v#L196",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.sad.html#Digraph.conjectures.sad.WC3_statement",
+        "verbatim": "Definition WC3_statement : Prop :=\n  forall D : diGraphType, (0 < #|D|)%N -> arc_strong D 3 -> SAD D."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "3arcstrong_strong",
+            "thm": "WC3_implies_3arcstrong_strong"
+          },
+          {
+            "to": "bang_jensen_yeo_SAD_statement",
+            "thm": "WC3_implies_SAD"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "bang_jensen_yeo_SAD_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "avec_core_statement",
+      "kind": "conjecture",
+      "cluster": "P2",
+      "title": "Minimum acyclic number of oriented triangle-free graphs — combinatorial core (a⃗)",
+      "informal": {
+        "text": "There exists a least integer $\\mathrm{mader}_{\\delta^0}(TT_k)$ such that every digraph $D$ with $\\delta^0(D) \\geq \\mathrm{mader}_{\\delta^0}(TT_k)$ contains a subdivision of $TT_k$.",
+        "source": {
+          "name": "arXiv 2403.02298",
+          "url": "https://arxiv.org/abs/2403.02298",
+          "attribution": "Aboulker, Bousquet, de Verclos et al."
+        }
+      },
+      "decoded": "There is a sequence g : nat -> nat such that, for every order n > 0: (lower bound) every digon-free digraph D on exactly n vertices whose underlying graph is triangle-free has an acyclic induced subdigraph of size at least g(n); and (attainment) some such order-n graph has no acyclic induced set of size g(n)+1, which pins g(n) to the exact minimum acyclic number a⃗(n). This is the combinatorial core of the Θ(√(n·log n)) conjecture, with the asymptotic envelope abstracted into the existence of such a binding sequence g.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "avec_core_statement",
+        "file": "theories/conjectures/chi_bounded.v",
+        "line": 195,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/chi_bounded.v#L195",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.chi_bounded.html#Digraph.conjectures.chi_bounded.avec_core_statement",
+        "verbatim": "Definition avec_core_statement : Prop :=\n  exists g : nat -> nat,\n    forall n : nat, (0 < n)%N ->\n      (* lower bound: every order-n oriented triangle-free D has an acyclic set of size g n *)\n      (forall D : diGraphType,\n         #|D| = n -> oriented_dg D -> underlying_triangle_free D ->\n         acyclic_number_ge D (g n)) /\\\n      (* attained — pins g to the MINIMUM a⃗(n): some order-n such D has no acyclic set of\n         size g n + 1 (without this, g := 1 satisfies the lower bound vacuously)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "bang_jensen_yeo_SAD_statement",
+      "kind": "conjecture",
+      "cluster": "P3",
+      "title": "Bang-Jensen–Yeo Strong Arc Decomposition Conjecture",
+      "informal": {
+        "text": "Conjecture There exists an ineteger $ k $ so that every $ k $ -arc-connected digraph contains a pair of arc-disjoint strongly connected spanning subdigraphs?",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/arc_disjoint_strongly_connected_spanning_subdigraphs",
+          "attribution": "Bang-Jensen, Yeo (2004)"
+        }
+      },
+      "decoded": "There is an absolute constant K such that every nonempty digraph D (0 < #|D|) that is K-arc-strong admits a Strong Arc Decomposition — a partition of its arc set into two disjoint arc classes, each spanning all vertices and each strongly connected (equivalently, a pair of arc-disjoint strongly connected spanning subdigraphs). The constant K is existentially bound, so the statement asserts that some finite arc-strength threshold forces such a decomposition. (Known: K = 2 fails — infinite obstruction families exist; no 3-arc-strong obstruction is known.)",
+      "decoded_authored": true,
+      "formal": {
+        "name": "bang_jensen_yeo_SAD_statement",
+        "file": "theories/conjectures/sad.v",
+        "line": 188,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/sad.v#L188",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.sad.html#Digraph.conjectures.sad.bang_jensen_yeo_SAD_statement",
+        "verbatim": "Definition bang_jensen_yeo_SAD_statement : Prop :=\n  exists K : nat,\n    forall D : diGraphType, (0 < #|D|)%N -> arc_strong D K -> SAD D."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "strong",
+            "thm": "BJY_SAD_implies_strong"
+          }
+        ],
+        "implied_by": [
+          {
+            "from": "WC3_statement",
+            "thm": "WC3_implies_SAD"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "bermond_thomassen_statement",
+      "kind": "conjecture",
+      "cluster": "P10",
+      "title": "Bermond–Thomassen Conjecture",
+      "informal": {
+        "text": "Conjecture For every positive integer $ k $ , every digraph with minimum out-degree at least $ 2k-1 $ contains $ k $ disjoint cycles.",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/the_bermond_thomassen_conjecture",
+          "attribution": "Bermond, Thomassen"
+        }
+      },
+      "decoded": "For every nonempty digraph D (0 < #|D|) and every k, if every vertex has out-degree at least 2k−1 (pointwise, forall v: 2*k−1 ≤ outdeg v), then D contains a packing of k directed cycles that are pairwise vertex-disjoint: there is a list P of seqs, each a directed cycle (cycle_pack P), with all members pairwise sharing no vertex (vtx_disjoint_pack P) and size P = k.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "bermond_thomassen_statement",
+        "file": "theories/conjectures/packing.v",
+        "line": 182,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L182",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.packing.html#Digraph.conjectures.packing.bermond_thomassen_statement",
+        "verbatim": "Definition bermond_thomassen_statement : Prop :=\n  forall (D : diGraphType) (k : nat),\n    (0 < #|D|)%N ->\n    (forall v : D, (2 * k - 1 <= outdeg v)%N) ->\n    exists P : seq (seq D),\n      [/\\ cycle_pack P, vtx_disjoint_pack P & size P = k]."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "one_cycle",
+            "thm": "bermond_thomassen_implies_one_cycle"
+          },
+          {
+            "to": "hoang_reed_weak",
+            "thm": "bermond_thomassen_implies_hoang_reed_weak"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "caccetta_haggkvist_statement",
+      "kind": "conjecture",
+      "cluster": "P9",
+      "title": "Caccetta–Häggkvist Conjecture",
+      "informal": {
+        "text": "Conjecture Every simple digraph of order $ n $ with minimum outdegree at least $ r $ has a cycle with length at most $ \\lceil n/r\\rceil $",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/caccetta_haggkvist_conjecture",
+          "attribution": "Caccetta, Häggkvist (1978)"
+        }
+      },
+      "decoded": "For every loopless digraph D on n vertices (0 < #|D|) in which every vertex has out-degree at least r, with r ≥ 1, there is a directed cycle of length at most ⌈n/r⌉ (written as (n+r−1) ÷ r). The nonemptiness guard 0 < #|D|, the looplessness condition (no vertex v has an arc v --> v), and r ≥ 1 are all stated explicitly.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "caccetta_haggkvist_statement",
+        "file": "theories/conjectures/classic_core.v",
+        "line": 78,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L78",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.caccetta_haggkvist_statement",
+        "verbatim": "Definition caccetta_haggkvist_statement : Prop :=\n  forall (D : diGraphType) (r : nat),\n    (0 < #|D|)%N -> (forall v : D, ~~ (v --> v)) -> (0 < r)%N ->\n    (forall v : D, (r <= outdeg v)%N) ->\n    exists c : seq D, dicycle c /\\ (size c <= (#|D| + r - 1) %/ r)%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "caccetta_haggkvist_triangle_statement",
+            "thm": "caccetta_haggkvist_implies_triangle"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "caccetta_haggkvist_triangle_statement",
+      "kind": "conjecture",
+      "cluster": "P9",
+      "title": "Caccetta–Häggkvist Conjecture — triangle case (r = n/3)",
+      "informal": {
+        "text": "Conjecture Every simple digraph of order $ n $ with minimum outdegree at least $ r $ has a cycle with length at most $ \\lceil n/r\\rceil $",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/caccetta_haggkvist_conjecture",
+          "attribution": "Caccetta, Häggkvist (1978)"
+        }
+      },
+      "decoded": "The famous triangle special case, over oriented (digon-free) digraphs: for every nonempty oriented digraph D (0 < #|D|) in which every vertex has out-degree at least n/3 — encoded as n ≤ 3·outdeg(v) for all v — there is a directed cycle of length exactly 3 (a directed triangle).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "caccetta_haggkvist_triangle_statement",
+        "file": "theories/conjectures/classic_core.v",
+        "line": 86,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L86",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.caccetta_haggkvist_triangle_statement",
+        "verbatim": "Definition caccetta_haggkvist_triangle_statement : Prop :=\n  forall D : orientedDigraph,\n    (0 < #|D|)%N -> (forall v : D, (#|D| <= 3 * outdeg v)%N) ->\n    exists c : seq D, dicycle c /\\ size c = 3."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [
+          {
+            "from": "caccetta_haggkvist_statement",
+            "thm": "caccetta_haggkvist_implies_triangle"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "caccetta_haggkvist_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "card_AC",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ACₙ has n vertices",
+      "informal": {
+        "text": "",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "The circulant tournament ACₙ has exactly n vertices (n = 2m+1, the order of the underlying cyclic group ℤ/nℤ).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "card_AC",
+        "file": "theories/constructions/circulant.v",
+        "line": 129,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/constructions/circulant.v#L129",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.constructions.circulant.html#Digraph.constructions.circulant.card_AC",
+        "verbatim": "Lemma card_AC : #|AC| = n."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "card_T4",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "Order of T4 = ACₙ[C₃] is 3n",
+      "informal": {
+        "text": "T4 has order 3n",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "The tournament T4 = ACₙ[C₃] (with n = 2m+1, m ≥ 3) has exactly 3n vertices (#|T4| = n·3), since ACₙ has n vertices and C₃ has 3 and the lexicographic product multiplies orders.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "card_T4",
+        "file": "theories/applications/k4/k4_main.v",
+        "line": 67,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_main.v#L67",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k4.k4_main.html#Digraph.applications.k4.k4_main.card_T4",
+        "verbatim": "Lemma card_T4 : #|T4| = (n * 3)%N."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "card_T5",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Conj 5.10 — order of the host T₅ is n²",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
+        }
+      },
+      "decoded": "The host tournament T₅ = ACₙ[ACₙ] has exactly n² vertices (n = 2m+1), since the lexicographic product of two ACₙ's, each of order n, has n·n vertices. This is what makes distinct n yield arbitrarily large critical tournaments.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "card_T5",
+        "file": "theories/applications/k5/main.v",
+        "line": 79,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v#L79",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.main.html#Digraph.applications.k5.main.card_T5",
+        "verbatim": "Lemma card_T5 : #|T5| = (n * n)%N."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "cheng_keevash_conj1_statement",
+      "kind": "conjecture",
+      "cluster": "P1",
+      "title": "Cheng–Keevash Conjecture 1 — directed path of length 2·δ⁺",
+      "informal": {
+        "text": "Conjecture Every oriented graph with minimum outdegree $ k $ contains a directed path of length $ 2k $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/directed_cycle_of_length_twice_the_minimum_outdegree",
+          "attribution": "Thomassé (also attributed in the Caccetta-Häggkvist circle)"
+        }
+      },
+      "decoded": "For every oriented digraph D (loopless, digon-free) with 0 < #|D| and every d such that every vertex has out-degree at least d (d ≤ outdeg v for all v), the longest directed path of D has length at least 2d (2·d ≤ ell D, where ell D is the number of arcs on a longest dipath). Equivalently: minimum out-degree ≥ d forces a directed path with 2d arcs.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "cheng_keevash_conj1_statement",
+        "file": "theories/conjectures/long_dipath.v",
+        "line": 24,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/long_dipath.v#L24",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.long_dipath.html#Digraph.conjectures.long_dipath.cheng_keevash_conj1_statement",
+        "verbatim": "Definition cheng_keevash_conj1_statement : Prop :=\n  forall (D : orientedDigraph) (d : nat),\n    0 < #|D| -> (forall v : D, d <= outdeg v) -> 2 * d <= ell D."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "delta3",
+            "thm": "conj1_implies_delta3"
+          },
+          {
+            "to": "delta4",
+            "thm": "conj1_implies_delta4"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "chordal_not_dichromatic_bounded_statement",
+      "kind": "conjecture",
+      "cluster": "P2",
+      "title": "Chordal directed graphs are not χ⃗-bounded",
+      "informal": {
+        "text": "Chordal directed graphs are NOT directed-χ-bounded (arXiv:2202.01006): the class C₃ has unbounded dichromatic number, i.e. [dichromatic_bounded] FAILS on C₃.",
+        "source": {
+          "name": "arXiv 2202.01006",
+          "url": "https://arxiv.org/abs/2202.01006",
+          "attribution": "Aboulker, Bousquet, de Verclos et al. (2022)"
+        }
+      },
+      "decoded": "It is NOT the case that the chordal class C₃ is dichromatic-bounded: there is no single constant B such that every digraph in C₃ is B-dicolourable (χ⃗ ≤ B). Here C₃ is the class of digon-free digraphs with no induced transitive triangle TT₃ and no induced (chordless) directed cycle of length ≥ 4, so the dichromatic number is unbounded over this class.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "chordal_not_dichromatic_bounded_statement",
+        "file": "theories/conjectures/chi_bounded.v",
+        "line": 176,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/chi_bounded.v#L176",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.chi_bounded.html#Digraph.conjectures.chi_bounded.chordal_not_dichromatic_bounded_statement",
+        "verbatim": "Definition chordal_not_dichromatic_bounded_statement : Prop :=\n  ~ dichromatic_bounded chordal_C3."
+      },
+      "status": "solved",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "ck_conj1_delta2",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "Cheng–Keevash Conj 1 (Thomassé directed-path) — proved at δ = 2",
+      "informal": {
+        "text": "Conjecture Every oriented graph with minimum outdegree $ k $ contains a directed path of length $ 2k $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/directed_cycle_of_length_twice_the_minimum_outdegree",
+          "attribution": "Thomassé (also attributed in the Caccetta-Häggkvist circle)"
+        }
+      },
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) in which every vertex has out-degree at least 2, the longest directed simple path has length at least 4 (ℓ(D) ≥ 4). This is the δ = 2 case of the conjecture that minimum out-degree δ forces a directed path of length 2δ, proved unconditionally as a corollary of the general Lemma 7 / Theorem 4 bound.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "ck_conj1_delta2",
+        "file": "theories/applications/ck3/lemma7.v",
+        "line": 698,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/ck3/lemma7.v#L698",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.ck3.lemma7.html#Digraph.applications.ck3.lemma7.ck_conj1_delta2",
+        "verbatim": "Corollary ck_conj1_delta2 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 2 <= outdeg v) -> 4 <= ell D."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "cheng_keevash_conj1_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "ck_conj1_delta3",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "Cheng–Keevash Conj 1 (Thomassé directed-path) — proved at δ = 3",
+      "informal": {
+        "text": "Conjecture Every oriented graph with minimum outdegree $ k $ contains a directed path of length $ 2k $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/directed_cycle_of_length_twice_the_minimum_outdegree",
+          "attribution": "Thomassé (also attributed in the Caccetta-Häggkvist circle)"
+        }
+      },
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) in which every vertex has out-degree at least 3, the longest directed simple path has length at least 6 (ℓ(D) ≥ 6); ℓ(D) counts arcs. This is the δ = 3 case of the conjecture that minimum out-degree δ forces a directed path of length 2δ, proved unconditionally.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "ck_conj1_delta3",
+        "file": "theories/applications/ck3/ck3_main.v",
+        "line": 147,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/ck3/ck3_main.v#L147",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.ck3.ck3_main.html#Digraph.applications.ck3.ck3_main.ck_conj1_delta3",
+        "verbatim": "Theorem ck_conj1_delta3 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 3 <= outdeg v) -> 6 <= ell D."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "cheng_keevash_conj1_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "ck_conj1_delta3_path",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "Cheng–Keevash Conj 1 at δ = 3 — explicit 6-arc path",
+      "informal": {
+        "text": "Conjecture Every oriented graph with minimum outdegree $ k $ contains a directed path of length $ 2k $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/directed_cycle_of_length_twice_the_minimum_outdegree",
+          "attribution": "Thomassé (also attributed in the Caccetta-Häggkvist circle)"
+        }
+      },
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) in which every vertex has out-degree at least 3, there exist a start vertex x and a sequence s of 6 vertices forming a directed simple path from x (dipath x s with size s = 6); i.e. a directed simple path with 6 arcs exists. This is the path-existence (unfolded) form of the δ = 3 case of the directed-path conjecture.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "ck_conj1_delta3_path",
+        "file": "theories/applications/ck3/ck3_main.v",
+        "line": 158,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/ck3/ck3_main.v#L158",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.ck3.ck3_main.html#Digraph.applications.ck3.ck3_main.ck_conj1_delta3_path",
+        "verbatim": "Corollary ck_conj1_delta3_path (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 3 <= outdeg v) ->\n  exists x : D, exists s : seq D, dipath x s /\\ size s = 6."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "cheng_keevash_conj1_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "ck_theorem4_oriented",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "Cheng–Keevash Theorem 4 (oriented) — ℓ(D) ≥ 2δ − ⌊(δ−1)/2⌋",
+      "informal": {
+        "text": "Conjecture Every oriented graph with minimum outdegree $ k $ contains a directed path of length $ 2k $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/directed_cycle_of_length_twice_the_minimum_outdegree",
+          "attribution": "Thomassé (also attributed in the Caccetta-Häggkvist circle)"
+        }
+      },
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) and every δ such that every vertex has out-degree at least δ, the longest directed simple path satisfies ℓ(D) ≥ 2δ − ⌊(δ−1)/2⌋ (nat truncated subtraction; the ⌊·⌋/2 coded as (δ−1)./2). This is the general unconditional lower bound; at δ = 2 it gives the 2δ = 4 conjecture bound exactly (2·2 − ⌊1/2⌋ = 4), and it is the partial-progress envelope toward the full 2δ directed-path conjecture.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "ck_theorem4_oriented",
+        "file": "theories/applications/ck3/lemma7.v",
+        "line": 684,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/ck3/lemma7.v#L684",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.ck3.lemma7.html#Digraph.applications.ck3.lemma7.ck_theorem4_oriented",
+        "verbatim": "Theorem ck_theorem4_oriented (D : orientedDigraph) (delta : nat) :\n  0 < #|D| -> (forall v : D, delta <= outdeg v) ->\n  2 * delta - (delta - 1)./2 <= ell D."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "cheng_keevash_conj1_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj2_1605_statement",
+      "kind": "conjecture",
+      "cluster": "P2",
+      "title": "Aboulker–Charbit–Naserasr Conjecture 2 — Forb(H) is χ-bounded iff underlying H is a forest",
+      "informal": {
+        "text": "Conjecture 2 (1605.07411): Forb(H) is χ-bounded iff underlying H is a forest For an oriented graph [H], the class of oriented graphs with no induced copy of [H] is χ-bounded iff the underlying graph of [H] is a forest.",
+        "source": {
+          "name": "arXiv 1605.07411",
+          "url": "https://arxiv.org/abs/1605.07411",
+          "attribution": "Aboulker, Charbit, Naserasr"
+        }
+      },
+      "decoded": "For every digon-free (oriented) graph H: the class of oriented graphs that contain no induced copy of H is χ-bounded if and only if the underlying undirected graph of H is a forest. Here χ-bounded means a single binding function f bounds the ordinary undirected chromatic number χ(underlying G) ≤ f(ω(underlying G)) for every nonempty member G of the class.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj2_1605_statement",
+        "file": "theories/conjectures/chi_bounded.v",
+        "line": 82,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/chi_bounded.v#L82",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.chi_bounded.html#Digraph.conjectures.chi_bounded.conj2_1605_statement",
+        "verbatim": "Definition conj2_1605_statement : Prop :=\n  forall H : diGraphType,\n    oriented_dg H ->\n    ( chi_bounded_under (fun G => oriented_dg G /\\ ind_free H G)\n      <-> oriented_forest H )."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "conj4_1605_statement",
+            "thm": "conj2_implies_conj4"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj3_avec_Theta_statement",
+      "kind": "conjecture",
+      "cluster": "P8",
+      "title": "Conjecture 3 (Aboulker–Bousquet et al.) — a⃗(n) = Θ(√(n·ln n))",
+      "informal": {
+        "text": "There exists a least integer $\\mathrm{mader}_{\\delta^0}(TT_k)$ such that every digraph $D$ with $\\delta^0(D) \\geq \\mathrm{mader}_{\\delta^0}(TT_k)$ contains a subdivision of $TT_k$.",
+        "source": {
+          "name": "arXiv 2403.02298",
+          "url": "https://arxiv.org/abs/2403.02298",
+          "attribution": "Aboulker, Bousquet, de Verclos et al."
+        }
+      },
+      "decoded": "For every nat-sequence av that genuinely equals the extremal minimum acyclic number a⃗ (is_avec av: for each order n > 0, av n is both a lower bound on the acyclic number of every n-vertex oriented triangle-free digraph and attained by some such digraph), the real sequence n ↦ av n is Θ of env_a(n) = √(n·ln n). Θ is the two-sided Landau predicate: there exist positive reals c₁, c₂ and a threshold N with c₁·√(n·ln n) ≤ av n ≤ c₂·√(n·ln n) for all n ≥ N.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj3_avec_Theta_statement",
+        "file": "theories/conjectures/reals_growth.v",
+        "line": 165,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/reals_growth.v#L165",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.reals_growth.html#Digraph.conjectures.reals_growth.conj3_avec_Theta_statement",
+        "verbatim": "Definition conj3_avec_Theta_statement : Prop :=\n  forall av : nat -> nat,\n    is_avec av ->\n    is_Theta (fun n => INR (av n)) env_a."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj3_avec_exists_statement",
+      "kind": "conjecture",
+      "cluster": "P8",
+      "title": "Conjecture 3 (Aboulker–Bousquet et al.) — existential form: a⃗ exists and is Θ(√(n·ln n))",
+      "informal": {
+        "text": "There exists a least integer $\\mathrm{mader}_{\\delta^0}(TT_k)$ such that every digraph $D$ with $\\delta^0(D) \\geq \\mathrm{mader}_{\\delta^0}(TT_k)$ contains a subdivision of $TT_k$.",
+        "source": {
+          "name": "arXiv 2403.02298",
+          "url": "https://arxiv.org/abs/2403.02298",
+          "attribution": "Aboulker, Bousquet, de Verclos et al."
+        }
+      },
+      "decoded": "There exists a nat-sequence av that genuinely equals the extremal minimum acyclic number a⃗ (is_avec av) AND is Θ of env_a(n) = √(n·ln n) — i.e. there are positive reals c₁, c₂ and a threshold N with c₁·√(n·ln n) ≤ av n ≤ c₂·√(n·ln n) eventually. A concrete-witness reading equivalent in content to the universally-quantified form.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj3_avec_exists_statement",
+        "file": "theories/conjectures/reals_growth.v",
+        "line": 172,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/reals_growth.v#L172",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.reals_growth.html#Digraph.conjectures.reals_growth.conj3_avec_exists_statement",
+        "verbatim": "Definition conj3_avec_exists_statement : Prop :=\n  exists av : nat -> nat,\n    is_avec av /\\ is_Theta (fun n => INR (av n)) env_a."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj4_1605_statement",
+      "kind": "conjecture",
+      "cluster": "P2",
+      "title": "Aboulker–Charbit–Naserasr Conjecture 4 — every oriented star is χ-bounding",
+      "informal": {
+        "text": "Conjecture 4: every oriented star is χ-bounding. (A special case of Conjecture 2, since a star is an oriented forest; stated separately as in the paper.)",
+        "source": {
+          "name": "arXiv 1605.07411",
+          "url": "https://arxiv.org/abs/1605.07411",
+          "attribution": "Aboulker, Charbit, Naserasr"
+        }
+      },
+      "decoded": "For every oriented star S (an orientation of K_{1,t}: one centre adjacent in the underlying graph to all others, with the leaves pairwise non-adjacent), the class of oriented graphs with no induced copy of S is χ-bounded — a single binding function bounds χ(underlying G) ≤ f(ω(underlying G)) for every nonempty member. A special case of Conjecture 2, since an oriented star is an oriented forest.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj4_1605_statement",
+        "file": "theories/conjectures/chi_bounded.v",
+        "line": 100,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/chi_bounded.v#L100",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.chi_bounded.html#Digraph.conjectures.chi_bounded.conj4_1605_statement",
+        "verbatim": "Definition conj4_1605_statement : Prop :=\n  forall S : diGraphType,\n    oriented_star S ->\n    chi_bounded_under (fun G => oriented_dg G /\\ ind_free S G)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [
+          {
+            "from": "conj2_1605_statement",
+            "thm": "conj2_implies_conj4"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conj2_1605_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj4_tvec_Theta_statement",
+      "kind": "conjecture",
+      "cluster": "P8",
+      "title": "Conjecture 4 (Aboulker–Bousquet et al.) — t⃗(n) = Θ(√(n/ln n))",
+      "informal": {
+        "text": "For any oriented star $S$, $\\mathrm{Forb}(S)$ is $\\chi$-bounded.",
+        "source": {
+          "name": "arXiv 2403.02298",
+          "url": "https://arxiv.org/abs/2403.02298",
+          "attribution": "Aboulker, Bousquet, de Verclos et al."
+        }
+      },
+      "decoded": "For every nat-sequence tv that genuinely equals the extremal maximum dichromatic number t⃗ (is_tvec tv: for each order n > 0, every n-vertex oriented triangle-free digraph is tv n-dicolourable, χ⃗ ≤ tv n, and this is attained by some such digraph), the real sequence n ↦ tv n is Θ of env_t(n) = √(n/ln n). Θ here means there exist positive reals c₁, c₂ and a threshold N with c₁·√(n/ln n) ≤ tv n ≤ c₂·√(n/ln n) for all n ≥ N.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj4_tvec_Theta_statement",
+        "file": "theories/conjectures/reals_growth.v",
+        "line": 177,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/reals_growth.v#L177",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.reals_growth.html#Digraph.conjectures.reals_growth.conj4_tvec_Theta_statement",
+        "verbatim": "Definition conj4_tvec_Theta_statement : Prop :=\n  forall tv : nat -> nat,\n    is_tvec tv ->\n    is_Theta (fun n => INR (tv n)) env_t."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj4_tvec_exists_statement",
+      "kind": "conjecture",
+      "cluster": "P8",
+      "title": "Conjecture 4 (Aboulker–Bousquet et al.) — existential form: t⃗ exists and is Θ(√(n/ln n))",
+      "informal": {
+        "text": "For any oriented star $S$, $\\mathrm{Forb}(S)$ is $\\chi$-bounded.",
+        "source": {
+          "name": "arXiv 2403.02298",
+          "url": "https://arxiv.org/abs/2403.02298",
+          "attribution": "Aboulker, Bousquet, de Verclos et al."
+        }
+      },
+      "decoded": "There exists a nat-sequence tv that genuinely equals the extremal maximum dichromatic number t⃗ (is_tvec tv) AND is Θ of env_t(n) = √(n/ln n) — i.e. there are positive reals c₁, c₂ and a threshold N with c₁·√(n/ln n) ≤ tv n ≤ c₂·√(n/ln n) eventually. A concrete-witness reading equivalent in content to the universally-quantified form.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj4_tvec_exists_statement",
+        "file": "theories/conjectures/reals_growth.v",
+        "line": 182,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/reals_growth.v#L182",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.reals_growth.html#Digraph.conjectures.reals_growth.conj4_tvec_exists_statement",
+        "verbatim": "Definition conj4_tvec_exists_statement : Prop :=\n  exists tv : nat -> nat,\n    is_tvec tv /\\ is_Theta (fun n => INR (tv n)) env_t."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj5_1605_statement",
+      "kind": "conjecture",
+      "cluster": "P2",
+      "title": "Aboulker–Charbit–Naserasr Conjecture 5 — non-exceptional families of P₄-orientations are χ-bounding",
+      "informal": {
+        "text": "Conjecture 5: any non-empty family [forb] of orientations of P₄ that is neither the singleton [{→P₄}] nor the singleton [{P⁺(1,1,1)}] is χ-bounding. We encode \"[forb] is a non-empty subset of Or(P₄) that is neither exceptional singleton\" by: [forb] holds only of P₄-orientations, is inhabited, and contains a member that is neither the directed nor the alternating P₄ (this rules out both exceptional singletons).",
+        "source": {
+          "name": "arXiv 1605.07411",
+          "url": "https://arxiv.org/abs/1605.07411",
+          "attribution": "Aboulker, Charbit, Naserasr"
+        }
+      },
+      "decoded": "For every family forb of orientations of the 4-vertex path P₄ that is nonempty (some member exists) and contains a member that is neither the directed path →P₄ nor the alternating orientation P⁺(1,1,1) — which rules out both exceptional singletons — the class of oriented graphs with no induced copy of any member of forb is χ-bounded (a single f bounds χ(underlying G) ≤ f(ω(underlying G)) for every nonempty member).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj5_1605_statement",
+        "file": "theories/conjectures/chi_bounded.v",
+        "line": 145,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/chi_bounded.v#L145",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.chi_bounded.html#Digraph.conjectures.chi_bounded.conj5_1605_statement",
+        "verbatim": "Definition conj5_1605_statement : Prop :=\n  forall forb : diGraphType -> Prop,\n    (forall P : diGraphType, forb P -> P4_underlying P) ->\n    (exists P : diGraphType, forb P) ->\n    (exists P : diGraphType, forb P /\\ ~ is_dirP4 P /\\ ~ is_altP4 P) ->\n    chi_bounded_under (fun G => oriented_dg G /\\ Forb_ind forb G)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj_3_12_statement",
+      "kind": "conjecture",
+      "cluster": "P12",
+      "title": "AACL Conjecture 3.12 — bounded-twin-width tournaments are ω̄-bounded",
+      "informal": {
+        "text": "Let $k\\geq 1$. The class of tournaments with twin-width at most $k$ is $\\operatorname{\\overrightarrow{\\chi}}$-bounded.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments)"
+        }
+      },
+      "decoded": "For every k there is a binding function f_k (the existential ∃f sits inside the ∀k, so f may depend on k) such that every nonempty tournament T (0 < #|T|) whose twin-width is at most k (tww_le T k) is f_k(ω̄(T))-dicolourable, i.e. χ⃗(T) ≤ f_k(ω̄(T)) — dicolorableb T m encodes exactly χ⃗(T) ≤ m. In other words, within each bounded-twin-width class the dichromatic number is bounded by a function of the tournament clique number ω̄.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj_3_12_statement",
+        "file": "theories/conjectures/twinwidth.v",
+        "line": 177,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/twinwidth.v#L177",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.twinwidth.html#Digraph.conjectures.twinwidth.conj_3_12_statement",
+        "verbatim": "Definition conj_3_12_statement : Prop :=\n  forall k : nat,\n    exists f : nat -> nat,\n      forall T : tournament,\n        (0 < #|T|)%N -> tww_le T k -> dicolorableb T (f (omegabar T))."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "conj_3_12_classwise",
+            "thm": "conj_3_12_single_implies_classwise"
+          }
+        ],
+        "implied_by": [
+          {
+            "from": "conj_3_16_statement",
+            "thm": "conj_3_16_implies_3_12"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj_3_13_statement",
+      "kind": "conjecture",
+      "cluster": "P12",
+      "title": "AACL Conjecture 3.13 — one ordering bounding both backedge clique number and ordered twin-width",
+      "informal": {
+        "text": "There exists a function $f$, such that for every tournament $T$, there exists an ordering $\\prec^{*}$ of $V(T)$ such that:",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments)"
+        }
+      },
+      "decoded": "There is a single function f (one ∃f over all tournaments) such that every nonempty tournament T (0 < #|T|) admits an ordering p of its vertices that simultaneously bounds two quantities by f(ω̄(T)): the backedge clique number ω(T^p) (bclique p ≤ f(ω̄(T))) AND the ordered twin-width of that ordering (otww_le p (f(ω̄(T)))). Both bounds use the same value f(ω̄(T)).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj_3_13_statement",
+        "file": "theories/conjectures/twinwidth.v",
+        "line": 248,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/twinwidth.v#L248",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.twinwidth.html#Digraph.conjectures.twinwidth.conj_3_13_statement",
+        "verbatim": "Definition conj_3_13_statement : Prop :=\n  exists f : nat -> nat,\n    forall T : tournament,\n      (0 < #|T|)%N ->\n      exists p : {perm T},\n        (bclique p <= f (omegabar T))%N /\\ otww_le p (f (omegabar T))."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "conj_3_16_statement",
+            "thm": "conj_3_13_implies_3_16"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conj_3_16_statement",
+      "kind": "conjecture",
+      "cluster": "P12",
+      "title": "AACL Conjecture 3.16 — a BST-ordering bounding the backedge clique number",
+      "informal": {
+        "text": "There exists a function $f$ such that, for every tournament $T$, there exists a $BST$-ordering $\\prec$ of $T$ such:",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments)"
+        }
+      },
+      "decoded": "There is a single function f (one ∃f over all tournaments) such that every nonempty tournament T (0 < #|T|) admits an ordering p that is a BST-ordering (bst_order p) whose backedge clique number ω(T^p) is at most f(ω̄(T)) (bclique p ≤ f(ω̄(T))).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conj_3_16_statement",
+        "file": "theories/conjectures/twinwidth.v",
+        "line": 281,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/twinwidth.v#L281",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.twinwidth.html#Digraph.conjectures.twinwidth.conj_3_16_statement",
+        "verbatim": "Definition conj_3_16_statement : Prop :=\n  exists f : nat -> nat,\n    forall T : tournament,\n      (0 < #|T|)%N ->\n      exists p : {perm T},\n        bst_order p /\\ (bclique p <= f (omegabar T))%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "conj_3_12_statement",
+            "thm": "conj_3_16_implies_3_12"
+          }
+        ],
+        "implied_by": [
+          {
+            "from": "conj_3_13_statement",
+            "thm": "conj_3_13_implies_3_16"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conjecture_5_10_at_345",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Conjecture 5.10 — proved at k ∈ {3,4,5}",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For every k with 3 ≤ k ≤ 5 and every bound N, there exists a tournament T that is k-ω̄-critical (its directed clique number ω̄(T) = k and deleting any single vertex drops ω̄ to k−1) and has more than N vertices. Since N is arbitrary, this gives arbitrarily large — hence infinitely many — k-ω̄-critical tournaments for each k in {3,4,5}, establishing Conjecture 5.10 in that range.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conjecture_5_10_at_345",
+        "file": "theories/applications/unified.v",
+        "line": 66,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/unified.v#L66",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.unified.html#Digraph.applications.unified.conjecture_5_10_at_345",
+        "verbatim": "Theorem conjecture_5_10_at_345 (k : nat) : (3 <= k <= 5)%N ->\n  forall N : nat, exists T : tournament, kcritical k T /\\ (N < #|T|)%N."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conjecture_5_10_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conjecture_5_10_at_k3",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Conjecture 5.10 — proved at k = 3",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For every bound N there exists a 3-ω̄-critical tournament T (directed clique number ω̄(T) = 3, with ω̄ dropping to 2 after deleting any single vertex) on more than N vertices. As N is arbitrary this yields arbitrarily large — thus infinitely many — 3-ω̄-critical tournaments, i.e. the k = 3 case of Conjecture 5.10.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conjecture_5_10_at_k3",
+        "file": "theories/applications/unified.v",
+        "line": 33,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/unified.v#L33",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.unified.html#Digraph.applications.unified.conjecture_5_10_at_k3",
+        "verbatim": "Theorem conjecture_5_10_at_k3 (N : nat) :\n  exists T : tournament, kcritical 3 T /\\ (N < #|T|)%N."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conjecture_5_10_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conjecture_5_10_at_k4",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Conjecture 5.10 — proved at k = 4",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes"
+        }
+      },
+      "decoded": "For every bound N there exists a tournament T that is 4-ω̄-critical and has more than N vertices; hence there are arbitrarily large (infinitely many) 4-ω̄-critical tournaments. This is the k = 4 instance of Conjecture 5.10 (the witnesses being the family ACₙ[C₃]).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conjecture_5_10_at_k4",
+        "file": "theories/applications/k4/k4_main.v",
+        "line": 74,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_main.v#L74",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k4.k4_main.html#Digraph.applications.k4.k4_main.conjecture_5_10_at_k4",
+        "verbatim": "Theorem conjecture_5_10_at_k4 (N : nat) :\n  exists T : tournament, kcritical 4 T /\\ (N < #|T|)%N."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conjecture_5_10_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conjecture_5_10_at_k5",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Conj 5.10 — proved at k = 5",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
+        }
+      },
+      "decoded": "For every N there exists a tournament T that is 5-ω̄-critical (ω̄(T) = 5 and ω̄(T − v) = 4 for every vertex v) and has more than N vertices. This is the k = 5 instance of Conjecture 5.10: there are arbitrarily large (hence infinitely many) 5-ω̄-critical tournaments.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conjecture_5_10_at_k5",
+        "file": "theories/applications/k5/main.v",
+        "line": 108,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v#L108",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.main.html#Digraph.applications.k5.main.conjecture_5_10_at_k5",
+        "verbatim": "Theorem conjecture_5_10_at_k5 (N : nat) :\n  exists T : tournament, kcritical 5 T /\\ (N < #|T|)%N."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conjecture_5_10_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conjecture_5_10_statement",
+      "kind": "conjecture",
+      "cluster": "P1",
+      "title": "AACL Conjecture 5.10 — infinitely many k-ω̄-critical tournaments",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For every k ≥ 3 and every bound N, there is a tournament T that is k-ω̄-critical (kcritical k T) and has more than N vertices (N < #|T|). Because the size bound N is universally quantified, this encodes \"arbitrarily large k-ω̄-critical tournaments exist\", i.e. infinitely many up to isomorphism, for each fixed k ≥ 3.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conjecture_5_10_statement",
+        "file": "theories/conjectures/clique_cluster.v",
+        "line": 41,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/clique_cluster.v#L41",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.clique_cluster.html#Digraph.conjectures.clique_cluster.conjecture_5_10_statement",
+        "verbatim": "Definition conjecture_5_10_statement : Prop :=\n  forall k : nat, (3 <= k)%N ->\n    forall N : nat, exists T : tournament, kcritical k T /\\ (N < #|T|)%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [
+          {
+            "to": "question_5_9_statement",
+            "thm": "conj_5_10_implies_neg_Q5_9"
+          }
+        ],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "conjecture_5_8_statement",
+      "kind": "conjecture",
+      "cluster": "P1",
+      "title": "AACL Conjecture 5.8 — bounded ω̄-cluster from large ω̄ (f ≠ id weakening)",
+      "informal": {
+        "text": "Conjecture 5.8: the f ≠ id weakening — two functions f, ℓ with ω̄(T) ≥ f(k) forcing a size-≤ ℓ(k) subtournament of ω̄ ≥ k.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "There exist two functions f, ℓ : ℕ → ℕ such that for every tournament T and every k, if ω̄(T) ≥ f(k) then T has a vertex subset S of size at most ℓ(k) whose induced subtournament satisfies ω̄(sub_tournament S) ≥ k. This is the relaxed form of Question 5.9 in which the threshold on ω̄ is f(k) rather than k itself.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "conjecture_5_8_statement",
+        "file": "theories/conjectures/clique_cluster.v",
+        "line": 54,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/clique_cluster.v#L54",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.clique_cluster.html#Digraph.conjectures.clique_cluster.conjecture_5_8_statement",
+        "verbatim": "Definition conjecture_5_8_statement : Prop :=\n  exists f ell : nat -> nat,\n    forall (T : tournament) (k : nat), (f k <= ω̄(T))%N ->\n      exists S : {set T}, (#|S| <= ell k)%N /\\ (k <= ω̄(sub_tournament S))%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "dom_omega_cluster_statement",
+            "thm": "conj_5_8_implies_dom_cluster"
+          }
+        ],
+        "implied_by": [
+          {
+            "from": "question_5_9_statement",
+            "thm": "Q5_9_implies_conj_5_8"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "dom_omega_cluster_statement",
+      "kind": "conjecture",
+      "cluster": "P1",
+      "title": "AACL Conjecture 5.3 — large domination forces a bounded ω̄-cluster",
+      "informal": {
+        "text": "There exist two functions $f$ and $\\ell$ such that, for every integer $k$, every tournament $T$ with $\\operatorname{dom}(T)\\geq f(k)$ contains a subtournament $X$ with $|X|\\leq\\ell(k)$ and $\\operatorname{\\overrightarrow{\\omega}}(X)\\geq k$.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "There exist two functions f, ℓ : ℕ → ℕ such that for every tournament T and every k, if the domination number dom(T) ≥ f(k), then T has a vertex subset S of size at most ℓ(k) whose induced subtournament satisfies ω̄(sub_tournament S) ≥ k. Same bounded-witness conclusion as Conjecture 5.8 but with a domination-number hypothesis in place of the ω̄ hypothesis.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "dom_omega_cluster_statement",
+        "file": "theories/conjectures/clique_cluster.v",
+        "line": 61,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/clique_cluster.v#L61",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.clique_cluster.html#Digraph.conjectures.clique_cluster.dom_omega_cluster_statement",
+        "verbatim": "Definition dom_omega_cluster_statement : Prop :=\n  exists f ell : nat -> nat,\n    forall (T : tournament) (k : nat), (f k <= domnum T)%N ->\n      exists S : {set T}, (#|S| <= ell k)%N /\\ (k <= ω̄(sub_tournament S))%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [
+          {
+            "from": "conjecture_5_8_statement",
+            "thm": "conj_5_8_implies_dom_cluster"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "domnum_le_omegabar",
+      "kind": "proved-result",
+      "cluster": "G",
+      "title": "AACL Property 3.2 — dom(T) ≤ ω̄(T)",
+      "informal": {
+        "text": "Paper Property 3.2 — the lower-bound engine for ω̄.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For a tournament T, the domination number domnum (the least size of a set X such that every vertex outside X is beaten by some member of X) is at most ω̄(T), the tournament clique number. This is the lower-bound engine for ω̄ (Property 3.2 of Aboulker–Aubian–Charbit–Lopes).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "domnum_le_omegabar",
+        "file": "theories/invariants/domination.v",
+        "line": 114,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/domination.v#L114",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.invariants.domination.html#Digraph.invariants.domination.domnum_le_omegabar",
+        "verbatim": "Theorem domnum_le_omegabar : domnum <= ω̄(T)."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "ec_log_c6_statement",
+      "kind": "conjecture",
+      "cluster": "P8",
+      "title": "EC-log Eulerian SAD milestone (open conjecture) — explicit constant C = 6",
+      "informal": {
+        "text": "The concrete proven form ([C = 6]): instantiates the existential. This is an EDGE (Qed-closed): the [C = 6] form implies the [∃ C] milestone.",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "For every digraph D on at least 3 vertices that is Eulerian (in-degree = out-degree at every vertex), if D is k-arc-strong and the real inequality k ≥ 6·log₂(#|D|) holds (log₂ x = ln x / ln 2), then D admits a Strong Arc Decomposition. The concrete C = 6, n₀ = 3 instance of the Bang-Jensen–Yeo Eulerian logarithmic threshold; it implies the ∃C form.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "ec_log_c6_statement",
+        "file": "theories/conjectures/reals_growth.v",
+        "line": 218,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/reals_growth.v#L218",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.reals_growth.html#Digraph.conjectures.reals_growth.ec_log_c6_statement",
+        "verbatim": "Definition ec_log_c6_statement : Prop :=\n  forall (D : diGraphType) (k : nat),\n    (3 <= #|D|)%N ->\n    eulerian D ->\n    arc_strong D k ->\n    INR k >= 6 * log2 (INR #|D|) ->\n    SAD D."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "ec_log_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "ec_log_statement",
+      "kind": "conjecture",
+      "cluster": "P8",
+      "title": "EC-log Eulerian SAD milestone — there is an absolute constant C",
+      "informal": {
+        "text": "The EC-log lemma (Bang-Jensen–Yeo Eulerian logarithmic milestone): there is an absolute constant — here the proven [C = 6] with threshold order [n₀ = 3] — such that every Eulerian digraph of order [n] whose arc-strength [k] meets the REAL threshold [k ≥ 6·log₂ n] admits a Strong Arc Decomposition. Faithful encoding: arc-strength is the nat [arc_strong D k] of [sad.v] ([λ(D) ≥ k]); the comparison to the real threshold [6·log₂ n] is [INR k >= 6 * log2 (INR n)] in [%R]. We GUARD [3 <= n] (the proven [n₀]); the parameter [k] is the witnessing arc-strength. Stated existentially over the constant [c = 6] so the milestone is \"∃ C, …\", matching its statement.",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "There is a positive real constant c such that for every digraph D on at least 3 vertices that is Eulerian (in-degree = out-degree at every vertex), if D is k-arc-strong and k ≥ c·log₂(#|D|) (the comparison is over the reals, log₂ x = ln x / ln 2), then D admits a Strong Arc Decomposition. A logarithmic-arc-strength threshold guaranteeing SAD in the Eulerian regime of Bang-Jensen–Yeo, guarded by 3 ≤ #|D|.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "ec_log_statement",
+        "file": "theories/conjectures/reals_growth.v",
+        "line": 206,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/reals_growth.v#L206",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.reals_growth.html#Digraph.conjectures.reals_growth.ec_log_statement",
+        "verbatim": "Definition ec_log_statement : Prop :=\n  exists c : R,\n    0 < c /\\\n    forall (D : diGraphType) (k : nat),\n      (3 <= #|D|)%N ->\n      eulerian D ->\n      arc_strong D k ->\n      INR k >= c * log2 (INR #|D|) ->\n      SAD D."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "erdos_posa_long_dicycles_statement",
+      "kind": "conjecture",
+      "cluster": "P10",
+      "title": "Erdős–Pósa property for long directed cycles",
+      "informal": {
+        "text": "Conjecture Let $ \\ell \\geq 2 $ be an integer. For every integer $ n\\geq 0 $ , there exists an integer $ t_n=t_n(\\ell) $ such that for every digraph $ D $ , either $ D $ has a $ n $ pairwise-disjoint directed cycles of length at least $ \\ell $ , or there exists a set $ T $ of at most $ t_n $ vertices such that $ D-T $ has no directed cycles of length at least $ \\ell $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/erdos_posa_property_for_long_directed_cycles",
+          "attribution": "Birmelé, Bondy, Reed circle (directed Erdős-Pósa)"
+        }
+      },
+      "decoded": "For every length threshold ℓ ≥ 2 and every n there is a bound t (a number depending on ℓ and n but not on the digraph) such that for every digraph D, either D contains n pairwise vertex-disjoint directed cycles each of length at least ℓ (a vertex-disjoint cycle pack of size n with every member of length ≥ ℓ), or there is a set T of at most t vertices that meets every directed cycle of length ≥ ℓ (meets_long_dicycles ℓ T).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "erdos_posa_long_dicycles_statement",
+        "file": "theories/conjectures/packing.v",
+        "line": 266,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L266",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.packing.html#Digraph.conjectures.packing.erdos_posa_long_dicycles_statement",
+        "verbatim": "Definition erdos_posa_long_dicycles_statement : Prop :=\n  forall ell : nat, (2 <= ell)%N ->\n  forall n : nat, exists t : nat,\n    forall D : diGraphType,\n      (exists P : seq (seq D),\n         [/\\ cycle_pack P, vtx_disjoint_pack P, size P = n &\n             all (fun c => ell <= size c)%N P])\n      \\/\n      (exists T : {set D}, (#|T| <= t)%N /\\ meets_long_dicycles ell T)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "hoang_reed_statement",
+      "kind": "conjecture",
+      "cluster": "P10",
+      "title": "Hoàng–Reed Conjecture",
+      "informal": {
+        "text": "Conjecture Every digraph in which each vertex has outdegree at least $ k $ contains $ k $ directed cycles $ C_1, \\ldots, C_k $ such that $ C_j $ meets $ \\cup_{i=1}^{j-1}C_i $ in at most one vertex, $ 2 \\leq j \\leq k $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/hoand_reed_conjecture",
+          "attribution": "Hoàng, Reed"
+        }
+      },
+      "decoded": "For every nonempty digraph D (0 < #|D|) and every k, if every vertex has out-degree at least k (pointwise, forall v: k ≤ outdeg v), then D contains a pack P of k directed cycles (cycle_pack P, size P = k) with the intersection-forest property: for each position j > 0, the set of vertices on cycle j that also lie on some earlier cycle i < j has size at most one — i.e. each cycle meets the union of all the previous ones in at most one vertex.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "hoang_reed_statement",
+        "file": "theories/conjectures/packing.v",
+        "line": 196,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L196",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.packing.html#Digraph.conjectures.packing.hoang_reed_statement",
+        "verbatim": "Definition hoang_reed_statement : Prop :=\n  forall (D : diGraphType) (k : nat),\n    (0 < #|D|)%N ->\n    (forall v : D, (k <= outdeg v)%N) ->\n    exists P : seq (seq D),\n      [/\\ cycle_pack P,\n          size P = k &\n          (* intersection-forest: cycle #j meets the union of the earlier ones\n             in at most one vertex, for every 1 <= j < size P *)\n          forall j : 'I_(size P), (0 < j)%N ->\n            (#|[set v : D | (v \\in nth [::] P j) &&\n                 [exists i : 'I_(size P), (i < j)%N && (v \\in nth [::] P i)]]| <= 1)%N]."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "bermond_thomassen_k1",
+            "thm": "hoang_reed_implies_bermond_thomassen_k1"
+          },
+          {
+            "to": "one_cycle",
+            "thm": "hoang_reed_implies_one_cycle"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "jackson_hamilton_small_diregular_statement",
+      "kind": "conjecture",
+      "cluster": "P9",
+      "title": "Jackson's Conjecture — Hamilton cycle in small d-diregular oriented graphs",
+      "informal": {
+        "text": "An directed graph is $ k $ -diregular if every vertex has indegree and outdegree at least $ k $ . Conjecture For $ d >2 $ , every $ d $ -diregular oriented graph on at most $ 4d+1 $ vertices has a Hamilton cycle.",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/hamilton_cycle_in_small_d_diregular_graphs",
+          "attribution": "Jackson"
+        }
+      },
+      "decoded": "For every nonempty oriented (digon-free) digraph D (0 < #|D|) and every d > 2 (i.e. d ≥ 3) such that D is d-diregular (diregular D d, i.e. every vertex has in-degree EXACTLY d and out-degree EXACTLY d — not merely ≥ d) and D has at most 4d+1 vertices, there is a directed cycle whose size equals #|D|, i.e. a Hamilton directed cycle through every vertex.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "jackson_hamilton_small_diregular_statement",
+        "file": "theories/conjectures/classic_core.v",
+        "line": 105,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L105",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.jackson_hamilton_small_diregular_statement",
+        "verbatim": "Definition jackson_hamilton_small_diregular_statement : Prop :=\n  forall (D : orientedDigraph) (d : nat),\n    (0 < #|D|)%N -> 2 < d -> diregular D d -> (#|D| <= 4 * d + 1)%N ->\n    exists c : seq D, dicycle c /\\ size c = #|D|."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "kcritical2_uniq",
+      "kind": "proved-result",
+      "cluster": "G",
+      "title": "Uniqueness of the 2-ω̄-critical tournament (C₃)",
+      "informal": {
+        "text": "The explicit isomorphism C3 ≅ T sending 0,1,2 to the triangle.",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Every 2-ω̄-critical tournament T (i.e. T satisfying kcritical 2 T: ω̄(T) = 2 and deleting any single vertex drops ω̄ to 1) is digraph-isomorphic to C₃, the directed triangle. Hence C₃ is the unique 2-ω̄-critical tournament.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "kcritical2_uniq",
+        "file": "theories/invariants/critical.v",
+        "line": 124,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/critical.v#L124",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.invariants.critical.html#Digraph.invariants.critical.kcritical2_uniq",
+        "verbatim": "Theorem kcritical2_uniq : dgiso (C3 : diGraphType) T."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conjecture_5_10_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "kcritical_proper_sub",
+      "kind": "proved-result",
+      "cluster": "G",
+      "title": "Proper subtournaments of a k-ω̄-critical tournament have ω̄ ≤ k−1",
+      "informal": {
+        "text": "Proper subtournaments of critical tournaments In a k-ω̄-critical tournament every *proper* subtournament has ω̄ ≤ k − 1: it omits some vertex, hence embeds into that vertex's deletion (the Question-5.9-failure mechanism, stated once; G1 of docs/k34_dossier.md).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "For every natural number k and every k-ω̄-critical tournament T, any vertex subset S that is NOT the whole vertex set (S ≠ [set: T], a proper subset) induces a subtournament with ω̄(sub_tournament S) ≤ k−1. A proper subset omits some vertex, so it embeds into that vertex's deletion, which has ω̄ = k−1 by criticality.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "kcritical_proper_sub",
+        "file": "theories/invariants/critical.v",
+        "line": 46,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/critical.v#L46",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.invariants.critical.html#Digraph.invariants.critical.kcritical_proper_sub",
+        "verbatim": "Lemma kcritical_proper_sub (k : nat) (T : tournament) (S : {set T}) :\n  kcritical k T -> S != [set: T] -> (ω̄(sub_tournament S) <= k.-1)%N."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conjecture_5_10_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "lemma7",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "Lemma 7 (Cheng–Keevash) — dichotomy: long path or a deficient set",
+      "informal": {
+        "text": "Conjecture Every oriented graph with minimum outdegree $ k $ contains a directed path of length $ 2k $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/directed_cycle_of_length_twice_the_minimum_outdegree",
+          "attribution": "Thomassé (also attributed in the Caccetta-Häggkvist circle)"
+        }
+      },
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) and every δ with every vertex of out-degree at least δ, EITHER the longest directed simple path has length at least 2δ (ℓ(D) ≥ 2δ — the full conjecture conclusion), OR there exists a nonempty vertex set S (S ≠ ∅) of size at most δ (#|S| ≤ δ) such that every vertex v in S has at least 2δ − ℓ(D) of its out-neighbours inside S (outdeg_in S v ≥ 2δ − ℓ(D), nat truncated subtraction). The general structural lemma whose two branches drive the δ = 2 and δ = 3 results.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "lemma7",
+        "file": "theories/applications/ck3/lemma7.v",
+        "line": 646,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/ck3/lemma7.v#L646",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.ck3.lemma7.html#Digraph.applications.ck3.lemma7.lemma7",
+        "verbatim": "Theorem lemma7 (D : orientedDigraph) (delta : nat) :\n  0 < #|D| -> (forall v : D, delta <= outdeg v) ->\n  2 * delta <= ell D \\/\n  exists S : {set D},\n    [/\\ S != set0, #|S| <= delta\n      & forall v, v \\in S -> 2 * delta - ell D <= outdeg_in S v]."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "cheng_keevash_conj1_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "linial_berge_statement",
+      "kind": "conjecture",
+      "cluster": "P10",
+      "title": "Linial–Berge path-partition duality",
+      "informal": {
+        "text": "Conjecture The minimum $ k $ -norm of a path partition on a directed graph $ D $ is no more than the maximal size of an induced $ k $ -colorable subgraph.",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/linial_berge_path_partition_duality",
+          "attribution": "Berge (Linial)"
+        }
+      },
+      "decoded": "For every digraph D and every k there exist a path-partition Q of V(D) (Q partitions every vertex into vertex-disjoint directed paths, pp_partition Q) and a vertex set S inducing a subdigraph with directed chromatic number ≤ k (dicolorableb (D[S]) k, i.e. χ⃗(D[S]) ≤ k) such that the k-norm of Q — the sum over paths of min(k, number of vertices on the path) — equals |S| (pp_knorm k Q = #|S|), and this is optimal: no path-partition Q' has k-norm smaller than |S| (forall Q' path-partition, #|S| ≤ pp_knorm k Q'). In other words the minimum k-norm over path-partitions equals the maximum order of an induced χ⃗ ≤ k subdigraph.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "linial_berge_statement",
+        "file": "theories/conjectures/packing.v",
+        "line": 239,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L239",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.packing.html#Digraph.conjectures.packing.linial_berge_statement",
+        "verbatim": "Definition linial_berge_statement : Prop :=\n  forall (D : diGraphType) (k : nat),\n    exists (Q : seq (D * seq D)) (S : {set D}),\n      [/\\ (* Q is a path-partition realizing the minimum k-norm *)\n          pp_partition Q,\n          (* S induces a χ⃗ ≤ k subdigraph (a union of k acyclic sets) *)\n          dicolorableb (induced_digraph S) k,\n          (* duality: the realized k-norm equals |S| *)\n          pp_knorm k Q = #|S| &\n          (* and this is optimal: no path-partition has smaller k-norm than |S|,\n             i.e."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "long_dicycle_diregular_statement",
+      "kind": "conjecture",
+      "cluster": "P9",
+      "title": "Long directed cycles in diregular oriented graphs (Bermond–Germa–Heydemann–Sotteau)",
+      "informal": {
+        "text": "Conjecture Every strong oriented graph in which each vertex has indegree and outdegree at least $ d $ contains a directed cycle of length at least $ 2d+1 $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/long_directed_cycles_in_digraph_with_minimum_in_and_out_degree",
+          "attribution": "Bermond, Germa, Heydemann, Sotteau"
+        }
+      },
+      "decoded": "For every nonempty oriented (digon-free) digraph D (0 < #|D|) and every d ≥ 1 such that D is strongly connected and every vertex has in-degree at least d and out-degree at least d, there is a directed cycle of length at least 2d+1.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "long_dicycle_diregular_statement",
+        "file": "theories/conjectures/classic_core.v",
+        "line": 95,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L95",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.long_dicycle_diregular_statement",
+        "verbatim": "Definition long_dicycle_diregular_statement : Prop :=\n  forall (D : orientedDigraph) (d : nat),\n    (0 < #|D|)%N -> (0 < d)%N -> strongb D ->\n    (forall v : D, (d <= indeg v)%N) -> (forall v : D, (d <= outdeg v)%N) ->\n    exists c : seq D, dicycle c /\\ (2 * d + 1 <= size c)%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "m3_landmark_statement",
+      "kind": "conjecture",
+      "cluster": "P2",
+      "title": "The m(3) landmark — a triangle-free oriented graph with dichromatic number ≥ 3",
+      "informal": {
+        "text": "The m(3) landmark: there exists an oriented triangle-free graph that is NOT 2-dicolourable (its dichromatic number is at least 3) — so the least order m(3) realizing dichromatic number 3 among oriented triangle-free graphs is finite.",
+        "source": {
+          "name": "arXiv 2403.02298",
+          "url": "https://arxiv.org/abs/2403.02298",
+          "attribution": "Aboulker, Bousquet, de Verclos et al."
+        }
+      },
+      "decoded": "There exists a nonempty (0 < #|D|), digon-free digraph D whose underlying graph is triangle-free and that is NOT 2-dicolourable (its vertices cannot be split into 2 acyclic-inducing classes), so its dichromatic number is at least 3. This witnesses that the least order m(3) realizing dichromatic number 3 among oriented triangle-free graphs is finite.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "m3_landmark_statement",
+        "file": "theories/conjectures/chi_bounded.v",
+        "line": 229,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/chi_bounded.v#L229",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.chi_bounded.html#Digraph.conjectures.chi_bounded.m3_landmark_statement",
+        "verbatim": "Definition m3_landmark_statement : Prop :=\n  exists D : diGraphType,\n    [/\\ (0 < #|D|)%N, oriented_dg D, underlying_triangle_free D & ~~ dicolorableb D 2]."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [
+          {
+            "to": "2bound",
+            "thm": "m3_landmark_refutes_2bound"
+          }
+        ],
+        "refuted_by": [
+          {
+            "from": "tvec_core_statement",
+            "thm": "tvec_reaches3_implies_m3"
+          }
+        ],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "majority_3col_eulerian_statement",
+      "kind": "conjecture",
+      "cluster": "P11",
+      "title": "Majority 3-colouring of Eulerian digraphs (KOSvZW, Open Problem 3)",
+      "informal": {
+        "text": "Open Problem 3 (1608.03040): does every Eulerian digraph have a majority 3-colouring?",
+        "source": {
+          "name": "arXiv 1608.03040",
+          "url": "https://arxiv.org/abs/1608.03040",
+          "attribution": "Kreutzer, Oum, Seymour, van der Zypen, Wood (2017)"
+        }
+      },
+      "decoded": "Every Eulerian digraph D (in-degree equals out-degree at every vertex) admits a majority 3-colouring: a 3-colouring of its vertices such that at every vertex v at most half of its out-neighbours share v's own colour (2·#{w : v→w, col w = col v} ≤ outdeg v for all v). The Eulerian special case of the majority 3-colouring conjecture.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "majority_3col_eulerian_statement",
+        "file": "theories/conjectures/colouring_variants.v",
+        "line": 92,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/colouring_variants.v#L92",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.colouring_variants.html#Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement",
+        "verbatim": "Definition majority_3col_eulerian_statement : Prop :=\n  forall D : diGraphType, eulerian D ->\n    exists col : D -> 'I_3, majority_col col."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [
+          {
+            "from": "majority_3col_statement",
+            "thm": "majority_3col_implies_eulerian"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "majority_3col_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "majority_3col_statement",
+      "kind": "conjecture",
+      "cluster": "P11",
+      "title": "Majority 3-colouring Conjecture (Kreutzer–Oum–Seymour–van der Zypen–Wood, Conj 2)",
+      "informal": {
+        "text": "Conjecture 2 (1608.03040): every digraph admits a majority 3-colouring.",
+        "source": {
+          "name": "arXiv 1608.03040",
+          "url": "https://arxiv.org/abs/1608.03040",
+          "attribution": "Kreutzer, Oum, Seymour, van der Zypen, Wood (2017)"
+        }
+      },
+      "decoded": "Every digraph D admits a vertex colouring with 3 colours that is a majority colouring: at every vertex v at most half of its out-neighbours share v's own colour (encoded fraction-free as 2·#{w : v→w, col w = col v} ≤ outdeg v for all v).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "majority_3col_statement",
+        "file": "theories/conjectures/colouring_variants.v",
+        "line": 71,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/colouring_variants.v#L71",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.colouring_variants.html#Digraph.conjectures.colouring_variants.majority_3col_statement",
+        "verbatim": "Definition majority_3col_statement : Prop :=\n  forall D : diGraphType, exists col : D -> 'I_3, majority_col col."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "majority_3col_tournament_statement",
+            "thm": "majority_3col_implies_tournament"
+          },
+          {
+            "to": "majority_3col_eulerian_statement",
+            "thm": "majority_3col_implies_eulerian"
+          }
+        ],
+        "implied_by": [
+          {
+            "from": "majority_k1col_statement",
+            "thm": "majority_k1col_implies_majority_3col"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "majority_3col_tournament_statement",
+      "kind": "conjecture",
+      "cluster": "P11",
+      "title": "Majority 3-colouring of tournaments (KOSvZW, Open Problem 2)",
+      "informal": {
+        "text": "Open Problem 2 (1608.03040): does every tournament have a majority 3-colouring?",
+        "source": {
+          "name": "arXiv 1608.03040",
+          "url": "https://arxiv.org/abs/1608.03040",
+          "attribution": "Kreutzer, Oum, Seymour, van der Zypen, Wood (2017)"
+        }
+      },
+      "decoded": "Every tournament T admits a majority 3-colouring: a colouring of its vertices with 3 colours such that at every vertex v at most half of its out-neighbours share v's own colour (2·#{w : v→w, col w = col v} ≤ outdeg v for all v). The tournament special case of the majority 3-colouring conjecture.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "majority_3col_tournament_statement",
+        "file": "theories/conjectures/colouring_variants.v",
+        "line": 82,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/colouring_variants.v#L82",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.colouring_variants.html#Digraph.conjectures.colouring_variants.majority_3col_tournament_statement",
+        "verbatim": "Definition majority_3col_tournament_statement : Prop :=\n  forall T : tournament, exists col : T -> 'I_3, majority_col col."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [
+          {
+            "from": "majority_3col_statement",
+            "thm": "majority_3col_implies_tournament"
+          }
+        ],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "majority_3col_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "majority_k1col_statement",
+      "kind": "conjecture",
+      "cluster": "P11",
+      "title": "Fractional majority colouring (Kreutzer–Oum–Seymour–van der Zypen–Wood, Conj 9)",
+      "informal": {
+        "text": "Conjecture 9 (1608.03040): for every [k >= 2], every digraph admits a (k+1)-colouring with at most [(1/k)·deg⁺] same-coloured out-neighbours.",
+        "source": {
+          "name": "arXiv 1608.03040",
+          "url": "https://arxiv.org/abs/1608.03040",
+          "attribution": "Kreutzer, Oum, Seymour, van der Zypen, Wood (2017)"
+        }
+      },
+      "decoded": "For every k ≥ 2, every digraph D admits a vertex colouring with k+1 colours such that at every vertex v at most a (1/k)-fraction of its out-neighbours share v's colour (encoded fraction-free as k·#{w : v→w, col w = col v} ≤ outdeg v for all v). At k = 2 this is exactly the majority 3-colouring condition.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "majority_k1col_statement",
+        "file": "theories/conjectures/colouring_variants.v",
+        "line": 76,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/colouring_variants.v#L76",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.colouring_variants.html#Digraph.conjectures.colouring_variants.majority_k1col_statement",
+        "verbatim": "Definition majority_k1col_statement : Prop :=\n  forall (k : nat), 2 <= k ->\n    forall D : diGraphType, exists col : D -> 'I_k.+1, kmajority_col k col."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "majority_3col_statement",
+            "thm": "majority_k1col_implies_majority_3col"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "majority_3col_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "matchingFAS_iff_dw1_statement",
+      "kind": "conjecture",
+      "cluster": "P4",
+      "title": "Matching-FAS = degreewidth at most 1 (sparse-tournament fact)",
+      "informal": {
+        "text": "The sparse-tournament fact (Davot–Isenmann–Roy–Thiebaut, arXiv:2212.06007): a tournament admits a matching feedback arc set iff its degreewidth is ≤ 1. Stated as a target Prop (it is known, but stated here uniformly, not proved).",
+        "source": {
+          "name": "arXiv 2212.06007",
+          "url": "https://arxiv.org/abs/2212.06007",
+          "attribution": "Davot, Isenmann, Roy, Thiebaut"
+        }
+      },
+      "decoded": "For every tournament T, T admits a matching feedback arc set if and only if its degreewidth Δ*(T) is at most 1. A matching-FAS is an arc set meeting every directed cycle whose underlying simple graph is a matching (a forest of maximum degree at most 1: no two of its arcs share a vertex). Δ*(T) is the minimum over all vertex orders of the maximum back-degree of a vertex (realized as a genuine minimum). Stated as a Prop target — a known result of Davot–Isenmann–Roy–Thiebaut stated uniformly here, not proved.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "matchingFAS_iff_dw1_statement",
+        "file": "theories/conjectures/path_fas.v",
+        "line": 182,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/path_fas.v#L182",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.path_fas.html#Digraph.conjectures.path_fas.matchingFAS_iff_dw1_statement",
+        "verbatim": "Definition matchingFAS_iff_dw1_statement : Prop :=\n  forall T : tournament, has_matchingFAS T <-> (Delta_star T <= 1)%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "pathFAS",
+            "thm": "dw1_implies_pathFAS"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "minimal_LFO_no_infinite_statement",
+      "kind": "conjecture",
+      "cluster": "P4",
+      "title": "Infinitely many vertex-minimal LFO obstructions",
+      "informal": {
+        "text": "There is no largest vertex-minimal obstruction: for every [N] there is a vertex-minimal LFO-NO tournament on more than [N] vertices. (An infinite minimal-obstruction family would rule out a finite forbidden-subtournament characterization of Path-FAS; cf. the growing minimal-NO catalogues in path_matching_fas/docs/minimal_no_obstruction_catalogue.md.)",
+        "source": {
+          "name": "arXiv 2402.10782",
+          "url": "https://arxiv.org/abs/2402.10782",
+          "attribution": "Aboulker, Aubian, Lopes"
+        }
+      },
+      "decoded": "There are arbitrarily large vertex-minimal LFO-obstructions: for every N there is a tournament T on more than N vertices (N < #|T|) that has no linear-forest ordering, yet is vertex-minimal — deleting ANY single vertex yields a tournament that DOES have a linear-forest ordering. So the family of vertex-minimal LFO-NO tournaments is infinite, which (via the conjectured Path-FAS ⇔ LFO reduction) would rule out any finite forbidden-subtournament characterization of Path-FAS.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "minimal_LFO_no_infinite_statement",
+        "file": "theories/conjectures/path_fas.v",
+        "line": 219,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/path_fas.v#L219",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.path_fas.html#Digraph.conjectures.path_fas.minimal_LFO_no_infinite_statement",
+        "verbatim": "Definition minimal_LFO_no_infinite_statement : Prop :=\n  forall N : nat, exists T : tournament, minimal_LFO_no T /\\ (N < #|T|)%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "mono_reach_or_rainbow_statement",
+      "kind": "conjecture",
+      "cluster": "P11",
+      "title": "Monochromatic reachability or rainbow triangles (Sands–Sauer–Woodrow variant)",
+      "informal": {
+        "text": "In an edge-colored digraph, we say that a subgraph is rainbow if all its edges have distinct colors, and monochromatic if all its edges have the same color. Problem Let $ G $ be a tournament with edges colored from a set of three colors. Is it true that $ G $ must have either a rainbow directed cycle of length three or a vertex $ v $ so that every other vertex can be reached from $ v $ by a monochromatic (directed) path?",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/monochromatic_reachability_vs_rainbow_triangles",
+          "attribution": "Sands, Sauer, Woodrow (variant); posed by Bang-Jensen / Aharoni et al."
+        }
+      },
+      "decoded": "For every nonempty tournament T (0 < #|T|) whose arcs are coloured with 3 colours, either T contains a rainbow directed triangle (a directed 3-cycle a→b→c→a whose three arcs carry three distinct colours) or T has a monochromatic-reachability root: a vertex v from which every vertex w is reachable by a single-colour directed path (the colour may depend on w).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "mono_reach_or_rainbow_statement",
+        "file": "theories/conjectures/colouring_variants.v",
+        "line": 216,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/colouring_variants.v#L216",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.colouring_variants.html#Digraph.conjectures.colouring_variants.mono_reach_or_rainbow_statement",
+        "verbatim": "Definition mono_reach_or_rainbow_statement : Prop :=\n  forall (T : tournament) (c : arc_colouring T 3),\n    (0 < #|T|)%N ->\n    rainbow_triangle c \\/ exists v : T, mono_root c v."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "no_short_strong3",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "Cheng–Keevash δ = 3 endgame — no short strong 3-out-regular oriented digraph",
+      "informal": {
+        "text": "The endgame: no strong 3-outregular oriented digraph has ℓ ≤ 5",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "It is NOT the case that a nonempty (0 < #|H|), strongly connected (strongb H), oriented digraph H (no loops, no digons) in which every vertex has out-degree EXACTLY 3 has its longest directed simple path of length at most 5: such an H with ℓ(H) ≤ 5 yields a contradiction (False). The internal endgame lemma forcing ℓ(H) ≥ 6 in the strong 3-out-regular case that underlies the δ = 3 theorem.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "no_short_strong3",
+        "file": "theories/applications/ck3/ck3_main.v",
+        "line": 28,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/ck3/ck3_main.v#L28",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.ck3.ck3_main.html#Digraph.applications.ck3.ck3_main.no_short_strong3",
+        "verbatim": "Lemma no_short_strong3 (H : orientedDigraph) :\n  (forall v : H, outdeg v = 3) -> 0 < #|H| -> strongb H ->\n  ell H <= 5 -> False."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_AC",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ω̄(ACₙ) = 3",
+      "informal": {
+        "text": "ω̄(ACₙ) = 3",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "For m ≥ 3 (ACₙ a circulant tournament on n = 2m+1 ≥ 7 vertices), the directed clique number of ACₙ equals 3.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_AC",
+        "file": "theories/applications/k5/acn_base.v",
+        "line": 374,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/acn_base.v#L374",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.acn_base.html#Digraph.applications.k5.acn_base.omegabar_AC",
+        "verbatim": "Theorem omegabar_AC : (3 <= m)%N -> ω̄((AC m' : tournament)) = 3."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_AC_del",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ω̄(ACₙ − v) = 2",
+      "informal": {
+        "text": "",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "For m ≥ 3 and any vertex v of ACₙ, deleting v from the circulant tournament ACₙ yields a tournament with directed clique number ω̄ = 2.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_AC_del",
+        "file": "theories/applications/k5/acn_base.v",
+        "line": 423,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/acn_base.v#L423",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.acn_base.html#Digraph.applications.k5.acn_base.omegabar_AC_del",
+        "verbatim": "Theorem omegabar_AC_del (v : ACm) :\n  (3 <= m)%N -> ω̄(del_tournament v) = 2."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_T4",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ω̄(T4 = ACₙ[C₃]) = 4",
+      "informal": {
+        "text": "",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "The tournament T4 = ACₙ[C₃] (with n = 2m+1, m ≥ 3) has ω̄(T4) = 4, where ω̄ is the AACL clique-number invariant of a tournament. This is the value pinned for the 4-ω̄-criticality argument.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_T4",
+        "file": "theories/applications/k4/k4_value.v",
+        "line": 511,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_value.v#L511",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k4.k4_value.html#Digraph.applications.k4.k4_value.omegabar_T4",
+        "verbatim": "Theorem omegabar_T4 : ω̄(T4) = 4."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_T4_del",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ω̄(T4 − v) = 3 for every vertex",
+      "informal": {
+        "text": "ω̄(T4 − v) = 3 for every vertex v",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "For every vertex v of T4 = ACₙ[C₃] (n = 2m+1, m ≥ 3), the tournament obtained by deleting v has ω̄(T4 − v) = 3. (One value suffices for all v by vertex-transitivity of T4.) This is the criticality drop feeding T4_kcritical4.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_T4_del",
+        "file": "theories/applications/k4/k4_main.v",
+        "line": 51,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_main.v#L51",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k4.k4_main.html#Digraph.applications.k4.k4_main.omegabar_T4_del",
+        "verbatim": "Theorem omegabar_T4_del (v : T4) : ω̄(del_tournament v) = 3."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_T5",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ω̄(T₅) = 5",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
+        }
+      },
+      "decoded": "The directed clique number of the host tournament T₅ = ACₙ[ACₙ] (odd n = 2m+1, m ≥ 3) is exactly 5. This is the upper component of the criticality witness.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_T5",
+        "file": "theories/applications/k5/main.v",
+        "line": 54,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v#L54",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.main.html#Digraph.applications.k5.main.omegabar_T5",
+        "verbatim": "Theorem omegabar_T5 : ω̄(T5) = 5."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_T5_del",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "ω̄(T₅ − v) = 4 for every vertex v",
+      "informal": {
+        "text": "For every integer $k\\geq 3$, there is an infinite number of $k$-$\\operatorname{\\overrightarrow{\\omega}}$-critical tournaments.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
+        }
+      },
+      "decoded": "Deleting any single vertex v from the host tournament T₅ = ACₙ[ACₙ] yields a tournament with directed clique number exactly 4. By vertex-transitivity of the product, the value at one vertex spreads to all, so every single-vertex deletion drops ω̄ from 5 to 4.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_T5_del",
+        "file": "theories/applications/k5/main.v",
+        "line": 62,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v#L62",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.main.html#Digraph.applications.k5.main.omegabar_T5_del",
+        "verbatim": "Theorem omegabar_T5_del (v : T5) : ω̄(del_tournament v) = 4."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_del_vt",
+      "kind": "proved-result",
+      "cluster": "G",
+      "title": "Vertex-deletion of ω̄ is vertex-independent on vertex-transitive tournaments",
+      "informal": {
+        "text": "The marquee theorem: on a vertex-transitive tournament, ω̄ after deletion is the same whichever vertex is deleted.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "If a tournament T is vertex-transitive (vertex_transitiveb T), then ω̄(del_tournament u) = ω̄(del_tournament v) for all vertices u, v — deleting any vertex leaves a subtournament with the same clique number, regardless of which vertex is removed.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_del_vt",
+        "file": "theories/invariants_advanced/transitive.v",
+        "line": 47,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants_advanced/transitive.v#L47",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.invariants_advanced.transitive.html#Digraph.invariants_advanced.transitive.omegabar_del_vt",
+        "verbatim": "Theorem omegabar_del_vt :\n  vertex_transitiveb (T : diGraphType) ->\n  forall u v : T, ω̄(del_tournament u) = ω̄(del_tournament v)."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_lexprod_ge",
+      "kind": "proved-result",
+      "cluster": "G",
+      "title": "ω̄ of a lexicographic substitution — lower bound",
+      "informal": {
+        "text": "The substitution lower bound: ω̄(S[H]) ≥ ω̄(S) + ω̄(H) − 1.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For tournaments S and H, the lexicographic substitution S[H] (vertices are pairs (s,h), with (s₁,h₁) → (s₂,h₂) iff s₁ → s₂, or s₁ = s₂ and h₁ → h₂) satisfies ω̄(S) + ω̄(H) ≤ ω̄(S[H]) + 1, i.e. ω̄(S[H]) ≥ ω̄(S) + ω̄(H) − 1. The clique number is super-additive under substitution.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_lexprod_ge",
+        "file": "theories/invariants_advanced/substitution.v",
+        "line": 168,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants_advanced/substitution.v#L168",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.invariants_advanced.substitution.html#Digraph.invariants_advanced.substitution.omegabar_lexprod_ge",
+        "verbatim": "Theorem omegabar_lexprod_ge :\n  ω̄(S) + ω̄(H) <= ω̄(lexprod_tournament S H) + 1."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "omegabar_transb",
+      "kind": "proved-result",
+      "cluster": "G",
+      "title": "ω̄(T) = 1 if and only if T is transitive",
+      "informal": {
+        "text": "",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For every nonempty tournament T (0 < #|T|), ω̄(T) equals 1 if and only if T is transitive (transb T, i.e. the arc relation is transitive). Equivalently, transitive tournaments are exactly the ones with clique number 1.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "omegabar_transb",
+        "file": "theories/invariants/omegabar.v",
+        "line": 74,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants/omegabar.v#L74",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.invariants.omegabar.html#Digraph.invariants.omegabar.omegabar_transb",
+        "verbatim": "Lemma omegabar_transb : 0 < #|T| -> (ω̄(T) == 1) = transb T."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "oriented_chromatic_planar_bounded_statement",
+      "kind": "conjecture",
+      "cluster": "P11",
+      "title": "Oriented chromatic number of planar graphs is bounded (Courcelle; Sopena)",
+      "informal": {
+        "text": "An oriented colouring of an oriented graph is assignment $ c $ of colours to the vertices such that no two arcs receive ordered pairs of colours $ (c_1,c_2) $ and $ (c_2,c_1) $ . It is equivalent to a homomorphism of the digraph onto some tournament of order $ k $ . Problem What is the maximal possible oriented chromatic number of an oriented planar graph?",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/oriented_chromatic_number_of_planar_graphs",
+          "attribution": "Courcelle; Sopena"
+        }
+      },
+      "decoded": "There is a single number k such that every loopless digraph D whose underlying simple graph is planar (in the Wagner/minor sense: no K₅ and no K₃,₃ minor) admits an oriented k-colouring, encoded as a digraph homomorphism (arc-preserving map, not required surjective) from D to some tournament on exactly k vertices. The bound k is uniform over the whole class. Note: the formal statement quantifies over every loopless digraph with planar underlying graph (not only orientations); there is no 0 < #|D| nonemptiness guard.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "oriented_chromatic_planar_bounded_statement",
+        "file": "theories/conjectures/colouring_variants.v",
+        "line": 167,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/colouring_variants.v#L167",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.colouring_variants.html#Digraph.conjectures.colouring_variants.oriented_chromatic_planar_bounded_statement",
+        "verbatim": "Definition oriented_chromatic_planar_bounded_statement : Prop :=\n  exists k : nat,\n    forall (D : diGraphType) (llD : loopless D),\n      planar_sg (underlyingG llD) -> oriented_kcolouring D k."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "pathFAS_iff_LFO_statement",
+      "kind": "conjecture",
+      "cluster": "P4",
+      "title": "Path-FAS = linear-forest ordering (the LFO reduction)",
+      "informal": {
+        "text": "The reduction (path_matching_fas/docs/path_fas.md): a tournament has a path-shaped feedback arc set iff some vertex order has a linear-forest back-arc graph. Stated as the formalization target (its proof is the open reduction).",
+        "source": {
+          "name": "arXiv 2402.10782",
+          "url": "https://arxiv.org/abs/2402.10782",
+          "attribution": "Aboulker, Aubian, Lopes (Problem 4.4)"
+        }
+      },
+      "decoded": "For every tournament T, T has a path-shaped feedback arc set if and only if T has a linear-forest ordering. The left side (has_pathFAS) asks for a set F of genuine arcs that meets every directed cycle and whose underlying simple graph (vertices adjacent iff F has an arc between them in either direction) is a linear forest — acyclic with every vertex of degree at most 2. The right side (has_LFO) asks for a vertex order whose back-arc graph is such a linear forest. Stated as a Prop target; its proof is the open reduction.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "pathFAS_iff_LFO_statement",
+        "file": "theories/conjectures/path_fas.v",
+        "line": 164,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/path_fas.v#L164",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.path_fas.html#Digraph.conjectures.path_fas.pathFAS_iff_LFO_statement",
+        "verbatim": "Definition pathFAS_iff_LFO_statement : Prop :=\n  forall T : tournament, has_pathFAS T <-> has_LFO T."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "prob6_unvd_statement",
+      "kind": "conjecture",
+      "cluster": "P8",
+      "title": "Problem 6 (Aboulker–Bang-Jensen et al.) — bounded-mad ⇒ polynomial unavoidability bound",
+      "informal": {
+        "text": "Let $\\alpha$ be a positive real number. Does there exist a polynomial $P_{\\alpha}$ such that $\\operatorname{unvd}(D)\\leqslant P_{\\alpha}(|V(D)|)$ for every digraph with maximum average degree at most $\\alpha$?",
+        "source": {
+          "name": "arXiv 2410.23566",
+          "url": "https://arxiv.org/abs/2410.23566",
+          "attribution": "Aboulker, Bang-Jensen, Bousquet, Charbit, Havet et al."
+        }
+      },
+      "decoded": "For every rational bound α, there exist nat coefficients a, d, b such that every nonempty digraph D (0 < #|D|) whose maximum average degree is at most α has unavoidability number nD bounded by the polynomial a·#|D|^d + b (here nD is pinned via the unvd relation: the least N such that every N-vertex tournament contains D). Faithfully encodes 'there exists a polynomial P_α with unvd(D) ≤ P_α(|V(D)|)' for bounded-mad digraphs, with the polynomial given concretely by coefficients a, d, b.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "prob6_unvd_statement",
+        "file": "theories/conjectures/reals_growth.v",
+        "line": 238,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/reals_growth.v#L238",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.reals_growth.html#Digraph.conjectures.reals_growth.prob6_unvd_statement",
+        "verbatim": "Definition prob6_unvd_statement : Prop := unvd.prob_6."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "question_5_9_fails_at_k3",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Question 5.9 — refuted at k = 3",
+      "informal": {
+        "text": "Is there a function $\\ell$ such that, for every tournament $T$, if $\\operatorname{\\overrightarrow{\\omega}}(T)\\geq k$, then $T$ has a subtournament $A$ such that $|A|\\leq\\ell(k)$ and $\\operatorname{\\overrightarrow{\\omega}}(A)\\geq k$.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For every bound L there exists a 3-ω̄-critical tournament T with more than L vertices such that the only subtournament S with ω̄(sub_tournament S) ≥ 3 is the whole vertex set T itself. So T witnesses ω̄ ≥ 3 only via an arbitrarily large subtournament, refuting the k = 3 case of Question 5.9 (which asked for a bounded-size, ℓ(k)-bounded, subtournament certifying ω̄ ≥ k).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "question_5_9_fails_at_k3",
+        "file": "theories/applications/unified.v",
+        "line": 47,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/unified.v#L47",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.unified.html#Digraph.applications.unified.question_5_9_fails_at_k3",
+        "verbatim": "Theorem question_5_9_fails_at_k3 (L : nat) :\n  exists T : tournament,\n    [/\\ kcritical 3 T, (L < #|T|)%N\n      & forall S : {set T}, (3 <= ω̄(sub_tournament S))%N -> S = [set: T]]."
+      },
+      "status": "refuted",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "question_5_9_fails_at_k4",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Question 5.9 fails at k = 4",
+      "informal": {
+        "text": "Is there a function $\\ell$ such that, for every tournament $T$, if $\\operatorname{\\overrightarrow{\\omega}}(T)\\geq k$, then $T$ has a subtournament $A$ such that $|A|\\leq\\ell(k)$ and $\\operatorname{\\overrightarrow{\\omega}}(A)\\geq k$.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes"
+        }
+      },
+      "decoded": "For every bound L there is a tournament T that is 4-ω̄-critical, has more than L vertices, and in which the ONLY subtournament S with ω̄(S) ≥ 4 is the whole tournament (S = the full vertex set). So no subtournament strictly smaller than T attains ω̄ ≥ 4; since T can be made arbitrarily large, there is no bounded-size witness ℓ(4), refuting Question 5.9 at k = 4.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "question_5_9_fails_at_k4",
+        "file": "theories/applications/k4/k4_main.v",
+        "line": 89,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k4/k4_main.v#L89",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k4.k4_main.html#Digraph.applications.k4.k4_main.question_5_9_fails_at_k4",
+        "verbatim": "Theorem question_5_9_fails_at_k4 (L : nat) :\n  exists T : tournament,\n    [/\\ kcritical 4 T, (L < #|T|)%N\n      & forall S : {set T}, (4 <= ω̄(sub_tournament S))%N -> S = [set: T]]."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "question_5_9_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "question_5_9_fails_at_k5",
+      "kind": "proved-result",
+      "cluster": "P1",
+      "title": "AACL Question 5.9 fails at k = 5",
+      "informal": {
+        "text": "Is there a function $\\ell$ such that, for every tournament $T$, if $\\operatorname{\\overrightarrow{\\omega}}(T)\\geq k$, then $T$ has a subtournament $A$ such that $|A|\\leq\\ell(k)$ and $\\operatorname{\\overrightarrow{\\omega}}(A)\\geq k$.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (Clique number of tournaments, 2023)"
+        }
+      },
+      "decoded": "For every L there exists a tournament T that is 5-ω̄-critical, has more than L vertices, and whose ONLY subtournament S with ω̄ ≥ 5 is the whole tournament (S = the full vertex set). So there is no bound ℓ(5): one cannot witness ω̄ ≥ 5 inside a subtournament of bounded size, which is exactly what Question 5.9 asks for at k = 5 — hence Question 5.9 (the existence of such a bounding function ℓ) is NOT the case at k = 5.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "question_5_9_fails_at_k5",
+        "file": "theories/applications/k5/main.v",
+        "line": 127,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/applications/k5/main.v#L127",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.applications.k5.main.html#Digraph.applications.k5.main.question_5_9_fails_at_k5",
+        "verbatim": "Theorem question_5_9_fails_at_k5 (L : nat) :\n  exists T : tournament,\n    [/\\ kcritical 5 T, (L < #|T|)%N\n      & forall S : {set T}, (5 <= ω̄(sub_tournament S))%N -> S = [set: T]]."
+      },
+      "status": "open",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "question_5_9_statement",
+      "kind": "conjecture",
+      "cluster": "P1",
+      "title": "AACL Question 5.9 — compact ω̄-cluster (f = id form)",
+      "informal": {
+        "text": "Is there a function $\\ell$ such that, for every tournament $T$, if $\\operatorname{\\overrightarrow{\\omega}}(T)\\geq k$, then $T$ has a subtournament $A$ such that $|A|\\leq\\ell(k)$ and $\\operatorname{\\overrightarrow{\\omega}}(A)\\geq k$.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "There exists a single function ℓ : ℕ → ℕ such that for every tournament T and every k, if ω̄(T) ≥ k then T has a vertex subset S of size at most ℓ(k) whose induced subtournament already satisfies ω̄(sub_tournament S) ≥ k. This is the f = id (threshold exactly k) strengthening of Conjecture 5.8; Conjecture 5.10 refutes it.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "question_5_9_statement",
+        "file": "theories/conjectures/clique_cluster.v",
+        "line": 47,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/clique_cluster.v#L47",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.clique_cluster.html#Digraph.conjectures.clique_cluster.question_5_9_statement",
+        "verbatim": "Definition question_5_9_statement : Prop :=\n  exists ell : nat -> nat,\n    forall (T : tournament) (k : nat), (k <= ω̄(T))%N ->\n      exists S : {set T}, (#|S| <= ell k)%N /\\ (k <= ω̄(sub_tournament S))%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [
+          {
+            "to": "conjecture_5_8_statement",
+            "thm": "Q5_9_implies_conj_5_8"
+          }
+        ],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [
+          {
+            "from": "conjecture_5_10_statement",
+            "thm": "conj_5_10_implies_neg_Q5_9"
+          }
+        ],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "sands_sauer_woodrow_statement",
+      "kind": "conjecture",
+      "cluster": "P11",
+      "title": "Sands–Sauer–Woodrow monochromatic reachability (arc-coloured digraphs)",
+      "informal": {
+        "text": "Conjecture For every $ k $ , there exists an integer $ f(k) $ such that if $ D $ is a digraph whose arcs are colored with $ k $ colors, then $ D $ has a $ S $ set which is the union of $ f(k) $ stables sets so that every vertex has a monochromatic path to some vertex in $ S $ .",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/monochromatoc_reachability_in_arc_colored_digraphs",
+          "attribution": "Sands, Sauer, Woodrow (generalization)"
+        }
+      },
+      "decoded": "For every number of colours k there is a bound f such that every k-arc-coloured digraph D has a vertex set S which is a union of at most f stable sets and such that every vertex v of D reaches some vertex of S by a monochromatic directed path (a path whose arcs all carry one colour; the colour and target may depend on v).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "sands_sauer_woodrow_statement",
+        "file": "theories/conjectures/colouring_variants.v",
+        "line": 234,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/colouring_variants.v#L234",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.colouring_variants.html#Digraph.conjectures.colouring_variants.sands_sauer_woodrow_statement",
+        "verbatim": "Definition sands_sauer_woodrow_statement : Prop :=\n  forall k : nat, exists f : nat,\n    forall (D : diGraphType) (c : arc_colouring D k),\n      exists S : {set D},\n        [/\\ union_of_stables f S\n          & forall v : D, exists2 s : D, s \\in S & mono_reach_any c v s]."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "seymour_second_neighbourhood_statement",
+      "kind": "conjecture",
+      "cluster": "P9",
+      "title": "Seymour's Second Neighbourhood Conjecture",
+      "informal": {
+        "text": "Conjecture Any oriented graph has a vertex whose outdegree is at most its second outdegree.",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/seymours_second_neighbourhood_conjecture",
+          "attribution": "Seymour"
+        }
+      },
+      "decoded": "Every nonempty oriented (digon-free) digraph D (0 < #|D|) has a \"Seymour vertex\": there exists a vertex v whose first out-neighbourhood is no larger than its second out-neighbourhood, i.e. outdeg(v) ≤ #|Nout2(v)|, where Nout2(v) is the set of vertices reachable from v by a directed path of length exactly 2 (and not already out-neighbours of v).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "seymour_second_neighbourhood_statement",
+        "file": "theories/conjectures/classic_core.v",
+        "line": 70,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L70",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.seymour_second_neighbourhood_statement",
+        "verbatim": "Definition seymour_second_neighbourhood_statement : Prop :=\n  forall D : orientedDigraph,\n    (0 < #|D|)%N -> exists v : D, (outdeg v <= #|Nout2 v|)%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "splitting_min_outdegree_statement",
+      "kind": "conjecture",
+      "cluster": "P9",
+      "title": "Splitting a digraph with minimum out-degree constraints (Alon; Thomassen)",
+      "informal": {
+        "text": "Problem Is there a minimum integer $ f(d) $ such that the vertices of any digraph with minimum outdegree $ d $ can be partitioned into two classes so that the minimum outdegree of the subgraph induced by each class is at least $ d $ ?",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/splitting_a_digraph_with_minimum_outdegree_constraints",
+          "attribution": "Alon; Thomassen"
+        }
+      },
+      "decoded": "There is a function f : nat → nat such that for every digraph D and every d, if every vertex has out-degree at least f(d), then the vertex set splits into a proper bipartition (V1 nonempty and not all of D, with complement ~:V1) in which each part induces minimum out-degree at least d — every v in V1 has outdeg_in(V1, v) ≥ d, and every v outside V1 has outdeg_in(~:V1, v) ≥ d, where outdeg_in(A,v) counts only arcs whose head lies in A.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "splitting_min_outdegree_statement",
+        "file": "theories/conjectures/classic_core.v",
+        "line": 116,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L116",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.splitting_min_outdegree_statement",
+        "verbatim": "Definition splitting_min_outdegree_statement : Prop :=\n  exists f : nat -> nat,\n    forall (D : diGraphType) (d : nat),\n      (forall v : D, (f d <= outdeg v)%N) ->\n      exists V1 : {set D},\n        [/\\ (* a PROPER bipartition: both parts nonempty (without this, V1 := setT makes\n               the complement-side constraint vacuous, trivializing the statement) *)\n            V1 != set0,\n            V1 != [set: D],\n            (forall v : D, v \\in V1 -> (d <= outdeg_in V1 v)%N)\n          & (forall v : D, v \\notin V1 -> (d <= outdeg_in (~: V1) v)%N)]."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "stable_meeting_longest_dipaths_statement",
+      "kind": "conjecture",
+      "cluster": "P9",
+      "title": "Stable set meeting all longest directed paths (Laborde–Payan–Xuong)",
+      "informal": {
+        "text": "Conjecture Every digraph has a stable set meeting all longest directed paths",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/stable_set_meeting_all_longest_directed_paths",
+          "attribution": "Laborde, Payan, Xuong"
+        }
+      },
+      "decoded": "Every digraph D (no nonemptiness guard) has a stable set S (an independent set: no two of its vertices are joined by an arc in either direction) that meets every longest directed path — for every directed path x :: s whose LENGTH (number of arcs, size s) attains the maximum ell(D) = max over dipaths of size s (so the path has ell(D) arcs and ell(D)+1 vertices, NOT ell(D) vertices), some vertex of S lies on that path (v ∈ x :: s).",
+      "decoded_authored": true,
+      "formal": {
+        "name": "stable_meeting_longest_dipaths_statement",
+        "file": "theories/conjectures/classic_core.v",
+        "line": 135,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L135",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.stable_meeting_longest_dipaths_statement",
+        "verbatim": "Definition stable_meeting_longest_dipaths_statement : Prop :=\n  forall D : diGraphType,\n    exists S : {set D}, stable S /\\\n      forall (x : D) (s : seq D), dipath x s -> size s = ell D ->\n        exists2 v : D, v \\in S & v \\in x :: s."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "tvec_core_statement",
+      "kind": "conjecture",
+      "cluster": "P2",
+      "title": "Maximum dichromatic number of oriented triangle-free graphs — combinatorial core (t⃗)",
+      "informal": {
+        "text": "For any oriented star $S$, $\\mathrm{Forb}(S)$ is $\\chi$-bounded.",
+        "source": {
+          "name": "arXiv 2403.02298",
+          "url": "https://arxiv.org/abs/2403.02298",
+          "attribution": "Aboulker, Bousquet, de Verclos et al."
+        }
+      },
+      "decoded": "There is a sequence h : nat -> nat such that, for every order n > 0: (upper bound) every digon-free digraph D on exactly n vertices with triangle-free underlying graph is h(n)-dicolourable (χ⃗(D) ≤ h(n)); and (attainment) some such order-n graph is NOT (h(n)−1)-dicolourable, pinning h(n) to the exact maximum dichromatic number t⃗(n). This is the combinatorial core of the Θ(√(n/log n)) conjecture, with the asymptotic envelope abstracted into the existence of such a binding sequence h.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "tvec_core_statement",
+        "file": "theories/conjectures/chi_bounded.v",
+        "line": 212,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/chi_bounded.v#L212",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.chi_bounded.html#Digraph.conjectures.chi_bounded.tvec_core_statement",
+        "verbatim": "Definition tvec_core_statement : Prop :=\n  exists h : nat -> nat,\n    forall n : nat, (0 < n)%N ->\n      (* upper bound: every order-n oriented triangle-free D is h n-dicolourable *)\n      (forall D : diGraphType,\n         #|D| = n -> oriented_dg D -> underlying_triangle_free D ->\n         dicolorableb D (h n)) /\\\n      (* attained — pins h to the MAXIMUM t⃗(n): some order-n such D is not\n         (h n − 1)-dicolourable (without the upper bound, h := 1 makes (h n).-1 = 0 and\n         the clause holds vacuously)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [
+          {
+            "to": "m3_landmark_statement",
+            "thm": "tvec_reaches3_implies_m3"
+          }
+        ],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "vt_kcritical",
+      "kind": "proved-result",
+      "cluster": "G",
+      "title": "k-ω̄-criticality of a vertex-transitive tournament reduces to one deletion",
+      "informal": {
+        "text": "Hence k-ω̄-criticality reduces to a single deletion.",
+        "source": {
+          "name": "arXiv 2310.04265",
+          "url": "https://arxiv.org/abs/2310.04265",
+          "attribution": "Aboulker, Aubian, Charbit, Lopes (2023)"
+        }
+      },
+      "decoded": "For a vertex-transitive tournament T (vertex_transitiveb T) and any fixed vertex v₀, T is k-ω̄-critical if and only if ω̄(T) = k and ω̄(del_tournament v₀) = k−1. Vertex-transitivity makes all single-vertex deletions interchangeable, so the universally-quantified deletion test in the definition of kcritical collapses to a single arbitrary deletion at v₀.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "vt_kcritical",
+        "file": "theories/invariants_advanced/transitive.v",
+        "line": 57,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/invariants_advanced/transitive.v#L57",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.invariants_advanced.transitive.html#Digraph.invariants_advanced.transitive.vt_kcritical",
+        "verbatim": "Theorem vt_kcritical (k : nat) (v0 : T) :\n  vertex_transitiveb (T : diGraphType) ->\n  kcritical k T = (ω̄(T) == k) && (ω̄(del_tournament v0) == k.-1)."
+      },
+      "status": "proved",
+      "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [
+        "conjecture_5_10_statement"
+      ],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "woodall_statement",
+      "kind": "conjecture",
+      "cluster": "P10",
+      "title": "Woodall's Conjecture (directed Lucchesi–Younger)",
+      "informal": {
+        "text": "Conjecture If $ G $ is a directed graph with smallest directed cut of size $ k $ , then $ G $ has $ k $ disjoint dijoins.",
+        "source": {
+          "name": "OPG",
+          "url": "http://www.openproblemgarden.org/op/woodalls_conjecture",
+          "attribution": "Woodall"
+        }
+      },
+      "decoded": "For every digraph D and every k, if the minimum dicut size is k — encoded as: some one-way set B (nonempty proper set with no arc entering it) has dicut size exactly k, and every one-way set has dicut size at least k — then there exist k dijoins (arc selectors each meeting the dicut of every one-way set) that are pairwise arc-disjoint (all dijoin Js, size Js = k, and for all i ≠ j the i-th and j-th selectors share no arc). I.e. the minimum dicut size equals the maximum number of arc-disjoint dijoins.",
+      "decoded_authored": true,
+      "formal": {
+        "name": "woodall_statement",
+        "file": "theories/conjectures/packing.v",
+        "line": 217,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L217",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.packing.html#Digraph.conjectures.packing.woodall_statement",
+        "verbatim": "Definition woodall_statement : Prop :=\n  forall (D : diGraphType) (k : nat),\n    (exists B : {set D}, oneway B /\\ dicut_size B = k) ->\n    (forall B : {set D}, oneway B -> (k <= dicut_size B)%N) ->\n    exists Js : seq (D -> {set D}),\n      [/\\ all dijoin Js,\n          size Js = k &\n          (* pairwise arc-disjoint *)\n          [forall i : 'I_(size Js), forall j : 'I_(size Js),\n             (i != j) ==>\n             arc_disjoint_sel (nth (fun _ => set0) Js i) (nth (fun _ => set0) Js j)]]."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounding": [],
+      "faithfulness": ""
+    }
+  ]
+}

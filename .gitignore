@@ -41,3 +41,6 @@ rocq_mcp_cache_*.v
 # website build outputs
 blueprint/src/web/
 blueprint/src/print/
+
+# transient correspondence authoring fragments (merged into curated.json)
+docs/correspondence/frag_*.json
