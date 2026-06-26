@@ -463,8 +463,8 @@
    ],
    "rocq_idiom": "forall G, planar G -> exists S, induced_forest G S /\\ |S| >= n/2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1694,8 +1694,8 @@
    ],
    "rocq_idiom": "max over G = union of two planar graphs of chi G (thickness-2 chromatic number)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3576,8 +3576,8 @@
    ],
    "rocq_idiom": "forall planar G, chi(G^2) <= bound(Delta(G)) by cases on Delta",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6830,8 +6830,8 @@
    ],
    "rocq_idiom": "forall planar G, exists 5-colouring, any k classes induce (k-1)-degenerate graph",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

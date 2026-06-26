@@ -3,12 +3,14 @@
  "packages": [
   "chromatic-theory",
   "cycle-theory",
+  "graph-theory-misc",
   "hamiltonicity-theory",
   "homomorphism-theory",
   "hypergraph-theory",
   "minor-theory",
   "packing-theory",
-  "reconstruction-theory"
+  "reconstruction-theory",
+  "topological-graph-theory"
  ],
  "totals": {
   "edges": 20,

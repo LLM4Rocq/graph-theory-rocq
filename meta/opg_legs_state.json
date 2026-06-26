@@ -881,6 +881,46 @@
       "audit_page": "todo",
       "commit": "a05c5cf",
       "package": "hypergraph-theory"
+    },
+    "large_induced_forest_in_a_planar_graph": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "598a8b8",
+      "package": "topological-graph-theory",
+      "note": "G2-blocked: abstract is_planar"
+    },
+    "earth_moon_problem": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "598a8b8",
+      "package": "topological-graph-theory",
+      "note": "G2-blocked: thickness-2 via union_of_two_planar (abstract is_planar)"
+    },
+    "colouring_the_square_of_a_planar_graph": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "598a8b8",
+      "package": "topological-graph-theory",
+      "note": "G2-blocked: abstract is_planar (uses base graph_power 2)"
+    },
+    "degenerate_colorings_of_planar_graphs": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "598a8b8",
+      "package": "topological-graph-theory",
+      "note": "G2-blocked: abstract is_planar"
     }
   }
 }
