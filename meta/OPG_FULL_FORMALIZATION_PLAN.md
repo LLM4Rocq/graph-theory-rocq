@@ -499,8 +499,12 @@ the large finite catch-all.
   `git subtree`** into `digraph/`, relinking the opam switch + repointing paths (§A.1 runbook).
   Move shared tooling to `blueprint/`, planning artifacts to `meta/`. (Also: the *target package
   subdir* must exist before that package's milestone can land.)
-- **G1 — dependency-graph metric.** Make `build_dependency_graph.py` deterministic, regenerate,
-  and CI-gate `declared _implies_ theorems == committed graph edges` (today 48 vs 34 vs 45, §1).
+- **G1 — dependency-graph metric. ✅ DONE (2026-06-26), federation-wide.** `meta/build_edge_graph.py`
+  extracts edges across all packages — `(*@EDGE …*)` annotations (candidate/refuted-direction) +
+  `_implies_`/`_equiv_` theorems (verified, must be backed by a Theorem) — into a deterministic,
+  sorted `meta/dependency_graph.json`; `--check` is the CI drift gate (wired into `make gate`). The
+  legacy digraph-theory 48/34 discrepancy is reported in a `legacy` block, not used to drive the
+  format. Current federation graph: 3 edges (1 candidate, 2 refuted-direction, 0 verified).
 - **G3-core — base ownership. ✅ STARTED (2026-06-26).** `base/` = `coq-graph-theory-base`
   (namespace `GTBase`) re-exports the undirected interop and **owns** the first cross-area
   primitives validated by U1: `Delta` (Δ), `common_nbr`, `regular`, `girth_geq`, `ceil_div`.

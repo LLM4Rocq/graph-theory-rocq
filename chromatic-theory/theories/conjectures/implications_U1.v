@@ -82,3 +82,7 @@ Unset Printing Implicit Defensive.
     no [verified-literature] relative implication, and the only expected
     relationship (Reed ⇄ Borodin–Kostochka) is false in BOTH directions and is
     therefore deliberately absent (a false edge must fail to compile). *)
+
+(** Machine-readable edge records (extracted by meta/build_edge_graph.py): *)
+(*@EDGE from=reeds_omega_delta_and_chi_statement to=the_borodin_kostochka_statement kind=implies status=refuted-direction cite="false at Δ=9,ω=8 (Cranston-Rabern)" *)
+(*@EDGE from=the_borodin_kostochka_statement to=reeds_omega_delta_and_chi_statement kind=implies status=refuted-direction cite="independent; neither implies the other" *)

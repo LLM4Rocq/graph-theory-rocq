@@ -1,10 +1,18 @@
 # graph-theory-rocq root build. Each package has a _CoqProject; we generate its Makefile.coq
 # and build, in dependency order (base first; area packages depend on base).
 PACKAGES := base chromatic-theory hamiltonicity-theory homomorphism-theory
-.PHONY: all clean $(PACKAGES)
+LANDED := U1 chromatic-theory U2 hamiltonicity-theory U3 homomorphism-theory
+.PHONY: all clean gate $(PACKAGES)
 all: $(PACKAGES)
 
 chromatic-theory hamiltonicity-theory homomorphism-theory: base   # area packages depend on base (G3-core)
+
+# CI gate (G1 + acceptance): manifest reproduces, edge-graph has no drift, every landed
+# milestone passes check_milestone (compiles, axiom-free, Print-Assumptions-clean, legs justified).
+gate:
+	python3 meta/build_opg_manifest.py
+	python3 meta/build_edge_graph.py --check
+	@set -e; set -- $(LANDED); while [ $$# -ge 2 ]; do python3 meta/check_milestone.py $$1 $$2; shift 2; done
 
 $(PACKAGES):
 	cd $@ && rocq makefile -f _CoqProject -o Makefile.coq && $(MAKE) -f Makefile.coq

@@ -1,0 +1,58 @@
+{
+ "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations + _implies_/_equiv_ theorems across graph-theory-rocq packages (legacy digraph-theory excluded; see `legacy`). Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails on drift. Edges are sorted (from,to,kind,status,package) for determinism.",
+ "packages": [
+  "chromatic-theory",
+  "hamiltonicity-theory",
+  "homomorphism-theory"
+ ],
+ "totals": {
+  "edges": 3,
+  "by_status": {
+   "candidate": 1,
+   "refuted-direction": 2,
+   "verified": 0
+  },
+  "by_kind": {
+   "equiv": 0,
+   "implies": 3,
+   "refutes": 0,
+   "specializes": 0
+  },
+  "proved_theorems": 0
+ },
+ "edges": [
+  {
+   "from": "pentagon_statement",
+   "to": "weak_pentagon_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Nesetril; girth+construction gaps, not Qed-closed as formulated",
+   "package": "homomorphism-theory",
+   "file": "implications_U3.v"
+  },
+  {
+   "from": "reeds_omega_delta_and_chi_statement",
+   "to": "the_borodin_kostochka_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "false at Δ=9,ω=8 (Cranston-Rabern)",
+   "package": "chromatic-theory",
+   "file": "implications_U1.v"
+  },
+  {
+   "from": "the_borodin_kostochka_statement",
+   "to": "reeds_omega_delta_and_chi_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "independent; neither implies the other",
+   "package": "chromatic-theory",
+   "file": "implications_U1.v"
+  }
+ ],
+ "legacy": {
+  "repo": "digraph-theory (absorbed)",
+  "implies_theorems_in_source": 48,
+  "committed_dependency_graph_edges": 34,
+  "note": "Legacy digraph-only graph: source _implies_ theorem count vs the committed graph differ (theorem-name pattern includes helper lemmas; the old extractor filtered). Reconcile within digraph-theory separately; it does NOT define the federation format."
+ }
+}

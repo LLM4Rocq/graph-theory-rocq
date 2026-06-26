@@ -121,3 +121,6 @@ Unset Printing Implicit Defensive.
     The disproved Row 1 (Hedetniemi) is recorded as a separate refutation, not
     an inter-node edge.  This file is therefore intentionally theorem-free and
     axiom-free. *)
+
+(** Machine-readable edge records (extracted by meta/build_edge_graph.py): *)
+(*@EDGE from=pentagon_statement to=weak_pentagon_statement kind=implies status=candidate cite="Nesetril; girth+construction gaps, not Qed-closed as formulated" *)
