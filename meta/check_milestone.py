@@ -97,7 +97,8 @@ if compiles and ns:
     assum_detail = "" if assum_ok else f"closed={closed}/{len(expected)} has_axioms={has_axioms}; {out[-300:]}"
     for f in glob.glob(os.path.join(pkg, "theories", "conjectures", f"_assum_{phase}.v*")):
         os.remove(f)
-chk(assum_ok, "Print Assumptions clean (all statements)", assum_detail)
+n_axfree = closed if (compiles and ns) else 0
+chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements)", assum_detail)
 
 # 6) overlay legs justified by artifacts + provenance
 legs_path = os.path.join(META, "opg_legs_state.json")
@@ -120,8 +121,12 @@ chk(not unjust, "overlay leg-state justified by artifacts", "; ".join(unjust[:6]
 
 # ── report ──
 print(f"\n=== check_milestone {phase} / {package} ===")
+print(f"  {len(expected)} statement nodes: {', '.join(expected)}")
 for ok, label, detail in results:
     print(f"  [{'PASS' if ok else 'FAIL'}] {label}" + (f"  — {detail}" if (detail and not ok) else ""))
 allok = all(ok for ok, _, _ in results)
-print(f"\n{'ACCEPTED' if allok else 'REJECTED'}: {sum(ok for ok,_,_ in results)}/{len(results)} checks passed.")
+n_def = len(expected) - len(missing)
+print(f"\n{'ACCEPTED' if allok else 'REJECTED'}: {sum(ok for ok,_,_ in results)}/{len(results)} CHECKS passed | "
+      f"statements: {n_def}/{len(expected)} Defined, {n_axfree}/{len(expected)} axiom-free.")
+print("  (NB: the X/Y above counts acceptance CHECKS, not statement rows — the row count is the line above.)")
 sys.exit(0 if allok else 1)
