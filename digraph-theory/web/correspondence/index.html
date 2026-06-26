@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digraph conjectures — informal ⇄ formal auditor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <div>
+      <h1>Digraph conjectures · informal&nbsp;⇄&nbsp;formal auditor</h1>
+      <p class="tagline">
+        Each entry pairs an <b>informal statement</b> with its <b>formal Rocq/MathComp
+        statement</b> and a plain-English <b>readback of what the Rocq actually encodes</b>,
+        so the formalization can be audited without reading Rocq. Conjecture statements link to
+        the <b>machine-checked proofs that test their definitions</b> (filter <i>grounding</i>);
+        verbatim statements are extracted from source, proofs are axiom-free.
+      </p>
+    </div>
+    <div class="counts" id="counts"></div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <input type="search" id="search" placeholder="Search title / id / text…" autocomplete="off">
+    <div class="filtergroup" id="filter-status"></div>
+    <div class="filtergroup" id="filter-kind"></div>
+    <nav class="toc" id="toc"></nav>
+  </aside>
+
+  <main class="content" id="content">
+    <p class="loading">Loading registry…</p>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

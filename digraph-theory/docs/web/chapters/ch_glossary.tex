@@ -1,0 +1,57 @@
+\chapter{Glossary of MathComp / graph-theory primitives}
+\label{ch:glossary}
+
+The external vocabulary the quoted statements draw on. Each entry is
+standard library material (MathComp 2.5 / \texttt{coq-graph-theory}
+0.9.7), battle-tested far beyond this project; the entries below give
+the reading, not a re-development.
+
+\begin{description}
+\item[\texttt{finType}] A type with a (computable) finite
+  enumeration. All vertex types in this document are finite.
+\item[\texttt{\#|T|}, \texttt{\#|A|}] Cardinality of a finite
+  type / of a set.
+\item[\texttt{\{set T\}}] Subsets of the finite type \texttt{T};
+  \texttt{x \textbackslash in A} membership; \texttt{[set: T]} the
+  full set; \texttt{[set\textasciitilde{} v]} the complement of
+  $\{v\}$; \texttt{A != B} Boolean disequality of sets.
+\item[\texttt{\{perm T\}}] Permutations of \texttt{T} (the symmetric
+  group); \texttt{enum\_rank x} the position of $x$ in the canonical
+  enumeration.
+\item[\texttt{'Z\_n}] The ring $\mathbb{Z}/n\mathbb{Z}$ (for the
+  $n \ge 2$ in use here); \texttt{val z} its representative in
+  $\{0, \dots, n-1\}$; arithmetic \texttt{+}, \texttt{-} is modular.
+\item[\texttt{rel T}] Boolean binary relations on \texttt{T}.
+\item[\texttt{b = true}, \texttt{is\_true}] A Boolean used as a
+  statement means ``it computes to \texttt{true}''
+  (\cref{ch:primer}).
+\item[\texttt{==}, \texttt{!=}] Decidable equality / disequality
+  (provably equivalent to \texttt{=} on these types).
+\item[\texttt{(+)}] Exclusive or of Booleans.
+\item[{\texttt{[forall x : T, P]}, \texttt{[exists x, P]}}]
+  Boolean quantifiers over finite types.
+\item[\texttt{reflect P b}] ``The Boolean \texttt{b} is equivalent to
+  the proposition \texttt{P}''.
+\item[\texttt{n.+1}, \texttt{n.-1}, \texttt{n.*2}, \texttt{n./2}]
+  Successor, truncated predecessor, doubling, truncated halving on
+  \texttt{nat}; \texttt{maxn} maximum.
+\item[\texttt{path e x s}, \texttt{uniq s}, \texttt{size s}]
+  MathComp sequences: \texttt{path} chains the relation \texttt{e}
+  along \texttt{x :: s}; \texttt{uniq} no repetition; \texttt{size}
+  length.
+\item[\texttt{connect e x y}] Reflexive--transitive closure: a
+  directed \texttt{e}-walk from $x$ to $y$ exists.
+\item[\texttt{sgraph}] \texttt{coq-graph-theory}'s finite simple
+  graphs; \texttt{u -{}- v} adjacency (symmetric, irreflexive).
+\item[\texttt{cliques}, \texttt{omega}]
+  \texttt{coq-graph-theory}'s cliques of an \texttt{sgraph} and its
+  clique number $\omega$ (the maximum size of a set of pairwise
+  adjacent vertices). $\bar\omega$ (\cref{def:omegabar}) is built on
+  these --- the one place this library leans on its undirected
+  companion, by design.
+\item[{\texttt{[arg min\_(i < i0) F]}}] MathComp's minimiser of
+  \texttt{F} over a finite type, with default \texttt{i0}.
+\item[{\texttt{Sub}, \texttt{val}, \texttt{\{x | P x\}}}]
+  Dependent pairs: an element together with a proof; \texttt{val}
+  forgets the proof (the underlying element).
+\end{description}

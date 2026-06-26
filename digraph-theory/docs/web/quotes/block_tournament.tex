@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+HB.mixin Record Oriented_IsTournament V of Oriented V := {
+  arc_total : forall u v : V, (u != v) = (arc u v) (+) (arc v u)
+}.
+\end{lstlisting}
+\rocqsource{theories/core/tournament.v}{32}

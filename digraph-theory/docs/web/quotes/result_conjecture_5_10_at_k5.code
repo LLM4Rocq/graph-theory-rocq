@@ -1,0 +1,3 @@
+% theories/applications/k5/main.v:108
+Theorem conjecture_5_10_at_k5 (N : nat) :
+  exists T : tournament, kcritical 5 T /\ (N < #|T|)%N.

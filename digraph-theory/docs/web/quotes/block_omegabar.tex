@@ -1,0 +1,8 @@
+\begin{lstlisting}[language=Rocq]
+Definition omegab_at (T : tournament) (p : {perm T}) : nat :=
+  `$\omega$`([set: backedge p]).
+
+Definition omegabar (T : tournament) : nat :=
+  omegab_at [arg min_(p < (1%g : {perm T})) omegab_at p].
+\end{lstlisting}
+\rocqsource{theories/invariants/omegabar.v}{29}

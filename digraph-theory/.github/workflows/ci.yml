@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Matches the local dev switch `digraph` (Rocq 9.1.1 + MathComp 2.5.0);
+        # tag existence verified on Docker Hub (see docs/DESIGN.md §3).
+        image:
+          - 'mathcomp/mathcomp:2.5.0-rocq-prover-9.1'
+    steps:
+      - uses: actions/checkout@v5
+      - uses: coq-community/docker-coq-action@v1
+        with:
+          custom_image: ${{ matrix.image }}
+          # Override the action's default install step (opam pin + --deps-only):
+          # it needs `git ls-files` in the workspace, which fails on the
+          # uid mismatch between the runner checkout and the container user.
+          # mathcomp-classical is needed by the prelude, coq-graph-theory by the
+          # interop layer; both idempotent if the image already ships them.
+          install: |
+            startGroup "Install dependencies"
+              opam install -y rocq-mathcomp-classical coq-graph-theory
+            endGroup
+          before_script: |
+            startGroup "Workaround permission issue"
+              sudo chown -R "$(id -u):$(id -g)" .
+            endGroup
+          script: |
+            startGroup "Build"
+              make -j2
+            endGroup
+          after_script: |
+            startGroup "Restore permissions"
+              sudo chown -R 1001:116 .
+            endGroup

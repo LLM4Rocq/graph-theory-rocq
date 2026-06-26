@@ -1,0 +1,2 @@
+% theories/applications/k4/k4_main.v:51
+Theorem omegabar_T4_del (v : T4) : ω̄(del_tournament v) = 3.

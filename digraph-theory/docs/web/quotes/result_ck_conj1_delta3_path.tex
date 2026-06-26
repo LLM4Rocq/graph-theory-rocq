@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+Corollary ck_conj1_delta3_path (D : orientedDigraph) :
+  0 < #|D| -> (forall v : D, 3 <= outdeg v) ->
+  exists x : D, exists s : seq D, dipath x s /\ size s = 6.
+\end{lstlisting}
+\rocqsource{theories/applications/ck3/ck3_main.v}{158}

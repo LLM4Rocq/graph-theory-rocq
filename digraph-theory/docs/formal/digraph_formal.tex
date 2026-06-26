@@ -1,0 +1,69 @@
+% =====================================================================
+% digraph_formal.tex — the statement-audit companion of digraph-theory.
+%
+% Build:  make            (in docs/formal/; regenerates the extracted
+%                          quotes, panels and catalog first)
+%
+% Single source: the chapters live in ../web/chapters/ and are shared
+% with the blueprint website (PLAN_WEB M19/M20).
+% =====================================================================
+
+\input{preamble}
+
+\title{\textbf{Tournaments, $\bar\omega$-criticality, and directed
+    paths:\\ the formal statements}\\[1ex]
+  \large A machine-checked companion to the \texttt{digraph-theory}
+  library\\ for mathematicians with no Rocq background}
+\author{The \texttt{LLM4Rocq/digraph-theory} project}
+\date{\today\\[1ex]\normalsize
+  \url{https://github.com/LLM4Rocq/digraph-theory}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This document lets a mathematician audit, without reading any proof or
+learning any proof assistant, what exactly has been machine-checked in
+the \texttt{digraph-theory} library: \textbf{for every $k \in
+\{3,4,5\}$ there are infinitely many $k$-$\bar\omega$-critical
+tournaments} (Conjecture 5.10 of Aboulker--Aubian--Charbit--Lopes,
+arXiv:2310.04265, at every value of $k$ for which it is humanly known),
+that \textbf{Question 5.9 of the same paper fails at each such $k$},
+and \textbf{the $\delta = 3$ case of the Cheng--Keevash path
+conjecture} (every oriented digraph with minimum out-degree $\ge 3$
+contains a directed path of length~$6$), among other results.
+
+Each result page shows the \emph{verbatim} formal statement, a plain
+mathematical decoding, and --- the audit contract --- the complete list
+of definitions the statement depends on, each explained in the
+Dictionary (\cref{ch:dictionary}). The lists are \emph{generated from
+the compiled library} and checked in continuous integration: no
+definition can be silently missing. Proofs never appear; they are the
+machine's job. Every result here is axiom-free
+(\texttt{Print Assumptions}: closed under the global context).
+\end{abstract}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\input{../web/chapters/ch_primer}
+\input{../web/chapters/ch_dictionary}
+\input{../web/chapters/ch_unified}
+\input{../web/chapters/ch_families}
+\input{../web/chapters/ch_paths}
+\input{../web/chapters/ch_general}
+
+\appendix
+\input{../web/chapters/ch_glossary}
+
+\chapter{The full catalog (auto-generated)}
+\label{ch:catalog}
+Every named declaration in the library's build chain, with its source
+location. Entries shown in the narrative chapters are marked
+$\bigstar$. Everything else is internal proof machinery: it affects
+\emph{whether} the theorems hold (the kernel checked that), never
+\emph{what} they say.
+\input{lemma_catalog}
+
+\end{document}

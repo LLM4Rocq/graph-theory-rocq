@@ -1,0 +1,83 @@
+\chapter{The unified theorem: Conjecture 5.10 at $k = 3, 4, 5$}
+\label{ch:unified}
+
+Aboulker, Aubian, Charbit and Lopes (arXiv:2310.04265) conjecture
+(their Conjecture 5.10) that for every $k \ge 3$ there are infinitely
+many $k$-$\bar\omega$-critical tournaments, and ask (their Question
+5.9) whether a tournament with $\bar\omega(T) \ge k$ must contain a
+\emph{bounded-size} subtournament with $\bar\omega \ge k$. The library
+settles every humanly known case of the conjecture and refutes the
+question at each such $k$.
+
+\begin{trustbox}
+\noindent\textbf{Trust.} Every theorem in this chapter is verified by
+the Rocq kernel and reports
+\rocqinline@Closed under the global context@
+(\rocqinline@Print Assumptions@) --- no axioms, no admitted steps. The
+witnesses are fully explicit: $\mathrm{AC}_n$,
+$\mathrm{AC}_n[C_3]$, $\mathrm{AC}_n[\mathrm{AC}_n]$
+(\cref{def:AC,def:T4family,def:T5family}). The small instances were
+independently cross-checked by exact and SAT-based computation
+(\texttt{scripts/}).
+\end{trustbox}
+
+\resulthead{The headline: every $k \in \{3,4,5\}$}{conjecture_5_10_at_345}
+
+\input{../web/quotes/result_conjecture_5_10_at_345}
+
+\begin{decoded}
+For every $k$ with $3 \le k \le 5$ and every bound $N$ there exists a
+$k$-$\bar\omega$-critical tournament on more than $N$ vertices: the
+$k$-critical tournaments form an infinite family. (``$T$ is
+$k$-critical'' unfolds per \cref{def:kcritical}: $\bar\omega(T) = k$
+and $\bar\omega(T - v) = k - 1$ for every vertex $v$.)
+\end{decoded}
+
+\input{../web/panels/conjecture_5_10_at_345}
+
+\resulthead{$k = 3$: infinitely many, and Question 5.9 fails}{conjecture_5_10_at_k3}
+
+\input{../web/quotes/result_conjecture_5_10_at_k3}
+\input{../web/quotes/result_question_5_9_fails_at_k3}
+\label{res:question_5_9_fails_at_k3}
+
+\begin{decoded}
+First statement: for every $N$ there is a 3-critical tournament on
+more than $N$ vertices (the witness is $\mathrm{AC}_n$ itself,
+$n = 2\max(2,N){+}3$). Second: moreover the witness can be chosen so
+that \emph{its only subtournament with $\bar\omega \ge 3$ is the whole
+tournament} --- formally, any vertex subset $S$ whose induced
+subtournament has $\bar\omega \ge 3$ must be all of $V$
+(\rocqinline@[set: T]@ is the full set). Hence no function
+$\ell(3)$ as in Question 5.9 can exist: witnesses have unbounded size
+but no proper witnessing subtournament at all.
+\end{decoded}
+
+\input{../web/panels/question_5_9_fails_at_k3}
+
+\resulthead{$k = 4$}{conjecture_5_10_at_k4}
+
+\input{../web/quotes/result_conjecture_5_10_at_k4}
+\input{../web/quotes/result_question_5_9_fails_at_k4}
+\label{res:question_5_9_fails_at_k4}
+
+\begin{decoded}
+As for $k = 3$, with witness $\mathrm{AC}_n[C_3]$ on $3n$ vertices
+(\cref{def:T4family}; the underlying values $\bar\omega = 4$,
+$\bar\omega(T - v) = 3$ are \cref{res:omegabar_T4,res:omegabar_T4_del}).
+\end{decoded}
+
+\input{../web/panels/question_5_9_fails_at_k4}
+
+\resulthead{$k = 5$}{conjecture_5_10_at_k5}
+
+\input{../web/quotes/result_conjecture_5_10_at_k5}
+\input{../web/quotes/result_question_5_9_fails_at_k5}
+\label{res:question_5_9_fails_at_k5}
+
+\begin{decoded}
+As above, with witness $\mathrm{AC}_n[\mathrm{AC}_n]$ on $n^2$
+vertices (\cref{def:T5family}).
+\end{decoded}
+
+\input{../web/panels/question_5_9_fails_at_k5}

@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+Definition has_dipath k := [exists x : D, exists t : k.-tuple D, dipath x t].
+
+Definition ell := \max_(k < #|D| | has_dipath k) (k : nat).
+\end{lstlisting}
+\rocqsource{theories/core/dipath.v}{144}

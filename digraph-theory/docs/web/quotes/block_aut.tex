@@ -1,0 +1,7 @@
+\begin{lstlisting}[language=Rocq]
+Definition autb p : bool :=
+  [forall u : D, [forall v : D, arc (p u) (p v) == arc u v]].
+
+Definition dgaut : {set {perm D}} := [set p | autb p].
+\end{lstlisting}
+\rocqsource{theories/constructions/automorphism.v}{25}

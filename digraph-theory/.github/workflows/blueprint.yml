@@ -1,0 +1,161 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # Builds the library (for .glob files + coqdoc) and verifies that the
+  # committed generated artifacts — closure.json, quotes, panels,
+  # blueprint chapters, catalog — are exactly what the current source
+  # regenerates: the audit gate of docs/PLAN_WEB.md.
+  audit-and-coqdoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: coq-community/docker-coq-action@v1
+        with:
+          custom_image: 'mathcomp/mathcomp:2.5.0-rocq-prover-9.1'
+          install: |
+            startGroup "Install dependencies"
+              opam install -y rocq-mathcomp-classical coq-graph-theory
+            endGroup
+          before_script: |
+            startGroup "Workaround permission issue"
+              sudo chown -R "$(id -u):$(id -g)" .
+            endGroup
+          script: |
+            startGroup "Build library"
+              make -j2
+            endGroup
+            startGroup "Closure audit gate + regenerate"
+              python3 scripts/statement_closure.py --check
+              python3 scripts/extract_quotes.py
+              python3 scripts/gen_panels.py
+              python3 scripts/gen_blueprint.py
+              python3 scripts/extract_catalog.py
+            endGroup
+            startGroup "Correspondence registry + coverage gate"
+              python3 scripts/build_correspondence.py
+              python3 scripts/build_correspondence.py --check
+              python3 scripts/test_correspondence.py
+            endGroup
+            startGroup "Freshness: committed artifacts == regenerated"
+              git -c core.fileMode=false diff --exit-code -- \
+                docs/web docs/formal/lemma_catalog.tex blueprint/src \
+                web/correspondence/registry.json
+            endGroup
+            startGroup "Axiom audit: every catalog result closed"
+              python3 scripts/axiom_audit.py
+            endGroup
+            startGroup "Generate coqdoc"
+              make html || make -f Makefile.coq html
+            endGroup
+          after_script: |
+            sudo chown -R "$(id -u):$(id -g)" . || true
+      - name: Revert permissions
+        if: ${{ always() }}
+        run: sudo chown -R $(id -u):$(id -g) . || true
+      - name: Upload coqdoc artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coqdoc-html
+          path: html/
+          if-no-files-found: warn
+      - name: Upload correspondence auditor artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: correspondence-site
+          path: web/correspondence/
+          if-no-files-found: warn
+
+  build-blueprint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz libgraphviz-dev texlive-latex-base python3-dev
+      - name: Install rocqblueprint
+        run: pip install rocqblueprint
+      - name: Build blueprint
+        run: |
+          cd blueprint/src
+          rocqblueprint web
+      - name: Upload blueprint artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blueprint-web
+          path: blueprint/src/web/
+
+  build-formal-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-base texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended \
+            texlive-science lmodern
+      - name: Build formal companion PDF (from committed artifacts)
+        run: cd docs/formal && make pdf
+      - name: Upload formal PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: formal-pdf
+          path: docs/formal/digraph_formal.pdf
+
+  combine-and-deploy:
+    needs: [audit-and-coqdoc, build-blueprint, build-formal-pdf]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download blueprint
+        uses: actions/download-artifact@v4
+        with:
+          name: blueprint-web
+          path: site/
+      - name: Download coqdoc
+        uses: actions/download-artifact@v4
+        with:
+          name: coqdoc-html
+          path: site/doc/
+        continue-on-error: true
+      - name: Download formal PDF
+        uses: actions/download-artifact@v4
+        with:
+          name: formal-pdf
+          path: site/
+      - name: Download correspondence auditor
+        uses: actions/download-artifact@v4
+        with:
+          name: correspondence-site
+          path: site/correspondence/
+        continue-on-error: true
+      - name: Disable Jekyll on the deployed site
+        run: touch site/.nojekyll
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

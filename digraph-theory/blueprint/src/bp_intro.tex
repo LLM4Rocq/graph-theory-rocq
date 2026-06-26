@@ -1,0 +1,63 @@
+\chapter{How to use this site}
+\label{ch:intro}
+
+This site lets a mathematician audit, \emph{without reading any proof
+or learning any proof assistant}, what exactly has been
+machine-checked in the
+\href{https://github.com/LLM4Rocq/digraph-theory}{\texttt{digraph-theory}}
+library:
+
+\begin{itemize}
+\item \textbf{for every $k \in \{3,4,5\}$ there are infinitely many
+  $k$-$\bar\omega$-critical tournaments} (Conjecture 5.10 of
+  Aboulker--Aubian--Charbit--Lopes, arXiv:2310.04265, at every value
+  of $k$ for which it is humanly known) ---
+  \ref{res:conjecture_5_10_at_345};
+\item \textbf{Question 5.9 of the same paper fails at each such $k$}
+  --- \ref{res:question_5_9_fails_at_k3},
+  \ref{res:question_5_9_fails_at_k4},
+  \ref{res:question_5_9_fails_at_k5};
+\item \textbf{the $\delta = 3$ case of the Cheng--Keevash path
+  conjecture}: every oriented digraph with minimum out-degree $\ge 3$
+  contains a directed path of length 6 ---
+  \ref{res:ck_conj1_delta3};
+\item the general tournament theory behind them (substitution bound,
+  vertex-transitive criticality, domination,
+  uniqueness of the 2-critical tournament).
+\end{itemize}
+
+\paragraph{The division of labour.} The Rocq kernel has checked every
+proof; each result here reports \emph{axiom-free} status
+(\code{Print Assumptions}: closed under the global context). Proofs
+are therefore not shown. What a human must check is that the
+\emph{statements} say what the informal mathematics means --- so every
+result page shows the verbatim formal statement, a plain-mathematics
+decoding, and machine-generated \code{uses} links to \emph{every}
+definition the statement depends on (the Dictionary,
+\ref{ch:dictionary}). Use the dependency graph to explore: a result's
+ancestors are exactly the definitions you must read to trust it.
+
+\paragraph{Generated, not curated.} The dependency edges are computed
+from the compiled library by \code{scripts/statement\_closure.py};
+continuous integration fails if a statement's closure ever contains a
+definition without a Dictionary entry, or if a quoted text drifts
+from the source.
+
+\paragraph{Conventions.} Statements are quoted verbatim. Boolean
+connectives (\code{==}, \code{\&\&}, \code{[forall ...]}) are
+MathComp's decidable counterparts of the usual logical ones ---
+equivalent to them on the finite structures used here. The circulant
+families use the index convention $m =$ \code{m'.+1},
+$n =$ \code{m.*2.+1} with hypothesis \code{3 <= m'.+1}: $n$ ranges
+exactly over the odd numbers $\ge 7$. A statement quoted from inside
+a \code{Section} is implicitly universally quantified over the
+section's parameters. A companion PDF with the same content plus a
+notation primer and the full declaration catalog is available as
+\href{https://llm4rocq.github.io/digraph-theory/digraph_formal.pdf}{\texttt{digraph\_formal.pdf}};
+the per-file API documentation (coqdoc) is under
+\href{https://llm4rocq.github.io/digraph-theory/doc}{\texttt{/doc}}.
+An interactive \emph{informal\,$\rightleftarrows$\,formal auditor} --- every
+conjecture statement and proved result paired with its informal source, a
+plain-English readback of the formal statement, the verbatim Rocq, and the
+proved implication edges --- is at
+\href{https://llm4rocq.github.io/digraph-theory/correspondence/}{\texttt{/correspondence}}.

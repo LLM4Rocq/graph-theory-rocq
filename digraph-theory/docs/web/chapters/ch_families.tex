@@ -1,0 +1,121 @@
+\chapter{The three critical families}
+\label{ch:families}
+
+The three witnesses share one platform: the circulant tournament
+$\mathrm{AC}_n$ on $n = 2m{+}1 \ge 7$ vertices (\cref{def:AC}), used
+directly for $k=3$ and composed with itself or with $C_3$ by
+lexicographic substitution (\cref{def:lexprod}) for $k = 5, 4$. All
+statements below are quoted from inside sections fixing
+\rocqinline@m' : nat@ with \rocqinline@(3 <= m'.+1)%N@
+(see \cref{ch:primer} for the $m', m, n$ convention): each is
+universally quantified over all odd $n \ge 7$.
+
+\section*{$k = 3$: the tournament $\mathrm{AC}_n$}
+
+\resulthead{$\bar\omega(\mathrm{AC}_n) = 3$}{omegabar_AC}
+
+\input{../web/quotes/result_omegabar_AC}
+
+\begin{decoded}
+For every odd $n = 2m+1$ with $m \ge 3$, the tournament clique number
+of $\mathrm{AC}_n$ is exactly $3$. (\rocqinline@(AC m' : tournament)@
+is $\mathrm{AC}_n$ viewed as a tournament; the hypothesis
+\rocqinline@3 <= m@ is $m \ge 3$.)
+\end{decoded}
+
+\input{../web/panels/omegabar_AC}
+
+\resulthead{$\bar\omega(\mathrm{AC}_n - v) = 2$ for every $v$}{omegabar_AC_del}
+
+\input{../web/quotes/result_omegabar_AC_del}
+
+\begin{decoded}
+Deleting any single vertex $v$ from $\mathrm{AC}_n$ drops the
+invariant to $2$.
+\end{decoded}
+
+\input{../web/panels/omegabar_AC_del}
+
+\resulthead{$\mathrm{AC}_n$ is 3-critical; its basic stats}{AC_kcritical3}
+
+\input{../web/quotes/result_AC_kcritical3}
+\input{../web/quotes/result_card_AC}
+\label{res:card_AC}
+\input{../web/quotes/result_AC_vertex_transitive}
+\label{res:AC_vertex_transitive}
+
+\begin{decoded}
+$\mathrm{AC}_n$ is $3$-$\bar\omega$-critical (\cref{def:kcritical}),
+has exactly $n$ vertices, and is vertex-transitive (\cref{def:vt}).
+\end{decoded}
+
+\input{../web/panels/AC_kcritical3}
+
+\section*{$k = 4$: the tournament $\mathrm{AC}_n[C_3]$}
+
+\resulthead{$\bar\omega(\mathrm{AC}_n[C_3]) = 4$}{omegabar_T4}
+
+\input{../web/quotes/result_omegabar_T4}
+
+\begin{decoded}
+Here \rocqinline@T4@ abbreviates the substitution
+$\mathrm{AC}_n[C_3]$ (\cref{def:T4family}). For every odd
+$n = 2m{+}1 \ge 7$, its tournament clique number is exactly $4$.
+\end{decoded}
+
+\input{../web/panels/omegabar_T4}
+
+\resulthead{$\bar\omega(\mathrm{AC}_n[C_3] - v) = 3$ for every $v$}{omegabar_T4_del}
+
+\input{../web/quotes/result_omegabar_T4_del}
+
+\begin{decoded}
+Deleting any vertex of $\mathrm{AC}_n[C_3]$ drops the invariant to
+$3$ (by vertex-transitivity all deletions are isomorphic, so this is
+one computation plus symmetry --- see \cref{res:vt_kcritical}).
+\end{decoded}
+
+\input{../web/panels/omegabar_T4_del}
+
+\resulthead{$\mathrm{AC}_n[C_3]$ is 4-critical, on $3n$ vertices}{T4_kcritical4}
+
+\input{../web/quotes/result_T4_kcritical4}
+\input{../web/quotes/result_card_T4}
+\label{res:card_T4}
+
+\begin{decoded}
+The two previous values say precisely that $\mathrm{AC}_n[C_3]$ is
+$4$-$\bar\omega$-critical; its order is $n \cdot 3$.
+\end{decoded}
+
+\input{../web/panels/T4_kcritical4}
+
+\section*{$k = 5$: the tournament $\mathrm{AC}_n[\mathrm{AC}_n]$}
+
+\resulthead{$\bar\omega(\mathrm{AC}_n[\mathrm{AC}_n]) = 5$}{omegabar_T5}
+
+\input{../web/quotes/result_omegabar_T5}
+
+\begin{decoded}
+\rocqinline@T5@ abbreviates $\mathrm{AC}_n[\mathrm{AC}_n]$
+(\cref{def:T5family}); its tournament clique number is exactly $5$,
+for every odd $n = 2m{+}1 \ge 7$.
+\end{decoded}
+
+\input{../web/panels/omegabar_T5}
+
+\resulthead{$\bar\omega(\mathrm{AC}_n[\mathrm{AC}_n] - v) = 4$; 5-criticality; order $n^2$}{T5_kcritical5}
+
+\input{../web/quotes/result_omegabar_T5_del}
+\label{res:omegabar_T5_del}
+\input{../web/quotes/result_T5_kcritical5}
+\input{../web/quotes/result_card_T5}
+\label{res:card_T5}
+
+\begin{decoded}
+Every single-vertex deletion has $\bar\omega = 4$; hence
+$\mathrm{AC}_n[\mathrm{AC}_n]$ is $5$-$\bar\omega$-critical, on
+$n \cdot n$ vertices.
+\end{decoded}
+
+\input{../web/panels/T5_kcritical5}

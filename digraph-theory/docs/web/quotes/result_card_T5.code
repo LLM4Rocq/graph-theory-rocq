@@ -1,0 +1,2 @@
+% theories/applications/k5/main.v:79
+Lemma card_T5 : #|T5| = (n * n)%N.

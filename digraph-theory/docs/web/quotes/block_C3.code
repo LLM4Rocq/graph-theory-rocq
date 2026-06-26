@@ -1,0 +1,4 @@
+% theories/core/tournament.v:183
+Definition C3 : Type := 'Z_3.
+
+Lemma arcC3E (u v : C3) : (u --> v) = (v == u + 1 :> 'Z_3).

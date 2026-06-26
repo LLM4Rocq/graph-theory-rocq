@@ -1,0 +1,2 @@
+% theories/invariants/domination.v:114
+Theorem domnum_le_omegabar : domnum <= ω̄(T).

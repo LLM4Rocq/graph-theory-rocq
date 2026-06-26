@@ -1,0 +1,3 @@
+% theories/invariants/critical.v:21
+Definition kcritical (k : nat) (T : tournament) : bool :=
+  (ω̄(T) == k) && [forall v : T, ω̄(del_tournament v) == k.-1].

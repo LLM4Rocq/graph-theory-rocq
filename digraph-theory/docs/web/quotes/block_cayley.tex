@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+Definition cayley (gT : finGroupType) (A : {set gT}) : Type := gT.
+
+Lemma cayley_arcE (x y : cayley A) : (x --> y) = ((x^-1 * y)%g \in A).
+\end{lstlisting}
+\rocqsource{theories/constructions/cayley.v}{30}

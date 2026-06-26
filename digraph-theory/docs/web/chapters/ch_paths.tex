@@ -1,0 +1,88 @@
+\chapter{Directed paths: the Cheng--Keevash results}
+\label{ch:paths}
+
+Thomass\'e's path conjecture, in the oriented form studied by Cheng
+and Keevash (``Conjecture 1''), asserts that every oriented digraph
+with minimum out-degree $\delta^+ \ge k$ contains a directed simple
+path of length $2k$. The library proves the cases $k = 2$ and $k = 3$
+and the general Lemma 7 of Cheng--Keevash, uniform in $\delta$.
+
+\begin{trustbox}
+\noindent\textbf{Trust.} All results axiom-free
+(\rocqinline@Print Assumptions@ closed). Hypotheses are stated on
+arbitrary finite oriented digraphs (\cref{def:oriented}) --- no
+hidden strong-connectivity or regularity assumptions; where the
+\emph{proof} reduces to a strong subdigraph, that reduction is part of
+the formalized proof, not of the statement.
+\end{trustbox}
+
+\resulthead{The $\delta = 3$ path theorem}{ck_conj1_delta3}
+
+\input{../web/quotes/result_ck_conj1_delta3}
+\input{../web/quotes/result_ck_conj1_delta3_path}
+\label{res:ck_conj1_delta3_path}
+
+\begin{decoded}
+Let $D$ be any nonempty finite oriented digraph in which every vertex
+has out-degree at least $3$. Then $\ell(D) \ge 6$
+(\cref{def:ell}): $D$ contains a directed simple path with $6$ arcs
+(7 distinct vertices). The second form unfolds $\ell$ into the
+explicit existence of such a path (\cref{def:dipath}).
+This is the $k = 3$ case of Cheng--Keevash Conjecture~1.
+\end{decoded}
+
+\input{../web/panels/ck_conj1_delta3}
+
+\resulthead{The $\delta = 2$ case}{ck_conj1_delta2}
+
+\input{../web/quotes/result_ck_conj1_delta2}
+
+\begin{decoded}
+Same statement one level down: minimum out-degree $\ge 2$ forces a
+directed simple path of length $4$.
+\end{decoded}
+
+\input{../web/panels/ck_conj1_delta2}
+
+\resulthead{Cheng--Keevash Lemma 7, uniform in $\delta$}{lemma7}
+
+\input{../web/quotes/result_lemma7}
+
+\begin{decoded}
+In a strong (\cref{def:strong}) oriented digraph that is
+$\delta$-out-regular-from-below ($d^+(v) \ge \delta$ everywhere,
+$\delta \ge 1$) and where the longest path is short
+($\ell(D) \le 2\delta$), the vertex set of any longest path supports
+the structural ``kernel'' conclusion quantified in the statement ---
+the engine behind the path theorems. (This page quotes the statement
+in full; the surrounding section fixes the oriented digraph
+\rocqinline@D@, $\delta$, and the strongness/degree hypotheses
+visible in the quoted text.)
+\end{decoded}
+
+\input{../web/panels/lemma7}
+
+\resulthead{Theorem 4, oriented version}{ck_theorem4_oriented}
+
+\input{../web/quotes/result_ck_theorem4_oriented}
+
+\begin{decoded}
+Every nonempty oriented digraph with minimum out-degree $\ge \delta$
+satisfies $\ell(D) \ge 2\delta - \lfloor(\delta-1)/2\rfloor$
+(\rocqinline@./2@ is truncated halving). For even $\delta$ this is
+sharper than the $\lceil 3\delta/2 \rceil$ stated by Cheng--Keevash.
+\end{decoded}
+
+\input{../web/panels/ck_theorem4_oriented}
+
+\resulthead{No short-path strong counterexample at $\delta = 3$}{no_short_strong3}
+
+\input{../web/quotes/result_no_short_strong3}
+
+\begin{decoded}
+There is no strong oriented digraph with $\delta^+ \ge 3$ and
+$\ell \le 5$: the reduction target of the main theorem, stated
+separately.
+\end{decoded}
+
+\input{../web/panels/no_short_strong3}

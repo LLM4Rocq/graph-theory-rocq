@@ -1,0 +1,3 @@
+% theories/core/tournament.v:112
+Definition transb := [forall u : T, [forall v : T, [forall w : T,
+  (u --> v) ==> (v --> w) ==> (u --> w)]]].

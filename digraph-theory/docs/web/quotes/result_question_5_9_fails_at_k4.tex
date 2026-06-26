@@ -1,0 +1,7 @@
+\begin{lstlisting}[language=Rocq]
+Theorem question_5_9_fails_at_k4 (L : nat) :
+  exists T : tournament,
+    [/\ kcritical 4 T, (L < #|T|)%N
+      & forall S : {set T}, (4 <= `$\bar\omega$`(sub_tournament S))%N -> S = [set: T]].
+\end{lstlisting}
+\rocqsource{theories/applications/k4/k4_main.v}{89}

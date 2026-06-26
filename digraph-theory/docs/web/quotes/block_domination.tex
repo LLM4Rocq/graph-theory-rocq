@@ -1,0 +1,7 @@
+\begin{lstlisting}[language=Rocq]
+Definition dominatesb (X : {set T}) : bool :=
+  [forall v : T, (v \in X) || [exists x in X, x --> v]].
+
+Definition domnum : nat := #|[arg min_(X < [set: T] | dominatesb X) #|X|]|.
+\end{lstlisting}
+\rocqsource{theories/invariants/domination.v}{28}

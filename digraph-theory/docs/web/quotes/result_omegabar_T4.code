@@ -1,0 +1,2 @@
+% theories/applications/k4/k4_value.v:511
+Theorem omegabar_T4 : ω̄(T4) = 4.

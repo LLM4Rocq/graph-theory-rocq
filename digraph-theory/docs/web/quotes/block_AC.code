@@ -1,0 +1,7 @@
+% theories/constructions/circulant.v:63
+Definition ACset : {set 'Z_n} :=
+  [set z : 'Z_n | ((0 < val z < m) || (val z == m.+1))%N].
+
+Definition AC : tournament := cayley ACset : tournament.
+
+Lemma AC_arcE (x y : AC) : (x --> y) = (y - x \in ACset).

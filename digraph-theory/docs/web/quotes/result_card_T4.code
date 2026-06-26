@@ -1,0 +1,2 @@
+% theories/applications/k4/k4_main.v:67
+Lemma card_T4 : #|T4| = (n * 3)%N.

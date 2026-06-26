@@ -1,0 +1,144 @@
+% =====================================================================
+% Preamble for digraph_formal.tex — the statement-audit companion.
+% Adapted from mathcomp-eulerian/docs/formal/preamble.tex.
+% =====================================================================
+
+\documentclass[11pt,a4paper]{report}
+
+% --- Encoding & fonts ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+% combining macron (U+0304) may reach text mode via section titles
+\DeclareUnicodeCharacter{0304}{\textomegabarhack}
+\newcommand{\textomegabarhack}{}
+
+% --- Math ---
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+
+% --- Page geometry ---
+\usepackage[margin=1in]{geometry}
+
+% --- Hyperlinks ---
+\usepackage[colorlinks=true,
+            linkcolor=blue!50!black,
+            citecolor=blue!50!black,
+            urlcolor=blue!50!black]{hyperref}
+\usepackage{bookmark}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+% --- Tables ---
+\usepackage{booktabs, longtable}
+
+% --- Boxes ---
+\usepackage[framemethod=TikZ]{mdframed}
+
+% --- Code listings ---
+\usepackage{xcolor}
+\definecolor{rocqkw}{RGB}{120,30,150}
+\definecolor{rocqcom}{RGB}{0,128,0}
+\definecolor{rocqstr}{RGB}{200,30,30}
+\definecolor{rocqbg}{RGB}{248,248,248}
+\definecolor{rocqframe}{RGB}{220,220,230}
+\definecolor{decodedbg}{RGB}{255,253,238}
+\definecolor{decodedframe}{RGB}{225,210,150}
+\definecolor{panelbg}{RGB}{240,245,255}
+\definecolor{panelframe}{RGB}{180,200,230}
+\definecolor{trustbg}{RGB}{240,255,242}
+\definecolor{trustframe}{RGB}{160,210,170}
+\definecolor{faithbg}{RGB}{255,245,245}
+\definecolor{faithframe}{RGB}{220,170,170}
+
+\usepackage{listings}
+
+\lstdefinelanguage{Rocq}{
+  morekeywords={Definition, Theorem, Lemma, Corollary, Proposition, Fact,
+    Let, Proof, Qed, Defined, Fixpoint, Inductive, Record, Variable,
+    Variables, Hypothesis, Section, End, Module, Notation, Implicit,
+    Set, Unset, Arguments, From, Require, Import, Export,
+    forall, exists, exists2, fun, match, with, end, if, then, else,
+    let, in, return, as, fix, struct, Type, Prop,
+    bool, nat, true, false, reflect, Local},
+  sensitive=true,
+  morecomment=[s]{(*}{*)},
+  morestring=[b]",
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{rocqkw}\bfseries,
+  commentstyle=\color{rocqcom}\itshape,
+  stringstyle=\color{rocqstr},
+  backgroundcolor=\color{rocqbg},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{rocqframe},
+  framesep=4pt,
+  xleftmargin=10pt,
+  xrightmargin=10pt,
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  % Unicode never reaches listings: scripts/extract_quotes.py rewrites
+  % it to math through the escape character below.
+  escapechar=\`
+}
+\lstset{language=Rocq}
+% No-argument alias: listings reads the braced text itself with
+% verbatim catcodes, so |, ~, _, =, % survive.
+\newcommand{\rocqinline}{\lstinline[language=Rocq,basicstyle=\ttfamily\small]}
+
+% --- GitHub source links ---
+\newcommand{\GitHubBase}{https://github.com/LLM4Rocq/digraph-theory/blob}
+\newcommand{\GitHubBranch}{main}
+\newcommand{\rocqsource}[2]{%
+  \par\nopagebreak\vspace{-2pt}\hfill
+  {\footnotesize\href{\GitHubBase/\GitHubBranch/#1\#L#2}%
+    {[\texttt{\detokenize{#1}:#2}]}}}
+
+% --- Theorem-ish display environments (no proofs anywhere) ---
+\theoremstyle{definition}
+\newtheorem{glossentry}{}[chapter]
+
+% Decoded: the formal line re-read as ordinary mathematics.
+\newmdenv[backgroundcolor=decodedbg, linecolor=decodedframe,
+          linewidth=0.6pt, innertopmargin=4pt, innerbottommargin=4pt,
+          skipabove=4pt]{decodedbox}
+\newenvironment{decoded}
+  {\begin{decodedbox}\noindent\textbf{Decoded.}\ }
+  {\end{decodedbox}}
+
+% Faithfulness note: why the formal object is the intended one.
+\newmdenv[backgroundcolor=faithbg, linecolor=faithframe,
+          linewidth=0.6pt, innertopmargin=4pt, innerbottommargin=4pt,
+          skipabove=4pt]{faithbox}
+\newenvironment{faithnote}
+  {\begin{faithbox}\noindent\textbf{Why this is the right definition.}\ }
+  {\end{faithbox}}
+
+% Closure panel: everything this statement needs.
+\newmdenv[backgroundcolor=panelbg, linecolor=panelframe,
+          linewidth=0.6pt, innertopmargin=4pt, innerbottommargin=4pt,
+          skipabove=4pt]{panelbox}
+\newenvironment{closurepanel}
+  {\begin{panelbox}\noindent\textbf{Everything this statement needs}%
+   \footnote{This list is \emph{generated} from the build: a script
+   computes every constant the formal statement references,
+   transitively through library definitions, and CI fails if any of
+   them lacks an entry in the Dictionary
+   (\texttt{scripts/statement\_closure.py}).}%
+   \begin{itemize}\setlength\itemsep{0pt}}
+  {\end{itemize}\end{panelbox}}
+
+% Trust box.
+\newmdenv[backgroundcolor=trustbg, linecolor=trustframe,
+          linewidth=0.6pt, innertopmargin=4pt, innerbottommargin=4pt,
+          skipabove=4pt]{trustbox}
+
+% Result and def-block sectioning.
+\newcommand{\resulthead}[2]{\section{#1}\label{res:#2}}
+\newcommand{\defblockhead}[2]{\section{#1}\label{#2}}
+
+% Math shorthands.
+\newcommand{\obar}{\bar{\omega}}
+\newcommand{\TT}{\mathrm{TT}}
+\newcommand{\ACn}{\mathrm{AC}_n}
+\newcommand{\Cthree}{C_3}

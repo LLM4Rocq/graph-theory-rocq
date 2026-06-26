@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+Theorem ck_theorem4_oriented (D : orientedDigraph) (delta : nat) :
+  0 < #|D| -> (forall v : D, delta <= outdeg v) ->
+  2 * delta - (delta - 1)./2 <= ell D.
+\end{lstlisting}
+\rocqsource{theories/applications/ck3/lemma7.v}{684}

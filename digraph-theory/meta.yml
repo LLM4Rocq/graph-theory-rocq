@@ -1,0 +1,67 @@
+# Metadata for the rocq-community project template generator.
+# OPTIONAL: the .opam files, README, and CI in this repo are hand-written and
+# authoritative. Adopt the generator (https://github.com/rocq-community/templates)
+# only if you want them regenerated from this file; keep the two in sync if so.
+
+fullname: Digraph Theory
+shortname: digraph-theory
+organization: LLM4Rocq
+opam_name: rocq-digraph-theory
+community: false
+action: true
+coqdoc: false
+
+synopsis: Directed graphs and tournaments for the Rocq/MathComp ecosystem
+
+description: |-
+  A MathComp-based formal library for directed graphs and tournaments: the
+  order-minimised clique number (omega-bar), the dichromatic number, lexicographic
+  substitution, circulant/Cayley constructions, and their invariant theory. The
+  directed companion to coq-graph-theory. Classical via mathcomp-classical.
+
+authors:
+  - name: Marc Lelarge
+
+maintainers:
+  - name: Marc Lelarge
+    nickname: mlelarge
+
+license:
+  fullname: Apache-2.0
+  identifier: Apache-2.0
+
+supported_coq_versions:
+  text: Rocq/Coq 8.19 or later
+  opam: '{ >= "8.19" }'
+
+dependencies:
+  - opam:
+      name: rocq-mathcomp-ssreflect
+      version: '{ >= "2.5.0" }'
+    description: MathComp SSReflect
+  - opam:
+      name: rocq-mathcomp-algebra
+      version: '{ >= "2.5.0" }'
+    description: MathComp Algebra
+  - opam:
+      name: rocq-mathcomp-fingroup
+      version: '{ >= "2.5.0" }'
+    description: MathComp finite groups
+  - opam:
+      name: rocq-mathcomp-classical
+      version: '{ >= "1.16.0" }'
+    description: MathComp classical logic
+  - opam:
+      name: rocq-hierarchy-builder
+      version: '{ >= "1.5.0" }'
+    description: Hierarchy Builder
+
+namespace: Digraph
+
+build: |-
+  ## Building instructions
+
+  ``` shell
+  make
+  make install
+  ```

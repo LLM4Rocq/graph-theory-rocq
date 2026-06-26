@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+Lemma no_short_strong3 (H : orientedDigraph) :
+  (forall v : H, outdeg v = 3) -> 0 < #|H| -> strongb H ->
+  ell H <= 5 -> False.
+\end{lstlisting}
+\rocqsource{theories/applications/ck3/ck3_main.v}{28}

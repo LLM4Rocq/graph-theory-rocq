@@ -1,0 +1,10 @@
+\begin{lstlisting}[language=Rocq]
+Definition lexprod : Type := (D1 * D2)%type.
+
+Lemma lexprod_arcE (u v : lexprod) :
+  (u --> v) = (u.1 --> v.1) || (u.1 == v.1) && (u.2 --> v.2).
+
+Definition lexprod_tournament (T1 T2 : tournament) : tournament :=
+  lexprod T1 T2 : tournament.
+\end{lstlisting}
+\rocqsource{theories/constructions/product.v}{25}

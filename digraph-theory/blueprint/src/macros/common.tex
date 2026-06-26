@@ -1,0 +1,26 @@
+% Macros shared by web and PDF versions.
+
+% --- Theorem-like environments (used by the dependency graph). ---
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{fact}[theorem]{Fact}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% --- Code-formatted Rocq names. ---
+\newcommand{\code}[1]{\texttt{#1}}
+
+% --- Math shorthands. ---
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\obar}{\bar{\omega}}
+
+% --- cleveref-style \cref shim. ---
+\providecommand{\cref}[1]{\ref{#1}}
+\providecommand{\Cref}[1]{\ref{#1}}

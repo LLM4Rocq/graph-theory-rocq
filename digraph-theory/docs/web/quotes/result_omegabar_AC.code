@@ -1,0 +1,2 @@
+% theories/applications/k5/acn_base.v:374
+Theorem omegabar_AC : (3 <= m)%N -> ω̄((AC m' : tournament)) = 3.

@@ -1,0 +1,8 @@
+\begin{lstlisting}[language=Rocq]
+Definition ltp p u v := enum_rank (p u) < enum_rank (p v).
+
+Definition realize : {perm V} := perm rfun_inj.
+
+Lemma ltp_realizeE u v : ltp realize u v = r u v.
+\end{lstlisting}
+\rocqsource{theories/core/order.v}{39}

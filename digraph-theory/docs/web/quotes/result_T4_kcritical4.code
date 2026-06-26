@@ -1,0 +1,2 @@
+% theories/applications/k4/k4_main.v:59
+Theorem T4_kcritical4 : kcritical 4 T4.

@@ -1,0 +1,95 @@
+\chapter{How to read a formal statement}
+\label{ch:primer}
+
+This chapter is the only Rocq you need. Statements in this document are
+shown \emph{verbatim} from the library source (grey boxes, with a
+clickable \texttt{[file:line]} link to GitHub); this page explains the
+ambient conventions once and for all.
+
+\section{What the machine guarantees, and what you must check}
+
+A proof assistant divides the work cleanly:
+
+\begin{itemize}
+\item \textbf{The machine checks the proofs.} Every theorem in this
+  document has been verified by the Rocq kernel down to the axioms of
+  its type theory, and every one reports
+  \rocqinline@Print Assumptions: Closed under the global context@ ---
+  no axioms, no admitted steps, nothing assumed. Proofs are therefore
+  \emph{not shown}: reading them adds nothing to your confidence.
+\item \textbf{You check the statements.} The only way a formalization
+  can be wrong for a mathematician is that the formal statement does
+  not say what the informal one means. That is exactly what this
+  document is for: each result page lists \emph{every} definition its
+  statement depends on (the blue ``Everything this statement needs''
+  panel), and each definition has a Dictionary entry with the verbatim
+  formal text and a note on why it captures the intended notion.
+\item \textbf{The lists themselves are machine-generated.} A script
+  computes the statement's dependency closure from the compiled
+  library and CI fails if a needed definition has no Dictionary entry,
+  or if a quoted text drifts from the source. What you read is what
+  the kernel saw.
+\end{itemize}
+
+\section{Reading the notation}
+
+\textbf{Finite types.} All graphs here are finite. A vertex set is a
+\rocqinline@finType@ (a type with a finite enumeration);
+\rocqinline@#|T|@ is its cardinality, \rocqinline@{set T}@ the type of
+its subsets, \rocqinline@{perm T}@ the type of its permutations.
+Quantification \rocqinline@[forall v : T, P v]@ over a finite type is
+an (effectively computable) Boolean.
+
+\textbf{Booleans as statements.} MathComp states decidable properties
+as Boolean computations: \rocqinline@==@ is decidable equality,
+\rocqinline@&&@, \rocqinline@||@, \rocqinline@~~@ are and/or/not, and a
+Boolean \rocqinline@b@ used as a statement abbreviates
+\rocqinline@b = true@. For finite objects this is a presentation
+choice, not a logical restriction: every such Boolean is provably
+equivalent to the corresponding ordinary proposition.
+
+\textbf{Numbers.} \rocqinline@nat@ is $\{0,1,2,\dots\}$;
+\rocqinline@n.+1@, \rocqinline@n.-1@, \rocqinline@n.*2@ are $n{+}1$,
+$n{-}1$ (truncated), $2n$; \rocqinline@<=@ and \rocqinline@<@ on
+\rocqinline@nat@ are the usual order (the \rocqinline@%N@ marker just
+selects this arithmetic when several are in scope).
+\rocqinline@'Z_n@ is the ring $\mathbb{Z}/n\mathbb{Z}$; for
+\rocqinline@z : 'Z_n@, \rocqinline@val z@ is its representative in
+$\{0,\dots,n-1\}$.
+
+\textbf{The recurring index convention.} The circulant families need
+``every odd $n = 2m+1$ with $m \ge 3$''. In the formal statements this
+appears as a parameter \rocqinline@m' : nat@ with the abbreviations
+$m :=$ \rocqinline@m'.+1@ and $n :=$ \rocqinline@m.*2.+1@, plus a
+hypothesis \rocqinline@(3 <= m'.+1)%N@. So \rocqinline@m'@ ranges over
+$\{2,3,4,\dots\}$, $m$ over $\{3,4,5,\dots\}$ and $n$ over
+$\{7,9,11,\dots\}$ --- exactly the intended family, with the
+non-degeneracy $n \ge 3$ built into the shape of $n$.
+
+\textbf{Sections.} Library files fix common parameters with
+\rocqinline@Variable@/\rocqinline@Hypothesis@ inside a
+\rocqinline@Section@. A statement quoted from inside a section is
+implicitly universally quantified over these parameters; where it
+matters, the result page says so in the Decoded box. (After the
+section ends, Rocq performs this quantification mechanically; the
+quoted in-file form and the exported form denote the same theorem.)
+
+\textbf{Structures.} ``\rocqinline@T : tournament@'' reads ``$T$ is a
+tournament'': a type bundled with an arc relation satisfying the
+tournament axioms (\cref{def:tournament}). Writing
+\rocqinline@v : T@ for a vertex of the bundled $T$ is the formal
+counterpart of ``$v \in V(T)$''.
+
+\section{The two headline objects}
+
+Everything in this document concerns two invariants, both defined in
+the Dictionary with full pedigree:
+
+\begin{itemize}
+\item $\bar\omega(T)$, the \emph{tournament clique number}
+  (\cref{def:omegabar}): the minimum over all orderings of $V(T)$ of
+  the clique number of the \emph{backedge graph}
+  (\cref{def:backedge}). Written with the omega-bar notation in the source.
+\item $\ell(D)$, the length of a longest directed simple path
+  (\cref{def:ell}).
+\end{itemize}

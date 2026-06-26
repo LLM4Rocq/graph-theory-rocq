@@ -1,0 +1,2 @@
+% theories/core/oriented.v:47
+Definition outdeg v := #|[set w | v --> w]|.

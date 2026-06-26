@@ -1,0 +1,282 @@
+\chapter{The Dictionary: every definition you need}
+\label{ch:dictionary}
+
+Each entry: the mathematical notion, the verbatim formal text, and ---
+where there is anything to argue --- why the formal object is the
+intended one. Result pages link here; the blue panels list exactly
+which entries each result needs.
+
+\defblockhead{Digraphs and arcs ($u \longrightarrow v$)}{def:arc}
+
+A digraph is a (finite, in this document) vertex type equipped with an
+arc relation. The library roots its own hierarchy on a bare relation:
+
+\input{../web/quotes/block_arc}
+
+\noindent
+\rocqinline@rel V@ is the type of Boolean binary relations on
+\rocqinline@V@; \rocqinline@u --> v@ is notation for
+\rocqinline@arc u v@, ``there is an arc from $u$ to $v$''.
+A \rocqinline@diGraphType@ is a finite type bundled with such a
+relation, with no further axioms.
+
+\begin{faithnote}
+No axioms at this level means nothing is smuggled in: loops and
+2-cycles are not yet excluded. They are excluded exactly where the
+mathematics requires it --- by the oriented/tournament axioms below.
+Isomorphism of digraphs is the evident notion (\cref{def:dgiso}).
+\end{faithnote}
+
+\defblockhead{Digraph isomorphism}{def:dgiso}
+
+\input{../web/quotes/block_dgiso}
+
+\noindent A bijection between the vertex types that preserves and
+reflects arcs ($f u \to f v$ iff $u \to v$, as Booleans).
+
+\defblockhead{Oriented digraphs}{def:oriented}
+
+An \emph{oriented digraph} (an ``oriented graph'' in the combinatorics
+literature) has no loops and no digons:
+
+\input{../web/quotes/block_oriented}
+
+\noindent
+\rocqinline@arc_irrefl@ forbids loops; \rocqinline@arc_asymm@ says
+$u \to v$ and $v \to u$ cannot both hold. The bundled structure is
+\rocqinline@orientedDigraph@.
+
+\defblockhead{Out-degree}{def:outdeg}
+
+\input{../web/quotes/block_outdeg}
+
+\noindent The number of out-neighbours of $v$: $d^+(v) = |\{w : v \to
+w\}|$. The path results state their hypothesis as
+``\rocqinline@forall v, k <= outdeg v@'', i.e.\ minimum out-degree
+$\delta^+ \ge k$.
+
+\defblockhead{Tournaments}{def:tournament}
+
+A tournament orients every pair: for distinct $u,v$ exactly one of
+$u \to v$, $v \to u$ holds.
+
+\input{../web/quotes/block_tournament}
+
+\noindent
+\rocqinline@(+)@ is exclusive or, so the axiom reads: $u \ne v$ iff
+exactly one of the two arcs is present. Together with irreflexivity
+(inherited from \rocqinline@Oriented@) this is precisely the textbook
+definition. The bundled structure is \rocqinline@tournament@.
+
+\begin{faithnote}
+On the diagonal the axiom specialises to $\mathrm{false} =
+(u \to u) \oplus (u \to u)$, which holds trivially --- irreflexivity
+is genuinely carried by the \rocqinline@Oriented@ layer, and totality
+by this one; no case is lost.
+\end{faithnote}
+
+\defblockhead{Transitive tournaments}{def:transb}
+
+\input{../web/quotes/block_transb}
+
+\noindent The Boolean ``the arc relation is transitive''. Transitive
+tournaments are exactly the linearly ordered ones; they are the
+tournaments with $\bar\omega = 1$
+(\rocqinline@omegabar_transb@, \cref{res:omegabar_transb}).
+
+\defblockhead{The directed triangle $C_3$}{def:C3}
+
+\input{../web/quotes/block_C3}
+
+\noindent Vertices $\mathbb{Z}/3$, arcs $u \to u+1$: the 3-cycle
+$0 \to 1 \to 2 \to 0$, the smallest non-transitive tournament.
+
+\defblockhead{Vertex orders as permutations}{def:ltp}
+
+$\bar\omega$ quantifies over \emph{orderings of the vertex set}. The
+library represents an ordering by a permutation $p$, compared through
+the position of the enumeration:
+
+\input{../web/quotes/block_ltp}
+
+\noindent
+\rocqinline@ltp p u v@ reads ``$u$ precedes $v$ in the order named by
+$p$''.
+
+\begin{faithnote}
+Two directions need checking. (i) Every \rocqinline@ltp p@ is an
+irreflexive, transitive, total comparison --- a strict linear order on
+the vertices. (ii) Conversely, \emph{every} strict linear order arises
+this way: \rocqinline@realize@ turns any irreflexive transitive total
+relation \rocqinline@r@ into a permutation, and
+\rocqinline@ltp_realizeE@ states \rocqinline@ltp realize u v = r u v@.
+So quantifying over \rocqinline@{perm T}@ is quantifying over all
+$|T|!$ vertex orders --- no order is missed, which is what makes the
+\emph{minimum} in $\bar\omega$ honest.
+\end{faithnote}
+
+\defblockhead{The backedge graph}{def:backedge}
+
+Fix a tournament $T$ and an order $p$. The backedge graph has an
+(undirected) edge between $u$ and $v$ when the arc between them points
+\emph{backwards} with respect to $p$:
+
+\input{../web/quotes/block_backedge}
+
+\noindent
+\rocqinline@sgraph@ is the simple-graph type of the
+\texttt{coq-graph-theory} library, whose clique machinery
+(\rocqinline@cliques@, \rocqinline@omega@) is reused unchanged;
+\rocqinline@u -- v@ is its edge relation.
+
+\begin{faithnote}
+A set $K$ is a clique of the backedge graph iff, listing $K$ in
+$p$-increasing order, every later vertex beats every earlier one ---
+i.e.\ $K$ is a ``reverse-ordered'' subtournament under $p$. This is
+the standard combinatorial reading of backedge cliques.
+\end{faithnote}
+
+\defblockhead{The tournament clique number $\bar\omega$}{def:omegabar}
+
+\input{../web/quotes/block_omegabar}
+
+\noindent
+\rocqinline@omegab_at p@ is the clique number of the backedge graph of
+the order $p$ (graph-theory's \rocqinline@omega@ of the full vertex
+set); \rocqinline@omegabar@ takes the \emph{minimum} over all $p$
+(\rocqinline@[arg min_(...)]@ is MathComp's minimiser over the finite
+type \rocqinline@{perm T}@). The display notation in the source is
+the omega-bar of the quoted statements.
+
+\begin{faithnote}
+$\bar\omega(T) = \min_{\prec} \omega(\mathrm{BE}(T,\prec))$ over all
+$|T|!$ linear orders $\prec$, by the realization argument of
+\cref{def:ltp}. This matches Aboulker--Aubian--Charbit--Lopes
+(arXiv:2310.04265, where the invariant measures the distance of $T$
+from transitivity); $\bar\omega(T) = 1$ iff $T$ is transitive
+(\cref{res:omegabar_transb}).
+\end{faithnote}
+
+\defblockhead{$k$-$\bar\omega$-critical tournaments}{def:kcritical}
+
+\input{../web/quotes/block_kcritical}
+
+\noindent $T$ is $k$-critical when $\bar\omega(T) = k$ and deleting
+\emph{any single} vertex drops $\bar\omega$ to $k-1$. The
+\rocqinline@[forall v : T, ...]@ ranges over all vertices;
+\rocqinline@k.-1@ is $k - 1$.
+
+\defblockhead{Subtournaments and vertex deletion}{def:subdel}
+
+\input{../web/quotes/block_subdel}
+
+\noindent For $S \subseteq V(T)$, \rocqinline@sub_tournament S@ is the
+induced subtournament: its vertices are the elements of $S$ (a
+dependent-pair type, whose first projection \rocqinline@val@ is the
+underlying vertex) and its arcs are inherited verbatim
+(\rocqinline@sub_arcE@). Deleting $v$ is the special case
+$S = V \setminus \{v\}$ (\rocqinline@[set~ v]@).
+
+\defblockhead{Directed domination}{def:domination}
+
+\input{../web/quotes/block_domination}
+
+\noindent $u$ dominates $v$ if $u = v$ or $u \to v$;
+$\mathrm{dom}(T)$ is the least size of a set dominating every vertex.
+Used in the general bound $\mathrm{dom}(T) \le \bar\omega(T)$
+(\cref{res:domnum_le_omegabar}).
+
+\defblockhead{Automorphisms}{def:aut}
+
+\input{../web/quotes/block_aut}
+
+\noindent A permutation of the vertices preserving arcs in both
+directions; \rocqinline@dgaut@ is the set of all of them (a group).
+
+\defblockhead{Vertex-transitivity}{def:vt}
+
+\input{../web/quotes/block_vt}
+
+\noindent For every pair of vertices some automorphism carries one to
+the other. All three critical families here are vertex-transitive ---
+which is why checking one deletion suffices
+(\cref{res:vt_kcritical}).
+
+\defblockhead{Lexicographic substitution $S[H]$}{def:lexprod}
+
+\input{../web/quotes/block_lexprod}
+
+\noindent Vertices are pairs $(s,h)$; between different $S$-blocks the
+arc follows the $S$-arc of the first coordinates, inside a block it
+follows $H$ (\rocqinline@lexprod_arcE@ is the characterising equation:
+the arc is \rocqinline@(u.1 --> v.1) || (u.1 == v.1) && (u.2 --> v.2)@,
+and for tournaments the first disjunct can only fire when
+$u.1 \neq v.1$). This is the standard substitution/composition
+$S[H]$: every block is a copy of $H$, blocks are arranged as $S$.
+
+\defblockhead{Cayley digraphs}{def:cayley}
+
+\input{../web/quotes/block_cayley}
+
+\noindent For a finite group $G$ and connection set $A \subseteq G$:
+vertices $G$, arc $x \to y$ iff $x^{-1}y \in A$. Over
+$\mathbb{Z}/n$ (written additively) this is the circulant: $x \to y$
+iff $y - x \in A$.
+
+\defblockhead{The circulant tournament $\mathrm{AC}_n$}{def:AC}
+
+The paper's witness platform: for odd $n = 2m+1$, the circulant with
+connection set $g = \{1, \dots, m-1\} \cup \{m+1\}$:
+
+\input{../web/quotes/block_AC}
+
+\noindent
+(\rocqinline@val z@ is the representative of $z \in \mathbb{Z}/n$ in
+$\{0,\dots,n{-}1\}$; the set comprehension says $0 < \mathrm{val}\, z
+< m$ or $\mathrm{val}\, z = m+1$.) Since $g$ contains exactly one of
+$\{z, -z\}$ for each $z \ne 0$, $\mathrm{AC}_n$ is a tournament; as a
+Cayley digraph it is vertex-transitive. Throughout, $m$ is
+\rocqinline@m'.+1@ and $n$ is \rocqinline@m.*2.+1@
+(\cref{ch:primer}). In statements quoted from section contexts, the
+local abbreviations \rocqinline@ACm@, \rocqinline@m@, \rocqinline@n@
+denote \rocqinline@AC m'@, \rocqinline@m'.+1@, \rocqinline@m.*2.+1@.
+
+\defblockhead{The $k=4$ family $\mathrm{AC}_n[C_3]$}{def:T4family}
+
+\rocqinline@T4@ abbreviates
+\rocqinline@lexprod_tournament ACm (C3 : tournament)@: the
+substitution of the directed triangle into $\mathrm{AC}_n$
+(\cref{def:lexprod,def:AC,def:C3}), a vertex-transitive tournament on
+$3n$ vertices.
+
+\defblockhead{The $k=5$ family $\mathrm{AC}_n[\mathrm{AC}_n]$}{def:T5family}
+
+\rocqinline@T5@ abbreviates \rocqinline@lexprod_tournament ACm ACm@:
+$\mathrm{AC}_n$ substituted into itself, a vertex-transitive
+tournament on $n^2$ vertices.
+
+\defblockhead{Directed simple paths}{def:dipath}
+
+\input{../web/quotes/block_dipath}
+
+\noindent \rocqinline@path arc x s@ (MathComp) says consecutive
+elements of \rocqinline@x :: s@ are joined by arcs;
+\rocqinline@uniq@ makes the path simple. Its \emph{length} (number of
+arcs) is \rocqinline@size s@.
+
+\defblockhead{The longest-path length $\ell(D)$}{def:ell}
+
+\input{../web/quotes/block_ell}
+
+\noindent $\ell(D)$ is the largest $k$ for which a directed simple
+path with $k$ arcs exists (\rocqinline@\max_(...)@ over the finite
+range; a simple path has at most $|D| - 1 < |D|$ arcs, so the bounded
+maximum is the true maximum). The display notation in the source is the script ell of
+the quoted statements.
+
+\defblockhead{Strong connectivity}{def:strong}
+
+\input{../web/quotes/block_strong}
+
+\noindent Every vertex reaches every other by a directed walk
+(\rocqinline@connect@ is MathComp's reflexive-transitive closure).

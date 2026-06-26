@@ -1,0 +1,3 @@
+% theories/applications/k4/k4_main.v:74
+Theorem conjecture_5_10_at_k4 (N : nat) :
+  exists T : tournament, kcritical 4 T /\ (N < #|T|)%N.

@@ -1,0 +1,2 @@
+% theories/invariants/strong.v:37
+Definition strongb := [forall x : D, forall y : D, connect arc x y].

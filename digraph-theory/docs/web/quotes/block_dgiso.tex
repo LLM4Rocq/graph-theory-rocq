@@ -1,0 +1,5 @@
+\begin{lstlisting}[language=Rocq]
+Definition dgiso (D1 D2 : diGraphType) : Prop :=
+  exists f : D1 -> D2, bijective f /\ forall u v, (f u --> f v) = (u --> v).
+\end{lstlisting}
+\rocqsource{theories/core/digraph.v}{97}

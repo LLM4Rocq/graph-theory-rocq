@@ -1,0 +1,86 @@
+\chapter{General tournament theory}
+\label{ch:general}
+
+The reusable theorems behind the families --- of independent interest
+for anyone working with $\bar\omega$.
+
+\resulthead{$\bar\omega = 1$ exactly for transitive tournaments}{omegabar_transb}
+
+\input{../web/quotes/result_omegabar_transb}
+
+\begin{decoded}
+For a nonempty tournament, $\bar\omega(T) = 1$ iff $T$ is transitive
+(\cref{def:transb}) --- the sanity anchor for reading $\bar\omega$ as
+a distance from transitivity. (The statement is a Boolean equation
+between $\bar\omega(T) = 1$ and \rocqinline@transb T@,
+both Booleans.)
+\end{decoded}
+
+\input{../web/panels/omegabar_transb}
+
+\resulthead{The substitution lower bound}{omegabar_lexprod_ge}
+
+\input{../web/quotes/result_omegabar_lexprod_ge}
+
+\begin{decoded}
+$\bar\omega(S) + \bar\omega(H) \le \bar\omega(S[H]) + 1$ for any
+tournaments $S, H$ (quoted inside a section fixing nonempty
+\rocqinline@S@, \rocqinline@H@): substitution composes criticality
+levels. This is what makes the tower $\mathrm{AC}_n \to
+\mathrm{AC}_n[C_3] \to \mathrm{AC}_n[\mathrm{AC}_n]$ work.
+\end{decoded}
+
+\input{../web/panels/omegabar_lexprod_ge}
+
+\resulthead{Vertex-transitive tournaments: one deletion decides criticality}{vt_kcritical}
+
+\input{../web/quotes/result_vt_kcritical}
+\input{../web/quotes/result_omegabar_del_vt}
+\label{res:omegabar_del_vt}
+
+\begin{decoded}
+In a vertex-transitive tournament all single-vertex deletions have
+the same $\bar\omega$ (second statement), so $k$-criticality reduces
+to the value of $\bar\omega(T)$ and of one deletion
+$\bar\omega(T - v_0)$ (first statement, a Boolean equivalence).
+\end{decoded}
+
+\input{../web/panels/vt_kcritical}
+
+\resulthead{Domination bounds the clique number}{domnum_le_omegabar}
+
+\input{../web/quotes/result_domnum_le_omegabar}
+
+\begin{decoded}
+$\mathrm{dom}(T) \le \bar\omega(T)$ for every tournament: a minimum
+backedge-clique under an optimal order dominates
+(\cref{def:domination}). This is the standard lower-bound tool for
+$\bar\omega$.
+\end{decoded}
+
+\input{../web/panels/domnum_le_omegabar}
+
+\resulthead{$C_3$ is the unique 2-critical tournament}{kcritical2_uniq}
+
+\input{../web/quotes/result_kcritical2_uniq}
+
+\begin{decoded}
+Every $2$-$\bar\omega$-critical tournament is isomorphic
+(\cref{def:dgiso}) to the directed triangle (\cref{def:C3}): the
+base of the criticality hierarchy is unique.
+\end{decoded}
+
+\input{../web/panels/kcritical2_uniq}
+
+\resulthead{Proper subtournaments of critical tournaments}{kcritical_proper_sub}
+
+\input{../web/quotes/result_kcritical_proper_sub}
+
+\begin{decoded}
+If $T$ is $k$-$\bar\omega$-critical and $S \subsetneq V(T)$, then the
+induced subtournament on $S$ has $\bar\omega \le k - 1$: criticality
+leaves no proper witness inside. This single lemma is what refutes
+Question 5.9 at every $k$ (\cref{ch:unified}).
+\end{decoded}
+
+\input{../web/panels/kcritical_proper_sub}

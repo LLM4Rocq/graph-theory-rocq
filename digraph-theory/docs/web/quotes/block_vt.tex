@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+Definition vertex_transitiveb : bool :=
+  [forall u : D, [forall v : D,
+    [exists p : {perm D}, (p \in dgaut) && (p u == v)]]].
+\end{lstlisting}
+\rocqsource{theories/constructions/automorphism.v}{55}

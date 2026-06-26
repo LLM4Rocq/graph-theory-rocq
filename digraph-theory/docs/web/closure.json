@@ -1,0 +1,6339 @@
+{
+  "conjecture_5_10_at_345": {
+    "file": "theories/applications/unified.v",
+    "line": 66,
+    "statement": "conjecture_5_10_at_345 (k : nat) : (3 <= k <= 5)%N ->\n  forall N : nat, exists T : tournament, kcritical k T /\\ (N < #|T|)%N",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "conjecture_5_10_at_k3": {
+    "file": "theories/applications/unified.v",
+    "line": 33,
+    "statement": "conjecture_5_10_at_k3 (N : nat) :\n  exists T : tournament, kcritical 3 T /\\ (N < #|T|)%N",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "question_5_9_fails_at_k3": {
+    "file": "theories/applications/unified.v",
+    "line": 47,
+    "statement": "question_5_9_fails_at_k3 (L : nat) :\n  exists T : tournament,\n    [/\\ kcritical 3 T, (L < #|T|)%N\n      & forall S : {set T}, (3 <= ω̄(sub_tournament S))%N -> S = [set: T]]",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::type_scope:'['_'/\\'_x_','_x_'&'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::type_scope:'['_'/\\'_x_','_x_'&'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "conjecture_5_10_at_k4": {
+    "file": "theories/applications/k4/k4_main.v",
+    "line": 74,
+    "statement": "conjecture_5_10_at_k4 (N : nat) :\n  exists T : tournament, kcritical 4 T /\\ (N < #|T|)%N",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "question_5_9_fails_at_k4": {
+    "file": "theories/applications/k4/k4_main.v",
+    "line": 89,
+    "statement": "question_5_9_fails_at_k4 (L : nat) :\n  exists T : tournament,\n    [/\\ kcritical 4 T, (L < #|T|)%N\n      & forall S : {set T}, (4 <= ω̄(sub_tournament S))%N -> S = [set: T]]",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::type_scope:'['_'/\\'_x_','_x_'&'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::type_scope:'['_'/\\'_x_','_x_'&'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "conjecture_5_10_at_k5": {
+    "file": "theories/applications/k5/main.v",
+    "line": 108,
+    "statement": "conjecture_5_10_at_k5 (N : nat) :\n  exists T : tournament, kcritical 5 T /\\ (N < #|T|)%N",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "question_5_9_fails_at_k5": {
+    "file": "theories/applications/k5/main.v",
+    "line": 127,
+    "statement": "question_5_9_fails_at_k5 (L : nat) :\n  exists T : tournament,\n    [/\\ kcritical 5 T, (L < #|T|)%N\n      & forall S : {set T}, (5 <= ω̄(sub_tournament S))%N -> S = [set: T]]",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::type_scope:'['_'/\\'_x_','_x_'&'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::type_scope:'['_'/\\'_x_','_x_'&'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "AC_kcritical3": {
+    "file": "theories/applications/k5/acn_base.v",
+    "line": 431,
+    "statement": "AC_kcritical3 : (3 <= m)%N -> kcritical 3 (AC m' : tournament)",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.applications.k5.acn_base",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_AC": {
+    "file": "theories/applications/k5/acn_base.v",
+    "line": 374,
+    "statement": "omegabar_AC : (3 <= m)%N -> ω̄((AC m' : tournament)) = 3",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.applications.k5.acn_base",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_AC_del": {
+    "file": "theories/applications/k5/acn_base.v",
+    "line": 423,
+    "statement": "omegabar_AC_del (v : ACm) :\n  (3 <= m)%N -> ω̄(del_tournament v) = 2",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k5.acn_base",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "card_AC": {
+    "file": "theories/constructions/circulant.v",
+    "line": 129,
+    "statement": "card_AC : #|AC| = n",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      }
+    }
+  },
+  "AC_vertex_transitive": {
+    "file": "theories/constructions/circulant.v",
+    "line": 134,
+    "statement": "AC_vertex_transitive : vertex_transitiveb AC",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "autb": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dgaut": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "vertex_transitiveb": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "T4_kcritical4": {
+    "file": "theories/applications/k4/k4_main.v",
+    "line": 59,
+    "statement": "T4_kcritical4 : kcritical 4 T4",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3t": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "T4": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_T4": {
+    "file": "theories/applications/k4/k4_value.v",
+    "line": 511,
+    "statement": "omegabar_T4 : ω̄(T4) = 4",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k4.k4_value",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3t": {
+        "lib": "Digraph.applications.k4.k4_value",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "T4": {
+        "lib": "Digraph.applications.k4.k4_value",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_T4_del": {
+    "file": "theories/applications/k4/k4_main.v",
+    "line": 51,
+    "statement": "omegabar_T4_del (v : T4) : ω̄(del_tournament v) = 3",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3t": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "T4": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "card_T4": {
+    "file": "theories/applications/k4/k4_main.v",
+    "line": 67,
+    "statement": "card_T4 : #|T4| = (n * 3)%N",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "C3t": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "T4": {
+        "lib": "Digraph.applications.k4.k4_main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'*'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      }
+    }
+  },
+  "T5_kcritical5": {
+    "file": "theories/applications/k5/main.v",
+    "line": 71,
+    "statement": "T5_kcritical5 : kcritical 5 T5",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "T5": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_T5": {
+    "file": "theories/applications/k5/main.v",
+    "line": 54,
+    "statement": "omegabar_T5 : ω̄(T5) = 5",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "T5": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_T5_del": {
+    "file": "theories/applications/k5/main.v",
+    "line": 62,
+    "statement": "omegabar_T5_del (v : T5) : ω̄(del_tournament v) = 4",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "T5": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "card_T5": {
+    "file": "theories/applications/k5/main.v",
+    "line": 79,
+    "statement": "card_T5 : #|T5| = (n * n)%N",
+    "digraph": {
+      "AC": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ACm": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ACset": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "def",
+        "plumbing": false
+      },
+      "T5": {
+        "lib": "Digraph.applications.k5.main",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "cayley": {
+        "lib": "Digraph.constructions.cayley",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "m": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "n": {
+        "lib": "Digraph.constructions.circulant",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:val": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "val",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_':'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_':'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'*'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.*2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.*2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.+1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.+1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.fingroup:finGroupType": {
+        "lib": "mathcomp.fingroup.fingroup",
+        "name": "finGroupType",
+        "kind": "abbrev"
+      }
+    }
+  },
+  "ck_conj1_delta3": {
+    "file": "theories/applications/ck3/ck3_main.v",
+    "line": 147,
+    "statement": "ck_conj1_delta3 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 3 <= outdeg v) -> 6 <= ell D",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ell": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "has_dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.bigop:::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x": {
+        "lib": "mathcomp.boot.bigop",
+        "name": "::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'exists'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'exists'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.tuple:::type_scope:x_'.-tuple'": {
+        "lib": "mathcomp.boot.tuple",
+        "name": "::type_scope:x_'.-tuple'",
+        "kind": "not"
+      }
+    }
+  },
+  "ck_conj1_delta3_path": {
+    "file": "theories/applications/ck3/ck3_main.v",
+    "line": 158,
+    "statement": "ck_conj1_delta3_path (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 3 <= outdeg v) ->\n  exists x : D, exists s : seq D, dipath x s /\\ size s = 6",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:seq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "seq",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.seq:size": {
+        "lib": "mathcomp.boot.seq",
+        "name": "size",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      }
+    }
+  },
+  "ck_conj1_delta2": {
+    "file": "theories/applications/ck3/lemma7.v",
+    "line": 698,
+    "statement": "ck_conj1_delta2 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 2 <= outdeg v) -> 4 <= ell D",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ell": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "has_dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.bigop:::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x": {
+        "lib": "mathcomp.boot.bigop",
+        "name": "::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'exists'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'exists'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.tuple:::type_scope:x_'.-tuple'": {
+        "lib": "mathcomp.boot.tuple",
+        "name": "::type_scope:x_'.-tuple'",
+        "kind": "not"
+      }
+    }
+  },
+  "ck_theorem4_oriented": {
+    "file": "theories/applications/ck3/lemma7.v",
+    "line": 684,
+    "statement": "ck_theorem4_oriented (D : orientedDigraph) (delta : nat) :\n  0 < #|D| -> (forall v : D, delta <= outdeg v) ->\n  2 * delta - (delta - 1)./2 <= ell D",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ell": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "has_dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.bigop:::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x": {
+        "lib": "mathcomp.boot.bigop",
+        "name": "::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'exists'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'exists'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'*'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'-'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'-'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'./2'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'./2'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.tuple:::type_scope:x_'.-tuple'": {
+        "lib": "mathcomp.boot.tuple",
+        "name": "::type_scope:x_'.-tuple'",
+        "kind": "not"
+      }
+    }
+  },
+  "lemma7": {
+    "file": "theories/applications/ck3/lemma7.v",
+    "line": 646,
+    "statement": "lemma7 (D : orientedDigraph) (delta : nat) :\n  0 < #|D| -> (forall v : D, delta <= outdeg v) ->\n  2 * delta <= ell D \\/\n  exists S : {set D},\n    [/\\ S != set0, #|S| <= delta\n      & forall v, v \\in S -> 2 * delta - ell D <= outdeg_in S v]",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ell": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "has_dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      },
+      "outdeg_in": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'\\/'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'\\/'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::type_scope:'['_'/\\'_x_','_x_'&'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::type_scope:'['_'/\\'_x_','_x_'&'_x_']'",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.bigop:::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x": {
+        "lib": "mathcomp.boot.bigop",
+        "name": "::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'!='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'!='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'in'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'in'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:set0": {
+        "lib": "mathcomp.boot.finset",
+        "name": "set0",
+        "kind": "def"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'exists'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'exists'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'*'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'-'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'-'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.tuple:::type_scope:x_'.-tuple'": {
+        "lib": "mathcomp.boot.tuple",
+        "name": "::type_scope:x_'.-tuple'",
+        "kind": "not"
+      }
+    }
+  },
+  "no_short_strong3": {
+    "file": "theories/applications/ck3/ck3_main.v",
+    "line": 28,
+    "statement": "no_short_strong3 (H : orientedDigraph) :\n  (forall v : H, outdeg v = 3) -> 0 < #|H| -> strongb H ->\n  ell H <= 5 -> False",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ell": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "has_dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      },
+      "strongb": {
+        "lib": "Digraph.invariants.strong",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:False": {
+        "lib": "Corelib.Init.Logic",
+        "name": "False",
+        "kind": "ind"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.bigop:::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x": {
+        "lib": "mathcomp.boot.bigop",
+        "name": "::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fingraph:connect": {
+        "lib": "mathcomp.boot.fingraph",
+        "name": "connect",
+        "kind": "def"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'exists'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'exists'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'forall'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'forall'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.tuple:::type_scope:x_'.-tuple'": {
+        "lib": "mathcomp.boot.tuple",
+        "name": "::type_scope:x_'.-tuple'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_lexprod_ge": {
+    "file": "theories/invariants_advanced/substitution.v",
+    "line": 168,
+    "statement": "omegabar_lexprod_ge :\n  ω̄(S) + ω̄(H) <= ω̄(lexprod_tournament S H) + 1",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "lexprod": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "lexprod_tournament": {
+        "lib": "Digraph.constructions.product",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::type_scope:x_'*'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::type_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'+'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'+'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "vt_kcritical": {
+    "file": "theories/invariants_advanced/transitive.v",
+    "line": 57,
+    "statement": "vt_kcritical (k : nat) (v0 : T) :\n  vertex_transitiveb (T : diGraphType) ->\n  kcritical k T = (ω̄(T) == k) && (ω̄(del_tournament v0) == k.-1)",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "autb": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dgaut": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      },
+      "diGraphType": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "vertex_transitiveb": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_del_vt": {
+    "file": "theories/invariants_advanced/transitive.v",
+    "line": 47,
+    "statement": "omegabar_del_vt :\n  vertex_transitiveb (T : diGraphType) ->\n  forall u v : T, ω̄(del_tournament u) = ω̄(del_tournament v)",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "autb": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dgaut": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      },
+      "diGraphType": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "vertex_transitiveb": {
+        "lib": "Digraph.constructions.automorphism",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "domnum_le_omegabar": {
+    "file": "theories/invariants/domination.v",
+    "line": 114,
+    "statement": "domnum_le_omegabar : domnum <= ω̄(T)",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "dominatesb": {
+        "lib": "Digraph.invariants.domination",
+        "kind": "def",
+        "plumbing": false
+      },
+      "domnum": {
+        "lib": "Digraph.invariants.domination",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_'in'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_'in'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_'|'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_'|'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "kcritical2_uniq": {
+    "file": "theories/invariants/critical.v",
+    "line": 124,
+    "statement": "kcritical2_uniq : dgiso (C3 : diGraphType) T",
+    "digraph": {
+      "C3": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dgiso": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "diGraphType": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrfun:bijective": {
+        "lib": "Corelib.ssr.ssrfun",
+        "name": "bijective",
+        "kind": "variant"
+      },
+      "mathcomp.algebra.zmodp:::type_scope:'''Z_'_x": {
+        "lib": "mathcomp.algebra.zmodp",
+        "name": "::type_scope:'''Z_'_x",
+        "kind": "not"
+      }
+    }
+  },
+  "kcritical_proper_sub": {
+    "file": "theories/invariants/critical.v",
+    "line": 46,
+    "statement": "kcritical_proper_sub (k : nat) (T : tournament) (S : {set T}) :\n  kcritical k T -> S != [set: T] -> (ω̄(sub_tournament S) <= k.-1)%N",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "del_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "kcritical": {
+        "lib": "Digraph.invariants.critical",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "sub_tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:bool": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "bool",
+        "kind": "ind"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
+        "lib": "Corelib.Init.Specif",
+        "name": "::type_scope:'{'_x_':'_x_'|'_x_'}'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'\\in'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'!='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'!='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_'~'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_'~'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::type_scope:'{'_'set'_x_'}'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::type_scope:'{'_'set'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'.-1'": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'.-1'",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  },
+  "omegabar_transb": {
+    "file": "theories/invariants/omegabar.v",
+    "line": 74,
+    "statement": "omegabar_transb : 0 < #|T| -> (ω̄(T) == 1) = transb T",
+    "digraph": {
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_irrefl": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "backedge_rel": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "backedge_sym": {
+        "lib": "Digraph.core.order",
+        "kind": "prf",
+        "plumbing": false
+      },
+      "ltp": {
+        "lib": "Digraph.core.order",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegab_at": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "omegabar": {
+        "lib": "Digraph.invariants.omegabar",
+        "kind": "def",
+        "plumbing": false
+      },
+      "tournament": {
+        "lib": "Digraph.core.tournament",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "transb": {
+        "lib": "Digraph.core.tournament",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:::bool_scope:x_'||'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'||'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::bool_scope:x_'==>'_x": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::bool_scope:x_'==>'_x",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "::function_scope:'['_'rel'_x_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "Corelib.ssr.ssrbool:irreflexive": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "irreflexive",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:rel": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "rel",
+        "kind": "def"
+      },
+      "Corelib.ssr.ssrbool:symmetric": {
+        "lib": "Corelib.ssr.ssrbool",
+        "name": "symmetric",
+        "kind": "def"
+      },
+      "GraphTheory.core.coloring::::'ω('_x_')'": {
+        "lib": "GraphTheory.core.coloring",
+        "name": ":::'ω('_x_')'",
+        "kind": "not"
+      },
+      "GraphTheory.core.sgraph:SGraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "SGraph",
+        "kind": "constr"
+      },
+      "GraphTheory.core.sgraph:sgraph": {
+        "lib": "GraphTheory.core.sgraph",
+        "name": "sgraph",
+        "kind": "rec"
+      },
+      "mathcomp.boot.eqtype:::bool_scope:x_'=='_x": {
+        "lib": "mathcomp.boot.eqtype",
+        "name": "::bool_scope:x_'=='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_':'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_':'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'forall'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'forall'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'['_'arg'_'min_'_'('_x_'<'_x_')'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:enum_rank": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "enum_rank",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.fingroup.perm",
+        "name": "::type_scope:'{'_'perm'_x_'}'",
+        "kind": "not"
+      }
+    }
+  }
+}

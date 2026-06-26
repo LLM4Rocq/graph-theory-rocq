@@ -1,0 +1,2 @@
+% theories/applications/k5/main.v:71
+Theorem T5_kcritical5 : kcritical 5 T5.

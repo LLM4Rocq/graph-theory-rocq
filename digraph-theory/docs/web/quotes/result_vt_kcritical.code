@@ -1,0 +1,4 @@
+% theories/invariants_advanced/transitive.v:57
+Theorem vt_kcritical (k : nat) (v0 : T) :
+  vertex_transitiveb (T : diGraphType) ->
+  kcritical k T = (ω̄(T) == k) && (ω̄(del_tournament v0) == k.-1).

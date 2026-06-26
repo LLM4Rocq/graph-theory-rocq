@@ -1,0 +1,6 @@
+\begin{lstlisting}[language=Rocq]
+Theorem vt_kcritical (k : nat) (v0 : T) :
+  vertex_transitiveb (T : diGraphType) ->
+  kcritical k T = (`$\bar\omega$`(T) == k) && (`$\bar\omega$`(del_tournament v0) == k.-1).
+\end{lstlisting}
+\rocqsource{theories/invariants_advanced/transitive.v}{57}

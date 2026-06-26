@@ -1,0 +1,5 @@
+\begin{lstlisting}[language=Rocq]
+Lemma kcritical_proper_sub (k : nat) (T : tournament) (S : {set T}) :
+  kcritical k T -> S != [set: T] -> (`$\bar\omega$`(sub_tournament S) <= k.-1)%N.
+\end{lstlisting}
+\rocqsource{theories/invariants/critical.v}{46}

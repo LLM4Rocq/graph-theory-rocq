@@ -1,0 +1,5 @@
+\begin{lstlisting}[language=Rocq]
+Definition kcritical (k : nat) (T : tournament) : bool :=
+  (`$\bar\omega$`(T) == k) && [forall v : T, `$\bar\omega$`(del_tournament v) == k.-1].
+\end{lstlisting}
+\rocqsource{theories/invariants/critical.v}{21}

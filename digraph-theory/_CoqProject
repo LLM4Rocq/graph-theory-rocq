@@ -1,0 +1,109 @@
+-R theories Digraph
+
+-arg -w -arg -notation-overridden,-ambiguous-paths
+
+# --- foundations ---
+theories/foundations/prelude.v
+theories/foundations/interop_graph_theory.v
+
+# --- core ---
+theories/core/digraph.v
+theories/core/oriented.v
+theories/core/dipath.v
+theories/core/tournament.v
+theories/core/order.v
+
+# --- invariants ---
+theories/invariants/omegabar.v
+theories/invariants/strong.v
+theories/invariants/critical.v
+theories/invariants/domination.v
+
+# --- constructions ---
+theories/constructions/automorphism.v
+theories/constructions/product.v
+theories/constructions/cayley.v
+theories/constructions/circulant.v
+
+# --- advanced invariants (the marquee general theorems, M3) ---
+theories/invariants_advanced/transitive.v
+theories/invariants_advanced/substitution.v
+
+# --- the k=5 application (M4+) ---
+theories/applications/k5/acn_arc_facts.v
+theories/applications/k5/acn_base.v
+theories/applications/acn_bands.v
+theories/applications/k5/k5_lower.v
+theories/applications/k5/in_neighbourhood.v
+theories/applications/k5/cells.v
+theories/applications/k5/obstructions.v
+theories/applications/k5/coverage.v
+theories/applications/k5/k5_upper.v
+theories/applications/k5/main.v
+
+# --- the CK3 application (M7+) ---
+theories/applications/ck3/lemma7.v
+theories/applications/ck3/ck3_main.v
+
+# --- the k=4 application (M14+) ---
+theories/applications/k4/k4_lower.v
+theories/applications/k4/k4_value.v
+theories/applications/k4/k4_del.v
+theories/applications/k4/k4_main.v
+
+# --- the unified k=3,4,5 theorem (M17) ---
+theories/applications/unified.v
+
+# --- conjecture statements + implication edges (docs/CONJECTURES_FORMALIZATION_PLAN.md) ---
+theories/conjectures/external.v
+theories/conjectures/clique_cluster.v
+theories/conjectures/long_dipath.v
+theories/conjectures/classic_core.v
+theories/conjectures/dichromatic.v
+theories/conjectures/heroes.v
+theories/conjectures/heroes_dichotomy.v
+theories/conjectures/sad.v
+theories/conjectures/path_fas.v
+theories/conjectures/unvd.v
+theories/conjectures/packing.v
+theories/conjectures/chi_bounded.v
+theories/conjectures/two_extremal.v
+theories/conjectures/implications.v
+theories/conjectures/two_extremal_hajos.v
+theories/conjectures/twinwidth.v
+theories/conjectures/colouring_variants.v
+theories/conjectures/implications2.v
+theories/conjectures/reals_growth.v
+theories/conjectures/two_extremal_glue.v
+theories/conjectures/twinwidth_ordered.v
+theories/conjectures/hero_isoclosure.v
+theories/conjectures/generalised_wheel.v
+theories/conjectures/glue_tree.v
+theories/conjectures/glue_eul_subtype.v
+
+# --- grounding lemmas: easy textbook/paper facts validating the definitions ---
+theories/conjectures/grounding_dichromatic.v
+theories/conjectures/grounding_classic_core.v
+theories/conjectures/grounding_heroes.v
+theories/conjectures/grounding_sad_packing.v
+theories/conjectures/grounding_fas_unvd.v
+theories/conjectures/grounding_tww_chi_col.v
+theories/conjectures/grounding_reals.v
+theories/conjectures/grounding_two_extremal.v
+
+# --- extended grounding: statement-level non-vacuity + falsification sweep ---
+theories/conjectures/grounding_clique_long.v
+theories/conjectures/grounding_heroes_dichotomy.v
+theories/conjectures/grounding_twinwidth.v
+theories/conjectures/grounding_chi_col.v
+theories/conjectures/grounding_unvd_sad.v
+theories/conjectures/grounding_falsification_report.v
+theories/conjectures/grounding_colouring2.v
+theories/conjectures/grounding_h2_concrete.v
+theories/conjectures/grounding_edges.v
+theories/conjectures/grounding_sad2.v
+theories/conjectures/grounding_omegabar_unvd.v
+theories/conjectures/grounding_pathfas_tww.v
+theories/conjectures/grounding_reals2.v
+theories/conjectures/grounding_degreewidth_c3.v
+theories/conjectures/grounding_dichromatic_cycle.v

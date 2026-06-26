@@ -1,0 +1,3 @@
+% theories/invariants/critical.v:46
+Lemma kcritical_proper_sub (k : nat) (T : tournament) (S : {set T}) :
+  kcritical k T -> S != [set: T] -> (ω̄(sub_tournament S) <= k.-1)%N.

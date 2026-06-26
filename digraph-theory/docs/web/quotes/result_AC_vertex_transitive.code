@@ -1,0 +1,2 @@
+% theories/constructions/circulant.v:134
+Lemma AC_vertex_transitive : vertex_transitiveb AC.

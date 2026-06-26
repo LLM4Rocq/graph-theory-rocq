@@ -1,0 +1,301 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\newcommand{\ob}{\bar\omega}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Hi}{\mathsf{H}}
+\newcommand{\Lo}{\mathsf{L}}
+\newcommand{\Ninv}{N^{-}}
+\DeclareMathOperator{\dom}{dom}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{An infinite family of $5$-$\ob$-critical tournaments\\
+\large (Conjecture 5.10 of Aboulker--Aubian--Charbit--Lopes at $k=5$)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a tournament $T$ the \emph{clique number} $\ob(T)$ is the minimum, over all orderings
+$\prec$ of $V(T)$, of the clique number of the backedge graph. A tournament is
+$k$-$\ob$-critical if $\ob(T)=k$ and $\ob(T-v)=k-1$ for every vertex $v$. We prove that for
+every odd $n\ge 7$ the lexicographic substitution $AC_n[AC_n]$ of the almost-consecutive
+circulant $AC_n=\mathrm{Cay}(\Z/n,\{1,\dots,m-1\}\cup\{m+1\})$ ($n=2m+1$) into itself is
+$5$-$\ob$-critical. Hence there are infinitely many $5$-$\ob$-critical tournaments, settling
+Conjecture~5.10 of Aboulker, Aubian, Charbit and Lopes (\texttt{arXiv:2310.04265}) at $k=5$,
+and the associated local--global question (Question~5.9) fails at $k=5$. The proof reduces the
+deletion bound to a finite, $n$-independent obstruction expressed through eight ``cells'',
+closed by elementary residue arithmetic and one interval-autocorrelation lemma.
+\end{abstract}
+
+\section{Definitions and the tools used}
+
+\begin{definition}[Backedge graph; tournament clique number]
+Let $T$ be a tournament and $\prec$ a total order of $V(T)$. The \emph{backedge graph} $T^{\prec}$
+has vertex set $V(T)$ and an edge $\{u,v\}$ (with $u\prec v$) iff the arc between them is $v\to u$
+(``backward''). A \emph{backedge clique} is a clique of $T^{\prec}$: a set listed by $\prec$ in
+reverse topological order, i.e.\ every later vertex beats every earlier one. We set
+$\ob(T)=\min_{\prec}\omega(T^{\prec})$. The tournament $T$ is \emph{$k$-$\ob$-critical} if
+$\ob(T)=k$ and $\ob(T-v)=k-1$ for all $v$.
+\end{definition}
+
+\begin{definition}[Substitution]
+For tournaments $S,H$, the \emph{lexicographic substitution} $S[H]$ has vertex set
+$V(S)\times V(H)$ and an arc $(s,h)\to(s',h')$ iff $s\to s'$ in $S$ (when $s\ne s'$) or $s=s'$
+and $h\to h'$ in $H$.
+\end{definition}
+
+\begin{definition}[The base circulant]
+Fix $n=2m+1$ with $m\ge 3$ and put $g=\{1,\dots,m-1\}\cup\{m+1\}\subseteq\Z/n$. The
+\emph{almost-consecutive circulant} is $AC_n=\mathrm{Cay}(\Z/n,g)$, with arc $i\to j$ iff
+$(j-i)\bmod n\in g$. Since for each $k\in\{1,\dots,m\}$ exactly one of $k,n-k$ lies in $g$,
+$AC_n$ is a tournament; it is vertex-transitive ($x\mapsto x+1$ is an automorphism). We write
+$\Hi:=[m+1,2m]$ and $\Lo:=[1,m]$ for the two halves of $\Z/n\setminus\{0\}$.
+\end{definition}
+
+\begin{lemma}[Arc-facts]\label{lem:arc}
+With $g$ as above:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item for $a\in\Hi$: $a\in g\iff a=m+1$, and $(-a)\equiv n-a\in g\iff a\in[m+2,2m]$;
+\item for $a\in\Lo$: $a\in g\iff a\in[1,m-1]$, and $(-a)\equiv n-a\in g\iff a=m$;
+\item for $a,a'$ in one of the length-$m$ intervals $\Hi$ or $\Lo$, the residue $(a-a')\bmod n$
+lies in $[m+2,2m]\cup[1,m-1]$, hence is in $g$ only when $a>a'$ with $a-a'\le m-1$ (never the
+wrap value $m+1$).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Direct from $g=\{1,\dots,m-1\}\cup\{m+1\}$ and $n=2m+1$. For $a\in\Hi$, $n-a\in[1,m]$ meets $g$
+exactly on $[1,m-1]$, i.e.\ $a\in[m+2,2m]$. For $a\in\Lo$, $n-a\in[m+1,2m]$ meets $g$ only at
+$m+1$, i.e.\ $a=m$. For (iii), two elements of a length-$m$ interval differ by at most $m-1$ in
+absolute value, so the wrap value $m+1$ never occurs.
+\end{proof}
+
+The asymmetry in Lemma~\ref{lem:arc} between the two bands---$(-a)\in g$ selects the whole
+interval $[m+2,2m]$ in band $\Hi$ but the single point $a=m$ in band $\Lo$---is genuine and is
+used repeatedly below.
+
+\begin{proposition}[Facts about $AC_n$]\label{prop:acn}
+For every odd $n=2m+1\ge 7$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\ob(AC_n)=3$; in the identity order the unique backedge triangle is $\{0,m,2m\}$.
+\item $\ob(AC_n-v)=2$ for every $v$; in particular $AC_n$ is $3$-$\ob$-critical.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\emph{Upper bound $\ob(AC_n)\le 3$ and the unique triangle.} In the identity order a
+backedge $i<j$ means $j$ beats $i$, i.e.\ $(i-j)\bmod n\in g$, i.e.\ the gap $j-i$ lies in
+$D=\{m\}\cup\{m+2,\dots,2m\}\subseteq[m,2m]$; every backedge gap is $\ge m$. A backedge clique
+$a_1<\dots<a_k$ has consecutive gaps $\ge m$, so spread $a_k-a_1\ge(k-1)m$; as the spread is
+$\le 2m$ this forces $k\le 3$. A backedge triangle has both gaps $=m$ and spread $2m$, hence
+equals $\{0,m,2m\}$.
+
+\emph{Lower bound $\ob(AC_n)\ge 3$.} The domination number satisfies $\dom\le\ob$
+(Property~3.2 of \texttt{arXiv:2310.04265}). With $N_0=\{0\}\cup g$, $\dom\le 2$ iff some
+translate $t\ne 0$ gives $|N_0\cap(N_0+t)|=1$; writing $N_0$ as the interval $\{0,\dots,m+1\}$
+minus the point $m$, a short count gives $\min_{t\ne 0}|N_0\cap(N_0+t)|=2$ for all $m\ge 3$
+(the autocorrelation lemma; values $m-1,\,m+1-t,\,2$ for $t=1$, $2\le t\le m-1$, $t=m$). Hence
+$\dom(AC_n)\ge 3$ and $\ob(AC_n)=3$.
+
+\emph{Criticality.} By vertex-transitivity delete $v=0$. The unique triangle $\{0,m,2m\}$ uses
+$0$, so the identity order is triangle-free on $AC_n-0$ and $\ob(AC_n-0)\le 2$; and $AC_n-0$
+contains the directed triangle $1\to2\to(m+3)\to1$ (gaps $1,m+1,m-1\in g$), so $\ob(AC_n-0)=2$.
+\end{proof}
+
+\begin{proposition}[Substitution lower bound]\label{prop:lower}
+For all tournaments $S,H$, $\ \ob(S[H])\ge\ob(S)+\ob(H)-1$.
+\end{proposition}
+\begin{proof}
+Fix any order $\prec$ of $S[H]$. Each block $\{s\}\times V(H)$, under the induced order, has a
+backedge clique of size $\ge\ob(H)$. For each block let $\mathrm{rep}(s)$ be its $\prec$-minimum;
+ordered by $\prec$ these reps give an order of $S$ with a backedge clique $R$ of size
+$\ge\ob(S)$. Let $s_0$ be the $\prec$-maximum of $R$ (its source: $s_0\to s$ for all other $s\in R$).
+Replace $\mathrm{rep}(s_0)$ by a full backedge $\ob(H)$-clique $C$ of block $s_0$: every $x\in C$
+satisfies $x\succeq\mathrm{rep}(s_0)\succ\mathrm{rep}(s)$ and $s_0\to s$, so $x$ beats
+$\mathrm{rep}(s)$. Thus $C\cup\{\mathrm{rep}(s):s\in R\setminus\{s_0\}\}$ is a backedge clique of
+size $\ob(S)+\ob(H)-1$.
+\end{proof}
+
+\section{The theorem}
+
+Throughout, $T:=AC_n[AC_n]$, with vertices $(a,b)$, $a,b\in\Z/n$; $a$ is the \emph{outer} and
+$b$ the \emph{inner} coordinate, and $(a,b)\to(a',b')$ iff ($a\ne a'$ and $(a'-a)\in g$) or
+($a=a'$ and $(b'-b)\in g$). Define the \emph{potential}
+\[
+c(t)=\begin{cases}3 & t=0,\\ 2 & 1\le t\le m,\\ 1 & m+1\le t\le 2m.\end{cases}
+\]
+
+\begin{theorem}\label{thm:main}
+For every odd $n\ge 7$, $T=AC_n[AC_n]$ is $5$-$\ob$-critical: $\ob(T)=5$ and $\ob(T-v)=4$ for all
+$v$. Consequently $\{AC_n[AC_n]:n\ge 7\text{ odd}\}$ is an infinite family of $5$-$\ob$-critical
+tournaments, proving Conjecture~5.10 at $k=5$, and Question~5.9 fails at $k=5$.
+\end{theorem}
+
+Since $T$ is vertex-transitive ($(x,y)\mapsto(x+s,y+t)$ are automorphisms), it suffices to delete
+$v=(0,0)$. The proof occupies the next three sections.
+
+\section{Value: $\ob(T)=5$}
+By Proposition~\ref{prop:lower} with $S=H=AC_n$ and Proposition~\ref{prop:acn}(a),
+$\ob(T)\ge 3+3-1=5$. For the matching upper bound, order the $n^2$ vertices by the key
+$(c(a)+c(b),a,b)$; an elementary casework on the key classes (using only the $n$-independent
+arc-facts of Lemma~\ref{lem:arc}) shows the backedge clique number is $5$. Combined with
+$\ob(T)\ge5$ this gives $\ob(T)=5$. Alternatively, $\ob(T)\le5$ follows from
+$\ob(T-(0,0))\le 4$ (Section~5) since $(0,0)$ is the $\prec$-maximum of the order used there:
+a backedge clique either omits $(0,0)$ (size $\le4$) or contains it as its top vertex, the rest
+being a backedge clique of $T-(0,0)$ of size $\le4$.
+
+\section{Deletion, lower bound: $\ob(T-(0,0))\ge 4$}
+$T-(0,0)$ contains the induced subtournament on $\{(a,b):a\ne 0\}$ (it also retains every
+$(0,b)$, $b\ne0$); that induced subtournament is $(AC_n-0)[AC_n]$. By monotonicity,
+Proposition~\ref{prop:lower}, and $\ob(AC_n-0)=2$ (Proposition~\ref{prop:acn}(b)),
+\[
+\ob(T-(0,0))\ \ge\ \ob\big((AC_n-0)[AC_n]\big)\ \ge\ 2+3-1\ =\ 4 .
+\]
+
+\section{Deletion, upper bound: $\ob(T-(0,0))\le 4$}
+Order the $n^2-1$ survivors by \textbf{inner-then-outer}: $\mathrm{key}(a,b)=(c(b),c(a),a,b)$.
+The \emph{cell} of a vertex is $\chi(a,b)=(c(b),c(a))\in\{1,2,3\}^2$. As $(0,0)$ is the only
+cell-$(3,3)$ vertex, the survivors occupy the $8$ cells $\{1,2,3\}^2\setminus\{(3,3)\}$.
+
+\subsection{One vertex per cell}\label{ss:cell}
+\begin{lemma}\label{lem:cell}
+There is no backedge between two vertices of the same cell. Hence a backedge clique has at most
+one vertex per cell, and so injects into the $8$ cells.
+\end{lemma}
+\begin{proof}
+Fix a cell $(\beta,\alpha)$ and two of its vertices $(a,b),(a',b')$; then $b,b'$ lie in one
+length-$m$ monotone interval (or $b=b'=0$) and likewise $a,a'$. If $a\ne a'$, the backedge
+condition between them is $(a_{\text{earlier}}-a_{\text{later}})\in g$ with both in one
+length-$m$ interval; by Lemma~\ref{lem:arc}(iii) this residue lies in $[m+2,2m]$, disjoint from
+$g$. If $a=a'$ and $b\ne b'$, the same applies to the inner gap. Either way there is no backedge.
+\end{proof}
+
+\subsection{Band caps}
+Group the $8$ cells by inner band $c(b)$: band $1=\{(1,1),(1,2),(1,3)\}$,
+$2=\{(2,1),(2,2),(2,3)\}$, $3=\{(3,1),(3,2)\}$. By Lemma~\ref{lem:cell}, writing
+$n_j=|S\cap\text{band }j|$, immediately $n_1,n_2\le3$ and $n_3\le2$. (For $n_3$: band $3$ is
+$\{(a,0):a\ne0\}$ ordered by $(c(a),a)$ as $[m+1,\dots,2m,1,\dots,m]$; within each half
+consecutive gaps land in $[m+2,2m]\notin g$, so there is no backedge inside a half, giving
+$n_3\le2$.)
+
+\subsection{The in-neighbourhood lemma}
+\begin{lemma}[H17]\label{lem:h17}
+For $x\in\Hi$ and $y\in\Lo$, the common in-neighbourhood $\Ninv(x)\cap\Ninv(y)=(x-g)\cap(y-g)$
+in $AC_n$ lies in a single band: it is contained in $[0,m-1]$ if $x-y\le m$, and in $[m+1,2m-1]$
+if $x-y\ge m+1$. In particular it never contains both an $\Hi$-residue and an $\Lo$-residue.
+\end{lemma}
+\begin{proof}
+$\Ninv(v)=v-g=[v-m-1,\,v-1]\setminus\{v-m\}$. For $x\in\Hi$ this is a non-wrapping arc; for
+$y\in\Lo$ it wraps. Their intersection is $[x-m-1,\,y-1]\subseteq[0,m-1]$ when $x-y\le m$, and
+$[y+m,\,x-1]\subseteq[m+1,2m-1]$ when $x-y\ge m+1$---single band in either case.
+\end{proof}
+
+\subsection{No five cells are realizable}
+The $8$ cells in key order are
+$(1,1)\prec(1,2)\prec(1,3)\prec(2,1)\prec(2,2)\prec(2,3)\prec(3,1)\prec(3,2)$. We use a fixed list
+of \textbf{$20$ infeasible cell-sets}. Two facts give $\ob(T-(0,0))\le4$:
+\begin{itemize}[nosep]
+\item[(a)] each of the $20$ sets is infeasible (proved below, $n$-independently);
+\item[(b)] every $5$-subset of the $8$ cells contains one of the $20$---a purely combinatorial
+statement ($\binom{8}{5}=56$ checks, independent of $n$).
+\end{itemize}
+By Lemma~\ref{lem:cell} a backedge clique injects into the $8$ cells; by (a)+(b) it cannot occupy
+$5$ of them, so has $\le4$ vertices. We do \emph{not} claim the list is the exact set of minimal
+obstructions---only (a),(b), which suffice. We record the \emph{beat conditions}: the higher
+cell's representative $(a_H,b_H)$ beats the lower's $(a_L,b_L)$ iff $(a_L-a_H)\in g$ when
+$a_H\ne a_L$, else $(b_L-b_H)\in g$.
+
+\paragraph{(I) Ten triples} in five $c(a){=}1\leftrightarrow2$ mirror pairs. We give the band-$\Hi$
+chain of each; the band-$\Lo$ mirror uses Lemma~\ref{lem:arc}(ii) and is written afterwards.
+\begin{itemize}
+\item $\{(1,1),(1,3),(2,1)\}\ (\cong\{(1,2),(1,3),(2,2)\})$: reps $x\in(1,1)$, $y=(0,\cdot)\in(1,3)$,
+$z\in(2,1)$. $y$ beats $x$: $a_x\in g$, $a_x\in\Hi\Rightarrow a_x=m+1$. $z$ beats $y$: $(-a_z)\in g
+\Rightarrow a_z\in[m+2,2m]$. $z$ beats $x$ (same band, $a_z\ne a_x$): $(a_x-a_z)=(m+1-a_z)\in g$,
+but $m+1-a_z\in[m+2,2m]\notin g$. Contradiction.
+\item $\{(1,1),(1,3),(3,1)\}\ (\cong\{(1,2),(1,3),(3,2)\})$: same chain with $z\in(3,1)$
+($a_x=m+1$, $a_z\in[m+2,2m]$, $z$ beats $x$ needs $(m+1-a_z)\in g$, false).
+\item $\{(1,1),(2,3),(3,1)\}\ (\cong\{(1,2),(2,3),(3,2)\})$: $y\in(2,3)$, $z\in(3,1)$; identical
+($a_x=m+1$, $a_z\in[m+2,2m]$, false).
+\item $\{(2,1),(2,3),(3,1)\}\ (\cong\{(2,2),(2,3),(3,2)\})$: $x\in(2,1)$, $a_x=m+1$; $z\in(3,1)$,
+$a_z\in[m+2,2m]$; $z$ beats $x$ needs $(m+1-a_z)\in g$, false.
+\item $\{(1,3),(2,1),(2,3)\}\ (\cong\{(1,3),(2,2),(2,3)\})$: reps $u=(0,\cdot)\in(1,3)$, $v\in(2,1)$,
+$w=(0,\cdot)\in(2,3)$. $v$ beats $u$: $(-a_v)\in g\Rightarrow a_v\in[m+2,2m]$. $w$ beats $v$:
+$a_v\in g\Rightarrow a_v=m+1$, contradicting $a_v\in[m+2,2m]$.
+\end{itemize}
+\emph{Band-$\Lo$ mirrors.} The first four: $y=(0,\cdot)$ beats $x=(a_x,\cdot)$ forces $a_x\in g$,
+$a_x\in\Lo\Rightarrow a_x\in[1,m-1]$; the beaten-by-source coordinate $a_z$ satisfies $(-a_z)\in g$,
+$a_z\in\Lo\Rightarrow a_z=m$; then $z$ beats $x$ needs $(a_x-m)\equiv a_x+m+1\in[m+2,2m]\notin g$.
+The fifth: $v\in(2,2)$ gives $(-a_v)\in g\Rightarrow a_v=m$, and $w=(0,\cdot)$ beats $v$ needs
+$a_v\in g$, but $a_v=m\notin g$. All contradictions.
+
+\paragraph{(II) Four outer-source quadruples} (cells in key order; every step is an arc-fact of
+Lemma~\ref{lem:arc}):
+\begin{itemize}
+\item $\{(1,1),(1,2),(2,1),(2,3)\}$: $p\in(1,1),q\in(1,2),r\in(2,1),s=(0,\cdot)\in(2,3)$ (top). $s$
+beats $p,r\Rightarrow a_p=a_r=m+1$ (same block). Then $q\succ p$ needs $(m+1-a_q)\in g$ while
+$r\succ q$ needs $(a_q-(m+1))\in g$: opposite arcs between blocks $a_q$ and $m+1$, impossible.
+\item $\{(1,2),(2,1),(2,2),(2,3)\}$: $p\in(1,2),q\in(2,1),r\in(2,2),s=(0,\cdot)\in(2,3)$. $s$ beats
+$q\Rightarrow a_q=m+1$; $s$ beats $p,r\Rightarrow a_p,a_r\in[1,m-1]$. $q\succ p$:
+$(a_p-(m+1))\equiv a_p+m\in g\Rightarrow a_p=1$. $r\succ q$: $(m+1-a_r)\in g\Rightarrow a_r\in[2,m]$.
+$r\succ p$ (both in $\Lo$, $a_r\ne1$): $(1-a_r)\equiv 2m+2-a_r\in[m+2,2m]\notin g$.
+\item $\{(1,3),(2,1),(2,2),(3,1)\}$: $p=(0,\cdot)\in(1,3)$ (bottom), $q\in(2,1),r\in(2,2),s=(a_s,0)
+\in(3,1)$. Each of $q,r,s$ beats $p$: $a_q\in[m+2,2m]$, $a_r=m$, $a_s\in[m+2,2m]$. $r\succ q$:
+$(a_q-m)\in g\Rightarrow a_q\in[m+2,2m-1]$. $s\succ r$: $(m-a_s)\in g\Rightarrow a_s=2m$. $s\succ q$
+(both in $\Hi$): $(a_q-2m)\equiv a_q+1\in[m+3,2m]\notin g$.
+\item $\{(1,3),(2,2),(3,1),(3,2)\}$: $p=(0,\cdot)\in(1,3)$, $q\in(2,2),r=(a_r,0)\in(3,1),s=(a_s,0)\in(3,2)$.
+Each beats $p$: $a_q=m$, $a_r\in[m+2,2m]$, $a_s=m$ ($q,s$ share block $m$). $r\succ q$:
+$(m-a_r)\in g\Rightarrow a_r=2m$. $s\succ r$: $(a_r-a_s)=2m-m=m\notin g$.
+\end{itemize}
+
+\paragraph{(III) Six squares}
+\[
+\{(1,1),(1,2),(2,1),(2,2)\},\ \{(1,1),(1,2),(2,1),(3,2)\},\ \{(1,1),(1,2),(3,1),(3,2)\},
+\]
+\[
+\{(1,1),(2,2),(3,1),(3,2)\},\ \{(1,2),(2,1),(2,2),(3,1)\},\ \{(2,1),(2,2),(3,1),(3,2)\}.
+\]
+In key order each has $c(a)$ alternating $\Hi,\Lo,\Hi,\Lo$: two cells in band $\Hi$, two in band
+$\Lo$. Write the two band-$\Hi$ reps and two band-$\Lo$ reps; the two same-band cell-pairs branch:
+\begin{itemize}[nosep]
+\item \emph{equality branch} (two same-band reps share a block): two of the six backedges become
+opposite arcs $x\to y$, $y\to x$ between the shared block and a third block---impossible by
+tournament antisymmetry.
+\item \emph{all-distinct branch}: the six outer backedges force one band-$\Hi$ rep and one
+band-$\Lo$ rep to be common in-neighbours, one in each band, of the other band-$\Hi$ and band-$\Lo$
+rep---impossible by Lemma~\ref{lem:h17}.
+\end{itemize}
+Both branches are contradictory for each of the six squares.
+
+This establishes (a) for all $20$ sets; with (b) we conclude $\ob(T-(0,0))\le 4$.\qed
+
+\section{Conclusion}
+By Sections 4--5, $\ob(T-(0,0))=4$; by vertex-transitivity $\ob(T-v)=4$ for every $v$. With
+$\ob(T)=5$ (Section~3), $T=AC_n[AC_n]$ is $5$-$\ob$-critical for every odd $n\ge 7$. Distinct $n$
+give tournaments of distinct order $n^2$, so this is an infinite family, proving
+\textbf{Conjecture~5.10 at $k=5$}.
+
+\medskip
+\noindent\textbf{Question 5.9.} A proper subtournament $A\subsetneq T$ omits a vertex $v$, so
+$A\subseteq T-v$ and $\ob(A)\le\ob(T-v)=4$ by monotonicity. Thus the only subtournament of $T$
+with $\ob\ge5$ is $T$ itself, of unbounded order $n^2$; no bound $\ell(5)$ exists, i.e.\
+\textbf{Question~5.9 fails at $k=5$}.\qed
+
+\bigskip
+\noindent\emph{Verification.} Every arc-fact used in Section~5 is $n$-independent and was checked
+for $m=3,\dots,200$; the $20$-set list, the coverage (b), and Lemma~\ref{lem:h17} were checked
+exactly for small odd $n$. The construction is reproducible with the exact $\ob$ oracle (exact
+branch-and-bound and a validated no-$K$-clique SAT encoding). An independent multi-skeptic
+red-team reproduced the value, the deletion, $\ob(AC_n-0)=2$, and Lemma~\ref{lem:h17}.
+
+\end{document}

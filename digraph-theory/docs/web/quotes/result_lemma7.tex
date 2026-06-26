@@ -1,0 +1,9 @@
+\begin{lstlisting}[language=Rocq]
+Theorem lemma7 (D : orientedDigraph) (delta : nat) :
+  0 < #|D| -> (forall v : D, delta <= outdeg v) ->
+  2 * delta <= ell D \/
+  exists S : {set D},
+    [/\ S != set0, #|S| <= delta
+      & forall v, v \in S -> 2 * delta - ell D <= outdeg_in S v].
+\end{lstlisting}
+\rocqsource{theories/applications/ck3/lemma7.v}{646}

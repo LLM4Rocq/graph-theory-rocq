@@ -1,0 +1,2 @@
+% theories/core/dipath.v:36
+Definition dipath x s := path arc x s && uniq (x :: s).

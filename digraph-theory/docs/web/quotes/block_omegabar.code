@@ -1,0 +1,6 @@
+% theories/invariants/omegabar.v:29
+Definition omegab_at (T : tournament) (p : {perm T}) : nat :=
+  ω([set: backedge p]).
+
+Definition omegabar (T : tournament) : nat :=
+  omegab_at [arg min_(p < (1%g : {perm T})) omegab_at p].

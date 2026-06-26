@@ -1,0 +1,5 @@
+% theories/core/oriented.v:33
+HB.mixin Record DiGraph_IsOriented V of DiGraph V := {
+  arc_irrefl : irreflexive (arc : rel V);
+  arc_asymm  : forall u v : V, arc u v -> arc v u = false
+}.
