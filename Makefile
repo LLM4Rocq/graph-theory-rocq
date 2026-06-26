@@ -1,10 +1,10 @@
 # graph-theory-rocq root build. Each package has a _CoqProject; we generate its Makefile.coq
 # and build, in dependency order (base first; area packages depend on base).
-PACKAGES := base chromatic-theory
+PACKAGES := base chromatic-theory hamiltonicity-theory
 .PHONY: all clean $(PACKAGES)
 all: $(PACKAGES)
 
-chromatic-theory: base          # area packages depend on graph-theory-base (G3-core)
+chromatic-theory hamiltonicity-theory: base   # area packages depend on graph-theory-base (G3-core)
 
 $(PACKAGES):
 	cd $@ && rocq makefile -f _CoqProject -o Makefile.coq && $(MAKE) -f Makefile.coq

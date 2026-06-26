@@ -187,8 +187,9 @@ const verify = await agent(
     statements_compile: { type: 'boolean' }, grounding_compiles: { type: 'boolean' }, statements_axiom_free: { type: 'boolean' },
     grounding_axiom_free: { type: 'boolean' }, blocked: { type: 'boolean' }, errors: { type: 'string' }, summary: { type: 'string' } },
     required: ['statements_compile', 'summary'] }, effort: 'medium' })
-const compileBlocked = !!((verify && verify.blocked) || (corrected && corrected.compile_blocked_reason) || (draft && draft.compile_blocked_reason))
-const anyBlocked = hasPlanar || compileBlocked   // milestone has ≥1 G2-blocked (planar) or compile-blocked row
+// A row is BLOCKED only if it is a planar row pre-G2 (row-level). A genuine compile failure is
+// NOT "blocked" — it surfaces as statement=partial (via sComp) and fails ready_to_land via sComp.
+const anyBlocked = hasPlanar   // milestone has ≥1 G2-blocked (planar) row
 log(`Correct+Ground: compile=${verify && verify.statements_compile} axiom-free=${verify && verify.statements_axiom_free} grounding=${verify && verify.grounding_compiles}${anyBlocked ? ` (${planarSlugs.size} planar-blocked)` : ''}`)
 
 // ── PHASE 4: IMPLICATIONS / REFUTATIONS — corrected edge policy ──────────────
@@ -225,7 +226,7 @@ const legs_update = rows.map((r) => {
   const a = auditBySlug[r.slug]
   const faithful = !!(a && a.faithful !== false && a.selected_proposition_matches !== false)
   const rowEdges = provedEdges.filter((e) => e.from === r.formal_name || e.to === r.formal_name)
-  const rowBlocked = !!(r.requires_planarity && !M.g2_ready) || compileBlocked  // ROW-LEVEL G2 gate
+  const rowBlocked = !!(r.requires_planarity && !M.g2_ready)  // ROW-LEVEL G2 gate (planar rows only)
   return { slug: r.slug,
     statement: rowBlocked ? 'blocked' : (sComp && sAx && faithful ? 'done' : 'partial'),
     grounding: rowBlocked ? 'blocked' : (gComp && gAx && gQed ? 'done' : 'todo'),

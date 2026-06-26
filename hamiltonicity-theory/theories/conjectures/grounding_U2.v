@@ -1,0 +1,196 @@
+(** * Hamilton.conjectures.grounding_U2 — grounding lemmas for milestone U2.
+
+    SIMPLE, Qed-closed sanity results validating the new primitives introduced
+    in [U2.v].  For each genuinely new definition we record a SATISFIABLE
+    witness and at least one textbook identity (e.g. 'K_1 carries a Hamiltonian
+    path, 'K_2 carries a Hamilton cycle, the Cayley graph on the full connection
+    set is the "different vertices" relation, complete graphs are
+    vertex-transitive, K_1 is not (uniquely) Hamiltonian, K_2 IS uniquely
+    Hamiltonian).  These are statement-VALIDATION lemmas, not the (open)
+    conjectures themselves.
+
+    NB: the four planarity-gated rows (5, 6, 7, 8) are BLOCKED — their planarity/
+    toroidality hypothesis is an abstract placeholder predicate quantified inside
+    the [Prop], so there is no geometric primitive to ground here; we ground only
+    the combinatorial primitives those rows reuse ([cartesian_product],
+    [hamilton_decomposition_into_two], [edge_set], [bipartite], [k_connected]). *)
+
+From GTBase Require Import base.
+From mathcomp Require Import fingroup perm.
+From Hamilton.conjectures Require Import U2.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+Unset Printing Implicit Defensive.
+
+(** ** [hamiltonian_path] — witness + identity.
+    Witness: the single vertex of 'K_1 is a Hamiltonian path.
+    Identity: the empty walk is a Hamiltonian path exactly of the empty graph. *)
+Lemma ham_path_K1 : hamiltonian_path 'K_1 [:: ord0].
+Proof. by rewrite /hamiltonian_path /= card_ord. Qed.
+
+Lemma ham_path_nil (G : sgraph) : hamiltonian_path G [::] = (#|G| == 0).
+Proof. by rewrite /hamiltonian_path /= eq_sym. Qed.
+
+(** ** [hamiltonian_cycle] / [is_hamiltonian] — witness.
+    The 2-cycle [ord0; ord1] is a Hamilton cycle of 'K_2, so 'K_2 is
+    Hamiltonian. *)
+Lemma ham_cycle_K2 : hamiltonian_cycle 'K_2 [:: @ord0 1; @Ordinal 2 1 isT].
+Proof. by rewrite /hamiltonian_cycle /ucycleb /= card_ord. Qed.
+
+Lemma is_hamiltonian_K2 : is_hamiltonian 'K_2.
+Proof. by exists [:: @ord0 1; @Ordinal 2 1 isT]; exact: ham_cycle_K2. Qed.
+
+(** ** [cycle_edges] — identity: the empty cycle realises no edge. *)
+Lemma cycle_edges_nil (G : sgraph) : cycle_edges G [::] = set0.
+Proof.
+by rewrite /cycle_edges; apply/setP => e; rewrite !inE;
+   apply/imsetP => -[x]; rewrite inE.
+Qed.
+
+(** ** [k_connected] — witness: 'K_1 is 0-connected (the vacuous separator
+    clause + a nonempty vertex set). *)
+Lemma k_connected_K1_0 : k_connected 'K_1 0.
+Proof. by split; [rewrite card_ord | move=> S; rewrite ltn0]. Qed.
+
+(** ** [graph_automorphism] — witness: the identity map is always an
+    automorphism. *)
+Lemma graph_automorphism_id (G : sgraph) : graph_automorphism (id : G -> G).
+Proof. by split; [exists id | ]. Qed.
+
+(** ** [vertex_transitive] — witness: complete graphs are vertex-transitive,
+    via the transposition swapping the two chosen vertices (textbook). *)
+Lemma vertex_transitive_complete n : vertex_transitive 'K_n.
+Proof.
+move=> x y; exists (tperm x y); split; last exact: tpermL.
+split; first by exists (tperm x y); apply: tpermK.
+by move=> u v; rewrite /edge_rel /= /complete_rel /= (inj_eq perm_inj).
+Qed.
+
+(** ** [bipartite] — witness: 'K_2 (an edge) is bipartite, witnessed by the
+    part [{ord0}]. *)
+Lemma bipartite_K2 : bipartite 'K_2.
+Proof.
+exists [set @ord0 1] => x y; rewrite /edge_rel /= /complete_rel /= !inE => xy.
+by case: x xy => -[|[|x]] xlt //=; case: y => -[|[|y]] ylt //=.
+Qed.
+
+(** ** [cartesian_product] / [box_rel] — textbook identity: in [G □ H], two
+    vertices sharing the first coordinate are adjacent iff their second
+    coordinates are adjacent in H. *)
+Lemma box_same_fst (G H : sgraph) (a : G) (x y : H) :
+  (@edge_rel (cartesian_product G H) (a, x) (a, y)) = (x -- y).
+Proof. by rewrite /edge_rel /= /box_rel !eqxx sg_irrefl andbF orbF. Qed.
+
+(** ** [line_graph] — identity + witness.
+    Identity: L('K_1) has no vertices (the edgeless graph has no edges).
+    Witness: L('K_2) has a vertex (the single edge of 'K_2). *)
+Lemma line_graph_K1_empty : #|line_graph 'K_1| = 0.
+Proof.
+rewrite card_sig; apply: eq_card0 => p; rewrite !inE.
+case: p => a b; rewrite /lg_oedge /=.
+by rewrite /edge_rel /= /complete_rel /= [a]ord1 [b]ord1 eqxx.
+Qed.
+
+Lemma line_graph_K2_inhab : 0 < #|line_graph 'K_2|.
+Proof.
+apply/card_gt0P.
+have h : @lg_oedge 'K_2 (@ord0 1, @Ordinal 2 1 isT).
+  by rewrite /lg_oedge /= !enum_rank_ord /=.
+by exists (Sub (@ord0 1, @Ordinal 2 1 isT) h).
+Qed.
+
+(** ** [symmetric_set] — witness: the whole group is a symmetric connection
+    set. *)
+Lemma symmetric_set_T (gT : finGroupType) : symmetric_set [set: gT].
+Proof. by move=> x; rewrite !inE. Qed.
+
+(** ** [cayley_graph] / [cayley_rel] — textbook identity: with the full
+    connection set, the Cayley graph is the complete graph on the group (two
+    elements are adjacent iff they differ). *)
+Lemma cayley_full (gT : finGroupType) (x y : gT) :
+  @edge_rel (cayley_graph [set: gT]) x y = (x != y).
+Proof. by rewrite /edge_rel /= /cayley_rel !in_setT orbT andbT. Qed.
+
+(** ** [edge_set] — identity (edgeless) + identity (single edge).
+    'K_1 has no edges; 'K_2 has exactly one edge, the whole vertex set. *)
+Lemma edge_set_K1 : edge_set 'K_1 = set0.
+Proof.
+apply/setP => e; rewrite !inE; apply/negbTE.
+rewrite negb_exists; apply/forallP => x; rewrite negb_exists; apply/forallP => y.
+rewrite negb_and; apply/orP; left.
+by rewrite /edge_rel /= /complete_rel /= negbK [x]ord1 [y]ord1.
+Qed.
+
+Lemma edge_set_K2 : edge_set 'K_2 = [set [set: 'K_2]].
+Proof.
+apply/setP => e; rewrite !inE; apply/existsP/eqP.
+- move=> [x] /existsP[y] /andP[xy /eqP->].
+  have xy' : x != y by move: xy; rewrite /edge_rel /= /complete_rel /=.
+  by apply/eqP; rewrite eqEcard subsetT cardsT card_ord cards2 xy'.
+- move=> ->; exists (@ord0 1); apply/existsP; exists (@Ordinal 2 1 isT).
+  apply/andP; split; first by rewrite /edge_rel /= /complete_rel /=.
+  by apply/eqP/setP => z; rewrite !inE; case: z => -[|[|z]] zlt.
+Qed.
+
+(** ** No Hamilton cycle in 'K_1 (a single vertex): the only size-1 closed walk
+    is the self-loop [x], excluded by irreflexivity.  This grounds the negative
+    side of [is_hamiltonian], [uniquely_hamiltonian] and
+    [hamilton_decomposition_into_two]. *)
+Lemma no_ham_cycle_K1 (c : seq 'K_1) : ~~ hamiltonian_cycle 'K_1 c.
+Proof.
+rewrite /hamiltonian_cycle card_ord.
+case: c => [|x [|y c]] //=; first by rewrite /ucycleb /= sg_irrefl.
+by rewrite andbF.
+Qed.
+
+(** ** [is_hamiltonian] — negative witness: 'K_1 is not Hamiltonian. *)
+Lemma not_is_hamiltonian_K1 : ~ is_hamiltonian 'K_1.
+Proof. by case=> c; apply/negP/no_ham_cycle_K1. Qed.
+
+(** ** [uniquely_hamiltonian] — negative witness ('K_1, no Hamilton cycle) and a
+    POSITIVE witness ('K_2 has a single Hamilton cycle up to its edge set). *)
+Lemma not_uniquely_hamiltonian_K1 : ~ uniquely_hamiltonian 'K_1.
+Proof. by case=> c [hc _]; move: hc; apply/negP/no_ham_cycle_K1. Qed.
+
+(** Helpers: on a 2-element list the cyclic successor swaps the endpoints. *)
+Lemma next_K2_fst (a b : 'K_2) : next [:: a; b] a = b.
+Proof. by rewrite next_nth mem_head /= eqxx /=. Qed.
+
+Lemma next_K2_snd (a b : 'K_2) : a != b -> next [:: a; b] b = a.
+Proof.
+by move=> ab; rewrite next_nth !inE eqxx orbT /= (negbTE ab) eqxx /=.
+Qed.
+
+(** Every Hamilton cycle of 'K_2 realises the same (single) edge: the whole
+    vertex set.  Hence 'K_2 is uniquely Hamiltonian. *)
+Lemma ham_edges_K2 (c : seq 'K_2) :
+  hamiltonian_cycle 'K_2 c -> cycle_edges 'K_2 c = [set [set: 'K_2]].
+Proof.
+move=> /andP[/andP[_ uc] /eqP]; rewrite card_ord => sz.
+move: uc; case: c sz => [|a [|b [|c0 c1]]] //= _ uc.
+have ab : a != b by move: uc; rewrite inE andbT.
+have setab : [set a; b] = [set: 'K_2].
+  by apply/eqP; rewrite eqEcard subsetT cardsT card_ord cards2 ab.
+have na := @next_K2_fst a b.
+have nb := @next_K2_snd a b ab.
+apply/setP => e; rewrite !inE; apply/imsetP/eqP.
+- move=> [x]; rewrite inE !inE => /orP[]/eqP-> ->.
+  + by rewrite na setab.
+  + by rewrite nb setUC setab.
+- move=> ->; exists a; first by rewrite inE mem_head.
+  by rewrite na setab.
+Qed.
+
+Lemma uniquely_hamiltonian_K2 : uniquely_hamiltonian 'K_2.
+Proof.
+exists [:: @ord0 1; @Ordinal 2 1 isT]; split; first exact: ham_cycle_K2.
+by move=> c' hc'; rewrite (ham_edges_K2 hc') (ham_edges_K2 ham_cycle_K2).
+Qed.
+
+(** ** [hamilton_decomposition_into_two] — negative witness: 'K_1 admits no
+    such decomposition (it has no Hamilton cycle at all). *)
+Lemma not_hamilton_decomp_K1 : ~ hamilton_decomposition_into_two 'K_1.
+Proof.
+by case=> c1 [c2 [hc _ _ _]]; move: hc; apply/negP/no_ham_cycle_K1.
+Qed.
