@@ -347,6 +347,19 @@
     "jones_conjecture": {
       "statement": "blocked", "grounding": "blocked", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
       "commit": "88a31cd", "package": "packing-theory", "note": "G2-blocked: abstract is_planar placeholder; target of triangle_packing candidate"
+    },
+
+    "the_berge_fulkerson_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "done", "correspondence": "todo", "audit_page": "todo",
+      "commit": "417aa63", "package": "cycle-theory", "note": "target of VERIFIED petersen_coloring->berge_fulkerson (external_petersen_BF hyp)"
+    },
+    "petersen_coloring_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "done", "correspondence": "todo", "audit_page": "todo",
+      "commit": "417aa63", "package": "cycle-theory", "note": "source of VERIFIED petersen_coloring->berge_fulkerson"
+    },
+    "intersecting_two_perfect_matchings": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "417aa63", "package": "cycle-theory", "note": "target of berge/petersen -> intersecting candidates"
     }
   }
 }

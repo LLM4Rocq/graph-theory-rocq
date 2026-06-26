@@ -4635,9 +4635,9 @@
    ],
    "rocq_idiom": "forall G, bridgeless cubic G -> exists M1..M6 perfect matchings, each edge in exactly 2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5825,9 +5825,9 @@
    ],
    "rocq_idiom": "forall G, cubic G -> bridgeless G -> exists f: E(G)->E(Petersen), forall three mutually adjacent edges map to mutually adjacent",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6326,9 +6326,9 @@
    ],
    "rocq_idiom": "forall G bridgeless cubic, exists M1 M2 perfect matchings, no odd edge-cut subset of M1 cap M2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },

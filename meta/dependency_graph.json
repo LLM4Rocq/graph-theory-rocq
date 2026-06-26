@@ -9,19 +9,19 @@
   "packing-theory"
  ],
  "totals": {
-  "edges": 16,
+  "edges": 19,
   "by_status": {
-   "candidate": 11,
+   "candidate": 13,
    "refuted-direction": 4,
-   "verified": 1
+   "verified": 2
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 16,
+   "implies": 19,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 1
+  "proved_theorems": 2
  },
  "edges": [
   {
@@ -136,6 +136,26 @@
    ]
   },
   {
+   "from": "petersen_coloring_statement",
+   "to": "intersecting_two_perfect_matchings_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "snark-colouring literature",
+   "sources": [
+    "cycle-theory/implications_U10.v"
+   ]
+  },
+  {
+   "from": "petersen_coloring_statement",
+   "to": "the_berge_fulkerson_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12",
+   "sources": [
+    "cycle-theory/implications_U10.v"
+   ]
+  },
+  {
    "from": "reeds_omega_delta_and_chi_statement",
    "to": "the_borodin_kostochka_statement",
    "kind": "implies",
@@ -153,6 +173,16 @@
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (strong-k-CDC => CDC)",
    "sources": [
     "cycle-theory/implications_U6.v"
+   ]
+  },
+  {
+   "from": "the_berge_fulkerson_statement",
+   "to": "intersecting_two_perfect_matchings_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Fan-Raspaud 1994 (Berge-Fulkerson => Fan-Raspaud)",
+   "sources": [
+    "cycle-theory/implications_U10.v"
    ]
   },
   {
