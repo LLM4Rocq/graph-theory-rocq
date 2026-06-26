@@ -43,14 +43,17 @@ const NS = { 'chromatic-theory': 'Chromatic', 'hamiltonicity-theory': 'Hamilton'
 // Gates (plan §7): GLOBAL before any landing — g0 (monorepo+package exists), g1 (dep-graph gate),
 // base_ready (=G3-core). ROW-LEVEL before a planar row — g2 (fourcolor installed). The driver is a
 // pre-G0 dry-run QA harness when these are false; it never claims ready_to_land without them.
+// <<MILESTONE-SPEC-START>>  (meta/make_milestone_workflow.py replaces this block with an
+// embedded literal M — rows + gate flags inlined — because runtime `args` is NOT reliably
+// delivered in this harness. Do not run this template directly; generate a wrapper instead.)
 const M = { phase: args && args.phase, repo: args && args.repo, rows: args && args.rows,
   base_ready: !!(args && args.base_ready), g0_ready: !!(args && args.g0_ready),
   g1_ready: !!(args && args.g1_ready), g2_ready: !!(args && args.g2_ready) }
 if (!M.phase || !M.repo || !Array.isArray(M.rows) || M.rows.length === 0) {
-  return { error: 'PREFLIGHT FAILED: pass args.phase, args.repo, and a non-empty args.rows from ' +
-    '`python3 scripts/milestone_rows.py <phase> <repo>`. The driver does not read the manifest or guess the repo ' +
-    '(phases like U13 span multiple repos — one repo per run).' }
+  return { error: 'PREFLIGHT FAILED: this is the TEMPLATE — run a generated wrapper from ' +
+    '`python3 meta/make_milestone_workflow.py <phase> <package>` (runtime args are not delivered here).' }
 }
+// <<MILESTONE-SPEC-END>>
 if (!NS[M.repo]) return { error: `Unknown repo "${M.repo}" — not one of the federation packages.` }
 const rows = M.rows
 // PLANARITY IS ROW-LEVEL (manifest requires_planarity), NOT repo/phase-level: needs-planarity rows

@@ -203,6 +203,28 @@ print("ALL MANIFEST INVARIANTS PASS:",
       f"{sum(1 for r in rows if r['requires_planarity'])} requires_planarity ({sum(1 for r in core if r['requires_planarity'])} core) |",
       f"{sum(1 for r in rows if r['already_formalized'])} already-formalized")
 
+# ── leg-state OVERLAY (meta/opg_legs_state.json): VALIDATE + MERGE (never regenerate away) ──
+# The manifest's `legs` are a generated DEFAULT; the overlay is the source of truth for progress
+# and is merged in here, so re-running the builder preserves landed leg state instead of resetting.
+SLUGS = {r['slug'] for r in rows}
+LEGS = ['statement', 'grounding', 'edges', 'correspondence', 'audit_page']
+ALLOWED = {'todo', 'partial', 'done', 'blocked'}
+legs_path = f"{META}/opg_legs_state.json"
+if os.path.exists(legs_path):
+    overlay = json.load(open(legs_path)).get('entries', {})
+    for slug, e in overlay.items():
+        need(slug in SLUGS, f"overlay slug not in manifest: {slug}")
+        for lg in LEGS:
+            st = e.get(lg, 'todo')
+            need(st in ALLOWED, f"overlay {slug}.{lg} invalid state {st!r}")
+            if lg in ('statement', 'grounding', 'edges') and st != 'todo':
+                need(e.get('commit') and e.get('package'),
+                     f"overlay {slug}: non-todo {lg}={st} needs commit+package provenance")
+    for r in rows:                       # overlay wins; missing legs keep the generated default
+        e = overlay.get(r['slug'])
+        if e: r['legs'] = OrderedDict((lg, e.get(lg, r['legs'][lg])) for lg in LEGS)
+    print(f"overlay: validated + merged {len(overlay)} leg-state entries from opg_legs_state.json")
+
 out={"_README":"Validated 227-row corpus manifest (v2, 2026-06-26). Each row → exactly one phase+repo "
       "(tier-respecting → counts reconcile to 142 core / 85 deferred / 227). formal_name is a VALID, UNIQUE "
       "planned Rocq identifier (finalized at implementation). status_semantics gives the exact settled/open "

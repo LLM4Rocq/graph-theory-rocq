@@ -324,8 +324,8 @@
    ],
    "rocq_idiom": "forall G, double_critical G -> chi G = n -> G = K_n",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -689,8 +689,8 @@
    ],
    "rocq_idiom": "exists G, (forall u v, u<>v -> #|common_nbr G u v| \\in [0;2]) /\\ chi G = 3",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -965,8 +965,8 @@
    ],
    "rocq_idiom": "forall k G, χ G > k -> #|cycles of length ≡0 mod k in G| >= (k+1)(k-1)!/2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3116,8 +3116,8 @@
    ],
    "rocq_idiom": "forall g, exists G, regular 4 G /\\ chi G = 4 /\\ girth G >= g",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4955,8 +4955,8 @@
    ],
    "rocq_idiom": "forall k G, union of k edge-disjoint K_k -> chi G = k",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6553,9 +6553,9 @@
    "new_primitives": [],
    "rocq_idiom": "forall G, maxdeg G >= 9 -> chi G <= maxn (maxdeg G - 1) (omega G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7877,8 +7877,8 @@
    ],
    "rocq_idiom": "Definition: forall G connected (Delta>=3) m>1 n>m, chi(G^{m/n}) = omega(G^{m/n})",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9582,8 +9582,8 @@
    ],
    "rocq_idiom": "forall G, |V|>=2 -> chromatic G > ceil(floor(w G/2)/(|V|-w G))",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9674,9 +9674,9 @@
    "new_primitives": [],
    "rocq_idiom": "forall G, chromatic G <= ceil((maxdeg G + 1 + omega G)/2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
