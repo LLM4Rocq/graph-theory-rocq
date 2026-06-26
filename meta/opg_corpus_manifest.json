@@ -98,8 +98,8 @@
    ],
    "rocq_idiom": "forall G, (forall k, odd k -> k>=5 -> ~ induced_cycle G k) -> exists c:V->bool, forall Q, max_clique G Q -> ~ monochromatic c Q",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -187,8 +187,8 @@
    ],
    "rocq_idiom": "exists f, forall G, book_thickness G <= f (book_thickness (subdivide1 G))",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2708,8 +2708,8 @@
    ],
    "rocq_idiom": "forall g k, exists d, forall G, avgdeg G >= d -> exists H subgraph_of G, avgdeg H >= k /\\ girth H > g",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2932,8 +2932,8 @@
    ],
    "rocq_idiom": "forall G1 G2, degenerate 1 G1 -> degenerate 2 G2 -> chi (union G1 G2) <= 5",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3950,8 +3950,8 @@
    ],
    "rocq_idiom": "r(k,n) = 2n-1 where r is smallest r making (SE(k,n))^{r-1} rearrangeable",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4546,8 +4546,8 @@
    ],
    "rocq_idiom": "forall G1 G2, p (G1 box G2) <= p G1 * p G2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4725,8 +4725,8 @@
    ],
    "rocq_idiom": "exists (G:sgraph), regular 57 G /\\ diameter G = 2 /\\ girth G = 5",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5000,8 +5000,8 @@
    ],
    "rocq_idiom": "forall T, is_tree T -> exists l, graceful_labeling T l",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5045,8 +5045,8 @@
    ],
    "rocq_idiom": "forall G, (forall e, imb e > 0) -> graphic (M_G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7288,8 +7288,8 @@
    ],
    "rocq_idiom": "Definition: exists optimal strategy pair achieving game value of leaf-pruning gold game on a tree",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9910,9 +9910,9 @@
    ],
    "rocq_idiom": "forall L regular 2-stage, (exists m, externally_connected (L^m)) -> rearrangeable (L^(2m))",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10456,8 +10456,8 @@
    ],
    "rocq_idiom": "exists c, forall hexagonal G, weighting p, chi(G,p) <= (9/8) omega(G,p) + c",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

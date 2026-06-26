@@ -941,6 +941,115 @@
       "commit": "d6c94d5",
       "package": "packing-theory",
       "note": "G2-blocked: abstract plane_triangulation placeholder"
+    },
+    "2_colouring_a_graph_without_a_monochromatic_maximum_clique": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "book_thickness_of_subdivisions": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "subgraph_of_large_average_degree_and_large_average_degree": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "coloring_the_union_of_degenerate_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "shuffle_exchange_conjecture_graph_theoretic_form": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "pebbling_a_cartesian_product": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "57_regular_moore_graph": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "graceful_tree_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "imbalance_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "a_gold_grabbing_game": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "weighted_colouring_of_hexagonal_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc"
+    },
+    "bene_conjecture_graph_theoretic_form_0": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "034bf92",
+      "package": "graph-theory-misc",
+      "note": "bene candidate edge recorded"
     }
   }
 }

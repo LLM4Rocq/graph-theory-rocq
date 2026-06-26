@@ -13,21 +13,31 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 22,
+  "edges": 23,
   "by_status": {
-   "candidate": 15,
+   "candidate": 16,
    "refuted-direction": 5,
    "verified": 2
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 22,
+   "implies": 23,
    "refutes": 0,
    "specializes": 0
   },
   "proved_theorems": 2
  },
  "edges": [
+  {
+   "from": "bene_conjecture_graph_theoretic_form_0_statement",
+   "to": "shuffle_exchange_conjecture_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Beneš 1965; Stone 1971 (shuffle-exchange); Beauquier–Darrot 2002 (graph-theoretic Beneš)",
+   "sources": [
+    "graph-theory-misc/implications_U13.v"
+   ]
+  },
   {
    "from": "domination_in_cubic_graphs_statement",
    "to": "domination_in_plane_triangulations_statement",
