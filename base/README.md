@@ -11,7 +11,9 @@ ownership table). Every area package depends ONLY on this (never on a sibling).
   - from U1: `Delta` (Δ), `common_nbr`, `regular`, `girth_geq`, `ceil_div`;
   - U3 surface (+ `cartesian_product` promoted from U2): graph homomorphism `is_hom` /
     `homs_to`, graph `is_core`, `cartesian_product` (□), `tensor_product` (×, the Hedetniemi product);
-  - power family (promoted from U1 ∩ U3): `graph_power` (Gᵐ), `subdivision` (G^{1/n}), `frac_power` (G^{m/n}).
+  - power family (promoted from U1 ∩ U3): `graph_power` (Gᵐ), `subdivision` (G^{1/n}), `frac_power` (G^{m/n});
+  - list-colouring (promoted from U4): `list_colourable` / `list_colourable_on` (over an arbitrary
+    `finType` palette), `choosable` (k-choosability), `is_choice_number` (relational choice number).
 
 Import with `From GTBase Require Import base.` (area packages add `-Q ../base/theories GTBase`
 to their `_CoqProject`). Compiles axiom-free on switch `digraph` (Rocq 9.1.1 + coq-graph-theory);

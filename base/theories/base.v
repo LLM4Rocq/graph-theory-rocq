@@ -117,3 +117,24 @@ Definition subdivision : sgraph := SGraph sub_sym sub_irrefl.
 End Subdivision.
 
 Definition frac_power (G : sgraph) (m n : nat) : sgraph := graph_power (subdivision G n) m.
+
+(** ** List colouring / choosability (promoted from chromatic-theory/U4)
+
+    The vertex list-colouring surface, reusable across colouring milestones (U4 list, U5
+    edge/total via the line-graph, U8 χ-boundedness). [list_colourable L] = a proper colouring
+    exists picking each vertex's colour from its list [L] (over an ARBITRARY finite palette [C],
+    quantified per use — no fixed colour universe); [choosable G k] = L-colourable for every list
+    assignment with all lists of size ≥ k; [is_choice_number G m] = the choice number ch(G),
+    stated relationally (least k with k-choosability) to stay proof-free. *)
+Definition list_colourable (G : sgraph) (C : finType) (L : G -> {set C}) : Prop :=
+  exists f : G -> C,
+    (forall v : G, f v \in L v) /\ (forall x y : G, x -- y -> f x != f y).
+Definition list_colourable_on (G : sgraph) (C : finType) (L : G -> {set C}) (W : {set G}) : Prop :=
+  exists f : G -> C,
+    (forall v : G, v \in W -> f v \in L v) /\
+    (forall x y : G, x \in W -> y \in W -> x -- y -> f x != f y).
+Definition choosable (G : sgraph) (k : nat) : Prop :=
+  forall (C : finType) (L : G -> {set C}),
+    (forall v : G, k <= #|L v|) -> list_colourable L.
+Definition is_choice_number (G : sgraph) (m : nat) : Prop :=
+  choosable G m /\ (forall k, choosable G k -> m <= k).
