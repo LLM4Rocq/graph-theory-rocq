@@ -1,0 +1,6 @@
+-R theories Topological
+-Q ../base/theories GTBase
+-arg -w -arg -notation-overridden
+
+theories/conjectures/U13.v
+theories/conjectures/grounding_U13.v

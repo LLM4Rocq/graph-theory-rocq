@@ -1,11 +1,11 @@
 # graph-theory-rocq root build. Each package has a _CoqProject; we generate its Makefile.coq
 # and build, in dependency order (base first; area packages depend on base).
-PACKAGES := base chromatic-theory hamiltonicity-theory homomorphism-theory cycle-theory minor-theory packing-theory reconstruction-theory hypergraph-theory
-LANDED := U1 chromatic-theory U2 hamiltonicity-theory U3 homomorphism-theory U4 chromatic-theory U5 chromatic-theory U6 cycle-theory U7 minor-theory U8 chromatic-theory U9 packing-theory U10 cycle-theory U11 reconstruction-theory U12 hypergraph-theory
+PACKAGES := base chromatic-theory hamiltonicity-theory homomorphism-theory cycle-theory minor-theory packing-theory reconstruction-theory hypergraph-theory topological-graph-theory
+LANDED := U1 chromatic-theory U2 hamiltonicity-theory U3 homomorphism-theory U4 chromatic-theory U5 chromatic-theory U6 cycle-theory U7 minor-theory U8 chromatic-theory U9 packing-theory U10 cycle-theory U11 reconstruction-theory U12 hypergraph-theory U13 topological-graph-theory
 .PHONY: all clean gate $(PACKAGES)
 all: $(PACKAGES)
 
-chromatic-theory hamiltonicity-theory homomorphism-theory cycle-theory minor-theory packing-theory reconstruction-theory hypergraph-theory: base   # area packages depend on base (G3-core)
+chromatic-theory hamiltonicity-theory homomorphism-theory cycle-theory minor-theory packing-theory reconstruction-theory hypergraph-theory topological-graph-theory: base   # area packages depend on base (G3-core)
 
 # CI gate (G1 + acceptance): manifest reproduces, edge-graph has no drift, every landed
 # milestone passes check_milestone (compiles, axiom-free, Print-Assumptions-clean, legs justified).
