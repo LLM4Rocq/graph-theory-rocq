@@ -111,11 +111,8 @@ Definition is_online_choice_number (G : sgraph) (m : nat) : Prop :=
     [total_chromatic_number] (χ'') also live in base now.  Only the area-local derivatives below
     ([mDelta], [Delta_edge_critical]) remain here. *)
 
-(** Maximum degree of a multigraph (parallel edges counted).  Genuinely new
-    cross-area primitive — distinct from base's [Delta] (sgraph neighbourhood
-    degree); tagged for migration if a 2nd multigraph area needs it.
-    [@MOVE-to-base] *)
-Definition mDelta (G : mgraph) : nat := \max_(v : G) #|edges_at v|.
+(** [mDelta] (multigraph maximum degree, parallel edges counted) is now in graph-theory-base —
+    promoted (U4 ∩ U5) and reused here via the base export. *)
 
 (** [Δ]-edge-critical: deleting ANY edge strictly lowers the chromatic index
     χ'(G) = χ(L(G)).  Deleting edge [e] = deleting vertex [e] of the line

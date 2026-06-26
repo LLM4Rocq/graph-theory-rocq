@@ -43,8 +43,11 @@ def scan(pkg):
         txt = open(os.path.join(cdir, fn)).read()
         for m in EDGE_RE.finditer(txt):
             kv = parse_kv(m.group(1))
+            status = kv.get("status")
+            if status == "verified-literature":  # agents sometimes use the plan's term for a proved edge
+                status = "verified"
             edges.append({"from": kv.get("from"), "to": kv.get("to"), "kind": kv.get("kind"),
-                          "status": kv.get("status"), "cite": kv.get("cite", ""), "package": pkg, "file": fn})
+                          "status": status, "cite": kv.get("cite", ""), "package": pkg, "file": fn})
         for m in THM_RE.finditer(txt):
             thms.append({"name": f"{m.group(1)}_{m.group(2)}_{m.group(3)}", "kind": m.group(2), "package": pkg, "file": fn})
     return edges, thms
@@ -65,7 +68,19 @@ for e in [e for e in all_edges if e["status"] == "verified" and e["kind"] in ("i
     need([t for t in all_thms if t["file"] == e["file"] and t["kind"] == e["kind"]],
          f"verified {e['kind']} edge {e['from']}->{e['to']} ({e['file']}) has no matching Theorem")
 
-edges_sorted = sorted(all_edges, key=lambda e: (e["from"], e["to"], e["kind"], e["status"], e["package"]))
+# dedup: collapse edges with identical (from,to,kind,status) — the SAME edge re-asserted in
+# multiple files (e.g. a cross-milestone refuted edge noted at both endpoints). Keep one, record
+# every file that asserts it under `sources` (sorted, deterministic).
+by_id = {}
+for e in all_edges:
+    k = (e["from"], e["to"], e["kind"], e["status"])
+    if k not in by_id:
+        by_id[k] = {"from": e["from"], "to": e["to"], "kind": e["kind"], "status": e["status"],
+                    "cite": e["cite"], "sources": set()}
+    by_id[k]["sources"].add(f"{e['package']}/{e['file']}")
+edges_sorted = sorted(by_id.values(), key=lambda e: (e["from"], e["to"], e["kind"], e["status"]))
+for e in edges_sorted:
+    e["sources"] = sorted(e["sources"])
 
 # legacy report — counts only, does not define the format
 legacy = {}

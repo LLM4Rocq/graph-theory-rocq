@@ -19,6 +19,7 @@ ownership table). Every area package depends ONLY on this (never on a sibling).
     (χ''), `edge_colourable` / `total_colourable`. **`mgraph` is `Import`ed, not `Export`ed** — a
     pure-sgraph milestone stays clean; an mgraph-aware milestone does `From GraphTheory Require Import
     mgraph.` **before** the base import (coq-graph-theory's `mgraph` has a clashing *directed* `line_graph`).
+    `mDelta` (multigraph max degree, parallel edges counted) is here too (promoted from U4 ∩ U5).
 
 Import with `From GTBase Require Import base.` (area packages add `-Q ../base/theories GTBase`
 to their `_CoqProject`). Compiles axiom-free on switch `digraph` (Rocq 9.1.1 + coq-graph-theory);

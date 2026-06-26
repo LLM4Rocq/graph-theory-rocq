@@ -6,15 +6,15 @@
   "homomorphism-theory"
  ],
  "totals": {
-  "edges": 6,
+  "edges": 8,
   "by_status": {
-   "candidate": 2,
+   "candidate": 4,
    "refuted-direction": 4,
    "verified": 0
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 6,
+   "implies": 8,
    "refutes": 0,
    "specializes": 0
   },
@@ -22,22 +22,45 @@
  },
  "edges": [
   {
+   "from": "edge_list_coloring_statement",
+   "to": "goldbergs_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (edge-list-colouring/LCC <-> Goldberg region)",
+   "sources": [
+    "chromatic-theory/implications_U5.v"
+   ]
+  },
+  {
+   "from": "goldbergs_statement",
+   "to": "seymours_r_graph_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Goldberg 1973; Seymour, On multicolourings of cubic graphs, Proc. LMS (3) 38 (1979) 423-460",
+   "sources": [
+    "chromatic-theory/implications_U5.v"
+   ]
+  },
+  {
    "from": "list_hadwiger_statement",
    "to": "hadwiger_statement",
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6",
-   "package": "chromatic-theory",
-   "file": "implications_U4.v"
+   "sources": [
+    "chromatic-theory/implications_U4.v"
+   ]
   },
   {
    "from": "list_total_colouring_statement",
-   "to": "behzad_total_colouring_statement",
+   "to": "behzads_statement",
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6",
-   "package": "chromatic-theory",
-   "file": "implications_U4.v"
+   "sources": [
+    "chromatic-theory/implications_U4.v",
+    "chromatic-theory/implications_U5.v"
+   ]
   },
   {
    "from": "partial_list_coloring_0_statement",
@@ -45,8 +68,9 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Albertson-Grossman-Haas, Partial list colorings, Discrete Math. 214 (2000); Iradmusa 2010 (ratio conj strengthens AGH)",
-   "package": "chromatic-theory",
-   "file": "implications_U4.v"
+   "sources": [
+    "chromatic-theory/implications_U4.v"
+   ]
   },
   {
    "from": "pentagon_statement",
@@ -54,8 +78,9 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Nesetril; girth+construction gaps, not Qed-closed as formulated",
-   "package": "homomorphism-theory",
-   "file": "implications_U3.v"
+   "sources": [
+    "homomorphism-theory/implications_U3.v"
+   ]
   },
   {
    "from": "reeds_omega_delta_and_chi_statement",
@@ -63,8 +88,9 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "false at Δ=9,ω=8 (Cranston-Rabern)",
-   "package": "chromatic-theory",
-   "file": "implications_U1.v"
+   "sources": [
+    "chromatic-theory/implications_U1.v"
+   ]
   },
   {
    "from": "the_borodin_kostochka_statement",
@@ -72,8 +98,9 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "independent; neither implies the other",
-   "package": "chromatic-theory",
-   "file": "implications_U1.v"
+   "sources": [
+    "chromatic-theory/implications_U1.v"
+   ]
   }
  ],
  "legacy": {

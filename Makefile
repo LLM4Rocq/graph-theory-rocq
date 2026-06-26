@@ -1,7 +1,7 @@
 # graph-theory-rocq root build. Each package has a _CoqProject; we generate its Makefile.coq
 # and build, in dependency order (base first; area packages depend on base).
 PACKAGES := base chromatic-theory hamiltonicity-theory homomorphism-theory
-LANDED := U1 chromatic-theory U2 hamiltonicity-theory U3 homomorphism-theory U4 chromatic-theory
+LANDED := U1 chromatic-theory U2 hamiltonicity-theory U3 homomorphism-theory U4 chromatic-theory U5 chromatic-theory
 .PHONY: all clean gate $(PACKAGES)
 all: $(PACKAGES)
 

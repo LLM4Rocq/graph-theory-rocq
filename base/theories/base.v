@@ -203,3 +203,7 @@ Definition total_chromatic_number (G : mgraph) : nat := χ([set: total_graph G])
 (** k-edge-colourable = the line graph is k-vertex-colourable; likewise for total colouring. *)
 Definition edge_colourable (G : mgraph) (k : nat) : Prop := chromatic_index G <= k.
 Definition total_colourable (G : mgraph) (k : nat) : Prop := total_chromatic_number G <= k.
+
+(** Multigraph maximum degree (parallel edges counted) — distinct from the sgraph [Delta].
+    Promoted from chromatic-theory U4 ∩ U5. *)
+Definition mDelta (G : mgraph) : nat := \max_(v : G) #|edges_at v|.
