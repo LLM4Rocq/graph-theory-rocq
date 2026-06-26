@@ -129,6 +129,51 @@
     "mapping_planar_graphs_to_odd_cycles": {
       "statement": "blocked", "grounding": "blocked", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
       "commit": "a59246d", "package": "homomorphism-theory", "note": "G2-blocked: placeholder planarity (drops planarity -> too strong); auditor-flagged"
+    },
+
+    "partial_list_coloring": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory", "note": "t=0 vacuously true (not false); faithful for t>=1"
+    },
+    "partial_list_coloring_0": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory", "note": "candidate edge -> partial_list_coloring (AGH)"
+    },
+    "bounding_the_on_line_choice_number_in_terms_of_the_choice_number": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory"
+    },
+    "edge_list_coloring_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory"
+    },
+    "list_colorings_of_edge_critical_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory"
+    },
+    "list_colourings_of_complete_multipartite_graphs_with_2_big_parts": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory"
+    },
+    "choice_number_of_k_chromatic_graphs_of_bounded_order": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory"
+    },
+    "list_hadwiger_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory", "note": "list_hadwiger->hadwiger refuted-direction (cross-milestone U7)"
+    },
+    "list_total_colouring_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory", "note": "list_total->behzad refuted-direction (cross-milestone U5)"
+    },
+    "strong_colorability": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory"
+    },
+    "acyclic_list_colouring_of_planar_graphs": {
+      "statement": "blocked", "grounding": "blocked", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "3c7756b", "package": "chromatic-theory", "note": "G2-blocked: placeholder planarity (over-strong); auditor-flagged"
     }
   }
 }

@@ -554,9 +554,9 @@
    ],
    "rocq_idiom": "forall G L, (forall v, |L v|=t) -> t<=chi_l G -> exists C partial colouring colouring at least tn/chi_l vertices",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1238,9 +1238,9 @@
    ],
    "rocq_idiom": "forall G r s, 1<=r<=s<=χ_ℓ G -> λ_r G / r >= λ_s G / s",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2254,8 +2254,8 @@
    ],
    "rocq_idiom": "exists family, forall M, exists G, chOL G - ch G >= M (gap unbounded); finite per-graph predicates, paintability game",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3024,8 +3024,8 @@
    ],
    "rocq_idiom": "forall G, list_chromatic_index G = chromatic_index G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3162,8 +3162,8 @@
    ],
    "rocq_idiom": "forall G, Delta_edge_critical G -> forall L, (forall e, size (L e) = Delta) -> ~(all_equal L) -> L_edge_colorable G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3807,8 +3807,8 @@
    ],
    "rocq_idiom": "smallest t with chi_ell(K_{a,b}+K_t) = chi(K_{a,b}+K_t)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4178,8 +4178,8 @@
    ],
    "rocq_idiom": "forall G m, chi G = k -> #|V G| <= m*k -> ch G <= ch (Kmk m k)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4456,9 +4456,9 @@
    ],
    "rocq_idiom": "exists c, forall G t, ~has_minor G (K t) -> ch G <= c*t",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5090,9 +5090,9 @@
    ],
    "rocq_idiom": "forall H, chi_l (T H) = chi (T H)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9218,8 +9218,8 @@
    ],
    "rocq_idiom": "forall G, planar G -> acyclically_choosable G 5",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10363,8 +10363,8 @@
    ],
    "rocq_idiom": "forall G, strongly_colorable G (2 * maxdeg G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

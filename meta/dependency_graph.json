@@ -6,21 +6,48 @@
   "homomorphism-theory"
  ],
  "totals": {
-  "edges": 3,
+  "edges": 6,
   "by_status": {
-   "candidate": 1,
-   "refuted-direction": 2,
+   "candidate": 2,
+   "refuted-direction": 4,
    "verified": 0
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 3,
+   "implies": 6,
    "refutes": 0,
    "specializes": 0
   },
   "proved_theorems": 0
  },
  "edges": [
+  {
+   "from": "list_hadwiger_statement",
+   "to": "hadwiger_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN §6",
+   "package": "chromatic-theory",
+   "file": "implications_U4.v"
+  },
+  {
+   "from": "list_total_colouring_statement",
+   "to": "behzad_total_colouring_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN §6",
+   "package": "chromatic-theory",
+   "file": "implications_U4.v"
+  },
+  {
+   "from": "partial_list_coloring_0_statement",
+   "to": "partial_list_coloring_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Albertson-Grossman-Haas, Partial list colorings, Discrete Math. 214 (2000); Iradmusa 2010 (ratio conj strengthens AGH)",
+   "package": "chromatic-theory",
+   "file": "implications_U4.v"
+  },
   {
    "from": "pentagon_statement",
    "to": "weak_pentagon_statement",
