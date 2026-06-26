@@ -72,3 +72,48 @@ Proof. by move=> p q; rewrite /tensor_rel ![p.1 -- q.1]sg_sym' ![p.2 -- q.2]sg_s
 Lemma tensor_irrefl (G H : sgraph) : irreflexive (@tensor_rel G H).
 Proof. by move=> p; rewrite /tensor_rel !sg_irrefl. Qed.
 Definition tensor_product (G H : sgraph) : sgraph := SGraph (@tensor_sym G H) (@tensor_irrefl G H).
+
+(** ** Powers, subdivisions, fractional powers
+
+    Pure, colouring-free [sgraph] constructions, promoted here because both
+    chromatic-theory/U1 (fractional powers) and homomorphism-theory/U3 (frac-3/3-power)
+    use them.  [graph_power G m] = the m-th power (distinct vertices at distance ≤ m
+    adjacent); [subdivision G n] = the n-subdivision (n−1 internal vertices per edge);
+    [frac_power G m n] = G^{m/n} = (G^{1/n})^m.  NB: [subdivision G n] degenerates for
+    [n ≤ 1] (the meaningful regime is [n ≥ 2]); callers guard accordingly. *)
+Section Power.
+Variables (G : sgraph) (m : nat).
+Fixpoint ball (k : nat) (x : G) : {set G} :=
+  if k is k'.+1 then ball k' x :|: \bigcup_(z in ball k' x) N(z) else [set x].
+Definition reach_le (x y : G) : bool := y \in ball m x.
+Definition pow_rel : rel G := fun x y => (x != y) && (reach_le x y || reach_le y x).
+Lemma pow_sym : symmetric pow_rel.
+Proof. by move=> x y; rewrite /pow_rel eq_sym orbC. Qed.
+Lemma pow_irrefl : irreflexive pow_rel.
+Proof. by move=> x; rewrite /pow_rel eqxx. Qed.
+Definition graph_power : sgraph := SGraph pow_sym pow_irrefl.
+End Power.
+
+Section Subdivision.
+Variables (G : sgraph) (n : nat).
+Definition oedge (p : G * G) : bool := (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N.
+Local Notation EdgeT := {p : G * G | oedge p}.
+Definition lo (e : EdgeT) : G := (val e).1.
+Definition hi (e : EdgeT) : G := (val e).2.
+Definition SubVert : Type := (G + (EdgeT * 'I_n.-1))%type.
+Definition sub_r0 (x y : SubVert) : bool :=
+  match x, y with
+  | inl _, inl _ => false
+  | inl a, inr (e, i) => ((a == lo e) && (val i == 0)) || ((a == hi e) && (val i == n.-1.-1))
+  | inr _, inl _ => false
+  | inr (e, i), inr (e', j) => (e == e') && ((val i).+1 == val j)
+  end.
+Definition sub_rel (x y : SubVert) : bool := sub_r0 x y || sub_r0 y x.
+Lemma sub_sym : symmetric sub_rel.
+Proof. by move=> x y; rewrite /sub_rel orbC. Qed.
+Lemma sub_irrefl : irreflexive sub_rel.
+Proof. move=> x; rewrite /sub_rel orbb; case: x => [a|[e i]] //=. by rewrite eqxx /= (gtn_eqF (ltnSn _)). Qed.
+Definition subdivision : sgraph := SGraph sub_sym sub_irrefl.
+End Subdivision.
+
+Definition frac_power (G : sgraph) (m n : nat) : sgraph := graph_power (subdivision G n) m.

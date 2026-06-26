@@ -10,7 +10,8 @@ ownership table). Every area package depends ONLY on this (never on a sibling).
 - **owns** the cross-area primitives:
   - from U1: `Delta` (Δ), `common_nbr`, `regular`, `girth_geq`, `ceil_div`;
   - U3 surface (+ `cartesian_product` promoted from U2): graph homomorphism `is_hom` /
-    `homs_to`, graph `is_core`, `cartesian_product` (□), `tensor_product` (×, the Hedetniemi product).
+    `homs_to`, graph `is_core`, `cartesian_product` (□), `tensor_product` (×, the Hedetniemi product);
+  - power family (promoted from U1 ∩ U3): `graph_power` (Gᵐ), `subdivision` (G^{1/n}), `frac_power` (G^{m/n}).
 
 Import with `From GTBase Require Import base.` (area packages add `-Q ../base/theories GTBase`
 to their `_CoqProject`). Compiles axiom-free on switch `digraph` (Rocq 9.1.1 + coq-graph-theory);

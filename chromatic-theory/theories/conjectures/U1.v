@@ -161,78 +161,10 @@ Definition the_borodin_kostochka_statement : Prop :=
     graph for [n ≤ 1] (no internal vertices); Row 7's guard [1 < m < n] keeps
     [n ≥ 3], but a future base move should document/repair the [n ≤ 1] corner. *)
 
-(** *** The m-th power G^m *)
-Section Power.
-Variables (G : sgraph) (m : nat).
-
-(** Closed [k]-ball around [x]: vertices reachable from [x] in ≤ [k] steps. *)
-Fixpoint ball (k : nat) (x : G) : {set G} :=
-  if k is k'.+1 then ball k' x :|: \bigcup_(z in ball k' x) N(z)
-  else [set x].
-
-Definition reach_le (x y : G) : bool := y \in ball m x.
-
-(** Adjacency of the power graph: distinct vertices within distance [m]
-    (the OR makes symmetry free; reachability is already symmetric). *)
-Definition pow_rel : rel G :=
-  fun x y => (x != y) && (reach_le x y || reach_le y x).
-
-Lemma pow_sym : symmetric pow_rel.
-Proof. by move=> x y; rewrite /pow_rel eq_sym orbC. Qed.
-
-Lemma pow_irrefl : irreflexive pow_rel.
-Proof. by move=> x; rewrite /pow_rel eqxx. Qed.
-
-Definition graph_power : sgraph := SGraph pow_sym pow_irrefl.
-End Power.
-
-(** *** The n-subdivision G^{1/n} *)
-Section Subdivision.
-Variables (G : sgraph) (n : nat).
-
-(** Canonically oriented edges (each undirected edge once, low endpoint first
-    in the finType enumeration order). *)
-Definition oedge (p : G * G) : bool :=
-  (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N.
-
-Local Notation EdgeT := {p : G * G | oedge p}.
-
-Definition lo (e : EdgeT) : G := (val e).1.
-Definition hi (e : EdgeT) : G := (val e).2.
-
-(** Vertices of the n-subdivision: original vertices, plus [n-1] internal
-    vertices per edge. *)
-Definition SubVert : Type := (G + (EdgeT * 'I_n.-1))%type.
-
-(** Oriented raw relation: endpoint [lo e] meets internal position [0],
-    endpoint [hi e] meets internal position [n-2], consecutive internal
-    positions of one edge are adjacent.  Symmetrized below. *)
-Definition sub_r0 (x y : SubVert) : bool :=
-  match x, y with
-  | inl _, inl _ => false
-  | inl a, inr (e, i) =>
-      ((a == lo e) && (val i == 0)) || ((a == hi e) && (val i == n.-1.-1))
-  | inr _, inl _ => false
-  | inr (e, i), inr (e', j) => (e == e') && ((val i).+1 == val j)
-  end.
-
-Definition sub_rel (x y : SubVert) : bool := sub_r0 x y || sub_r0 y x.
-
-Lemma sub_sym : symmetric sub_rel.
-Proof. by move=> x y; rewrite /sub_rel orbC. Qed.
-
-Lemma sub_irrefl : irreflexive sub_rel.
-Proof.
-move=> x; rewrite /sub_rel orbb; case: x => [a|[e i]] //=.
-by rewrite eqxx /= (gtn_eqF (ltnSn _)).
-Qed.
-
-Definition subdivision : sgraph := SGraph sub_sym sub_irrefl.
-End Subdivision.
-
-(** The fractional power G^{m/n} = (G^{1/n})^m. *)
-Definition frac_power (G : sgraph) (m n : nat) : sgraph :=
-  graph_power (subdivision G n) m.
+(** *** Powers / subdivisions / fractional powers — PROMOTED to graph-theory-base.
+    [graph_power], [subdivision], [frac_power] (and their helpers ball/reach_le/oedge/…)
+    now live in base/ — reused here via `From GTBase Require Export base` — because a second
+    area (homomorphism-theory/U3) also uses them. No local definitions remain. *)
 
 Definition vertex_coloring_of_graph_fractional_powers_statement : Prop :=
   forall (G : sgraph) (m n : nat),
