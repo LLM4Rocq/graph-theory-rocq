@@ -8,15 +8,15 @@
   "minor-theory"
  ],
  "totals": {
-  "edges": 11,
+  "edges": 14,
   "by_status": {
-   "candidate": 6,
+   "candidate": 9,
    "refuted-direction": 4,
    "verified": 1
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 11,
+   "implies": 14,
    "refutes": 0,
    "specializes": 0
   },
@@ -51,6 +51,36 @@
    "cite": "Goldberg 1973; Seymour, On multicolourings of cubic graphs, Proc. LMS (3) 38 (1979) 423-460",
    "sources": [
     "chromatic-theory/implications_U5.v"
+   ]
+  },
+  {
+   "from": "high_connectivity_no_k_n_statement",
+   "to": "jorgensens_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "OPG minor-theory",
+   "sources": [
+    "minor-theory/implications_U7.v"
+   ]
+  },
+  {
+   "from": "jorgensens_statement",
+   "to": "forcing_a_k_6_minor_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Jorgensen 1994",
+   "sources": [
+    "minor-theory/implications_U7.v"
+   ]
+  },
+  {
+   "from": "jorgensens_statement",
+   "to": "high_connectivity_no_k_n_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "OPG minor-theory",
+   "sources": [
+    "minor-theory/implications_U7.v"
    ]
   },
   {

@@ -88,3 +88,8 @@ Qed.
     connectivity conjunct of Row 1's CONJUNCTION (the minimum-degree conjunct is
     not derivable from Jørgensen, since high min degree does not force
     6-connectivity).  status=candidate, proved=false; needs_external. *)
+
+(** Machine-readable edge records (extracted by meta/build_edge_graph.py): *)
+(*@EDGE from=high_connectivity_no_k_n_statement to=jorgensens_statement kind=implies status=candidate cite="OPG minor-theory" note="FAILS Qed: size hypothesis missing; both endpoints G2-blocked (abstract is_planar)" *)
+(*@EDGE from=jorgensens_statement to=high_connectivity_no_k_n_statement kind=implies status=candidate cite="OPG minor-theory" note="FAILS Qed: needs the n<>6 cases; both endpoints G2-blocked" *)
+(*@EDGE from=jorgensens_statement to=forcing_a_k_6_minor_statement kind=implies status=candidate cite="Jorgensen 1994" note="needs_external: planar=>connectivity<=5 (G2); targets only the connectivity conjunct" *)

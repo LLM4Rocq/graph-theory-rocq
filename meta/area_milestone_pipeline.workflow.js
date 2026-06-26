@@ -222,7 +222,13 @@ const implications = await agent(
   `• refuted records (manifest status disproved, e.g. Hedetniemi) → a separate ~statement, not a global negation.\n\n` +
   `STATEMENT FILE (final):\n\`\`\`coq\n${corrected && corrected.final_source || draft.source}\n\`\`\`\n\n${API}\n` +
   `Write implications_${M.phase}.v, prove what you can via rocq_compile, return source + each edge with citation/status/proved. ` +
-  `An unproved edge stays status='candidate', proved=false.`,
+  `An unproved edge stays status='candidate', proved=false.\n` +
+  `MANDATORY: for EVERY edge (verified/candidate/refuted-direction), also emit a machine-readable ` +
+  `annotation line that meta/build_edge_graph.py extracts — prose alone is NOT enough:\n` +
+  `  (*@EDGE from=<A_statement> to=<B_statement> kind=<implies|equiv|refutes|specializes> ` +
+  `status=<verified|candidate|refuted-direction> proved=<true|false> cite="..." note="..." *)\n` +
+  `from/to MUST be the exact _statement Definition names. A verified edge MUST also have a real ` +
+  `Theorem <A>_implies_<B> (Qed) in the file; candidate/refuted edges are the annotation only.`,
   { label: `implications:${M.phase}`, phase: 'Implications', schema: IMPL_EDGE_SCHEMA, effort: 'high' })
 const provedEdges = (implications && implications.edges || []).filter((e) => e.proved)
 log(`Implications: ${implications && implications.edges ? implications.edges.length : 0} edges, ${provedEdges.length} proved`)
