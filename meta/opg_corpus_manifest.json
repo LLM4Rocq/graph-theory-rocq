@@ -417,8 +417,8 @@
    ],
    "rocq_idiom": "forall G, connected G -> vertex_transitive G -> exists p, hamiltonian_path G p",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1103,8 +1103,8 @@
    ],
    "rocq_idiom": "forall (G:fingroup) (S:set), is_hamiltonian (Cayley G S)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3441,8 +3441,8 @@
    ],
    "rocq_idiom": "forall G, 4-connected G -> exists C, hamilton_cycle G C -> exists C', C' <> C /\\ hamilton_cycle G C'",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5317,8 +5317,8 @@
    ],
    "rocq_idiom": "forall r G, r > 2 -> regular r G -> ~ uniquely_hamiltonian G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6189,8 +6189,8 @@
    ],
    "rocq_idiom": "forall G 3-conn cubic planar, exists two edge-disjoint Hamilton cycles partitioning E(G box K2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6235,8 +6235,8 @@
    ],
    "rocq_idiom": "forall G toroidal 4-connected, has_hamilton_cycle G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6876,8 +6876,8 @@
    ],
    "rocq_idiom": "forall G 3-connected planar, hamiltonian (G box K2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8612,8 +8612,8 @@
    ],
    "rocq_idiom": "forall G, planar /\\ 3-connected /\\ cubic /\\ bipartite -> exists hamiltonian cycle",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8842,8 +8842,8 @@
    ],
    "rocq_idiom": "forall G, 4-connected(line-graph G) -> hamiltonian(line-graph G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

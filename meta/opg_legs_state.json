@@ -51,6 +51,43 @@
       "statement": "done", "grounding": "done", "edges": "todo",
       "correspondence": "todo", "audit_page": "todo",
       "commit": "13cd1ad", "package": "chromatic-theory"
+    },
+
+    "hamiltonian_paths_and_cycles_in_vertex_transitive_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory", "note": "Lovász; faithful, axiom-free"
+    },
+    "hamiltonicity_of_cayley_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory"
+    },
+    "4_connected_graphs_are_not_uniquely_hamiltonian": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory"
+    },
+    "uniquely_hamiltonian_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory"
+    },
+    "hamiltonian_cycles_in_line_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory"
+    },
+    "barnettes_conjecture": {
+      "statement": "blocked", "grounding": "blocked", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory", "note": "G2-blocked: placeholder planarity (forall planar, planar G -> _) is too strong; real planarity at fourcolor (see AUDIT_NOTES.md)"
+    },
+    "decomposing_the_prism_of_a_3_connected_cubic_planar_graphs_in_hamilton_cycles": {
+      "statement": "blocked", "grounding": "blocked", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory", "note": "G2-blocked: placeholder planarity; auditor-flagged"
+    },
+    "every_prism_over_a_3_connected_planar_graph_is_hamiltonian": {
+      "statement": "blocked", "grounding": "blocked", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory", "note": "G2-blocked: placeholder planarity"
+    },
+    "every_4_connected_toroidal_graph_has_a_hamilton_cycle": {
+      "statement": "blocked", "grounding": "blocked", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "b262ac7", "package": "hamiltonicity-theory", "note": "G2-blocked: placeholder toroidal-embedding predicate"
     }
   }
 }
