@@ -5,3 +5,6 @@
 theories/conjectures/U6.v
 theories/conjectures/grounding_U6.v
 theories/conjectures/implications_U6.v
+theories/conjectures/U10.v
+theories/conjectures/grounding_U10.v
+theories/conjectures/implications_U10.v
