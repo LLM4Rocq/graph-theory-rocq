@@ -39,3 +39,36 @@ Definition regular (G : sgraph) (d : nat) : Prop := forall v : G, #|N(v)| = d.
     [g ≥ 3].  Acyclic graphs satisfy it for all [g]. *)
 Definition girth_geq (G : sgraph) (g : nat) : Prop :=
   forall c : seq G, ucycle (--) c -> 2 < size c -> g <= size c.
+
+(** ** Homomorphisms, cores, and products (U3 surface)
+
+    A [graph homomorphism] is an adjacency-preserving vertex map; [homs_to] is the
+    existence of one; a [core] is a graph all of whose endomorphisms are bijective
+    (for finite graphs, automorphisms).  The cartesian (box) product [□] is promoted
+    here from hamiltonicity-theory/U2 (used by prisms); the tensor / direct /
+    categorical product [×] is the product Hedetniemi's conjecture is about. *)
+
+Definition is_hom (G H : sgraph) (f : G -> H) : Prop := forall x y : G, x -- y -> f x -- f y.
+Definition homs_to (G H : sgraph) : Prop := exists f : G -> H, is_hom f.
+Definition is_core (G : sgraph) : Prop := forall f : G -> G, is_hom f -> bijective f.
+
+(** Cartesian (box) product G □ H. *)
+Definition box_rel (G H : sgraph) : rel (G * H) :=
+  fun p q => ((p.1 == q.1) && (p.2 -- q.2)) || ((p.2 == q.2) && (p.1 -- q.1)).
+Lemma box_sym (G H : sgraph) : symmetric (@box_rel G H).
+Proof.
+by move=> p q; rewrite /box_rel ![p.1 == q.1]eq_sym ![p.2 == q.2]eq_sym
+   ![p.1 -- q.1]sg_sym' ![p.2 -- q.2]sg_sym'.
+Qed.
+Lemma box_irrefl (G H : sgraph) : irreflexive (@box_rel G H).
+Proof. by move=> p; rewrite /box_rel !eqxx /= !sg_irrefl. Qed.
+Definition cartesian_product (G H : sgraph) : sgraph := SGraph (@box_sym G H) (@box_irrefl G H).
+
+(** Tensor / direct / categorical product G × H (the product in Hedetniemi's conjecture). *)
+Definition tensor_rel (G H : sgraph) : rel (G * H) :=
+  fun p q => (p.1 -- q.1) && (p.2 -- q.2).
+Lemma tensor_sym (G H : sgraph) : symmetric (@tensor_rel G H).
+Proof. by move=> p q; rewrite /tensor_rel ![p.1 -- q.1]sg_sym' ![p.2 -- q.2]sg_sym'. Qed.
+Lemma tensor_irrefl (G H : sgraph) : irreflexive (@tensor_rel G H).
+Proof. by move=> p; rewrite /tensor_rel !sg_irrefl. Qed.
+Definition tensor_product (G H : sgraph) : sgraph := SGraph (@tensor_sym G H) (@tensor_irrefl G H).

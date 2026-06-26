@@ -81,21 +81,10 @@ Definition graph_automorphism (G : sgraph) (f : G -> G) : Prop :=
 Definition vertex_transitive (G : sgraph) : Prop :=
   forall x y : G, exists f : G -> G, graph_automorphism f /\ f x = y.
 
-(** ** Cartesian (box) product G □ H.
-    [@MOVE-to-base]: a pure structural product reused across areas. *)
-Definition box_rel (G H : sgraph) : rel (G * H) :=
-  fun p q => ((p.1 == q.1) && (p.2 -- q.2)) || ((p.2 == q.2) && (p.1 -- q.1)).
-
-Lemma box_sym (G H : sgraph) : symmetric (@box_rel G H).
-Proof.
-by move=> p q; rewrite /box_rel ![p.1 == q.1]eq_sym ![p.2 == q.2]eq_sym
-   ![p.1 -- q.1]sg_sym' ![p.2 -- q.2]sg_sym'.
-Qed.
-
-Lemma box_irrefl (G H : sgraph) : irreflexive (@box_rel G H).
-Proof. by move=> p; rewrite /box_rel !eqxx /= !sg_irrefl. Qed.
-
-Definition cartesian_product (G H : sgraph) : sgraph := SGraph (@box_sym G H) (@box_irrefl G H).
+(** ** Cartesian (box) product G □ H — PROMOTED to graph-theory-base (GTBase.base).
+    [cartesian_product] (and [box_rel]/[box_sym]/[box_irrefl]) now live in base/ — used here
+    via `From GTBase Require Import base` — since a second area (homomorphism-theory/U3) needs
+    products too. No local definition remains. *)
 
 (** ** Line graph L(G).
     Vertices are the (undirected) edges of [G], canonically oriented once via

@@ -7,8 +7,10 @@ ownership table). Every area package depends ONLY on this (never on a sibling).
 - **re-exports** the core coq-graph-theory undirected vocabulary in one place — `sgraph`, `--`,
   `N(x)`, `χ`/`chi_mem`, `ω`/`omega_mem`, `α`, `clique`/`cliques`, `connected`, `'K_n`/`complete`,
   `≃`/`diso`, `ucycle`/`ucycleb` (plus mathcomp `all_boot`);
-- **owns** the cross-area primitives discovered + validated by the U1 milestone:
-  `Delta` (Δ), `common_nbr`, `regular`, `girth_geq`, `ceil_div`.
+- **owns** the cross-area primitives:
+  - from U1: `Delta` (Δ), `common_nbr`, `regular`, `girth_geq`, `ceil_div`;
+  - U3 surface (+ `cartesian_product` promoted from U2): graph homomorphism `is_hom` /
+    `homs_to`, graph `is_core`, `cartesian_product` (□), `tensor_product` (×, the Hedetniemi product).
 
 Import with `From GTBase Require Import base.` (area packages add `-Q ../base/theories GTBase`
 to their `_CoqProject`). Compiles axiom-free on switch `digraph` (Rocq 9.1.1 + coq-graph-theory);
