@@ -2,23 +2,24 @@
  "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations + _implies_/_equiv_ theorems across graph-theory-rocq packages (legacy digraph-theory excluded; see `legacy`). Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails on drift. Edges are sorted (from,to,kind,status,package) for determinism.",
  "packages": [
   "chromatic-theory",
+  "cycle-theory",
   "hamiltonicity-theory",
   "homomorphism-theory"
  ],
  "totals": {
-  "edges": 8,
+  "edges": 11,
   "by_status": {
-   "candidate": 4,
+   "candidate": 6,
    "refuted-direction": 4,
-   "verified": 0
+   "verified": 1
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 8,
+   "implies": 11,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 0
+  "proved_theorems": 1
  },
  "edges": [
   {
@@ -29,6 +30,16 @@
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (edge-list-colouring/LCC <-> Goldberg region)",
    "sources": [
     "chromatic-theory/implications_U5.v"
+   ]
+  },
+  {
+   "from": "faithful_cycle_covers_statement",
+   "to": "cycle_double_cover_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "Seymour 1979; Alspach-Goddyn-Zhang, Graphs with the circuit cover property, Trans. AMS 344 (1994) 131-154; Szekeres 1973",
+   "sources": [
+    "cycle-theory/implications_U6.v"
    ]
   },
   {
@@ -63,6 +74,16 @@
    ]
   },
   {
+   "from": "m_n_cycle_covers_statement",
+   "to": "cycle_double_cover_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "OPG cycle-cover literature",
+   "sources": [
+    "cycle-theory/implications_U6.v"
+   ]
+  },
+  {
    "from": "partial_list_coloring_0_statement",
    "to": "partial_list_coloring_statement",
    "kind": "implies",
@@ -90,6 +111,16 @@
    "cite": "false at Δ=9,ω=8 (Cranston-Rabern)",
    "sources": [
     "chromatic-theory/implications_U1.v"
+   ]
+  },
+  {
+   "from": "strong_5_cycle_double_cover_statement",
+   "to": "cycle_double_cover_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (strong-k-CDC => CDC)",
+   "sources": [
+    "cycle-theory/implications_U6.v"
    ]
   },
   {

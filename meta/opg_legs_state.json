@@ -211,6 +211,51 @@
     "behzads_conjecture": {
       "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
       "commit": "ff00f33", "package": "chromatic-theory", "note": "msimple guard = simple graph (faithful TCC); list_total->behzads refuted-direction"
+    },
+
+    "cycle_double_covers_containing_predefined_2_regular_subgraphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory"
+    },
+    "3_decomposition_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory"
+    },
+    "decomposing_a_connected_graph_into_paths": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory"
+    },
+    "decomposing_an_eulerian_graph_into_cycles": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory"
+    },
+    "decomposing_an_eulerian_graph_into_cycles_with_no_two_consecutives_edges_on_a_prescirbed_eulerian_tour": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory"
+    },
+    "decomposing_eulerian_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory"
+    },
+    "m_n_cycle_covers": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory", "note": "m_n->cdc candidate (member-shape mismatch)"
+    },
+    "odd_cycles_and_low_oddness": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory"
+    },
+    "faithful_cycle_covers": {
+      "statement": "done", "grounding": "done", "edges": "done", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory", "note": "VERIFIED edge faithful_cycle_covers->cycle_double_cover (Qed, sound: p=2)"
+    },
+    "strong_5_cycle_double_cover_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory", "note": "strong_5_cdc->cdc candidate (member-shape mismatch)"
+    },
+    "cycle_double_cover_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "2bb9863", "package": "cycle-theory", "note": "target of 1 verified (faithful_cycle_covers) + 2 candidate edges"
     }
   }
 }

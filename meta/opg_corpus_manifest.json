@@ -279,8 +279,8 @@
    ],
    "rocq_idiom": "forall G, cubic G -> 2connected G -> forall S, regular2 S -> connected (G - E S) -> exists C, cdc G C /\\ cycles_of S \\subset C",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1468,8 +1468,8 @@
    ],
    "rocq_idiom": "forall G, cubic G -> connected G -> exists H1 H2 H3, spanning_tree H1 /\\ two_regular H2 /\\ matching H3 /\\ edge_partition G [H1;H2;H3]",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2343,8 +2343,8 @@
    ],
    "rocq_idiom": "forall G, connected G -> exists ps, path_decomposition G ps /\\ size ps <= (n+1)/2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2977,8 +2977,8 @@
    ],
    "rocq_idiom": "forall G, eulerian G -> exists D, cycle_decomposition G D /\\ size D <= (n-1)/2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3622,8 +3622,8 @@
    ],
    "rocq_idiom": "forall eulerian G (min deg 4) and tour W, exists cycle decomposition avoiding two consecutive W-edges",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4910,8 +4910,8 @@
    ],
    "rocq_idiom": "forall G P, 6_edge_connected G -> eulerian G -> transition2 P -> exists D, compatible_decomposition G P D",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7015,9 +7015,9 @@
    ],
    "rocq_idiom": "forall bridgeless G, exists list of 5 cycles covering each edge exactly twice",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8336,8 +8336,8 @@
    ],
    "rocq_idiom": "G bridgeless cubic, some 2-factor all-odd cycles -> oddness(G)<=2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8796,9 +8796,9 @@
    ],
    "rocq_idiom": "forall G p, admissible p /\\ (forall e, even p e) -> exists list of cycles covering each e exactly p e times",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9720,9 +9720,9 @@
    ],
    "rocq_idiom": "forall G cubic bridgeless, forall circuit C, exists 5 cycles double-covering E with C in one",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9999,9 +9999,9 @@
    ],
    "rocq_idiom": "forall G, bridgeless G -> exists L:list cycle, forall e, count(e in L) = 2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
