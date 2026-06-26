@@ -1784,8 +1784,8 @@
    ],
    "rocq_idiom": "forall G H, chi (tensor_product G H) = minn (chi G) (chi H)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5181,9 +5181,9 @@
    ],
    "rocq_idiom": "exists g, forall G, cubic G -> girth G >= g -> exists h, hom G C5 h",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5453,8 +5453,8 @@
    ],
    "rocq_idiom": "forall G, k_connected 3 G -> forall C, longest_cycle G C -> exists e, chord G C e",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6143,8 +6143,8 @@
    ],
    "rocq_idiom": "forall M abelian, forall Cayley G on power of M, exists k, core G is Cayley on power M",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6737,8 +6737,8 @@
    ],
    "rocq_idiom": "forall G, Delta G>=2 -> chi(power(subdiv(G,3),3)) <= 2*Delta G + 1",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6784,8 +6784,8 @@
    ],
    "rocq_idiom": "forall G strongly-regular, core G = G \\/ core G = complete",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7647,8 +7647,8 @@
    ],
    "rocq_idiom": "Definition: forall G planar, girth G >= 4k -> exists hom G -> C_{2k+1}",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8103,8 +8103,8 @@
    ],
    "rocq_idiom": "forall connected G, forall 3 longest paths, exists common vertex",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8147,8 +8147,8 @@
    ],
    "rocq_idiom": "forall n-vertex tree T, #endo(path) <= #endo(T) <= #endo(star)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9170,9 +9170,9 @@
    ],
    "rocq_idiom": "forall G, cubic /\\ triangle-free -> exists 5-edge-colouring s.t. complement of each colour class is bipartite",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
