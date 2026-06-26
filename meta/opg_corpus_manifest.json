@@ -1927,8 +1927,8 @@
    ],
    "rocq_idiom": "forall G, cubic G -> 3_connected G -> #|V G| = 3*k -> exists partition into k paths of length 2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2067,9 +2067,9 @@
    ],
    "rocq_idiom": "forall G k, max_edge_disjoint_triangles G <= k -> exists S, #|S| <= 2*k /\\ triangle_free (G - S)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2436,8 +2436,8 @@
    ],
    "rocq_idiom": "forall r, finite { G : r-regular & ~ exists friendly_partition G } (cofinitely many r-regular graphs admit one)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2617,8 +2617,8 @@
    ],
    "rocq_idiom": "forall a b G, (a+b+2)-edge-connected G -> exists partition {A,B} of E G, a-edge-connected (V,A) /\\ b-edge-connected (V,B)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5913,8 +5913,8 @@
    ],
    "rocq_idiom": "forall G1 G2, #|V G1| = n -> #|V G2| = n -> (Delta G1 +1)*(Delta G2 +1) < n+1 -> pack G1 G2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6372,8 +6372,8 @@
    ],
    "rocq_idiom": "exists f, forall k G x y, f k -connected G -> exists induced path P from x to y, k-connected (G - V P)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7601,9 +7601,9 @@
    ],
    "rocq_idiom": "Definition: forall G planar, fvs G <= 2 * cycle_packing G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7692,8 +7692,8 @@
    ],
    "rocq_idiom": "Definition: forall G triangle-free on n vtx, exists <= n^2/25 edges whose removal makes G bipartite",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8289,8 +8289,8 @@
    ],
    "rocq_idiom": "forall d, exists g, forall G avgdeg<d & girth>=g -> has matching-cut",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8889,8 +8889,8 @@
    ],
    "rocq_idiom": "forall G T k, (forall u v in T, 2k edge-disjoint u-v paths) -> exists k edge-disjoint trees each spanning T",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8936,8 +8936,8 @@
    ],
    "rocq_idiom": "forall d M, matching M in Q_d -> exists hamiltonian cycle H, M subset E(H)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9815,8 +9815,8 @@
    ],
    "rocq_idiom": "wsat(K_n, Q_3) = value: min edges of F s.t. E(K_n)\\E(F) addable one-at-a-time each completing a Q_3",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10272,8 +10272,8 @@
    ],
    "rocq_idiom": "exists c, forall graft (G,T), min_tcut(G,T)>=k -> exists tjoin packing of size >= (2/3)k-c",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

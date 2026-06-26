@@ -5,18 +5,19 @@
   "cycle-theory",
   "hamiltonicity-theory",
   "homomorphism-theory",
-  "minor-theory"
+  "minor-theory",
+  "packing-theory"
  ],
  "totals": {
-  "edges": 15,
+  "edges": 16,
   "by_status": {
-   "candidate": 10,
+   "candidate": 11,
    "refuted-direction": 4,
    "verified": 1
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 15,
+   "implies": 16,
    "refutes": 0,
    "specializes": 0
   },
@@ -162,6 +163,16 @@
    "cite": "independent; neither implies the other",
    "sources": [
     "chromatic-theory/implications_U1.v"
+   ]
+  },
+  {
+   "from": "triangle_packing_vs_triangle_edge_transversal_statement",
+   "to": "jones_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Tuza, Conjecture on triangle packing/covering, in Finite and Infinite Sets (1981); F. Jones / D. Chen, Jones' conjecture on planar cc <= 2 cp",
+   "sources": [
+    "packing-theory/implications_U9.v"
    ]
   },
   {

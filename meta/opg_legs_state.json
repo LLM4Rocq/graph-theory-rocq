@@ -294,6 +294,59 @@
     "vertex_minor_closed_classes_are_chi_bounded": {
       "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
       "commit": "05e3578", "package": "chromatic-theory", "note": "vertex_minor->forbidden_tree candidate edge"
+    },
+
+    "partition_of_a_cubic_3_connected_graphs_into_paths_of_length_2": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "triangle_packing_vs_triangle_edge_transversal": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory", "note": "triangle_packing->jones candidate"
+    },
+    "friendly_partitions": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "partitioning_edge_connectivity": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory", "note": "directional-walk flag fixed via local undirected uwalk (faithful)"
+    },
+    "the_bollobas_eldridge_catlin_conjecture_on_graph_packing": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "lovasz_path_removal_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "odd_cycle_transversal_in_triangle_free_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "matching_cut_and_girth": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "kriesells_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "matchings_extends_to_hamilton_cycles_in_hypercubes": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "weak_saturation_of_the_cube_in_the_clique": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "packing_t_joins": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory"
+    },
+    "jones_conjecture": {
+      "statement": "blocked", "grounding": "blocked", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "88a31cd", "package": "packing-theory", "note": "G2-blocked: abstract is_planar placeholder; target of triangle_packing candidate"
     }
   }
 }
