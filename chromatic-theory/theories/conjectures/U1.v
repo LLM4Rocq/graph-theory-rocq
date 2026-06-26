@@ -22,45 +22,16 @@
       - [ucycle (--) c] / [ucycleb (--) c] : (boolean) cycle predicate on
         [c : seq G] (a cycle = closed walk with distinct vertices). *)
 
-From mathcomp Require Import all_boot.
-From GraphTheory Require Import digraph sgraph coloring.
+(** G3: cross-area primitives now come from graph-theory-base (GTBase.base), which also
+    re-exports the coq-graph-theory undirected vocabulary (sgraph, --, N, χ, ω, clique,
+    connected, 'K_n, ≃, ucycle).  The Δ / ceil_div / common_nbr / regular / girth_geq
+    definitions formerly inlined here (tagged @MOVE-to-base) were moved verbatim to base/.
+    Re-EXPORTED so files importing U1 (grounding_U1, implications_U1) get the base vocabulary. *)
+From GTBase Require Export base.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
-
-(** ** Shared AREA primitives *)
-
-(** [@MOVE-to-base] Maximum degree Δ(G).  For the empty graph this is 0; the
-    rows that use it (Borodin–Kostochka, Reed) carry an explicit non-triviality
-    guard. *)
-Definition Delta (G : sgraph) : nat := \max_(x : G) #|N(x)|.
-
-(** [@MOVE-to-base] Pure arithmetic helper: ⌈a/b⌉ (with the mathcomp
-    convention ⌈a/0⌉ = 0).  Graph-free and cross-area (used by Melnikov, Row 8,
-    and conceptually Reed); it is a base/arithmetic candidate, not row-local. *)
-Definition ceil_div (a b : nat) : nat := (a + b - 1) %/ b.
-
-(** [@MOVE-to-base] Common-neighbourhood set of two vertices. *)
-Definition common_nbr (G : sgraph) (u v : G) : {set G} := N(u) :&: N(v).
-
-(** [@MOVE-to-base] [d]-regularity: every vertex has degree exactly [d]. *)
-Definition regular (G : sgraph) (d : nat) : Prop := forall v : G, #|N(v)| = d.
-
-(** [@MOVE-to-base] Girth ≥ [g]: every GENUINE cycle has length at least [g]
-    (acyclic graphs satisfy this for every [g]).
-
-    NB: the [2 < size c] guard is load-bearing, not decoration.  In mathcomp
-    [ucycle (--) [::]] reduces to [true] (an empty closed walk), and for an
-    edge [x -- y] the 2-tuple [[x; y]] is also a [ucycle]; without the guard
-    [girth_geq G g] would be REFUTED by [c := [::]] for every [g ≥ 1] (size 0)
-    and capped at [g ≤ 2] for every graph carrying an edge, making it
-    unsatisfiable for [g ≥ 3] and turning Row 4 into a false statement.  In a
-    simple graph every genuine cycle has [3 ≤ size c], so restricting the bound
-    to [2 < size c] is exactly "girth ≥ g" and keeps the predicate satisfiable
-    (e.g. forests/edgeless graphs satisfy it for all [g]). *)
-Definition girth_geq (G : sgraph) (g : nat) : Prop :=
-  forall c : seq G, ucycle (--) c -> 2 < size c -> g <= size c.
 
 (** ** Row 1 — Double-critical graph conjecture
     PARTIAL (verified for k ≤ 5; open for k ≥ 6).

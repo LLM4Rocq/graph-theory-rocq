@@ -1,0 +1,4 @@
+-R theories GTBase
+-arg -w -arg -notation-overridden
+
+theories/base.v

@@ -501,9 +501,11 @@ the large finite catch-all.
   subdir* must exist before that package's milestone can land.)
 - **G1 — dependency-graph metric.** Make `build_dependency_graph.py` deterministic, regenerate,
   and CI-gate `declared _implies_ theorems == committed graph edges` (today 48 vs 34 vs 45, §1).
-- **G3-core — base ownership.** Stand up the `base/` package with the *non-planar* cross-area
-  primitives (interop, hom, products, list-χ, line/total-graph, Δ) per the §A ownership table, so
-  the import DAG is acyclic before any area package is built.
+- **G3-core — base ownership. ✅ STARTED (2026-06-26).** `base/` = `coq-graph-theory-base`
+  (namespace `GTBase`) re-exports the undirected interop and **owns** the first cross-area
+  primitives validated by U1: `Delta` (Δ), `common_nbr`, `regular`, `girth_geq`, `ceil_div`.
+  `chromatic-theory/U1` is retargeted onto it (compiles axiom-free; `check_milestone U1` → 9/9).
+  *Remaining (added as their milestones need them):* hom, products, list-χ, line/total-graph.
 
 *ROW-LEVEL — before a row with `requires_planarity` (17 core rows, spread across **P9, U2, U3,
 U4, U7, U9, U13** — NOT just topological):*

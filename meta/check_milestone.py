@@ -66,7 +66,16 @@ need_files = [f"theories/conjectures/{phase}.v"] + \
 notlisted = [f for f in need_files if f not in cqp_txt]
 chk(os.path.exists(cqp) and not notlisted, "files in _CoqProject", f"not listed: {notlisted}" if notlisted else "")
 
-# 3) compile
+# 3) build sibling dependencies referenced in _CoqProject (e.g. -Q ../base/theories GTBase), then compile
+deps = re.findall(r"-[QR]\s+\.\./([\w.-]+)/theories\s+\S+", cqp_txt)
+dep_fail = []
+for dep in deps:
+    dpath = os.path.join(MONO, dep)
+    if os.path.isfile(os.path.join(dpath, "_CoqProject")):
+        dm = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"], cwd=dpath)
+        if dm.returncode != 0:
+            dep_fail.append(dep)
+chk(not dep_fail, f"dependencies build ({', '.join(deps) or 'none'})", f"failed: {dep_fail}" if dep_fail else "")
 mk = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"])
 compiles = mk.returncode == 0
 chk(compiles, "package compiles", "" if compiles else (mk.stdout + mk.stderr)[-500:])
@@ -89,7 +98,8 @@ if compiles and ns:
     body = f"From {ns}.conjectures Require Import {phase}.\n" + \
            "".join(f"Print Assumptions {n}.\n" for n in expected)
     open(probe, "w").write(body)
-    pr = run(["bash", "-c", f"coqc -R theories {ns} theories/conjectures/_assum_{phase}.v"])
+    incl = " ".join(re.findall(r"-[QR]\s+\S+\s+\S+", cqp_txt)) or f"-R theories {ns}"
+    pr = run(["bash", "-c", f"coqc {incl} theories/conjectures/_assum_{phase}.v"])
     out = pr.stdout + pr.stderr
     closed = out.count("Closed under the global context")
     has_axioms = "Axioms:" in out

@@ -1,4 +1,5 @@
 -R theories Chromatic
+-Q ../base/theories GTBase
 -arg -w -arg -notation-overridden
 
 theories/conjectures/U1.v
