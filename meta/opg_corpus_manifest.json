@@ -1739,8 +1739,8 @@
    ],
    "rocq_idiom": "forall (F : {set {set T}}), union_closed F -> F != set0 -> exists x, 2 * #|[set A in F | x \\in A]| >= #|F|",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3396,8 +3396,8 @@
    ],
    "rocq_idiom": "forall H, 3_uniform H /\\ #V = 3n /\\ K4_3_free H -> #edges H <= n^2(5n-3)/2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6691,8 +6691,8 @@
    ],
    "rocq_idiom": "forall k-uniform H, critical k-forest H -> k-tree H",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10317,8 +10317,8 @@
    ],
    "rocq_idiom": "forall H r-uniform r-partite, tau H <= (r-1) * nu H",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

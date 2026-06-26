@@ -845,6 +845,42 @@
       "audit_page": "todo",
       "commit": "3b2638f",
       "package": "reconstruction-theory"
+    },
+    "frankls_union_closed_sets_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "a05c5cf",
+      "package": "hypergraph-theory"
+    },
+    "turans_problem_for_hypergraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "a05c5cf",
+      "package": "hypergraph-theory"
+    },
+    "are_critical_k_forests_tight": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "a05c5cf",
+      "package": "hypergraph-theory"
+    },
+    "rysers_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "a05c5cf",
+      "package": "hypergraph-theory"
     }
   }
 }
