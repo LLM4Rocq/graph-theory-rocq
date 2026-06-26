@@ -4,7 +4,8 @@
   "chromatic-theory",
   "cycle-theory",
   "hamiltonicity-theory",
-  "homomorphism-theory"
+  "homomorphism-theory",
+  "minor-theory"
  ],
  "totals": {
   "edges": 11,

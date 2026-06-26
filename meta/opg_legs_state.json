@@ -256,6 +256,31 @@
     "cycle_double_cover_conjecture": {
       "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
       "commit": "2bb9863", "package": "cycle-theory", "note": "target of 1 verified (faithful_cycle_covers) + 2 candidate edges"
+    },
+
+    "forcing_a_k_6_minor": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "63afbd2", "package": "minor-theory", "note": "target of jorgensens->forcing_k6 candidate"
+    },
+    "seagull_problem": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "63afbd2", "package": "minor-theory"
+    },
+    "coloring_and_immersion": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "63afbd2", "package": "minor-theory", "note": "uses immersion (@MOVE-to-base candidate)"
+    },
+    "forcing_a_2_regular_minor": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "63afbd2", "package": "minor-theory", "note": "0<#|G| guard added by correct+ground (faithful)"
+    },
+    "high_connectivity_no_k_n": {
+      "statement": "blocked", "grounding": "blocked", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "63afbd2", "package": "minor-theory", "note": "G2-blocked: abstract is_planar placeholder; candidate edge <-> jorgensens"
+    },
+    "jorgensens_conjecture": {
+      "statement": "blocked", "grounding": "blocked", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "63afbd2", "package": "minor-theory", "note": "G2-blocked: abstract is_planar/apex placeholder; candidate edges"
     }
   }
 }

@@ -372,9 +372,9 @@
    "new_primitives": [],
    "rocq_idiom": "(forall G, mindeg G >= 7 -> minor K6 G) /\\ (forall G, connectivity G >= 7 -> minor K6 G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -598,8 +598,8 @@
    "new_primitives": [],
    "rocq_idiom": "forall G, alpha G <= 2 -> minor (K (n/2)) G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -918,8 +918,8 @@
    ],
    "rocq_idiom": "forall t G, χ G >= t -> immerses G (K t)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2482,9 +2482,9 @@
    ],
    "rocq_idiom": "forall n, exists N, forall G, #|V G|>=N -> n_connected G -> ~ minor G (K n) -> exists S, #|S|=n-5 /\\ planar (G - S)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8242,9 +8242,9 @@
    ],
    "rocq_idiom": "forall G 6-connected, no K6 minor -> apex (planar + 1 vertex)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10089,8 +10089,8 @@
    ],
    "rocq_idiom": "forall t G H, avgdeg G >= (4/3)t-2 -> 2regular H -> |V H|=t -> minor H G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
