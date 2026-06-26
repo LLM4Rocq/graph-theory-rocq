@@ -6,18 +6,19 @@
   "hamiltonicity-theory",
   "homomorphism-theory",
   "minor-theory",
-  "packing-theory"
+  "packing-theory",
+  "reconstruction-theory"
  ],
  "totals": {
-  "edges": 19,
+  "edges": 20,
   "by_status": {
-   "candidate": 13,
+   "candidate": 14,
    "refuted-direction": 4,
    "verified": 2
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 19,
+   "implies": 20,
    "refutes": 0,
    "specializes": 0
   },
@@ -153,6 +154,16 @@
    "cite": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12",
    "sources": [
     "cycle-theory/implications_U10.v"
+   ]
+  },
+  {
+   "from": "reconstruction_statement",
+   "to": "edge_reconstruction_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Greenwell, Proc. AMS 30 (1971) 431-433; Bondy, A graph reconstructor's manual (1991)",
+   "sources": [
+    "reconstruction-theory/implications_U11.v"
    ]
   },
   {

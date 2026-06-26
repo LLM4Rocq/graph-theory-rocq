@@ -3348,8 +3348,8 @@
    ],
    "rocq_idiom": "forall G, #|V G| >= 5 -> forall H, same_switching_deck G H -> iso G H",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3668,9 +3668,9 @@
    ],
    "rocq_idiom": "forall G with >=4 edges, any H with same edge-deck (multiset of edge-deleted subgraphs up to iso) is iso to G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5638,8 +5638,8 @@
    ],
    "rocq_idiom": "forall T1 T2, is_tree T1 -> is_tree T2 -> (forall i, #|V(iter i L T1)| = #|V(iter i L T2)|) -> iso T1 T2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9031,9 +9031,9 @@
    ],
    "rocq_idiom": "forall G H, |V|>=3 /\\ deck G = deck H (as multiset up to iso) -> G iso H",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
