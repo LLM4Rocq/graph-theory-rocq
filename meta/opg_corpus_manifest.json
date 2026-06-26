@@ -9400,8 +9400,8 @@
    "new_primitives": [],
    "rocq_idiom": "forall G, cubic G -> 3.connected G -> domnum G <= ceil(|G|/3)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10044,8 +10044,8 @@
    ],
    "rocq_idiom": "exists n0, forall G, plane_triangulation G -> |V G| >= n0 -> domnum G <= |V G|/4",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

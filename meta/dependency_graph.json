@@ -13,21 +13,41 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 20,
+  "edges": 22,
   "by_status": {
-   "candidate": 14,
-   "refuted-direction": 4,
+   "candidate": 15,
+   "refuted-direction": 5,
    "verified": 2
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 20,
+   "implies": 22,
    "refutes": 0,
    "specializes": 0
   },
   "proved_theorems": 2
  },
  "edges": [
+  {
+   "from": "domination_in_cubic_graphs_statement",
+   "to": "domination_in_plane_triangulations_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md §6 (no domination edge in the verified table); Reed, Paths/stars/the domination number, Combin. Probab. Comput. 1996 (cubic γ<=⌈n/3⌉); Matheson & Tarjan 1996 (planar triangulation γ<=n/3, conj. n/4)",
+   "sources": [
+    "packing-theory/implications_U13.v"
+   ]
+  },
+  {
+   "from": "domination_in_plane_triangulations_statement",
+   "to": "domination_in_cubic_graphs_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md §6 (no domination edge in the verified table)",
+   "sources": [
+    "packing-theory/implications_U13.v"
+   ]
+  },
   {
    "from": "edge_list_coloring_statement",
    "to": "goldbergs_statement",
