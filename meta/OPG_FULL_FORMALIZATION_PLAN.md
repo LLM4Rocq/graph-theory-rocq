@@ -95,25 +95,29 @@ as `digraph-theory` did for k=3,4,5 and Cheng–Keevash δ=2,3.
 library `graph-theory-base` *owns* every cross-area primitive; area packages never depend on
 each other):
 
+Subdir names equal the manifest `repo` values (so the workflow's `<repo>/theories/…` landing
+paths are correct without a mapping). **✅ STOOD UP (gate G0 done, see §A.1).**
+
 ```
 graph-theory-rocq/                         ONE git repo (llm4rocq/graph-theory-rocq)
-  base/        coq-graph-theory-base   — SINGLE owner of cross-cutting defs: the undirected
-       │       interop façade; graph homomorphism `hom`; products (tensor/cartesian/lex);
-       │       list-assignment + list-χ; line-graph + total-graph; Δ. One definition each, so
-       ▼       cross-area `_implies_` edges type-check. Depends on coq-graph-theory + mathcomp.
-  digraph/     the absorbed digraph-theory (directed; namespace Digraph)
-  chromatic/ hamiltonicity/ homomorphism/ cycle/ minor/ packing/ reconstruction/
-  hypergraph/ topological/ misc/         — area packages: depend ONLY on base (+ digraph if
-       │       directed), NEVER on a sibling → the area layer is an antichain, no cycles.
-       ▼       Each owns its area-specific primitives (deck, hyperedge, cycle-space, immersion…).
-  extremal/ infinite/ spectral/          — parked (deferred tail)
-  atlas/       cross-area `_implies_` edges + the federated dependency graph (the only
-       │       multi-area consumer; depends on the area packages it links)
-  blueprint/   shared DEV-TOOLING (NOT a Rocq lib): closure gate, correspondence auditor, axiom
-       │       audit, federated dep-graph + site generator (factored from digraph/scripts/)
-  meta/        OPG_FULL_FORMALIZATION_PLAN.md, opg_corpus_manifest.json, build_opg_manifest.py,
-               milestone_rows.py, area_milestone_pipeline.workflow.js
-  _CoqProject · dune-project · Makefile · .github/workflows/   one build, CI matrix over packages
+  base/             coq-graph-theory-base — SINGLE owner of cross-cutting defs: the undirected
+       │            interop façade; graph homomorphism `hom`; products (tensor/cartesian/lex);
+       │            list-assignment + list-χ; line-graph + total-graph; Δ. One definition each,
+       ▼            so cross-area `_implies_` edges type-check. Depends on coq-graph-theory + mathcomp.
+  digraph-theory/   the absorbed standalone repo (directed; namespace Digraph; history preserved)
+  chromatic-theory/ hamiltonicity-theory/ homomorphism-theory/ cycle-theory/ minor-theory/
+  packing-theory/ reconstruction-theory/ hypergraph-theory/ topological-graph-theory/
+  graph-theory-misc/      — area packages: depend ONLY on base (+ digraph-theory if directed),
+       │                    NEVER on a sibling → the area layer is an antichain, no cycles.
+       ▼                    Each owns its area-specific primitives (deck, hyperedge, cycle-space…).
+  extremal-graph-theory/ infinite-graph-theory/ spectral-graph-theory/   — parked (deferred tail)
+  atlas/            cross-area `_implies_` edges + the federated dependency graph (the only
+       │            multi-area consumer; depends on the area packages it links)
+  blueprint/        shared DEV-TOOLING (NOT a Rocq lib): closure gate, correspondence auditor,
+       │            axiom audit, federated dep-graph + site generator (factored from digraph-theory/scripts/)
+  meta/             OPG_FULL_FORMALIZATION_PLAN.md, opg_corpus_manifest.json, build_opg_manifest.py,
+                    milestone_rows.py, area_milestone_pipeline.workflow.js
+  Makefile · .gitignore · .github/workflows/   one root build, recurse/matrix over packages
 ```
 
 **Definition-ownership table** (a primitive lives in exactly one place; `unlocks` = repos using it):
@@ -167,27 +171,30 @@ proof-extensible (exactly how `coq-mathcomp-ssreflect` etc. work), but base/atla
 the planning artifacts are in-tree and cross-area refactors/edges are atomic. This restores the
 shared-tooling simplicity while keeping "each package extended later with proofs."
 
-### A.1 Migration runbook — absorb `digraph-theory` into `graph-theory-rocq` (git subtree)
+### A.1 Migration runbook — absorb `digraph-theory` (status: G0 mechanics DONE 2026-06-26)
 
 One-time, deliberate (do NOT ad-hoc `mv` the live tree — its opam switch is linked to its path
-`_opam -> ~/.opam/digraph`, the Rocq MCP resolves the switch from there, and scripts use absolute
-paths; a bare move breaks the toolchain). Ordered steps:
+`_opam -> ~/.opam/digraph`, the Rocq MCP resolves the switch from there; a bare move breaks the
+toolchain). The absorb was done **non-destructively**: the standalone `digraph-theory` repo, its
+opam switch, and the MCP are all untouched (the subtree merge *copies* history into the monorepo).
 
-1. `git init graph-theory-rocq` (new repo in the `llm4rocq` org); add root `dune-project` /
-   `_CoqProject` / `Makefile` / `.github/workflows/` and empty `base/ atlas/ blueprint/ meta/`.
-2. Absorb digraph with history: `git -C graph-theory-rocq subtree add --prefix digraph <digraph-theory-url> main`.
-3. Move shared bits to the root: `digraph/scripts/{statement_closure,build_correspondence,…}.py` →
-   `blueprint/`; `digraph/docs/{OPG_FULL_FORMALIZATION_PLAN.md, opg_corpus_manifest.json,
-   build_opg_manifest.py, milestone_rows.py, area_milestone_pipeline.workflow.js}` → `meta/`.
-4. **Relink the opam switch** to the new root (`opam switch link graph` or recreate), and update
-   `ROCQ_WORKSPACE` / the MCP workspace + the absolute paths in `meta/*.py` and the workflow's
-   `REPO`/path constants to `graph-theory-rocq/…`.
-5. Rename packages to dual `rocq-/coq-<area>-theory`; one root build/CI matrix.
-6. Deploy the auditor to `llm4rocq.github.io/graph-theory-rocq`; add a redirect from the old
-   `…/digraph-theory` site. Retire the standalone repo (archive, with a pointer).
+- **✅ 1. Monorepo stood up** — `git init graph-theory-rocq` + root `README`/`Makefile`/`.gitignore`
+  + `base/ atlas/ blueprint/ meta/` + the 13 area-package dirs (manifest-driven READMEs/namespaces).
+- **✅ 2. digraph absorbed with history** — `git subtree` binary is absent here, so used the
+  equivalent `merge -s ours --allow-unrelated-histories` + `read-tree --prefix=digraph-theory/`;
+  the planning commit and digraph's full history are reachable in the monorepo (48 commits).
+- **✅ 3. Planning artifacts relocated to `meta/`** (plan, manifest, classification, builder, loader,
+  workflow); `build_opg_manifest.py`/`milestone_rows.py` repointed to `meta/` + the corpus, and the
+  builder **reproduces `meta/opg_corpus_manifest.json` byte-identically** from the new location.
+- **⏳ 3b. (deferred) Extract the *existing* shared tooling** (`digraph-theory/scripts/{statement_closure,
+  build_correspondence,…}.py`) → `blueprint/` — a refactor of digraph's build, left for a G0-followup.
+- **⏳ 4. (deferred CUTOVER) Relink the opam switch** to the monorepo root + repoint `ROCQ_WORKSPACE`/MCP
+  and the workflow's `REPO` constant. Until then the **toolchain still runs from the standalone
+  `digraph-theory` path** (intentional — keeps the working switch/MCP).
+- **⏳ 5–6. (deferred CUTOVER)** Dual `rocq-/coq-<area>-theory` opam packages + one CI matrix; deploy the
+  auditor to `llm4rocq.github.io/graph-theory-rocq` with a redirect; retire/archive the standalone repo.
 
-Until step 4 completes, the toolchain still runs from the current `digraph-theory` path; the
-manifest's `repo` values double as the **package** ids (= subdir names) under `graph-theory-rocq/`.
+The manifest's `repo` values are the **package** ids (= subdir names) under `graph-theory-rocq/`.
 
 ---
 
