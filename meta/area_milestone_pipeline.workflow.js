@@ -161,7 +161,9 @@ const auditorThunks = rows.map((r) => () =>
 const ra = (await parallel(reviewerThunks.concat(auditorThunks))).filter(Boolean)
 const reviews = ra.slice(0, CONCERNS.length)
 const audits = ra.slice(CONCERNS.length)
-const auditBySlug = Object.fromEntries(audits.filter((a) => a && a.slug).map((a) => [a.slug, a]))
+// key audits by BOTH slug and formal_name — agents inconsistently return one or the other
+const auditBySlug = {}
+for (const a of audits) { if (!a) continue; if (a.slug) auditBySlug[a.slug] = a; if (a.formal_name) auditBySlug[a.formal_name] = a }
 const unfaithful = audits.filter((a) => a && (a.faithful === false || a.selected_proposition_matches === false))
 log(`Reviews ${reviews.length}; faithfulness audits ${audits.length} (${unfaithful.length} flagged unfaithful/mismatched)`)
 
@@ -226,7 +228,7 @@ const gComp = !!(verify && verify.grounding_compiles), gAx = !!(verify && verify
 const gQed = !!(corrected && corrected.grounding_lemmas && corrected.grounding_lemmas.length &&
   corrected.grounding_lemmas.every((l) => l.qed))
 const legs_update = rows.map((r) => {
-  const a = auditBySlug[r.slug]
+  const a = auditBySlug[r.slug] || auditBySlug[r.formal_name]
   const faithful = !!(a && a.faithful !== false && a.selected_proposition_matches !== false)
   const rowEdges = provedEdges.filter((e) => e.from === r.formal_name || e.to === r.formal_name)
   const rowBlocked = !!(r.requires_planarity && !M.g2_ready)  // ROW-LEVEL G2 gate (planar rows only)

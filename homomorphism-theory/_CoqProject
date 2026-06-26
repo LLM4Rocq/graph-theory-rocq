@@ -1,0 +1,7 @@
+-R theories Hom
+-Q ../base/theories GTBase
+-arg -w -arg -notation-overridden
+
+theories/conjectures/U3.v
+theories/conjectures/grounding_U3.v
+theories/conjectures/implications_U3.v
