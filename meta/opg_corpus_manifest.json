@@ -644,8 +644,8 @@
    ],
    "rocq_idiom": "forall G, schi G <= (if even Delta then 5*Delta^2/4 else (5*Delta^2-2*Delta+1)/4)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1283,9 +1283,9 @@
    ],
    "rocq_idiom": "forall r (G:r-graph), χ' G <= r+1",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2160,8 +2160,8 @@
    ],
    "rocq_idiom": "forall G, cubic G -> connected G -> 3edgecolorable G -> exists e, 3edgecolorable (suppress (G - e))",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3715,9 +3715,9 @@
    ],
    "rocq_idiom": "forall multigraph G, chi'(G) <= max(Delta(G)+1, w(G)) with w the overfull density parameter",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6645,8 +6645,8 @@
    ],
    "rocq_idiom": "forall H d-uniform with codegree<=r, exists (r+d-1)-edge-colouring proper on (d-1)-intersecting edges",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7242,8 +7242,8 @@
    ],
    "rocq_idiom": "which STS S satisfy: every cubic G is S-edge-colourable",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8564,8 +8564,8 @@
    ],
    "rocq_idiom": "forall G, exists c: edge-colouring with Delta+2 colours, proper /\\ every cycle uses >=3 colours",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9078,8 +9078,8 @@
    ],
    "rocq_idiom": "forall G, subcubic G -> star-chromatic-index G <= 6",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9265,9 +9265,9 @@
    ],
    "rocq_idiom": "forall G, total_chromatic G <= maxdeg G + 2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },

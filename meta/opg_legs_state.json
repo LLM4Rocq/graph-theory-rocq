@@ -174,6 +174,43 @@
     "acyclic_list_colouring_of_planar_graphs": {
       "statement": "blocked", "grounding": "blocked", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
       "commit": "3c7756b", "package": "chromatic-theory", "note": "G2-blocked: placeholder planarity (over-strong); auditor-flagged"
+    },
+
+    "strong_edge_colouring_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory"
+    },
+    "seymours_r_graph_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory", "note": "fixed to edge_colourable G r (chi'=r); goldberg->seymour demoted to candidate"
+    },
+    "3_edge_coloring_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory"
+    },
+    "goldbergs_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory", "note": "edge_list->goldberg + goldberg->seymour candidate edges"
+    },
+    "a_generalization_of_vizings_theorem": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory"
+    },
+    "universal_steiner_triple_systems": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory"
+    },
+    "acyclic_edge_coloring": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory"
+    },
+    "star_chromatic_index_of_cubic_graphs": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory"
+    },
+    "behzads_conjecture": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "ff00f33", "package": "chromatic-theory", "note": "msimple guard = simple graph (faithful TCC); list_total->behzads refuted-direction"
     }
   }
 }
