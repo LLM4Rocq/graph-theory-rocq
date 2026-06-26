@@ -1,0 +1,6 @@
+-R theories Chromatic
+-arg -w -arg -notation-overridden
+
+theories/conjectures/U1.v
+theories/conjectures/grounding_U1.v
+theories/conjectures/implications_U1.v
