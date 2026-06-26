@@ -56,7 +56,7 @@
     dodges shadowing of upstream names), NOT an arity marker. *)
 
 From GraphTheory Require Import mgraph.
-From GTBase Require Import base.
+From GTBase Require Export base.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -92,13 +92,11 @@ Definition del_bipartite (G : sgraph) (S : {set {set G}}) : Prop :=
     forall x y : G, x -- y -> [set x; y] \notin S -> (x \in A) != (y \in A).
 
 (** Triangle-free: no 3-clique. *)
-Definition triangle_free (G : sgraph) : Prop :=
-  forall T : {set G}, ~ is_triangle T.
+(* [triangle_free] now from graph-theory-base (vertex-triple form, equivalent to ~ is_triangle). *)
 
 (** ** k-connectivity (Whitney form, separator-free).  [@MOVE-to-base]: also used
     by hamiltonicity-theory/U2; promote to base when a second area is wired. *)
-Definition k_connected (G : sgraph) (k : nat) : Prop :=
-  (k < #|G|) /\ forall S : {set G}, #|S| < k -> connected ([set: G] :\: S).
+(* [k_connected] now from graph-theory-base. *)
 
 (** k-connectivity of the induced subgraph on [U] (deletions taken from [U]). *)
 Definition k_connected_on (G : sgraph) (U : {set G}) (k : nat) : Prop :=
@@ -252,13 +250,7 @@ Definition is_wsat (n : nat) (m : nat) : Prop :=
     orientation (the library [walk] only goes [source -> target], which on the
     DIRECTED carrier [mgraph = graph unit unit] would encode directed/strong
     reachability — wrong for the undirected "edge-connected graph" of Row 4). *)
-Fixpoint uwalk (G : mgraph) (x y : G) (w : seq (edge G)) {struct w} : bool :=
-  match w with
-  | [::] => x == y
-  | e :: w' =>
-      ((source e == x) && uwalk (target e) y w') ||
-      ((target e == x) && uwalk (source e) y w')
-  end.
+(* [uwalk] (undirected multigraph walk) now from graph-theory-base. *)
 
 (** Connectivity using only the edges of [E]: any two vertices joined by an
     UNDIRECTED [E]-walk (undirected edge-connectivity, faithful to Row 4). *)

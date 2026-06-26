@@ -26,15 +26,16 @@ directed/undirected defect — worth re-checking when the connectivity layer is 
 1 candidate: `triangle_packing_vs_triangle_edge_transversal ⟹ jones` (recorded as `(*@EDGE*)`; not
 Qed-forced — jones is G2-blocked anyway).
 
-### Base-promotion candidates (PENDING your review — not yet promoted)
-Per the agreed gate-promotion-on-review policy, U9 keeps everything local; these are the cross-area
-primitives to decide on:
-- **`k_connected`** — defined in **hamiltonicity/U2, homomorphism/U3, packing/U9** (3 areas). U9 uses
-  the Whitney separator-free form; definitions across areas must be reconciled before promoting one
-  canonical base version.
-- **`triangle_free`** (U3, U9), **`is_matching`** (U6 *mgraph* vs U9 *sgraph* — carrier differs),
-  **`hamiltonian_cycle`/`is_hamiltonian`** (U2, U9), and **`uwalk`** (undirected-walk primitive; if
-  promoted, U6's connectivity should be retargeted onto it to fix the directional-walk issue above).
+### Base-promotion candidates — RESOLVED (reviewed + promoted 2026-06-26)
+Per the gate-promotion-on-review policy, after sign-off:
+- **PROMOTED to base** (and retargeted): `k_connected` (Whitney form; the 3 area defs were
+  definitionally identical — U2/U3/U9 retargeted), `triangle_free` (U3's vertex-triple form — U3 + U9
+  retargeted; U9's `triangle_free_small` grounding lemma was reproved for the new shape via
+  `uniq_leq_size`), `uwalk` (undirected walk — **cycle-theory/U6's connectivity was retargeted off the
+  library's directional `walk` onto it**, fixing the latent directed/undirected defect).
+- **DEFERRED** (kept local): `is_matching` (U6 *mgraph* vs U9 *sgraph* — carrier mismatch, not
+  mergeable as-is), `hamiltonian_cycle`/`is_hamiltonian` (U2, U9 — lower value). Revisit when a
+  matching/hamiltonicity milestone fixes the canonical carrier.
 
 ### Area-local primitives (this milestone)
 `is_P3`, `is_triangle`/`tri_edges`/triangle-packing/-transversal, `friendly_partition`,

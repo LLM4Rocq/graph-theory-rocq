@@ -30,7 +30,7 @@
     pure colouring-free [sgraph] constructions promoted from chromatic-theory/U1
     (tagged [@MOVE-to-base]: base candidates once a 2nd area needs them). *)
 
-From GTBase Require Import base.
+From GTBase Require Export base.
 From mathcomp Require Import fingroup.
 
 Set Implicit Arguments.
@@ -115,8 +115,7 @@ Definition pentagon_statement : Prop :=
     maximum length.  [chord G c]: an edge [x -- y] joining two cycle vertices
     that are NOT cyclically consecutive in [c] — consecutivity is exactly
     membership in [zip c (rot 1 c)], the list of cycle edges. *)
-Definition k_connected (G : sgraph) (k : nat) : Prop :=
-  k < #|G| /\ forall S : {set G}, #|S| < k -> connected (~: S).
+(* [k_connected] now from graph-theory-base (uses [set: G] :\: S = ~: S). *)
 
 Definition longest_cycle (G : sgraph) (c : seq G) : Prop :=
   [/\ ucycle (--) c, 2 < size c &
@@ -317,8 +316,7 @@ Definition extremal_problem_on_the_number_of_tree_endomorphism_statement : Prop 
     is a symmetric [col : G -> G -> 'I_5]; the complement of colour class [c] is
     the relation [x -- y && col x y != c], required [bipartite_rel] (admits a
     2-colouring [G -> bool] separating its edges). *)
-Definition triangle_free (G : sgraph) : Prop :=
-  forall x y z : G, x -- y -> y -- z -> z -- x -> False.
+(* [triangle_free] now from graph-theory-base (identical definition). *)
 
 Definition bipartite_rel (G : sgraph) (r : rel G) : Prop :=
   exists f : G -> bool, forall x y : G, r x y -> f x != f y.

@@ -21,7 +21,7 @@
     they do not yet state the real geometric conjecture.  The other five rows model
     their statements fully. *)
 
-From GTBase Require Import base.
+From GTBase Require Export base.
 From mathcomp Require Import fingroup.
 
 Set Implicit Arguments.
@@ -59,13 +59,8 @@ Definition cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
   [set [set x; next c x] | x in [set z | z \in c]].
 Arguments cycle_edges : clear implicits.
 
-(** ** k-connectivity (Whitney form, separator-free)
-
-    [k_connected G k]: more than [k] vertices, and deleting any set of fewer than
-    [k] vertices leaves a connected graph.  Stated via the core [connected] on the
-    induced set [ [set: G] :\: S ], so no separator API is needed. *)
-Definition k_connected (G : sgraph) (k : nat) : Prop :=
-  (k < #|G|) /\ forall S : {set G}, #|S| < k -> connected ([set: G] :\: S).
+(** [k_connected] (Whitney k-connectivity) is now in graph-theory-base — promoted from
+    U2 ∩ U3 ∩ U9 — and reused here via the base export. *)
 
 (** ** Bipartiteness (a 2-colouring with no monochromatic edge).
     [@MOVE-to-base]: a colouring-free structural primitive, base candidate. *)

@@ -23,7 +23,7 @@
       - [edge G] : finType of edges; [source e]/[target e] : G endpoints;
       - [incident x e] : bool; [edges_at x] : {set edge G};
       - [edges x y] : {set edge G} the edges between x and y;
-      - [walk x y w] : closed/open edge-walk predicate (w : seq (edge G));
+      - [uwalk x y w] : closed/open edge-walk predicate (w : seq (edge G));
       - [eseparates x y E] : every [x]–[y] walk meets the edge set [E];
       - [partition P D] : mathcomp partition of a finite set.
 
@@ -68,20 +68,20 @@ Definition even_subgraph (G : mgraph) (C : {set edge G}) : Prop :=
 
 (** Walk restricted to edges of [H]. *)
 Definition walk_in (G : mgraph) (H : {set edge G}) (x y : G) (w : seq (edge G)) : bool :=
-  walk x y w && all (fun e => e \in H) w.
+  uwalk x y w && all (fun e => e \in H) w.
 
 (** Whole-graph (vertex) connectivity. *)
 Definition mconnected (G : mgraph) : Prop :=
-  forall x y : G, exists w, walk x y w.
+  forall x y : G, exists w, uwalk x y w.
 
 (** Connectivity using only edges OUTSIDE the edge set [S] (i.e. of [G - E(S)]). *)
 Definition connected_del_edges (G : mgraph) (S : {set edge G}) : Prop :=
-  forall x y : G, exists w, walk x y w /\ all (fun e => e \notin S) w.
+  forall x y : G, exists w, uwalk x y w /\ all (fun e => e \notin S) w.
 
 (** Connectivity after deleting the vertex set [Z] (walks avoiding [Z]). *)
 Definition connected_del_verts (G : mgraph) (Z : {set G}) : Prop :=
   forall x y : G, x \notin Z -> y \notin Z ->
-    exists w, walk x y w /\ all (fun e => (source e \notin Z) && (target e \notin Z)) w.
+    exists w, uwalk x y w /\ all (fun e => (source e \notin Z) && (target e \notin Z)) w.
 
 (** 2-(vertex-)connected: at least 3 vertices, and connected after deleting any one. *)
 Definition two_connected (G : mgraph) : Prop :=
@@ -123,7 +123,7 @@ Definition is_matching (G : mgraph) (M : {set edge G}) : Prop :=
     is automatic from [walk]-connectivity over ALL vertices (an isolated vertex
     has no nontrivial walk to the others). *)
 Definition spanning_connected (G : mgraph) (T : {set edge G}) : Prop :=
-  forall x y : G, exists w, walk x y w /\ all (fun e => e \in T) w.
+  forall x y : G, exists w, uwalk x y w /\ all (fun e => e \in T) w.
 
 Definition spanning_tree (G : mgraph) (T : {set edge G}) : Prop :=
   spanning_connected T /\ acyclic T.

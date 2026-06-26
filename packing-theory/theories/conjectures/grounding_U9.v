@@ -136,9 +136,16 @@ Qed.
 (** identity: a graph with fewer than three vertices is triangle-free. *)
 Lemma triangle_free_small (G : sgraph) : #|G| < 3 -> triangle_free G.
 Proof.
-move=> hG T [_ hT].
-have h2 := subset_leq_card (subsetT T); rewrite cardsT hT in h2.
-by move: (leq_ltn_trans h2 hG); rewrite ltnn.
+move=> hG x y z xy yz zx.
+have D : forall a b : G, a -- b -> a != b.
+  by move=> a b ab; apply/eqP => e; move: ab; rewrite e sg_irrefl.
+have xz : x != z by rewrite eq_sym; exact: (D _ _ zx).
+have u : uniq [:: x; y; z].
+  by rewrite /= !inE !negb_or (D _ _ xy) xz (D _ _ yz).
+have sub : {subset [:: x; y; z] <= enum G} by move=> a _; rewrite mem_enum.
+have key := uniq_leq_size u sub.
+rewrite -cardE in key.
+by rewrite leqNgt hG in key.
 Qed.
 
 (** witness: the 2-vertex edgeless graph is triangle-free. *)

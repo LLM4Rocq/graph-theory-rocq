@@ -207,3 +207,27 @@ Definition total_colourable (G : mgraph) (k : nat) : Prop := total_chromatic_num
 (** Multigraph maximum degree (parallel edges counted) — distinct from the sgraph [Delta].
     Promoted from chromatic-theory U4 ∩ U5. *)
 Definition mDelta (G : mgraph) : nat := \max_(v : G) #|edges_at v|.
+
+(** ** Connectivity & structural predicates (promoted across areas)
+
+    [k_connected] (Whitney form, from U2/U3/U9), [triangle_free] (from U3/U9), and [uwalk] —
+    an UNDIRECTED multigraph walk traversing each edge in either direction, fixing the
+    source→target bias of coq-graph-theory's [walk] (from U9; cycle-theory connectivity reuses it). *)
+
+(** k-connectivity: more than k vertices, and deleting any fewer than k leaves it connected.
+    Uses [ [set: G] :\: S ] (= [~: S]) — the form U2/U9 already use. *)
+Definition k_connected (G : sgraph) (k : nat) : Prop :=
+  (k < #|G|) /\ forall S : {set G}, #|S| < k -> connected ([set: G] :\: S).
+
+(** Triangle-free: no three mutually adjacent vertices. *)
+Definition triangle_free (G : sgraph) : Prop :=
+  forall x y z : G, x -- y -> y -- z -> z -- x -> False.
+
+(** Undirected walk in a loopless multigraph: each edge traversed in EITHER direction. *)
+Fixpoint uwalk (G : mgraph) (x y : G) (w : seq (edge G)) {struct w} : bool :=
+  match w with
+  | [::] => x == y
+  | e :: w' =>
+      ((source e == x) && uwalk (target e) y w') ||
+      ((target e == x) && uwalk (source e) y w')
+  end.
