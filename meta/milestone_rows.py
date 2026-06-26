@@ -15,8 +15,8 @@ REQUIRES an explicit repo — the workflow generates ONE file per (phase,repo), 
 import json, sys, os, re
 from collections import Counter
 
-DT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-m = json.load(open(f"{DT}/docs/opg_corpus_manifest.json"))
+META = os.path.dirname(os.path.abspath(__file__))   # graph-theory-rocq/meta
+m = json.load(open(f"{META}/opg_corpus_manifest.json"))
 ROWS = m["rows"]
 
 if len(sys.argv) < 2:

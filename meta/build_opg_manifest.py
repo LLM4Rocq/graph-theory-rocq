@@ -5,16 +5,17 @@ valid+unique Rocq formal_names, no empty source_propositions, exact status_seman
 import json, re, os
 from collections import Counter, OrderedDict
 
-DT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # repo root (scripts/..)
-GC = os.environ.get("GRAPH_CONJECTURES",
-                    os.path.join(os.path.dirname(os.path.dirname(DT)), "graph-conjectures"))
+META = os.path.dirname(os.path.abspath(__file__))           # graph-theory-rocq/meta
+REPO = os.path.dirname(META)                                # graph-theory-rocq (monorepo root)
+GC = os.environ.get("GRAPH_CONJECTURES",                    # ~/Recherche/graph-conjectures
+                    os.path.join(os.path.dirname(os.path.dirname(REPO)), "graph-conjectures"))
 SRC_COMMIT_REPO = "f6901fb371155678980a84306f6208fa0f166a6b"
 SRC_COMMIT_PROBLEMS = "27aec7fadb54b371fdee44e51e96a5f525c372a0"
 
 prob = {p['slug']: p for p in json.load(open(f"{GC}/data/problems.json"))}
-# raw classifier output committed in-repo (the manifest's upstream); GRAPH_CONJECTURES env
+# raw classifier output committed in meta/ (the manifest's upstream); GRAPH_CONJECTURES env
 # overrides the corpus location for provenance/source_text.
-cls = json.load(open(f"{DT}/docs/opg_full_classification.json"))['classifications']
+cls = json.load(open(f"{META}/opg_full_classification.json"))['classifications']
 
 # slugs already covered by digraph-theory's existing nodes (verified constant names)
 ALREADY = {
@@ -216,5 +217,5 @@ out={"_README":"Validated 227-row corpus manifest (v2, 2026-06-26). Each row →
                "by_status":dict(Counter(r['status'] for r in rows)),
                "already_formalized":sum(1 for r in rows if r['already_formalized'])},
      "rows":rows}
-json.dump(out,open(f"{DT}/docs/opg_corpus_manifest.json","w"),ensure_ascii=False,indent=1)
-print("wrote docs/opg_corpus_manifest.json")
+json.dump(out,open(f"{META}/opg_corpus_manifest.json","w"),ensure_ascii=False,indent=1)
+print("wrote meta/opg_corpus_manifest.json")
