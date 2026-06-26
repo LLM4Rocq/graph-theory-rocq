@@ -11,3 +11,6 @@ theories/conjectures/implications_U4.v
 theories/conjectures/U5.v
 theories/conjectures/grounding_U5.v
 theories/conjectures/implications_U5.v
+theories/conjectures/U8.v
+theories/conjectures/grounding_U8.v
+theories/conjectures/implications_U8.v
