@@ -1,0 +1,7 @@
+-R theories Minor
+-Q ../base/theories GTBase
+-arg -w -arg -notation-overridden
+
+theories/conjectures/U7.v
+theories/conjectures/grounding_U7.v
+theories/conjectures/implications_U7.v
