@@ -67,8 +67,13 @@ const MCP = `To run Rocq: call ToolSearch with the keyword query "rocq coq compi
   `then use the returned rocq_compile / rocq_query / rocq_start / rocq_check tools.`
 
 const BASE = M.base_ready
-  ? `graph-theory-base EXISTS (plan G3 done): import cross-area primitives — graph homomorphism, products ` +
-    `(tensor/cartesian/lex), list-assignment/list-χ, line-graph/total-graph, Δ — FROM graph-theory-base; do not redefine them.`
+  ? `graph-theory-base is INSTALLED (G3-core). Use \`From GTBase Require Import base.\` as the SOLE ` +
+    `top import (do NOT also import GraphTheory/mathcomp directly — base re-exports all_boot + the ` +
+    `coq-graph-theory undirected vocabulary listed below). base ALSO provides the cross-area primitives ` +
+    `Delta (Δ), common_nbr, regular, girth_geq, ceil_div — REUSE them verbatim, never redefine. If this ` +
+    `milestone needs a NEW cross-area primitive (e.g. a graph product / homomorphism / line-graph), define ` +
+    `it locally and tag it [@MOVE-to-base] (it migrates to base when a second area needs it). rocq_compile ` +
+    `finds GTBase in the switch's user-contrib; the package _CoqProject also has -Q ../base/theories GTBase.`
   : `PRE-G3 MODE: graph-theory-base does NOT exist yet. Import the CORE primitives DIRECTLY from coq-graph-theory / ` +
     `digraph-theory in this file's preamble, and add a comment marking any cross-area def that will MOVE to ` +
     `graph-theory-base once G3 lands. Do NOT claim base reuse.`
