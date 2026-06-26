@@ -34,8 +34,11 @@
       - [acyclic_colouring] / [acyclically_choosable] : Row 10 (PLANARITY-GATED);
       - [strongly_colorable] : Row 11. *)
 
-From GTBase Require Export base.
+(* mgraph imported BEFORE base: coq-graph-theory's mgraph defines a DIRECTED `line_graph`
+   (DiGraph, target=source); importing it first lets base's undirected sgraph line_graph/
+   total_graph shadow it. We use mgraph for the raw edge/incident/edges_at/source/target API. *)
 From GraphTheory Require Import minor mgraph.
+From GTBase Require Export base.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -102,61 +105,11 @@ Definition is_online_choice_number (G : sgraph) (m : nat) : Prop :=
 
 (** ** Multigraph line- and total-graph constructions (Rows 4, 5, 9) ***********)
 
-(** A loopless multigraph is a [graph unit unit] with no loop edge. *)
-Notation mgraph := (graph unit unit).
-
-Definition loopless (G : mgraph) : Prop :=
-  forall e : edge G, source e != target e.
-
-Definition share_endpoint (G : mgraph) (e1 e2 : edge G) : bool :=
-  [exists v : G, incident v e1 && incident v e2].
-
-Definition line_rel (G : mgraph) : rel (edge G) :=
-  fun e1 e2 => (e1 != e2) && @share_endpoint G e1 e2.
-
-Lemma line_rel_sym (G : mgraph) : symmetric (@line_rel G).
-Proof.
-move=> e1 e2; rewrite /line_rel eq_sym; congr (_ && _).
-by apply/existsP/existsP=> -[v Hv]; exists v; rewrite andbC.
-Qed.
-
-Lemma line_rel_irrefl (G : mgraph) : irreflexive (@line_rel G).
-Proof. by move=> e; rewrite /line_rel eqxx. Qed.
-
-(** Line graph L(G): vertices = edges of [G]; two distinct edges adjacent iff
-    they share an endpoint.  Parallel edges share both endpoints, hence are
-    adjacent — the correct multigraph line graph. *)
-Definition line_graph (G : mgraph) : sgraph :=
-  SGraph (@line_rel_sym G) (@line_rel_irrefl G).
-
-Definition madj (G : mgraph) (x y : G) : bool :=
-  (x != y) && [exists e : edge G, incident x e && incident y e].
-
-Definition total_rel (G : mgraph) : rel (G + edge G)%type :=
-  fun a b =>
-    match a, b with
-    | inl x, inl y => @madj G x y
-    | inr e, inr f => @line_rel G e f
-    | inl x, inr e => incident x e
-    | inr e, inl x => incident x e
-    end.
-
-Lemma total_rel_sym (G : mgraph) : symmetric (@total_rel G).
-Proof.
-move=> [x|e] [y|f] //=.
-- rewrite /madj eq_sym; congr (_ && _).
-  by apply/existsP/existsP=> -[w Hw]; exists w; rewrite andbC.
-- by rewrite line_rel_sym.
-Qed.
-
-Lemma total_rel_irrefl (G : mgraph) : irreflexive (@total_rel G).
-Proof. by move=> [x|e] /=; [rewrite /madj eqxx | rewrite line_rel_irrefl]. Qed.
-
-(** Total graph T(G): vertices = V(G) ⊎ E(G); a vertex–vertex pair is adjacent
-    iff joined by an edge, an edge–edge pair iff sharing an endpoint, a
-    vertex–edge pair iff incident. *)
-Definition total_graph (G : mgraph) : sgraph :=
-  SGraph (@total_rel_sym G) (@total_rel_irrefl G).
+(** [mgraph], [loopless], [line_graph], [total_graph] (and the helpers
+    share_endpoint/line_rel/madj/total_rel) are PROMOTED to graph-theory-base — used here via the
+    base export — since edge/total colouring is the U5 milestone too.  [chromatic_index] (χ') and
+    [total_chromatic_number] (χ'') also live in base now.  Only the area-local derivatives below
+    ([mDelta], [Delta_edge_critical]) remain here. *)
 
 (** Maximum degree of a multigraph (parallel edges counted).  Genuinely new
     cross-area primitive — distinct from base's [Delta] (sgraph neighbourhood

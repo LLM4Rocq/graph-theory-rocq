@@ -16,10 +16,18 @@
 
 From mathcomp Require Export all_boot.
 From GraphTheory Require Export digraph sgraph coloring.
+(* mgraph is IMPORTED, not EXPORTED: base needs the multigraph type to define the line/total
+   graph below, but mgraph's notations/coercions would shadow the sgraph vocabulary in pure-sgraph
+   importers (U1/U3). Downstream gets base's [mgraph] notation + line_graph/total_graph/χ'/χ'';
+   an mgraph-area milestone (U5) imports mgraph itself for the raw edge/source/incident API. *)
+From GraphTheory Require Import mgraph.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
+
+(** The loopless multigraph type: a [graph unit unit] (unlabelled vertices/edges). *)
+Notation mgraph := (graph unit unit).
 
 (** Maximum degree Δ(G).  Empty graph ↦ 0; users carry a non-triviality guard. *)
 Definition Delta (G : sgraph) : nat := \max_(x : G) #|N(x)|.
@@ -138,3 +146,60 @@ Definition choosable (G : sgraph) (k : nat) : Prop :=
     (forall v : G, k <= #|L v|) -> list_colourable L.
 Definition is_choice_number (G : sgraph) (m : nat) : Prop :=
   choosable G m /\ (forall k, choosable G k -> m <= k).
+
+(** ** Edge & total colouring via the line / total graph (promoted from U4)
+
+    The line graph L(G) and total graph T(G) of a loopless multigraph, reducing edge-
+    and total-colouring to VERTEX colouring of these sgraphs: a proper k-edge-colouring of
+    G is a proper k-vertex-colouring of [line_graph G], so the chromatic index χ'(G) =
+    χ(L(G)) and the total chromatic number χ''(G) = χ(T(G)).  Shared by U5 (edge/total
+    colouring) and later cycle/matching material. *)
+
+(** A loopless multigraph: no edge joins a vertex to itself. *)
+Definition loopless (G : mgraph) : Prop := forall e : edge G, source e != target e.
+
+(** Line graph L(G): vertices = edges of G, two distinct edges adjacent iff they share an
+    endpoint (parallel edges share both, hence adjacent — the correct multigraph line graph). *)
+Definition share_endpoint (G : mgraph) (e1 e2 : edge G) : bool :=
+  [exists v : G, incident v e1 && incident v e2].
+Definition line_rel (G : mgraph) : rel (edge G) :=
+  fun e1 e2 => (e1 != e2) && @share_endpoint G e1 e2.
+Lemma line_rel_sym (G : mgraph) : symmetric (@line_rel G).
+Proof.
+move=> e1 e2; rewrite /line_rel eq_sym; congr (_ && _).
+by apply/existsP/existsP=> -[v Hv]; exists v; rewrite andbC.
+Qed.
+Lemma line_rel_irrefl (G : mgraph) : irreflexive (@line_rel G).
+Proof. by move=> e; rewrite /line_rel eqxx. Qed.
+Definition line_graph (G : mgraph) : sgraph := SGraph (@line_rel_sym G) (@line_rel_irrefl G).
+
+(** Total graph T(G): vertices = V(G) ⊎ E(G); vertex–vertex adjacent iff joined by an edge,
+    edge–edge iff sharing an endpoint, vertex–edge iff incident. *)
+Definition madj (G : mgraph) (x y : G) : bool :=
+  (x != y) && [exists e : edge G, incident x e && incident y e].
+Definition total_rel (G : mgraph) : rel (G + edge G)%type :=
+  fun a b =>
+    match a, b with
+    | inl x, inl y => @madj G x y
+    | inr e, inr f => @line_rel G e f
+    | inl x, inr e => incident x e
+    | inr e, inl x => incident x e
+    end.
+Lemma total_rel_sym (G : mgraph) : symmetric (@total_rel G).
+Proof.
+move=> [x|e] [y|f] //=.
+- rewrite /madj eq_sym; congr (_ && _).
+  by apply/existsP/existsP=> -[w Hw]; exists w; rewrite andbC.
+- by rewrite line_rel_sym.
+Qed.
+Lemma total_rel_irrefl (G : mgraph) : irreflexive (@total_rel G).
+Proof. by move=> [x|e] /=; [rewrite /madj eqxx | rewrite line_rel_irrefl]. Qed.
+Definition total_graph (G : mgraph) : sgraph := SGraph (@total_rel_sym G) (@total_rel_irrefl G).
+
+(** χ'(G) = chromatic index = χ(L(G)); χ''(G) = total chromatic number = χ(T(G)). *)
+Definition chromatic_index (G : mgraph) : nat := χ([set: line_graph G]).
+Definition total_chromatic_number (G : mgraph) : nat := χ([set: total_graph G]).
+
+(** k-edge-colourable = the line graph is k-vertex-colourable; likewise for total colouring. *)
+Definition edge_colourable (G : mgraph) (k : nat) : Prop := chromatic_index G <= k.
+Definition total_colourable (G : mgraph) (k : nat) : Prop := total_chromatic_number G <= k.

@@ -67,16 +67,21 @@ const MCP = `To run Rocq: call ToolSearch with the keyword query "rocq coq compi
   `then use the returned rocq_compile / rocq_query / rocq_start / rocq_check tools.`
 
 const BASE = M.base_ready
-  ? `graph-theory-base is INSTALLED (G3-core). Use \`From GTBase Require Import base.\` as the SOLE ` +
-    `top import (do NOT also import GraphTheory/mathcomp directly — base re-exports all_boot + the ` +
-    `coq-graph-theory undirected vocabulary listed below). base ALSO provides cross-area primitives — ` +
-    `currently Delta (Δ), ceil_div, common_nbr, regular, girth_geq, is_hom, homs_to, is_core, ` +
-    `cartesian_product (□), tensor_product (×). BEFORE defining ANY cross-area primitive, CHECK base ` +
-    `first via rocq_query (Search/Print/Locate over GTBase.base) and REUSE base's version verbatim — ` +
-    `never redefine (e.g. Hedetniemi MUST use base's tensor_product; products/homs/cores come from base). ` +
-    `Only a genuinely NEW cross-area primitive is defined locally + tagged [@MOVE-to-base] (it migrates to ` +
-    `base when a 2nd area needs it). rocq_compile finds GTBase in the switch's user-contrib; the package ` +
-    `_CoqProject also has -Q ../base/theories GTBase.`
+  ? `graph-theory-base is INSTALLED (G3-core). Use \`From GTBase Require Import base.\` as the top import ` +
+    `(base re-exports all_boot + the coq-graph-theory undirected vocabulary). base provides cross-area ` +
+    `primitives — currently Delta (Δ), ceil_div, common_nbr, regular, girth_geq; is_hom, homs_to, is_core, ` +
+    `cartesian_product (□), tensor_product (×); graph_power, subdivision, frac_power; list_colourable, ` +
+    `list_colourable_on, choosable, is_choice_number; the [mgraph] notation + line_graph, total_graph, ` +
+    `chromatic_index (χ'), total_chromatic_number (χ''), edge_colourable, total_colourable. BEFORE defining ` +
+    `ANY cross-area primitive, CHECK base first via rocq_query (Search/Print/Locate over GTBase.base) and ` +
+    `REUSE base's version verbatim — never redefine (e.g. edge/total colouring MUST use base's ` +
+    `line_graph/total_graph/χ'/χ''; products/homs/cores/list-χ come from base). Only a genuinely NEW ` +
+    `cross-area primitive is defined locally + tagged [@MOVE-to-base] (it migrates to base when a 2nd area ` +
+    `needs it). IMPORT-ORDER WARNING: if this milestone needs coq-graph-theory's multigraph API (edge, ` +
+    `source, target, incident, edges_at — i.e. a \`From GraphTheory Require Import mgraph.\`), put that ` +
+    `import BEFORE the base import, because coq-graph-theory's mgraph defines a DIRECTED line_graph that ` +
+    `would otherwise shadow base's undirected one. rocq_compile finds GTBase in the switch's user-contrib; ` +
+    `the package _CoqProject also has -Q ../base/theories GTBase.`
   : `PRE-G3 MODE: graph-theory-base does NOT exist yet. Import the CORE primitives DIRECTLY from coq-graph-theory / ` +
     `digraph-theory in this file's preamble, and add a comment marking any cross-area def that will MOVE to ` +
     `graph-theory-base once G3 lands. Do NOT claim base reuse.`

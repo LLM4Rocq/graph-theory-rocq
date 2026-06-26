@@ -32,10 +32,18 @@ for U5 (edge/total via line-graph) and U8 (χ-boundedness). Design choices (all 
   edges: list-Hadwiger gives only c·t-list-colourability; χ″_ℓ=χ″ doesn't give the Δ+2 bound).
   Cross-milestone targets (Hadwiger is U7, Behzad is U5) — not yet formalized nodes.
 
-## Area-local primitives (base candidates as later milestones need them)
-`line_graph` / `total_graph` (mgraph-based) — **U5 (edge/total colouring) will need these → promote
-to base when U5 lands**; `mDelta` (multigraph max degree), `complete_multipartite`, `colourable_count`
+## Edge/total layer promoted to base (post-U5-prep)
+`line_graph`, `total_graph`, `chromatic_index` (χ'), `total_chromatic_number` (χ''),
+`edge_colourable`, `total_colourable`, and the `mgraph` notation are now in **base** (for U5).
+U4 retargeted onto them. **Import-order gotcha (learned here):** coq-graph-theory's `mgraph` defines
+a *directed* `line_graph := DiGraph …`, which shadows base's undirected one if imported after base —
+so U4 now imports `From GraphTheory Require Import minor mgraph.` **before** `From GTBase Require
+Export base.`. base `Import`s mgraph privately (never `Export`s it) so pure-sgraph U1/U3 stay clean.
+The χ-deletion form `χ([set: line_graph G] :\ e)` only elaborates once base's sgraph `line_graph`
+wins the name resolution.
+
+## Area-local primitives (remain in U4)
+`mDelta` (multigraph max degree), `Delta_edge_critical`, `complete_multipartite`, `colourable_count`
 (λ_L), `paintable` (online choosability), `acyclic_colouring` / `acyclically_choosable`,
-`strongly_colorable`. Imports `minor` + `mgraph` from coq-graph-theory directly (outside base's
-undirected surface, justified). Nit: British/American spelling mixed (`strongly_colorable` vs the
+`strongly_colorable`. Nit: British/American spelling mixed (`strongly_colorable` vs the
 `…colourable` family) — harmless.
