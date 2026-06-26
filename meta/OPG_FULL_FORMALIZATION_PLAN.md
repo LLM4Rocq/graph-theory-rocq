@@ -96,7 +96,7 @@ library `graph-theory-base` *owns* every cross-area primitive; area packages nev
 each other):
 
 Subdir names equal the manifest `repo` values (so the workflow's `<repo>/theories/…` landing
-paths are correct without a mapping). **✅ STOOD UP (gate G0 done, see §A.1).**
+paths are correct without a mapping). **✅ STOOD UP & PUSHED (gate G0 done) — https://github.com/LLM4Rocq/graph-theory-rocq (see §A.1).**
 
 ```
 graph-theory-rocq/                         ONE git repo (llm4rocq/graph-theory-rocq)
