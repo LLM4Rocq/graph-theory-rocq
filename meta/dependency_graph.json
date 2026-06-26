@@ -8,15 +8,15 @@
   "minor-theory"
  ],
  "totals": {
-  "edges": 14,
+  "edges": 15,
   "by_status": {
-   "candidate": 9,
+   "candidate": 10,
    "refuted-direction": 4,
    "verified": 1
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 14,
+   "implies": 15,
    "refutes": 0,
    "specializes": 0
   },
@@ -162,6 +162,16 @@
    "cite": "independent; neither implies the other",
    "sources": [
     "chromatic-theory/implications_U1.v"
+   ]
+  },
+  {
+   "from": "vertex_minor_closed_classes_are_chi_bounded_statement",
+   "to": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (vertex-minor-closed-chi-bounded => forbidden-induced-tree-chi-bounded); Geelen-Kwon-McCarty-Wollan, JCTB 158 (2023) 93-116; Gyarfas-Sumner",
+   "sources": [
+    "chromatic-theory/implications_U8.v"
    ]
   }
  ],

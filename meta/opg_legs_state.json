@@ -281,6 +281,19 @@
     "jorgensens_conjecture": {
       "statement": "blocked", "grounding": "blocked", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
       "commit": "63afbd2", "package": "minor-theory", "note": "G2-blocked: abstract is_planar/apex placeholder; candidate edges"
+    },
+
+    "bounding_the_chromatic_number_of_triangle_free_graphs_with_fixed_maximum_degree": {
+      "statement": "done", "grounding": "done", "edges": "todo", "correspondence": "todo", "audit_page": "todo",
+      "commit": "05e3578", "package": "chromatic-theory"
+    },
+    "graphs_with_a_forbidden_induced_tree_are_chi_bounded": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "05e3578", "package": "chromatic-theory", "note": "target of vertex_minor->forbidden_tree candidate"
+    },
+    "vertex_minor_closed_classes_are_chi_bounded": {
+      "statement": "done", "grounding": "done", "edges": "partial", "correspondence": "todo", "audit_page": "todo",
+      "commit": "05e3578", "package": "chromatic-theory", "note": "vertex_minor->forbidden_tree candidate edge"
     }
   }
 }
