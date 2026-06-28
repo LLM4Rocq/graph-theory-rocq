@@ -147,6 +147,12 @@ const draft = await agent(
   `Milestone rows (canonical, pre-validated — use EXACTLY these formal_names and source_texts):\n${JSON.stringify(rows)}\n\n` +
   `Draft theories/conjectures/${M.phase}.v: for EACH row a \`Definition <formal_name> : Prop\`, carrier type chosen ` +
   `per row.rocq_idiom (NOT a blanket sgraph). Introduce only minimal AREA-SPECIFIC new primitives.\n${API}\n${STATUS_RULES}${PLANAR_RULE}\n` +
+  `ALGORITHMIC/COMPLEXITY rows (decides / runs-in-time / approximation_ratio / PTAS / NP-hard): keep cost & ` +
+  `algorithm notions DELIBERATELY RELATIONAL + ABSTRACT — an 'algorithm' is an abstract function plus an ` +
+  `abstract cost predicate (e.g. \`runs_in_time\` as a Prop), NOT a machine/Turing model; do NOT build a ` +
+  `computation-cost framework. A SOLVED row (e.g. a PTAS exists) is still a \`Definition _statement : Prop\` ` +
+  `(proofs are optional applications work). If ≥2 rows share such vocabulary, put it in a single ` +
+  `${M.repo}/theories/foundations/<topic>.v module (area-local), not base.\n` +
   `Discover exact graph-theory names via rocq_query, then iterate with rocq_compile until the non-planar rows type-check (statements only).\n` +
   `Return the source, per_statement (slug↔formal_name↔carrier_type), the new primitives (flag area_specific), API findings, compile status.`,
   { label: `implement:${M.phase}`, phase: 'Implement', schema: IMPL_SCHEMA, effort: 'high' })
