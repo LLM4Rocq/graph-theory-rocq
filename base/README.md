@@ -24,11 +24,15 @@ ownership table). Every area package depends ONLY on this (never on a sibling).
     `triangle_free` (vertex-triple form), `uwalk` (undirected multigraph walk — fixes the
     source→target bias of coq-graph-theory's `walk`; cycle-theory/U6 connectivity reuses it);
   - degeneracy / sparsity (promoted U7/U13): `k_degenerate` / `k_degenerate_on`, `average_degree_geq`
-    (avg degree ≥ a/b via Σdeg = 2|E|), `has_girth` (exact girth).
+    (avg degree ≥ a/b via Σdeg = 2|E|), `has_girth` (exact girth);
+  - **combinatorial planarity** (G2-lite): `wagner_planar G := ~ minor G 'K_5 /\ ~ minor G (KB 3 3)`
+    — Wagner's theorem characterization of planarity, axiom-free (no coq-fourcolor). For statements
+    whose hypothesis is just "G is planar"; NOT a face/embedding/genus notion.
 
 Import with `From GTBase Require Import base.` (area packages add `-Q ../base/theories GTBase`
 to their `_CoqProject`). Compiles axiom-free on switch `digraph` (Rocq 9.1.1 + coq-graph-theory);
 `chromatic-theory/U1` consumes it.
 
-**Not here yet:** graph homomorphism / products / list-χ / line-graph (added as the milestones
-that need them land), and the **planarity façade** (gated on the `coq-fourcolor` spike, G2).
+**Heavyweight planar layer (real embeddings/faces/genus) still deferred** to a future `coq-fourcolor`
+spike — needed only by surface/triangulation/crossing-number rows; the combinatorial `wagner_planar`
+above covers every "G is planar" hypothesis.

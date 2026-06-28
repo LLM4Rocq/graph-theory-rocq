@@ -21,6 +21,9 @@ From GraphTheory Require Export digraph sgraph coloring.
    importers (U1/U3). Downstream gets base's [mgraph] notation + line_graph/total_graph/χ'/χ'';
    an mgraph-area milestone (U5) imports mgraph itself for the raw edge/source/incident API. *)
 From GraphTheory Require Import mgraph.
+(* minor is IMPORTED (for the combinatorial [wagner_planar] definition); downstream uses
+   [wagner_planar] opaquely and need not import minor. *)
+From GraphTheory Require Import minor.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -254,3 +257,14 @@ Definition average_degree_geq (G : sgraph) (a b : nat) : Prop :=
 (** Exact girth g: girth ≥ g and a genuine g-cycle exists. *)
 Definition has_girth (G : sgraph) (g : nat) : Prop :=
   girth_geq G g /\ (exists c : seq G, ucycle (--) c /\ size c = g).
+
+(** ** Combinatorial planarity (Wagner's theorem) — the G2-lite façade
+
+    [wagner_planar G]: the finite simple graph G has NEITHER K5 NOR K3,3 as a minor. By Wagner's
+    theorem this is EXACTLY planarity, so it is a statement-faithful planarity predicate that needs
+    NO coq-graph-theory-planar / coq-fourcolor (axiom-free). Use this to state any conjecture whose
+    hypothesis is just "G is a planar graph" (replacing the over-strong abstract-predicate placeholder).
+    It does NOT capture a fixed embedding / faces / genus — rows about plane triangulations (faces),
+    toroidal/surface embeddings, or crossing number still need the real planar layer. *)
+Definition wagner_planar (G : sgraph) : Prop :=
+  ~ minor G 'K_5 /\ ~ minor G (KB 3 3).
