@@ -68,8 +68,7 @@ Definition immersion (G H : sgraph) : Prop :=
     rational [a/b], stated cross-multiplied to stay in [nat].  Average degree
     = (∑ deg)/|G|, so "≥ a/b" ⟺ [a * #|G| <= b * (∑ deg)].  Cross-area
     (extremal) primitive, not in base — [@MOVE-to-base]. *)
-Definition average_degree_geq (G : sgraph) (a b : nat) : Prop :=
-  a * #|G| <= b * (\sum_(v in G) #|N(v)|).
+(* [average_degree_geq] now from graph-theory-base (identical). *)
 
 (** [planar_after_deleting is_planar G k] : there is a set of [k] vertices
     whose deletion leaves a planar graph (the "apex-bounded-deletion" notion).

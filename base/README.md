@@ -22,7 +22,9 @@ ownership table). Every area package depends ONLY on this (never on a sibling).
     `mDelta` (multigraph max degree, parallel edges counted) is here too (promoted from U4 ∩ U5).
   - connectivity & structure (promoted across U2/U3/U6/U9): `k_connected` (Whitney form),
     `triangle_free` (vertex-triple form), `uwalk` (undirected multigraph walk — fixes the
-    source→target bias of coq-graph-theory's `walk`; cycle-theory/U6 connectivity reuses it).
+    source→target bias of coq-graph-theory's `walk`; cycle-theory/U6 connectivity reuses it);
+  - degeneracy / sparsity (promoted U7/U13): `k_degenerate` / `k_degenerate_on`, `average_degree_geq`
+    (avg degree ≥ a/b via Σdeg = 2|E|), `has_girth` (exact girth).
 
 Import with `From GTBase Require Import base.` (area packages add `-Q ../base/theories GTBase`
 to their `_CoqProject`). Compiles axiom-free on switch `digraph` (Rocq 9.1.1 + coq-graph-theory);

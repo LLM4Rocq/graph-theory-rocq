@@ -34,7 +34,7 @@
         [@MOVE-to-base] and should migrate to base once a second area needs
         degeneracy. *)
 
-From GTBase Require Import base.
+From GTBase Require Export base.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -148,14 +148,7 @@ Definition colouring_the_square_of_a_planar_graph_statement : Prop :=
     of k colour classes" picked by a palette [T : {set 'I_5}] with |T| = k is
     the vertex set [[set v | col v \in T]], which must be (k−1)-degenerate for
     1 ≤ k ≤ 4. *)
-Definition k_degenerate_on (G : sgraph) (W : {set G}) (k : nat) : Prop :=
-  forall S : {set G},
-    S \subset W -> S != set0 ->
-    exists x : G, x \in S /\ (#|N(x) :&: S| <= k)%N.
-
-Definition k_degenerate (G : sgraph) (k : nat) : Prop :=
-  k_degenerate_on [set: G] k.
-Arguments k_degenerate_on {G} W k.
+(* [k_degenerate_on] / [k_degenerate] now from graph-theory-base. *)
 
 Definition degenerate_colorings_of_planar_graphs_statement : Prop :=
   forall (is_planar : sgraph -> Prop) (G : sgraph),

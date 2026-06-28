@@ -231,3 +231,26 @@ Fixpoint uwalk (G : mgraph) (x y : G) (w : seq (edge G)) {struct w} : bool :=
       ((source e == x) && uwalk (target e) y w') ||
       ((target e == x) && uwalk (source e) y w')
   end.
+
+(** ** Degeneracy, average degree, exact girth (promoted across areas)
+
+    [k_degenerate]/[k_degenerate_on] (from topological/U13 ∩ graph-theory-misc/U13),
+    [average_degree_geq G a b] = avg degree ≥ a/b via the handshake sum of degrees
+    (from minor/U7 ∩ graph-theory-misc/U13; note Σ_v #|N(v)| = 2|E|), and [has_girth] = exact
+    girth (girth ≥ g AND a genuine g-cycle), the companion of [girth_geq] (from graph-theory-misc/U13). *)
+
+(** [G] is k-degenerate on [W]: every nonempty subset of [W] has a vertex of W-degree ≤ k. *)
+Definition k_degenerate_on (G : sgraph) (W : {set G}) (k : nat) : Prop :=
+  forall S : {set G}, S \subset W -> S != set0 -> exists x, (x \in S) /\ #|N(x) :&: S| <= k.
+Arguments k_degenerate_on {G} W k.
+(** Whole-graph k-degeneracy (= k-degeneracy on the full vertex set). *)
+Definition k_degenerate (G : sgraph) (k : nat) : Prop :=
+  k_degenerate_on [set: G] k.
+
+(** Average degree ≥ a/b (cross-multiplied over ℕ; Σ_v #|N(v)| = 2|E|). *)
+Definition average_degree_geq (G : sgraph) (a b : nat) : Prop :=
+  a * #|G| <= b * (\sum_(v in G) #|N(v)|).
+
+(** Exact girth g: girth ≥ g and a genuine g-cycle exists. *)
+Definition has_girth (G : sgraph) (g : nat) : Prop :=
+  girth_geq G g /\ (exists c : seq G, ucycle (--) c /\ size c = g).

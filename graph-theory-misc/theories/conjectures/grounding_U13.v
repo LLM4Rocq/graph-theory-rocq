@@ -182,11 +182,11 @@ Proof. by []. Qed.
 
 (** [avgdeg_geq] — witness (average degree ≥ 0 always) + monotonicity identity. *)
 Lemma avgdeg_geq_0 (G : sgraph) : avgdeg_geq G 0.
-Proof. by rewrite /avgdeg_geq mul0n. Qed.
+Proof. by rewrite /avgdeg_geq /average_degree_geq mul0n. Qed.
 
 Lemma avgdeg_geq_mono (G : sgraph) (d d' : nat) :
   avgdeg_geq G d -> d' <= d -> avgdeg_geq G d'.
-Proof. by move=> H le; apply: leq_trans H; rewrite leq_mul2r le orbT. Qed.
+Proof. rewrite /avgdeg_geq /average_degree_geq => H le. apply: leq_trans H. by rewrite leq_mul2r le orbT. Qed.
 
 (** [subgraph_of] — reflexivity (every graph is a subgraph of itself). *)
 Lemma subgraph_of_refl (G : sgraph) : subgraph_of G G.
@@ -206,13 +206,13 @@ Lemma edge_union_edge (V : finType) (r1 r2 : rel V) (x y : edge_union r1 r2) :
 Proof. by []. Qed.
 
 (** [degenerate] — witness (every graph is [#|G|]-degenerate) + monotonicity. *)
-Lemma degenerate_max (G : sgraph) : degenerate G #|G|.
-Proof. by move=> S /set0Pn[x xS]; exists x; split=> //; exact: max_card. Qed.
+Lemma degenerate_max (G : sgraph) : k_degenerate G #|G|.
+Proof. by move=> S _ /set0Pn[x xS]; exists x; split=> //; exact: max_card. Qed.
 
 Lemma degenerate_mono (G : sgraph) (k k' : nat) :
-  degenerate G k -> k <= k' -> degenerate G k'.
+  k_degenerate G k -> k <= k' -> k_degenerate G k'.
 Proof.
-move=> H le S Hs; have [v [vS dv]] := H S Hs.
+move=> H le S Hsub Hs; have [v [vS dv]] := H S Hsub Hs.
 by exists v; split=> //; apply: leq_trans dv le.
 Qed.
 

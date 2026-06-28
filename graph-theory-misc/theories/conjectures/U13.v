@@ -139,7 +139,7 @@ Definition book_thickness_of_subdivisions_statement : Prop :=
         subgraph of [G] iff there is an injective homomorphism [H → G] (base's
         [is_hom] preserves edges), i.e. [G] contains a copy of [H].
     "girth greater than g" reuses base's [girth_geq] as [girth_geq H g.+1]. *)
-Definition avgdeg_geq (G : sgraph) (d : nat) : Prop := d * #|G| <= 2 * n_edges G.
+Definition avgdeg_geq (G : sgraph) (d : nat) : Prop := average_degree_geq G d 1.
 
 Definition subgraph_of (H G : sgraph) : Prop :=
   exists f : H -> G, injective f /\ is_hom f.
@@ -169,8 +169,8 @@ Definition subgraph_of_large_average_degree_and_large_average_d_statement : Prop
         vertex of [S]-degree ≤ k (the standard k-degeneracy);
       - [edge_union r1 r2] (edge-union): [mk_sgraph] of the union of the two
         edge relations.
-    The hypotheses are [degenerate (mk_sgraph r1) 1] (a forest) and
-    [degenerate (mk_sgraph r2) 2]. *)
+    The hypotheses are [k_degenerate (mk_sgraph r1) 1] (a forest) and
+    [k_degenerate (mk_sgraph r2) 2]. *)
 Section EdgeUnion.
 Variable V : finType.
 
@@ -186,14 +186,13 @@ Definition edge_union (r1 r2 : rel V) : sgraph :=
   mk_sgraph (fun x y => r1 x y || r2 x y).
 End EdgeUnion.
 
-Definition degenerate (G : sgraph) (k : nat) : Prop :=
-  forall S : {set G}, S != set0 -> exists v : G, (v \in S) /\ #|N(v) :&: S| <= k.
+(* [degenerate] -> base [k_degenerate] (= k_degenerate_on [set:G]). *)
 
 Definition coloring_the_union_of_degenerate_graphs_statement : Prop :=
   forall (V : finType) (r1 r2 : rel V),
     0 < #|V| ->
-    degenerate (mk_sgraph r1) 1 ->
-    degenerate (mk_sgraph r2) 2 ->
+    k_degenerate (mk_sgraph r1) 1 ->
+    k_degenerate (mk_sgraph r2) 2 ->
     χ([set: edge_union r1 r2]) <= 5.
 
 (** ================================================================= *)
@@ -318,8 +317,7 @@ Definition pebbling_a_cartesian_product_statement : Prop :=
 Definition has_diameter (G : sgraph) (d : nat) : Prop :=
   (forall u v : G, v \in ball d u) /\ (exists u v : G, v \notin ball d.-1 u).
 
-Definition has_girth (G : sgraph) (g : nat) : Prop :=
-  girth_geq G g /\ (exists c : seq G, ucycle (--) c /\ size c = g).
+(* [has_girth] now from graph-theory-base (identical). *)
 
 Definition fiftyseven_regular_moore_graph_statement : Prop :=
   exists G : sgraph, [/\ regular G 57, has_diameter G 2 & has_girth G 5].
