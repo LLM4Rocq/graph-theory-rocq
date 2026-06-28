@@ -508,8 +508,8 @@
    ],
    "rocq_idiom": "forall T:tournament n, exists F, arc_disjoint F /\\ (forall t in F, TT3 t) /\\ |F| >= ceil(n(n-1)/6 - n/3)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1649,8 +1649,8 @@
    ],
    "rocq_idiom": "forall D, (forall C, strong_component D C -> nontrivial C) -> exists S, spanning S /\\ cyclic S /\\ cyclomatic S <= alpha D",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1880,8 +1880,8 @@
    ],
    "rocq_idiom": "forall (T:tournament) (col:edge->'I_3), (exists rainbow directed triangle) \\/ (exists v, forall u, mono_reachable col v u)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2021,8 +2021,8 @@
    ],
    "rocq_idiom": "exists f:nat->nat, forall k D, min_outdeg D >= f k -> contains_subdivision D (transitive_tournament k)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2208,8 +2208,8 @@
    ],
    "rocq_idiom": "forall D k, #|A D| > (k-2)*#|V D| -> forall T, antidirected_tree T -> order T = k -> contains_sub D T",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2391,8 +2391,8 @@
    ],
    "rocq_idiom": "forall k>=2, exists f, forall T tournament, strongly_connected_at_least f T -> exists k edge-disjoint Hamilton dicycles",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3256,8 +3256,8 @@
    ],
    "rocq_idiom": "forall G, orientation_of_planar G -> exists X1 X2, partition /\\ acyclic (induced X1) /\\ acyclic (induced X2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3898,8 +3898,8 @@
    ],
    "rocq_idiom": "exists g(k_1..k_p), every g-strong tournament partitions into V_i each inducing nontrivial k_i-strong subtournament",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3996,8 +3996,8 @@
    ],
    "rocq_idiom": "exists D on >=12 vertices that is switching-nonreconstructible",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4132,8 +4132,8 @@
    ],
    "rocq_idiom": "forall G k, k_regular G -> exists cs, arc_disjoint cs /\\ all dicycle cs /\\ size cs >= 'C(k+1,2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4272,8 +4272,8 @@
    ],
    "rocq_idiom": "forall T, even #|V| -> exists ps, dipath_decomp T ps /\\ size ps = \\sum_v max 0 (dout v - din v)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4411,8 +4411,8 @@
    ],
    "rocq_idiom": "min outdeg >= k -> exists C_1..C_k dicycles, each C_j meets union of earlier in <=1 vertex",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4773,8 +4773,8 @@
    ],
    "rocq_idiom": "exists k, forall D u v, k_arc_strong D -> exists Bout Bin, out_branching u Bout /\\ in_branching v Bin /\\ arc_disjoint Bout Bin",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5546,9 +5546,9 @@
    ],
    "rocq_idiom": "forall T k, tournament T -> k_arc_strong T -> exists D1..Dk, arc_partition /\\ forall i, spanning_strong Di T",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5779,8 +5779,8 @@
    ],
    "rocq_idiom": "forall G, simple_digraph G -> (no dicycle len<=3) -> beta G <= gamma G / 2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8195,8 +8195,8 @@
    ],
    "rocq_idiom": "forall d>2, oriented G, diregular d, |V|<=4d+1 -> exists Hamilton dicycle",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8984,8 +8984,8 @@
    ],
    "rocq_idiom": "max over oriented planar G of min k, exists homomorphism G -> tournament on k vertices",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9629,8 +9629,8 @@
    ],
    "rocq_idiom": "forall T oriented tree |T|=k, forall D, dichromatic D >= 2k-2 -> T subdigraph of D",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9861,8 +9861,8 @@
    ],
    "rocq_idiom": "forall T:tournament, (exists c:seq T, dicycle c) -> exists a:T*T, arc a /\\ num_dicycles (reverse_arc T a) < num_dicycles T",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10181,9 +10181,9 @@
    ],
    "rocq_idiom": "forall D, planar(oriented) D -> exists S, acyclic(induced D S) /\\ |S| >= 3/5 |V D|",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },

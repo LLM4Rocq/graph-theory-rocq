@@ -1050,6 +1050,190 @@
       "commit": "034bf92",
       "package": "graph-theory-misc",
       "note": "bene candidate edge recorded"
+    },
+    "minimum_number_of_transitive_subtournaments_of_order_3_in_a_tournament": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "cyclic_spanning_subdigraph_with_small_cyclomatic_number": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "monochromatic_reachability_vs_rainbow_triangles": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "subdivision_of_a_transitive_tournament_in_digraphs_with_large_outdegree": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "antidirected_trees_in_digraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "edge_disjoint_hamilton_cycles": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "partitionning_a_tournament_into_k_strongly_connected_subtournaments": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "switching_reconstruction_of_digraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "arc_disjoint_directed_cycles_in_regular_directed_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "decomposing_an_even_tournament_in_directed_paths": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "hoand_reed_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "arc_disjoint_out_branching_and_in_branching": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "non_edges_vs_feedback_edge_sets_in_digraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "hamilton_cycle_in_small_d_diregular_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "oriented_trees_in_n_chromatic_digraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "adams_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory"
+    },
+    "decomposing_k_arc_strong_tournament_into_k_spanning_strong_digraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "decomposing_k_arc->arc_disjoint_out_branching candidate"
+    },
+    "partitioning_planar_digraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "done via combinatorial planar_sg (Wagner K5/K3,3-minor-free); axiom-free, NOT G2"
+    },
+    "oriented_chromatic_number_of_planar_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "done via planar_sg (Wagner); axiom-free, NOT G2"
+    },
+    "large_acyclic_induced_subdigraph_in_a_planar_oriented_graph": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "done via planar_sg (Wagner); axiom-free, NOT G2; target of candidate"
     }
   }
 }
