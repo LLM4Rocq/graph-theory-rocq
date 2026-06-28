@@ -233,9 +233,9 @@
    ],
    "rocq_idiom": "forall t>1, forall G, is_2t1_graph t G -> Fc G <= 2 + 2/t",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -872,8 +872,8 @@
    ],
    "rocq_idiom": "forall G bidirected, (exists k, has_nz_flow G k) -> has_nz_flow G 6",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1513,8 +1513,8 @@
    ],
    "rocq_idiom": "exists (Gs : nat -> sgraph), forall i j, i<>j -> ~ cycle_continuous (Gs i) (Gs j)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2797,8 +2797,8 @@
    ],
    "rocq_idiom": "forall G, edge_connectivity G >= 4 -> exists_nz_flow G 3",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2843,8 +2843,8 @@
    ],
    "rocq_idiom": "exists c, forall k G, k_outerplanar k G -> approx_ratio_MaxEDP G <= c",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4086,8 +4086,8 @@
    ],
    "rocq_idiom": "forall G, bridgeless G -> ~ has_minor G Petersen -> has_nz_flow G 4",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5361,8 +5361,8 @@
    ],
    "rocq_idiom": "forall G, bridgeless G -> exists phi, nowhere_zero_k_flow 5 G phi",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5962,8 +5962,8 @@
    ],
    "rocq_idiom": "forall G, bridgeless G -> exists phi: E(G)->S2, flow_conservation phi",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6009,8 +6009,8 @@
    ],
    "rocq_idiom": "exists c, forall G embedded loopless, edgewidth G >= c -> has_5_local_tension G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6969,9 +6969,9 @@
    ],
    "rocq_idiom": "forall 4k-edge-connected G, exists orientation, indeg-outdeg = 0 mod (2k+1) at each v",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7555,9 +7555,9 @@
    ],
    "rocq_idiom": "Definition: forall G 2-edge-connected, Phi(G,5.5) > 0",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7922,8 +7922,8 @@
    ],
    "rocq_idiom": "Definition: hom Cayley(M,B)->Cayley(M',B') -> (forall G, has_Bflow G -> has_B'flow G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8379,9 +8379,9 @@
    ],
    "rocq_idiom": "forall G, forall real r root of Q_G, r<=4",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9954,9 +9954,9 @@
    ],
    "rocq_idiom": "forall t G, regular(2t+1) G -> class1 G -> Fc G <= 2 + 2/t",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
-    "edges": "todo",
+    "statement": "done",
+    "grounding": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10408,8 +10408,8 @@
    ],
    "rocq_idiom": "forall G bridgeless, exists A1 A2 A3 partition E, forall i, nz4flow (G minus Ai)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

@@ -1234,6 +1234,146 @@
       "commit": "bb0f97b",
       "package": "digraph-theory",
       "note": "done via planar_sg (Wagner); axiom-free, NOT G2; target of candidate"
+    },
+    "circular_flow_numbers_of_r_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory",
+      "note": "candidate"
+    },
+    "bouchets_6_flow_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "antichains_in_the_cycle_continuous_order": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "3_flow_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "approximation_ratio_for_k_outerplanar_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "4_flow_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "5_flow_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "unit_vector_flows": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "5_local_tensions": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "jaegers_modular_orientation_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory",
+      "note": "VERIFIED jaegers->three_flow (external orientation<->flow duality)"
+    },
+    "half_integral_flow_polynomial_values": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory",
+      "note": "target of candidate"
+    },
+    "a_homomorphism_problem_for_flows": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
+    },
+    "real_roots_of_the_flow_polynomial": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory",
+      "note": "candidate->half_integral"
+    },
+    "circular_flow_number_of_regular_class_1_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "partial",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory",
+      "note": "candidate"
+    },
+    "three_4_flows_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "c347c80",
+      "package": "cycle-theory"
     }
   }
 }
