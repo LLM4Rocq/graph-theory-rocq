@@ -463,8 +463,8 @@
    ],
    "rocq_idiom": "forall G, planar G -> exists S, induced_forest G S /\\ |S| >= n/2",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1694,8 +1694,8 @@
    ],
    "rocq_idiom": "max over G = union of two planar graphs of chi G (thickness-2 chromatic number)",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2482,8 +2482,8 @@
    ],
    "rocq_idiom": "forall n, exists N, forall G, #|V G|>=N -> n_connected G -> ~ minor G (K n) -> exists S, #|S|=n-5 /\\ planar (G - S)",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3576,8 +3576,8 @@
    ],
    "rocq_idiom": "forall planar G, chi(G^2) <= bound(Delta(G)) by cases on Delta",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6189,8 +6189,8 @@
    ],
    "rocq_idiom": "forall G 3-conn cubic planar, exists two edge-disjoint Hamilton cycles partitioning E(G box K2)",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6830,8 +6830,8 @@
    ],
    "rocq_idiom": "forall planar G, exists 5-colouring, any k classes induce (k-1)-degenerate graph",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6876,8 +6876,8 @@
    ],
    "rocq_idiom": "forall G 3-connected planar, hamiltonian (G box K2)",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7601,8 +7601,8 @@
    ],
    "rocq_idiom": "Definition: forall G planar, fvs G <= 2 * cycle_packing G",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7647,8 +7647,8 @@
    ],
    "rocq_idiom": "Definition: forall G planar, girth G >= 4k -> exists hom G -> C_{2k+1}",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8242,8 +8242,8 @@
    ],
    "rocq_idiom": "forall G 6-connected, no K6 minor -> apex (planar + 1 vertex)",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8612,8 +8612,8 @@
    ],
    "rocq_idiom": "forall G, planar /\\ 3-connected /\\ cubic /\\ bipartite -> exists hamiltonian cycle",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9218,8 +9218,8 @@
    ],
    "rocq_idiom": "forall G, planar G -> acyclically_choosable G 5",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

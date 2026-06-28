@@ -151,7 +151,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "hamiltonicity-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -161,7 +161,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "hamiltonicity-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -171,7 +171,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "hamiltonicity-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -275,7 +275,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "homomorphism-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -379,7 +379,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "chromatic-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -615,7 +615,7 @@
       "edges": "partial",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "minor-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -625,7 +625,7 @@
       "edges": "partial",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "minor-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -774,7 +774,7 @@
       "edges": "partial",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "packing-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -888,7 +888,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "topological-graph-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -898,7 +898,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "topological-graph-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -908,7 +908,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "topological-graph-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
@@ -918,7 +918,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "577626e",
       "package": "topological-graph-theory",
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
