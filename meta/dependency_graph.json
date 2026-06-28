@@ -13,21 +13,31 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 30,
+  "edges": 32,
   "by_status": {
    "candidate": 22,
-   "refuted-direction": 5,
+   "refuted-direction": 7,
    "verified": 3
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 30,
+   "implies": 32,
    "refutes": 0,
    "specializes": 0
   },
   "proved_theorems": 3
  },
  "edges": [
+  {
+   "from": "approximation_ratio_for_maximum_edge_disjoint_paths_statement",
+   "to": "finding_k_edge_outerplanar_graph_embeddings_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "plan v4 §6 edge policy; Chuzhoy-Kim-Li 2016 (MaxEDP planar); Bienstock-Monma 1988 (outerplanarity computation)",
+   "sources": [
+    "graph-theory-misc/implications_D7.v"
+   ]
+  },
   {
    "from": "bene_conjecture_graph_theoretic_form_0_statement",
    "to": "shuffle_exchange_conjecture_statement",
@@ -237,6 +247,16 @@
    "cite": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12",
    "sources": [
     "cycle-theory/implications_U10.v"
+   ]
+  },
+  {
+   "from": "ptas_for_feedback_arc_set_in_tournaments_statement",
+   "to": "algorithm_for_graph_homomorphisms_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "Kenyon-Mathieu-Schudy 2007 (FAS-tournaments PTAS); plan v4 §6 edge policy",
+   "sources": [
+    "graph-theory-misc/implications_D7.v"
    ]
   },
   {

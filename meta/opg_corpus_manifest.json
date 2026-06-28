@@ -142,8 +142,8 @@
    ],
    "rocq_idiom": "exists c, exists algo, forall G H, decides_hom algo G H /\\ time algo <= c^(|G|+|H|)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3485,8 +3485,8 @@
    ],
    "rocq_idiom": "open-ended question about approximation ratio / APX-hardness of MaxEDP",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4863,8 +4863,8 @@
    ],
    "rocq_idiom": "NP_hard (fun G => exists F, H_factor H G F) for min-degree cn graphs",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6464,8 +6464,8 @@
    ],
    "rocq_idiom": "exists PTAS for min feedback arc set over tournaments",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9445,8 +9445,8 @@
    ],
    "rocq_idiom": "exists polytime algorithm finding minimal k-edge-outerplanar embedding",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
