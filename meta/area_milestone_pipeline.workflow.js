@@ -32,8 +32,11 @@ export const meta = {
   ],
 }
 
-const REPO = '/Users/lelarge/Recherche/LLM4code/digraph-theory'
-const PLAN = `${REPO}/docs/OPG_FULL_FORMALIZATION_PLAN.md`
+// ALL paths are RELATIVE to the graph-theory-rocq monorepo root (the session working directory).
+// NEVER write to an absolute standalone path — the absorbed copy under digraph-theory/ is the source
+// of truth, and every package (chromatic-theory/, …, digraph-theory/) lives under the monorepo root.
+const REPO = 'digraph-theory'   // the absorbed DIRECTED library (monorepo-relative)
+const PLAN = 'meta/OPG_FULL_FORMALIZATION_PLAN.md'
 const NS = { 'chromatic-theory': 'Chromatic', 'hamiltonicity-theory': 'Hamilton', 'homomorphism-theory': 'Hom',
   'cycle-theory': 'Cycle', 'minor-theory': 'Minor', 'packing-theory': 'Packing', 'reconstruction-theory': 'Reconstruction',
   'hypergraph-theory': 'Hypergraph', 'topological-graph-theory': 'Topological', 'graph-theory-misc': 'GTMisc',
@@ -85,12 +88,14 @@ const BASE = M.base_ready
   : (M.repo === 'digraph-theory'
     ? `DIRECTED REPO (digraph-theory, the absorbed self-contained directed library — NOT a GTBase consumer). ` +
       `This is a DIRECTED phase: the carrier is coq-graph-theory's diGraph (a -> b arcs), NOT the undirected sgraph. ` +
-      `FIRST explore the repo's existing API and REUSE it — theories/core/{digraph,tournament,oriented,dipath,order}, ` +
-      `theories/invariants/{strong,domination,critical}, theories/constructions/{circulant,cayley,product}. The repo ` +
-      `ALREADY commits ~12 directed conjecture _statement constants (theories/conjectures/{classic_core,packing,sad,` +
-      `long_dipath,colouring_variants,implications,implications2}.v) — you are adding ONLY the NEW rows in M.rows; do ` +
-      `NOT restate, redefine, or shadow any existing constant (rocq_query/Search first). Put new statements in ` +
-      `theories/conjectures/P9.v with -R theories Digraph. Do NOT import GTBase (undirected).`
+      `ALL paths are under the MONOREPO copy ${M.repo}/ (the absorbed subtree) — NEVER any standalone repo. ` +
+      `FIRST explore + REUSE the existing API — ${M.repo}/theories/core/{digraph,tournament,oriented,dipath,order}, ` +
+      `${M.repo}/theories/invariants/{strong,domination,critical}, ${M.repo}/theories/constructions/{...}. The repo ` +
+      `ALREADY commits ~12 directed conjecture _statement constants (${M.repo}/theories/conjectures/{classic_core,packing,` +
+      `sad,long_dipath,colouring_variants,implications,implications2}.v) — you add ONLY the NEW rows in M.rows; do ` +
+      `NOT restate, redefine, or shadow any existing constant (rocq_query/Search first). Write the new statements to ` +
+      `${M.repo}/theories/conjectures/${M.phase}.v (with -R theories Digraph) — the file paths below are authoritative. ` +
+      `Do NOT import GTBase (undirected).`
     : `PRE-G3 MODE: graph-theory-base does NOT exist yet. Import the CORE primitives DIRECTLY from coq-graph-theory / ` +
     `digraph-theory in this file's preamble, and add a comment marking any cross-area def that will MOVE to ` +
     `graph-theory-base once G3 lands. Do NOT claim base reuse.`)
