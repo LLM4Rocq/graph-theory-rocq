@@ -142,6 +142,32 @@ const IMPL_SCHEMA = { type: 'object', properties: {
     name: { type: 'string' }, definition: { type: 'string' }, area_specific: { type: 'boolean' } }, required: ['name'] } },
   api_findings: { type: 'string' }, compiles: { type: 'boolean' }, compile_blocked_reason: { type: 'string' }, notes: { type: 'string' } },
   required: ['source', 'per_statement', 'new_primitives'] }
+// Spectral design spec (D5 / spectral-graph-theory) — preflighted carrier + matrix policy.
+const SPECTRAL = M.repo === 'spectral-graph-theory'
+  ? `\nSPECTRAL DESIGN (settled in preflight — follow it):\n` +
+    `• TOOLCHAIN: algC / mathcomp.field are NOT installed. Do NOT import mathcomp.field; use ONLY ` +
+    `\`From mathcomp Require Import all_algebra.\`. IMPORT ORDER (load-bearing for int/rat canonical ` +
+    `structures): \`From mathcomp Require Import all_boot.\` → \`From GraphTheory Require Import sgraph.\` ` +
+    `→ \`From GTBase Require Import base.\` → \`From mathcomp Require Import all_algebra.\`, then ` +
+    `\`Local Open Scope ring_scope. Import GRing.Theory Num.Theory.\`\n` +
+    `• CARRIER: (a) for COSPECTRALITY / 'determined by spectrum', use char_poly EQUALITY over int — no ` +
+    `field, no roots: \`cospectral G H := char_poly (adjmx int G) = char_poly (adjmx int H)\`; ` +
+    `'determined by spectrum' := \`forall H, cospectral G H -> inhabited (G ≃ H)\` (ISO via diso, NOT ` +
+    `equality). (b) for rows about EIGENVALUE MAGNITUDE / ORDERING / SPECTRAL RADIUS (signing bound, ` +
+    `Laplacian degrees), quantify over an ABSTRACT \`(R : rcfType)\` (real-closed field — the real ` +
+    `symmetric adjacency/Laplacian eigenvalues live in any rcf; gives order, |·|, and Num.sqrt for the ` +
+    `2*sqrt(d-1) bound). NO concrete algC needed for statement-only.\n` +
+    `• MATRIX: define in spectral-graph-theory/theories/foundations/spectral.v (area-local, NOT base): ` +
+    `\`adjmx (R:ringType)(G:sgraph) : 'M[R]_(#|G|) := \\matrix_(i,j) (if enum_val i -- enum_val j then 1 else 0)\`; ` +
+    `Laplacian \`L = D - A\` (D = degree diagonal); char_poly; cospectral; determined_by_spectrum; ` +
+    `\`spectral_radius_le A b := forall x, eigenvalue A x -> |x| <= b\` (over rcfType).\n` +
+    `• SPECTRUM IS A MULTISET (counted with multiplicity), never a set. 'largest eigenvalue' = spectral radius.\n` +
+    `• NON-SPECTRAL rows: triangle_free_strongly_regular → reuse a combinatorial strongly_regular (int, ` +
+    `no matrices); symmetric_chromatic_function (distinguishing trees) → Stanley's SYMMETRIC CHROMATIC ` +
+    `function (a combinatorial generating function over proper colourings, NOT eigenvalues); 'distinguish' ` +
+    `:= exists non-iso trees with equal function.\n` +
+    `• Keep base/ UNTOUCHED (new area; no other package consumes spectral vocab).`
+  : ''
 const draft = await agent(
   `You are a Rocq/MathComp engineer building milestone ${M.phase} of '${M.repo}' (namespace ${NS[M.repo]}), plan v4.\n` +
   `Milestone rows (canonical, pre-validated — use EXACTLY these formal_names and source_texts):\n${JSON.stringify(rows)}\n\n` +
@@ -153,6 +179,7 @@ const draft = await agent(
   `computation-cost framework. A SOLVED row (e.g. a PTAS exists) is still a \`Definition _statement : Prop\` ` +
   `(proofs are optional applications work). If ≥2 rows share such vocabulary, put it in a single ` +
   `${M.repo}/theories/foundations/<topic>.v module (area-local), not base.\n` +
+  `${SPECTRAL}\n` +
   `Discover exact graph-theory names via rocq_query, then iterate with rocq_compile until the non-planar rows type-check (statements only).\n` +
   `Return the source, per_statement (slug↔formal_name↔carrier_type), the new primitives (flag area_specific), API findings, compile status.`,
   { label: `implement:${M.phase}`, phase: 'Implement', schema: IMPL_SCHEMA, effort: 'high' })
@@ -181,7 +208,15 @@ const auditorThunks = rows.map((r) => () =>
     `Status semantics: ${r.status_semantics || '(open)'}\nrocq_idiom hint: ${r.rocq_idiom || '(n/a)'}\n\n` +
     `Flag missing hypotheses, wrong quantifier/inequality direction, rounding, vacuity, mis-encoded primitives, and crucially ` +
     `whether the node encodes the SELECTED proposition's CLASS (set selected_proposition_matches=false if e.g. Ádám is over ` +
-    `arbitrary digraphs instead of tournaments).\n\n\`\`\`coq\n${draft.source}\n\`\`\`\nReturn faithful, selected_proposition_matches, issues, suggested fix, verdict.`,
+    `arbitrary digraphs instead of tournaments).\n` +
+    (M.repo === 'spectral-graph-theory'
+      ? `SPECTRAL AUDIT FLAGS (check explicitly): (1) is the spectrum a MULTISET / counted with ` +
+        `multiplicity, not a set? (2) is 'determined by spectrum' graph ISOMORPHISM (diso), not matrix/` +
+        `graph equality? (3) exact field/domain — char_poly over int for cospectrality, an rcfType for ` +
+        `eigenvalue magnitude/ordering? (4) which spectrum — ADJACENCY vs LAPLACIAN vs signless — matches ` +
+        `the source? (5) does 'largest eigenvalue' mean spectral radius (max |λ|)?\n`
+      : '') +
+    `\n\`\`\`coq\n${draft.source}\n\`\`\`\nReturn faithful, selected_proposition_matches, issues, suggested fix, verdict.`,
     { label: `audit:${r.slug}`, phase: 'Review+Audit', schema: AUDIT_SCHEMA, effort: 'high' }))
 const ra = (await parallel(reviewerThunks.concat(auditorThunks))).filter(Boolean)
 const reviews = ra.slice(0, CONCERNS.length)
