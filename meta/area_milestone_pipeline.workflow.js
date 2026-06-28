@@ -82,9 +82,18 @@ const BASE = M.base_ready
     `import BEFORE the base import, because coq-graph-theory's mgraph defines a DIRECTED line_graph that ` +
     `would otherwise shadow base's undirected one. rocq_compile finds GTBase in the switch's user-contrib; ` +
     `the package _CoqProject also has -Q ../base/theories GTBase.`
-  : `PRE-G3 MODE: graph-theory-base does NOT exist yet. Import the CORE primitives DIRECTLY from coq-graph-theory / ` +
+  : (M.repo === 'digraph-theory'
+    ? `DIRECTED REPO (digraph-theory, the absorbed self-contained directed library — NOT a GTBase consumer). ` +
+      `This is a DIRECTED phase: the carrier is coq-graph-theory's diGraph (a -> b arcs), NOT the undirected sgraph. ` +
+      `FIRST explore the repo's existing API and REUSE it — theories/core/{digraph,tournament,oriented,dipath,order}, ` +
+      `theories/invariants/{strong,domination,critical}, theories/constructions/{circulant,cayley,product}. The repo ` +
+      `ALREADY commits ~12 directed conjecture _statement constants (theories/conjectures/{classic_core,packing,sad,` +
+      `long_dipath,colouring_variants,implications,implications2}.v) — you are adding ONLY the NEW rows in M.rows; do ` +
+      `NOT restate, redefine, or shadow any existing constant (rocq_query/Search first). Put new statements in ` +
+      `theories/conjectures/P9.v with -R theories Digraph. Do NOT import GTBase (undirected).`
+    : `PRE-G3 MODE: graph-theory-base does NOT exist yet. Import the CORE primitives DIRECTLY from coq-graph-theory / ` +
     `digraph-theory in this file's preamble, and add a comment marking any cross-area def that will MOVE to ` +
-    `graph-theory-base once G3 lands. Do NOT claim base reuse.`
+    `graph-theory-base once G3 lands. Do NOT claim base reuse.`)
 
 const API = `
 TOOLCHAIN: opam switch 'digraph' (Rocq 9.1.1 + coq-graph-theory). ${MCP}

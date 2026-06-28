@@ -27,10 +27,14 @@ mono = os.path.dirname(META)
 pkg_exists = os.path.isdir(os.path.join(mono, package, "theories"))
 base_has_v = os.path.isdir(os.path.join(mono, "base", "theories")) and any(
     f.endswith(".v") for _, _, fs in os.walk(os.path.join(mono, "base")) for f in fs)
+# digraph-theory is the absorbed DIRECTED repo: it is self-contained (its own core/tournament/
+# oriented/dipath + already-committed conjectures) and does NOT consume the undirected GTBase. Force
+# base_ready=false so the wrapper uses PRE-G3 mode (import directly from coq-graph-theory/digraph-theory).
+directed_repo = (package == "digraph-theory")
 gates = {
     "g0_ready": pkg_exists and "--no-g0" not in flags,
     "g1_ready": "--g1-ready" in flags,
-    "base_ready": base_has_v or "--base-ready" in flags,
+    "base_ready": (base_has_v or "--base-ready" in flags) and not directed_repo,
     "g2_ready": "--g2-ready" in flags,
 }
 
@@ -40,8 +44,14 @@ proc = subprocess.run([sys.executable, os.path.join(META, "milestone_rows.py"), 
 if proc.returncode != 0:
     sys.exit(f"milestone_rows.py failed:\n{proc.stderr}")
 rows = json.loads(proc.stdout)
+# Never restate ALREADY-FORMALIZED rows (e.g. the 12 directed conjectures already in digraph-theory):
+# they are a pre-existing bridge (leg=done), so only the NEW rows are sent to the implement step.
+skipped = [r["slug"] for r in rows if r.get("already_formalized")]
+rows = [r for r in rows if not r.get("already_formalized")]
 if not rows:
-    sys.exit(f"no rows for {phase}/{package}")
+    sys.exit(f"no NEW rows for {phase}/{package} (all {len(skipped)} already-formalized)")
+if skipped:
+    sys.stderr.write(f"skipping {len(skipped)} already-formalized rows (pre-existing bridge): {skipped}\n")
 
 # 2) manifest provenance
 mhash = hashlib.sha256(open(MANIFEST, "rb").read()).hexdigest()

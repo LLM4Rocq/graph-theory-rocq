@@ -42,7 +42,8 @@ assert all(re.match(r"^[A-Za-z_]\w*$", n) for n in names), "invalid Rocq formal_
 assert all(r.get("source_text") for r in sel), "row missing source_text (provenance)"
 
 FIELDS = ["slug", "formal_name", "source_text", "source_propositions", "selected_proposition",
-          "status", "status_semantics", "tier", "topic", "requires_planarity", "rocq_idiom", "new_primitives"]
+          "status", "status_semantics", "tier", "topic", "requires_planarity", "already_formalized",
+          "rocq_idiom", "new_primitives"]
 out = [{k: r.get(k) for k in FIELDS} for r in sel]
 json.dump(out, sys.stdout, ensure_ascii=False)
 print(f"\n-- emitted {len(out)} validated rows for phase={phase} repo={repo or repos[0]}", file=sys.stderr)
