@@ -46,6 +46,7 @@
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import mgraph sgraph treewidth.
 From GTBase Require Import base.
+From Cycle.foundations Require Export connectivity.
 From mathcomp Require Import all_algebra all_fingroup.
 
 Import GRing.Theory Num.Theory.
@@ -57,38 +58,12 @@ Unset Printing Implicit Defensive.
 Open Scope ring_scope.
 
 (** ================================================================= *)
-(** ** Reused multigraph vocabulary (self-contained, mirroring U6) *)
+(** ** Reused multigraph vocabulary (from [Cycle.foundations.connectivity]) *)
 
-(** Multigraph degree, edge cut, connectivity, edge-connectivity, bridges.
-    [@MOVE-to-base]: mdeg/mreg/mDelta are genuinely new multigraph primitives
-    (base only ships sgraph-level [Delta]/[regular]); tagged for migration to
-    base once a second area needs the multigraph degree vocabulary. *)
-Definition mdeg (G : mgraph) (v : G) : nat := #|edges_at v|.
-Definition cut (G : mgraph) (S : {set G}) : {set edge G} :=
-  [set e | (source e \in S) (+) (target e \in S)].
-Definition mconnected (G : mgraph) : Prop :=
-  forall x y : G, exists w, uwalk x y w.
-Definition connected_del_edges (G : mgraph) (S : {set edge G}) : Prop :=
-  forall x y : G, exists w, uwalk x y w /\ all (fun e => e \notin S) w.
-Definition edge_connected (G : mgraph) (k : nat) : Prop :=
-  forall E : {set edge G}, (#|E| < k)%N -> connected_del_edges E.
-Definition is_bridge (G : mgraph) (e : edge G) : Prop :=
-  eseparates (source e) (target e) [set e].
-Definition bridgeless (G : mgraph) : Prop := forall e : edge G, ~ is_bridge e.
-
-(** Circuits (single cycles) as edge sets. *)
-Definition subdeg (G : mgraph) (H : {set edge G}) (v : G) : nat :=
-  #|edges_at v :&: H|.
-Definition subgraph_kregular (G : mgraph) (H : {set edge G}) (k : nat) : Prop :=
-  forall v : G, subdeg H v = 0 \/ subdeg H v = k.
-Definition walk_in (G : mgraph) (H : {set edge G}) (x y : G)
-    (w : seq (edge G)) : bool := uwalk x y w && all (fun e => e \in H) w.
-Definition H_inc (G : mgraph) (H : {set edge G}) (x : G) : bool :=
-  [exists e, (e \in H) && incident x e].
-Definition subgraph_connected (G : mgraph) (H : {set edge G}) : Prop :=
-  forall x y : G, H_inc H x -> H_inc H y -> exists w, walk_in H x y w.
-Definition is_circuit (G : mgraph) (C : {set edge G}) : Prop :=
-  [/\ C != set0, subgraph_kregular C 2 & subgraph_connected C].
+(** [mdeg], [cut], [mconnected], [connected_del_edges], [edge_connected],
+    [is_bridge], [bridgeless], [subdeg], [subgraph_kregular], [walk_in],
+    [H_inc], [subgraph_connected], [is_circuit] and [two_edge_connected] now
+    live in [Cycle.foundations.connectivity] (imported above). *)
 
 (** ================================================================= *)
 (** ** Shared flow infrastructure (mgraph, intrinsic [source]/[target]) *)
@@ -149,9 +124,8 @@ Definition is_2t1_graph (G : mgraph) (t : nat) : Prop :=
 Definition mDelta (G : mgraph) : nat := \max_(v : G) mdeg v.
 Definition is_class1 (G : mgraph) : Prop := chromatic_index G = mDelta G.
 
-(** 2-edge-connected = connected and bridgeless.  [@MOVE-to-base]. *)
-Definition two_edge_connected (G : mgraph) : Prop :=
-  mconnected G /\ bridgeless G.
+(** [two_edge_connected] (= connected and bridgeless) now lives in
+    [Cycle.foundations.connectivity] (imported above). *)
 
 (** ================================================================= *)
 (** ** Row 1 — Circular flow numbers of [(2t+1)]-graphs *)

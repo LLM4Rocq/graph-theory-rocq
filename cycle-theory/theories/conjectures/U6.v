@@ -36,6 +36,7 @@
 
 From GraphTheory Require Import mgraph.
 From GTBase Require Import base.
+From Cycle.foundations Require Export connectivity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -43,17 +44,8 @@ Unset Printing Implicit Defensive.
 
 (** ** Degrees and subgraph degrees *)
 
-(** Multigraph degree of [v]: number of incident edges. *)
-Definition mdeg (G : mgraph) (v : G) : nat := #|edges_at v|.
-
-(** Degree of [v] inside the subgraph given by edge set [H]. *)
-Definition subdeg (G : mgraph) (H : {set edge G}) (v : G) : nat :=
-  #|edges_at v :&: H|.
-
-(** [k]-regular subgraph: every vertex has [H]-degree [0] or [k]
-    (so its support is a disjoint union of [k]-regular pieces). *)
-Definition subgraph_kregular (G : mgraph) (H : {set edge G}) (k : nat) : Prop :=
-  forall v : G, subdeg H v = 0 \/ subdeg H v = k.
+(** [mdeg], [subdeg] and [subgraph_kregular] now live in
+    [Cycle.foundations.connectivity] (imported above). *)
 
 (** A 2-factor: a SPANNING 2-regular subgraph (every vertex has degree 2). *)
 Definition two_factor (G : mgraph) (F : {set edge G}) : Prop :=
@@ -64,48 +56,14 @@ Definition two_factor (G : mgraph) (F : {set edge G}) : Prop :=
 Definition even_subgraph (G : mgraph) (C : {set edge G}) : Prop :=
   forall v : G, ~~ odd (subdeg C v).
 
-(** ** Connectivity at the multigraph level (via [walk]) *)
+(** ** Connectivity at the multigraph level (via [uwalk]) *)
 
-(** Walk restricted to edges of [H]. *)
-Definition walk_in (G : mgraph) (H : {set edge G}) (x y : G) (w : seq (edge G)) : bool :=
-  uwalk x y w && all (fun e => e \in H) w.
-
-(** Whole-graph (vertex) connectivity. *)
-Definition mconnected (G : mgraph) : Prop :=
-  forall x y : G, exists w, uwalk x y w.
-
-(** Connectivity using only edges OUTSIDE the edge set [S] (i.e. of [G - E(S)]). *)
-Definition connected_del_edges (G : mgraph) (S : {set edge G}) : Prop :=
-  forall x y : G, exists w, uwalk x y w /\ all (fun e => e \notin S) w.
-
-(** Connectivity after deleting the vertex set [Z] (walks avoiding [Z]). *)
-Definition connected_del_verts (G : mgraph) (Z : {set G}) : Prop :=
-  forall x y : G, x \notin Z -> y \notin Z ->
-    exists w, uwalk x y w /\ all (fun e => (source e \notin Z) && (target e \notin Z)) w.
-
-(** 2-(vertex-)connected: at least 3 vertices, and connected after deleting any one. *)
-Definition two_connected (G : mgraph) : Prop :=
-  (3 <= #|G|)%N /\ forall z : G, connected_del_verts [set z].
-
-(** [k]-edge-connected: deleting fewer than [k] edges keeps the graph connected.
-    [@MOVE-to-base]: general graph notion, migrate to graph-theory-base when a
-    second area needs it. *)
-Definition edge_connected (G : mgraph) (k : nat) : Prop :=
-  forall E : {set edge G}, (#|E| < k)%N -> connected_del_edges E.
-
-(** A subgraph [H] is connected: any two [H]-incident vertices are joined by an
-    [H]-walk. *)
-Definition H_inc (G : mgraph) (H : {set edge G}) (x : G) : bool :=
-  [exists e, (e \in H) && incident x e].
-
-Definition subgraph_connected (G : mgraph) (H : {set edge G}) : Prop :=
-  forall x y : G, H_inc H x -> H_inc H y -> exists w, walk_in H x y w.
+(** [walk_in], [mconnected], [connected_del_edges], [connected_del_verts],
+    [two_connected], [edge_connected], [H_inc], [subgraph_connected] and the
+    circuit predicate [is_circuit] now live in [Cycle.foundations.connectivity]
+    (imported above). *)
 
 (** ** Circuits and acyclicity *)
-
-(** A circuit (single cycle): a nonempty, connected, 2-regular edge set. *)
-Definition is_circuit (G : mgraph) (C : {set edge G}) : Prop :=
-  [/\ C != set0, subgraph_kregular C 2 & subgraph_connected C].
 
 (** Acyclic: contains no circuit. *)
 Definition acyclic (G : mgraph) (H : {set edge G}) : Prop :=
@@ -130,12 +88,8 @@ Definition spanning_tree (G : mgraph) (T : {set edge G}) : Prop :=
 
 (** ** Bridges, cubic, eulerian *)
 
-(** [e] is a bridge: every walk between its endpoints uses [e]. *)
-Definition is_bridge (G : mgraph) (e : edge G) : Prop :=
-  eseparates (source e) (target e) [set e].
-
-Definition bridgeless (G : mgraph) : Prop :=
-  forall e : edge G, ~ is_bridge e.
+(** [is_bridge] and [bridgeless] now live in [Cycle.foundations.connectivity]
+    (imported above). *)
 
 (** Cubic: loopless and 3-regular. *)
 Definition cubic (G : mgraph) : Prop :=
@@ -191,9 +145,8 @@ Definition faithful_cover (G : mgraph) (p : edge G -> nat) (L : seq {set edge G}
   (forall C, C \in L -> is_circuit C) /\
   (forall e : edge G, count (fun C : {set edge G} => e \in C) L = p e).
 
-(** The edge cut of a vertex set [S]: edges with exactly one endpoint in [S]. *)
-Definition cut (G : mgraph) (S : {set G}) : {set edge G} :=
-  [set e | (source e \in S) (+) (target e \in S)].
+(** The edge cut [cut] now lives in [Cycle.foundations.connectivity]
+    (imported above). *)
 
 (** Admissible weighting: across every cut, the total is even and no single edge
     exceeds the sum of the others (i.e. 2·p(e) ≤ p(δ(S))). *)

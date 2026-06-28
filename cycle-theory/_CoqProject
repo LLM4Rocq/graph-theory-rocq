@@ -2,6 +2,7 @@
 -Q ../base/theories GTBase
 -arg -w -arg -notation-overridden
 
+theories/foundations/connectivity.v
 theories/conjectures/U6.v
 theories/conjectures/grounding_U6.v
 theories/conjectures/implications_U6.v

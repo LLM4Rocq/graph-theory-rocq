@@ -47,6 +47,7 @@
 
 From GraphTheory Require Import mgraph sgraph.
 From GTBase Require Import base.
+From Cycle.foundations Require Import connectivity.
 From Cycle.conjectures Require Import U6.
 
 Set Implicit Arguments.

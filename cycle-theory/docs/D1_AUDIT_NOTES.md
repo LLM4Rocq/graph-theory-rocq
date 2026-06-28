@@ -23,7 +23,7 @@ Importing mathcomp `all_algebra`/`all_fingroup` **before** base **poisons** int/
 (ring numerals lose their order instance). **Correct order:** `all_boot` → `GraphTheory mgraph sgraph
 treewidth` → `GTBase base` → `all_algebra all_fingroup`.
 
-## Cross-area / de-dup candidates — PENDING your review (kept local, U9 pattern)
+## Cross-area / de-dup — RESOLVED (reviewed 2026-06-28): cycle-theory foundations module
 D1 re-inlined cycle-theory/U6's general multigraph connectivity (`mconnected`, `edge_connected`,
 `cut`, `mdeg`, `is_circuit`, `bridgeless`) rather than importing U6, and adds `two_edge_connected`
 (`[@MOVE-to-base]`). These are now in **U6 ∩ D1** (both cycle-theory). Per your "base only if reused
@@ -31,4 +31,4 @@ D1 re-inlined cycle-theory/U6's general multigraph connectivity (`mconnected`, `
 (a) a **cycle-theory foundations module** that U6/U10/D1 share (de-dup intra-area, not base);
 (b) **D1 imports U6** (lightest); (c) **promote to base** (only if non-cycle reuse is expected soon).
 Flow predicates (`has_nz_kflow`, conservation, orientation, flow_poly, face layer) stay
-cycle-theory-local. Decision deferred to the promotion review.
+cycle-theory-local. DECISION (your sign-off): extracted the connectivity layer (mdeg, subdeg, subgraph_kregular, walk_in, mconnected, connected_del_edges, connected_del_verts, two_connected, edge_connected, H_inc, subgraph_connected, is_circuit, cut, is_bridge, bridgeless, two_edge_connected — 16 defs) into `cycle-theory/theories/foundations/connectivity.v`; U6/U10/D1 import it (U6/D1 Export it so their grounding/implications see the names), local copies removed. NOT promoted to base (not used outside cycle-theory). U6 U10 D1 check_milestone all ACCEPTED.
