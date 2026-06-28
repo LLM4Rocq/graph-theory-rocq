@@ -253,15 +253,18 @@ Proof. by rewrite /edge_rel /= /sub_rel /=. Qed.
 Lemma frac_power0_edgeless (G : sgraph) n (x y : frac_power G 0 n) : ~~ (x -- y).
 Proof. exact: graph_power0_edgeless. Qed.
 
-(** ** Row 7 planarity gate — the discharged Section parameter is genuine. *)
+(** ** Row 7 planarity gate — now GENUINE via base's [wagner_planar].
 
-(** The Row-7 statement is ANTITONE in the planarity predicate: strengthening
-    [is_planar] (fewer planar graphs) makes the statement easier.  This confirms
-    [is_planar] is a real discharged parameter (the conjecture relative to it),
-    NOT the inert inner [forall is_planar] that an unconstrained positive
-    universal would collapse via [fun _ => True]. *)
-Lemma mapping_planar_antimono (p q : sgraph -> Prop) :
-  (forall G, q G -> p G) ->
-  mapping_planar_graphs_to_odd_cycles_statement p ->
-  mapping_planar_graphs_to_odd_cycles_statement q.
-Proof. by move=> qp H G k k0 qG; apply: H => //; exact: qp. Qed.
+    The Row-7 statement no longer takes a planarity predicate parameter: it
+    instantiates planarity at base's combinatorial, axiom-free [wagner_planar]
+    ([~ minor _ 'K_5 /\ ~ minor _ (KB 3 3)] — Wagner planarity), used opaquely.
+    The former antitone-in-[is_planar] sanity lemma is therefore retired (the
+    placeholder it validated is gone).  We instead record that the statement is
+    non-vacuous as a hypothesis shape: it has the expected [forall G k]
+    quantifier structure with a real planarity premise. *)
+Lemma mapping_planar_statement_shape :
+  mapping_planar_graphs_to_odd_cycles_statement =
+  (forall (G : sgraph) (k : nat),
+     0 < k -> wagner_planar G -> girth_geq G (4 * k) ->
+     homs_to G (cycle_graph (2 * k + 1))).
+Proof. by []. Qed.

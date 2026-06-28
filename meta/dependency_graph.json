@@ -262,7 +262,7 @@
  ],
  "legacy": {
   "repo": "digraph-theory (absorbed)",
-  "implies_theorems_in_source": 48,
+  "implies_theorems_in_source": 50,
   "committed_dependency_graph_edges": 34,
   "note": "Legacy digraph-only graph: source _implies_ theorem count vs the committed graph differ (theorem-name pattern includes helper lemmas; the old extractor filtered). Reconcile within digraph-theory separately; it does NOT define the federation format."
  }

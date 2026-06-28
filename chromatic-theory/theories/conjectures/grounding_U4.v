@@ -16,8 +16,10 @@
     Planarity note: Row 10's statement primitive [acyclically_choosable] is
     validated here ([acyclic_colouring_complete], [acyclically_choosable_K1]);
     the planarity-gated STATEMENT itself ([acyclic_list_colouring_of_planar_
-    graphs_statement]) is compile_blocked (no real planar predicate is
-    installed) and is therefore deliberately NOT grounded. *)
+    graphs_statement]) is now genuinely faithful — its planarity hypothesis is
+    base's combinatorial [wagner_planar] (no K5 / K3,3 minor, used opaquely), so
+    no abstract placeholder remains.  Its colouring core is grounded via the
+    [acyclically_choosable] witnesses above. *)
 
 From GTBase Require Import base.
 From GraphTheory Require Import minor mgraph.

@@ -224,35 +224,22 @@ Definition cores_of_strongly_regular_graphs_statement : Prop :=
     is_core G \/ exists n : nat, hom_equiv G 'K_n.
 
 (** ** Row 7 — Mapping planar graphs to odd cycles
-    OPEN. PLANARITY G2-GATE: coq-graph-theory-planar / coq-fourcolor are NOT
-    installed, so planarity is carried as a DISCHARGED SECTION HYPOTHESIS
-    [Variable is_planar : sgraph -> Prop] — the statement is stated RELATIVE to
-    a FIXED planarity predicate, which the section then discharges, so the final
-    constant has type [(sgraph -> Prop) -> Prop] (never a top-level
-    Parameter/Axiom — keeps the file axiom-free).
-
-    IMPORTANT (faithfulness fix): [is_planar] must NOT be an inner
-    [forall is_planar : sgraph -> Prop, ...].  As a positive (hypothesis-side)
-    occurrence, an inner universal could be instantiated at [fun _ => True],
-    which DROPS the planarity hypothesis and yields the STRICTLY STRONGER (and
-    false) planarity-free claim.  A section [Variable] (discharged to an explicit
-    argument) constrains nothing artificially: instantiating the resulting
-    [(sgraph -> Prop) -> Prop] at the GENUINE planarity predicate — once the
-    planar layer lands — recovers exactly the conjecture.  Until then the row is
-    reported compile_blocked: with an arbitrary [is_planar] it type-checks but is
-    not yet the genuine planar conjecture.
+    OPEN. PLANARITY now GENUINE: base/ provides the combinatorial, axiom-free,
+    fourcolor-free planarity predicate [wagner_planar G := ~ minor G 'K_5 /\
+    ~ minor G (KB 3 3)] — by Wagner's theorem exactly planarity (no K5 and no
+    K3,3 minor).  It is exported by base and used OPAQUELY here (we do NOT import
+    minor).  The earlier discharged Section hypothesis [Variable is_planar] is
+    therefore retired: the statement now instantiates planarity at the real
+    predicate [wagner_planar], so the row is genuinely faithful (no
+    [forall is_planar], no top-level Parameter/Axiom — file stays axiom-free).
 
     Source: "Every planar graph of girth ≥ 4k has a homomorphism to C_{2k+1}."
 
     Target odd cycle [C_{2k+1}] = [cycle_graph (2*k+1)]; girth via [girth_geq]. *)
-Section MappingPlanar.
-Variable is_planar : sgraph -> Prop.
-
 Definition mapping_planar_graphs_to_odd_cycles_statement : Prop :=
   forall (G : sgraph) (k : nat),
-    0 < k -> is_planar G -> girth_geq G (4 * k) ->
+    0 < k -> wagner_planar G -> girth_geq G (4 * k) ->
     homs_to G (cycle_graph (2 * k + 1)).
-End MappingPlanar.
 
 (** ** Row 8 — Three longest paths share a vertex
     OPEN.

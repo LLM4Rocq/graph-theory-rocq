@@ -115,24 +115,26 @@ Definition coloring_and_immersion_statement : Prop :=
   forall (t : nat) (G : sgraph),
     0 < t -> t <= χ([set: G]) -> immersion G 'K_t.
 
-(** ** Row 4 — High connectivity, no K_n minor  [PLANARITY-GATED, compile_blocked]
+(** ** Row 4 — High connectivity, no K_n minor
     OPEN (Problem).  Source: "Is it true for all n ≥ 0 that every sufficiently
     large n-connected graph without a K_n minor has a set of n-5 vertices whose
-    deletion results in a planar graph?"  Planarity abstracted as [is_planar].
-    "Sufficiently large" is [exists N, forall G, N <= #|G| -> ...]. *)
+    deletion results in a planar graph?"  Planarity is the combinatorial
+    [wagner_planar] (no K5 and no K3,3 minor — Wagner's theorem), faithful and
+    fourcolor-free.  "Sufficiently large" is [exists N, forall G, N <= #|G| -> ...]. *)
 Definition high_connectivity_no_k_n_statement : Prop :=
-  forall (is_planar : sgraph -> Prop) (n : nat),
+  forall (n : nat),
     exists N : nat,
       forall G : sgraph,
         N <= #|G| -> n.-connected G -> ~ minor G 'K_n ->
-        planar_after_deleting is_planar G (n - 5).
+        planar_after_deleting wagner_planar G (n - 5).
 
-(** ** Row 5 — Jørgensen's conjecture  [PLANARITY-GATED, compile_blocked]
+(** ** Row 5 — Jørgensen's conjecture
     OPEN.  Source: "Every 6-connected graph without a K6 minor is apex (planar
-    plus one vertex)."  Planarity abstracted as [is_planar]. *)
+    plus one vertex)."  Planarity is the combinatorial [wagner_planar] (no K5
+    and no K3,3 minor — Wagner's theorem), faithful and fourcolor-free. *)
 Definition jorgensens_statement : Prop :=
-  forall (is_planar : sgraph -> Prop) (G : sgraph),
-    6.-connected G -> ~ minor G 'K_6 -> apex is_planar G.
+  forall (G : sgraph),
+    6.-connected G -> ~ minor G 'K_6 -> apex wagner_planar G.
 
 (** ** Row 6 — Forcing a 2-regular minor
     OPEN.  Source: "Every graph with average degree at least (4/3)t - 2

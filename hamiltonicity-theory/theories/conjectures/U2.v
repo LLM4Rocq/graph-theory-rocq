@@ -12,14 +12,16 @@
     genuinely group-theoretic and finGroupType is NOT part of base's vocabulary.
 
     PLANARITY G2-GATE: planarity/genus are NOT installed (coq-graph-theory-planar +
-    coq-fourcolor are absent on this switch).  Rows 5, 6, 7, 8 (manifest
-    requires_planarity=true) therefore model the planarity/toroidality hypothesis
-    as an ABSTRACT predicate quantified INSIDE the [Prop] (e.g.
-    [forall (planar : sgraph -> Prop), ...]) — never a top-level Axiom/Parameter
-    (which would contaminate Print Assumptions).  These rows type-check and are
-    axiom-free, but they are BLOCKED: the planarity predicate is a placeholder, so
-    they do not yet state the real geometric conjecture.  The other five rows model
-    their statements fully. *)
+    coq-fourcolor are absent on this switch).  Rows 5, 7, 8 (manifest
+    requires_planarity=true, the *planar* — not surface — rows) now state their
+    planarity hypothesis as the combinatorial [wagner_planar G] from base (NO K5
+    and NO K3,3 minor), which by Wagner's theorem IS planarity: faithful, axiom-free
+    and fourcolor-free.  [wagner_planar] is used OPAQUELY (base imports minor; we do
+    not).  Row 6 is GENUS/SURFACE-gated (toroidal embedding) and stays BLOCKED: it
+    still models toroidality as an ABSTRACT predicate quantified INSIDE the [Prop]
+    ([forall (toroidal : sgraph -> Prop), ...]) — never a top-level Axiom/Parameter
+    (which would contaminate Print Assumptions) — because no combinatorial surface
+    predicate exists yet.  The other rows model their statements fully. *)
 
 From GTBase Require Export base.
 From mathcomp Require Import fingroup.
@@ -195,7 +197,7 @@ Definition uniquely_hamiltonian_graphs_statement : Prop :=
     2 < r -> regular G r -> ~ uniquely_hamiltonian G.
 
 (** ** Row 5 — Decomposing the prism of a 3-connected cubic planar graph  (OPEN)
-    PLANARITY-GATED (blocked): [planar] is an abstract placeholder predicate.
+    Planarity is the combinatorial [wagner_planar] (no K5/K3,3 minor) from base.
 
     Source: "Conjecture: Every prism over a 3-connected cubic planar graph can be
     decomposed into two Hamilton cycles."
@@ -217,8 +219,8 @@ Definition hamilton_decomposition_into_two (G : sgraph) : Prop :=
       & cycle_edges G c1 :|: cycle_edges G c2 = edge_set G].
 
 Definition decomposing_the_prism_of_a_3_connected_cubic_planar_statement : Prop :=
-  forall (planar : sgraph -> Prop) (G : sgraph),
-    planar G -> k_connected G 3 -> regular G 3 ->
+  forall (G : sgraph),
+    wagner_planar G -> k_connected G 3 -> regular G 3 ->
     hamilton_decomposition_into_two (cartesian_product G 'K_2).
 
 (** ** Row 6 — Every 4-connected toroidal graph has a Hamilton cycle  (OPEN)
@@ -231,22 +233,22 @@ Definition every_4_connected_toroidal_graph_has_a_hamilton_cycl_statement : Prop
     toroidal G -> k_connected G 4 -> is_hamiltonian G.
 
 (** ** Row 7 — Every prism over a 3-connected planar graph is Hamiltonian  (OPEN)
-    PLANARITY-GATED (blocked): [planar] is an abstract placeholder predicate.
+    Planarity is the combinatorial [wagner_planar] (no K5/K3,3 minor) from base.
 
     Source: "Conjecture: If G is a 3-connected planar graph, then G□K_2 has a
     Hamilton cycle." *)
 Definition every_prism_over_a_3_connected_planar_graph_is_hamil_statement : Prop :=
-  forall (planar : sgraph -> Prop) (G : sgraph),
-    planar G -> k_connected G 3 -> is_hamiltonian (cartesian_product G 'K_2).
+  forall (G : sgraph),
+    wagner_planar G -> k_connected G 3 -> is_hamiltonian (cartesian_product G 'K_2).
 
 (** ** Row 8 — Barnette's conjecture  (OPEN)
-    PLANARITY-GATED (blocked): [planar] is an abstract placeholder predicate.
+    Planarity is the combinatorial [wagner_planar] (no K5/K3,3 minor) from base.
 
     Source: "Conjecture: Every 3-connected cubic planar bipartite graph is
     Hamiltonian."  Cubic = [regular G 3] (base); bipartite = [bipartite G]. *)
 Definition barnettes_statement : Prop :=
-  forall (planar : sgraph -> Prop) (G : sgraph),
-    planar G -> k_connected G 3 -> regular G 3 -> bipartite G -> is_hamiltonian G.
+  forall (G : sgraph),
+    wagner_planar G -> k_connected G 3 -> regular G 3 -> bipartite G -> is_hamiltonian G.
 
 (** ** Row 9 — Hamiltonian cycles in line graphs  (OPEN)
 

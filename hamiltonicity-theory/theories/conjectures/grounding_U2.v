@@ -9,11 +9,13 @@
     Hamiltonian).  These are statement-VALIDATION lemmas, not the (open)
     conjectures themselves.
 
-    NB: the four planarity-gated rows (5, 6, 7, 8) are BLOCKED — their planarity/
-    toroidality hypothesis is an abstract placeholder predicate quantified inside
-    the [Prop], so there is no geometric primitive to ground here; we ground only
-    the combinatorial primitives those rows reuse ([cartesian_product],
-    [hamilton_decomposition_into_two], [edge_set], [bipartite], [k_connected]). *)
+    NB: rows 5, 7, 8 now state planarity via the combinatorial [wagner_planar]
+    (no K5/K3,3 minor) from base — a faithful, axiom-free predicate used opaquely,
+    with no extra geometric primitive to ground here; we ground the combinatorial
+    primitives those rows reuse ([cartesian_product], [hamilton_decomposition_into_two],
+    [edge_set], [bipartite], [k_connected]).  Only the surface row 6 stays BLOCKED:
+    its toroidality hypothesis is an abstract placeholder predicate quantified inside
+    the [Prop], so there is no geometric primitive to ground. *)
 
 From GTBase Require Import base.
 From mathcomp Require Import fingroup perm.

@@ -52,8 +52,8 @@ Unset Printing Implicit Defensive.
     |S| ≥ n/2 is stated multiplied through as [#|G| <= 2 * #|S|] to avoid the
     nat division. *)
 Definition large_induced_forest_in_a_planar_graph_statement : Prop :=
-  forall (is_planar : sgraph -> Prop) (G : sgraph),
-    is_planar G ->
+  forall (G : sgraph),
+    wagner_planar G ->
     exists S : {set G}, is_forest S /\ (#|G| <= 2 * #|S|)%N.
 
 (** ** Row 2 — Earth–Moon problem (thickness-2 chromatic number)
@@ -97,11 +97,10 @@ Definition union_of_two_planar
       & forall x y : G, (x -- y) = e1 x y || e2 x y ].
 
 Definition earth_moon_statement : Prop :=
-  forall (is_planar : sgraph -> Prop),
-    (exists G0 : sgraph, union_of_two_planar is_planar G0) ->
+    (exists G0 : sgraph, union_of_two_planar wagner_planar G0) ->
     exists m : nat,
-      (forall G : sgraph, union_of_two_planar is_planar G -> (χ([set: G]) <= m)%N)
-   /\ (exists G : sgraph, union_of_two_planar is_planar G /\ χ([set: G]) = m).
+      (forall G : sgraph, union_of_two_planar wagner_planar G -> (χ([set: G]) <= m)%N)
+   /\ (exists G : sgraph, union_of_two_planar wagner_planar G /\ χ([set: G]) = m).
 
 (** ** Row 3 — Colouring the square of a planar graph (Wegner)
     OPEN.
@@ -115,8 +114,8 @@ Definition earth_moon_statement : Prop :=
     square = [χ([set: graph_power G 2])]; "max-degree" Δ = [Delta G] (base).
     The three regimes are stated as a guarded conjunction. *)
 Definition colouring_the_square_of_a_planar_graph_statement : Prop :=
-  forall (is_planar : sgraph -> Prop) (G : sgraph),
-    is_planar G -> (0 < #|G|)%N ->
+  forall (G : sgraph),
+    wagner_planar G -> (0 < #|G|)%N ->
     [/\ ( Delta G = 3 -> (χ([set: graph_power G 2]) <= 7)%N ),
         ( (4 <= Delta G)%N -> (Delta G <= 7)%N ->
             (χ([set: graph_power G 2]) <= Delta G + 5)%N )
@@ -151,8 +150,8 @@ Definition colouring_the_square_of_a_planar_graph_statement : Prop :=
 (* [k_degenerate_on] / [k_degenerate] now from graph-theory-base. *)
 
 Definition degenerate_colorings_of_planar_graphs_statement : Prop :=
-  forall (is_planar : sgraph -> Prop) (G : sgraph),
-    is_planar G ->
+  forall (G : sgraph),
+    wagner_planar G ->
     exists col : G -> 'I_5,
       (forall x y : G, x -- y -> col x != col y)
    /\ (forall T : {set 'I_5},

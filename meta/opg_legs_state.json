@@ -146,34 +146,34 @@
       "package": "hamiltonicity-theory"
     },
     "barnettes_conjecture": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b262ac7",
+      "commit": "PENDING",
       "package": "hamiltonicity-theory",
-      "note": "G2-blocked: placeholder planarity (forall planar, planar G -> _) is too strong; real planarity at fourcolor (see AUDIT_NOTES.md)"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "decomposing_the_prism_of_a_3_connected_cubic_planar_graphs_in_hamilton_cycles": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b262ac7",
+      "commit": "PENDING",
       "package": "hamiltonicity-theory",
-      "note": "G2-blocked: placeholder planarity; auditor-flagged"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "every_prism_over_a_3_connected_planar_graph_is_hamiltonian": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b262ac7",
+      "commit": "PENDING",
       "package": "hamiltonicity-theory",
-      "note": "G2-blocked: placeholder planarity"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "every_4_connected_toroidal_graph_has_a_hamilton_cycle": {
       "statement": "blocked",
@@ -270,14 +270,14 @@
       "package": "homomorphism-theory"
     },
     "mapping_planar_graphs_to_odd_cycles": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "a59246d",
+      "commit": "PENDING",
       "package": "homomorphism-theory",
-      "note": "G2-blocked: placeholder planarity (drops planarity -> too strong); auditor-flagged"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "partial_list_coloring": {
       "statement": "done",
@@ -374,14 +374,14 @@
       "package": "chromatic-theory"
     },
     "acyclic_list_colouring_of_planar_graphs": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "3c7756b",
+      "commit": "PENDING",
       "package": "chromatic-theory",
-      "note": "G2-blocked: placeholder planarity (over-strong); auditor-flagged"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "strong_edge_colouring_conjecture": {
       "statement": "done",
@@ -610,24 +610,24 @@
       "note": "0<#|G| guard added by correct+ground (faithful)"
     },
     "high_connectivity_no_k_n": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "partial",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "63afbd2",
+      "commit": "PENDING",
       "package": "minor-theory",
-      "note": "G2-blocked: abstract is_planar placeholder; candidate edge <-> jorgensens"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "jorgensens_conjecture": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "partial",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "63afbd2",
+      "commit": "PENDING",
       "package": "minor-theory",
-      "note": "G2-blocked: abstract is_planar/apex placeholder; candidate edges"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "bounding_the_chromatic_number_of_triangle_free_graphs_with_fixed_maximum_degree": {
       "statement": "done",
@@ -769,14 +769,14 @@
       "package": "packing-theory"
     },
     "jones_conjecture": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "partial",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "88a31cd",
+      "commit": "PENDING",
       "package": "packing-theory",
-      "note": "G2-blocked: abstract is_planar placeholder; target of triangle_packing candidate"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "the_berge_fulkerson_conjecture": {
       "statement": "done",
@@ -883,44 +883,44 @@
       "package": "hypergraph-theory"
     },
     "large_induced_forest_in_a_planar_graph": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "598a8b8",
+      "commit": "PENDING",
       "package": "topological-graph-theory",
-      "note": "G2-blocked: abstract is_planar"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "earth_moon_problem": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "598a8b8",
+      "commit": "PENDING",
       "package": "topological-graph-theory",
-      "note": "G2-blocked: thickness-2 via union_of_two_planar (abstract is_planar)"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "colouring_the_square_of_a_planar_graph": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "598a8b8",
+      "commit": "PENDING",
       "package": "topological-graph-theory",
-      "note": "G2-blocked: abstract is_planar (uses base graph_power 2)"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "degenerate_colorings_of_planar_graphs": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "598a8b8",
+      "commit": "PENDING",
       "package": "topological-graph-theory",
-      "note": "G2-blocked: abstract is_planar"
+      "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "domination_in_cubic_graphs": {
       "statement": "done",

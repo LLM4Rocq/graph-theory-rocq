@@ -42,13 +42,12 @@
     [matching-extension], [copy_Q3_through] / [weakly_saturates] / [is_wsat]
     (weak-saturation-number), [cut_mg] / [is_tjoin] (t-join) / T-cut / graft.
 
-    PLANARITY G2-GATE (Row 7, Jones, [requires_planarity=true]): the planar/Four-
-    Colour layer is NOT installed on this switch.  Planarity is therefore modelled
-    as an ABSTRACT predicate [planar : sgraph -> Prop] quantified INSIDE the [Prop]
-    — never a top-level Axiom/Parameter (that would contaminate Print Assumptions).
-    Row 7 type-checks and is axiom-free, but is BLOCKED: [planar] is a placeholder,
-    so it does not yet state the real geometric conjecture.  The other twelve rows
-    model their statements fully.
+    PLANARITY (Row 7, Jones, [requires_planarity=true]): planarity is the base-
+    provided combinatorial predicate [wagner_planar G := ~ minor G 'K_5 /\
+    ~ minor G (KB 3 3)] (no K5 / no K3,3 minor).  By Wagner's theorem this IS
+    planarity, so Row 7 is now FAITHFUL and Four-Colour-free; [wagner_planar] is
+    used opaquely (we do not import [minor]).  The former abstract [planar : sgraph
+    -> Prop] placeholder is gone.  All thirteen rows model their statements fully.
 
     NAMING: predicates use the [is_] prefix ([is_P3], [is_triangle], [is_min_fvs],
     [is_matching_edges], [is_tjoin], [is_wsat]); a trailing [G] ([edge_setG],
@@ -387,24 +386,23 @@ Definition lovasz_path_removal_statement : Prop :=
         is_induced_path x y p /\
         k_connected_on ([set: G] :\: [set z in p]) k.
 
-(** ** Row 7 — Jones' conjecture  (OPEN — PLANARITY-GATED, BLOCKED)
+(** ** Row 7 — Jones' conjecture  (OPEN — PLANAR, FAITHFUL)
 
     Source: "For a graph G, let cp(G) denote the cardinality of a maximum cycle
     packing (collection of vertex disjoint cycles) and let cc(G) denote the
     cardinality of a minimum feedback vertex set (set of vertices X so that G−X is
     acyclic).  Conjecture: For every planar graph G, cc(G) ≤ 2·cp(G)."
 
-    Carrier: [sgraph].  PLANARITY-GATED / BLOCKED (G2 gate): [planar] is discharged
-    INTO the statement as an abstract hypothesis predicate [forall planar : sgraph ->
-    Prop, planar G -> ...] — NEVER a top-level Axiom/Parameter (that would
-    contaminate Print Assumptions).  Because the real planar/Four-Colour layer is
-    not installed, [planar] is a placeholder: the row TYPE-CHECKS and is axiom-free
-    but does NOT yet state the genuine geometric conjecture, so this leg is BLOCKED,
-    not done.  cc = [is_min_fvs] (feedback-vertex-set); cp = [is_max_cycle_packing]
+    Carrier: [sgraph].  PLANARITY is now the base-provided combinatorial predicate
+    [wagner_planar G := ~ minor G 'K_5 /\ ~ minor G (KB 3 3)] (no K5 and no K3,3
+    minor).  By Wagner's theorem this IS planarity, so the row is FAITHFUL and
+    Four-Colour-free; [wagner_planar] is used opaquely (we do not import [minor]).
+    The former abstract [forall planar : sgraph -> Prop] placeholder is gone.
+    cc = [is_min_fvs] (feedback-vertex-set); cp = [is_max_cycle_packing]
     (cycle-packing), both stated relationally (no min/max existence proof needed). *)
 Definition jones_statement : Prop :=
-  forall (planar : sgraph -> Prop) (G : sgraph) (ccn cpn : nat),
-    planar G -> is_min_fvs G ccn -> is_max_cycle_packing G cpn ->
+  forall (G : sgraph) (ccn cpn : nat),
+    wagner_planar G -> is_min_fvs G ccn -> is_max_cycle_packing G cpn ->
     ccn <= 2 * cpn.
 
 (** ** Row 8 — Odd cycle transversal in triangle-free graphs  (OPEN)

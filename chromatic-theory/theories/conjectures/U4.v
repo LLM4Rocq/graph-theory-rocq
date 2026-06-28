@@ -256,14 +256,14 @@ Definition list_total_colouring_statement : Prop :=
     m = χ([set: total_graph H]).
 
 (** ** Row 10 — Acyclic list colouring of planar graphs (OPEN; PLANARITY-GATED).
-    "Every planar graph is acyclically 5-choosable."  Planarity is the G2 gate
-    (coq-graph-theory-planar / coq-fourcolor not installed): we discharge it as
-    an ABSTRACT hypothesis [is_planar] INTO the statement — never a top-level
-    Parameter/Axiom — so the file stays axiom-free; the row is marked
-    compile_blocked because the real planar predicate is unavailable. *)
+    "Every planar graph is acyclically 5-choosable."  Planarity is now supplied
+    by base's combinatorial [wagner_planar] predicate (verified, axiom-free: G
+    has NEITHER a K5 NOR a K3,3 minor, which by Wagner's theorem IS planarity).
+    The row is therefore genuinely faithful — no abstract [is_planar] placeholder
+    and no fourcolor dependency.  [wagner_planar] is used opaquely. *)
 Definition acyclic_list_colouring_of_planar_graphs_statement : Prop :=
-  forall (is_planar : sgraph -> Prop) (G : sgraph),
-    is_planar G -> acyclically_choosable G 5.
+  forall (G : sgraph),
+    wagner_planar G -> acyclically_choosable G 5.
 
 (** ** Row 11 — Strong colourability (PARTIAL).
     "If Δ is the maximum degree of G, then G is strongly 2Δ-colourable." *)
