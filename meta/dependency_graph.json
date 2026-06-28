@@ -13,15 +13,15 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 23,
+  "edges": 24,
   "by_status": {
-   "candidate": 16,
+   "candidate": 17,
    "refuted-direction": 5,
    "verified": 2
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 23,
+   "implies": 24,
    "refutes": 0,
    "specializes": 0
   },
@@ -36,6 +36,16 @@
    "cite": "Beneš 1965; Stone 1971 (shuffle-exchange); Beauquier–Darrot 2002 (graph-theoretic Beneš)",
    "sources": [
     "graph-theory-misc/implications_U13.v"
+   ]
+  },
+  {
+   "from": "degenerate_colorings_of_planar_graphs_statement",
+   "to": "large_induced_forest_in_a_planar_graph_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Albertson & Berman 1979 (induced-forest conj.); Borodin 1979 (acyclic 5-colouring of planar graphs)",
+   "sources": [
+    "topological-graph-theory/implications_U13.v"
    ]
   },
   {
