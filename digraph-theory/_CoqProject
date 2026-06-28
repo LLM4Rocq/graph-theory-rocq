@@ -107,3 +107,6 @@ theories/conjectures/grounding_pathfas_tww.v
 theories/conjectures/grounding_reals2.v
 theories/conjectures/grounding_degreewidth_c3.v
 theories/conjectures/grounding_dichromatic_cycle.v
+theories/conjectures/P9.v
+theories/conjectures/grounding_P9.v
+theories/conjectures/implications_P9.v
