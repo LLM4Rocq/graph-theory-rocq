@@ -8,6 +8,7 @@
   "hamiltonicity-theory",
   "homomorphism-theory",
   "hypergraph-theory",
+  "infinite-graph-theory",
   "minor-theory",
   "packing-theory",
   "reconstruction-theory",
@@ -15,15 +16,15 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 42,
+  "edges": 44,
   "by_status": {
    "candidate": 25,
-   "refuted-direction": 14,
+   "refuted-direction": 16,
    "verified": 3
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 41,
+   "implies": 43,
    "refutes": 0,
    "specializes": 1
   },
@@ -81,6 +82,16 @@
    ]
   },
   {
+   "from": "counting_3_colorings_of_the_hex_lattice_statement",
+   "to": "exact_colorings_of_graphs_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG infinite/asymptotic entries (Baxter, J. Math. Phys. 11 (1970) 784-789; exact-colourings-of-K_omega record)",
+   "sources": [
+    "infinite-graph-theory/implications_D4doa.v"
+   ]
+  },
+  {
    "from": "degenerate_colorings_of_planar_graphs_statement",
    "to": "large_induced_forest_in_a_planar_graph_statement",
    "kind": "implies",
@@ -118,6 +129,16 @@
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (edge-list-colouring/LCC <-> Goldberg region)",
    "sources": [
     "chromatic-theory/implications_U5.v"
+   ]
+  },
+  {
+   "from": "exact_colorings_of_graphs_statement",
+   "to": "counting_3_colorings_of_the_hex_lattice_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG infinite/asymptotic entries (exact-colourings-of-K_omega record; Baxter, J. Math. Phys. 11 (1970) 784-789)",
+   "sources": [
+    "infinite-graph-theory/implications_D4doa.v"
    ]
   },
   {

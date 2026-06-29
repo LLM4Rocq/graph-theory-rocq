@@ -1329,8 +1329,8 @@
    ],
    "rocq_idiom": "forall H hypergraph, edges bounded by k -> exists strongly_maximal_matching H /\\ strongly_minimal_cover H",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2298,8 +2298,8 @@
    ],
    "rocq_idiom": "chi (OddDistanceGraph over R^2) = infinity",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2662,8 +2662,8 @@
    ],
    "rocq_idiom": "forall G infinite, proper_minor G G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3530,8 +3530,8 @@
    ],
    "rocq_idiom": "characterize graphs with bipartition where A-degrees aleph_0, B-degrees aleph_1",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3762,8 +3762,8 @@
    ],
    "rocq_idiom": "highly arc-transitive two-ended digraph => every tile is disjoint union of complete bipartite graphs",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4041,8 +4041,8 @@
    ],
    "rocq_idiom": "every countably infinite graph has a 2-partition where each vertex has >= as many cross neighbours as own-class",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4315,8 +4315,8 @@
    ],
    "rocq_idiom": "infinite rays/ends; not finite",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4679,8 +4679,8 @@
    ],
    "rocq_idiom": "infinite graph, aleph_0 partition into triangle-free; set theory/ZFC",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5682,8 +5682,8 @@
    ],
    "rocq_idiom": "exists G, locally_finite G /\\ one_ended G /\\ regular r G /\\ r>2 /\\ uniquely_hamiltonian G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6600,8 +6600,8 @@
    ],
    "rocq_idiom": "exists locally-finite highly-arc-transitive universal digraph",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7422,8 +7422,8 @@
    ],
    "rocq_idiom": "Definition: lim (number of proper 3-colorings of torus hex map)^(1/|V|) exists/=value",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7510,8 +7510,8 @@
    ],
    "rocq_idiom": "Definition: P(c,m) iff m<=2 or c=m, over exact c-colorings of K_omega",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9491,8 +9491,8 @@
    ],
    "rocq_idiom": "forall locally-finite G, 4-edge-connected G -> hamiltonian (line G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10134,8 +10134,8 @@
    ],
    "rocq_idiom": "countable connected G -> hamiltonian (G^3); 2-connected -> hamiltonian (G^2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

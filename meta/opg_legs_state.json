@@ -1900,6 +1900,146 @@
       "commit": "1ebccac",
       "package": "topological-graph-theory",
       "note": "needs topological layer: combinatorial curvature needs face sizes"
+    },
+    "counting_3_colorings_of_the_hex_lattice": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "hex-lattice limit re-encoded axiom-free over rcfType (persite_cauchy), no Stdlib Reals"
+    },
+    "exact_colorings_of_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "K_omega exact-colourings, axiom-free"
+    },
+    "end_devouring_rays": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "iGraph carrier suffices; needs ends machinery"
+    },
+    "hamiltonian_cycles_in_line_graphs_of_infinite_graphs": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "iGraph carrier suffices; needs infinite Hamiltonicity (topological double-ray cycles)"
+    },
+    "hamiltonian_cycles_in_powers_of_infinite_graphs": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "iGraph carrier suffices; needs infinite Hamiltonicity"
+    },
+    "infinite_uniquely_hamiltonian_graphs": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "iGraph carrier suffices; needs one-ended + infinite Hamiltonicity"
+    },
+    "seymours_self_minor_conjecture": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "iGraph carrier suffices; needs infinite-graph minor theory"
+    },
+    "unfriendly_partitions": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "iGraph carrier suffices; needs cardinal neighbour comparison"
+    },
+    "strong_matchings_and_covers": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "iGraph carrier suffices; needs infinite hypergraph order theory"
+    },
+    "characterizing_aleph_0_aleph_1_graphs": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "out of scope: aleph_1 cardinal arithmetic"
+    },
+    "coloring_the_odd_distance_graph": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "out of scope: R^2 odd-distance geometry"
+    },
+    "highly_arc_transitive_two_ended_digraphs": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "out of scope: ends + automorphism action"
+    },
+    "unions_of_triangle_free_graphs": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "out of scope: ZFC / independence"
+    },
+    "universal_highly_arc_transitive_digraphs": {
+      "statement": "blocked",
+      "grounding": "blocked",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "b300860",
+      "package": "infinite-graph-theory",
+      "note": "out of scope: universality + automorphisms"
     }
   }
 }
