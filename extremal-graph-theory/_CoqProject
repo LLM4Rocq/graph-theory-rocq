@@ -1,0 +1,24 @@
+-R theories Extremal
+-Q ../base/theories GTBase
+
+-arg -w -arg -notation-overridden,-ambiguous-paths,-deprecated
+
+# --- foundations ---
+theories/foundations/circular_colouring.v
+
+# --- D2 sub-batches (chromatic / ramsey / turan / probabilistic / structural) ---
+theories/conjectures/D2chr.v
+theories/conjectures/grounding_D2chr.v
+theories/conjectures/implications_D2chr.v
+theories/conjectures/D2ram.v
+theories/conjectures/grounding_D2ram.v
+theories/conjectures/implications_D2ram.v
+theories/conjectures/D2tur.v
+theories/conjectures/grounding_D2tur.v
+theories/conjectures/implications_D2tur.v
+theories/conjectures/D2pr.v
+theories/conjectures/grounding_D2pr.v
+theories/conjectures/implications_D2pr.v
+theories/conjectures/D2str.v
+theories/conjectures/grounding_D2str.v
+theories/conjectures/implications_D2str.v
