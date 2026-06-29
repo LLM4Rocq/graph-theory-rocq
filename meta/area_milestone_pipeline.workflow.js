@@ -188,6 +188,28 @@ const CROSSING = M.repo === 'topological-graph-theory'
     `• crossing_number is AREA-LOCAL (topological foundations), NOT base. Add an audit note that it is the ` +
     `planarization invariant. Do NOT introduce drawings/surfaces/faces/genus/point-sets.`
   : ''
+// Infinite-graph design (D4 / infinite-graph-theory) — preflighted carrier (NOT sgraph; it is finite).
+const INFINITE = M.repo === 'infinite-graph-theory'
+  ? `\nINFINITE-GRAPH DESIGN (settled in preflight — follow it; FAITHFUL or PARTIAL, never a placeholder):\n` +
+    `• DO NOT force infinite rows through \`sgraph\` (it is a finite finType — structurally UNFAITHFUL for ` +
+    `infinite graphs). Define the carrier in infinite-graph-theory/theories/foundations/igraph.v:\n` +
+    `  \`Definition irel_sym {V} (e:V->V->Prop) := forall x y, e x y -> e y x.\` ` +
+    `\`Definition irel_irr {V} (e:V->V->Prop) := forall x, ~ e x x.\` ` +
+    `\`Record iGraph := { iV : Type; iedge : iV -> iV -> Prop; iedge_sym : irel_sym iedge; ` +
+    `iedge_irr : irel_irr iedge }.\` plus an accessor \`Definition iadj (G:iGraph)(x y:iV G):Prop := @iedge G x y.\`\n` +
+    `• Predicates are PROP-LEVEL (mathcomp bool \`\\in\`/\`path\` need eqType/finType, UNAVAILABLE for an ` +
+    `arbitrary iV): \`countable_graph G := exists f:iV G->nat, injective f\`; \`ray G r := injective r /\\ ` +
+    `forall n, iadj (r n) (r n.+1)\`; \`locally_finite G := forall v, exists n (f:'I_n->iV G), forall w, ` +
+    `iadj v w -> exists i, f i = w\`; connectivity via an INDEXED walk \`f:'I_k.+1->iV G\` (not bool path); ` +
+    `colourings/partitions as functions \`iV G -> 'I_k\` / \`-> bool\` with a Prop constraint.\n` +
+    `• THE 2 DOABLE ROWS: (1) counting_3_colorings_of_the_hex_lattice is a THERMODYNAMIC LIMIT over ` +
+    `*finite* hexagonal tori — use a FINITE \`sgraph\` torus + count proper 3-colourings (\`{ffun _ -> 'I_3}\`) ` +
+    `+ the ε–N/eventual-bound idiom for lim (count)^(1/|V|); it does NOT need iGraph. (2) ` +
+    `exact_colorings_of_graphs is over K_ω = the COUNTABLE complete graph (\`iV:=nat\`, \`iedge x y := x<>y\`); ` +
+    `state the exact-colouring counting predicate faithfully, or mark the row PARTIAL if it can't be.\n` +
+    `• Keep ALL infinite vocabulary in foundations/, NEVER base. No cardinals beyond ℵ₀ (no ℵ₁), no ends/` +
+    `compactification, no ℝ² geometry — those rows are out of scope here.`
+  : ''
 const draft = await agent(
   `You are a Rocq/MathComp engineer building milestone ${M.phase} of '${M.repo}' (namespace ${NS[M.repo]}), plan v4.\n` +
   `Milestone rows (canonical, pre-validated — use EXACTLY these formal_names and source_texts):\n${JSON.stringify(rows)}\n\n` +
@@ -199,7 +221,7 @@ const draft = await agent(
   `computation-cost framework. A SOLVED row (e.g. a PTAS exists) is still a \`Definition _statement : Prop\` ` +
   `(proofs are optional applications work). If ≥2 rows share such vocabulary, put it in a single ` +
   `${M.repo}/theories/foundations/<topic>.v module (area-local), not base.\n` +
-  `${SPECTRAL}${CROSSING}\n` +
+  `${SPECTRAL}${CROSSING}${INFINITE}\n` +
   `ASYMPTOTIC/EXTREMAL rows (lim / o / O / Ω / Θ / whp / 'almost all'): use an EVENTUAL-BOUND, ε–N ` +
   `formulation over ℕ (e.g. \`forall m, exists N, forall n, N<=n -> <bound>\`; ratios cross-multiplied), ` +
   `NEVER an informal 'o'/'O' token. Rows needing PROBABILITY SPACES, GRAPH LIMITS/graphons, hom-DENSITY, ` +
