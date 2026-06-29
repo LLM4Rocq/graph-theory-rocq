@@ -1,0 +1,8 @@
+-R theories Infinite
+-Q ../base/theories GTBase
+-arg -w -arg -notation-overridden
+
+theories/foundations/igraph.v
+theories/conjectures/D4doa.v
+theories/conjectures/grounding_D4doa.v
+theories/conjectures/implications_D4doa.v
