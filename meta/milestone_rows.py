@@ -28,6 +28,14 @@ if len(sys.argv) < 2:
 phase = sys.argv[1]
 repo = sys.argv[2] if len(sys.argv) > 2 else None
 sel = [r for r in ROWS if r["phase"] == phase and (repo is None or r["repo"] == repo)]
+# sub-batch tags (meta/subbatches.json): a tag resolves to a SLUG SUBSET of a real phase, so a large
+# milestone (e.g. D2) runs in vocabulary chunks, each as its own <tag>.v file (overlay keeps real phase).
+_subf = f"{META}/subbatches.json"
+SUBB = json.load(open(_subf)) if os.path.exists(_subf) else {}
+if not sel and phase in SUBB and not phase.startswith("_"):
+    _b = SUBB[phase]; _slugs = set(_b["slugs"])
+    if repo is None: repo = _b.get("repo")
+    sel = [r for r in ROWS if r["slug"] in _slugs and (repo is None or r["repo"] == repo)]
 repos = sorted({r["repo"] for r in sel})
 
 if not sel:

@@ -180,6 +180,13 @@ const draft = await agent(
   `(proofs are optional applications work). If ≥2 rows share such vocabulary, put it in a single ` +
   `${M.repo}/theories/foundations/<topic>.v module (area-local), not base.\n` +
   `${SPECTRAL}\n` +
+  `ASYMPTOTIC/EXTREMAL rows (lim / o / O / Ω / Θ / whp / 'almost all'): use an EVENTUAL-BOUND, ε–N ` +
+  `formulation over ℕ (e.g. \`forall m, exists N, forall n, N<=n -> <bound>\`; ratios cross-multiplied), ` +
+  `NEVER an informal 'o'/'O' token. Rows needing PROBABILITY SPACES, GRAPH LIMITS/graphons, hom-DENSITY, ` +
+  `or analytic-density machinery you are NOT building: mark the row PARTIAL — state the cleanest faithful ` +
+  `approximation (or the finite/eventual core) and note what's missing; do NOT fake it with a vacuous ` +
+  `abstract predicate. Shared area vocabulary used by ≥2 rows → a ${M.repo}/theories/foundations/<topic>.v ` +
+  `module (area-local), not base.\n` +
   `Discover exact graph-theory names via rocq_query, then iterate with rocq_compile until the non-planar rows type-check (statements only).\n` +
   `Return the source, per_statement (slug↔formal_name↔carrier_type), the new primitives (flag area_specific), API findings, compile status.`,
   { label: `implement:${M.phase}`, phase: 'Implement', schema: IMPL_SCHEMA, effort: 'high' })

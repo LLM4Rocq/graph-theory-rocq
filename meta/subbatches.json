@@ -1,0 +1,72 @@
+{
+  "_README": "Sub-batch tags for running a large milestone in vocabulary chunks (resolved by milestone_rows.py). Each tag -> a slug subset of a real manifest phase; runs as its own <tag>.v file. Overlay/manifest keep the rows' real phase.",
+  "_desc": {
+    "D2chr": "chromatic variants (fractional/list/circular/choosability)",
+    "D2ram": "Ramsey / Erdos-Hajnal / induced-subgraph extremal",
+    "D2pr": "probabilistic / random / analytic-limit",
+    "D2tur": "Turan / counting / hom-density / extremal-number",
+    "D2str": "structural / hypergraph / geometric-combinatorial"
+  },
+  "D2chr": {
+    "phase": "D2",
+    "repo": "extremal-graph-theory",
+    "slugs": [
+      "fractional_hadwiger",
+      "mixing_circular_colourings_0",
+      "list_chromatic_number_and_maximum_degree_of_bipartite_graphs",
+      "monochromatic_vertex_colorings_inherited_from_perfect_matchings",
+      "choosability_of_graph_powers",
+      "circular_choosability_of_planar_graphs",
+      "star_chromatic_index_of_complete_graphs",
+      "circular_chromatic_number_of_triangle_free_planar_graphs",
+      "circular_colouring_the_orthogonality_graph"
+    ]
+  },
+  "D2ram": {
+    "phase": "D2",
+    "repo": "extremal-graph-theory",
+    "slugs": [
+      "multicolour_erdos_hajnal_conjecture",
+      "complete_bipartite_subgraphs_of_perfect_graphs",
+      "chromatic_number_of_common_graphs",
+      "ramsey_properties_of_cayley_graphs",
+      "the_erdos_hajnal_conjecture"
+    ]
+  },
+  "D2pr": {
+    "phase": "D2",
+    "repo": "extremal-graph-theory",
+    "slugs": [
+      "almost_all_non_hamiltonian_3_regular_graphs_are_1_connected",
+      "coloring_random_subgraphs",
+      "shannon_capacity_of_the_seven_cycle",
+      "negative_association_in_uniform_forests",
+      "chromatic_number_of_random_lifts_of_complete_graphs",
+      "random_stable_roommates",
+      "asymptotic_distribution_of_form_of_polyhedra"
+    ]
+  },
+  "D2tur": {
+    "phase": "D2",
+    "repo": "extremal-graph-theory",
+    "slugs": [
+      "what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian",
+      "turan_number_of_a_finite_family",
+      "good_edge_labelings",
+      "sidorenkos_conjecture",
+      "number_of_cliques_in_minor_closed_classes",
+      "minimal_graphs_with_a_prescribed_number_of_spanning_trees"
+    ]
+  },
+  "D2str": {
+    "phase": "D2",
+    "repo": "extremal-graph-theory",
+    "slugs": [
+      "linear_hypergraphs_with_dimension_3",
+      "geodesic_cycles_and_tuttes_theorem",
+      "nearly_spanning_regular_subgraphs",
+      "simultaneous_partition_of_hypergraphs",
+      "covering_powers_of_cycles_with_equivalence_subgraphs"
+    ]
+  }
+}
