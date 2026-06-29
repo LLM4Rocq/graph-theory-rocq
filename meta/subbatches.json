@@ -5,7 +5,8 @@
     "D2ram": "Ramsey / Erdos-Hajnal / induced-subgraph extremal",
     "D2pr": "probabilistic / random / analytic-limit",
     "D2tur": "Turan / counting / hom-density / extremal-number",
-    "D2str": "structural / hypergraph / geometric-combinatorial"
+    "D2str": "structural / hypergraph / geometric-combinatorial",
+    "D3cr": "crossing-number rows via a faithful combinatorial crossing_number (planarization onto wagner_planar)"
   },
   "D2chr": {
     "phase": "D2",
@@ -67,6 +68,16 @@
       "nearly_spanning_regular_subgraphs",
       "simultaneous_partition_of_hypergraphs",
       "covering_powers_of_cycles_with_equivalence_subgraphs"
+    ]
+  },
+  "D3cr": {
+    "phase": "D3",
+    "repo": "topological-graph-theory",
+    "slugs": [
+      "the_crossing_number_of_the_complete_graph",
+      "the_crossing_number_of_the_complete_bipartite_graph",
+      "crossing_numbers_and_coloring",
+      "the_crossing_number_of_the_hypercube"
     ]
   }
 }

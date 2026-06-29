@@ -168,6 +168,26 @@ const SPECTRAL = M.repo === 'spectral-graph-theory'
     `:= exists non-iso trees with equal function.\n` +
     `• Keep base/ UNTOUCHED (new area; no other package consumes spectral vocab).`
   : ''
+// Crossing-number design (D3cr / topological-graph-theory) — preflighted: faithful combinatorial cr.
+const CROSSING = M.repo === 'topological-graph-theory'
+  ? `\nCROSSING-NUMBER DESIGN (settled in preflight — follow it; FAITHFUL or PARTIAL, never a placeholder):\n` +
+    `• Define a SINGLE faithful combinatorial \`crossing_number : sgraph -> nat\` in ` +
+    `topological-graph-theory/theories/foundations/crossing.v, via PLANARIZATION onto base's ` +
+    `\`wagner_planar\` (no geometry/drawings): cr(G) ≤ k IFF G admits a "k-crossing planarization" — a ` +
+    `graph obtained by inserting k degree-4 crossing-vertices, each splitting a pair of independent ` +
+    `edges of G — that is \`wagner_planar\`; \`crossing_number G\` is the LEAST such k (a min over a ` +
+    `finite/decidable predicate). This is the standard planarization characterisation, hence faithful.\n` +
+    `• MANDATORY non-vacuity grounding (a fake/trivial cr must FAIL these): \`crossing_number G = 0 <-> ` +
+    `wagner_planar G\` (both directions), \`crossing_number\` monotone under sub-relation, and a concrete ` +
+    `\`crossing_number 'K_5 != 0\` (K_5 is not wagner_planar ⇒ cr ≥ 1). If you CANNOT make crossing_number ` +
+    `faithfully capture "min crossings" + prove these, DO NOT ship a placeholder — mark that row PARTIAL ` +
+    `with an honest note on what's missing.\n` +
+    `• Use it: cr('K_n) = Guy formula (statement-only Prop); cr(KB m n) = Zarankiewicz formula; ` +
+    `χ(G)≥t → cr(G) ≥ cr('K_t) (relational); lim cr(Q_d)/4^d = 5/32 via the ε–N/eventual-bound idiom ` +
+    `(Q_d = hypercube = iterated cartesian_product of K_2, reuse base \`cartesian_product\`).\n` +
+    `• crossing_number is AREA-LOCAL (topological foundations), NOT base. Add an audit note that it is the ` +
+    `planarization invariant. Do NOT introduce drawings/surfaces/faces/genus/point-sets.`
+  : ''
 const draft = await agent(
   `You are a Rocq/MathComp engineer building milestone ${M.phase} of '${M.repo}' (namespace ${NS[M.repo]}), plan v4.\n` +
   `Milestone rows (canonical, pre-validated — use EXACTLY these formal_names and source_texts):\n${JSON.stringify(rows)}\n\n` +
@@ -179,7 +199,7 @@ const draft = await agent(
   `computation-cost framework. A SOLVED row (e.g. a PTAS exists) is still a \`Definition _statement : Prop\` ` +
   `(proofs are optional applications work). If ≥2 rows share such vocabulary, put it in a single ` +
   `${M.repo}/theories/foundations/<topic>.v module (area-local), not base.\n` +
-  `${SPECTRAL}\n` +
+  `${SPECTRAL}${CROSSING}\n` +
   `ASYMPTOTIC/EXTREMAL rows (lim / o / O / Ω / Θ / whp / 'almost all'): use an EVENTUAL-BOUND, ε–N ` +
   `formulation over ℕ (e.g. \`forall m, exists N, forall n, N<=n -> <bound>\`; ratios cross-multiplied), ` +
   `NEVER an informal 'o'/'O' token. Rows needing PROBABILITY SPACES, GRAPH LIMITS/graphons, hom-DENSITY, ` +
