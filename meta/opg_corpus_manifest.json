@@ -1374,8 +1374,8 @@
    ],
    "rocq_idiom": "exists G, triangle_free G /\\ strongly_regular G /\\ G not among the 7 known",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5227,8 +5227,8 @@
    ],
    "rocq_idiom": "forall d-regular A, exists symmetric signing S, spectral_radius S <= 2*sqrt(d-1)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6052,8 +6052,8 @@
    ],
    "rocq_idiom": "fraction of n-vertex graphs that are spectrally determined -> 1 as n -> infinity",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8750,8 +8750,8 @@
    ],
    "rocq_idiom": "exists T1 T2 trees, ~iso T1 T2 /\\ X_{T1} = X_{T2}",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9536,8 +9536,8 @@
    ],
    "rocq_idiom": "forall connected G, forall k, c_k G >= d_k G (c_k via Laplacian eigenvalues)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

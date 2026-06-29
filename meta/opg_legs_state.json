@@ -1424,6 +1424,51 @@
       "commit": "dd408c3",
       "package": "graph-theory-misc",
       "note": "abstract existential-algorithm vacuous + edge_outerplanar is a wagner_planar proxy"
+    },
+    "triangle_free_strongly_regular_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "7c23ef2",
+      "package": "spectral-graph-theory"
+    },
+    "signing_a_graph_to_have_small_magnitude_eigenvalues": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "7c23ef2",
+      "package": "spectral-graph-theory"
+    },
+    "are_almost_all_graphs_determined_by_their_spectrum": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "7c23ef2",
+      "package": "spectral-graph-theory"
+    },
+    "does_the_symmetric_chromatic_function_distinguish_trees": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "7c23ef2",
+      "package": "spectral-graph-theory"
+    },
+    "laplacian_degrees_of_a_graph": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "7c23ef2",
+      "package": "spectral-graph-theory"
     }
   }
 }
