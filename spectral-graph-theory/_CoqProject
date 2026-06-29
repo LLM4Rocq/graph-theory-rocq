@@ -1,0 +1,15 @@
+-R theories Spectral
+
+-arg -w -arg -notation-overridden,-ambiguous-paths,-deprecated
+
+# --- foundations ---
+theories/foundations/spectral.v
+
+# --- conjecture statements (D5) ---
+theories/conjectures/D5.v
+
+# --- grounding lemmas (D5) ---
+theories/conjectures/grounding_D5.v
+
+# --- implications (D5) ---
+theories/conjectures/implications_D5.v
