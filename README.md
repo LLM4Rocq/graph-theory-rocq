@@ -1,11 +1,17 @@
 # graph-theory-rocq
 
+![corpus-status](https://github.com/LLM4Rocq/graph-theory-rocq/actions/workflows/corpus-status.yml/badge.svg)
+**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **192 done** (axiom-free
+`Definition <name>_statement : Prop`) · 18 partial · 17 blocked. Full breakdown:
+[`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md); deep-layer roadmap: [`meta/ROADMAP_DEEP_LAYERS.md`](meta/ROADMAP_DEEP_LAYERS.md).
+
 A monorepo of Rocq/MathComp **graph-theory** libraries — the math-comp model (one repo,
 many independently-installable opam packages). Each `<area>-theory/` subdir states the open
 conjectures of one area of graph theory (and gains their proofs over time).
 
 Built on [`coq-graph-theory`](https://github.com/rocq-community/graph-theory) (undirected) and
-MathComp. The roadmap + the validated 227-problem manifest live in **`meta/`**.
+MathComp. The roadmap + the validated 227-problem manifest live in **`meta/`**. Verify the
+statement-complete claim with `make audit` (toolchain-free) or the full `make gate` (Coq builds).
 
 ## Packages
 | package | namespace | core | deferred |

@@ -1,0 +1,21 @@
+name: corpus-status
+
+# Backs the public "statement-complete" claim WITHOUT the Coq toolchain: the manifest reproduces,
+# the edge graph has no drift, and CORPUS_STATUS.md matches the committed manifest/overlay with the
+# headline invariants intact (227 total, 0 todo). The full `make gate` (per-milestone Coq builds,
+# axiom-free + Print-Assumptions checks) runs in the Rocq+MathComp+coq-graph-theory environment.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Toolchain-free corpus-status audit
+        run: make audit
