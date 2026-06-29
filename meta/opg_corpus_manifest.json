@@ -736,8 +736,8 @@
    ],
    "rocq_idiom": "sup over G with planar G /\\ mindeg>=3 /\\ everywhere_positive_curvature G /\\ ~prism G /\\ ~antiprism G of |G|",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -783,8 +783,8 @@
    ],
    "rocq_idiom": "forall S : set of great circles in general position, χ (arrangement_graph S) <= 3",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1010,8 +1010,8 @@
    ],
    "rocq_idiom": "forall G1 G2 Σ, optimal_drawing (G1⊎G2) Σ -> images of G1 and G2 are disjoint",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5499,8 +5499,8 @@
    ],
    "rocq_idiom": "exists G, forall N1 N2 distinct non-orientable surfaces, minor_minimal_obstruction G N1 /\\ minor_minimal_obstruction G N2",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6509,8 +6509,8 @@
    ],
    "rocq_idiom": "exists P subset R^2 of size O(n), every n-vertex planar graph has straight-line embedding into P",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6923,8 +6923,8 @@
    ],
    "rocq_idiom": "forall G loopless triangulation of orientable surface, 3-edge-colourable (dual G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7060,8 +7060,8 @@
    ],
    "rocq_idiom": "exists planar G, obstacle_number G > 1; exists k, forall planar G, obstacle_number G <= k",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7196,8 +7196,8 @@
    ],
    "rocq_idiom": "forall 2-connected G, exists surface embedding, each face boundary is a cycle",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7332,8 +7332,8 @@
    ],
    "rocq_idiom": "Definition: forall G, pair_cr G = cr G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7829,8 +7829,8 @@
    ],
    "rocq_idiom": "Definition: forall m n, cr(K_{m,n}) = floor(m/2)floor((m-1)/2)floor(n/2)floor((n-1)/2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8470,8 +8470,8 @@
    ],
    "rocq_idiom": "cr(K_n) = (1/4)floor(n/2)floor((n-1)/2)floor((n-2)/2)floor((n-3)/2)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8703,8 +8703,8 @@
    ],
    "rocq_idiom": "forall G t, chi(G)>=t -> cr(G) >= cr(K_t)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9123,8 +9123,8 @@
    ],
    "rocq_idiom": "lim cr(Q_d)/4^d = 5/32",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9355,8 +9355,8 @@
    ],
    "rocq_idiom": "forall decreasing seq a, exists G, forall i, mincrossing_on_genus G i = a_i",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "blocked",
+    "grounding": "blocked",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

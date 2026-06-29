@@ -15,15 +15,15 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 41,
+  "edges": 42,
   "by_status": {
-   "candidate": 24,
+   "candidate": 25,
    "refuted-direction": 14,
    "verified": 3
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 40,
+   "implies": 41,
    "refutes": 0,
    "specializes": 1
   },
@@ -379,6 +379,16 @@
    "cite": "independent; neither implies the other",
    "sources": [
     "chromatic-theory/implications_U1.v"
+   ]
+  },
+  {
+   "from": "the_crossing_number_of_the_complete_bipartite_graph_statement",
+   "to": "the_crossing_number_of_the_complete_graph_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Guy, The decline and fall of Zarankiewicz's theorem, 1969; Kleitman 1970 (cr(K_{m,n}) for min<=6); Guy 1972 counting bound cr(K_{2n}) >= cr(K_{n,n}) + 2 cr(K_n)",
+   "sources": [
+    "topological-graph-theory/implications_D3cr.v"
    ]
   },
   {
