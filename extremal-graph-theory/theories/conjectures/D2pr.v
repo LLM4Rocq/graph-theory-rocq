@@ -110,10 +110,8 @@ Definition adjb (V:finType)(E:{set {set V}}) : rel V := fun x y => [set x; y] \i
 Definition edge2 (G:sgraph) : {set {set G}} :=
   [set e : {set G} | [exists x, exists y, (x -- y) && (e == [set x; y])]].
 
-(** The cycle [C_n] on ['I_n].  [@MOVE-to-base]. *)
-Definition cyc_rel (n:nat) : rel 'I_n :=
-  fun x y => (val y == (val x).+1 %% n) || (val x == (val y).+1 %% n).
-Definition cycle_graph (n:nat) : sgraph := mkG (@cyc_rel n).
+(** The cycle [C_n] on ['I_n] now comes from [GTBase.base] (cross-area finite
+    invariant), imported via [base]; base's [cycle_graph] is the same relation. *)
 
 (** ================================================================= *)
 (** ** Row 1 — Almost all non-Hamiltonian 3-regular graphs are 1-connected (OPEN)

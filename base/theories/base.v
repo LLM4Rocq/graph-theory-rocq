@@ -268,3 +268,20 @@ Definition has_girth (G : sgraph) (g : nat) : Prop :=
     toroidal/surface embeddings, or crossing number still need the real planar layer. *)
 Definition wagner_planar (G : sgraph) : Prop :=
   ~ minor G 'K_5 /\ ~ minor G (KB 3 3).
+
+(** ** Bipartiteness and the cycle family (cross-area finite invariants) *)
+
+(** Bipartite: a 2-colouring with no monochromatic edge. *)
+Definition bipartite (G : sgraph) : Prop := exists f : G -> bool, forall x y : G, x -- y -> f x != f y.
+
+(** The cycle C_n on ['I_n] (promoted from homomorphism/U3; reused by extremal D2). *)
+Section CycleGraph.
+Variable n : nat.
+Definition cyc_rel (i j : 'I_n) : bool :=
+  (i != j) && (((val i).+1 %% n == val j) || ((val j).+1 %% n == val i)).
+Lemma cyc_sym : symmetric cyc_rel.
+Proof. by move=> i j; rewrite /cyc_rel eq_sym orbC. Qed.
+Lemma cyc_irrefl : irreflexive cyc_rel.
+Proof. by move=> i; rewrite /cyc_rel eqxx. Qed.
+Definition cycle_graph : sgraph := SGraph cyc_sym cyc_irrefl.
+End CycleGraph.

@@ -140,9 +140,9 @@ Definition mixing_circular_colourings_0_statement : Prop :=
     [bipartite] = 2-colourable (χ ≤ 2); the guard [2 ≤ Δ] excludes the degenerate
     small-degree regime where log Δ vanishes.
 
-    [@MOVE-to-base] [bipartite] is a generic cross-area chromatic primitive (not yet in
-    GTBase.base); migrate it to base when a 2nd area needs it. *)
-Definition bipartite (G : sgraph) : Prop := (χ([set: G]) <= 2)%N.
+    [bipartite] now comes from [GTBase.base] (cross-area finite invariant), in the
+    2-colouring form [exists f : G -> bool, forall edge, f x != f y]; imported via base.
+    (This is the standard def; it is equivalent to χ≤2.) *)
 
 Definition list_chromatic_number_and_maximum_degree_of_bipartit_statement : Prop :=
   exists c : nat,

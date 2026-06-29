@@ -199,7 +199,7 @@ Proof. by case. Qed.
 (** ** [bipartite] — identity: an edgeless graph is bipartite. *)
 Lemma bipartite_edgeless (G : sgraph) :
   (forall x y : G, ~~ x -- y) -> bipartite G.
-Proof. by move=> H; exists set0 => x y xy; move: (H x y); rewrite xy. Qed.
+Proof. by move=> H; exists (fun _ : G => false) => x y xy; move: (H x y); rewrite xy. Qed.
 
 (** Witness (degenerate): the 1-vertex graph is bipartite. *)
 Lemma bipartite_K1 : bipartite 'K_1.
@@ -212,7 +212,7 @@ Proof. by case: x => -[|[|m]] mlt // _; apply: val_inj. Qed.
 (** Witness (canonical): ['K_2] is bipartite, with the part [{ord0}]. *)
 Lemma bipartite_K2 : bipartite 'K_2.
 Proof.
-exists [set ord0] => x y; rewrite /edge_rel /= !inE => xy.
+exists (fun x : 'K_2 => x \in [set ord0]) => x y; rewrite /edge_rel /= !inE => xy.
 by case: (x =P ord0) xy => [->|/eqP /I2_eq1 ->];
    case: (y =P ord0) => [->|/eqP /I2_eq1 ->] //=.
 Qed.

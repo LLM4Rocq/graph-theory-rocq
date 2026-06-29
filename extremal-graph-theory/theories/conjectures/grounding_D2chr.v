@@ -119,9 +119,10 @@ Qed.
 
 (** ** Row 3 — bipartite *)
 
-(** [bipartite] unfolds to 2-colourability, as intended. *)
-Lemma bipartiteE (G : sgraph) : bipartite G <-> (χ([set: G]) <= 2)%N.
-Proof. by []. Qed.
+(** base's [bipartite] (the 2-colouring form) is witnessed e.g. by the 1-vertex
+    graph; the standard equivalence with χ≤2 holds but is not needed here. *)
+Lemma bipartite_K1 : bipartite 'K_1.
+Proof. by exists (fun _ : 'K_1 => false) => x y; rewrite (ord1 x) (ord1 y) sgP. Qed.
 
 (** ** Row 4 — perfect-matching / sign-weight primitives *)
 

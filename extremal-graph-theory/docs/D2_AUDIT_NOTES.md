@@ -33,13 +33,18 @@ axiom-free. **Leg state: 29 done, 3 partial.**
   polyhedra). **Faithful fix available**: `polyhedralb := three_connb ∧ wagner_planar` (base has
   `wagner_planar`) — deferred to the reconciliation review.
 
-## PENDING reconciliation review (base-reuse misses + cross-batch duplication)
-Parallel batches independently introduced overlapping vocab + missed some base reuse:
-- **base-reuse misses**: `k_connected` (D2str re-defined; base owns it), `edge_count`/`oedges`
-  (D2tur+D2ram re-derive `#|E(G)|`), good-edge-labeling avg-degree (D2tur inlined; base has
-  `average_degree_geq` → use `~ average_degree_geq`).
-- **cross-batch dups**: `bipartite` (D2chr+D2tur), `cycle_graph` (D2str+D2pr), `edge_count` (D2tur+D2ram).
-- **cross-area candidates** (`[@MOVE-to-base]`?): `cayley_graph` (undirected analogue of digraph-theory's),
-  `strong_power` (strong product — NOT base's distance `graph_power`), `hom_count`, `clique_count`,
-  `bipartite`. → consolidate into `extremal-graph-theory/foundations/` + selective base promotion,
-  gated on the promotion review (local-first/U9 pattern).
+## Reconciliation review — DONE (full reconcile approved + executed)
+- **base-reuse misses were ALREADY FIXED by correct+ground** (the recurring pattern — audit flagged the
+  implement-phase version, correct+ground fixed on disk): D2str uses base `k_connected`; D2tur uses
+  `~ average_degree_geq`; D2ram's `edge_count` is `#|E(G)|`. No further work.
+- **cross-area promotions to base** (clearly cross-area finite invariants): `bipartite` (2-colouring
+  form `exists f:G->bool, forall edge, f x != f y`) and `cycle_graph` (C_n on 'I_n). Local definitions
+  REMOVED and retargeted: `cycle_graph` in U3 (homomorphism), D2str, D2pr; `bipartite` in D2chr, D2tur.
+  Grounding reproved (D2tur's bipartite witnesses; D2chr's `bipartiteE` χ≤2-bridge replaced by a
+  `bipartite_K1` witness — the χ≤2 equivalence holds but is not needed). All re-`check_milestone`'d
+  ACCEPTED, plus U1 confirmed the base additions broke no existing consumer.
+- **polyhedra (`polyhedralb`) stays PARTIAL — genuinely blocked**: it must be a `bool` (it is counted in
+  `cP = #|...|`), but `wagner_planar` is `Prop` (`~minor`) with no decidable boolean test, so the
+  planarity restriction can't be added to the count without a decidable-minor reflection (out of scope).
+- **left area-local** (genuinely extremal-specific, no 2nd consumer): `cayley_graph`, `strong_power`
+  (strong product — NOT base's distance `graph_power`), `hom_count`, `clique_count`.

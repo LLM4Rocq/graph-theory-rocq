@@ -45,16 +45,8 @@ Unset Printing Implicit Defensive.
     [n ≤ 2]); for [n ≥ 3] this is the genuine cycle.  [C5] = [cycle_graph 5]
     is Hedetniemi/pentagon's target; [cycle_graph (2*k+1)] is the odd cycle
     [C_{2k+1}]. *)
-Section CycleGraph.
-Variable n : nat.
-Definition cyc_rel (i j : 'I_n) : bool :=
-  (i != j) && (((val i).+1 %% n == val j) || ((val j).+1 %% n == val i)).
-Lemma cyc_sym : symmetric cyc_rel.
-Proof. by move=> i j; rewrite /cyc_rel eq_sym orbC. Qed.
-Lemma cyc_irrefl : irreflexive cyc_rel.
-Proof. by move=> i; rewrite /cyc_rel eqxx. Qed.
-Definition cycle_graph : sgraph := SGraph cyc_sym cyc_irrefl.
-End CycleGraph.
+(** [cyc_rel]/[cycle_graph] now live in [GTBase.base] (promoted as a cross-area
+    finite invariant, reused by extremal-theory); imported via [base] above. *)
 
 Definition C5 : sgraph := cycle_graph 5.
 

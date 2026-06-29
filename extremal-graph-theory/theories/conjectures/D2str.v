@@ -323,19 +323,8 @@ Definition simultaneous_partition_of_hypergraphs_statement : Prop :=
 
 (** The cycle [C_n] on ['I_n]: [x] and [y] adjacent iff cyclically consecutive.
     [@MOVE-to-base]: generic cycle family, migrate when a 2nd area needs it. *)
-Section Cyc.
-Variable n : nat.
-Definition cyc_rel (x y : 'I_n) : bool :=
-  (x != y) && ((val y == (val x).+1 %% n) || (val x == (val y).+1 %% n)).
-Lemma cyc_sym : symmetric cyc_rel.
-Proof.
-move=> x y; rewrite /cyc_rel [in RHS](eq_sym y) orbC.
-by congr (_ && (_ || _)).
-Qed.
-Lemma cyc_irrefl : irreflexive cyc_rel.
-Proof. by move=> x; rewrite /cyc_rel eqxx. Qed.
-Definition cycle_graph : sgraph := SGraph cyc_sym cyc_irrefl.
-End Cyc.
+(** [cyc_rel]/[cycle_graph] now come from [GTBase.base] (cross-area finite
+    invariant), imported via [base]; base's [cyc_rel] is the same relation. *)
 
 (** An equivalence subgraph of [G]: an equivalence relation all of whose
     nontrivial related pairs are edges of [G]. *)

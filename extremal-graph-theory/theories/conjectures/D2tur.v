@@ -234,9 +234,8 @@ Definition good_edge_labelings_statement : Prop :=
     multiplied over [nat] (multiply through by |V(G)|^(2|E(H)|), and 2|E(G)| = [oedges G]):
         (2|E(G)|)^|E(H)| · |V(G)|^|V(H)|  ≤  hom(H,G) · |V(G)|^(2|E(H)|). *)
 
-(** [@MOVE-to-base] *)
-Definition bipartite (G : sgraph) : Prop :=
-  exists S : {set G}, forall x y : G, x -- y -> (x \in S) (+) (y \in S).
+(** [bipartite] now comes from [GTBase.base] (cross-area finite invariant), in the
+    2-colouring form [exists f : G -> bool, forall edge, f x != f y]; imported via base. *)
 
 (** [@MOVE-to-base] [hom_count H G] counts graph homomorphisms.  The set-builder
     predicate [forall x y, (x -- y) ==> (f x -- f y)] is the decidable boolean form of
