@@ -58,7 +58,7 @@
       match is not scheduled — policy §6 / R4).
 
     Consequently this file schedules ZERO edges (no [_implies_]/[_equiv_]
-    theorems), and emits no [(*@EDGE …*)] annotations: there is no edge — verified,
+    theorems), and emits no machine-readable @EDGE annotations: there is no edge — verified,
     candidate, or refuted-direction — whose endpoints are two distinct D5 nodes.
     The file imports the node statements only to confirm they are in scope and
     that this (edge-empty) module compiles axiom-free. *)

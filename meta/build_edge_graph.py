@@ -43,6 +43,9 @@ def scan(pkg):
         txt = open(os.path.join(cdir, fn)).read()
         for m in EDGE_RE.finditer(txt):
             kv = parse_kv(m.group(1))
+            if not (kv.get("from") and kv.get("to")):
+                import sys as _s; _s.stderr.write(f"skip malformed @EDGE (no from/to) in {fn} — likely prose\n")
+                continue
             status = kv.get("status")
             if status == "verified-literature":  # agents sometimes use the plan's term for a proved edge
                 status = "verified"
