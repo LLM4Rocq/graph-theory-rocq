@@ -1469,6 +1469,297 @@
       "audit_page": "todo",
       "commit": "7c23ef2",
       "package": "spectral-graph-theory"
+    },
+    "almost_all_non_hamiltonian_3_regular_graphs_are_1_connected": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "fractional_hadwiger": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "linear_hypergraphs_with_dimension_3": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "mixing_circular_colourings_0": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory",
+      "note": "M_c real infimum; rational-threshold approximation"
+    },
+    "what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "coloring_random_subgraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "list_chromatic_number_and_maximum_degree_of_bipartite_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "monochromatic_vertex_colorings_inherited_from_perfect_matchings": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "turan_number_of_a_finite_family": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "geodesic_cycles_and_tuttes_theorem": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "shannon_capacity_of_the_seven_cycle": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "multicolour_erdos_hajnal_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "complete_bipartite_subgraphs_of_perfect_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "good_edge_labelings": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "nearly_spanning_regular_subgraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "sidorenkos_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "choosability_of_graph_powers": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "negative_association_in_uniform_forests": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "simultaneous_partition_of_hypergraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "chromatic_number_of_common_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "number_of_cliques_in_minor_closed_classes": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "ramsey_properties_of_cayley_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "chromatic_number_of_random_lifts_of_complete_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "random_stable_roommates": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "asymptotic_distribution_of_form_of_polyhedra": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory",
+      "note": "planarity omitted (=3-connected, not polyhedra); fix=three_connb /\\ wagner_planar"
+    },
+    "circular_choosability_of_planar_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "covering_powers_of_cycles_with_equivalence_subgraphs": {
+      "statement": "partial",
+      "grounding": "partial",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory",
+      "note": "2k<n guard admits n=2k+1 (refutable); regime guard insufficient"
+    },
+    "star_chromatic_index_of_complete_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "circular_chromatic_number_of_triangle_free_planar_graphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "circular_colouring_the_orthogonality_graph": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "the_erdos_hajnal_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
+    },
+    "minimal_graphs_with_a_prescribed_number_of_spanning_trees": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "818a76c",
+      "package": "extremal-graph-theory"
     }
   }
 }

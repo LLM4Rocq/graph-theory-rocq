@@ -3,6 +3,7 @@
  "packages": [
   "chromatic-theory",
   "cycle-theory",
+  "extremal-graph-theory",
   "graph-theory-misc",
   "hamiltonicity-theory",
   "homomorphism-theory",
@@ -14,17 +15,17 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 32,
+  "edges": 41,
   "by_status": {
-   "candidate": 22,
-   "refuted-direction": 7,
+   "candidate": 24,
+   "refuted-direction": 14,
    "verified": 3
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 32,
+   "implies": 40,
    "refutes": 0,
-   "specializes": 0
+   "specializes": 1
   },
   "proved_theorems": 3
  },
@@ -47,6 +48,26 @@
    "cite": "Beneš 1965; Stone 1971 (shuffle-exchange); Beauquier–Darrot 2002 (graph-theoretic Beneš)",
    "sources": [
     "graph-theory-misc/implications_U13.v"
+   ]
+  },
+  {
+   "from": "circular_choosability_of_planar_graphs_statement",
+   "to": "circular_chromatic_number_of_triangle_free_planar_gr_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "X. Zhu, Circular choosability of graphs, JGT 48 (2005) 210-218 (cch >= chi_c, planar cch >= 4); OPG_FULL_FORMALIZATION_PLAN.md v4 §6",
+   "sources": [
+    "extremal-graph-theory/implications_D2chr.v"
+   ]
+  },
+  {
+   "from": "circular_chromatic_number_of_triangle_free_planar_gr_statement",
+   "to": "circular_colouring_the_orthogonality_graph_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG circular-colouring entries",
+   "sources": [
+    "extremal-graph-theory/implications_D2chr.v"
    ]
   },
   {
@@ -130,6 +151,16 @@
    ]
   },
   {
+   "from": "geodesic_cycles_and_tuttes_theorem_statement",
+   "to": "covering_powers_of_cycles_with_equivalence_subgraphs_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG entries (Tutte geodesic cycles vs equivalence covering number of C_n^k)",
+   "sources": [
+    "extremal-graph-theory/implications_D2str.v"
+   ]
+  },
+  {
    "from": "goldbergs_statement",
    "to": "seymours_r_graph_statement",
    "kind": "implies",
@@ -180,6 +211,26 @@
    ]
   },
   {
+   "from": "linear_hypergraphs_with_dimension_3_statement",
+   "to": "simultaneous_partition_of_hypergraphs_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; these two problems are independent OPG hypergraph entries",
+   "sources": [
+    "extremal-graph-theory/implications_D2str.v"
+   ]
+  },
+  {
+   "from": "list_chromatic_number_and_maximum_degree_of_bipartit_statement",
+   "to": "choosability_of_graph_powers_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG list-colouring entries",
+   "sources": [
+    "extremal-graph-theory/implications_D2chr.v"
+   ]
+  },
+  {
    "from": "list_hadwiger_statement",
    "to": "hadwiger_statement",
    "kind": "implies",
@@ -208,6 +259,16 @@
    "cite": "OPG cycle-cover literature",
    "sources": [
     "cycle-theory/implications_U6.v"
+   ]
+  },
+  {
+   "from": "multicolour_erdos_hajnal_statement",
+   "to": "the_erdos_hajnal_statement",
+   "kind": "specializes",
+   "status": "candidate",
+   "cite": "Erdős–Hajnal 1989; multicolour generalisation, Conlon–Fox–Sudakov, Erdős–Hajnal surveys (OPG)",
+   "sources": [
+    "extremal-graph-theory/implications_D2ram.v"
    ]
   },
   {
@@ -341,6 +402,26 @@
    ]
   },
   {
+   "from": "turan_number_of_a_finite_family_statement",
+   "to": "number_of_cliques_in_minor_closed_classes_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "plan v4 §6 edge policy / R4; OPG: Turan number of a finite family (open Conjecture) and number of cliques in minor-closed classes (open Question)",
+   "sources": [
+    "extremal-graph-theory/implications_D2tur.v"
+   ]
+  },
+  {
+   "from": "turan_number_of_a_finite_family_statement",
+   "to": "sidorenkos_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "plan v4 §6 edge policy / R4; OPG: Turan number of a finite family (open Conjecture) and Sidorenko's conjecture (open)",
+   "sources": [
+    "extremal-graph-theory/implications_D2tur.v"
+   ]
+  },
+  {
    "from": "vertex_minor_closed_classes_are_chi_bounded_statement",
    "to": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
    "kind": "implies",
@@ -348,6 +429,16 @@
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (vertex-minor-closed-chi-bounded => forbidden-induced-tree-chi-bounded); Geelen-Kwon-McCarty-Wollan, JCTB 158 (2023) 93-116; Gyarfas-Sumner",
    "sources": [
     "chromatic-theory/implications_U8.v"
+   ]
+  },
+  {
+   "from": "what_is_the_smallest_number_of_disjoint_spanning_tre_statement",
+   "to": "minimal_graphs_with_a_prescribed_number_of_spanning_statement",
+   "kind": "implies",
+   "status": "refuted-direction",
+   "cite": "plan v4 §6 edge policy / R4; OPG: disjoint shortest spanning trees (open Question) and minimal graphs with a prescribed number of spanning trees (open Conjecture, alpha(n)=o(log n))",
+   "sources": [
+    "extremal-graph-theory/implications_D2tur.v"
    ]
   }
  ],

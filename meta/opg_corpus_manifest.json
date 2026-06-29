@@ -829,8 +829,8 @@
    ],
    "rocq_idiom": "lim_{n->oo} NHB(n)/NH(n) = 1 over 3-regular graphs of order 2n",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1056,8 +1056,8 @@
    ],
    "rocq_idiom": "forall G, χ_f G <= had G /\\ χ G <= had_f G /\\ χ_f G <= had_f G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1147,8 +1147,8 @@
    ],
    "rocq_idiom": "forall H linear, dim(incidence_poset H) <= 3 -> exists family of triangles/segments realizing H",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1192,8 +1192,8 @@
    ],
    "rocq_idiom": "forall G, M_c(G) is rational",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1421,8 +1421,8 @@
    ],
    "rocq_idiom": "smallest k such that union of k greedy disjoint min spanning trees contains a Hamiltonian path",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -1602,8 +1602,8 @@
    ],
    "rocq_idiom": "exists c:R, forall G, E[chi (G_{1/2})] > c * chi G / log (chi G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2527,8 +2527,8 @@
    ],
    "rocq_idiom": "exists c, forall G bipartite, list_chromatic G <= c * log (maxdeg G)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2572,8 +2572,8 @@
    ],
    "rocq_idiom": "for which (n,d) exists bicolored G st all d monochromatic perfect-matching colourings have unit weight and others cancel",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -2754,8 +2754,8 @@
    ],
    "rocq_idiom": "forall family F, exists F0 in family, ex(n,F0) = O(ex(n,family)) as n->infinity",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3071,8 +3071,8 @@
    ],
    "rocq_idiom": "forall G, 3_connected G -> exists ell:E->R+, forall C, geodesic ell C -> peripheral C",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3302,8 +3302,8 @@
    ],
    "rocq_idiom": "shannon_capacity C7 = lim_n (alpha (strong_power C7 n))^(1/n) = ?",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3853,8 +3853,8 @@
    ],
    "rocq_idiom": "exists eps>0, every edge-colouring of K_n has either chi-pattern on k vtxs or n^eps vtxs with <=m-1 colours",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4223,8 +4223,8 @@
    ],
    "rocq_idiom": "forall G, perfect G -> exists A B, Kbip in G or compl /\\ |A|,|B| >= n^{1-o(1)}",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4365,8 +4365,8 @@
    ],
    "rocq_idiom": "finiteness of critical graphs with average degree < c; edge-density max",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4501,8 +4501,8 @@
    ],
    "rocq_idiom": "forall eps k, exists r0, forall G r>=r0, regular -> exists H k-regular subgraph, |V H| >= (1-eps)|V G|",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4590,8 +4590,8 @@
    ],
    "rocq_idiom": "forall H bipartite, G, hom(H,G) >= (2|E G|/|V G|^2)^|E H| |V G|^|V H|",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -4818,8 +4818,8 @@
    ],
    "rocq_idiom": "exists f, (f =o k^2) /\\ forall G, ch (G^2) <= f (chi (G^2))",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5135,8 +5135,8 @@
    ],
    "rocq_idiom": "P(e in F | f in F) <= P(e in F) for uniform random forest F",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -5868,8 +5868,8 @@
    ],
    "rocq_idiom": "forall H1 H2 r-uniform on V, exists partition V1..Vr, forall i, #|edges of Hi meeting all classes| >= r!*m_i/r^r - o(m_i)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6097,8 +6097,8 @@
    ],
    "rocq_idiom": "exists k, forall H common, chi H <= k",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6418,8 +6418,8 @@
    ],
    "rocq_idiom": "exists c, forall t G n-vertex Kt-minor-free, #cliques G <= c^t * n",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7107,8 +7107,8 @@
    ],
    "rocq_idiom": "exists c, forall abelian G, exists symmetric S, Cayley(G,S) has no clique/indep > c log|G|",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7377,8 +7377,8 @@
    ],
    "rocq_idiom": "Definition: chi of a random h-lift of K5 is whp on a single value",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7737,8 +7737,8 @@
    ],
    "rocq_idiom": "Definition: P(random roommates instance solvable) = Theta(n^{-1/4})",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7967,8 +7967,8 @@
    ],
    "rocq_idiom": "open-ended limiting distribution of beta=v/(k+2) as k->inf",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8013,8 +8013,8 @@
    ],
    "rocq_idiom": "best real upper bound on cch(G) over planar G",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8058,8 +8058,8 @@
    ],
    "rocq_idiom": "eq(C_n^k) = Omega(k)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "partial",
+    "grounding": "partial",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8425,8 +8425,8 @@
    ],
    "rocq_idiom": "chi'_s(K_n) = O(n)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8658,8 +8658,8 @@
    ],
    "rocq_idiom": "forall G, triangle-free /\\ planar /\\ Delta<=3 -> chi_c(G) <= 20/7",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9310,8 +9310,8 @@
    ],
    "rocq_idiom": "circular_chromatic O = 4 where O has vertex set lines in R^3",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9768,8 +9768,8 @@
    ],
    "rocq_idiom": "forall H, exists d>0, forall G H-induced-free, max(omega G, alpha G) >= |G|^d",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10225,8 +10225,8 @@
    ],
    "rocq_idiom": "alpha(n)=min{k | exists G on k verts with exactly n spanning trees}; alpha(n)=o(log n)",
    "legs": {
-    "statement": "todo",
-    "grounding": "todo",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
