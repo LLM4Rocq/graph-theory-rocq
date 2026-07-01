@@ -15,9 +15,12 @@ gate:
 	python3 meta/report_corpus_status.py --check
 	@set -e; set -- $(LANDED); while [ $$# -ge 2 ]; do python3 meta/check_milestone.py $$1 $$2; shift 2; done
 
-# Toolchain-free status audit (no Coq build) — backs the "statement-complete" claim in CI.
+# Toolchain-free status audit (no Coq build, no external OPG source) — backs the
+# "statement-complete" claim in CI. Only VERIFIES the committed manifest/overlay/report/edge-graph
+# are mutually consistent (drift + invariants); it does NOT regenerate the manifest, since
+# build_opg_manifest.py reads the external OpenProblemGarden clone (data/problems.json) which is
+# not in the repo. Manifest regeneration lives in `gate`, run in the full dev environment.
 audit:
-	python3 meta/build_opg_manifest.py
 	python3 meta/build_edge_graph.py --check
 	python3 meta/report_corpus_status.py --check
 
