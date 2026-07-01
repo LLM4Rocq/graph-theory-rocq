@@ -20,10 +20,16 @@
 
     Scope note: [euler_genus] uses the connected-map Euler relation; rows that quantify
     over embeddings carry the graph's connectivity hypothesis.  Non-vacuity: [edge_perm]
-    is a fixed-point-free involution (below).  The generic embedding-existence witness
-    ([forall G, inhabited (embedding G)] via the canonical cyclic-successor rotation) is
-    the remaining obligation gating "for all/exists embedding" rows — see the Track-A
-    roadmap; until it lands, embedding-quantified rows are recorded partial. *)
+    is a fixed-point-free involution (below).
+
+    EMBEDDING-EXISTENCE (gating "for all/exists embedding" rows → done vs partial): the
+    plan is the canonical cyclic-successor rotation [rot_fun d := next (Lv d) d] where
+    [Lv d] enumerates the darts at [d]'s source.  Its combinatorial CRUX is now PROVEN —
+    [np_orbit] below shows [next] generates a single cycle covering its list, so the
+    rotation's orbit at a vertex is exactly that vertex's dart-set ([erot_vertex]).  The
+    final assembly ([rot_perm]/[erot_vertex] → [inhabited (embedding G)]) connects
+    [np_orbit] to the graph; it is mechanical (the math is done) and is the last Phase-A1
+    step.  Until it lands, embedding-quantified rows stay recorded partial. *)
 
 From mathcomp Require Import all_boot.
 From mathcomp Require Import fingroup perm.
@@ -32,6 +38,52 @@ From mathcomp Require Import all_algebra.
 Import GRing.Theory Num.Theory.
 Set Implicit Arguments.
 Unset Strict Implicit.
+
+(** ** Reusable: [next] generates a single cycle covering its (uniq) list.
+
+    This is the combinatorial linchpin for embedding-EXISTENCE (the canonical
+    cyclic-successor rotation whose orbit at a vertex is exactly that vertex's
+    dart-set).  [np Us] is [next s] as a permutation; [np_orbit] shows its orbit
+    of any list element is the whole list. *)
+
+Lemma next_nth_cyc (T : eqType) (d : T) s m : uniq s -> m < size s ->
+  next s (nth d s m) = nth d s (m.+1 %% size s).
+Proof.
+case: s => [|y0 p'] // Us Hm.
+have zin : nth d (y0 :: p') m \in (y0 :: p') by rewrite mem_nth.
+rewrite next_nth zin index_uniq //.
+move: Hm; rewrite ltnS leq_eqVlt => /orP[/eqP Em|Hlt].
+  by rewrite Em modnn /= nth_default.
+by rewrite modn_small ?ltnS //= (set_nth_default d).
+Qed.
+
+Section NextCycle.
+Variable T : finType.
+Variable s : seq T.
+Hypothesis Us : uniq s.
+Definition np : {perm T} := perm (can_inj (prev_next Us)).
+Lemma npE x : np x = next s x. Proof. exact: permE. Qed.
+Lemma np_iter x i : x \in s -> (np ^+ i)%g x = nth x s ((index x s + i) %% size s).
+Proof.
+move=> xs; have Hs : 0 < size s by rewrite lt0n size_eq0; case: (s) xs.
+elim: i => [|i IH]; first by rewrite expg0 perm1 addn0 modn_small ?index_mem // nth_index.
+rewrite expgSr permM IH npE next_nth_cyc ?ltn_mod //.
+have KEY : (index x s + i.+1) %% size s = ((index x s + i) %% size s).+1 %% size s.
+  by rewrite addnS -addn1 -modnDml addn1.
+by rewrite KEY.
+Qed.
+Lemma np_orbit x : x \in s -> porbit np x = [set y in s].
+Proof.
+move=> xs; have Hs : 0 < size s by rewrite lt0n size_eq0; case: (s) xs.
+apply/setP => y; rewrite inE; apply/idP/idP.
+  by move=> /porbitP[i ->]; rewrite np_iter //; apply: mem_nth; rewrite ltn_mod.
+move=> ys; apply/porbitP; exists (index y s + size s - index x s); rewrite np_iter //.
+have Hy : index y s < size s by rewrite index_mem.
+have Hle : index x s <= index y s + size s.
+  by apply: (@leq_trans (size s)); [rewrite ltnW // index_mem | exact: leq_addl].
+by rewrite subnKC // modnDr modn_small // nth_index.
+Qed.
+End NextCycle.
 
 Section Embedding.
 Variable G : sgraph.
