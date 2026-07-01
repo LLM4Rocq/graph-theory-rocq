@@ -176,14 +176,14 @@
       "note": "unblocked via base wagner_planar (Wagner: no K5/K3,3 minor); axiom-free, no G2/fourcolor"
     },
     "every_4_connected_toroidal_graph_has_a_hamilton_cycle": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b262ac7",
+      "commit": "40f4754",
       "package": "hamiltonicity-theory",
-      "note": "G2-blocked: placeholder toroidal-embedding predicate"
+      "note": "Wave 1 (embedding foundation): real toroidal = embeds_in_genus 1"
     },
     "hedetniemis_conjecture": {
       "statement": "done",
@@ -933,14 +933,14 @@
       "note": "Reed; k_connected G 3 + regular G 3 -> gamma <= ceil(n/3)"
     },
     "domination_in_plane_triangulations": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "d6c94d5",
+      "commit": "40f4754",
       "package": "packing-theory",
-      "note": "G2-blocked: abstract plane_triangulation placeholder"
+      "note": "Wave 1 (embedding foundation): planar_embedding + triangulation"
     },
     "2_colouring_a_graph_without_a_monochromatic_maximum_clique": {
       "statement": "done",
@@ -1872,34 +1872,34 @@
       "note": "needs topological layer: non-orientable surface embedding"
     },
     "grunbaums_conjecture": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "40f4754",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: orientable-surface triangulation (rotation system)"
+      "note": "Wave 1 (embedding foundation): dual 3-edge-colouring via embedding triangulation"
     },
     "the_circular_embedding_conjecture": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "40f4754",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: surface embedding + faces"
+      "note": "Wave 1 (embedding foundation): face-boundary cycles via embedding"
     },
     "what_is_the_largest_graph_of_positive_curvature": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "40f4754",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: combinatorial curvature needs face sizes"
+      "note": "Wave 1 (embedding foundation): bounded-sup via combinatorial curvature + prism/antiprism"
     },
     "counting_3_colorings_of_the_hex_lattice": {
       "statement": "done",

@@ -736,8 +736,8 @@
    ],
    "rocq_idiom": "sup over G with planar G /\\ mindeg>=3 /\\ everywhere_positive_curvature G /\\ ~prism G /\\ ~antiprism G of |G|",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6235,8 +6235,8 @@
    ],
    "rocq_idiom": "forall G toroidal 4-connected, has_hamilton_cycle G",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6923,8 +6923,8 @@
    ],
    "rocq_idiom": "forall G loopless triangulation of orientable surface, 3-edge-colourable (dual G)",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -7196,8 +7196,8 @@
    ],
    "rocq_idiom": "forall 2-connected G, exists surface embedding, each face boundary is a cycle",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -10044,8 +10044,8 @@
    ],
    "rocq_idiom": "exists n0, forall G, plane_triangulation G -> |V G| >= n0 -> domnum G <= |V G|/4",
    "legs": {
-    "statement": "blocked",
-    "grounding": "blocked",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

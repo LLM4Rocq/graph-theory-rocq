@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **192 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **18 partial** · **17 blocked**.
+- **197 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **18 partial** · **12 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -17,16 +17,16 @@
 | digraph-theory | Digraph | 32 | 0 | 0 | 32 |
 | extremal-graph-theory | Extremal | 29 | 3 | 0 | 32 |
 | graph-theory-misc | GTMisc | 13 | 4 | 0 | 17 |
-| hamiltonicity-theory | Hamilton | 8 | 0 | 1 | 9 |
+| hamiltonicity-theory | Hamilton | 9 | 0 | 0 | 9 |
 | homomorphism-theory | Hom | 10 | 0 | 0 | 10 |
 | hypergraph-theory | Hypergraph | 4 | 0 | 0 | 4 |
 | infinite-graph-theory | Infinite | 2 | 7 | 5 | 14 |
 | minor-theory | Minor | 6 | 0 | 0 | 6 |
-| packing-theory | Packing | 14 | 0 | 1 | 15 |
+| packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
-| topological-graph-theory | Topological | 4 | 4 | 10 | 18 |
-| **TOTAL** | | **192** | **18** | **17** | **227** |
+| topological-graph-theory | Topological | 7 | 4 | 7 | 18 |
+| **TOTAL** | | **197** | **18** | **12** | **227** |
 
 ## Per-phase (milestones)
 
@@ -37,15 +37,15 @@
 | D3 | 0 | 4 | 6 | 10 |
 | D4 | 2 | 7 | 5 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
-| D6 | 0 | 0 | 4 | 4 |
+| D6 | 3 | 0 | 1 | 4 |
 | D7 | 1 | 4 | 0 | 5 |
 | P9 | 32 | 0 | 0 | 32 |
 | U1 | 9 | 0 | 0 | 9 |
 | U10 | 3 | 0 | 0 | 3 |
 | U11 | 4 | 0 | 0 | 4 |
 | U12 | 4 | 0 | 0 | 4 |
-| U13 | 17 | 0 | 1 | 18 |
-| U2 | 8 | 0 | 1 | 9 |
+| U13 | 18 | 0 | 0 | 18 |
+| U2 | 9 | 0 | 0 | 9 |
 | U3 | 10 | 0 | 0 | 10 |
 | U4 | 11 | 0 | 0 | 11 |
 | U5 | 9 | 0 | 0 | 9 |
@@ -77,27 +77,22 @@
 | topological-graph-theory | the_crossing_number_of_the_complete_graph | faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry) |
 | topological-graph-theory | the_crossing_number_of_the_hypercube | faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry) |
 
-## Blocked — needs a layer deliberately out of scope (17)
+## Blocked — needs a layer deliberately out of scope (12)
 
 | area | slug | reason |
 |---|---|---|
-| hamiltonicity-theory | every_4_connected_toroidal_graph_has_a_hamilton_cycle | G2-blocked: placeholder toroidal-embedding predicate |
 | infinite-graph-theory | characterizing_aleph_0_aleph_1_graphs | out of scope: aleph_1 cardinal arithmetic |
 | infinite-graph-theory | coloring_the_odd_distance_graph | out of scope: R^2 odd-distance geometry |
 | infinite-graph-theory | highly_arc_transitive_two_ended_digraphs | out of scope: ends + automorphism action |
 | infinite-graph-theory | unions_of_triangle_free_graphs | out of scope: ZFC / independence |
 | infinite-graph-theory | universal_highly_arc_transitive_digraphs | out of scope: universality + automorphisms |
-| packing-theory | domination_in_plane_triangulations | G2-blocked: abstract plane_triangulation placeholder |
 | topological-graph-theory | 3_colourability_of_arrangements_of_great_circles | needs topological layer: spherical arrangement geometry |
 | topological-graph-theory | are_different_notions_of_the_crossing_number_the_same | needs topological layer: two distinct drawing semantics |
 | topological-graph-theory | consecutive_non_orientable_embedding_obstructions | needs topological layer: non-orientable surface embedding |
 | topological-graph-theory | crossing_sequences | needs topological layer: crossing-on-genus (genus/surface layer) |
 | topological-graph-theory | drawing_disconnected_graphs_on_surfaces | needs topological layer: optimal drawings on a surface |
-| topological-graph-theory | grunbaums_conjecture | needs topological layer: orientable-surface triangulation (rotation system) |
 | topological-graph-theory | obstacle_number_of_planar_graphs | needs topological layer: obstacle/visibility geometry |
 | topological-graph-theory | small_universal_point_sets_for_planar_graphs | needs topological layer: point sets in R^2 + straight-line embeddings |
-| topological-graph-theory | the_circular_embedding_conjecture | needs topological layer: surface embedding + faces |
-| topological-graph-theory | what_is_the_largest_graph_of_positive_curvature | needs topological layer: combinatorial curvature needs face sizes |
 
 ## Base surfaces (`graph-theory-base`, cross-area primitives)
 
