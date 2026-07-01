@@ -42,3 +42,11 @@ cr(KB m n)=Zarankiewicz, χ≥t→cr(G)≥cr('K_t), lim cr(Q_d)/4^d=5/32 via ε�
 
 These stay blocked until a real topological layer (rotation systems / embeddings / genus / a decidable
 planarity test) is built — a deliberate deferral, joining the 2 surface rows already blocked.
+
+> **UPDATE (Wave 1 — the rotation-system layer now EXISTS,** `foundations/embedding.v`**):** of the
+> table above, `grunbaums_conjecture` and `what_is_the_largest_graph_of_positive_curvature` are now
+> **done**, and `the_circular_embedding_conjecture` is **partial** (orientable-only encoding — see
+> `WAVE1_AUDIT_NOTES.md`); the two blocked surface rows outside this package (toroidal-Hamilton,
+> plane-triangulation domination) are also done. The remaining rows of the table (drawings, point-sets,
+> non-orientable obstructions, crossing sequences, great circles, obstacle number) still need metric
+> geometry or a non-orientable layer and stay blocked.

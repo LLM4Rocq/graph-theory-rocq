@@ -13,9 +13,10 @@
     (no K5/K3,3 minor) from base — a faithful, axiom-free predicate used opaquely,
     with no extra geometric primitive to ground here; we ground the combinatorial
     primitives those rows reuse ([cartesian_product], [hamilton_decomposition_into_two],
-    [edge_set], [bipartite], [k_connected]).  Only the surface row 6 stays BLOCKED:
-    its toroidality hypothesis is an abstract placeholder predicate quantified inside
-    the [Prop], so there is no geometric primitive to ground. *)
+    [edge_set], [bipartite] — base's 2-colouring form, [k_connected]).  Row 6
+    (toroidal) is DONE since Wave 1: it uses the real [toroidal] from
+    [Topological.foundations.embedding] (grounded there — [embedding_exists],
+    genus arithmetic), so no extra grounding is needed here. *)
 
 From GTBase Require Import base.
 From mathcomp Require Import fingroup perm.
@@ -69,11 +70,12 @@ split; first by exists (tperm x y); apply: tpermK.
 by move=> u v; rewrite /edge_rel /= /complete_rel /= (inj_eq perm_inj).
 Qed.
 
-(** ** [bipartite] — witness: 'K_2 (an edge) is bipartite, witnessed by the
-    part [{ord0}]. *)
+(** ** [bipartite] (base's 2-colouring form) — witness: 'K_2 (an edge) is
+    bipartite, coloured by membership in [{ord0}]. *)
 Lemma bipartite_K2 : bipartite 'K_2.
 Proof.
-exists [set @ord0 1] => x y; rewrite /edge_rel /= /complete_rel /= !inE => xy.
+exists (fun x : 'K_2 => x \in [set @ord0 1]) => x y.
+rewrite /edge_rel /= /complete_rel /= !inE => xy.
 by case: x xy => -[|[|x]] xlt //=; case: y => -[|[|y]] ylt //=.
 Qed.
 

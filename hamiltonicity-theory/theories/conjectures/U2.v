@@ -17,11 +17,11 @@
     planarity hypothesis as the combinatorial [wagner_planar G] from base (NO K5
     and NO K3,3 minor), which by Wagner's theorem IS planarity: faithful, axiom-free
     and fourcolor-free.  [wagner_planar] is used OPAQUELY (base imports minor; we do
-    not).  Row 6 is GENUS/SURFACE-gated (toroidal embedding) and stays BLOCKED: it
-    still models toroidality as an ABSTRACT predicate quantified INSIDE the [Prop]
-    ([forall (toroidal : sgraph -> Prop), ...]) — never a top-level Axiom/Parameter
-    (which would contaminate Print Assumptions) — because no combinatorial surface
-    predicate exists yet.  The other rows model their statements fully. *)
+    not).  Row 6 (toroidal) is DONE since Wave 1: it uses the REAL [toroidal]
+    (= [embeds_in_genus G 1], an orientable rotation-system embedding of Euler
+    genus ≤ 1) from the Track-A foundation [Topological.foundations.embedding];
+    the 4-connectivity hypothesis keeps the genus formula in its faithful
+    (connected) regime.  All rows model their statements fully. *)
 
 From GTBase Require Export base.
 From mathcomp Require Import fingroup.
@@ -65,10 +65,9 @@ Arguments cycle_edges : clear implicits.
 (** [k_connected] (Whitney k-connectivity) is now in graph-theory-base — promoted from
     U2 ∩ U3 ∩ U9 — and reused here via the base export. *)
 
-(** ** Bipartiteness (a 2-colouring with no monochromatic edge).
-    [@MOVE-to-base]: a colouring-free structural primitive, base candidate. *)
-Definition bipartite (G : sgraph) : Prop :=
-  exists A : {set G}, forall x y : G, x -- y -> (x \in A) != (y \in A).
+(** ** Bipartiteness now comes from [GTBase.base] (promoted during the D2
+    reconcile, 2-colouring form [exists f : G -> bool, forall edge, f x != f y]);
+    the former local [{set G}]-part version was interchangeable and is removed. *)
 
 (** ** Graph automorphisms and vertex-transitivity (Algebraic Graph Theory).
     An automorphism is an adjacency-preserving bijection; [G] is vertex-transitive

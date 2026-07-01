@@ -105,7 +105,8 @@ if compiles and ns:
     has_axioms = "Axioms:" in out
     assum_ok = (pr.returncode == 0) and (not has_axioms) and (closed == len(expected))
     assum_detail = "" if assum_ok else f"closed={closed}/{len(expected)} has_axioms={has_axioms}; {out[-300:]}"
-    for f in glob.glob(os.path.join(pkg, "theories", "conjectures", f"_assum_{phase}.v*")):
+    for f in glob.glob(os.path.join(pkg, "theories", "conjectures", f"_assum_{phase}*")) + \
+             glob.glob(os.path.join(pkg, "theories", "conjectures", f"._assum_{phase}*")):
         os.remove(f)
 n_axfree = closed if (compiles and ns) else 0
 chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements)", assum_detail)

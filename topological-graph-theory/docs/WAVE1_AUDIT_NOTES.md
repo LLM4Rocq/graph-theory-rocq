@@ -1,4 +1,16 @@
-# Track A / Wave 1 — 5 rows blocked → done via the embedding foundation
+# Track A / Wave 1 — 5 rows unblocked via the embedding foundation
+
+> **Post-review corrections (adversarial Track-A review, 11 confirmed findings):** (1)
+> `domination_in_plane_triangulations` gained the REQUIRED `connected [set: G]` guard — the unguarded
+> form was **provably false** (disjoint triangles satisfy `planar_embedding`+`triangulation` under the
+> truncated connected-map Euler formula yet need γ = n/3 > n/4). (2) `the_circular_embedding_conjecture`
+> is **downgraded done → PARTIAL**: rotation systems capture exactly orientable embeddings
+> (Heffter–Edmonds), so the Prop is the strictly stronger ORIENTABLE circular-embedding conjecture;
+> full faithfulness needs signed rotation systems (non-orientable layer). (3) `grunbaums_conjecture`
+> carries a status caveat: the general orientable form was refuted by Kochol (2009); encoding faithful
+> to the OPG source, low-genus cases open. (4) `euler_genus`'s connected-only/truncation semantics are
+> now documented at the definition site in `foundations/embedding.v`. Net Wave-1 outcome: **4 done +
+> 1 partial** (was 5 done).
 
 With the axiom-free combinatorial embedding foundation complete (`foundations/embedding.v`,
 `embedding_exists : inhabited (embedding G)` making the predicates non-vacuous), the 5 rows that need

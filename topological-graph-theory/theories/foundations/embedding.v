@@ -140,6 +140,20 @@ Definition emV (E : embedding) : nat := #|porbits (erot E)|.
 Definition emE : nat := #|{: dart}| %/ 2.
 Definition emF (E : embedding) : nat := #|porbits (face_perm E)|.
 
+(** SCOPE CAVEAT (Track-A review, confirmed): [euler_genus] hard-codes the
+    CONNECTED-map Euler relation [2-2g = V-E+F] over truncating nat arithmetic.
+    For a c-component map the true relation is [V-E+F = 2c - 2·Σgᵢ] and graph
+    genus is ADDITIVE over components (Battle–Harary–Kodama–Youngs), so on
+    disconnected graphs this formula computes [max(0, Σgᵢ + 1 - c)] — it
+    UNDERSTATES genus by [c-1] (e.g. K7 ⊎ K7 with torus triangulations gets
+    genus 1, though the true genus is 2) and can truncate to 0 (disjoint
+    triangles).  Also, [emV] counts erot-orbits, so ISOLATED vertices are
+    invisible, and an EDGELESS graph gets [euler_genus = 1] (empty-map anomaly).
+    Every consumer of [planar_embedding]/[embeds_in_genus]/[min_genus]/[toroidal]
+    must therefore carry a connectivity hypothesis (all current rows do:
+    U2 via [k_connected G 4], U13 + the D6emb curvature row via
+    [connected [set: G]]); an unguarded use on possibly-disconnected graphs is
+    UNFAITHFUL. *)
 Definition euler_genus (E : embedding) : nat := (2 + emE - emV E - emF E) %/ 2.
 Definition planar_embedding (E : embedding) : Prop := euler_genus E = 0.
 Definition embeds_in_genus (g : nat) : Prop := exists E : embedding, euler_genus E <= g.

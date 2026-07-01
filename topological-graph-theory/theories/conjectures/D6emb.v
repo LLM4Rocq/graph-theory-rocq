@@ -84,7 +84,11 @@ Definition is_antiprism (G : sgraph) : Prop :=
   exists n : nat, 2 < n /\ inhabited (G ≃ antiprism n).
 
 (** ** Row 1 — Grünbaum's conjecture (3-edge-colourability of the dual of a
-    triangulation of an orientable surface).  OPEN.
+    triangulation of an orientable surface).  Recorded OPEN in the OPG source;
+    STATUS CAVEAT (Track-A review): the general orientable form encoded here was
+    REFUTED by Kochol (2009, polyhedral embeddings of snarks in orientable
+    surfaces of large genus); the low-genus (e.g. toroidal) cases remain open.
+    The encoding is faithful to the source conjecture as stated.
 
     Source (Conjecture): "If [G] is a simple loopless triangulation of an
     orientable surface, then the dual of [G] is 3-edge-colorable."
@@ -108,10 +112,19 @@ Definition grunbaums_statement : Prop :=
          c (face_perm E d) <> c (face_perm E (face_perm E d)) /\
          c d <> c (face_perm E (face_perm E d))).
 
-(** ** Row 2 — The circular-embedding conjecture.  OPEN.
+(** ** Row 2 — The circular-embedding conjecture.  OPEN — recorded PARTIAL
+    (orientable-only encoding; Track-A review).
 
     Source (Conjecture): "Every 2-connected graph may be embedded in a surface so
     that the boundary of each face is a cycle."
+
+    FAITHFULNESS CAVEAT: rotation systems capture exactly the ORIENTABLE cellular
+    embeddings (Heffter–Edmonds), so this Prop is the strictly STRONGER
+    orientable circular-embedding (orientable strong embedding) conjecture — the
+    source allows non-orientable surfaces too, and the two are not known
+    equivalent.  A fully faithful encoding needs signed rotation systems (edge
+    signatures); until that non-orientable layer exists this row is recorded
+    PARTIAL, not done.
 
     Encoding.  For every 2-connected [G] there is an embedding [E] all of whose
     face boundaries are cycles = no vertex is repeated on any face: on each face

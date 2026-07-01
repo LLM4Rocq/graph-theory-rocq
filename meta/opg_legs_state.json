@@ -181,7 +181,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "40f4754",
+      "commit": "b5c7e15",
       "package": "hamiltonicity-theory",
       "note": "Wave 1 (embedding foundation): real toroidal = embeds_in_genus 1"
     },
@@ -938,9 +938,9 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "40f4754",
+      "commit": "b5c7e15",
       "package": "packing-theory",
-      "note": "Wave 1 (embedding foundation): planar_embedding + triangulation"
+      "note": "Wave 1 + review fix: connected [set:G] guard added (unguarded form was provably FALSE via disjoint triangles under truncated Euler genus); commit PENDING2"
     },
     "2_colouring_a_graph_without_a_monochromatic_maximum_clique": {
       "statement": "done",
@@ -1879,17 +1879,17 @@
       "audit_page": "todo",
       "commit": "40f4754",
       "package": "topological-graph-theory",
-      "note": "Wave 1 (embedding foundation): dual 3-edge-colouring via embedding triangulation"
+      "note": "Wave 1: dual 3-edge-colouring via embedding triangulation; STATUS caveat: general orientable form refuted (Kochol 2009), low-genus cases open; encoding faithful to the OPG source"
     },
     "the_circular_embedding_conjecture": {
-      "statement": "done",
-      "grounding": "done",
+      "statement": "partial",
+      "grounding": "partial",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "40f4754",
+      "commit": "PENDING2",
       "package": "topological-graph-theory",
-      "note": "Wave 1 (embedding foundation): face-boundary cycles via embedding"
+      "note": "orientable-only encoding (rotation systems = Heffter-Edmonds orientable maps); source allows non-orientable surfaces -> strictly stronger Prop; needs signed rotation systems. Downgraded done->partial by the Track-A review"
     },
     "what_is_the_largest_graph_of_positive_curvature": {
       "statement": "done",

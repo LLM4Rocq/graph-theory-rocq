@@ -74,19 +74,22 @@ Definition domination_in_cubic_graphs_statement : Prop :=
     is_domination_number G m ->
     m <= ceil_div #|G| 3.
 
-(** ** Row 2 — Domination in plane triangulations  (OPEN — PLANARITY-GATED, BLOCKED)
+(** ** Row 2 — Domination in plane triangulations  (OPEN — done, Wave 1)
 
     Source: "Conjecture: Every sufficiently large plane triangulation G has a
     dominating set of size ≤ (1/4)|V(G)|."
 
-    Carrier: [sgraph].  PLANARITY-GATED / BLOCKED (G2 gate): "plane
-    triangulation" is discharged INTO the statement as an abstract hypothesis
-    predicate [forall plane_triangulation : sgraph -> Prop, …] — NEVER a
-    top-level Axiom/Parameter (that would contaminate Print Assumptions).
-    Because the real planar/Four-Colour layer is not installed,
-    [plane_triangulation] is a placeholder: the row TYPE-CHECKS and is axiom-free
-    but does NOT yet state the genuine geometric conjecture, so this leg is
-    BLOCKED, not done.
+    Wave 1 (Track-A embedding foundation): "plane triangulation" is the REAL
+    combinatorial notion — a CONNECTED graph with a genus-0 rotation-system
+    embedding all of whose faces are triangles ([planar_embedding E] +
+    [triangulation E] from [Topological.foundations.embedding]).
+
+    [connected [set: G]] is REQUIRED, not cosmetic: [euler_genus] is the
+    connected-map Euler relation over truncating nat arithmetic, so without it
+    disconnected pseudo-planar instances slip in (e.g. c ≥ 2 disjoint triangles
+    have [2+E-V-F = 2-2c ≤ 0 → genus 0] yet need γ = n/3 > n/4, making the
+    unguarded statement provably FALSE — caught by the Track-A review).  Plane
+    triangulations are connected by definition, so the guard is faithful.
 
     "Sufficiently large" = an order threshold [n0] beyond which the bound holds;
     [n0 <= #|G|] also supplies the non-triviality guard.  "dominating set of size
@@ -95,6 +98,7 @@ Definition domination_in_cubic_graphs_statement : Prop :=
 Definition domination_in_plane_triangulations_statement : Prop :=
   exists n0 : nat,
     forall (G : sgraph) (E : embedding G) (m : nat),
+      connected [set: G] ->
       planar_embedding E -> triangulation E -> n0 <= #|G| ->
       is_domination_number G m ->
       m <= #|G| %/ 4.
