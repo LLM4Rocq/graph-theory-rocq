@@ -7,7 +7,8 @@
     "D2tur": "Turan / counting / hom-density / extremal-number",
     "D2str": "structural / hypergraph / geometric-combinatorial",
     "D3cr": "crossing-number rows via a faithful combinatorial crossing_number (planarization onto wagner_planar)",
-    "D4doa": "doable infinite-graph rows: finite hex-torus thermodynamic limit + countable K_omega exact-colourings"
+    "D4doa": "doable infinite-graph rows: finite hex-torus thermodynamic limit + countable K_omega exact-colourings",
+    "D6emb": "Wave 1: D6 rows unblocked by the embedding foundation (grunbaum dual / circular embedding / positive curvature)"
   },
   "D2chr": {
     "phase": "D2",
@@ -87,6 +88,15 @@
     "slugs": [
       "counting_3_colorings_of_the_hex_lattice",
       "exact_colorings_of_graphs"
+    ]
+  },
+  "D6emb": {
+    "phase": "D6",
+    "repo": "topological-graph-theory",
+    "slugs": [
+      "grunbaums_conjecture",
+      "the_circular_embedding_conjecture",
+      "what_is_the_largest_graph_of_positive_curvature"
     ]
   }
 }

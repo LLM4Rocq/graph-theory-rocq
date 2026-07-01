@@ -169,7 +169,7 @@ const SPECTRAL = M.repo === 'spectral-graph-theory'
     `• Keep base/ UNTOUCHED (new area; no other package consumes spectral vocab).`
   : ''
 // Crossing-number design (D3cr / topological-graph-theory) — preflighted: faithful combinatorial cr.
-const CROSSING = M.repo === 'topological-graph-theory'
+const CROSSING = M.phase === 'D3cr'
   ? `\nCROSSING-NUMBER DESIGN (settled in preflight — follow it; FAITHFUL or PARTIAL, never a placeholder):\n` +
     `• Define a SINGLE faithful combinatorial \`crossing_number : sgraph -> nat\` in ` +
     `topological-graph-theory/theories/foundations/crossing.v, via PLANARIZATION onto base's ` +
@@ -187,6 +187,36 @@ const CROSSING = M.repo === 'topological-graph-theory'
     `(Q_d = hypercube = iterated cartesian_product of K_2, reuse base \`cartesian_product\`).\n` +
     `• crossing_number is AREA-LOCAL (topological foundations), NOT base. Add an audit note that it is the ` +
     `planarization invariant. Do NOT introduce drawings/surfaces/faces/genus/point-sets.`
+  : ''
+// Embedding design (Wave 1 / D6emb) — the combinatorial embedding foundation is DONE; use it.
+const EMBEDDING = M.phase === 'D6emb'
+  ? `\nEMBEDDING DESIGN (the Track-A foundation is COMPLETE and axiom-free — USE it, do NOT rebuild):\n` +
+    `• Import \`From Topological.foundations Require Import embedding.\` It provides (all take the graph ` +
+    `\`(G:sgraph)\` explicitly, and an embedding \`(E : embedding G)\`): \`dart G\` (oriented edges), ` +
+    `\`edge_perm G : {perm (dart G)}\` (edge involution), \`embedding G\` (Record: an orientable ` +
+    `rotation system), \`face_perm E\`/\`face_of E d\`/\`face_size E d\` (faces = orbits of face_perm), ` +
+    `\`planar_embedding E\` (genus 0), \`embeds_in_genus g\`, \`min_genus g\`, \`toroidal G\` (genus ≤ 1), ` +
+    `\`triangulation E\` (every face_size = 3), \`combinatorial_curvature E v : rat\`, ` +
+    `\`positive_curvature E\`, and crucially \`embedding_exists : inhabited (embedding G)\` (NON-VACUITY — ` +
+    `every graph has an embedding, so these predicates are inhabited). base has \`k_connected\`, ` +
+    `\`cartesian_product\` (□), \`cycle_graph\`, \`'K_n\`, \`N(v)\`, \`edge_colourable\`/\`chromatic_index\`.\n` +
+    `• ENCODINGS (faithful; the foundation makes them non-vacuous):\n` +
+    `  - grunbaums_conjecture: \`forall G (E:embedding G), triangulation E -> exists c : dart G -> 'I_3, ` +
+    `(forall d, c d = c (edge_perm G d)) /\\ (forall d, the three edge-colours c d, c(face_perm E d), ` +
+    `c(face_perm E (face_perm E d)) are PAIRWISE DISTINCT)\` — a proper 3-edge-colouring of the ` +
+    `(3-regular) dual = the 3 edges bounding each triangular face get 3 distinct colours. (G:sgraph is ` +
+    `simple+loopless; the rotation system is orientable by construction.)\n` +
+    `  - the_circular_embedding_conjecture: \`forall G, k_connected G 2 -> exists E : embedding G, ` +
+    `forall d, {in face_of E d &, injective (fun d' : dart G => (sval d').1)}\` — each face boundary is a ` +
+    `CYCLE = no vertex repeats on the face (source map injective on each face's darts).\n` +
+    `  - what_is_the_largest_graph_of_positive_curvature: \`exists N, forall G (E:embedding G), ` +
+    `connected [set:G] -> planar_embedding E -> (forall v, 2 < #|N(v)|) -> positive_curvature E -> ` +
+    `~ is_prism G -> ~ is_antiprism G -> #|G| <= N\`. Define \`is_prism G := exists n, 2<n /\\ ` +
+    `inhabited (G ≃ cartesian_product (cycle_graph n) 'K_2)\` and a concrete \`antiprism\` sgraph on ` +
+    `\`'I_n * bool\` (two n-cycles + connecting triangles: top i ~ bottom i and top i ~ bottom (i+1)), ` +
+    `\`is_antiprism G := exists n, 2<n /\\ inhabited (G ≃ antiprism n)\`.\n` +
+    `• AREA-LOCAL to topological-graph-theory/theories/conjectures/${M.phase}.v; only new primitives are ` +
+    `is_prism/is_antiprism (+ antiprism). Everything AXIOM-FREE. No metric geometry.`
   : ''
 // Infinite-graph design (D4 / infinite-graph-theory) — preflighted carrier (NOT sgraph; it is finite).
 const INFINITE = M.repo === 'infinite-graph-theory'
@@ -221,7 +251,7 @@ const draft = await agent(
   `computation-cost framework. A SOLVED row (e.g. a PTAS exists) is still a \`Definition _statement : Prop\` ` +
   `(proofs are optional applications work). If ≥2 rows share such vocabulary, put it in a single ` +
   `${M.repo}/theories/foundations/<topic>.v module (area-local), not base.\n` +
-  `${SPECTRAL}${CROSSING}${INFINITE}\n` +
+  `${SPECTRAL}${CROSSING}${EMBEDDING}${INFINITE}\n` +
   `ASYMPTOTIC/EXTREMAL rows (lim / o / O / Ω / Θ / whp / 'almost all'): use an EVENTUAL-BOUND, ε–N ` +
   `formulation over ℕ (e.g. \`forall m, exists N, forall n, N<=n -> <bound>\`; ratios cross-multiplied), ` +
   `NEVER an informal 'o'/'O' token. Rows needing PROBABILITY SPACES, GRAPH LIMITS/graphons, hom-DENSITY, ` +
