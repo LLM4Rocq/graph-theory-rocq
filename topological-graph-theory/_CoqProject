@@ -10,3 +10,6 @@ theories/conjectures/implications_U13.v
 theories/conjectures/D3cr.v
 theories/conjectures/grounding_D3cr.v
 theories/conjectures/implications_D3cr.v
+theories/conjectures/D6emb.v
+theories/conjectures/grounding_D6emb.v
+theories/conjectures/implications_D6emb.v
