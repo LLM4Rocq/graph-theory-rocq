@@ -2,6 +2,7 @@
 -Q ../base/theories GTBase
 -arg -w -arg -notation-overridden
 
+theories/foundations/embedding.v
 theories/foundations/crossing.v
 theories/conjectures/U13.v
 theories/conjectures/grounding_U13.v
