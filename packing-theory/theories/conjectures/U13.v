@@ -38,6 +38,7 @@
     unaffected and models its statement fully. *)
 
 From GTBase Require Export base.
+From Topological.foundations Require Import embedding.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -92,9 +93,8 @@ Definition domination_in_cubic_graphs_statement : Prop :=
     ≤ (1/4)|V(G)|" = γ(G) ≤ ⌊|G|/4⌋, i.e. the domination number [m]
     ([is_domination_number G m]) satisfies [m <= #|G| %/ 4]. *)
 Definition domination_in_plane_triangulations_statement : Prop :=
-  forall plane_triangulation : sgraph -> Prop,
-    exists n0 : nat,
-      forall (G : sgraph) (m : nat),
-        plane_triangulation G -> n0 <= #|G| ->
-        is_domination_number G m ->
-        m <= #|G| %/ 4.
+  exists n0 : nat,
+    forall (G : sgraph) (E : embedding G) (m : nat),
+      planar_embedding E -> triangulation E -> n0 <= #|G| ->
+      is_domination_number G m ->
+      m <= #|G| %/ 4.

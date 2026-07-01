@@ -25,6 +25,7 @@
 
 From GTBase Require Export base.
 From mathcomp Require Import fingroup.
+From Topological.foundations Require Import embedding.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -224,13 +225,14 @@ Definition decomposing_the_prism_of_a_3_connected_cubic_planar_statement : Prop 
     hamilton_decomposition_into_two (cartesian_product G 'K_2).
 
 (** ** Row 6 — Every 4-connected toroidal graph has a Hamilton cycle  (OPEN)
-    PLANARITY/GENUS-GATED (blocked): [toroidal] is an abstract placeholder
-    predicate (genus-embedding is not installed).
+    Now uses the real [toroidal] (embeds in the orientable genus-1 surface, i.e.
+    [embeds_in_genus G 1]) from the Track-A combinatorial embedding foundation
+    ([Topological.foundations.embedding]) — non-vacuous (every graph has an
+    embedding, so planar graphs are toroidal); [k_connected] from base.
 
     Source: "Conjecture: Every 4-connected toroidal graph has a Hamilton cycle." *)
 Definition every_4_connected_toroidal_graph_has_a_hamilton_cycl_statement : Prop :=
-  forall (toroidal : sgraph -> Prop) (G : sgraph),
-    toroidal G -> k_connected G 4 -> is_hamiltonian G.
+  forall G : sgraph, toroidal G -> k_connected G 4 -> is_hamiltonian G.
 
 (** ** Row 7 — Every prism over a 3-connected planar graph is Hamiltonian  (OPEN)
     Planarity is the combinatorial [wagner_planar] (no K5/K3,3 minor) from base.

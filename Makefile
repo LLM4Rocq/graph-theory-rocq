@@ -7,6 +7,8 @@ all: $(PACKAGES)
 
 chromatic-theory hamiltonicity-theory homomorphism-theory cycle-theory minor-theory packing-theory reconstruction-theory hypergraph-theory topological-graph-theory graph-theory-misc spectral-graph-theory extremal-graph-theory infinite-graph-theory: base   # area packages depend on base (G3-core)
 
+hamiltonicity-theory packing-theory: topological-graph-theory   # Wave-1: use the embedding foundation
+
 # CI gate (G1 + acceptance): manifest reproduces, edge-graph has no drift, every landed
 # milestone passes check_milestone (compiles, axiom-free, Print-Assumptions-clean, legs justified).
 gate:
