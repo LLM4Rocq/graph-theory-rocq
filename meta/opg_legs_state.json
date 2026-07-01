@@ -1762,44 +1762,44 @@
       "package": "extremal-graph-theory"
     },
     "the_crossing_number_of_the_complete_graph": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry)"
+      "note": "Wave 2: direct form is_crossing_number 'K_n (Guy value) — non-vacuous (achievability part of the claim); %/4 exact for all n (audited)"
     },
     "the_crossing_number_of_the_complete_bipartite_graph": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry)"
+      "note": "Wave 2: direct form is_crossing_number (KB m n) (Zarankiewicz value) — non-vacuous; degenerate m,n<=2 verified planar/0"
     },
     "crossing_numbers_and_coloring": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry)"
+      "note": "Wave 2: sub-level form (forall k achievable for G, exists j<=k achievable for K_t) — robust to exactly-k non-monotonicity; t=5 slice carries 4CT strength (audited)"
     },
     "the_crossing_number_of_the_hypercube": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry)"
+      "note": "Wave 2: two-sided eps-N on achievable counts — body <-> minimum-in-window proven by audit probes; N>=4 quantifier order load-bearing and correct"
     },
     "3_colourability_of_arrangements_of_great_circles": {
       "statement": "blocked",

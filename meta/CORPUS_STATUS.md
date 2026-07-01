@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **196 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **19 partial** · **12 blocked**.
+- **200 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **15 partial** · **12 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -25,8 +25,8 @@
 | packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
-| topological-graph-theory | Topological | 6 | 5 | 7 | 18 |
-| **TOTAL** | | **196** | **19** | **12** | **227** |
+| topological-graph-theory | Topological | 10 | 1 | 7 | 18 |
+| **TOTAL** | | **200** | **15** | **12** | **227** |
 
 ## Per-phase (milestones)
 
@@ -34,7 +34,7 @@
 |---|--:|--:|--:|--:|
 | D1 | 15 | 0 | 0 | 15 |
 | D2 | 29 | 3 | 0 | 32 |
-| D3 | 0 | 4 | 6 | 10 |
+| D3 | 4 | 0 | 6 | 10 |
 | D4 | 2 | 7 | 5 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 2 | 1 | 1 | 4 |
@@ -54,7 +54,7 @@
 | U8 | 3 | 0 | 0 | 3 |
 | U9 | 13 | 0 | 0 | 13 |
 
-## Partial — faithful but conditional / needs a deferred layer (19)
+## Partial — faithful but conditional / needs a deferred layer (15)
 
 | area | slug | reason |
 |---|---|---|
@@ -72,11 +72,7 @@
 | infinite-graph-theory | seymours_self_minor_conjecture | iGraph carrier suffices; needs infinite-graph minor theory |
 | infinite-graph-theory | strong_matchings_and_covers | iGraph carrier suffices; needs infinite hypergraph order theory |
 | infinite-graph-theory | unfriendly_partitions | iGraph carrier suffices; needs cardinal neighbour comparison |
-| topological-graph-theory | crossing_numbers_and_coloring | faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry) |
 | topological-graph-theory | the_circular_embedding_conjecture | orientable-only encoding (rotation systems = Heffter-Edmonds orientable maps); source allows non-orientable surfaces -> strictly stronger Prop; needs signed rotation systems. Downgraded done->partial by the Track-A review |
-| topological-graph-theory | the_crossing_number_of_the_complete_bipartite_graph | faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry) |
-| topological-graph-theory | the_crossing_number_of_the_complete_graph | faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry) |
-| topological-graph-theory | the_crossing_number_of_the_hypercube | faithful planarization crossing_number; statement vacuity-conditional on is_crossing_number totality (needs omitted geometry) |
 
 ## Blocked — needs a layer deliberately out of scope (12)
 

@@ -7829,8 +7829,8 @@
    ],
    "rocq_idiom": "Definition: forall m n, cr(K_{m,n}) = floor(m/2)floor((m-1)/2)floor(n/2)floor((n-1)/2)",
    "legs": {
-    "statement": "partial",
-    "grounding": "partial",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8470,8 +8470,8 @@
    ],
    "rocq_idiom": "cr(K_n) = (1/4)floor(n/2)floor((n-1)/2)floor((n-2)/2)floor((n-3)/2)",
    "legs": {
-    "statement": "partial",
-    "grounding": "partial",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -8703,8 +8703,8 @@
    ],
    "rocq_idiom": "forall G t, chi(G)>=t -> cr(G) >= cr(K_t)",
    "legs": {
-    "statement": "partial",
-    "grounding": "partial",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -9123,8 +9123,8 @@
    ],
    "rocq_idiom": "lim cr(Q_d)/4^d = 5/32",
    "legs": {
-    "statement": "partial",
-    "grounding": "partial",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
