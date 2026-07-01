@@ -1887,7 +1887,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING2",
+      "commit": "865108f",
       "package": "topological-graph-theory",
       "note": "orientable-only encoding (rotation systems = Heffter-Edmonds orientable maps); source allows non-orientable surfaces -> strictly stronger Prop; needs signed rotation systems. Downgraded done->partial by the Track-A review"
     },
