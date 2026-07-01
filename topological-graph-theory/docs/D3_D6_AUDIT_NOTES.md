@@ -15,7 +15,16 @@ ways), monotone under sub-relation, `is_crossing_number 'K_5` ⇒ `≥ 1` (K_5 n
 (`is_crossing_number_uniq`). `hypercube d` = iterated base `cartesian_product` of `'K_2`
 (`[@MOVE-to-base]`; base's `graph_power` is the distance-power, NOT the cartesian power, so not reusable).
 
-## The 4 crossing rows → PARTIAL (vacuity, honest)
+## The 4 crossing rows → DONE (Wave 2: direct non-vacuous forms)
+**Wave-2 upgrade (audited 5/5 clean: 4 per-row auditors + a vacuity skeptic with compiled refutation
+probes):** the rows now assert the conjectures DIRECTLY — `is_crossing_number 'K_n (Guy)` /
+`is_crossing_number (KB m n) (Zarankiewicz)` (achievability + minimality both part of the claim, no
+inhabitance gate; Guy's `%/4` exact for all n), Albertson in sub-level form (`forall k achievable for
+G, exists j <= k achievable for K_t` — robust to exactly-k non-monotonicity; the t=5 slice provably
+carries four-colour-theorem strength), and the hypercube limit two-sided ε–N on achievable counts
+(body ⟺ minimum-in-window, Qed-probed). The pre-Wave-2 text below records the original partial state.
+
+### (historical) The 4 crossing rows → PARTIAL (vacuity, honest)
 Each is the correct RELATIONAL encoding (`forall v, is_crossing_number G v -> v = …` / `… -> cr(G) ≥
 cr('K_t)`), faithful given `is_crossing_number` is functional. **But `is_crossing_number G v` is not
 provably inhabited for the non-planar regime** (n ≥ 5): totality (every graph HAS a crossing number)

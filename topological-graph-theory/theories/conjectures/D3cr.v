@@ -19,9 +19,17 @@
     See crossing.v for why cr is exposed RELATIONALLY (a total [nat]-valued cr
     would need a finite-drawing/geometry existence fact, excluded here) and for the
     honest note on the full subgraph-monotonicity (open in this model).
-    [is_crossing_number] is FUNCTIONAL ([is_crossing_number_uniq]); each statement
-    binds cr as a value [v] under the hypothesis [is_crossing_number _ v], which
-    therefore pins cr and keeps the statement non-vacuous and faithful.
+    [is_crossing_number] is FUNCTIONAL ([is_crossing_number_uniq]).
+
+    WAVE 2 (post-review upgrade): the rows are stated in DIRECT, NON-VACUOUS form.
+    Rows 1–2 assert [is_crossing_number <carrier> <formula>] outright — the
+    conjectured value both achievable and minimal, no inhabitance gate (the former
+    [forall v, is_crossing_number _ v -> v = _] shape was vacuity-conditional).
+    Row 3 uses the sub-level comparison of minima ([forall k achievable for G,
+    exists j <= k achievable for K_t] — robust to the exactly-k non-monotonicity
+    of [crossing_planar_in]); Row 4 states the 5/32 limit two-sidedly on the
+    achievable counts.  No totality theorem is needed: each existence half is part
+    of the conjecture's own claim.
 
     CARRIERS (per row.rocq_idiom): complete-bipartite [KB m n], complete ['K_n],
     arbitrary [sgraph], and the hypercube [hypercube d] (= iterated cartesian power
@@ -63,11 +71,18 @@ Fixpoint hypercube (d : nat) : sgraph :=
       cr(K_{m,n}) = ⌊m/2⌋⌊(m−1)/2⌋⌊n/2⌋⌊(n−1)/2⌋."
 
     Carrier: the complete bipartite graph [KB m n].  Floors are nat division
-    [_ %/ 2]. *)
+    [_ %/ 2].
+
+    WAVE-2 FORM (direct, NON-VACUOUS): asserts that the Zarankiewicz product IS
+    the crossing number — both achievability of that many crossings (the known
+    Zarankiewicz drawing) and minimality (the open part) are part of the
+    conjecture's own claim, so no separate totality theorem is needed.  The
+    former relational form [forall v, is_crossing_number _ v -> v = _] was
+    vacuity-conditional on inhabitance. *)
 Definition the_crossing_number_of_the_complete_bipartite_graph_statement : Prop :=
-  forall (m n v : nat),
-    is_crossing_number (KB m n) v ->
-    v = (m %/ 2) * ((m - 1) %/ 2) * (n %/ 2) * ((n - 1) %/ 2).
+  forall m n : nat,
+    is_crossing_number (KB m n)
+      ((m %/ 2) * ((m - 1) %/ 2) * (n %/ 2) * ((n - 1) %/ 2)).
 
 (** ** Row 2 — Crossing number of the complete graph (Guy)
     OPEN (Guy's conjecture; known for n ≤ 12).
@@ -79,11 +94,14 @@ Definition the_crossing_number_of_the_complete_bipartite_graph_statement : Prop 
     Carrier: the complete graph ['K_n].  The Guy product is always divisible by 4,
     so the ¼ factor is the EXACT nat division [_ %/ 4].  (This divisibility is a
     relied-upon arithmetic fact about the Guy product — verified for all checked n
-    — not enforced by the encoding; were it ever to fail, [%/ 4] would truncate.) *)
+    — not enforced by the encoding; were it ever to fail, [%/ 4] would truncate.)
+
+    WAVE-2 FORM (direct, NON-VACUOUS): asserts the Guy value IS the crossing
+    number (achievability = Guy's construction + minimality = the open part). *)
 Definition the_crossing_number_of_the_complete_graph_statement : Prop :=
-  forall (n v : nat),
-    is_crossing_number 'K_n v ->
-    v = ((n %/ 2) * ((n - 1) %/ 2) * ((n - 2) %/ 2) * ((n - 3) %/ 2)) %/ 4.
+  forall n : nat,
+    is_crossing_number 'K_n
+      (((n %/ 2) * ((n - 1) %/ 2) * ((n - 2) %/ 2) * ((n - 3) %/ 2)) %/ 4).
 
 (** ** Row 3 — Crossing numbers and colouring (Albertson)
     OPEN (Albertson's conjecture; known for t ≤ 18 and via the four-colour theorem
@@ -93,13 +111,20 @@ Definition the_crossing_number_of_the_complete_graph_statement : Prop :=
       Every graph G with χ(G) ≥ t satisfies cr(G) ≥ cr(K_t)."
 
     Carrier: arbitrary [sgraph]; χ([set: G]) is the whole-graph chromatic number
-    (base/coloring). *)
+    (base/coloring).
+
+    WAVE-2 FORM (sub-level, NON-VACUOUS): cr(K_t) ≤ cr(G) is stated as "every
+    planarization count achievable for G dominates some achievable count for
+    K_t": [forall k, crossing_planar_in k G -> exists j <= k, crossing_planar_in
+    j 'K_t].  The [exists j <= k] (rather than exactly [k]) is deliberate —
+    [crossing_planar_in] counts EXACT split numbers and is not monotone in [k],
+    so the sub-level form is the correct encoding of the ≤ comparison of minima.
+    It has content for every planarizable G (no inhabitance gate). *)
 Definition crossing_numbers_and_coloring_statement : Prop :=
-  forall (G : sgraph) (t vG vt : nat),
+  forall (G : sgraph) (t k : nat),
     (t <= χ([set: G]))%N ->
-    is_crossing_number G vG ->
-    is_crossing_number 'K_t vt ->
-    (vt <= vG)%N.
+    crossing_planar_in k G ->
+    exists j : nat, (j <= k)%N /\ crossing_planar_in j 'K_t.
 
 (** ** Row 4 — Crossing number of the hypercube
     OPEN (the limit is known to exist and lie in a narrow interval around 5/32;
@@ -116,22 +141,31 @@ Definition crossing_numbers_and_coloring_statement : Prop :=
       eps_den · |32·cr − 5·4^d|  <  eps_num · (32·4^d),
     the absolute value written as a sum of truncated nat subtractions.
 
-    VACUITY NOTE (shared by all four rows, sharpest here).  Like Rows 1–3, the
-    inner body is gated by [is_crossing_number (hypercube d) v], which RELATIONALLY
-    pins cr but — in this geometry-free model — is not KNOWN to be inhabited in the
-    non-planar regime (d ≥ 4): exhibiting it needs the planarization upper bound
-    (a drawing/geometry existence fact this layer omits), so the ε–N body is
-    vacuously satisfiable precisely where the 5/32 limit lives.  This is inherent
-    to the relational cr foundation, not a defect of the encoding; it keeps the
-    statement faithful (it makes no false claim) while honestly weak.  That cr is
-    nonetheless genuinely INHABITED (so the predicate is not silently empty) is
-    certified in [grounding_D3cr] by [cr_hypercube0]/[cr_hypercube1] (cr(Q_0) =
-    cr(Q_1) = 0, the planar base of the family) and [cr_K1]. *)
+    WAVE-2 FORM (two-sided, NON-VACUOUS).  The former ε–N body was gated by
+    [is_crossing_number (hypercube d) v] and hence vacuity-conditional exactly
+    where the limit lives (d ≥ 4).  The direct form asserts, past N, BOTH sides
+    of |cr(Q_d)/4^d − 5/32| < ε on the achievable planarization counts:
+    - UPPER + achievability: SOME count [k] is achievable with
+      [|32k − 5·4^d| < ε·32·4^d]  (in particular cr ≤ k, giving the upper bound;
+      the existence half is part of the conjecture's own claim);
+    - LOWER: EVERY achievable count [k] satisfies [(5/32 − ε)·4^d < k], written
+      additively as [eps_den·5·4^d < eps_den·32·k + eps_num·32·4^d] so no
+      truncated subtraction is needed.  (One-sided on purpose: counts above the
+      minimum are legitimate, so only the lower bound may quantify over all [k].)
+    Together these pin the minimum into the ε-window, i.e. the limit is 5/32.
+    Non-vacuity of the family's planar base stays certified in [grounding_D3cr]
+    ([cr_hypercube0]/[cr_hypercube1], [cr_K1]). *)
 Definition the_crossing_number_of_the_hypercube_statement : Prop :=
   forall (eps_num eps_den : nat),
     (0 < eps_num)%N -> (0 < eps_den)%N ->
     exists N : nat,
-      forall (d v : nat),
-        (N <= d)%N -> is_crossing_number (hypercube d) v ->
-        (eps_den * ((32 * v - 5 * 4 ^ d) + (5 * 4 ^ d - 32 * v))
-           < eps_num * (32 * 4 ^ d))%N.
+      forall d : nat,
+        (N <= d)%N ->
+        (exists k : nat,
+            crossing_planar_in k (hypercube d) /\
+            (eps_den * ((32 * k - 5 * 4 ^ d) + (5 * 4 ^ d - 32 * k))
+               < eps_num * (32 * 4 ^ d))%N) /\
+        (forall k : nat,
+            crossing_planar_in k (hypercube d) ->
+            (eps_den * (5 * 4 ^ d)
+               < eps_den * (32 * k) + eps_num * (32 * 4 ^ d))%N).
