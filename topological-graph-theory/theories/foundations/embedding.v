@@ -22,14 +22,15 @@
     over embeddings carry the graph's connectivity hypothesis.  Non-vacuity: [edge_perm]
     is a fixed-point-free involution (below).
 
-    EMBEDDING-EXISTENCE (gating "for all/exists embedding" rows → done vs partial): the
-    plan is the canonical cyclic-successor rotation [rot_fun d := next (Lv d) d] where
-    [Lv d] enumerates the darts at [d]'s source.  Its combinatorial CRUX is now PROVEN —
-    [np_orbit] below shows [next] generates a single cycle covering its list, so the
-    rotation's orbit at a vertex is exactly that vertex's dart-set ([erot_vertex]).  The
-    final assembly ([rot_perm]/[erot_vertex] → [inhabited (embedding G)]) connects
-    [np_orbit] to the graph; it is mechanical (the math is done) and is the last Phase-A1
-    step.  Until it lands, embedding-quantified rows stay recorded partial. *)
+    EMBEDDING-EXISTENCE is PROVEN (foundation complete): [embedding_exists :
+    inhabited (embedding G)] for EVERY [G], via the canonical cyclic-successor rotation
+    [rot_perm] ([rot_fun d := next (Lv d) d], [Lv d] enumerating the darts at [d]'s
+    source).  The combinatorial crux [np_orbit] ([next] generates a single cycle covering
+    its list) gives [rot_perm_vertex]: the rotation's orbit at a vertex is exactly that
+    vertex's dart-set, so [rot_perm] is a genuine rotation system.  Hence the
+    embedding-quantified predicates above are NON-VACUOUS — the Phase-A1 foundation is
+    fully green, and Wave-1 rows (grünbaum / circular-embedding / positive-curvature /
+    toroidal-Hamilton / plane-triangulation) can land blocked→done. *)
 
 From mathcomp Require Import all_boot.
 From mathcomp Require Import fingroup perm.
@@ -84,6 +85,19 @@ have Hle : index x s <= index y s + size s.
 by rewrite subnKC // modnDr modn_small // nth_index.
 Qed.
 End NextCycle.
+
+(** Abstract iterate-agreement: if [g] agrees with [f] along [f]'s orbit of [x],
+    then [g^n x = f^n x] (used to transfer [np]'s single-cycle orbit to the graph
+    rotation without unfolding the per-vertex dart-list). *)
+Lemma iter_agree (T : finType) (f g : {perm T}) x n :
+  (forall k, k < n -> g ((f ^+ k)%g x) = f ((f ^+ k)%g x)) ->
+  (g ^+ n)%g x = (f ^+ n)%g x.
+Proof.
+elim: n => [|n IH] H; first by rewrite !expg0 !perm1.
+have Hsub : forall k, k < n -> g ((f ^+ k)%g x) = f ((f ^+ k)%g x).
+  by move=> k Hk; apply: H; rewrite ltnS; exact: ltnW.
+by rewrite !expgSr !permM (IH Hsub) (H n (ltnSn n)).
+Qed.
 
 Section Embedding.
 Variable G : sgraph.
@@ -140,6 +154,64 @@ Definition combinatorial_curvature (E : embedding) (v : G) : rat :=
   (1 - (#|darts_at v|)%:R / 2%:R + \sum_(d in darts_at v) 1 / (face_size E d)%:R)%R.
 Definition positive_curvature (E : embedding) : Prop :=
   forall v : G, (0 < combinatorial_curvature E v)%R.
+
+(** ** Embedding EXISTENCE — every graph has a combinatorial embedding.
+
+    The canonical rotation [rot_perm] sends each dart to the cyclic successor in
+    its source-vertex dart-list [Lv].  Via [np_orbit] (the [next] single-cycle
+    lemma), its orbit at [d] is exactly [darts_at (sval d).1], so [rot_perm] is a
+    genuine rotation system.  Hence [inhabited (embedding G)] for EVERY [G] — the
+    embedding-quantified predicates above are non-vacuous. *)
+
+Definition Lv (d : dart) := enum (darts_at (sval d).1).
+Lemma memLv (d : dart) : d \in Lv d. Proof. by rewrite mem_enum inE. Qed.
+Lemma LvE (z d : dart) : (sval z).1 = (sval d).1 -> Lv z = Lv d.
+Proof. by rewrite /Lv => ->. Qed.
+
+Definition rot_fun (d : dart) : dart := next (Lv d) d.
+Lemma rot_fun_src d : (sval (rot_fun d)).1 = (sval d).1.
+Proof.
+suff H : rot_fun d \in darts_at (sval d).1 by move: H; rewrite inE => /eqP.
+by rewrite -mem_enum -/(Lv d) /rot_fun mem_next memLv.
+Qed.
+Lemma rot_fun_inj : injective rot_fun.
+Proof.
+move=> d1 d2 E.
+have S : (sval d1).1 = (sval d2).1 by rewrite -(rot_fun_src d1) E rot_fun_src.
+move: E; rewrite /rot_fun (LvE S).
+exact: (can_inj (prev_next (enum_uniq (darts_at (sval d2).1)))).
+Qed.
+Definition rot_perm : {perm dart} := perm rot_fun_inj.
+Lemma rot_permE d : rot_perm d = next (Lv d) d. Proof. exact: permE. Qed.
+Lemma rot_perm_src d : (sval (rot_perm d)).1 = (sval d).1.
+Proof. by rewrite rot_permE (rot_fun_src d). Qed.
+
+Lemma np_iter_src d k :
+  (sval ((np (enum_uniq (darts_at (sval d).1)) ^+ k)%g d)).1 = (sval d).1.
+Proof.
+suff H : (np (enum_uniq (darts_at (sval d).1)) ^+ k)%g d \in Lv d
+  by move: H; rewrite mem_enum inE => /eqP.
+have Ho : (np (enum_uniq (darts_at (sval d).1)) ^+ k)%g d
+          \in porbit (np (enum_uniq (darts_at (sval d).1))) d by apply/porbitP; exists k.
+by move: Ho; rewrite np_orbit ?memLv // inE.
+Qed.
+Lemma rot_np_agree (d z : dart) : (sval z).1 = (sval d).1 ->
+  rot_perm z = np (enum_uniq (darts_at (sval d).1)) z.
+Proof. by move=> Hz; rewrite rot_permE (LvE Hz) npE. Qed.
+Lemma rot_iter_np d k :
+  (rot_perm ^+ k)%g d = (np (enum_uniq (darts_at (sval d).1)) ^+ k)%g d.
+Proof. apply: iter_agree => j _; apply: rot_np_agree; exact: np_iter_src. Qed.
+
+Lemma rot_perm_vertex d : porbit rot_perm d = [set d' | (sval d').1 == (sval d).1].
+Proof.
+have E : porbit rot_perm d = porbit (np (enum_uniq (darts_at (sval d).1))) d.
+  by apply/setP => z; apply/idP/idP => /porbitP[i ->]; apply/porbitP; exists i;
+     rewrite rot_iter_np.
+by rewrite E np_orbit ?memLv //; apply/setP => z; rewrite !inE mem_enum inE.
+Qed.
+
+Definition embedding_of : embedding := Emb rot_perm_src rot_perm_vertex.
+Lemma embedding_exists : inhabited embedding. Proof. exact: (inhabits embedding_of). Qed.
 
 End Embedding.
 
