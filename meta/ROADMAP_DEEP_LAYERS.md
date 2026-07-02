@@ -14,6 +14,14 @@ invariant but the conjecture statements are vacuity-conditional on inhabitance �
   rows (toroidal-Hamilton, plane-triangulation domination).
 - Likely substrate: rotation systems (combinatorial embeddings) → Euler genus → faces; a decidable
   planar predicate to replace/strengthen `wagner_planar` for counting.
+- **PROGRESS:** the orientable rotation-system layer (`foundations/embedding.v`, Wave 1) and the
+  SIGNED layer (`foundations/signed_embedding.v` — general orientable-or-not maps, `orientable_map`,
+  crosscap-scale `seuler_genus`) both EXIST, audited. Waves 1–2 landed grunbaum / curvature /
+  toroidal-Hamilton / plane-triangulation / circular-embedding (all-surfaces form) / the 4 crossing
+  rows. Remaining in this track: metric geometry (drawings, point-sets, great circles, obstacles),
+  the embeds-in-N_k vocabulary for the non-orientable obstruction row, cr-on-S_i assembly for
+  crossing_sequences, and hardening TODOs (Qed the flag-doubling mirror lemma; formalize
+  emFs = 2·emF / the crosscap-scale compat).
 
 ## Track B — Infinite-combinatorics layer (unblocks 7 D4 partial)
 Ends / Freudenthal-style end equivalence, infinite Hamiltonicity (topological double-ray cycles),

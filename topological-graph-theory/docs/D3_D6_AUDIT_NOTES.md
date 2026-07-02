@@ -52,10 +52,14 @@ cr(KB m n)=Zarankiewicz, χ≥t→cr(G)≥cr('K_t), lim cr(Q_d)/4^d=5/32 via ε�
 These stay blocked until a real topological layer (rotation systems / embeddings / genus / a decidable
 planarity test) is built — a deliberate deferral, joining the 2 surface rows already blocked.
 
-> **UPDATE (Wave 1 — the rotation-system layer now EXISTS,** `foundations/embedding.v`**):** of the
-> table above, `grunbaums_conjecture` and `what_is_the_largest_graph_of_positive_curvature` are now
-> **done**, and `the_circular_embedding_conjecture` is **partial** (orientable-only encoding — see
-> `WAVE1_AUDIT_NOTES.md`); the two blocked surface rows outside this package (toroidal-Hamilton,
-> plane-triangulation domination) are also done. The remaining rows of the table (drawings, point-sets,
-> non-orientable obstructions, crossing sequences, great circles, obstacle number) still need metric
-> geometry or a non-orientable layer and stay blocked.
+> **UPDATE 2 (signed layer — `foundations/signed_embedding.v`, audited 5/5 sound):** the
+> rotation-system layer (`foundations/embedding.v`, Wave 1) made `grunbaums_conjecture` and
+> `what_is_the_largest_graph_of_positive_curvature` **done**; the SIGNED layer (edge signatures =
+> general orientable-or-not combinatorial maps, Mohar–Thomassen schemes) now makes
+> `the_circular_embedding_conjecture` **done** too, in its intended all-surfaces generality.
+> `consecutive_non_orientable_embedding_obstructions` stays blocked but the blocker narrowed to 4
+> statement-level vocabulary items (embeds-in-N_k without orientable-scheme leakage, disconnected
+> embeddability semantics, the K1 empty-map guard, proper-minor) — see the overlay note.
+> `crossing_sequences`' blocker is also narrower than the table says: cr-on-S_i is assemblable from
+> `xsplit` + `embeds_in_genus` (attemptable). The rest (drawings, point-sets, great circles, obstacle
+> number) still need metric geometry and stay blocked.

@@ -1829,7 +1829,7 @@
       "audit_page": "todo",
       "commit": "1ebccac",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: crossing-on-genus (genus/surface layer)"
+      "note": "blocker narrowed (signed-layer audit): orientable layer + crossing.v xsplit already suffice to state cr-on-S_i (least splits landing in embeds_in_genus i, connected witnesses); attemptable in a future push"
     },
     "drawing_disconnected_graphs_on_surfaces": {
       "statement": "blocked",
@@ -1869,7 +1869,7 @@
       "audit_page": "todo",
       "commit": "1ebccac",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: non-orientable surface embedding"
+      "note": "signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes — K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate"
     },
     "grunbaums_conjecture": {
       "statement": "done",
@@ -1879,17 +1879,17 @@
       "audit_page": "todo",
       "commit": "40f4754",
       "package": "topological-graph-theory",
-      "note": "Wave 1: dual 3-edge-colouring via embedding triangulation; STATUS caveat: general orientable form refuted (Kochol 2009), low-genus cases open; encoding faithful to the OPG source"
+      "note": "Wave 1: dual 3-edge-colouring via embedding triangulation; STATUS caveat: general orientable form refuted (Kochol 2009), low-genus cases open; encoding faithful to the OPG source; signed-layer audit: orientability LOAD-BEARING (emap generalization classically false: K6 triangulates N_1 with Petersen dual)"
     },
     "the_circular_embedding_conjecture": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "865108f",
+      "commit": "PENDING",
       "package": "topological-graph-theory",
-      "note": "orientable-only encoding (rotation systems = Heffter-Edmonds orientable maps); source allows non-orientable surfaces -> strictly stronger Prop; needs signed rotation systems. Downgraded done->partial by the Track-A review"
+      "note": "signed-map (general-surface) form via foundations/signed_embedding.v: exists emap with all face boundaries cycles; k_connected 2 guard makes flag-orbit source-injectivity exactly boundary-is-cycle; audited 5/5 sound (skeptic: no trivialization/refutation)"
     },
     "what_is_the_largest_graph_of_positive_curvature": {
       "statement": "done",

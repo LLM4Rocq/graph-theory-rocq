@@ -33,7 +33,7 @@
 
 From GTBase Require Import base.
 From mathcomp Require Import fingroup perm.
-From Topological.foundations Require Import embedding.
+From Topological.foundations Require Import embedding signed_embedding.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -89,6 +89,11 @@ Definition is_antiprism (G : sgraph) : Prop :=
     REFUTED by Kochol (2009, polyhedral embeddings of snarks in orientable
     surfaces of large genus); the low-genus (e.g. toroidal) cases remain open.
     The encoding is faithful to the source conjecture as stated.
+    ORIENTABILITY IS LOAD-BEARING (signed-layer audit): quantifying over [emap]
+    (all surfaces) instead of [embedding] (orientable) would make the row
+    classically FALSE outright — K6 triangulates the projective plane N_1 with
+    the Petersen graph as dual, which is not 3-edge-colourable.  The orientable
+    quantification is exactly the source's class.
 
     Source (Conjecture): "If [G] is a simple loopless triangulation of an
     orientable surface, then the dual of [G] is 3-edge-colorable."
@@ -112,31 +117,27 @@ Definition grunbaums_statement : Prop :=
          c (face_perm E d) <> c (face_perm E (face_perm E d)) /\
          c d <> c (face_perm E (face_perm E d))).
 
-(** ** Row 2 — The circular-embedding conjecture.  OPEN — recorded PARTIAL
-    (orientable-only encoding; Track-A review).
+(** ** Row 2 — The circular-embedding conjecture.  OPEN — done (signed-map form).
 
     Source (Conjecture): "Every 2-connected graph may be embedded in a surface so
     that the boundary of each face is a cycle."
 
-    FAITHFULNESS CAVEAT: rotation systems capture exactly the ORIENTABLE cellular
-    embeddings (Heffter–Edmonds), so this Prop is the strictly STRONGER
-    orientable circular-embedding (orientable strong embedding) conjecture — the
-    source allows non-orientable surfaces too, and the two are not known
-    equivalent.  A fully faithful encoding needs signed rotation systems (edge
-    signatures); until that non-orientable layer exists this row is recorded
-    PARTIAL, not done.
-
-    Encoding.  For every 2-connected [G] there is an embedding [E] all of whose
-    face boundaries are cycles = no vertex is repeated on any face: on each face
-    [face_of E d] the source map [d' ↦ (sval d').1] is injective, so the darts of
-    the face visit pairwise-distinct vertices, i.e. the boundary walk is a simple
-    cycle. *)
+    Encoding (GENERAL surfaces — the signed-rotation-system layer
+    [Topological.foundations.signed_embedding]).  An [emap G] is a rotation
+    system PLUS an edge signature, capturing embeddings in ALL closed surfaces,
+    orientable or not (Mohar–Thomassen embedding schemes) — this closes the
+    orientability gap found by the Track-A review (the earlier [embedding G]
+    quantification expressed only the strictly stronger ORIENTABLE strong
+    embedding conjecture).  [circular_emap M] says every face-tracing orbit
+    visits pairwise-distinct vertices (the source map is injective on each flag
+    orbit), i.e. every face boundary is a simple cycle.  Non-vacuity:
+    [emap_exists] (every graph has a signed map — trivial signature), and
+    non-orientable signatures are genuinely expressible
+    ([twisted_triangle_nonorientable]). *)
 Definition the_circular_embedding_statement : Prop :=
   forall (G : sgraph),
     k_connected G 2 ->
-    exists E : embedding G,
-      forall d : dart G,
-        {in face_of E d &, injective (fun d' : dart G => (sval d').1)}.
+    exists M : emap G, circular_emap M.
 
 (** ** Row 3 — Largest planar graph of everywhere-positive combinatorial
     curvature that is neither a prism nor an antiprism.  (Open problem: what IS
