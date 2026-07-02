@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **200 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **15 partial** · **12 blocked**.
+- **201 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **12 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -25,8 +25,8 @@
 | packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
-| topological-graph-theory | Topological | 10 | 1 | 7 | 18 |
-| **TOTAL** | | **200** | **15** | **12** | **227** |
+| topological-graph-theory | Topological | 11 | 0 | 7 | 18 |
+| **TOTAL** | | **201** | **14** | **12** | **227** |
 
 ## Per-phase (milestones)
 
@@ -37,7 +37,7 @@
 | D3 | 4 | 0 | 6 | 10 |
 | D4 | 2 | 7 | 5 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
-| D6 | 2 | 1 | 1 | 4 |
+| D6 | 3 | 0 | 1 | 4 |
 | D7 | 1 | 4 | 0 | 5 |
 | P9 | 32 | 0 | 0 | 32 |
 | U1 | 9 | 0 | 0 | 9 |
@@ -54,7 +54,7 @@
 | U8 | 3 | 0 | 0 | 3 |
 | U9 | 13 | 0 | 0 | 13 |
 
-## Partial — faithful but conditional / needs a deferred layer (15)
+## Partial — faithful but conditional / needs a deferred layer (14)
 
 | area | slug | reason |
 |---|---|---|
@@ -72,7 +72,6 @@
 | infinite-graph-theory | seymours_self_minor_conjecture | iGraph carrier suffices; needs infinite-graph minor theory |
 | infinite-graph-theory | strong_matchings_and_covers | iGraph carrier suffices; needs infinite hypergraph order theory |
 | infinite-graph-theory | unfriendly_partitions | iGraph carrier suffices; needs cardinal neighbour comparison |
-| topological-graph-theory | the_circular_embedding_conjecture | orientable-only encoding (rotation systems = Heffter-Edmonds orientable maps); source allows non-orientable surfaces -> strictly stronger Prop; needs signed rotation systems. Downgraded done->partial by the Track-A review |
 
 ## Blocked — needs a layer deliberately out of scope (12)
 
@@ -85,8 +84,8 @@
 | infinite-graph-theory | universal_highly_arc_transitive_digraphs | out of scope: universality + automorphisms |
 | topological-graph-theory | 3_colourability_of_arrangements_of_great_circles | needs topological layer: spherical arrangement geometry |
 | topological-graph-theory | are_different_notions_of_the_crossing_number_the_same | needs topological layer: two distinct drawing semantics |
-| topological-graph-theory | consecutive_non_orientable_embedding_obstructions | needs topological layer: non-orientable surface embedding |
-| topological-graph-theory | crossing_sequences | needs topological layer: crossing-on-genus (genus/surface layer) |
+| topological-graph-theory | consecutive_non_orientable_embedding_obstructions | signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes — K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate |
+| topological-graph-theory | crossing_sequences | blocker narrowed (signed-layer audit): orientable layer + crossing.v xsplit already suffice to state cr-on-S_i (least splits landing in embeds_in_genus i, connected witnesses); attemptable in a future push |
 | topological-graph-theory | drawing_disconnected_graphs_on_surfaces | needs topological layer: optimal drawings on a surface |
 | topological-graph-theory | obstacle_number_of_planar_graphs | needs topological layer: obstacle/visibility geometry |
 | topological-graph-theory | small_universal_point_sets_for_planar_graphs | needs topological layer: point sets in R^2 + straight-line embeddings |

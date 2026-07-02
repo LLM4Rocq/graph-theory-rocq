@@ -1887,7 +1887,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "d9c9cc8",
       "package": "topological-graph-theory",
       "note": "signed-map (general-surface) form via foundations/signed_embedding.v: exists emap with all face boundaries cycles; k_connected 2 guard makes flag-orbit source-injectivity exactly boundary-is-cycle; audited 5/5 sound (skeptic: no trivialization/refutation)"
     },
