@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **201 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **12 blocked**.
+- **204 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **11 partial** · **12 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -16,7 +16,7 @@
 | cycle-theory | Cycle | 29 | 0 | 0 | 29 |
 | digraph-theory | Digraph | 32 | 0 | 0 | 32 |
 | extremal-graph-theory | Extremal | 29 | 3 | 0 | 32 |
-| graph-theory-misc | GTMisc | 13 | 4 | 0 | 17 |
+| graph-theory-misc | GTMisc | 16 | 1 | 0 | 17 |
 | hamiltonicity-theory | Hamilton | 9 | 0 | 0 | 9 |
 | homomorphism-theory | Hom | 10 | 0 | 0 | 10 |
 | hypergraph-theory | Hypergraph | 4 | 0 | 0 | 4 |
@@ -26,7 +26,7 @@
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
 | topological-graph-theory | Topological | 11 | 0 | 7 | 18 |
-| **TOTAL** | | **201** | **14** | **12** | **227** |
+| **TOTAL** | | **204** | **11** | **12** | **227** |
 
 ## Per-phase (milestones)
 
@@ -38,7 +38,7 @@
 | D4 | 2 | 7 | 5 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 3 | 0 | 1 | 4 |
-| D7 | 1 | 4 | 0 | 5 |
+| D7 | 4 | 1 | 0 | 5 |
 | P9 | 32 | 0 | 0 | 32 |
 | U1 | 9 | 0 | 0 | 9 |
 | U10 | 3 | 0 | 0 | 3 |
@@ -54,17 +54,14 @@
 | U8 | 3 | 0 | 0 | 3 |
 | U9 | 13 | 0 | 0 | 13 |
 
-## Partial — faithful but conditional / needs a deferred layer (14)
+## Partial — faithful but conditional / needs a deferred layer (11)
 
 | area | slug | reason |
 |---|---|---|
 | extremal-graph-theory | asymptotic_distribution_of_form_of_polyhedra | planarity omitted (=3-connected, not polyhedra); fix=three_connb /\ wagner_planar |
 | extremal-graph-theory | covering_powers_of_cycles_with_equivalence_subgraphs | 2k<n guard admits n=2k+1 (refutable); regime guard insufficient |
 | extremal-graph-theory | mixing_circular_colourings_0 | M_c real infimum; rational-threshold approximation |
-| graph-theory-misc | algorithm_for_graph_homomorphisms | abstract existential-algorithm: vacuous (decoupled alg/cost); needs computation-cost coupling |
-| graph-theory-misc | approximation_ratio_for_maximum_edge_disjoint_paths_problem | vacuous in abstract model (alg:=OPT, rho:=1=o(sqrt n)); auditor-flagged |
-| graph-theory-misc | finding_k_edge_outerplanar_graph_embeddings | abstract existential-algorithm vacuous + edge_outerplanar is a wagner_planar proxy |
-| graph-theory-misc | ptas_for_feedback_arc_set_in_tournaments | solved (PTAS exists) but abstract encoding vacuous; Definition kept |
+| graph-theory-misc | finding_k_edge_outerplanar_graph_embeddings | Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up) |
 | infinite-graph-theory | end_devouring_rays | iGraph carrier suffices; needs ends machinery |
 | infinite-graph-theory | hamiltonian_cycles_in_line_graphs_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity (topological double-ray cycles) |
 | infinite-graph-theory | hamiltonian_cycles_in_powers_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity |

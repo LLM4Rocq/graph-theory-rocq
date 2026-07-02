@@ -142,8 +142,8 @@
    ],
    "rocq_idiom": "exists c, exists algo, forall G H, decides_hom algo G H /\\ time algo <= c^(|G|+|H|)",
    "legs": {
-    "statement": "partial",
-    "grounding": "partial",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -3485,8 +3485,8 @@
    ],
    "rocq_idiom": "open-ended question about approximation ratio / APX-hardness of MaxEDP",
    "legs": {
-    "statement": "partial",
-    "grounding": "partial",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
@@ -6464,8 +6464,8 @@
    ],
    "rocq_idiom": "exists PTAS for min feedback arc set over tournaments",
    "legs": {
-    "statement": "partial",
-    "grounding": "partial",
+    "statement": "done",
+    "grounding": "done",
     "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"

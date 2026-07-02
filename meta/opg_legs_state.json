@@ -1381,7 +1381,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "27f7a11",
       "package": "graph-theory-misc",
       "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) — fixed to a<b"
     },
@@ -1391,7 +1391,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "27f7a11",
       "package": "graph-theory-misc",
       "note": "Track B: coupled prog model (decides_on + c^(n+m) pcost bound on the SAME program); audit SOUND, survived oracle attacks (Qed'd defense)"
     },
@@ -1401,7 +1401,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "27f7a11",
       "package": "graph-theory-misc",
       "note": "Track B: selected proposition = the o(sqrt n)-improvement branch (the source's disjunction is a classical tautology — audit-caught); value-estimation form, coupled prog + poly cost; no-const-prog defense Qed'd"
     },
@@ -1411,7 +1411,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "27f7a11",
       "package": "graph-theory-misc",
       "note": "Track B: PTAS as eps-before-program over coupled prog model; cross-multiplied (1+eps) sandwich on fas_opt; audit SOUND (solved row; value-estimation form)"
     },
@@ -1421,7 +1421,7 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "PENDING",
+      "commit": "27f7a11",
       "package": "graph-theory-misc",
       "note": "Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up)"
     },
