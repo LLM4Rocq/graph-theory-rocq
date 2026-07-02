@@ -40,6 +40,12 @@ see `graph-theory-misc/docs/D7_AUDIT_NOTES.md`). NP-hardness/lower-bound rows ar
 - Rows: algorithm_for_graph_homomorphisms, approximation_ratio_for_maximum_edge_disjoint_paths,
   ptas_for_feedback_arc_set_in_tournaments, finding_k_edge_outerplanar_graph_embeddings.
 - Design tension to resolve: a non-Turing cost coupling that stays statement-only.
+- **PROGRESS (Track B landed):** `graph-theory-misc/foundations/complexity.v` — a deep-embedded total
+  combinator language with one cost-metering interpreter (`no_zero_cost_program` Qed'd). The 4 positive
+  rows retargeted and audited (3 breaks caught and fixed: EDP classical tautology, outerplanar
+  constant-satisfier, h_factor refutable guard). Now: hom / EDP-improvement / PTAS done;
+  k-edge-outerplanar remains partial (proxy notion). Hardening TODO: formalize the P-containment
+  direction (Cobham-style) if ever needed.
 
 ## Invariants to preserve across all tracks
 Axiom-free throughout (`Print Assumptions` clean); local-first vocabulary (promote to `base/` only when

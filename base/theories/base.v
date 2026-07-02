@@ -269,6 +269,30 @@ Definition has_girth (G : sgraph) (g : nat) : Prop :=
 Definition wagner_planar (G : sgraph) : Prop :=
   ~ minor G 'K_5 /\ ~ minor G (KB 3 3).
 
+(** A minor never has more vertices than its host: a minor model assigns each
+    minor-vertex a NONEMPTY, pairwise-DISJOINT branch set, so a representative
+    map [H -> G] is injective.  (Promoted from topological/grounding_D3cr on its
+    second consumer, graph-theory-misc/D7.) *)
+Lemma minor_card (G H : sgraph) : minor G H -> #|H| <= #|G|.
+Proof.
+case=> phi mm.
+have [ne _ disj _] := minor_rmap_map mm.
+set psi := (fun x : H => [set y | phi y == Some x]) in ne disj *.
+case: (set_0Vmem [set: H]) => [HE|[x0 _]].
+  by rewrite -cardsT HE cards0.
+have [w0 _] : exists z : G, z \in psi x0 by apply/set0Pn; exact: ne x0.
+pose g (x : H) : G := oapp idfun w0 [pick z in psi x].
+have gP : forall x, g x \in psi x.
+  move=> x; rewrite /g; case: pickP => [z zP|e]; first exact: zP.
+  by case/set0Pn: (ne x) => z; rewrite (e z).
+have ginj : injective g.
+  move=> x y exy; apply/eqP; apply: contraT => xy.
+  have D := disj x y xy.
+  have : g y \in psi x :&: psi y by rewrite inE -{1}exy !gP.
+  by rewrite (disjoint_setI0 D) inE.
+exact: leq_card ginj.
+Qed.
+
 (** ** Bipartiteness and the cycle family (cross-area finite invariants) *)
 
 (** Bipartite: a 2-colouring with no monochromatic edge. *)

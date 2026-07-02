@@ -4,7 +4,27 @@ Deferred-tier milestone. **base_ready** run. Verified: compiles axiom-free, 31/3
 `Qed`, `check_milestone D7 graph-theory-misc` → ACCEPTED (5/5 axiom-free). Algorithm/cost notions kept
 deliberately **relational + abstract** (no machine/Turing model) per the agreed design.
 
-## Leg state: 1 done, 4 PARTIAL — the abstract-model faithfulness limit
+## TRACK B UPDATE (cost-coupled model) — leg state now 4 done, 1 partial
+`foundations/complexity.v` closes the decoupling: programs are SYNTAX (`prog`, a total combinator
+language), and ONE fixed interpreter computes both output (`prun`) and step count (`pcost`) — cost is
+forced by the object producing the output (`pcost_pos`, `no_zero_cost_program` Qed'd). The 4 positive
+rows were retargeted onto `realizes_on`/`decides_on` + `poly_cost_on` over the SAME `p : prog`, then an
+aggressive audit (4 per-row auditors + an oracle-attack skeptic) caught and we fixed THREE breaks:
+- **EDP row was a classical tautology** (the hardness disjunct's constant ratios are a subfamily of the
+  o(√n) algorithm branch, so EM alone decided the disjunction). Fixed: the row now states the SELECTED
+  open proposition — the o(√n)-improvement branch — in value-estimation form (documented).
+- **Outerplanar row fell to the oracle attack in coupled clothing**: the old layering proxy admitted
+  `elev ≡ 0`, pinning the answer to 1 on every planar instance, so `Pconst (Dnat 1)` PROVED it. Fixed:
+  level-partition proxy with a genuine level-forcing clause (each level Chartrand–Harary outerplanar:
+  no K4/K2,3 minor — `minor_card` promoted to base as its 2nd consumer). Row stays PARTIAL (still a
+  proxy for the true embedding-based notion, now expressible in principle via the Track-A layer).
+- **The h_factor row (recorded done since D7 landed) was REFUTABLE axiom-free**: the guard `a <= b`
+  admitted c = 1, where min-degree ≥ n empties the instance class and falsifies NP_hard. Fixed: `a < b`.
+Hom row and PTAS row survived all attacks (Qed'd defenses: instance pairs with different correct
+answers kill every constant program). Meta-caveat (documented in complexity.v): the class-contains-P
+direction is the model's Church–Turing-poly reading, analogous to wagner_planar = planarity.
+
+## (historical) Leg state: 1 done, 4 PARTIAL — the abstract-model faithfulness limit
 **Key finding (reviewed decision: mark partial):** math-predicate-only complexity, with no machine
 model, can faithfully state **NP-hardness / lower bounds** (universal claims) but **NOT "∃ efficient
 algorithm"** — because the abstract `algorithm` (a function) and its `cost` (a separate function) are

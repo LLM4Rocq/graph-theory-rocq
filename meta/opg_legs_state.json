@@ -1381,39 +1381,39 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "dd408c3",
+      "commit": "PENDING",
       "package": "graph-theory-misc",
-      "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous"
+      "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) — fixed to a<b"
     },
     "algorithm_for_graph_homomorphisms": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "dd408c3",
+      "commit": "PENDING",
       "package": "graph-theory-misc",
-      "note": "abstract existential-algorithm: vacuous (decoupled alg/cost); needs computation-cost coupling"
+      "note": "Track B: coupled prog model (decides_on + c^(n+m) pcost bound on the SAME program); audit SOUND, survived oracle attacks (Qed'd defense)"
     },
     "approximation_ratio_for_maximum_edge_disjoint_paths_problem": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "dd408c3",
+      "commit": "PENDING",
       "package": "graph-theory-misc",
-      "note": "vacuous in abstract model (alg:=OPT, rho:=1=o(sqrt n)); auditor-flagged"
+      "note": "Track B: selected proposition = the o(sqrt n)-improvement branch (the source's disjunction is a classical tautology — audit-caught); value-estimation form, coupled prog + poly cost; no-const-prog defense Qed'd"
     },
     "ptas_for_feedback_arc_set_in_tournaments": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "dd408c3",
+      "commit": "PENDING",
       "package": "graph-theory-misc",
-      "note": "solved (PTAS exists) but abstract encoding vacuous; Definition kept"
+      "note": "Track B: PTAS as eps-before-program over coupled prog model; cross-multiplied (1+eps) sandwich on fas_opt; audit SOUND (solved row; value-estimation form)"
     },
     "finding_k_edge_outerplanar_graph_embeddings": {
       "statement": "partial",
@@ -1421,9 +1421,9 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "dd408c3",
+      "commit": "PENDING",
       "package": "graph-theory-misc",
-      "note": "abstract existential-algorithm vacuous + edge_outerplanar is a wagner_planar proxy"
+      "note": "Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up)"
     },
     "triangle_free_strongly_regular_graphs": {
       "statement": "done",

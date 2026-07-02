@@ -1,12 +1,14 @@
 (** * GTMisc.conjectures.grounding_D7 — grounding lemmas for milestone D7.
 
     SIMPLE, Qed-closed sanity results validating the NEW area-specific primitives
-    introduced in [D7.v] (the shared abstract cost/algorithm layer, the MaxEDP
-    routing vocabulary, the H-factor / abstract-complexity layer, the tournament
-    feedback-arc-set vocabulary, and the edge-outerplanar layering proxy).  For
-    (essentially) each new definition we record a SATISFIABLE witness and at
-    least one textbook identity.  These are statement-validation lemmas, NOT the
-    (open) conjectures themselves.
+    introduced in [D7.v] (the abstract cost/algorithm vocabulary kept for the
+    hardness row, the coupled-prog-model glue of the POSITIVE rows — [dnat_val],
+    the per-row encodings, the statement SHAPES — the MaxEDP routing vocabulary,
+    the H-factor / abstract-complexity layer, the tournament feedback-arc-set
+    vocabulary, and the edge-outerplanar layering proxy).  For (essentially)
+    each new definition we record a SATISFIABLE witness and at least one
+    textbook identity.  These are statement-validation lemmas, NOT the (open)
+    conjectures themselves.
 
     Reusable carriers:
       - [K2] : the complete graph on 2 vertices (via [mk_sgraph] of the full
@@ -20,14 +22,18 @@
     2-vertex graph purely by cardinality.
 
     Coverage notes (honest): every new primitive gets at least one Qed-closed
-    identity, and almost all also get a satisfiable witness.  Two primitives are
-    grounded by a projection identity only:
-      - [maxedp_approx] (its full positive witness would require defining the
-        exact MaxEDP optimum as a function and proving the ratio for ALL planar
-        inputs — out of scope for a SIMPLE check);
+    identity, and almost all also get a satisfiable witness.  The POSITIVE-row
+    statement SHAPES (coupled [prog] model of foundations/complexity.v) are
+    grounded by concrete programs meeting a trivial spec within the stated cost
+    budget ([hom_statement_shape_inhabited], [edp_realizes_shape_inhabited]) —
+    non-vacuity of the FORM, leaving the mathematical content open.  Two
+    primitives are grounded by a projection identity only:
+      - [maxedp_approx] (its full positive witness would require a [prog]
+        actually computing an approximation of the MaxEDP optimum together with
+        a ratio proof for ALL planar inputs — out of scope for a SIMPLE check);
       - [NP_hard] (a positive witness is a complete problem, i.e. a genuine
         NP-hardness proof — out of scope; we record the elimination identity).
-    These match the deliberate machine-free abstraction of [D7.v]. *)
+    These match the deliberate abstraction level of [D7.v]. *)
 
 From GTBase Require Import base.
 From GraphTheory Require Import minor.
@@ -108,6 +114,45 @@ Lemma poly_bounded_0 (I : Type) (sz : I -> nat) : poly_bounded sz (fun _ => 0).
 Proof. by exists 0, 0, 0 => x; rewrite mul0n. Qed.
 
 (** ============================================================================
+    Coupled prog model (positive rows) — decoder identity and statement-SHAPE
+    non-vacuity.
+    ========================================================================== *)
+
+(** [dnat_val]: the output decoder reads back [Dnat] values (and 0 on junk). *)
+Lemma dnat_val_K (n : nat) : dnat_val (Dnat n) = n.
+Proof. by []. Qed.
+
+Lemma dnat_val_junk : dnat_val Dnil = 0.
+Proof. by []. Qed.
+
+(** Row 1 SHAPE: a concrete [prog] (the constant-YES program) decides the
+    trivial predicate on the homomorphism-instance encoding [enc_hom] within
+    the exponential budget — the coupled form [exists c p a b, [/\ ...]] is
+    inhabited for SOME predicate, so the open content of Row 1 is [homs_to],
+    not the statement shape. *)
+Lemma hom_statement_shape_inhabited :
+  exists (c : nat) (p : prog) (a b : nat),
+    [/\ 1 < c,
+        decides_on enc_hom (fun _ : sgraph * sgraph => True) p &
+        forall GH : sgraph * sgraph,
+          pcost p (enc_hom GH) <= a * c ^ (#|GH.1| + #|GH.2|) + b ].
+Proof.
+by exists 2, (Pconst (Dnat 1)), 0, 1; split.
+Qed.
+
+(** Rows 2/4/5 SHAPE: a concrete [prog] realizes a (trivial) output-value spec
+    on the MaxEDP instance encoding [enc_edp] within a polynomial step budget —
+    the coupled [realizes_on ... /\ poly_cost_on ...] form is inhabited. *)
+Lemma edp_realizes_shape_inhabited :
+  exists p : prog,
+    realizes_on enc_edp (fun _ out => dnat_val out = 0) p /\
+    poly_cost_on enc_edp p.
+Proof.
+exists (Pconst (Dnat 0)); split=> [x|]; first by [].
+by exists 1, 0 => x; rewrite /pcost /= expn0 muln1.
+Qed.
+
+(** ============================================================================
     Row 2 — MaxEDP routing vocabulary.
     ========================================================================== *)
 
@@ -146,9 +191,15 @@ Lemma edp_vsize_E (G : sgraph) (D : seq (G * G)) :
   edp_vsize (existT _ G D) = #|G| + size D.
 Proof. by []. Qed.
 
-(** [maxedp_approx]: projection — an approximation has a poly-bounded cost. *)
-Lemma maxedp_approx_cost (alg cost : edp_input -> nat) (rho : nat -> nat) :
-  maxedp_approx alg cost rho -> poly_bounded edp_vsize cost.
+(** [maxedp_approx] (coupled): projections — an approximating program has a
+    polynomially bounded step count on the SAME encoding it answers on, and
+    realizes the per-instance ratio spec. *)
+Lemma maxedp_approx_cost (p : prog) (rho : nat -> nat) :
+  maxedp_approx p rho -> poly_cost_on enc_edp p.
+Proof. by case. Qed.
+
+Lemma maxedp_approx_realizes (p : prog) (rho : nat -> nat) :
+  maxedp_approx p rho -> realizes_on enc_edp (edp_ratio_spec rho) p.
 Proof. by case. Qed.
 
 (** [little_o_sqrt]: the constant-zero ratio is [o(sqrt n)]. *)
@@ -246,19 +297,25 @@ Proof. by []. Qed.
     Row 5 — Edge-outerplanar layering proxy.
     ========================================================================== *)
 
-(** [edge_outerplanar]: [K2] admits the (trivial) depth-1 layering. *)
+(** [edge_outerplanar] (repaired level-partition proxy): [K2] admits the
+    depth-1 layering — its single level is [K2]-shaped, outerplanar in the
+    Chartrand–Harary sense since it has 2 < 4 and 2 < 5 vertices ([minor_card]
+    from base). *)
 Lemma edge_outerplanar_K2 : edge_outerplanar K2 1.
 Proof.
 split; first exact: wagner_K2.
-exists (fun _ _ => 0); split => //.
-by exists ord0, ord_max; split=> //; rewrite K2_edge.
+exists (fun _ _ => 0); split=> [x y _|j _] //.
+split=> M; have := minor_card M.
+- by rewrite !card_ord.
+- by rewrite card_sum !card_ord.
 Qed.
 
-(** [min_edge_outerplanar]: [K2]'s minimal edge-outerplanar depth is [1]
-    (any depth realising an edge is at least [1]). *)
+(** [min_edge_outerplanar]: [K2]'s minimal depth is [1] (a depth realising an
+    edge is positive: the edge's level must be [< m]). *)
 Lemma min_edge_outerplanar_K2 : min_edge_outerplanar K2 1.
 Proof.
 split; first exact: edge_outerplanar_K2.
-move=> m [_ [elev [_ Hlt _ [x [y [Hxy Hxy0]]]]]].
-by move: (Hlt x y Hxy); rewrite Hxy0.
+move=> m [_ [lev [Hlt _]]].
+have E : (ord0 : K2) -- ord_max by rewrite K2_edge.
+exact: leq_ltn_trans (leq0n _) (Hlt _ _ E).
 Qed.
