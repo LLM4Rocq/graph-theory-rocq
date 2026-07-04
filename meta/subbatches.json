@@ -113,5 +113,43 @@
     "slugs": [
       "crossing_sequences"
     ]
+  },
+  "D4inf1": {
+    "phase": "D4",
+    "repo": "infinite-graph-theory",
+    "slugs": [
+      "unfriendly_partitions",
+      "unions_of_triangle_free_graphs"
+    ]
+  },
+  "D4inf2": {
+    "phase": "D4",
+    "repo": "infinite-graph-theory",
+    "slugs": [
+      "seymours_self_minor_conjecture"
+    ]
+  },
+  "D4inf3": {
+    "phase": "D4",
+    "repo": "infinite-graph-theory",
+    "slugs": [
+      "end_devouring_rays",
+      "infinite_uniquely_hamiltonian_graphs"
+    ]
+  },
+  "D4inf4": {
+    "phase": "D4",
+    "repo": "infinite-graph-theory",
+    "slugs": [
+      "strong_matchings_and_covers",
+      "universal_highly_arc_transitive_digraphs"
+    ]
+  },
+  "D4inf5": {
+    "phase": "D4",
+    "repo": "infinite-graph-theory",
+    "slugs": [
+      "coloring_the_odd_distance_graph"
+    ]
   }
 }

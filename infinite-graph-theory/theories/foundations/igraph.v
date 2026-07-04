@@ -87,3 +87,77 @@ Definition uses_color (c : nat) (col : Kedge_coloring c)
 Definition exactly_m_colored (c : nat) (col : Kedge_coloring c)
     (s : nat -> nat) (m : nat) : Prop :=
   exists T : {set 'I_c}, #|T| = m /\ forall k, (k \in T) <-> uses_color col s k.
+
+(** ================================================================= *)
+(** ** Shared infinite-combinatorics primitives (D4 preflight, M0)
+
+    Carrier-free primitives reused across the D4 rows.  All are first-order
+    [Prop]s / inductive definitions — NO choice, NO cardinal arithmetic, NO
+    point-set topology.  [card_le] is the injection form of |A| ≤ |B| (its very
+    definition, needing no choice); [finite_sub] is an ['I_n]-cover of a
+    Prop-subset; [reachP]/[connected_set] are finite-walk reachability INSIDE a
+    Prop-subset; [infinite_graph] is Dedekind-infiniteness. *)
+
+(** |{x | P x}| ≤ |{y | Q y}| — the definitional injection form of cardinal ≤. *)
+Definition card_le (A B : Type) (P : A -> Prop) (Q : B -> Prop) : Prop :=
+  exists f : {x : A | P x} -> {y : B | Q y}, injective f.
+
+(** [P] picks out at most finitely many vertices (an ['I_n]-indexed cover). *)
+Definition finite_sub (G : iGraph) (P : iV G -> Prop) : Prop :=
+  exists (n : nat) (g : 'I_n -> iV G), forall x, P x -> exists i : 'I_n, g i = x.
+
+(** Reachability from [x] to [y] by an [iedge]-walk all of whose vertices lie in
+    [P] (so [reachP P x y -> P x /\ P y]). *)
+Inductive reachP (G : iGraph) (P : iV G -> Prop) : iV G -> iV G -> Prop :=
+  | reachP0 x : P x -> reachP P x x
+  | reachPS x y z : reachP P x y -> iadj y z -> P z -> reachP P x z.
+
+(** [P] induces a connected subgraph. *)
+Definition connected_set (G : iGraph) (P : iV G -> Prop) : Prop :=
+  forall x y, P x -> P y -> reachP P x y.
+
+(** [G] is (Dedekind-)infinite: [nat] injects into its vertices. *)
+Definition infinite_graph (G : iGraph) : Prop :=
+  exists f : nat -> iV G, injective f.
+
+(** ** Combinatorial ENDS (Halin) — no point-set topology.
+
+    Two rays are END-EQUIVALENT when no finite vertex set separates their tails:
+    for every FINITE [S], late vertices of one ray are joined, in [G − S], to
+    late vertices of the other (a walk avoiding [S], via [reachP]).  Since rays
+    are injective, each visits any finite [S] only finitely often, so tails do
+    eventually avoid [S].  An END is a class of this relation; below it is used
+    only through a representative ray. *)
+Definition end_equiv (G : iGraph) (r r' : nat -> iV G) : Prop :=
+  forall S : iV G -> Prop, finite_sub S ->
+    exists N : nat, forall n : nat, N <= n ->
+      exists m : nat, N <= m /\ reachP (fun v => ~ S v) (r n) (r' m).
+
+(** ================================================================= *)
+(** ** M1 vocabulary — unfriendly partitions & unions of triangle-free graphs *)
+
+(** The same-class / other-class neighbourhoods of [x] under a 2-partition [p]. *)
+Definition own_nbr (G : iGraph) (p : iV G -> bool) (x w : iV G) : Prop :=
+  iadj x w /\ p w = p x.
+Definition cross_nbr (G : iGraph) (p : iV G -> bool) (x w : iV G) : Prop :=
+  iadj x w /\ p w <> p x.
+
+(** [p] is UNFRIENDLY: every vertex has at least as many other-class as
+    same-class neighbours (|own| ≤ |cross|, via [card_le]). *)
+Definition unfriendly (G : iGraph) (p : iV G -> bool) : Prop :=
+  forall x : iV G, card_le (own_nbr p x) (cross_nbr p x).
+
+(** [G] contains no [K_4] (four pairwise-adjacent vertices; distinctness is free
+    from [iedge_irr]). *)
+Definition K4_free (G : iGraph) : Prop :=
+  ~ exists a b c d : iV G,
+      [/\ iadj a b, iadj a c, iadj a d, iadj b c & iadj b d /\ iadj c d].
+
+(** [G]'s edges are covered by countably many triangle-free graphs: a symmetric
+    [nat] edge-colouring with NO monochromatic triangle.  (A cover into
+    triangle-free subgraphs exists iff such a partition-colouring does.) *)
+Definition ctf_cover (G : iGraph) : Prop :=
+  exists col : iV G -> iV G -> nat,
+    (forall x y, col x y = col y x) /\
+    (forall x y z : iV G, iadj x y -> iadj y z -> iadj x z ->
+       col x y = col y z -> col x y = col x z -> False).
