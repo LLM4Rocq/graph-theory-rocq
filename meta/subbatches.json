@@ -8,7 +8,8 @@
     "D2str": "structural / hypergraph / geometric-combinatorial",
     "D3cr": "crossing-number rows via a faithful combinatorial crossing_number (planarization onto wagner_planar)",
     "D4doa": "doable infinite-graph rows: finite hex-torus thermodynamic limit + countable K_omega exact-colourings",
-    "D6emb": "Wave 1: D6 rows unblocked by the embedding foundation (grunbaum dual / circular embedding / positive curvature)"
+    "D6emb": "Wave 1: D6 rows unblocked by the embedding foundation (grunbaum dual / circular embedding / positive curvature)",
+    "D3geo": "metric-geometry: small universal point sets (finite geometry over an abstract ordered field)"
   },
   "D2chr": {
     "phase": "D2",
@@ -97,6 +98,13 @@
       "grunbaums_conjecture",
       "the_circular_embedding_conjecture",
       "what_is_the_largest_graph_of_positive_curvature"
+    ]
+  },
+  "D3geo": {
+    "phase": "D3",
+    "repo": "topological-graph-theory",
+    "slugs": [
+      "small_universal_point_sets_for_planar_graphs"
     ]
   }
 }

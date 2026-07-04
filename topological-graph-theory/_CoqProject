@@ -5,6 +5,7 @@
 theories/foundations/embedding.v
 theories/foundations/signed_embedding.v
 theories/foundations/crossing.v
+theories/foundations/geometry.v
 theories/conjectures/U13.v
 theories/conjectures/grounding_U13.v
 theories/conjectures/implications_U13.v
@@ -14,3 +15,6 @@ theories/conjectures/implications_D3cr.v
 theories/conjectures/D6emb.v
 theories/conjectures/grounding_D6emb.v
 theories/conjectures/implications_D6emb.v
+theories/conjectures/D3geo.v
+theories/conjectures/grounding_D3geo.v
+theories/conjectures/implications_D3geo.v
