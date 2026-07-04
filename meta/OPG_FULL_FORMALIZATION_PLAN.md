@@ -1,4 +1,34 @@
-# Formalizing the FULL OpenProblemGarden corpus — a statement-first plan (v4)
+# Formalizing the FULL OpenProblemGarden corpus — v1 completion report + future tracks
+
+> ## ✅ v1 COMPLETION REPORT — statement-complete corpus
+>
+> **The goal below is met.** All **227** OpenProblemGarden problems are attempted as axiom-free
+> Rocq `Definition <name>_statement : Prop` — **none left todo**.
+>
+> - **212 done** (faithful, axiom-free, `Print Assumptions` clean) · **8 partial** (faithful,
+>   documented proxy/conditional) · **7 blocked** (needs foundations deliberately out of scope).
+> - **Release:** git tag **`opg-v1.0-227-attempted`** (the tag pins the exact commit;
+>   `git rev-list -n1 opg-v1.0-227-attempted` gives the hash).
+> - **Canonical living report:** [`meta/CORPUS_STATUS.md`](CORPUS_STATUS.md) — per-area & per-phase
+>   counts, every partial/blocked row with its exact blocker, base surfaces, per-area foundation
+>   modules, and the conjecture dependency graph. Regenerated + drift-checked by
+>   `meta/report_corpus_status.py`.
+> - **Reproduce the claim:**
+>   - CI (toolchain-free): `make audit` — edge-graph + corpus-status invariants and no drift.
+>   - Full acceptance (Rocq/MathComp toolchain + OPG clone): `make gate` — every LANDED milestone
+>     compiles, is axiom-free, `Print Assumptions` clean, overlay leg-state justified.
+>
+> **Remaining tracks (no todo — these are the 7 blocked + 8 partial, tracked as follow-up issues):**
+> - **8 partial → proxy upgrades**: replace each documented proxy with its exact source semantics
+>   (e.g. Freudenthal Hamilton circles for the double-ray surrogates; De Bruijn–Erdős for the
+>   odd-distance χ=∞; full drawing-space geometry for the metric proxies).
+> - **7 blocked → serious new foundations**: real cardinal arithmetic (ℵ₁), point-set topology of
+>   surfaces (Freudenthal `|G|`), spherical/great-circle geometry, arbitrary-closed-set obstacle
+>   geometry, automorphism-group actions, ZFC/independence meta-tags.
+> - **verified-edge expansion** (more `Qed`-closed inter-node implications) and **proof
+>   applications** for the solved/disproved records.
+>
+> The detailed statement-first **plan (v4)** is retained below as the historical execution record.
 
 **Goal.** State (not prove) in Rocq/MathComp **every** conjecture in the
 `~/Recherche/graph-conjectures` OpenProblemGarden (OPG) corpus — **all 227 problems,

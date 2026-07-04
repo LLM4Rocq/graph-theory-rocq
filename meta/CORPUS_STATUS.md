@@ -85,6 +85,20 @@ Cross-area primitives every area may reuse (promoted only when ≥2 areas need t
 
 `mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
 
+## Per-area foundation modules
+
+Area-local foundations (each area builds these on top of `base`):
+
+| area | foundation modules |
+|---|---|
+| cycle-theory | `connectivity` |
+| digraph-theory | `interop_graph_theory`, `prelude` |
+| extremal-graph-theory | `circular_colouring` |
+| graph-theory-misc | `complexity` |
+| infinite-graph-theory | `igraph` |
+| spectral-graph-theory | `spectral` |
+| topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `signed_embedding` |
+
 ## Conjecture dependency graph
 
 - **44 edges** — by status {'candidate': 25, 'refuted-direction': 16, 'verified': 3}, by kind {'equiv': 0, 'implies': 43, 'refutes': 0, 'specializes': 1}; 3 Qed-proved relative theorems.
@@ -95,10 +109,19 @@ Cross-area primitives every area may reuse (promoted only when ≥2 areas need t
 
 ## Verifying this claim
 
+Release: **`opg-v1.0-227-attempted`** (the git tag pins the exact commit; run the gate at that tag).
+
+CI (toolchain-free — no Coq build, no external OPG clone needed):
+
 ```sh
-make gate                                   # builds every LANDED milestone, axiom-free, Print Assumptions clean
-python3 meta/build_edge_graph.py --check    # edge graph: no drift
-python3 meta/report_corpus_status.py --check # this report: invariants + no drift
+make audit   # build_edge_graph.py --check + report_corpus_status.py --check (invariants + no drift)
+```
+
+Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):
+
+```sh
+make gate    # regenerates the manifest, then check_milestone for EVERY LANDED milestone:
+             #   compiles, axiom-free, Print Assumptions clean, overlay leg-state justified
 ```
 
 Per-row provenance (the commit + package that landed each leg) lives in `meta/opg_legs_state.json`; routing/source-text provenance in `meta/opg_corpus_manifest.json`.

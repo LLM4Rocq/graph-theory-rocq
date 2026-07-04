@@ -111,6 +111,18 @@ w("## Base surfaces (`graph-theory-base`, cross-area primitives)\n")
 w("Cross-area primitives every area may reuse (promoted only when ≥2 areas need them):\n")
 w("`" + "`, `".join(surfaces) + "`\n")
 
+# per-area foundation modules (area-local Prop/def layers on top of base)
+w("## Per-area foundation modules\n")
+w("Area-local foundations (each area builds these on top of `base`):\n")
+w("| area | foundation modules |")
+w("|---|---|")
+for repo in sorted(by_repo):
+    fdir = os.path.join(MONO, repo, "theories", "foundations")
+    mods = sorted(f[:-2] for f in os.listdir(fdir) if f.endswith(".v")) if os.path.isdir(fdir) else []
+    if mods:
+        w(f"| {repo} | {', '.join('`' + m + '`' for m in mods)} |")
+w("")
+
 # edges
 t = edges["totals"]
 w("## Conjecture dependency graph\n")
@@ -124,9 +136,12 @@ w("")
 
 # verification
 w("## Verifying this claim\n")
-w("```sh\nmake gate                                   # builds every LANDED milestone, axiom-free, Print Assumptions clean\n"
-  "python3 meta/build_edge_graph.py --check    # edge graph: no drift\n"
-  "python3 meta/report_corpus_status.py --check # this report: invariants + no drift\n```\n")
+w("Release: **`opg-v1.0-227-attempted`** (the git tag pins the exact commit; run the gate at that tag).\n")
+w("CI (toolchain-free — no Coq build, no external OPG clone needed):\n")
+w("```sh\nmake audit   # build_edge_graph.py --check + report_corpus_status.py --check (invariants + no drift)\n```\n")
+w("Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):\n")
+w("```sh\nmake gate    # regenerates the manifest, then check_milestone for EVERY LANDED milestone:\n"
+  "             #   compiles, axiom-free, Print Assumptions clean, overlay leg-state justified\n```\n")
 w("Per-row provenance (the commit + package that landed each leg) lives in `meta/opg_legs_state.json`; "
   "routing/source-text provenance in `meta/opg_corpus_manifest.json`.\n")
 
