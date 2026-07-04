@@ -9355,8 +9355,8 @@
       ],
       "rocq_idiom": "forall decreasing seq a, exists G, forall i, mincrossing_on_genus G i = a_i",
       "legs": {
-        "statement": "blocked",
-        "grounding": "blocked",
+        "statement": "done",
+        "grounding": "done",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"

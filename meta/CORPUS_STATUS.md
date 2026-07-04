@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **205 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **11 partial** · **11 blocked**.
+- **206 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **11 partial** · **10 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -25,8 +25,8 @@
 | packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
-| topological-graph-theory | Topological | 12 | 0 | 6 | 18 |
-| **TOTAL** | | **205** | **11** | **11** | **227** |
+| topological-graph-theory | Topological | 13 | 0 | 5 | 18 |
+| **TOTAL** | | **206** | **11** | **10** | **227** |
 
 ## Per-phase (milestones)
 
@@ -34,7 +34,7 @@
 |---|--:|--:|--:|--:|
 | D1 | 15 | 0 | 0 | 15 |
 | D2 | 29 | 3 | 0 | 32 |
-| D3 | 5 | 0 | 5 | 10 |
+| D3 | 6 | 0 | 4 | 10 |
 | D4 | 2 | 7 | 5 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 3 | 0 | 1 | 4 |
@@ -70,7 +70,7 @@
 | infinite-graph-theory | strong_matchings_and_covers | iGraph carrier suffices; needs infinite hypergraph order theory |
 | infinite-graph-theory | unfriendly_partitions | iGraph carrier suffices; needs cardinal neighbour comparison |
 
-## Blocked — needs a layer deliberately out of scope (11)
+## Blocked — needs a layer deliberately out of scope (10)
 
 | area | slug | reason |
 |---|---|---|
@@ -82,7 +82,6 @@
 | topological-graph-theory | 3_colourability_of_arrangements_of_great_circles | needs topological layer: spherical arrangement geometry |
 | topological-graph-theory | are_different_notions_of_the_crossing_number_the_same | needs topological layer: two distinct drawing semantics |
 | topological-graph-theory | consecutive_non_orientable_embedding_obstructions | signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes — K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate |
-| topological-graph-theory | crossing_sequences | blocker narrowed (signed-layer audit): orientable layer + crossing.v xsplit already suffice to state cr-on-S_i (least splits landing in embeds_in_genus i, connected witnesses); attemptable in a future push |
 | topological-graph-theory | drawing_disconnected_graphs_on_surfaces | needs topological layer: optimal drawings on a surface |
 | topological-graph-theory | obstacle_number_of_planar_graphs | needs topological layer: obstacle/visibility geometry |
 

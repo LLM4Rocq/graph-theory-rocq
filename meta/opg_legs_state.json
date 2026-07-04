@@ -1822,14 +1822,14 @@
       "note": "needs topological layer: two distinct drawing semantics"
     },
     "crossing_sequences": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "2ef97d6",
       "package": "topological-graph-theory",
-      "note": "blocker narrowed (signed-layer audit): orientable layer + crossing.v xsplit already suffice to state cr-on-S_i (least splits landing in embeds_in_genus i, connected witnesses); attemptable in a future push"
+      "note": "genus crossing-number layer (foundations/crossing_genus.v): is_crossing_genus G i n = cr_i(G) via k xsplit crossing-resolutions landing in embeds_in_genus i; crossing sequence provably NON-INCREASING (is_crossing_genus_nonincreasing), functional (is_crossing_genus_uniq), inhabited (is_crossing_genus_inhab). Statement: forall strictly-decreasing-to-0 seq nat a, exists CONNECTED G realizing cr_i(G)=a_i for all i<size a (orientable primary). EXACT-FAITHFUL: xsplit PRESERVES connectivity (xsplit_connected, machine-checked) => for a connected witness euler_genus is exact on every planarization => is_crossing_genus is the EXACT topological genus crossing number (not a proxy); connected-witness is faithful to the source (a realizer is connectible via a bridge in a common face without changing any cr_i or genus). NONORIENTABLE twin (semb_in_genus) not built (scope). Audited: 3-skeptic SOUND (partial for the unguarded version; connected-guard flip verified exact-faithful). check_milestone D3xseq ACCEPTED, axiom-free. Caveats (none blocking): connected<=>general realizability is the one remaining MATH (not machine-checked) assumption (standard: bridge + genus-additivity; only OPG-true=>guarded-true matters); exactness is 'connected WITH an edge' but the sole connected edgeless graph K1 is provably outside is_crossing_genus's domain and never appears as a planarization, so closed by construction."
     },
     "drawing_disconnected_graphs_on_surfaces": {
       "statement": "blocked",

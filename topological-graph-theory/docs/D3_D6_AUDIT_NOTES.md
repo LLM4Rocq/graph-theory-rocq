@@ -73,16 +73,18 @@ planarity test) is built — a deliberate deferral, joining the 2 surface rows a
 > | slug | outcome | why |
 > |---|---|---|
 > | small_universal_point_sets_for_planar_graphs | **DONE** | faithful `n_universal` over a real-closed field: injective placement, no vertex on a non-incident edge, independent edges never `seg_meet`. `forall R : rcfType` + Tarski–Seidenberg ⇒ equivalent to the ℝ² source (proof AND disproof transfer). No general-position side condition (the source imposes none). |
-> | crossing_sequences | doable next | cr-on-genus-`i` assembles from `crossing.v` `xsplit` + `embeds_in_genus` — no new geometry primitive; teed up as the next build. |
+> | crossing_sequences | **DONE** | built `foundations/crossing_genus.v`: `is_crossing_genus G i n` = cr_i(G) via `k` `xsplit` resolutions landing in `embeds_in_genus i` (no new primitive). Statement = every strictly-decreasing-to-0 `seq nat` is realized by some CONNECTED graph's crossing sequence (orientable primary). EXACT-faithful: `xsplit_connected` (machine-checked) ⇒ `euler_genus` exact on every planarization of a connected witness ⇒ `is_crossing_genus` = topological cr_i. Non-increasing shape is a theorem. Nonorientable twin (`semb_in_genus`) not built (scope). |
 > | are_different_notions_of_the_crossing_number_the_same | partial candidate | pair-cr vs cr needs two DRAWING semantics; expressible as a proxy over the crossing/embedding layer, not the full ℝ² drawing space. |
 > | consecutive_non_orientable_embedding_obstructions | partial candidate | non-orientable minor-minimal obstructions over the signed layer — proxy only (as recorded under UPDATE 2). |
 > | 3_colourability_of_arrangements_of_great_circles | **BLOCKED** | genuine spherical arrangement geometry (great circles in general position on S²) — no finite `orient`-only proxy is faithful. |
 > | drawing_disconnected_graphs_on_surfaces | **BLOCKED** | optimal drawings on an arbitrary surface Σ — continuous drawing space. |
 > | obstacle_number_of_planar_graphs | **BLOCKED** | obstacle/visibility geometry over arbitrary closed sets — the definition itself is the hard part; no faithful finite-polygon proxy. |
 >
-> The `orient`-only foundation is deliberately minimal: it was built for exactly one DONE row and
-> reused conceptually for the crossing_sequences plan. The three BLOCKED rows stay blocked (real
-> spherical / continuous / arbitrary-closed-set geometry). Infinite-combinatorics track is LAST.
+> Two rows landed DONE from this preflight: small_universal_point_sets (new `orient`-only geometry
+> foundation) and crossing_sequences (new `crossing_genus.v` genus crossing-number layer, built on the
+> existing `xsplit` + `embeds_in_genus` — no new geometry primitive). The `orient`-only foundation is
+> deliberately minimal (one row). The three BLOCKED rows stay blocked (real spherical / continuous /
+> arbitrary-closed-set geometry). Infinite-combinatorics track is LAST.
 >
 > Residual caveats on the DONE row (recorded, none blocking — all `note`-severity in the 3/3-SOUND
 > audit): (1) the `forall R : rcfType` ⇔ ℝ² equivalence rests on a METATHEORETIC Tarski–Seidenberg
