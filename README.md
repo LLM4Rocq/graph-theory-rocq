@@ -1,9 +1,11 @@
 # graph-theory-rocq
 
 ![corpus-status](https://github.com/LLM4Rocq/graph-theory-rocq/actions/workflows/corpus-status.yml/badge.svg)
-**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **192 done** (axiom-free
-`Definition <name>_statement : Prop`) · 18 partial · 17 blocked. Full breakdown:
-[`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md); deep-layer roadmap: [`meta/ROADMAP_DEEP_LAYERS.md`](meta/ROADMAP_DEEP_LAYERS.md).
+**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **212 done** (axiom-free
+`Definition <name>_statement : Prop`, `Print Assumptions` clean) · **8 partial** · **7 blocked**.
+Release: **`opg-v1.0.1-227-attempted`**. Full breakdown:
+[`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md); v1 completion report + future tracks:
+[`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALIZATION_PLAN.md).
 
 A monorepo of Rocq/MathComp **graph-theory** libraries — the math-comp model (one repo,
 many independently-installable opam packages). Each `<area>-theory/` subdir states the open
@@ -37,9 +39,11 @@ statement-complete claim with `make audit` (toolchain-free) or the full `make ga
 - `base/` — `coq-graph-theory-base`: the single owner of cross-area primitives (interop façade,
   homomorphism, products, list-χ, line/total-graph, Δ).
 - `<area>-theory/` — the area packages (each: foundations/core/invariants/constructions/conjectures/applications).
-- `atlas/` — cross-area `_implies_` edges + the federated conjecture dependency graph.
-- `blueprint/` — shared dev tooling (statement-closure gate, correspondence auditor, axiom audit, site generator).
-- `meta/` — the roadmap (`OPG_FULL_FORMALIZATION_PLAN.md`), the manifest, and its builder/loader.
+- `meta/` — the v1 completion report + roadmap (`OPG_FULL_FORMALIZATION_PLAN.md`), the validated 227-row
+  manifest + leg-state overlay, the federated dependency graph (`dependency_graph.json`), the status report
+  (`CORPUS_STATUS.md`), and the gates (`check_milestone.py`, `report_corpus_status.py`, `build_edge_graph.py`).
+- `atlas/`, `blueprint/` — *scaffolds* reserved for later extraction of the cross-area edge atlas and the
+  shared dev tooling; both currently live in `meta/` (see the stubs' `Status: scaffold`).
 
 `digraph-theory/` was absorbed from the standalone repo via a subtree merge (history preserved).
 See `meta/OPG_FULL_FORMALIZATION_PLAN.md` §A / §A.1.
