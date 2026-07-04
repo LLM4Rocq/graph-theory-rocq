@@ -106,5 +106,12 @@
     "slugs": [
       "small_universal_point_sets_for_planar_graphs"
     ]
+  },
+  "D3xseq": {
+    "phase": "D3",
+    "repo": "topological-graph-theory",
+    "slugs": [
+      "crossing_sequences"
+    ]
   }
 }
