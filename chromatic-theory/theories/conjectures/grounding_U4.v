@@ -45,8 +45,8 @@ Qed.
 Lemma list_colourable_on_set0 n :
   list_colourable_on (G := 'K_n) (fun _ : 'K_n => [set: 'K_n]) set0.
 Proof.
-exists id; split.
-- by move=> v Hv; rewrite in_set0 in Hv.
+exists (fun=> None); split.
+- by move=> v; rewrite in_set0.
 - by move=> x y Hx _ _; rewrite in_set0 in Hx.
 Qed.
 
@@ -54,9 +54,10 @@ Qed.
 Lemma list_colourable_on_complete n :
   list_colourable_on (G := 'K_n) (fun _ : 'K_n => [set: 'K_n]) [set: 'K_n].
 Proof.
-exists id; split.
-- by move=> v _; rewrite inE.
-- by move=> x y _ _; rewrite /edge_rel /=.
+exists (fun v => Some v); split.
+- by move=> v _; exists v; rewrite inE.
+- move=> x y _ _; rewrite /edge_rel /= => xy.
+  by apply/eqP => -[] exy; rewrite exy eqxx in xy.
 Qed.
 
 (** ** [choosable] — witness: the one-vertex graph is 1-choosable. *)
@@ -107,7 +108,7 @@ split.
 - exists bool, (fun _ : 'K_0 => set0); split; first by case.
   split.
   + exists set0; split; last by rewrite cards0.
-    exists (fun _ => true); split.
+    exists (fun=> None); split.
     * by move=> v Hv; rewrite in_set0 in Hv.
     * by move=> x y Hx _ _; rewrite in_set0 in Hx.
   + move=> W _.

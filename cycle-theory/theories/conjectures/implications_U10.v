@@ -116,7 +116,7 @@ Qed.
 
 (** ** The scheduled edge *)
 
-(*@EDGE from=petersen_coloring_statement to=the_berge_fulkerson_statement kind=implies status=verified-literature proved=true cite="F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12" note="Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (carried as the explicit Petersen-side hypothesis external_petersen_BF_cover_statement) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f" *)
+(*@EDGE from=petersen_coloring_statement to=the_berge_fulkerson_statement kind=implies status=verified-literature proved=true proof=petersen_coloring_implies_berge_fulkerson cite="F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12" note="Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (carried as the explicit Petersen-side hypothesis external_petersen_BF_cover_statement) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f" *)
 Theorem petersen_coloring_implies_berge_fulkerson :
   external_petersen_BF_cover_statement ->
   petersen_coloring_statement ->

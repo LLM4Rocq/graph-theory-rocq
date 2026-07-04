@@ -140,9 +140,15 @@ Definition frac_power (G : sgraph) (m n : nat) : sgraph := graph_power (subdivis
 Definition list_colourable (G : sgraph) (C : finType) (L : G -> {set C}) : Prop :=
   exists f : G -> C,
     (forall v : G, f v \in L v) /\ (forall x y : G, x -- y -> f x != f y).
+(** [list_colourable_on L W]: the vertices of [W] (ONLY) can be properly coloured
+    from their lists.  The colouring is PARTIAL — [f : G -> option C], required to
+    be [Some c ∈ L v] on [W] and left free ([None]) off [W] — so it does NOT force
+    a total function into the palette.  This keeps [W = set0] (equivalently the
+    [t = 0] corner) vacuously TRUE even over an empty palette [C := 'I_0], where a
+    total [G -> C] would spuriously fail to exist. *)
 Definition list_colourable_on (G : sgraph) (C : finType) (L : G -> {set C}) (W : {set G}) : Prop :=
-  exists f : G -> C,
-    (forall v : G, v \in W -> f v \in L v) /\
+  exists f : G -> option C,
+    (forall v : G, v \in W -> exists c, f v = Some c /\ c \in L v) /\
     (forall x y : G, x \in W -> y \in W -> x -- y -> f x != f y).
 Definition choosable (G : sgraph) (k : nat) : Prop :=
   forall (C : finType) (L : G -> {set C}),

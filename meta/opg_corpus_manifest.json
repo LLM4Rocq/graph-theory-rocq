@@ -1834,8 +1834,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -1976,8 +1976,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -2116,8 +2116,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -2889,8 +2889,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -3211,8 +3211,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -5273,8 +5273,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -5409,8 +5409,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -5595,8 +5595,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -5733,8 +5733,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -7152,8 +7152,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -7469,8 +7469,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true
@@ -7786,8 +7786,8 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
-    "correspondence": "done",
+    "edges": "todo",
+    "correspondence": "todo",
     "audit_page": "todo"
    },
    "already_formalized": true

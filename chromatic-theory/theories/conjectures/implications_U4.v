@@ -44,7 +44,7 @@
     None of these is a U4-internal edge.
 
     ────────────────────────────────────────────────────────────────────────────
-    The ONE genuine U4-internal literature relationship, and why it is BLOCKED.
+    The ONE genuine U4-internal literature relationship (ratio ⟹ AGH-partial).
     ────────────────────────────────────────────────────────────────────────────
 
     The ratio conjecture (Row 2) is, in the source literature (Albertson–Grossman–
@@ -53,39 +53,26 @@
     larger index s := χ_ℓ in λ_r/r ≥ λ_s/s and using λ_{χ_ℓ} = n gives
     λ_r ≥ r·n/χ_ℓ, which is exactly Row 1.  So mathematically Row 2 ⟹ Row 1.
 
-    This edge is NEVERTHELESS NOT SCHEDULABLE, because Row 1 AS FORMALIZED in
-    [U4.v] is *unconditionally false*: at [t = 0] with an EMPTY colour palette
-    [C := 'I_0] over a non-empty graph (e.g. ['K_1]), the conclusion
-    [exists W, list_colourable_on L W /\ ...] demands a colour function
-    [f : G -> C] into an empty type, which cannot exist — while the premises
-    [is_choice_number 'K_1 1], [0 <= 1], [forall v, #|L v| = 0] all hold.  This is
-    witnessed below by [partial_list_coloring_statement_vacuously_false].
+    ENCODING NOTE (post-release repair, audit finding #1).  A PRIOR encoding of
+    Row 1 was unconditionally FALSE at [t = 0] over an empty palette [C := 'I_0]:
+    [list_colourable_on] then demanded a total [f : G -> C] into an empty type.
+    That is now FIXED — [list_colourable_on] is a PARTIAL ([option]-valued)
+    colouring of [W] only (base.v), so [W = set0] / [t = 0] is vacuously TRUE and
+    Row 1 is once again the faithful, open AGH proposition.  The [t = 0] corner is
+    trivially true; the content lives at [1 <= t], which is open.
 
-    Because Row 1 is false and Row 2 (the ratio conjecture) is NOT false (it is the
-    believed-true open conjecture; every degenerate instance, e.g. r = s, makes its
-    conclusion r·ls ≤ s·lr reduce to an equality), the relative theorem
-    [partial_list_coloring_0_statement -> partial_list_coloring_statement] CANNOT
-    be proved: a non-false hypothesis cannot derive a false conclusion.  Per the
-    edge policy ("a genuinely false edge must FAIL to compile — never force it") it
-    is therefore recorded as a CANDIDATE (Qed-gate blocked), not scheduled.
-
-    [Symmetric caution: the converse direction
-    [partial_list_coloring_statement -> partial_list_coloring_0_statement] WOULD
-    compile — but only VACUOUSLY, because its hypothesis Row 1 is false.  It is the
-    mathematically WRONG direction (AGH does not imply the strictly-stronger ratio
-    conjecture) and is a pure artifact of the encoding bug, so it is deliberately
-    NOT scheduled either.]
+    This literature edge [partial_list_coloring_0_statement ⟹
+    partial_list_coloring_statement] is therefore no longer blocked by a
+    faithfulness defect; it is recorded as a CANDIDATE (its Rocq proof — via
+    [λ_{χ_ℓ} = n] and the ratio at [s := χ_ℓ] — is future work, see the follow-up
+    "verified-edge expansion" issue), not force-scheduled.
 
     ────────────────────────────────────────────────────────────────────────────
-    CONCLUSION.  Like [implications_U1.v], this file commits ZERO scheduled
-    [_implies_] edges among the U4 nodes: §6 places every verified / candidate
-    edge across a milestone boundary, and the single internal literature edge
-    (ratio ⟹ AGH-partial) is blocked by a faithfulness defect in Row 1's encoding.
-    The only [Qed]-closed content is the vacuity witness documenting that defect —
-    a FORMALIZATION finding (the AGH conjecture itself is open/believed-true, NOT
-    refuted), flagged for repair of [U4.v] (guard a non-empty palette / [1 <= t],
-    or quantify [list_colourable_on] only over inhabited [C]).  The file loads
-    axiom-free, so the milestone's edge layer is present and green. *)
+    CONCLUSION.  This file commits ZERO scheduled [_implies_] edges among the U4
+    nodes: §6 places every verified / candidate edge across a milestone boundary,
+    and the single internal literature edge (ratio ⟹ AGH-partial) is a proof
+    obligation deferred to the edge-expansion track.  The only [Qed]-closed content
+    is [choice_number_K1] (ch('K_1) = 1).  The file loads axiom-free. *)
 
 From GTBase Require Import base.
 From GraphTheory Require Import minor mgraph.
@@ -95,13 +82,13 @@ Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(** ** Vacuity witness for Row 1 (a FORMALIZATION finding, NOT a math refutation)
+(** ** ch('K_1) = 1 (a grounding identity for the choice number).
 
-    [is_choice_number 'K_1 1] holds: ['K_1] is 1-choosable (its single vertex has
-    no incident edge, so any size-[≥1] list can be honoured), and it is not
-    0-choosable (a size-0 list over the empty palette ['I_0] has no colouring).
-    This makes the premises of [partial_list_coloring_statement] satisfiable at
-    [t = 0], where its conclusion then demands an impossible [ 'K_1 -> 'I_0 ]. *)
+    ['K_1] is 1-choosable (its single vertex has no incident edge, so any
+    size-[≥1] list can be honoured) and not 0-choosable (a size-0 list over the
+    empty palette ['I_0] has no colouring — note [choosable]/[list_colourable]
+    remain TOTAL colourings of the whole graph, which is the correct semantics
+    for the full-graph choice number, unlike the partial [list_colourable_on]). *)
 Lemma choice_number_K1 : is_choice_number (complete 1) 1.
 Proof.
 split.
@@ -119,30 +106,11 @@ split.
   by case: (f ord0).
 Qed.
 
-(** [partial_list_coloring_statement] (Row 1) is *vacuously false* as encoded:
-    instantiate the inner [forall C] with the EMPTY palette ['I_0] at [t = 0].
-    The conclusion would require a function [ 'K_1 -> 'I_0 ], which is impossible.
-
-    READ THIS CAREFULLY: this is a defect of the Rocq ENCODING (an unguarded
-    empty-palette / [t = 0] corner), NOT a refutation of the Albertson–Grossman–
-    Haas conjecture, which remains open and is believed true.  It is the precise
-    obstruction that prevents scheduling the literature edge
-    [ratio (Row 2) ⟹ AGH-partial (Row 1)]: a non-false hypothesis cannot prove a
-    false goal.  It is recorded here (not annotated as an [@EDGE]) so the edge
-    extractor never mistakes it for a node-to-node refutation. *)
-Lemma partial_list_coloring_statement_vacuously_false :
-  ~ partial_list_coloring_statement.
-Proof.
-move=> H.
-move: (H (complete 1) 0 1 choice_number_K1 (leq0n 1)
-         'I_0 (fun _ : complete 1 => set0) (fun _ => cards0 _)) => [W [Hon _]].
-by case: Hon => f _; case: (f ord0).
-Qed.
 
 (** ── Machine-readable edge records (extracted by meta/build_edge_graph.py) ───
     No scheduled edge: see the AUDIT RESULT above.  The records below carry the
     status/citation for the audited (and deliberately UNSCHEDULED) relationships. *)
 
-(*@EDGE from=partial_list_coloring_0_statement to=partial_list_coloring_statement kind=implies status=candidate proved=false cite="Albertson-Grossman-Haas, Partial list colorings, Discrete Math. 214 (2000); Iradmusa 2010 (ratio conj strengthens AGH)" note="verified in literature but BLOCKED by the Qed gate: Row 1 is false-as-formalized (empty-palette/t=0 degeneracy, see partial_list_coloring_statement_vacuously_false); fix U4.v Row 1 (guard non-empty palette / 1<=t) before scheduling" *)
+(*@EDGE from=partial_list_coloring_0_statement to=partial_list_coloring_statement kind=implies status=candidate proved=false cite="Albertson-Grossman-Haas, Partial list colorings, Discrete Math. 214 (2000); Iradmusa 2010 (ratio conj strengthens AGH)" note="ratio (Row 2) strengthens AGH-partial (Row 1) via lambda_{chi_l}=n at s:=chi_l; the earlier empty-palette/t=0 defect in Row 1 is FIXED (list_colourable_on is now partial/option-valued), so the edge is schedulable — its Rocq proof is future work (edge-expansion track)" *)
 (*@EDGE from=list_hadwiger_statement to=hadwiger_statement kind=implies status=refuted-direction cite="OPG_FULL_FORMALIZATION_PLAN §6" note="FORBIDDEN and CROSS-MILESTONE (Hadwiger is U7): the recorded list-Hadwiger gives only c*t-list-colourability, not (t-1)-colourability" *)
 (*@EDGE from=list_total_colouring_statement to=behzads_statement kind=implies status=refuted-direction cite="OPG_FULL_FORMALIZATION_PLAN §6" note="FORBIDDEN and CROSS-MILESTONE (Behzad node defined in U5): chi''_l = chi'' does not yield the chi'' <= Delta+2 bound" *)

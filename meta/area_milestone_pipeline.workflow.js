@@ -1,6 +1,15 @@
 /*
  * area-milestone-pipeline (v3, aligned to OPG_FULL_FORMALIZATION_PLAN.md v4 / 2026-06-26)
  * =======================================================================================
+ * ⚠️ ARCHIVED / HISTORICAL (post release opg-v1.0-227-attempted).
+ *   The statement-generation phase this pipeline drove is COMPLETE (227/227 attempted). It is
+ *   kept as a historical record of how milestones were generated. If ever reused for a NEW
+ *   area, note two post-release corrections: (a) the milestone-rows loader path is `meta/`
+ *   (fixed below); (b) the ALGORITHMIC/COMPLEXITY guidance below is SUPERSEDED — its abstract
+ *   decoupled cost model was found VACUOUS by the D7 audit (alg := exact answer, cost := 0);
+ *   use the cost-coupled interpreter model in
+ *   graph-theory-misc/theories/foundations/complexity.v instead.
+ * =======================================================================================
  * THIS IS A WORKFLOW-TOOL SCRIPT, NOT A STANDALONE NODE MODULE.
  *   Run it ONLY via  Workflow({ scriptPath: ".../docs/area_milestone_pipeline.workflow.js",
  *                               args: {...} }).
@@ -11,7 +20,7 @@
  *   pass canonical, pre-validated rows (see below).
  *
  * INVOKE (one milestone = one (phase, repo) cell of the validated manifest):
- *   1) python3 scripts/milestone_rows.py <phase> <repo>     # deterministic filter+validate gate
+ *   1) python3 meta/milestone_rows.py <phase> <repo>        # deterministic filter+validate gate
  *   2) Workflow({ scriptPath: <this file>,
  *        args: { phase:"U1", repo:"chromatic-theory", base_ready:false, rows:<step-1 JSON> } })
  *   `rows` is REQUIRED (no agent-side manifest filtering — that was unreliable). `repo` is
@@ -245,10 +254,11 @@ const draft = await agent(
   `Milestone rows (canonical, pre-validated — use EXACTLY these formal_names and source_texts):\n${JSON.stringify(rows)}\n\n` +
   `Draft theories/conjectures/${M.phase}.v: for EACH row a \`Definition <formal_name> : Prop\`, carrier type chosen ` +
   `per row.rocq_idiom (NOT a blanket sgraph). Introduce only minimal AREA-SPECIFIC new primitives.\n${API}\n${STATUS_RULES}${PLANAR_RULE}\n` +
-  `ALGORITHMIC/COMPLEXITY rows (decides / runs-in-time / approximation_ratio / PTAS / NP-hard): keep cost & ` +
-  `algorithm notions DELIBERATELY RELATIONAL + ABSTRACT — an 'algorithm' is an abstract function plus an ` +
-  `abstract cost predicate (e.g. \`runs_in_time\` as a Prop), NOT a machine/Turing model; do NOT build a ` +
-  `computation-cost framework. A SOLVED row (e.g. a PTAS exists) is still a \`Definition _statement : Prop\` ` +
+  `ALGORITHMIC/COMPLEXITY rows (decides / runs-in-time / approximation_ratio / PTAS / NP-hard): SUPERSEDED — ` +
+  `the abstract decoupled cost model was VACUOUS (D7 audit: alg := exact-answer, cost := 0). Couple cost to ` +
+  `the object that produces the output: reuse the fixed-language interpreter model in ` +
+  `graph-theory-misc/theories/foundations/complexity.v (one 'eval' computes BOTH output and step count), so a ` +
+  `positive existential-algorithm claim cannot be satisfied by a zero-cost oracle. A SOLVED row is still a \`Definition _statement : Prop\` ` +
   `(proofs are optional applications work). If ≥2 rows share such vocabulary, put it in a single ` +
   `${M.repo}/theories/foundations/<topic>.v module (area-local), not base.\n` +
   `${SPECTRAL}${CROSSING}${EMBEDDING}${INFINITE}\n` +

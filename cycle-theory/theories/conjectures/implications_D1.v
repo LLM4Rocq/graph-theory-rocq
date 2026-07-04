@@ -119,7 +119,7 @@ Definition external_modular_orientation_to_flow_statement : Prop :=
 (** ================================================================= *)
 (** ** The scheduled edge *)
 
-(*@EDGE from=jaegers_modular_orientation_statement to=three_flow_statement kind=implies status=verified-literature proved=true cite="Jaeger, Nowhere-zero flow problems, Selected Topics in Graph Theory 3 (1988) 71-95; Tutte 1954 (3-flow conjecture and orientation/flow duality)" note="Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the cited external orientation/flow duality" *)
+(*@EDGE from=jaegers_modular_orientation_statement to=three_flow_statement kind=implies status=verified-literature proved=true proof=jaegers_modular_orientation_implies_three_flow cite="Jaeger, Nowhere-zero flow problems, Selected Topics in Graph Theory 3 (1988) 71-95; Tutte 1954 (3-flow conjecture and orientation/flow duality)" note="Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the cited external orientation/flow duality" *)
 Theorem jaegers_modular_orientation_implies_three_flow :
   external_modular_orientation_to_flow_statement ->
   jaegers_modular_orientation_statement -> three_flow_statement.

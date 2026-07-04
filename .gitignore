@@ -22,3 +22,5 @@ __pycache__/
 .DS_Store
 rocq_mcp_cache_*.v
 meta/generated/
+.lia.cache
+*.lia.cache

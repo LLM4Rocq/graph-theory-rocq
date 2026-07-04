@@ -128,7 +128,7 @@ Qed.
 
 (** ** The scheduled edge *)
 
-(*@EDGE from=faithful_cycle_covers_statement to=cycle_double_cover_statement kind=implies status=verified-literature proved=true cite="Seymour 1979; Alspach-Goddyn-Zhang, Graphs with the circuit cover property, Trans. AMS 344 (1994) 131-154; Szekeres 1973" note="Faithful Cover Conjecture at the even weighting p==2 is exactly the Cycle Double Cover Conjecture; bridgeless => p==2 admissible via the walk/cut crossing lemma" *)
+(*@EDGE from=faithful_cycle_covers_statement to=cycle_double_cover_statement kind=implies status=verified-literature proved=true proof=faithful_cycle_covers_implies_cycle_double_cover cite="Seymour 1979; Alspach-Goddyn-Zhang, Graphs with the circuit cover property, Trans. AMS 344 (1994) 131-154; Szekeres 1973" note="Faithful Cover Conjecture at the even weighting p==2 is exactly the Cycle Double Cover Conjecture; bridgeless => p==2 admissible via the walk/cut crossing lemma" *)
 Theorem faithful_cycle_covers_implies_cycle_double_cover :
   faithful_cycle_covers_statement -> cycle_double_cover_statement.
 Proof.

@@ -101,7 +101,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **44 edges** — by status {'candidate': 25, 'refuted-direction': 16, 'verified': 3}, by kind {'equiv': 0, 'implies': 43, 'refutes': 0, 'specializes': 1}; 3 Qed-proved relative theorems.
+- **46 edges** — by status {'candidate': 27, 'refuted-direction': 16, 'verified': 3}, by kind {'equiv': 0, 'implies': 45, 'refutes': 0, 'specializes': 1}; 3 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `faithful_cycle_covers_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `jaegers_modular_orientation_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)

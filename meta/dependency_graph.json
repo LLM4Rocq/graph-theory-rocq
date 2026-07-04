@@ -1,5 +1,5 @@
 {
- "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations + _implies_/_equiv_ theorems across graph-theory-rocq packages (legacy digraph-theory excluded; see `legacy`). Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails on drift. Edges are sorted (from,to,kind,status,package) for determinism.",
+ "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations across graph-theory-rocq packages + the absorbed digraph-theory's @EDGEs BETWEEN corpus nodes (P9); digraph's legacy internal theorems are not federation edges (see `legacy`). Verified edges name their backing theorem via proof=<name>. Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails on drift + validates verified-edge proofs. Sorted (from,to,kind,status) for determinism.",
  "packages": [
   "chromatic-theory",
   "cycle-theory",
@@ -16,15 +16,15 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 44,
+  "edges": 46,
   "by_status": {
-   "candidate": 25,
+   "candidate": 27,
    "refuted-direction": 16,
    "verified": 3
   },
   "by_kind": {
    "equiv": 0,
-   "implies": 43,
+   "implies": 45,
    "refutes": 0,
    "specializes": 1
   },
@@ -37,6 +37,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "plan v4 §6 edge policy; Chuzhoy-Kim-Li 2016 (MaxEDP planar); Bienstock-Monma 1988 (outerplanarity computation)",
+   "proof": "",
    "sources": [
     "graph-theory-misc/implications_D7.v"
    ]
@@ -47,6 +48,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Beneš 1965; Stone 1971 (shuffle-exchange); Beauquier–Darrot 2002 (graph-theoretic Beneš)",
+   "proof": "",
    "sources": [
     "graph-theory-misc/implications_U13.v"
    ]
@@ -57,6 +59,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "X. Zhu, Circular choosability of graphs, JGT 48 (2005) 210-218 (cch >= chi_c, planar cch >= 4); OPG_FULL_FORMALIZATION_PLAN.md v4 §6",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2chr.v"
    ]
@@ -67,6 +70,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG circular-colouring entries",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2chr.v"
    ]
@@ -77,6 +81,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "circular-flow-number literature ((2t+1)-graph conjecture generalises the regular class-1 conjecture)",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
@@ -87,8 +92,20 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG infinite/asymptotic entries (Baxter, J. Math. Phys. 11 (1970) 784-789; exact-colourings-of-K_omega record)",
+   "proof": "",
    "sources": [
     "infinite-graph-theory/implications_D4doa.v"
+   ]
+  },
+  {
+   "from": "decomposing_k_arc_strong_tournament_into_k_spanning_statement",
+   "to": "arc_disjoint_out_branching_and_in_branching_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Bang-Jensen & Yeo, J. Graph Theory 2004 (k-arc-strong tournament decomposition); Edmonds 1973 (arc-disjoint branchings)",
+   "proof": "",
+   "sources": [
+    "digraph-theory/implications_P9.v"
    ]
   },
   {
@@ -97,6 +114,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Albertson & Berman 1979 (induced-forest conj.); Borodin 1979 (acyclic 5-colouring of planar graphs)",
+   "proof": "",
    "sources": [
     "topological-graph-theory/implications_U13.v"
    ]
@@ -107,6 +125,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md §6 (no domination edge in the verified table); Reed, Paths/stars/the domination number, Combin. Probab. Comput. 1996 (cubic γ<=⌈n/3⌉); Matheson & Tarjan 1996 (planar triangulation γ<=n/3, conj. n/4)",
+   "proof": "",
    "sources": [
     "packing-theory/implications_U13.v"
    ]
@@ -117,6 +136,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md §6 (no domination edge in the verified table)",
+   "proof": "",
    "sources": [
     "packing-theory/implications_U13.v"
    ]
@@ -127,6 +147,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (edge-list-colouring/LCC <-> Goldberg region)",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U5.v"
    ]
@@ -137,6 +158,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG infinite/asymptotic entries (exact-colourings-of-K_omega record; Baxter, J. Math. Phys. 11 (1970) 784-789)",
+   "proof": "",
    "sources": [
     "infinite-graph-theory/implications_D4doa.v"
    ]
@@ -147,6 +169,7 @@
    "kind": "implies",
    "status": "verified",
    "cite": "Seymour 1979; Alspach-Goddyn-Zhang, Graphs with the circuit cover property, Trans. AMS 344 (1994) 131-154; Szekeres 1973",
+   "proof": "faithful_cycle_covers_implies_cycle_double_cover",
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
@@ -157,6 +180,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "classical: 3-/4-/5-flow conjectures are mutually independent",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
@@ -167,6 +191,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "classical antichain",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
@@ -177,6 +202,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG entries (Tutte geodesic cycles vs equivalence covering number of C_n^k)",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2str.v"
    ]
@@ -187,6 +213,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Goldberg 1973; Seymour, On multicolourings of cubic graphs, Proc. LMS (3) 38 (1979) 423-460",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U5.v"
    ]
@@ -197,6 +224,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "OPG minor-theory",
+   "proof": "",
    "sources": [
     "minor-theory/implications_U7.v"
    ]
@@ -207,6 +235,7 @@
    "kind": "implies",
    "status": "verified",
    "cite": "Jaeger, Nowhere-zero flow problems, Selected Topics in Graph Theory 3 (1988) 71-95; Tutte 1954 (3-flow conjecture and orientation/flow duality)",
+   "proof": "jaegers_modular_orientation_implies_three_flow",
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
@@ -217,6 +246,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Jorgensen 1994",
+   "proof": "",
    "sources": [
     "minor-theory/implications_U7.v"
    ]
@@ -227,6 +257,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "OPG minor-theory",
+   "proof": "",
    "sources": [
     "minor-theory/implications_U7.v"
    ]
@@ -237,6 +268,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; these two problems are independent OPG hypergraph entries",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2str.v"
    ]
@@ -247,6 +279,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN.md v4 §6 edge policy; independent OPG list-colouring entries",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2chr.v"
    ]
@@ -257,6 +290,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U4.v"
    ]
@@ -267,6 +301,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U4.v",
     "chromatic-theory/implications_U5.v"
@@ -278,6 +313,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "OPG cycle-cover literature",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
@@ -288,6 +324,7 @@
    "kind": "specializes",
    "status": "candidate",
    "cite": "Erdős–Hajnal 1989; multicolour generalisation, Conlon–Fox–Sudakov, Erdős–Hajnal surveys (OPG)",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2ram.v"
    ]
@@ -298,8 +335,20 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Albertson-Grossman-Haas, Partial list colorings, Discrete Math. 214 (2000); Iradmusa 2010 (ratio conj strengthens AGH)",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U4.v"
+   ]
+  },
+  {
+   "from": "partitioning_planar_digraphs_statement",
+   "to": "large_acyclic_induced_subdigraph_in_a_planar_oriente_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Neumann-Lara 1985 (2-dicolourability of planar digraphs) vs Albertson-Berman / Borodin-type 3/5 acyclic-set bound",
+   "proof": "",
+   "sources": [
+    "digraph-theory/implications_P9.v"
    ]
   },
   {
@@ -308,6 +357,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Nesetril; girth+construction gaps, not Qed-closed as formulated",
+   "proof": "",
    "sources": [
     "homomorphism-theory/implications_U3.v"
    ]
@@ -318,6 +368,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "snark-colouring literature",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_U10.v"
    ]
@@ -328,6 +379,7 @@
    "kind": "implies",
    "status": "verified",
    "cite": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12",
+   "proof": "petersen_coloring_implies_berge_fulkerson",
    "sources": [
     "cycle-theory/implications_U10.v"
    ]
@@ -338,6 +390,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "Kenyon-Mathieu-Schudy 2007 (FAS-tournaments PTAS); plan v4 §6 edge policy",
+   "proof": "",
    "sources": [
     "graph-theory-misc/implications_D7.v"
    ]
@@ -348,6 +401,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Welsh; flow-polynomial real-root literature",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
@@ -358,6 +412,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Greenwell, Proc. AMS 30 (1971) 431-433; Bondy, A graph reconstructor's manual (1991)",
+   "proof": "",
    "sources": [
     "reconstruction-theory/implications_U11.v"
    ]
@@ -368,6 +423,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "false at Δ=9,ω=8 (Cranston-Rabern)",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U1.v"
    ]
@@ -378,6 +434,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (strong-k-CDC => CDC)",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
@@ -388,6 +445,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Fan-Raspaud 1994 (Berge-Fulkerson => Fan-Raspaud)",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_U10.v"
    ]
@@ -398,6 +456,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "independent; neither implies the other",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U1.v"
    ]
@@ -408,6 +467,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Guy, The decline and fall of Zarankiewicz's theorem, 1969; Kleitman 1970 (cr(K_{m,n}) for min<=6); Guy 1972 counting bound cr(K_{2n}) >= cr(K_{n,n}) + 2 cr(K_n)",
+   "proof": "",
    "sources": [
     "topological-graph-theory/implications_D3cr.v"
    ]
@@ -418,6 +478,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "classical: 3-/4-/5-flow conjectures are mutually independent (Jaeger 1979 survey)",
+   "proof": "",
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
@@ -428,6 +489,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "Tuza, Conjecture on triangle packing/covering, in Finite and Infinite Sets (1981); F. Jones / D. Chen, Jones' conjecture on planar cc <= 2 cp",
+   "proof": "",
    "sources": [
     "packing-theory/implications_U9.v"
    ]
@@ -438,6 +500,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "plan v4 §6 edge policy / R4; OPG: Turan number of a finite family (open Conjecture) and number of cliques in minor-closed classes (open Question)",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2tur.v"
    ]
@@ -448,6 +511,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "plan v4 §6 edge policy / R4; OPG: Turan number of a finite family (open Conjecture) and Sidorenko's conjecture (open)",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2tur.v"
    ]
@@ -458,6 +522,7 @@
    "kind": "implies",
    "status": "candidate",
    "cite": "OPG_FULL_FORMALIZATION_PLAN §6 (vertex-minor-closed-chi-bounded => forbidden-induced-tree-chi-bounded); Geelen-Kwon-McCarty-Wollan, JCTB 158 (2023) 93-116; Gyarfas-Sumner",
+   "proof": "",
    "sources": [
     "chromatic-theory/implications_U8.v"
    ]
@@ -468,6 +533,7 @@
    "kind": "implies",
    "status": "refuted-direction",
    "cite": "plan v4 §6 edge policy / R4; OPG: disjoint shortest spanning trees (open Question) and minimal graphs with a prescribed number of spanning trees (open Conjecture, alpha(n)=o(log n))",
+   "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2tur.v"
    ]

@@ -52,9 +52,20 @@ implications = os.path.join(pkg, "theories", "conjectures", f"implications_{phas
 chk(ns, "package known", package if ns else f"unknown package {package}")
 chk(os.path.exists(stmt), "statement file exists", stmt)
 
-# 1) every expected formal_name is Defined
-src = open(stmt).read() if os.path.exists(stmt) else ""
-defined = set(re.findall(r"^\s*Definition\s+([A-Za-z0-9_']+)", src, re.M))
+# 1) every expected formal_name is Defined — search ALL conjecture files, not just
+#    <phase>.v: some milestones (e.g. the absorbed Digraph P9) define "already-formalized"
+#    rows in sibling files (classic_core.v / packing.v / sad.v) re-exported by <phase>.v.
+conj_dir = os.path.join(pkg, "theories", "conjectures")
+def_re = re.compile(r"^\s*Definition\s+([A-Za-z0-9_']+)", re.M)
+defined_in = {}  # formal_name -> module basename (no .v) that defines it
+for vf in sorted(glob.glob(os.path.join(conj_dir, "*.v"))):
+    base = os.path.basename(vf)[:-2]
+    try:
+        for n in def_re.findall(open(vf).read()):
+            defined_in.setdefault(n, base)
+    except OSError:
+        pass
+defined = set(defined_in)
 missing = [n for n in expected if n not in defined]
 chk(not missing, f"all {len(expected)} formal_names Defined", f"missing: {missing}" if missing else "")
 
@@ -95,11 +106,19 @@ chk(not ax_hits, "no top-level Axiom/Parameter/Admitted", f"found: {ax_hits}" if
 assum_ok, assum_detail = False, "skipped (compile failed)"
 if compiles and ns:
     probe = os.path.join(pkg, "theories", "conjectures", f"_assum_{phase}.v")
-    body = f"From {ns}.conjectures Require Import {phase}.\n" + \
+    # import EVERY conjecture module that defines an expected name (not just <phase>.v):
+    # milestones like Digraph P9 spread "already-formalized" rows across sibling files.
+    mods = sorted({defined_in[n] for n in expected if n in defined_in} | {phase})
+    body = f"From {ns}.conjectures Require Import {' '.join(mods)}.\n" + \
            "".join(f"Print Assumptions {n}.\n" for n in expected)
     open(probe, "w").write(body)
-    incl = " ".join(re.findall(r"-[QR]\s+\S+\s+\S+", cqp_txt)) or f"-R theories {ns}"
-    pr = run(["bash", "-c", f"coqc {incl} theories/conjectures/_assum_{phase}.v"])
+    # build coqc include flags as an argv LIST (no shell string interpolation of _CoqProject paths)
+    incl_flags = []
+    for m in re.findall(r"-[QR]\s+\S+\s+\S+", cqp_txt):
+        incl_flags += m.split()
+    if not incl_flags:
+        incl_flags = ["-R", "theories", ns]
+    pr = run(["coqc"] + incl_flags + [f"theories/conjectures/_assum_{phase}.v"])
     out = pr.stdout + pr.stderr
     closed = out.count("Closed under the global context")
     has_axioms = "Axioms:" in out
@@ -118,6 +137,7 @@ unjust = []
 for s in slugs:
     e = overlay.get(s)
     if not e:
+        unjust.append(f"{s}: no overlay entry (every milestone row needs overlay leg-state + provenance)")
         continue
     if e.get("statement") == "done" and not (compiles and not missing):
         unjust.append(f"{s}: statement=done but not (compiles & defined)")

@@ -1,4 +1,5 @@
 -R theories Spectral
+-Q ../base/theories GTBase
 
 -arg -w -arg -notation-overridden,-ambiguous-paths,-deprecated
 

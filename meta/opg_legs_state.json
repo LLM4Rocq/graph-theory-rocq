@@ -2040,6 +2040,126 @@
       "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
       "note": "D4inf4: iDigraph carrier; exists locally-finite HAT universal digraph. highly_arc_transitive = UNFOLDED automorphism action (adjacency-preserving bijection on directed paths, no group object); universal via alt_walk_from/walk_uses (polarity-flipping alternating walk). Guards has_arc+infinite+no_sink_source load-bearing (edgeless/finite-cycle excluded). Audited done, axiom-free."
+    },
+    "linial_berge_path_partition_duality": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "seymours_second_neighbourhood_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "woodalls_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "caccetta_haggkvist_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "monochromatoc_reachability_in_arc_colored_digraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "the_bermond_thomassen_conjecture": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "arc_disjoint_strongly_connected_spanning_subdigraphs": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "erdos_posa_property_for_long_directed_cycles": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "long_directed_cycles_in_digraph_with_minimum_in_and_out_degree": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "splitting_a_digraph_with_minimum_outdegree_constraints": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "directed_cycle_of_length_twice_the_minimum_outdegree": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+    },
+    "stable_set_meeting_all_longest_directed_paths": {
+      "statement": "done",
+      "grounding": "done",
+      "edges": "todo",
+      "correspondence": "todo",
+      "audit_page": "todo",
+      "commit": "bb0f97b",
+      "package": "digraph-theory",
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
     }
   }
 }

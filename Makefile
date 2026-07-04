@@ -1,7 +1,7 @@
 # graph-theory-rocq root build. Each package has a _CoqProject; we generate its Makefile.coq
 # and build, in dependency order (base first; area packages depend on base).
 PACKAGES := base chromatic-theory hamiltonicity-theory homomorphism-theory cycle-theory minor-theory packing-theory reconstruction-theory hypergraph-theory topological-graph-theory graph-theory-misc spectral-graph-theory extremal-graph-theory infinite-graph-theory
-LANDED := U1 chromatic-theory U2 hamiltonicity-theory U3 homomorphism-theory U4 chromatic-theory U5 chromatic-theory U6 cycle-theory U7 minor-theory U8 chromatic-theory U9 packing-theory U10 cycle-theory D1 cycle-theory D7 graph-theory-misc D5 spectral-graph-theory D2chr extremal-graph-theory D2ram extremal-graph-theory D2tur extremal-graph-theory D2pr extremal-graph-theory D2str extremal-graph-theory D3cr topological-graph-theory D3geo topological-graph-theory D3xseq topological-graph-theory D4doa infinite-graph-theory D4inf1 infinite-graph-theory D4inf2 infinite-graph-theory D4inf3 infinite-graph-theory D4inf4 infinite-graph-theory D4inf5 infinite-graph-theory D6emb topological-graph-theory U11 reconstruction-theory U12 hypergraph-theory U13 topological-graph-theory U13 packing-theory U13 graph-theory-misc
+LANDED := U1 chromatic-theory U2 hamiltonicity-theory U3 homomorphism-theory U4 chromatic-theory U5 chromatic-theory U6 cycle-theory U7 minor-theory U8 chromatic-theory U9 packing-theory U10 cycle-theory D1 cycle-theory D7 graph-theory-misc D5 spectral-graph-theory D2chr extremal-graph-theory D2ram extremal-graph-theory D2tur extremal-graph-theory D2pr extremal-graph-theory D2str extremal-graph-theory D3cr topological-graph-theory D3geo topological-graph-theory D3xseq topological-graph-theory D4doa infinite-graph-theory D4inf1 infinite-graph-theory D4inf2 infinite-graph-theory D4inf3 infinite-graph-theory D4inf4 infinite-graph-theory D4inf5 infinite-graph-theory D6emb topological-graph-theory U11 reconstruction-theory U12 hypergraph-theory U13 topological-graph-theory U13 packing-theory U13 graph-theory-misc P9 digraph-theory
 .PHONY: all clean gate audit $(PACKAGES)
 all: $(PACKAGES)
 
@@ -33,5 +33,9 @@ clean:
 	@for p in $(PACKAGES); do (cd $$p && rocq makefile -f _CoqProject -o Makefile.coq >/dev/null 2>&1 && $(MAKE) -f Makefile.coq clean) 2>/dev/null || true; done
 
 # NOTE: `base/` (G3-core) + `chromatic-theory/` (U1) build today; add each area package to
-# PACKAGES (with `<pkg>: base`) as its milestone lands. The absorbed `digraph-theory/` builds
-# via its own Makefile (heavy proofs) and is intentionally out of the default `all`.
+# PACKAGES (with `<pkg>: base`) as its milestone lands. The absorbed `digraph-theory/` (heavy
+# proofs) is kept out of the default `all`/`PACKAGES` to keep `make all` light — but its P9
+# milestone IS gated: `make gate` runs `check_milestone P9 digraph-theory` (it builds the package
+# itself, verifies all 32 formal_names Defined + axiom-free + Print Assumptions clean). The
+# already-formalized P9 rows live in sibling conjecture files (classic_core.v/packing.v/sad.v/
+# colouring_variants.v/long_dipath.v) which check_milestone now scans + imports.

@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 """Federation-wide conjecture dependency-graph extractor + gate (G1).
 
-Scoped to graph-theory-rocq (NOT legacy digraph-theory). Scans every package's
-theories/conjectures/*.v for implication/refutation EDGES from two sources:
+Scans every graph-theory-rocq package's theories/conjectures/*.v for @EDGE annotations, PLUS
+the absorbed digraph-theory's @EDGE annotations that lie BETWEEN corpus nodes (its P9 rows are
+part of the 227-corpus). Its legacy INTERNAL _implies_ theorems (short non-corpus node names)
+are NOT federation edges and are excluded — only its edges, never its theorems.
 
-  (1) explicit structured annotations (the machine-readable record for edges that are
-      candidate/refuted/external — i.e. NOT a plain Qed theorem):
+  (1) explicit structured annotations (the machine-readable record for every edge):
         (*@EDGE from=<A_statement> to=<B_statement> kind=<implies|equiv|refutes|specializes>
-                status=<verified|candidate|refuted-direction> cite="<source>" *)
-  (2) Qed-closed relative theorems named  <A>_implies_<B> / <A>_equiv_<B> / <A>_refutes_<B>
-      (proved edges — these carry status=verified and MUST exist as a Theorem).
+                status=<verified|candidate|refuted-direction> [proof=<thm>] cite="<source>" *)
+  (2) Qed-closed relative theorems named  <A>_implies_<B> / <A>_equiv_<B> / <A>_refutes_<B>,
+      which BACK the verified edges (a verified edge names its theorem via proof=<name>).
 
 Output: one meta/dependency_graph.json with a DETERMINISTIC, sorted edge list.
-Gate (`--check`): regenerates byte-identically (fails on drift) AND every verified
-implies/equiv edge has a matching Theorem in its file (a proved edge can't be merely declared).
-Includes a LEGACY compatibility report for the absorbed digraph-theory (its _implies_ theorem
-count vs its committed dependency_graph.json) — reported, not used to drive this format.
+Gate (`--check`): regenerates byte-identically (fails on drift) AND every VERIFIED implies/equiv
+edge names an existing proof= theorem in its file (right kind, endpoints consistent with from/to)
+— a proved edge can't be merely declared, and a stale/mismatched annotation fails the endpoint
+check. A LEGACY compatibility report for digraph-theory's own graph is included (reported only).
 """
 import json, os, re, sys
 
@@ -50,7 +51,8 @@ def scan(pkg):
             if status == "verified-literature":  # agents sometimes use the plan's term for a proved edge
                 status = "verified"
             edges.append({"from": kv.get("from"), "to": kv.get("to"), "kind": kv.get("kind"),
-                          "status": status, "cite": kv.get("cite", ""), "package": pkg, "file": fn})
+                          "status": status, "cite": kv.get("cite", ""), "proof": kv.get("proof", ""),
+                          "package": pkg, "file": fn})
         for m in THM_RE.finditer(txt):
             thms.append({"name": f"{m.group(1)}_{m.group(2)}_{m.group(3)}", "kind": m.group(2), "package": pkg, "file": fn})
     return edges, thms
@@ -59,6 +61,19 @@ all_edges, all_thms = [], []
 for pkg in PACKAGES:
     e, t = scan(pkg); all_edges += e; all_thms += t
 
+# The absorbed digraph-theory's P9 rows ARE part of the 227 corpus, so its @EDGE annotations
+# BETWEEN corpus nodes are federation edges. (Its legacy INTERNAL _implies_ theorems are NOT
+# federation edges — they use short non-corpus node names — so we take digraph's EDGES only,
+# never its theorems, and keep only edges whose both endpoints are corpus formal_names.)
+try:
+    corpus_nodes = {r.get("formal_name")
+                    for r in json.load(open(os.path.join(META, "opg_corpus_manifest.json")))["rows"]}
+except (OSError, ValueError, KeyError):
+    corpus_nodes = set()
+if os.path.isdir(os.path.join(MONO, "digraph-theory", "theories", "conjectures")):
+    dg_edges, _dg_thms = scan("digraph-theory")
+    all_edges += [e for e in dg_edges if e["from"] in corpus_nodes and e["to"] in corpus_nodes]
+
 def need(c, m):
     if not c:
         raise AssertionError("EDGE-GRAPH INVARIANT VIOLATED: " + m)
@@ -66,10 +81,21 @@ for e in all_edges:
     need(e["from"] and e["to"] and e["kind"] and e["status"], f"edge missing field: {e}")
     need(e["kind"] in KINDS, f"bad kind {e['kind']!r} in {e['file']}")
     need(e["status"] in STATUSES, f"bad status {e['status']!r} in {e['file']}")
-# a verified implies/equiv edge must be backed by an actual Theorem in its file
+# a verified implies/equiv edge must name its backing Theorem (proof=<name>), and that EXACT
+# theorem must exist in the edge's file with the right kind AND endpoints consistent with from/to
+# (guards against a stale/mismatched annotation that a same-kind-in-file check would wave through).
+STMT = "_statement"
+def core(node):
+    return node[:-len(STMT)] if node.endswith(STMT) else node
 for e in [e for e in all_edges if e["status"] == "verified" and e["kind"] in ("implies", "equiv")]:
-    need([t for t in all_thms if t["file"] == e["file"] and t["kind"] == e["kind"]],
-         f"verified {e['kind']} edge {e['from']}->{e['to']} ({e['file']}) has no matching Theorem")
+    pf = e.get("proof", "")
+    need(pf, f"verified {e['kind']} edge {e['from']}->{e['to']} ({e['file']}) must carry proof=<theorem name>")
+    need([t for t in all_thms if t["name"] == pf and t["file"] == e["file"] and t["kind"] == e["kind"]],
+         f"verified edge proof theorem '{pf}' (kind {e['kind']}) not found in {e['file']}")
+    a, sep, b = pf.partition(f"_{e['kind']}_")
+    fc, tc = core(e["from"]), core(e["to"])
+    need(sep and a and b and (a in fc or fc in a) and (b in tc or tc in b),
+         f"verified edge proof '{pf}' endpoints inconsistent with {e['from']}->{e['to']}")
 
 # dedup: collapse edges with identical (from,to,kind,status) — the SAME edge re-asserted in
 # multiple files (e.g. a cross-milestone refuted edge noted at both endpoints). Keep one, record
@@ -79,7 +105,7 @@ for e in all_edges:
     k = (e["from"], e["to"], e["kind"], e["status"])
     if k not in by_id:
         by_id[k] = {"from": e["from"], "to": e["to"], "kind": e["kind"], "status": e["status"],
-                    "cite": e["cite"], "sources": set()}
+                    "cite": e["cite"], "proof": e.get("proof", ""), "sources": set()}
     by_id[k]["sources"].add(f"{e['package']}/{e['file']}")
 edges_sorted = sorted(by_id.values(), key=lambda e: (e["from"], e["to"], e["kind"], e["status"]))
 for e in edges_sorted:
@@ -105,10 +131,11 @@ if os.path.isdir(dt):
                       "Reconcile within digraph-theory separately; it does NOT define the federation format."}
 
 graph = {
-    "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations + "
-               "_implies_/_equiv_ theorems across graph-theory-rocq packages (legacy digraph-theory excluded; "
-               "see `legacy`). Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails on drift. "
-               "Edges are sorted (from,to,kind,status,package) for determinism.",
+    "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations across "
+               "graph-theory-rocq packages + the absorbed digraph-theory's @EDGEs BETWEEN corpus nodes (P9); "
+               "digraph's legacy internal theorems are not federation edges (see `legacy`). Verified edges name "
+               "their backing theorem via proof=<name>. Regenerate: `python3 meta/build_edge_graph.py`; gate: "
+               "`--check` fails on drift + validates verified-edge proofs. Sorted (from,to,kind,status) for determinism.",
     "packages": PACKAGES,
     "totals": {"edges": len(edges_sorted),
                "by_status": {s: sum(1 for e in edges_sorted if e["status"] == s) for s in sorted(STATUSES)},

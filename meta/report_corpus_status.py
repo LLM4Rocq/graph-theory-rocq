@@ -155,6 +155,16 @@ if "--check" in sys.argv:
         errs.append(f"{overall['todo']} rows still todo (corpus not statement-complete)")
     if overall["done"] + overall["partial"] + overall["blocked"] != total:
         errs.append("done+partial+blocked != total (a row has an unexpected leg state)")
+    # overlay is the source of truth for per-row leg-state + provenance; assert the manifest
+    # mirrors it exactly, and that EVERY row has an overlay entry (so provenance is real, not a
+    # generated default). Catches overlay edits not re-merged into the manifest.
+    no_overlay = [r["slug"] for r in rows if r["slug"] not in ent]
+    if no_overlay:
+        errs.append(f"{len(no_overlay)} rows lack an overlay entry (provenance leak): {no_overlay[:6]}")
+    drift = [r["slug"] for r in rows
+             if r["slug"] in ent and ent[r["slug"]].get("statement", "todo") != state_of(r)]
+    if drift:
+        errs.append(f"{len(drift)} rows: overlay statement != manifest legs (re-run build_opg_manifest): {drift[:6]}")
     committed = open(OUT).read() if os.path.exists(OUT) else ""
     if committed != report:
         errs.append("CORPUS_STATUS.md is stale — run `python3 meta/report_corpus_status.py`")
