@@ -7,8 +7,9 @@
 >
 > - **212 done** (faithful, axiom-free, `Print Assumptions` clean) · **8 partial** (faithful,
 >   documented proxy/conditional) · **7 blocked** (needs foundations deliberately out of scope).
-> - **Release:** git tag **`opg-v1.0-227-attempted`** (the tag pins the exact commit;
->   `git rev-list -n1 opg-v1.0-227-attempted` gives the hash).
+> - **Release:** git tag **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, which
+>   had a since-fixed U4 encoding blocker + P9 gate-coverage gap found in external audit). The tag pins
+>   the exact commit; `git rev-list -n1 opg-v1.0.1-227-attempted` gives the hash.
 > - **Canonical living report:** [`meta/CORPUS_STATUS.md`](CORPUS_STATUS.md) — per-area & per-phase
 >   counts, every partial/blocked row with its exact blocker, base surfaces, per-area foundation
 >   modules, and the conjecture dependency graph. Regenerated + drift-checked by

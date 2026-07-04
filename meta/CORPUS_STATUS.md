@@ -109,7 +109,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Verifying this claim
 
-Release: **`opg-v1.0-227-attempted`** (the git tag pins the exact commit; run the gate at that tag).
+Release: **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, which had a since-fixed U4 encoding blocker + P9 gate-coverage gap). The git tag pins the exact commit; run the gate at that tag.
 
 CI (toolchain-free — no Coq build, no external OPG clone needed):
 

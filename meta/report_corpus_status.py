@@ -136,7 +136,8 @@ w("")
 
 # verification
 w("## Verifying this claim\n")
-w("Release: **`opg-v1.0-227-attempted`** (the git tag pins the exact commit; run the gate at that tag).\n")
+w("Release: **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, which had a since-fixed "
+  "U4 encoding blocker + P9 gate-coverage gap). The git tag pins the exact commit; run the gate at that tag.\n")
 w("CI (toolchain-free — no Coq build, no external OPG clone needed):\n")
 w("```sh\nmake audit   # build_edge_graph.py --check + report_corpus_status.py --check (invariants + no drift)\n```\n")
 w("Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):\n")
