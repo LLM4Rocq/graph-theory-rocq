@@ -63,3 +63,36 @@ planarity test) is built — a deliberate deferral, joining the 2 surface rows a
 > `crossing_sequences`' blocker is also narrower than the table says: cr-on-S_i is assemblable from
 > `xsplit` + `embeds_in_genus` (attemptable). The rest (drawings, point-sets, great circles, obstacle
 > number) still need metric geometry and stay blocked.
+
+> **UPDATE 3 (metric-geometry preflight — `foundations/geometry.v`, audited 3/3 SOUND):**
+> the residual metric-geometry rows were preflighted under the strict "build only what one row
+> justifies" rule. One primitive was justified and built: `orient` (the sign of a 2×2 determinant)
+> over an abstract ordered field, with `between`/`seg_cross`/`seg_meet`/`straightline_planar`/
+> `n_universal` derived from it (no metric, no Stdlib Reals → axiom-free). Outcome per row:
+>
+> | slug | outcome | why |
+> |---|---|---|
+> | small_universal_point_sets_for_planar_graphs | **DONE** | faithful `n_universal` over a real-closed field: injective placement, no vertex on a non-incident edge, independent edges never `seg_meet`. `forall R : rcfType` + Tarski–Seidenberg ⇒ equivalent to the ℝ² source (proof AND disproof transfer). No general-position side condition (the source imposes none). |
+> | crossing_sequences | doable next | cr-on-genus-`i` assembles from `crossing.v` `xsplit` + `embeds_in_genus` — no new geometry primitive; teed up as the next build. |
+> | are_different_notions_of_the_crossing_number_the_same | partial candidate | pair-cr vs cr needs two DRAWING semantics; expressible as a proxy over the crossing/embedding layer, not the full ℝ² drawing space. |
+> | consecutive_non_orientable_embedding_obstructions | partial candidate | non-orientable minor-minimal obstructions over the signed layer — proxy only (as recorded under UPDATE 2). |
+> | 3_colourability_of_arrangements_of_great_circles | **BLOCKED** | genuine spherical arrangement geometry (great circles in general position on S²) — no finite `orient`-only proxy is faithful. |
+> | drawing_disconnected_graphs_on_surfaces | **BLOCKED** | optimal drawings on an arbitrary surface Σ — continuous drawing space. |
+> | obstacle_number_of_planar_graphs | **BLOCKED** | obstacle/visibility geometry over arbitrary closed sets — the definition itself is the hard part; no faithful finite-polygon proxy. |
+>
+> The `orient`-only foundation is deliberately minimal: it was built for exactly one DONE row and
+> reused conceptually for the crossing_sequences plan. The three BLOCKED rows stay blocked (real
+> spherical / continuous / arbitrary-closed-set geometry). Infinite-combinatorics track is LAST.
+>
+> Residual caveats on the DONE row (recorded, none blocking — all `note`-severity in the 3/3-SOUND
+> audit): (1) the `forall R : rcfType` ⇔ ℝ² equivalence rests on a METATHEORETIC Tarski–Seidenberg
+> transfer (each fixed-`(c,n)` body is a first-order ordered-field sentence, field-independent across
+> real-closed fields) — argued in the file comments, standard and correct, but not itself certified by
+> the `.vo`; (2) `O(n)` is the all-`n` form `exists c, forall n` (equivalent to the textbook tail form
+> since a finite universal set exists for each small `n`, absorbed into `c` via `max`); (3) `P : seq`
+> counts size with multiplicity — at-least-as-strong as a distinct-point bound, since injectivity
+> forces the `n` used points distinct; (4) `c` is chosen inside `forall R` so may formally depend on
+> `R` — harmless because Tarski pins every `rcfType` to ℝ's truth; (5) the grounding lemma exercises
+> only the edgeless `K1` case, so the `between`/`seg_meet` clauses are never driven by an actual edge
+> in a checked-in lemma (`orient_unit`/`orient_id1`/`orient_id2` separately show the primitive has
+> content) — a grounding-coverage limitation, not a statement defect.

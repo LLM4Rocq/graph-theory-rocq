@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **204 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **11 partial** · **12 blocked**.
+- **205 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **11 partial** · **11 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -25,8 +25,8 @@
 | packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
-| topological-graph-theory | Topological | 11 | 0 | 7 | 18 |
-| **TOTAL** | | **204** | **11** | **12** | **227** |
+| topological-graph-theory | Topological | 12 | 0 | 6 | 18 |
+| **TOTAL** | | **205** | **11** | **11** | **227** |
 
 ## Per-phase (milestones)
 
@@ -34,7 +34,7 @@
 |---|--:|--:|--:|--:|
 | D1 | 15 | 0 | 0 | 15 |
 | D2 | 29 | 3 | 0 | 32 |
-| D3 | 4 | 0 | 6 | 10 |
+| D3 | 5 | 0 | 5 | 10 |
 | D4 | 2 | 7 | 5 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 3 | 0 | 1 | 4 |
@@ -70,7 +70,7 @@
 | infinite-graph-theory | strong_matchings_and_covers | iGraph carrier suffices; needs infinite hypergraph order theory |
 | infinite-graph-theory | unfriendly_partitions | iGraph carrier suffices; needs cardinal neighbour comparison |
 
-## Blocked — needs a layer deliberately out of scope (12)
+## Blocked — needs a layer deliberately out of scope (11)
 
 | area | slug | reason |
 |---|---|---|
@@ -85,7 +85,6 @@
 | topological-graph-theory | crossing_sequences | blocker narrowed (signed-layer audit): orientable layer + crossing.v xsplit already suffice to state cr-on-S_i (least splits landing in embeds_in_genus i, connected witnesses); attemptable in a future push |
 | topological-graph-theory | drawing_disconnected_graphs_on_surfaces | needs topological layer: optimal drawings on a surface |
 | topological-graph-theory | obstacle_number_of_planar_graphs | needs topological layer: obstacle/visibility geometry |
-| topological-graph-theory | small_universal_point_sets_for_planar_graphs | needs topological layer: point sets in R^2 + straight-line embeddings |
 
 ## Base surfaces (`graph-theory-base`, cross-area primitives)
 

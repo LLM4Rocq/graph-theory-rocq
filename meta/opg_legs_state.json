@@ -22,7 +22,7 @@
       "audit_page": "todo",
       "commit": "13cd1ad",
       "package": "chromatic-theory",
-      "note": "axiom-free, compiles; Reed⊥B-K refuted-direction recorded (see AUDIT_NOTES.md)"
+      "note": "axiom-free, compiles; Reed\u22a5B-K refuted-direction recorded (see AUDIT_NOTES.md)"
     },
     "the_borodin_kostochka_conjecture": {
       "statement": "done",
@@ -60,7 +60,7 @@
       "audit_page": "todo",
       "commit": "13cd1ad",
       "package": "chromatic-theory",
-      "note": "2<k floor confirmed faithful (k=1,2 are genuine counterexamples) — see AUDIT_NOTES.md"
+      "note": "2<k floor confirmed faithful (k=1,2 are genuine counterexamples) \u2014 see AUDIT_NOTES.md"
     },
     "high_girth_low_degree_4_chromatic_graphs": {
       "statement": "done",
@@ -107,7 +107,7 @@
       "audit_page": "todo",
       "commit": "b262ac7",
       "package": "hamiltonicity-theory",
-      "note": "Lovász; faithful, axiom-free"
+      "note": "Lov\u00e1sz; faithful, axiom-free"
     },
     "hamiltonicity_of_cayley_graphs": {
       "statement": "done",
@@ -1383,7 +1383,7 @@
       "audit_page": "todo",
       "commit": "27f7a11",
       "package": "graph-theory-misc",
-      "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) — fixed to a<b"
+      "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) \u2014 fixed to a<b"
     },
     "algorithm_for_graph_homomorphisms": {
       "statement": "done",
@@ -1403,7 +1403,7 @@
       "audit_page": "todo",
       "commit": "27f7a11",
       "package": "graph-theory-misc",
-      "note": "Track B: selected proposition = the o(sqrt n)-improvement branch (the source's disjunction is a classical tautology — audit-caught); value-estimation form, coupled prog + poly cost; no-const-prog defense Qed'd"
+      "note": "Track B: selected proposition = the o(sqrt n)-improvement branch (the source's disjunction is a classical tautology \u2014 audit-caught); value-estimation form, coupled prog + poly cost; no-const-prog defense Qed'd"
     },
     "ptas_for_feedback_arc_set_in_tournaments": {
       "statement": "done",
@@ -1423,7 +1423,7 @@
       "audit_page": "todo",
       "commit": "27f7a11",
       "package": "graph-theory-misc",
-      "note": "Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up)"
+      "note": "Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial \u2014 proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up)"
     },
     "triangle_free_strongly_regular_graphs": {
       "statement": "done",
@@ -1769,7 +1769,7 @@
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: direct form is_crossing_number 'K_n (Guy value) — non-vacuous (achievability part of the claim); %/4 exact for all n (audited)"
+      "note": "Wave 2: direct form is_crossing_number 'K_n (Guy value) \u2014 non-vacuous (achievability part of the claim); %/4 exact for all n (audited)"
     },
     "the_crossing_number_of_the_complete_bipartite_graph": {
       "statement": "done",
@@ -1779,7 +1779,7 @@
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: direct form is_crossing_number (KB m n) (Zarankiewicz value) — non-vacuous; degenerate m,n<=2 verified planar/0"
+      "note": "Wave 2: direct form is_crossing_number (KB m n) (Zarankiewicz value) \u2014 non-vacuous; degenerate m,n<=2 verified planar/0"
     },
     "crossing_numbers_and_coloring": {
       "statement": "done",
@@ -1789,7 +1789,7 @@
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: sub-level form (forall k achievable for G, exists j<=k achievable for K_t) — robust to exactly-k non-monotonicity; t=5 slice carries 4CT strength (audited)"
+      "note": "Wave 2: sub-level form (forall k achievable for G, exists j<=k achievable for K_t) \u2014 robust to exactly-k non-monotonicity; t=5 slice carries 4CT strength (audited)"
     },
     "the_crossing_number_of_the_hypercube": {
       "statement": "done",
@@ -1799,7 +1799,7 @@
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: two-sided eps-N on achievable counts — body <-> minimum-in-window proven by audit probes; N>=4 quantifier order load-bearing and correct"
+      "note": "Wave 2: two-sided eps-N on achievable counts \u2014 body <-> minimum-in-window proven by audit probes; N>=4 quantifier order load-bearing and correct"
     },
     "3_colourability_of_arrangements_of_great_circles": {
       "statement": "blocked",
@@ -1852,14 +1852,14 @@
       "note": "needs topological layer: obstacle/visibility geometry"
     },
     "small_universal_point_sets_for_planar_graphs": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "7e6bf03",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: point sets in R^2 + straight-line embeddings"
+      "note": "faithful finite-geometry encoding (foundations/geometry.v, orient-only): n_universal over R:rcfType \u2014 injective placement, no vertex on a non-incident edge, independent edges never seg_meet (full closed-segment test); NO general-position side condition. forall R:rcfType + Tarski-Seidenberg => equivalent to the R^2 source (proof AND disproof transfer). Audited 3/3 SOUND (oracle-attack + source-faithfulness + rocq-semantics), synth SOUND_DONE, 0 blockers; 5 note-level caveats recorded (metatheoretic Tarski transfer; all-n O(n) form; seq-multiplicity; c-inside-forall-R; K1-only grounding)."
     },
     "consecutive_non_orientable_embedding_obstructions": {
       "statement": "blocked",
@@ -1869,7 +1869,7 @@
       "audit_page": "todo",
       "commit": "1ebccac",
       "package": "topological-graph-theory",
-      "note": "signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes — K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate"
+      "note": "signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes \u2014 K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate"
     },
     "grunbaums_conjecture": {
       "statement": "done",
