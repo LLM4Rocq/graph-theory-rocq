@@ -1329,8 +1329,8 @@
       ],
       "rocq_idiom": "forall H hypergraph, edges bounded by k -> exists strongly_maximal_matching H /\\ strongly_minimal_cover H",
       "legs": {
-        "statement": "partial",
-        "grounding": "partial",
+        "statement": "done",
+        "grounding": "done",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"
@@ -2298,8 +2298,8 @@
       ],
       "rocq_idiom": "chi (OddDistanceGraph over R^2) = infinity",
       "legs": {
-        "statement": "blocked",
-        "grounding": "blocked",
+        "statement": "partial",
+        "grounding": "partial",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"
@@ -2662,8 +2662,8 @@
       ],
       "rocq_idiom": "forall G infinite, proper_minor G G",
       "legs": {
-        "statement": "partial",
-        "grounding": "partial",
+        "statement": "done",
+        "grounding": "done",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"
@@ -4041,8 +4041,8 @@
       ],
       "rocq_idiom": "every countably infinite graph has a 2-partition where each vertex has >= as many cross neighbours as own-class",
       "legs": {
-        "statement": "partial",
-        "grounding": "partial",
+        "statement": "done",
+        "grounding": "done",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"
@@ -4315,8 +4315,8 @@
       ],
       "rocq_idiom": "infinite rays/ends; not finite",
       "legs": {
-        "statement": "partial",
-        "grounding": "partial",
+        "statement": "done",
+        "grounding": "done",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"
@@ -4679,8 +4679,8 @@
       ],
       "rocq_idiom": "infinite graph, aleph_0 partition into triangle-free; set theory/ZFC",
       "legs": {
-        "statement": "blocked",
-        "grounding": "blocked",
+        "statement": "done",
+        "grounding": "done",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"
@@ -6600,8 +6600,8 @@
       ],
       "rocq_idiom": "exists locally-finite highly-arc-transitive universal digraph",
       "legs": {
-        "statement": "blocked",
-        "grounding": "blocked",
+        "statement": "done",
+        "grounding": "done",
         "edges": "todo",
         "correspondence": "todo",
         "audit_page": "todo"

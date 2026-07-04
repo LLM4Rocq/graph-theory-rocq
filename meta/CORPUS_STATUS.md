@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **206 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **11 partial** · **10 blocked**.
+- **212 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **8 partial** · **7 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -20,13 +20,13 @@
 | hamiltonicity-theory | Hamilton | 9 | 0 | 0 | 9 |
 | homomorphism-theory | Hom | 10 | 0 | 0 | 10 |
 | hypergraph-theory | Hypergraph | 4 | 0 | 0 | 4 |
-| infinite-graph-theory | Infinite | 2 | 7 | 5 | 14 |
+| infinite-graph-theory | Infinite | 8 | 4 | 2 | 14 |
 | minor-theory | Minor | 6 | 0 | 0 | 6 |
 | packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
 | topological-graph-theory | Topological | 13 | 0 | 5 | 18 |
-| **TOTAL** | | **206** | **11** | **10** | **227** |
+| **TOTAL** | | **212** | **8** | **7** | **227** |
 
 ## Per-phase (milestones)
 
@@ -35,7 +35,7 @@
 | D1 | 15 | 0 | 0 | 15 |
 | D2 | 29 | 3 | 0 | 32 |
 | D3 | 6 | 0 | 4 | 10 |
-| D4 | 2 | 7 | 5 | 14 |
+| D4 | 8 | 4 | 2 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 3 | 0 | 1 | 4 |
 | D7 | 4 | 1 | 0 | 5 |
@@ -54,7 +54,7 @@
 | U8 | 3 | 0 | 0 | 3 |
 | U9 | 13 | 0 | 0 | 13 |
 
-## Partial — faithful but conditional / needs a deferred layer (11)
+## Partial — faithful but conditional / needs a deferred layer (8)
 
 | area | slug | reason |
 |---|---|---|
@@ -62,23 +62,17 @@
 | extremal-graph-theory | covering_powers_of_cycles_with_equivalence_subgraphs | 2k<n guard admits n=2k+1 (refutable); regime guard insufficient |
 | extremal-graph-theory | mixing_circular_colourings_0 | M_c real infimum; rational-threshold approximation |
 | graph-theory-misc | finding_k_edge_outerplanar_graph_embeddings | Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up) |
-| infinite-graph-theory | end_devouring_rays | iGraph carrier suffices; needs ends machinery |
+| infinite-graph-theory | coloring_the_odd_distance_graph | D4inf5: iGraph on R*R over rcfType, sqrt-free odd-integer-distance edge; chi=infinity via READING-2 (finite-subgraph chromatic unboundedness: forall n, exists finite S not n-colourable). PROXY on two documented axes: reading-2 is the choice-free direction of chi=infinity (converse = De Bruijn-Erdos), and forall R:rcfType is field-generic vs the specific reals. Audited partial: odd_dist faithful, n>=1 slice carries open content (grounding not_1_colorable), axiom-free. |
 | infinite-graph-theory | hamiltonian_cycles_in_line_graphs_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity (topological double-ray cycles) |
 | infinite-graph-theory | hamiltonian_cycles_in_powers_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity |
-| infinite-graph-theory | infinite_uniquely_hamiltonian_graphs | iGraph carrier suffices; needs one-ended + infinite Hamiltonicity |
-| infinite-graph-theory | seymours_self_minor_conjecture | iGraph carrier suffices; needs infinite-graph minor theory |
-| infinite-graph-theory | strong_matchings_and_covers | iGraph carrier suffices; needs infinite hypergraph order theory |
-| infinite-graph-theory | unfriendly_partitions | iGraph carrier suffices; needs cardinal neighbour comparison |
+| infinite-graph-theory | infinite_uniquely_hamiltonian_graphs | D4inf3: exists locally_finite 1-ended r-regular (r>2) uniquely-hamiltonian G. PROXY: uniquely_hamiltonian = spanning DOUBLE RAY (int-indexed), faithful to a Hamilton CIRCLE only in the co-assumed 1-ended locally-finite class (not the general Freudenthal topological circle). Audited partial: guards 2<r/one_ended/locally_finite load-bearing, trivialization+refutation fail, axiom-free. |
 
-## Blocked — needs a layer deliberately out of scope (10)
+## Blocked — needs a layer deliberately out of scope (7)
 
 | area | slug | reason |
 |---|---|---|
 | infinite-graph-theory | characterizing_aleph_0_aleph_1_graphs | out of scope: aleph_1 cardinal arithmetic |
-| infinite-graph-theory | coloring_the_odd_distance_graph | out of scope: R^2 odd-distance geometry |
 | infinite-graph-theory | highly_arc_transitive_two_ended_digraphs | out of scope: ends + automorphism action |
-| infinite-graph-theory | unions_of_triangle_free_graphs | out of scope: ZFC / independence |
-| infinite-graph-theory | universal_highly_arc_transitive_digraphs | out of scope: universality + automorphisms |
 | topological-graph-theory | 3_colourability_of_arrangements_of_great_circles | needs topological layer: spherical arrangement geometry |
 | topological-graph-theory | are_different_notions_of_the_crossing_number_the_same | needs topological layer: two distinct drawing semantics |
 | topological-graph-theory | consecutive_non_orientable_embedding_obstructions | signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes — K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate |

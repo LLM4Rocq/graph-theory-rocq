@@ -33,3 +33,42 @@ infinite-minor / cardinal-comparison vocabulary — a future infinite-combinator
 characterizing_aleph_0_aleph_1_graphs (ℵ₁ cardinal arithmetic), coloring_the_odd_distance_graph (ℝ²
 odd-distance geometry), highly_arc_transitive_two_ended_digraphs & universal_highly_arc_transitive_digraphs
 (ends + automorphism actions + universality), unions_of_triangle_free_graphs (ZFC / independence-flavoured).
+
+## UPDATE (infinite-combinatorics track — M0–M5, 8 rows landed; audited 8/8, 0 blockers)
+
+A per-row **preflight** (12 classifiers + synth) reclassified the 12 non-done D4 rows; **8 are buildable**
+(6 done + 2 honest partials), **4 stay blocked**. Built over a minimal shared foundation in
+`foundations/igraph.v` — **no choice / cardinal arithmetic / point-set topology / automorphism-group
+placeholders**:
+
+- **M0 primitives**: `card_le P Q := ∃ injection {x|P x}→{y|Q y}` (the *choice-free* definition of cardinal
+  ≤); `finite_sub` (an `'I_n`-cover); `reachP`/`connected_set` (inductive walk-in-a-Prop-subset);
+  `infinite_graph` (Dedekind ∃ nat-injection); `end_equiv` (Halin ends via finite separators + `reachP`).
+
+Rows (each gated axiom-free; a consolidated 8-skeptic + synth audit found **no surviving trivialization,
+refutation, vacuity, or smuggle** — 0 blockers):
+
+| slug | milestone | encoding | status |
+|---|---|---|---|
+| unfriendly_partitions | D4inf1 | `∀ countable G, ∃ p, ∀x card_le (own_nbr)(cross_nbr)` | **done** |
+| unions_of_triangle_free_graphs | D4inf1 | `∃G, K4_free ∧ ¬ctf_cover` (ℵ₀-cover = symmetric `nat` edge-colouring, no mono triangle) | **done** |
+| seymours_self_minor_conjecture | D4inf2 | `∀ infinite G`, proper minor of itself; `minor_model` + 3-way `proper_witness` (vertex-del/contraction/edge-del) | **done** |
+| strong_matchings_and_covers | D4inf4 | `iHypergraph`; edges≤k ⟹ strongly-maximal matching + strongly-minimal cover via `card_le` on symmetric differences | **done** |
+| universal_highly_arc_transitive_digraphs | D4inf4 | `iDigraph`; HAT = UNFOLDED automorphism action on directed paths; `universal` via polarity-flipping `alt_walk`; guards has_arc+infinite+no_sink_source | **done** |
+| end_devouring_rays | D4inf3 | combinatorial `end_equiv`; countable end + disjoint ω-rays ⟹ devouring reconfiguration + `same_start` | **done** |
+| infinite_uniquely_hamiltonian_graphs | D4inf3 | loc-finite 1-ended r>2 regular; Hamilton circle **proxy** = spanning double ray (`int`-indexed) | **partial** |
+| coloring_the_odd_distance_graph | D4inf5 | `iGraph` on `R*R` over `rcfType`, sqrt-free odd-distance; χ=∞ **proxy** = finite-subgraph unboundedness (reading-2) | **partial** |
+
+**Vacuity guards that survived attack** (would trivialize/refute if dropped): seymours `proper_witness`
+(the identity model provably fails it — `identity_not_proper`) + `infinite_graph` (finite G is refutable);
+universal_HAT has_arc+infinite+no_sink_source (edgeless / finite directed cycle otherwise vacuous).
+**Two proxies** (documented in file headers, kept partial): the double-ray surrogate for the Freudenthal
+Hamilton circle (faithful only in the 1-ended locally-finite class), and reading-2 for χ=∞ (the
+choice-free direction; converse is De Bruijn–Erdős) plus `∀R:rcfType` field-genericity.
+**One recorded caveat** (not a defect): end_devouring_rays guards with whole-graph countability, stronger
+than the source's *countable end* — it formalizes the countable-graph special case of Halin's theorem.
+
+**4 rows stay BLOCKED**: hamiltonian_cycles_in_line_graphs / _in_powers (Freudenthal |G| + S¹ Hamilton
+circle — genuine point-set topology), characterizing_aleph_0_aleph_1_graphs (uncountable cardinal *value*
+ℵ₁ + no crisp consequent), highly_arc_transitive_two_ended_digraphs (Aut-group action + digraph-symmetry
+collapse). After this track: **212 done / 8 partial / 7 blocked**.

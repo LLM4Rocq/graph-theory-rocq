@@ -1922,14 +1922,14 @@
       "note": "K_omega exact-colourings, axiom-free"
     },
     "end_devouring_rays": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "iGraph carrier suffices; needs ends machinery"
+      "note": "D4inf3: combinatorial Halin ends (end_equiv via finite separators + reachP, no topology); countable end + disjoint wray-family => devouring reconfiguration with same_start. Audited done: K:=K and self-repeat trivialization fail, conclusion is Halin countable theorem (no refutation); axiom-free. Caveat: guarded by countable_graph G (stronger than the source countable END) \u2014 formalizes the countable-graph special case, documented, non-vacuous."
     },
     "hamiltonian_cycles_in_line_graphs_of_infinite_graphs": {
       "statement": "partial",
@@ -1957,39 +1957,39 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "iGraph carrier suffices; needs one-ended + infinite Hamiltonicity"
+      "note": "D4inf3: exists locally_finite 1-ended r-regular (r>2) uniquely-hamiltonian G. PROXY: uniquely_hamiltonian = spanning DOUBLE RAY (int-indexed), faithful to a Hamilton CIRCLE only in the co-assumed 1-ended locally-finite class (not the general Freudenthal topological circle). Audited partial: guards 2<r/one_ended/locally_finite load-bearing, trivialization+refutation fail, axiom-free."
     },
     "seymours_self_minor_conjecture": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "iGraph carrier suffices; needs infinite-graph minor theory"
+      "note": "D4inf2: every infinite_graph G is a proper minor of itself via minor_model (branch sets, reachP-connected) + proper_witness (3-way: vertex-del/contraction/edge-del). Audited done: identity model provably fails proper_witness (grounding identity_not_proper), infinite_graph guard load-bearing (finite G refutable), iRay is a concrete proper self-minor; axiom-free."
     },
     "unfriendly_partitions": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "iGraph carrier suffices; needs cardinal neighbour comparison"
+      "note": "D4inf1: 2-partition p; unfriendly p = forall x, card_le (own_nbr)(cross_nbr) (choice-free cardinal <=); guarded countable_graph. Audited done: constant/parity p trivialization fails (grounding: Komega const not unfriendly), single-edge/K3/star/Komega all admit unfriendly partitions (no refutation), axiom-free."
     },
     "strong_matchings_and_covers": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "iGraph carrier suffices; needs infinite hypergraph order theory"
+      "note": "D4inf4: iHypergraph carrier; edges<=k => exists strongly_maximal_matching /\\ strongly_minimal_cover, |.\\.| compared via choice-free card_le on symmetric-difference sets. Audited done: verbatim faithful, empty/full/maximal trivialization fails, finite/edgeless satisfy not refute; axiom-free."
     },
     "characterizing_aleph_0_aleph_1_graphs": {
       "statement": "blocked",
@@ -2002,14 +2002,14 @@
       "note": "out of scope: aleph_1 cardinal arithmetic"
     },
     "coloring_the_odd_distance_graph": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "partial",
+      "grounding": "partial",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "out of scope: R^2 odd-distance geometry"
+      "note": "D4inf5: iGraph on R*R over rcfType, sqrt-free odd-integer-distance edge; chi=infinity via READING-2 (finite-subgraph chromatic unboundedness: forall n, exists finite S not n-colourable). PROXY on two documented axes: reading-2 is the choice-free direction of chi=infinity (converse = De Bruijn-Erdos), and forall R:rcfType is field-generic vs the specific reals. Audited partial: odd_dist faithful, n>=1 slice carries open content (grounding not_1_colorable), axiom-free."
     },
     "highly_arc_transitive_two_ended_digraphs": {
       "statement": "blocked",
@@ -2022,24 +2022,24 @@
       "note": "out of scope: ends + automorphism action"
     },
     "unions_of_triangle_free_graphs": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "out of scope: ZFC / independence"
+      "note": "D4inf1: exists G, K4_free G /\\ ~ctf_cover G (ctf_cover = symmetric nat edge-colouring, no monochromatic triangle = union of aleph_0 triangle-free). Only STATED (open/ZFC-flavoured truth). Audited done: trivialization needs an uncountable adversarial graph, refutation IS the open question; symmetry+triangle guards non-buggy, axiom-free."
     },
     "universal_highly_arc_transitive_digraphs": {
-      "statement": "blocked",
-      "grounding": "blocked",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "out of scope: universality + automorphisms"
+      "note": "D4inf4: iDigraph carrier; exists locally-finite HAT universal digraph. highly_arc_transitive = UNFOLDED automorphism action (adjacency-preserving bijection on directed paths, no group object); universal via alt_walk_from/walk_uses (polarity-flipping alternating walk). Guards has_arc+infinite+no_sink_source load-bearing (edgeless/finite-cycle excluded). Audited done, axiom-free."
     }
   }
 }
