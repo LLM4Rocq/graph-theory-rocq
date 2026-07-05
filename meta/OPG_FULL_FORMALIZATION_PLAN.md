@@ -28,6 +28,9 @@
 >   geometry, automorphism-group actions, ZFC/independence meta-tags.
 > - **verified-edge expansion** (more `Qed`-closed inter-node implications) and **proof
 >   applications** for the solved/disproved records.
+> - **faithfulness checking** — since the corpus is statement-only, faithfulness is the crux;
+>   the techniques (refutation-scan gate check, settled-case proofs, equivalent re-encodings,
+>   mutation testing, blind readback, expert review) are in [`meta/FAITHFULNESS_CHECKS.md`](FAITHFULNESS_CHECKS.md).
 >
 > The detailed statement-first **plan (v4)** is retained below as the historical execution record.
 
