@@ -446,3 +446,14 @@ Lemma mtreewidth_le_mono (G : mgraph) (w w' : nat) :
 Proof.
 by move=> [T [D [Hdec Hw]]] ww'; exists T, D; split=> //; apply: leq_trans Hw ww'.
 Qed.
+
+(** Small instance at the 3-flow modulus: the single loop [Lp] carries a
+    genuine nowhere-zero 3-flow ([phi == 1], with [1 <= |1| <= 3-1 = 2]) —
+    grounds [has_nz_kflow] at the exact modulus [k=3] of the 3-flow conjecture
+    on a graph that really has an edge (not the vacuous edge-less witness). *)
+Lemma has_nz_kflow_Lp3 : has_nz_kflow Lp 3.
+Proof.
+exists (fun _ => 1); split; first exact: iconservative_Lp1.
+move=> e; rewrite normr1; split; first by [].
+by rewrite ler1n.
+Qed.

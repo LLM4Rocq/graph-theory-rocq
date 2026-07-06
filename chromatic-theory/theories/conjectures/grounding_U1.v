@@ -147,3 +147,19 @@ have /all_pred1P -> :
 rewrite undup_nseq; last by rewrite size_map -cardE cardsT card_ord.
 by [].
 Qed.
+
+(** ** [omega] (ω, clique number) — textbook identity ω('K_n) = n.
+    Grounds the load-bearing clique-number primitive used in the Borodin–
+    Kostochka (Row 6) and Reed (Row 9) statements: the whole vertex set of the
+    complete graph is a maximum clique, so its clique number equals n. *)
+Lemma omega_complete n : ω([set: 'K_n]) = n.
+Proof.
+have cardKn : #|[set: 'K_n]| = n by rewrite cardsT card_ord.
+apply/eqP; rewrite eqn_leq; apply/andP; split.
+- case: (omegaP [set: 'K_n]) => K /maxcliquesW /cliques_subset subK.
+  by apply: leq_trans (subset_leq_card subK) _; rewrite cardKn.
+- have H : #|[set: 'K_n]| <= ω([set: 'K_n]).
+    apply: clique_bound; rewrite inE; apply/andP; split; first exact: subsetT.
+    by apply/cliqueP; apply: clique_complete.
+  by rewrite cardKn in H.
+Qed.

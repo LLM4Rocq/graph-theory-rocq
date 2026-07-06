@@ -22,7 +22,7 @@
 From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude digraph dipath tournament.
-From Digraph Require Import dichromatic.
+From Digraph Require Import dichromatic chi_bounded.
 From Digraph Require Import grounding_dichromatic.
 
 Set Implicit Arguments.
@@ -130,3 +130,63 @@ End DCycChi.
     (Forb_ind(digon, C₃, S₂⁺) is χ⃗ ≤ 2, attained by the oriented, C₃-free, S₂⁺-free C₄). *)
 Corollary chi_dcycle_C4 : ~~ dicolorableb (dcycle 4) 1 /\ dicolorableb (dcycle 4) 2.
 Proof. exact: chi_dcycle_eq2. Qed.
+
+(** The directed 4-cycle has 4 vertices. *)
+Lemma card_dc4 : #|{: dcycle 4}| = 4.
+Proof. by rewrite card_ord. Qed.
+
+(** GROUNDING (chi_bounded.v, tvec_core "attained" clause): the directed 4-cycle
+    is a genuine member of the oriented, underlying-triangle-free class that is NOT
+    1-dicolourable (its dichromatic number is 2, not 1). This gives the tfree-class
+    "attained" existential real teeth — its members are not all trivially
+    1-dicolourable. It combines: (i) [oriented_dg] (no digons, by the mod-4 arc
+    relation), (ii) [underlying_triangle_free] (the underlying graph is the
+    undirected C₄, whose two diagonal pairs {0,2},{1,3} are non-adjacent, so no
+    3-clique fits in the 4 vertices), and (iii) [~~ dicolorableb _ 1] (reusing the
+    keystone [chi_dcycle_C4]). *)
+Lemma dcycle4_tfree_not1 :
+  oriented_dg (dcycle 4) /\ underlying_triangle_free (dcycle 4)
+  /\ ~~ dicolorableb (dcycle 4) 1.
+Proof.
+split; last split.
+- move=> u v; rewrite !dcycle_arcE.
+  by case: u => -[|[|[|[|]]]] ?; case: v => -[|[|[|[|]]]] ?.
+- rewrite /underlying_triangle_free /no_underlying_Kl.
+  move=> [S [cardS clq]].
+  pose o0 : dcycle 4 := Ordinal (isT : (0 < 4)%N).
+  pose o1 : dcycle 4 := Ordinal (isT : (1 < 4)%N).
+  pose o2 : dcycle 4 := Ordinal (isT : (2 < 4)%N).
+  pose o3 : dcycle 4 := Ordinal (isT : (3 < 4)%N).
+  have cardCS : #|~: S| = 1.
+    have H := cardsC S; rewrite cardS card_dc4 in H.
+    by move/eqP: H; rewrite eqn_add2l => /eqP.
+  have /cards1P[z Hz] : #|~: S| == 1 by rewrite cardCS.
+  have Sz : S = ~: [set z] by rewrite -Hz setCK.
+  have Smem : forall a : dcycle 4, (a \in S) = (a != z).
+    by move=> a; rewrite Sz !inE.
+  (* clique adjacency of the underlying sgraph unfolds to [urel]; a non-adjacent
+     pair inside [S] is a contradiction. *)
+  have contra : forall a b : dcycle 4,
+      a \in S -> b \in S -> a != b -> ~~ @urel (dcycle 4) a b -> False.
+    move=> a b Ha Hb ab nadj.
+    have Hadj : @urel (dcycle 4) a b := clq a b Ha Hb ab.
+    by rewrite Hadj in nadj.
+  (* the missing vertex [z] lies in at most one diagonal pair, so the other
+     diagonal pair is entirely in [S] and is non-adjacent. *)
+  have [zin|zout] := boolP (z \in [set o0; o2]).
+  + have z1 : o1 != z by apply/negP => /eqP e; move: zin; rewrite -e !inE.
+    have z3 : o3 != z by apply/negP => /eqP e; move: zin; rewrite -e !inE.
+    apply: (contra o1 o3).
+    * by rewrite Smem.
+    * by rewrite Smem.
+    * by [].
+    * by rewrite /urel !dcycle_arcE.
+  + have z0 : o0 != z by apply/negP => /eqP e; move: zout; rewrite -e !inE eqxx.
+    have z2 : o2 != z by apply/negP => /eqP e; move: zout; rewrite -e !inE eqxx orbT.
+    apply: (contra o0 o2).
+    * by rewrite Smem.
+    * by rewrite Smem.
+    * by [].
+    * by rewrite /urel !dcycle_arcE.
+- exact: (proj1 chi_dcycle_C4).
+Qed.

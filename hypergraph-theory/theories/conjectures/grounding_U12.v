@@ -314,3 +314,23 @@ apply/eqP; rewrite eqn_leq; apply/andP; split.
 - by rewrite -Hc2; apply: Hb1.
 - by rewrite -Hc1; apply: Hb2.
 Qed.
+
+(** ================================================================= *)
+(** ** Row 1 — [union_closed] : GUARD-HAS-TEETH *)
+
+Notation O2 i := (@Ordinal 2 i isT).
+
+(** GUARD HAS TEETH: the two-singleton family {{0},{1}} over ['I_2] is NOT
+    union-closed — the union {0} :|: {1} = {0,1} of its two members escapes the
+    family (both members are singletons), so [union_closed] genuinely constrains
+    a family and Frankl's hypothesis is not vacuously satisfiable. *)
+Lemma frankl_union_closed_teeth :
+  ~ union_closed [set [set O2 0]; [set O2 1]].
+Proof.
+move=> H.
+have HA : [set O2 0] \in [set [set O2 0]; [set O2 1]] by rewrite !inE eqxx.
+have HB : [set O2 1] \in [set [set O2 0]; [set O2 1]] by rewrite !inE eqxx orbT.
+move: (H _ _ HA HB); rewrite !inE => /orP[] /eqP/setP H2.
+- by move: (H2 (O2 1)); rewrite !inE eqxx orbT -val_eqE.
+- by move: (H2 (O2 0)); rewrite !inE eqxx -val_eqE.
+Qed.

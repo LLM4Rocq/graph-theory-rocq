@@ -268,3 +268,59 @@ Lemma mapping_planar_statement_shape :
      0 < k -> wagner_planar G -> girth_geq G (4 * k) ->
      homs_to G (cycle_graph (2 * k + 1))).
 Proof. by []. Qed.
+
+(** ** [tensor_product] (×, Hedetniemi's product) — non-vacuity, teeth, law.
+
+    The tensor / categorical product is the central construction of Row 1
+    (Hedetniemi).  These three lemmas ground it: its carrier is not spuriously
+    edgeless, tensoring genuinely depends on both factors (not an always-full
+    relation), and adjacency obeys the defining product law. *)
+
+(** Inhabitation: the tensor product of two edge-bearing graphs has an edge —
+    [(0,0) -- (1,1)] in ['K_3 × 'K_3] (both coordinate pairs are distinct, hence
+    adjacent in ['K_3]).  The Hedetniemi carrier is not spuriously edgeless. *)
+Lemma tensor_product_has_edge : exists x y : (tensor_product 'K_3 'K_3), x -- y.
+Proof.
+exists (@Ordinal 3 0 isT, @Ordinal 3 0 isT).
+exists (@Ordinal 3 1 isT, @Ordinal 3 1 isT).
+by rewrite /edge_rel/= /tensor_rel/=.
+Qed.
+
+(** Guard has teeth: tensoring any graph [G] with ['K_1] kills every edge (the
+    second coordinate is forced equal, and adjacency is irreflexive).  So the
+    tensor relation genuinely depends on both factors — it is not always full. *)
+Lemma tensor_product_K1_edgeless (G : sgraph) (x y : tensor_product G 'K_1) :
+  ~~ (x -- y).
+Proof.
+have E2 : x.2 = y.2 by rewrite [x.2]ord1 [y.2]ord1.
+by rewrite /edge_rel/= /tensor_rel/= E2 sg_irrefl andbF.
+Qed.
+
+(** Structural law: adjacency in [G × H] projects to adjacency in both
+    coordinates — the defining property of the categorical product. *)
+Lemma tensor_edge_proj (G H : sgraph) (x y : tensor_product G H) :
+  x -- y -> (x.1 -- y.1) && (x.2 -- y.2).
+Proof. by []. Qed.
+
+(** ** [girth_geq] — satisfiability witness (Row 2 / Row 7 premise). *)
+
+(** Inhabitation: [girth_geq 'K_1 g] holds for every [g] — ['K_1] is acyclic, so
+    it has no genuine cycle (any [ucycle] is [uniq], hence of size [<= 1 < 3]) and
+    vacuously satisfies the girth bound.  So [girth_geq] is not accidentally
+    always-false (which would make the pentagon/planarity implications vacuous). *)
+Lemma girth_geq_K1 g : girth_geq 'K_1 g.
+Proof.
+move=> c /andP[_ uc] sz.
+have E : #|mem c| = size c by apply/card_uniqP.
+have le1 : size c <= 1.
+  rewrite -E; apply: leq_trans (max_card (mem c)) _; by rewrite card_ord.
+by move: (leq_trans sz le1).
+Qed.
+
+(** ** [is_core] — satisfiability witness (Row 4 / Row 6 conclusion). *)
+
+(** Inhabitation: ['K_1] is a core — every endomorphism of the one-vertex graph
+    is (trivially) bijective.  So the [is_core] conclusion predicate is
+    satisfiable, not accidentally always-false. *)
+Lemma is_core_K1 : is_core 'K_1.
+Proof. by move=> f _; exists f; move=> x; rewrite (ord1 (f (f x))) (ord1 x). Qed.

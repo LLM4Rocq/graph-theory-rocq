@@ -197,3 +197,29 @@ Qed.
 Lemma reconstructible_self (G : sgraph) :
   reconstructible G -> inhabited (G ≃ G).
 Proof. by move=> _; exact: (inhabits diso_id). Qed.
+
+(** ============================================================================
+    [is_tree] / [is_forest] — the tree hypothesis (Row 3 Graham, Row 4 Ulam).
+    ========================================================================== *)
+
+(** witness / satisfiability: the single-vertex graph [sunit] IS a tree, so the
+    [is_tree [set: T]] hypothesis of Graham's tree-reconstruction problem is not
+    vacuously empty. *)
+Lemma is_tree_sunit : is_tree [set: sunit].
+Proof.
+split; first exact: unit_forest.
+have -> : [set: sunit] = [set (tt : sunit)]
+  by apply/setP => x; case: x; rewrite !inE eqxx.
+exact: connected1.
+Qed.
+
+(** guard-has-teeth: the triangle [Kn 3] is NOT a forest (hence not a tree), so
+    the [is_forest]/[is_tree] guard genuinely bites (library lemma [forest3]:
+    a forest on >= 3 vertices has a non-adjacent pair, but [Kn 3] is complete). *)
+Lemma not_forest_Kn3 : ~ is_forest [set: Kn 3].
+Proof.
+move=> Hf.
+have card3 : (3 <= #|Kn 3|)%N by rewrite card_ord.
+have [x [y [xy nadj]]] := forest3 Hf card3.
+by rewrite Kn_edge xy in nadj.
+Qed.

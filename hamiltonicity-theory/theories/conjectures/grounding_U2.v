@@ -198,3 +198,29 @@ Lemma not_hamilton_decomp_K1 : ~ hamilton_decomposition_into_two 'K_1.
 Proof.
 by case=> c1 [c2 [hc _ _ _]]; move: hc; apply/negP/no_ham_cycle_K1.
 Qed.
+
+(** ** [wagner_planar] — inhabitation: 'K_4 is combinatorially planar (it has
+    NEITHER a K5 NOR a K3,3 minor), via the [minor_card] cardinality bound
+    (#|'K_5| = 5 > 4 = #|'K_4| and #|'K_3,3| = 6 > 4).  Grounds the shared
+    planarity hypothesis of Rows 5, 7 and 8, otherwise unwitnessed. *)
+Lemma wagner_planar_K4 : wagner_planar 'K_4.
+Proof.
+split => H.
+- by move: (minor_card H); rewrite !card_ord.
+- by move: (minor_card H); rewrite card_sum !card_ord.
+Qed.
+
+(** ** [bipartite] — guard-has-teeth: 'K_3 (an odd cycle) is NOT bipartite, so
+    the bipartite hypothesis of Barnette's conjecture (Row 8) genuinely excludes
+    graphs (it is not vacuously satisfiable).  Any 2-colouring of the triangle
+    repeats a colour on two of the three pairwise-adjacent vertices (pigeonhole:
+    3 vertices, 2 colours), contradicting the no-monochromatic-edge condition. *)
+Lemma not_bipartite_K3 : ~ bipartite 'K_3.
+Proof.
+case=> f Hf.
+have eab : (@ord0 2 : 'K_3) -- (@Ordinal 3 1 isT) by rewrite /edge_rel /= /complete_rel /=.
+have ebc : (@Ordinal 3 1 isT : 'K_3) -- (@Ordinal 3 2 isT) by rewrite /edge_rel /= /complete_rel /=.
+have eac : (@ord0 2 : 'K_3) -- (@Ordinal 3 2 isT) by rewrite /edge_rel /= /complete_rel /=.
+move: (Hf _ _ eab) (Hf _ _ ebc) (Hf _ _ eac).
+by case: (f (@ord0 2)); case: (f (@Ordinal 3 1 isT)); case: (f (@Ordinal 3 2 isT)).
+Qed.

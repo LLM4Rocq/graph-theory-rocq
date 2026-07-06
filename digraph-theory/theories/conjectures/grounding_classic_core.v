@@ -245,3 +245,19 @@ Print Assumptions tournament_indeg_outdeg.
 Print Assumptions C3_diregular1.
 Print Assumptions C3_has_seymour_vertex.
 Print Assumptions TT_has_source.
+
+(** ** [outdeg_in] on the FULL vertex set matches [outdeg] — grounds the
+    load-bearing [outdeg_in] primitive on which the (fixed) splitting-min-outdegree
+    statement is built: restricting the out-neighbourhood to [set: D] is no
+    restriction. *)
+Lemma outdeg_inT_eq (D : diGraphType) (v : D) : outdeg_in [set: D] v = outdeg v.
+Proof. by rewrite /outdeg_in /outdeg; apply: eq_card => w; rewrite !inE. Qed.
+
+(** ** [diregular] genuinely constrains: C3 is 1-diregular (C3_diregular1) but is
+    NOT 2-diregular — so the [diregular D d] hypothesis has teeth (it is not
+    satisfied at every degree). *)
+Lemma not_diregular_C3_2 : ~~ diregular C3 2.
+Proof.
+apply/forallPn; exists (0%R : C3).
+by rewrite negb_and C3_outdeg.
+Qed.

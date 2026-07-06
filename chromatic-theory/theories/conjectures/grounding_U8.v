@@ -155,3 +155,27 @@ Proof. by split; [move=> G H [] | exact: proper_class_empty]. Qed.
 Print Assumptions bounding_the_chromatic_number_of_triangle_free_graph_statement.
 Print Assumptions graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement.
 Print Assumptions vertex_minor_closed_classes_are_chi_bounded_statement.
+
+(** ============================================================================
+    Row 1 — triangle-free guard (inlined in
+    [bounding_the_chromatic_number_of_triangle_free_graph_statement]).
+    ========================================================================== *)
+
+(** ** inhabitation: 'K_2 (a graph WITH an edge) is triangle-free.  Three
+    pairwise-adjacent vertices would be pairwise distinct, but 'K_2 has only 2
+    vertices, so no triangle exists. *)
+Lemma triangle_free_K2 (x y z : 'K_2) : x -- y -> y -- z -> z -- x -> False.
+Proof.
+by move: x y z => -[[|[|?]] ?] [[|[|?]] ?] [[|[|?]] ?]; rewrite /edge_rel //=.
+Qed.
+
+(** ** guard-has-teeth: 'K_3 is NOT triangle-free — the three distinct vertices
+    0,1,2 are pairwise adjacent, forming a triangle.  Rules out an accidentally
+    vacuous guard that would apply the bound to every graph. *)
+Lemma not_triangle_free_K3 :
+  ~ (forall x y z : ('K_3), x -- y -> y -- z -> z -- x -> False).
+Proof.
+move=> H.
+by apply: (H (@Ordinal 3 0 isT) (@Ordinal 3 1 isT) (@Ordinal 3 2 isT));
+   rewrite /edge_rel /=.
+Qed.

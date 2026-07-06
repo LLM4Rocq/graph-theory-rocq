@@ -217,3 +217,20 @@ have dotC : (u *m v^T) 0 0 = (v *m u^T) 0 0.
   by rewrite !mxE; apply: eq_bigr => j _; rewrite !mxE mulrC.
 by rewrite dotC andbCA.
 Qed.
+
+(** ** Row 5 — little-o(k²) has teeth *)
+
+(** [is_o_ksq] is a GENUINE constraint: [k²] itself is NOT o(k²) (complements
+    [is_o_ksq_0], which only shows the zero function qualifies — so the predicate
+    is not vacuously satisfied by every [f]).  Instantiating the [c = 2] regime, a
+    large [k] would force [2·k² ≤ k²], impossible once [k² > 0]. *)
+Lemma not_is_o_ksq_sq : ~ is_o_ksq (fun k => k * k)%N.
+Proof.
+move=> /(_ 2 isT) [N H].
+set k := maxn N 1.
+have kN : (N <= k)%N by exact: leq_maxl.
+have k0 : (0 < k)%N by rewrite /k leq_max orbT.
+have kk0 : (0 < k * k)%N by rewrite muln_gt0 k0.
+have hk : (2 * (k * k) <= k * k)%N by exact: (H k kN).
+by move: hk; rewrite -{2}(mul1n (k * k))%N (leq_pmul2r kk0).
+Qed.

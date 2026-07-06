@@ -140,3 +140,17 @@ Proof. by rewrite /cayley_adj !in_setT orbT andbT. Qed.
 (** [has_induced_copy] is reflexive: every graph contains an induced copy of itself. *)
 Lemma has_induced_copy_refl (G : sgraph) : has_induced_copy G G.
 Proof. by constructor; apply: (@ISubgraph G G id (@inj_id _)) => x y. Qed.
+
+(** [has_induced_copy] has TEETH: ['K_2] has NO induced copy in ['K_1], so the
+    Erdős–Hajnal hypothesis [~ has_induced_copy H G] is genuinely satisfiable (the
+    H-induced-free class is nonempty — not vacuously true).  An induced embedding
+    ['K_2 ⇀ 'K_1] would inject the two distinct vertices of ['K_2] into the single
+    vertex of ['K_1], contradicting [isubgraph_inj]. *)
+Lemma not_has_induced_copy_K2_K1 : ~ has_induced_copy 'K_2 'K_1.
+Proof.
+case=> emb.
+have E : emb ord0 = emb (@Ordinal 2 1 isT).
+  by rewrite [emb ord0]ord1 [emb (@Ordinal 2 1 isT)]ord1.
+have contra := isubgraph_inj emb ord0 (@Ordinal 2 1 isT) E.
+by move/eqP: contra; rewrite -val_eqE.
+Qed.

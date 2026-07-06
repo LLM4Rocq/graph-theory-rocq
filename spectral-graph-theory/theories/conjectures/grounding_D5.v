@@ -146,3 +146,79 @@ Proof. by move=> h k a; rewrite h. Qed.
 Lemma same_csf_trans (G H K : sgraph) :
   same_csf G H -> same_csf H K -> same_csf G K.
 Proof. by move=> h1 h2 k a; rewrite h1 h2. Qed.
+
+(** ============================================================================
+    Rows 2, 3, 5 — the area-local SPECTRAL foundation vocabulary
+    ([is_signing], [spectral_radius_le], [total_count]/[is_lgraph],
+    [is_deg_sorted], [is_spectrum]) that D5's three spectral rows are built on.
+    These records are appended AFTER the Row-1/Row-4 lemmas so that opening
+    [ring_scope] here does not affect any of the combinatorial lemmas above.
+    ========================================================================== *)
+
+From mathcomp Require Import order.
+Import GRing.Theory Num.Theory.
+Local Open Scope ring_scope.
+
+(** SATISFIABLE WITNESS (Row 2).  The plain adjacency matrix is itself a symmetric
+    signing (all edge entries [+1]); this inhabits [is_signing], so the Row-2
+    existential [exists S, is_signing S /\ ...] is not over an empty domain. *)
+Lemma is_signing_adjmx (R:rcfType) (G:sgraph) : is_signing (adjmx R G).
+Proof.
+split.
+- by move=> i j; rewrite !mxE (@sg_sym G (enum_val i) (enum_val j)).
+- move=> i j; rewrite !mxE; case: (enum_val i -- enum_val j).
+  + by left.
+  + by [].
+Qed.
+
+(** GUARD-HAS-TEETH (Row 2).  On [K_2] (which has an edge) the ZERO matrix is NOT a
+    signing: the edge clause forces a [±1] entry, so [is_signing] genuinely
+    constrains edges and is not vacuously satisfiable by the trivial matrix. *)
+Lemma is_signing_zero_no_teeth (R:rcfType) :
+  ~ is_signing (G:='K_2) (0 : 'M[R]_(#|'K_2|)).
+Proof.
+move=> [_ He].
+have Hab : (ord0 : 'K_2) -- (@Ordinal 2 1 isT : 'K_2).
+  by rewrite /edge_rel /=.
+move: (He (enum_rank (ord0 : 'K_2)) (enum_rank (@Ordinal 2 1 isT : 'K_2))).
+rewrite !enum_rankK Hab !mxE.
+move=> [] /eqP; first by rewrite eq_sym oner_eq0.
+by rewrite eq_sym oppr_eq0 oner_eq0.
+Qed.
+
+(** STRUCTURAL LAW (Row 2).  [spectral_radius_le] is monotone in the bound [b]:
+    if all eigenvalues are [<= b] and [b <= b'] then they are [<= b'].  Confirms
+    the intended "all eigenvalues bounded by [b]" reading of the predicate. *)
+Lemma spectral_radius_le_mono (R:rcfType) n (A:'M[R]_n) (b b':R) :
+  b <= b' -> spectral_radius_le A b -> spectral_radius_le A b'.
+Proof. move=> hb H x /H hx; exact: (Order.le_trans hx hb). Qed.
+
+(** SATISFIABLE WITNESS (Row 3).  There is always at least one labelled [n]-graph
+    (the edgeless one), so [total_count n > 0] and the spectral-determination
+    density [determined_count n / total_count n] has a non-zero denominator. *)
+Lemma total_count_gt0 (n:nat) : (0 < total_count n)%N.
+Proof.
+rewrite /total_count card_gt0; apply/set0Pn.
+exists [ffun _ => false].
+rewrite inE /is_lgraph; apply/andP; split.
+- by apply/forallP => p; rewrite !ffunE.
+- by apply/forallP => i; rewrite ffunE.
+Qed.
+
+(** SATISFIABLE WITNESS (Row 5).  The non-increasing sort of the degree sequence is
+    a valid [is_deg_sorted] witness (a permutation of [degseq G] that is [geq]-
+    sorted), so the Row-5 body [forall d, is_deg_sorted G d -> ...] is not vacuous. *)
+Lemma is_deg_sorted_sort (G:sgraph) : is_deg_sorted G (sort geq (degseq G)).
+Proof.
+split; first by rewrite perm_sort.
+by apply: sort_sorted => x y; exact: leq_total.
+Qed.
+
+(** SATISFIABLE WITNESS (Row 5).  The empty spectrum is the spectrum of the [0x0]
+    matrix ([char_poly] of a [0x0] matrix is [1 = \prod_(x <- [::]) ...]), so the
+    factorisation predicate [is_spectrum] the Row-5 [forall] hinges on is inhabited. *)
+Lemma is_spectrum_nil (R:rcfType) (A:'M[R]_0) : is_spectrum A [::].
+Proof.
+split=> //.
+by rewrite big_nil /char_poly det_mx00.
+Qed.

@@ -364,3 +364,70 @@ Lemma m3_edge_is_theorem :
   ~ (forall D : diGraphType,
         (0 < #|D|)%N -> oriented_dg D -> underlying_triangle_free D -> dicolorableb D 2).
 Proof. exact: m3_landmark_refutes_2bound. Qed.
+
+(** ==================================================================== *)
+(** ** H. The [eulerian] antecedent (colouring_variants.v) discriminates.
+
+    [majority_3col_eulerian_statement] quantifies over Eulerian digraphs
+    ([indeg v = outdeg v] everywhere). We ground the antecedent both ways:
+    the directed triangle C3 IS Eulerian (a genuine, non-degenerate 3-vertex
+    member, unlike the 1-vertex TT 1), while the single arc TT 2 is NOT — so the
+    guard has teeth. *)
+
+(** C3 is Eulerian: every vertex has in-degree = out-degree = 1. *)
+Lemma eulerian_C3 : eulerian C3.
+Proof.
+apply/forallP => v.
+rewrite c3_outdeg1 /indeg.
+have -> : [set u | u --> v] = [set (v - 1)%R].
+  apply/setP => u; rewrite !inE arcC3E.
+  apply/idP/idP => /eqP H; apply/eqP.
+  - by rewrite H addrK.
+  - by rewrite H subrK.
+by rewrite cards1.
+Qed.
+
+(** RED-FLAG teeth: the single arc TT 2 (0 -> 1) is NOT Eulerian — vertex 0 has
+    out-degree 1 but in-degree 0. *)
+Lemma not_eulerian_TT2 : ~~ eulerian (TT 2).
+Proof.
+apply/forallPn; exists (ord0 : TT 2).
+have Ho : outdeg (ord0 : TT 2) = 1%N.
+  rewrite /outdeg.
+  have -> : [set w | (ord0 : TT 2) --> w] = [set ord_max].
+    by apply/setP => w; rewrite !inE arcTTE; case: w => -[|[|]].
+  by rewrite cards1.
+have Hi : indeg (ord0 : TT 2) = 0%N.
+  rewrite /indeg.
+  have -> : [set u | u --> (ord0 : TT 2)] = set0.
+    by apply/setP => u; rewrite !inE arcTTE; case: u => -[|[|]].
+  by rewrite cards0.
+by rewrite Ho Hi.
+Qed.
+
+(** ==================================================================== *)
+(** ** I. [acyclic_number_ge] teeth (chi_bounded.v, avec_core "attained" clause).
+
+    The edgeless digraph [Edg n] on [n] vertices has acyclic number exactly [n]
+    (all of V is arc-free, hence acyclic) but NO acyclic set of size [n+1] — no set
+    can exceed the [n] vertices. So [acyclic_number_ge] genuinely FAILS on a real
+    order-[n] object, giving the "attained" clause [~ acyclic_number_ge D (g n).+1]
+    teeth (without it, [g := 1] would satisfy the lower bound vacuously). *)
+
+Definition Edg (n : nat) : Type := 'I_n.
+Section EdgInst.
+Variable n : nat.
+HB.instance Definition _ := Finite.on (Edg n).
+HB.instance Definition _ := HasArc.Build (Edg n) [rel u v : 'I_n | false].
+End EdgInst.
+
+Lemma Edg_card (n : nat) : #|{: Edg n}| = n.
+Proof. by rewrite /Edg card_ord. Qed.
+
+Lemma not_acyclic_number_ge_Edg_succ (n : nat) : ~ acyclic_number_ge (Edg n) n.+1.
+Proof.
+rewrite /acyclic_number_ge /has_acyclic_set => /existsP[S /andP[hc _]].
+have hle : (#|S| <= #|{: Edg n}|)%N := max_card (mem S).
+move: hle; rewrite Edg_card => hle.
+by move: (leq_trans hc hle); rewrite leqNgt ltnSn.
+Qed.

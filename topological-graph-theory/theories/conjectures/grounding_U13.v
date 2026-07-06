@@ -124,3 +124,21 @@ Print Assumptions k_degenerate_on_max.
 Print Assumptions k_degenerate_on_mono.
 Print Assumptions k_degenerate_on_subset.
 Print Assumptions k_degenerate_max.
+
+(** ============================================================================
+    [is_forest] (coq-graph-theory, reused by row 1) — inhabitation witness.
+    ========================================================================== *)
+
+(** ** witness: the empty vertex set is a forest.  This grounds the [is_forest S]
+    conclusion of the row-1 existential ([exists S, is_forest S /\ …]) with a
+    concrete satisfying [S = set0]: any irredundant path contained in [set0] would
+    have its start vertex in [set0] (impossible), so the uniqueness clause of
+    [is_forest] holds vacuously. *)
+Lemma is_forest0 (G : sgraph) : is_forest (set0 : {set G}).
+Proof.
+move=> x y p q [_ pS] _.
+have xS : x \in (set0 : {set G}) by apply: (subsetP pS); exact: path_begin.
+by rewrite in_set0 in xS.
+Qed.
+
+Print Assumptions is_forest0.

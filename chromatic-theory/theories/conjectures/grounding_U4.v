@@ -240,3 +240,24 @@ exists (fun _ => ord0); split.
      rewrite /edge_rel /= (ord1 x) (ord1 y) eqxx.
 - by move=> B _ x y _ _ _; rewrite (ord1 x) (ord1 y).
 Qed.
+
+(** ============================================================================
+    Minor guards used by Rows 8 and 10.
+    ========================================================================== *)
+
+(** ** [minor] guard-has-teeth (Row 8, [list_hadwiger_statement]): the
+    K_t-minor-free hypothesis [~ minor G ('K_t)] is genuinely exercised — the
+    single-vertex graph ['K_1] has NO ['K_2] minor (a minor never has more
+    vertices than its host). *)
+Lemma K2_not_minor_K1 : ~ minor 'K_1 'K_2.
+Proof. by move=> /minor_card; rewrite !card_ord. Qed.
+
+(** ** [wagner_planar] inhabitation (Row 10 planarity guard): ['K_1] is
+    Wagner-planar — it has neither a K5 nor a K3,3 minor, both ruled out by
+    cardinality (#|'K_5| = 5 and #|K_{3,3}| = 6 both exceed #|'K_1| = 1). *)
+Lemma wagner_planar_K1 : wagner_planar 'K_1.
+Proof.
+split.
+- by move=> /minor_card; rewrite !card_ord.
+- by move=> /minor_card; rewrite card_sum !card_ord.
+Qed.

@@ -234,3 +234,18 @@ Print Assumptions remove_arcs_full_acyclic.
 Print Assumptions rev_arc_added.
 Print Assumptions chi_underlying_le.
 Print Assumptions TT_short_dicycle_free.
+
+(** ** [dipath_arcs] grounded by a concrete computation: the arc set of the
+    directed path [0 -> 1] in [TT 2] is exactly the single pair [{(0,1)}]. *)
+Lemma dipath_arcs_TT2 :
+  dipath_arcs (Ordinal (isT : (0 < 2)%N) : TT 2) [:: Ordinal (isT : (1 < 2)%N)]
+  = [set (Ordinal (isT : (0 < 2)%N), Ordinal (isT : (1 < 2)%N))].
+Proof. by apply/setP=> -[u v]; rewrite /dipath_arcs !inE. Qed.
+
+(** ** [ham] is inhabited by a concrete witness: the directed triangle
+    [0 -> 1 -> 2 -> 0] is a Hamiltonian dicycle of [C3] (it is a [dicycle] and
+    its length equals [#|C3|]). ([tournament.C3] is qualified because GraphTheory
+    also exports an sgraph named [C3].) *)
+Local Open Scope ring_scope.
+Lemma ham_C3 : @ham (tournament.C3 : diGraphType) [:: 0; 1; 1 + 1].
+Proof. by rewrite /ham /dicycle /= card_C3. Qed.

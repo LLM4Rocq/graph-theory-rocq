@@ -77,3 +77,46 @@ Lemma apex_planar_after_deleting
 Proof.
 by move=> [v Hv]; exists [set v]; split; first exact: cards1.
 Qed.
+
+(** ** [wagner_planar] — inhabitation: ['K_4] is Wagner-planar.  Neither ['K_5]
+    (a 4-vertex graph cannot have a 5-vertex minor, [small_K_free]) nor [K3,3]
+    (6 vertices > 4, [minor_card]) is a minor of ['K_4].  Grounds the planarity
+    predicate of Rows 4/5 with a canonical positive witness. *)
+Lemma K4_wagner_planar : wagner_planar 'K_4.
+Proof.
+split.
+- apply: (@small_K_free 4 'K_4); by rewrite card_ord.
+- move=> H0; move: (minor_card H0); rewrite card_sum !card_ord => Hle.
+  by move: Hle.
+Qed.
+
+(** ** [wagner_planar] — guard has teeth: ['K_5] is NOT Wagner-planar, since it
+    contains itself as a minor ([sub_minor] on [sub_Kn]), i.e. [minor 'K_5 'K_5]
+    holds, refuting the first conjunct.  Rules out an accidentally-always-true
+    [wagner_planar] that would make Rows 4/5 vacuous. *)
+Lemma K5_not_wagner_planar : ~ wagner_planar 'K_5.
+Proof.
+move=> [Hno5 _]; apply: Hno5; apply: sub_minor.
+apply: (@sub_Kn 5 'K_5); by rewrite card_ord.
+Qed.
+
+(** ** [minor _ 'K_6] — guard has teeth: ['K_5] has NO K6 minor (a 5-vertex
+    graph cannot host a 6-vertex minor, [small_K_free]).  Makes the conclusion
+    predicate [minor G 'K_6] of Row 1 (forcing a K6 minor) non-vacuous. *)
+Lemma K5_no_K6_minor : ~ minor 'K_5 'K_6.
+Proof. apply: (@small_K_free 5 'K_5); by rewrite card_ord. Qed.
+
+(** ** [forcing_a_2_regular_minor_statement] — the [0 < #|G|] soundness guard
+    has teeth: the empty graph ['K_0] satisfies the average-degree premise
+    vacuously ([_ * 0 <= _]) yet has NO nonempty graph [H] ([3 <= t] vertices)
+    as a minor ([minor_card] forces [t <= 0]).  This is exactly the unsoundness
+    the [0 < #|G|] guard in Row 6 prevents. *)
+Lemma forcing_2reg_guard_teeth (t : nat) (H : sgraph) :
+  3 <= t -> #|H| = t ->
+  average_degree_geq 'K_0 (4 * t - 6) 3 /\ ~ minor 'K_0 H.
+Proof.
+move=> t3 cardH; split.
+- by rewrite /average_degree_geq card_ord muln0.
+- move=> /minor_card; rewrite card_ord cardH => cardle.
+  by move: (leq_trans t3 cardle).
+Qed.

@@ -319,3 +319,24 @@ move=> m [_ [lev [Hlt _]]].
 have E : (ord0 : K2) -- ord_max by rewrite K2_edge.
 exact: leq_ltn_trans (leq0n _) (Hlt _ _ E).
 Qed.
+
+(** ============================================================================
+    Row 1 — [homs_to] non-vacuity and teeth.
+    ========================================================================== *)
+
+(** [homs_to] (the Row-1 decision predicate) is genuinely inhabited: the
+    identity is an adjacency-preserving map, so the target predicate is not
+    vacuously empty (the coupled-shape lemma above only decides [True]). *)
+Lemma homs_to_refl (G : sgraph) : homs_to G G.
+Proof. by exists id. Qed.
+
+(** [homs_to] has teeth: an edge cannot map into the edgeless [ 'K_1 ] — the
+    two distinct vertices of [K2] (adjacent) are forced onto the unique vertex
+    of [ 'K_1 ], where [is_hom]'s edge-preservation clause contradicts
+    [sg_irrefl].  So [homs_to] is not trivially always-true. *)
+Lemma not_homs_to_K2_K1 : ~ homs_to K2 'K_1.
+Proof.
+case=> f Hf.
+have E : (ord0 : K2) -- ord_max by rewrite K2_edge -val_eqE.
+by move: (Hf _ _ E); rewrite [f ord0]ord1 [f ord_max]ord1 sg_irrefl.
+Qed.
