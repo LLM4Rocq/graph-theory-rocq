@@ -22,6 +22,9 @@
 
 From GTBase Require Import base.
 From Topological.conjectures Require Import U13.
+(* [minor] is [Require Import]-ed (not Export-ed) by base; row-1 fragments below
+   use [small_K_free] / [non_forerst_K3] from it, so re-import here. *)
+From GraphTheory Require Import minor.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -142,3 +145,87 @@ by rewrite in_set0 in xS.
 Qed.
 
 Print Assumptions is_forest0.
+
+(** ============================================================================
+    Row 1 — [large_induced_forest_in_a_planar_graph_statement] right-polarity
+    fragments (TECHNIQUE #2).  The FULL n/2 conclusion for an arbitrary
+    [wagner_planar] G is the OPEN Albertson–Berman conjecture (and even the best
+    settled 2n/5 bound rests on Borodin's acyclic 5-colouring, a major theorem)
+    — NOT attempted.  What is grounded here are faithful, Qed-closed fragments
+    that pin the statement's truth value where it IS decided and show the
+    planarity guard is load-bearing.  All are on the intended object
+    ([sgraph] / [wagner_planar] / [is_forest]); none weaken the statement.
+    ========================================================================== *)
+
+(** ** always-true direction / forest sub-class: on graphs that ARE forests the
+    existential conclusion holds outright by taking [S = set:G] — |S| = n ≥ n/2.
+    Pins the conjectured direction TRUE on the whole (planar) forest sub-class. *)
+Lemma lif_conclusion_on_forests (G : sgraph) :
+  is_forest [set: G] ->
+  exists S : {set G}, is_forest S /\ (#|G| <= 2 * #|S|)%N.
+Proof.
+move=> HF; exists [set: G]; split=> //.
+by rewrite cardsT mul2n -addnn leq_addr.
+Qed.
+
+(** ** small-instance (n ≤ 2): every graph on at most 2 vertices satisfies the
+    full conclusion.  Such a graph has no [K3] minor ([small_K_free]), hence is a
+    forest (contrapositive of [non_forerst_K3], decided via [is_forestb] — no
+    classical axiom), so [S = set:G] works.  Pins the statement TRUE on the
+    decidable n ≤ 2 slice (all of which are planar) and exercises the
+    K3-minor-free ⇒ forest link. *)
+Lemma lif_small (G : sgraph) :
+  (#|G| <= 2)%N ->
+  exists S : {set G}, is_forest S /\ (#|G| <= 2 * #|S|)%N.
+Proof.
+move=> le2.
+have nK3 : ~ minor G 'K_3 := small_K_free le2.
+have HF : is_forest [set: G].
+  case E: (is_forestb [set: G]); first exact/is_forestP.
+  exfalso; apply: nK3; apply: non_forerst_K3 => /is_forestP H.
+  by rewrite E in H.
+exists [set: G]; split=> //.
+by rewrite cardsT mul2n -addnn leq_addr.
+Qed.
+
+(** ** hypothesis-class richness: EVERY graph on at most 4 vertices is
+    [wagner_planar] (a [K5] minor needs 5 vertices, a [K3,3] minor needs 6, by
+    [minor_card]).  Shows the planarity guard is far from vacuous — the
+    universal [forall G, wagner_planar G -> …] genuinely ranges over the whole
+    ≤4-vertex class (paired with [K5_teeth] below this brackets the guard). *)
+Lemma wagner_planar_small (G : sgraph) : (#|G| <= 4)%N -> wagner_planar G.
+Proof.
+move=> le4; split=> Hm; move: (leq_trans (minor_card Hm) le4).
+- by rewrite card_ord.
+- by rewrite card_sum !card_ord.
+Qed.
+
+(** ** teeth (guard is load-bearing).  In the excluded non-planar [K5] any induced
+    forest has at most 2 vertices: an induced forest [S] with [#|S| ≥ 3] yields
+    (via [induced_forest] + [forest3]) two distinct non-adjacent vertices, but
+    [K5] is complete, contradiction. *)
+Lemma K5_forest_le2 (S : {set 'K_5}) : is_forest S -> (#|S| <= 2)%N.
+Proof.
+move=> HF; rewrite leqNgt; apply/negP => H3.
+have HF' := induced_forest HF.
+have c3 : (3 <= #|induced S|)%N by rewrite card_sig.
+have [x [y [xy nadj]]] := forest3 HF' c3.
+move: nadj; rewrite induced_edge /= /edge_rel /= => /negP; apply.
+by rewrite /complete_rel /= (inj_eq val_inj).
+Qed.
+
+(** Hence the same conclusion is FALSE on [K5]: 5 ≤ 2·#|S| ≤ 2·2 = 4 is
+    impossible.  So dropping/weakening the [wagner_planar] guard would REFUTE the
+    statement — the planarity hypothesis is genuinely constraining, not
+    decorative or vacuizing. *)
+Lemma K5_teeth : ~ (exists S : {set 'K_5}, is_forest S /\ (#|'K_5| <= 2 * #|S|)%N).
+Proof.
+case=> S [/K5_forest_le2 hS]; rewrite card_ord => hb.
+by move: (leq_trans hb (leq_mul (leqnn 2) hS)).
+Qed.
+
+Print Assumptions lif_conclusion_on_forests.
+Print Assumptions lif_small.
+Print Assumptions wagner_planar_small.
+Print Assumptions K5_forest_le2.
+Print Assumptions K5_teeth.

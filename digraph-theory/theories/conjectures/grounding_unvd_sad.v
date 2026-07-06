@@ -726,3 +726,128 @@ Proof. by rewrite card_C3; split=> // v; rewrite outdeg_C3. Qed.
 Theorem hoang_reed_antecedent_C3 :
   (0 < #|{: C3}|)%N /\ (forall v : C3, (1 <= outdeg v)%N).
 Proof. by rewrite card_C3; split=> // v; rewrite outdeg_C3. Qed.
+
+(** ====================================================================== *)
+(** ** Erdős–Pósa for long directed cycles — RIGHT-POLARITY FRAGMENTS       *)
+(**                                                                         *)
+(**    The full [erdos_posa_long_dicycles_statement] is OPEN for [n >= 2]    *)
+(**    (its settled subcase, the unrestricted directed Erdős–Pósa property   *)
+(**    of Reed–Robertson–Seymour–Thomas 1996, is a deep landmark and does    *)
+(**    not even imply the length-restricted variant).  We pin the TRUTH      *)
+(**    VALUE of the statement on the fully decided small parameters [n = 0]  *)
+(**    and [n = 1] — both hold with the UNIFORM bound [t = 0], independently  *)
+(**    of RRST — and we expose that all remaining difficulty lives in the    *)
+(**    UNIFORMITY of [t] across arbitrarily large [D].                       *)
+(** ====================================================================== *)
+
+(** A singleton cycle pack is always vertex-disjoint (the only index pair is
+    [(i, i)], excluded by [i != j]). *)
+Lemma vtx_disjoint_pack1 (D : diGraphType) (c : seq D) :
+  vtx_disjoint_pack [:: c].
+Proof.
+apply/forallP => i; apply/forallP => j; apply/implyP => nij.
+by move: nij; rewrite (ord1 i) (ord1 j) eqxx.
+Qed.
+
+(** *** n = 0 slice of the full conjecture *)
+
+(** GROUNDING (statement TRUE at [n = 0], uniform [t = 0]): the FULL
+    "[exists t, forall D, ...]" conjecture at the decided parameter [n = 0]
+    holds with [t = 0] — on every digraph the empty cycle pack realizes the
+    LEFT disjunct.  This assembles the per-[D] lemma [erdos_posa_n0_left] into
+    the complete conjecture slice (strictly more than the per-[D] fact). *)
+Theorem eplp_n0_slice (ell : nat) : (2 <= ell)%N ->
+  exists t : nat, forall D : diGraphType,
+    (exists P : seq (seq D),
+       [/\ cycle_pack P, vtx_disjoint_pack P, size P = 0%N &
+           all (fun c => ell <= size c)%N P])
+    \/ (exists T : {set D}, (#|T| <= t)%N /\ meets_long_dicycles ell T).
+Proof.
+move=> _; exists 0%N => D; left; exact: erdos_posa_n0_left.
+Qed.
+
+(** *** Decidability of "has a long dicycle" (needed for the n = 1 slice) *)
+
+(** Being a long dicycle is a bounded-length condition (a dicycle is [uniq], so
+    of length [<= #|D|]); we reflect its existence as a boolean, quantifying
+    over the finitely many tuple-length classes. *)
+Definition has_long_dicycle (D : diGraphType) (ell : nat) : bool :=
+  [exists k : 'I_(#|D|).+1, (ell <= k)%N && [exists t : k.-tuple D, dicycle (val t)]].
+
+Lemma has_long_dicycleP (D : diGraphType) (ell : nat) :
+  reflect (exists c : seq D, dicycle c /\ (ell <= size c)%N)
+          (has_long_dicycle D ell).
+Proof.
+rewrite /has_long_dicycle.
+apply: (iffP existsP) => [[k /andP[hk /existsP[t dt]]] | [c [dc hc]]].
+  by exists (val t); split; [exact: dt | rewrite size_tuple].
+have uc : uniq c by case/and3P: dc.
+have szle : (size c <= #|D|)%N.
+  have /card_uniqP scard := uc.
+  by have := max_card (mem c); rewrite scard.
+exists (Ordinal (n:=(#|D|).+1) (m:=size c) szle); apply/andP; split=> //.
+by apply/existsP; exists (in_tuple c); exact: dc.
+Qed.
+
+(** *** n = 1 slice of the full conjecture — the classic base case *)
+
+(** GROUNDING (statement TRUE at [n = 1], uniform [t = 0]): the FULL
+    "[exists t, forall D, ...]" conjecture at [n = 1] holds with [t = 0].  This
+    is the classic one-cycle Erdős–Pósa base case, TRUE independently of RRST:
+    on each [D] either a long dicycle exists (a size-1 pack, LEFT disjunct) or
+    none does (the empty transversal [t = 0] meets all long dicycles vacuously,
+    RIGHT disjunct).  Pins the statement's truth value at [n = 1] for every
+    [ell >= 2], with a bound uniform over ALL [D]; hence every RRST-strength
+    difficulty of the conjecture lives strictly in [n >= 2]. *)
+Theorem eplp_n1_slice (ell : nat) : (2 <= ell)%N ->
+  exists t : nat, forall D : diGraphType,
+    (exists P : seq (seq D),
+       [/\ cycle_pack P, vtx_disjoint_pack P, size P = 1%N &
+           all (fun c => ell <= size c)%N P])
+    \/ (exists T : {set D}, (#|T| <= t)%N /\ meets_long_dicycles ell T).
+Proof.
+move=> _; exists 0%N => D.
+case: (boolP (has_long_dicycle D ell)) => [/has_long_dicycleP[c [dc lc]] | h].
+- left; exists [:: c]; split.
+  + by rewrite /cycle_pack; apply/allP => x; rewrite mem_seq1 => /eqP ->.
+  + exact: vtx_disjoint_pack1.
+  + by [].
+  + by apply/allP => x; rewrite mem_seq1 => /eqP ->.
+- right; exists set0; split; first by rewrite cards0.
+  move=> c dc lc; case/negP: h.
+  by apply/has_long_dicycleP; exists c; split.
+Qed.
+
+(** *** Per-D inhabitation of the right disjunct's predicate on a REAL object *)
+
+(** GROUNDING (transversal predicate inhabited per [D] on [T = [set: D]]): for
+    EVERY digraph the full vertex set is a valid long-cycle transversal (a
+    dicycle is nonempty, so its head lies in [[set: D]]).  This complements the
+    empty-graph [meets_long_dicycles_empty] with a NON-degenerate witness on an
+    arbitrary [D], making explicit that the sole open content of the conjecture
+    is the UNIFORMITY of the bound [t] (here [#|T| = #|D|] is unbounded). *)
+Theorem meets_long_dicycles_setT (D : diGraphType) (ell : nat) :
+  meets_long_dicycles ell [set: D].
+Proof.
+move=> c dc _; case: c dc => [|x s]; first by case/and3P.
+by move=> _; exists x; [rewrite in_setT | exact: mem_head].
+Qed.
+
+(** *** Teeth: the LEFT (packing) disjunct genuinely fires on a real digraph *)
+
+(** GROUNDING (packing branch non-vacuous on [C3]): on the concrete NONEMPTY
+    directed triangle [C3], the LEFT disjunct of the [n = 1] slice is realized —
+    [[:: 0; 1; 2]] is a dicycle of length 3, a valid size-1 pack of long cycles
+    for every [ell <= 3].  So the statement's packing branch is achievable on a
+    real object (both disjuncts are genuinely inhabited across the suite). *)
+Theorem eplp_left_fires_C3 (ell : nat) : (ell <= 3)%N ->
+  exists P : seq (seq C3),
+    [/\ cycle_pack P, vtx_disjoint_pack P, size P = 1%N &
+        all (fun c => ell <= size c)%N P].
+Proof.
+move=> hl; exists [:: [:: (0 : C3); 1; 2]]; split.
+- by rewrite /cycle_pack; apply/allP => x; rewrite mem_seq1 => /eqP ->; exact: C3_dicycle.
+- exact: vtx_disjoint_pack1.
+- by [].
+- by apply/allP => x; rewrite mem_seq1 => /eqP ->; exact: hl.
+Qed.

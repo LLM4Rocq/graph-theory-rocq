@@ -261,3 +261,158 @@ split.
 - by move=> /minor_card; rewrite !card_ord.
 - by move=> /minor_card; rewrite card_sum !card_ord.
 Qed.
+
+(** ============================================================================
+    Right-polarity fragments of the PARTIAL statements (TECHNIQUE #2).
+
+    These are genuine half-directions / decided sub-cases of the actual
+    STATEMENTS [partial_list_coloring_statement] (Row 1) and
+    [strong_colorability_statement] (Row 11) — not merely primitive-validation
+    lemmas like the ones above.  Each pins the correct TRUE value on a real
+    slice of its conjecture without touching the OPEN interior (AGH's
+    Hall/SDR transfer, resp. the Strong-Colouring / Haxell independent-
+    transversal machinery), which remain out of scope.
+    ========================================================================== *)
+
+(** ** Row 1, [partial_list_coloring_statement] — ALWAYS-TRUE direction
+    (choosable regime).  If [L] is fully list-colourable (a proper TOTAL choice
+    exists) then the AGH bound holds by taking [W = setT]: the required
+    inequality [t·#|G| ≤ cl·#|setT|] collapses to the hypothesis [t ≤ cl].  This
+    is the mechanism lemma pinning the ENTIRE "L is genuinely choosable" slice of
+    the conjecture to TRUE. *)
+Lemma partial_list_coloring_full (G : sgraph) (t cl : nat)
+  (C : finType) (L : G -> {set C}) :
+  t <= cl -> list_colourable L ->
+  exists W : {set G}, list_colourable_on L W /\ t * #|G| <= cl * #|W|.
+Proof.
+move=> Ht [f [Hf Hp]]; exists [set: G]; split.
+- exists (fun v => Some (f v)); split.
+  + by move=> v _; exists (f v); rewrite Hf.
+  + by move=> x y _ _ xy; apply/eqP => -[] e; move: (Hp x y xy); rewrite e eqxx.
+- rewrite cardsT; exact: leq_mul Ht (leqnn _).
+Qed.
+
+(** ** Row 1 — TOP endpoint [t = cl] (= χ_ℓ).  With every list of size exactly
+    [cl], [choosable G cl] (extracted from [is_choice_number G cl]) yields full
+    list-colourability, so [W = setT] gives the equality [cl·#|G| ≤ cl·#|G|].
+    This is AGH's settled trivial remark λ_{χ_ℓ} = n, now a fragment of the
+    actual statement shape. *)
+Lemma partial_list_coloring_top (G : sgraph) (cl : nat)
+  (C : finType) (L : G -> {set C}) :
+  is_choice_number G cl -> (forall v : G, #|L v| = cl) ->
+  exists W : {set G}, list_colourable_on L W /\ cl * #|G| <= cl * #|W|.
+Proof.
+move=> [Hch _] HL.
+apply: (partial_list_coloring_full (t:=cl) (leqnn cl)).
+by apply: Hch => v; rewrite HL.
+Qed.
+
+(** ** Row 1 — SMALL-INSTANCE: the FULL statement decided on the single-vertex
+    graph ['K_1] for every admissible [t].  [is_choice_number 'K_1 cl] forces
+    [cl = 1] (uniqueness against the grounded [is_choice_number_K1]), so
+    [t ∈ {0,1}]: [t = 0] takes [W = set0] (vacuously colourable, bound
+    [0 ≤ cl·0]); [t = 1 = cl] colours [ord0] from its nonempty size-1 list with
+    [W = setT] (#|W| = 1, bound [1·1 ≤ 1·1]).  The comma after [('K_1)] in the
+    hypothesis is parenthesised to avoid the complete-bipartite ['K_ n , m]
+    notation swallowing it. *)
+Lemma partial_list_coloring_K1 (t cl : nat) (C : finType) (L : 'K_1 -> {set C}) :
+  is_choice_number 'K_1 cl -> t <= cl -> (forall v : ('K_1), #|L v| = t) ->
+  exists W : {set 'K_1}, list_colourable_on L W /\ t * #|'K_1| <= cl * #|W|.
+Proof.
+move=> Hcl Ht HL.
+have E1 : cl = 1.
+  apply/eqP; rewrite eqn_leq; apply/andP; split.
+  - exact: (proj2 Hcl _ (proj1 is_choice_number_K1)).
+  - exact: (proj2 is_choice_number_K1 _ (proj1 Hcl)).
+move: Ht HL; rewrite E1 => Ht HL.
+case: t Ht HL => [|[|t]] // Ht HL.
+- exists set0; split.
+  + exists (fun=> None); split.
+    * by move=> v; rewrite in_set0.
+    * by move=> x y Hx _ _; rewrite in_set0 in Hx.
+  + by rewrite mul0n.
+- have /card_gt0P[c Hc] : 0 < #|L ord0| by rewrite HL.
+  exists [set: 'K_1]; split.
+  + exists (fun _ => Some c); split.
+    * by move=> v _; exists c; rewrite (ord1 v).
+    * by move=> x y _ _; rewrite /edge_rel /= (ord1 x) (ord1 y) eqxx.
+  + by rewrite cardsT card_ord.
+Qed.
+
+(** ** Row 11, [strong_colorability_statement] — ALWAYS-TRUE direction
+    (enough-colours engine).  If the palette is at least as large as V(G)
+    ([#|G| ≤ r]) then G is strongly r-colourable via the injection
+    [widen_ord ∘ enum_rank : G ↪ 'I_r]: an injective colouring is proper
+    (adjacency is irreflexive, [sgP]) and rainbow on every block.  This is the
+    unconditionally-true half of the statement, TRUE on the whole family
+    [{G : #|G| ≤ 2·Δ G}] (all complete / sufficiently dense graphs). *)
+Lemma strongly_colorable_card (G : sgraph) (r : nat) :
+  #|G| <= r -> strongly_colorable G r.
+Proof.
+move=> Hle P _ _.
+pose f (v : G) := widen_ord Hle (enum_rank v).
+have finj : injective f.
+  move=> x y; rewrite /f => /(congr1 val); rewrite /widen_ord /= => exy.
+  by apply: enum_rank_inj; apply: val_inj.
+exists f; split.
+- by move=> x y xy; apply/eqP => exy; move: xy; rewrite (finj _ _ exy) sgP.
+- by move=> B _ x y _ _; exact: finj.
+Qed.
+
+(** ** Row 11 helper — [#|N(x)| = n-1] in ['K_n]: the open neighbourhood of a
+    complete-graph vertex is everything but itself. *)
+Lemma card_N_complete n (x : 'K_n) : #|N(x)| = n.-1.
+Proof.
+rewrite /open_neigh.
+have -> : [set y | x -- y] = [set: 'K_n] :\ x.
+  by apply/setP=> y; rewrite !inE andbT eq_sym.
+by rewrite cardsDS ?sub1set ?inE // cardsT card_ord cards1 subn1.
+Qed.
+
+(** ** Row 11 helper — [n-1 ≤ Δ('K_n)] for [0 < n]: the degree of any vertex is
+    a lower bound for the max degree. *)
+Lemma Delta_complete_ge n : 0 < n -> n.-1 <= Delta 'K_n.
+Proof.
+move=> n0; rewrite /Delta; pose x0 : 'K_n := Ordinal n0.
+by rewrite -(card_N_complete x0) (leq_bigmax x0).
+Qed.
+
+(** ** Row 11 — SMALL-INSTANCE on the infinite family of complete graphs: for
+    [n ≥ 2], ['K_n] is strongly (2·Δ)-colourable.  Here [2·Δ('K_n) = 2(n-1) ≥ n],
+    so the enough-colours engine [strongly_colorable_card] applies — a genuine
+    non-vacuous decidable slice of the conjecture (K_n really needs all n colours
+    distinct). *)
+Lemma strong_Kn n : 2 <= n -> strongly_colorable 'K_n (2 * Delta 'K_n).
+Proof.
+move=> n2; apply: strongly_colorable_card; rewrite card_ord.
+apply: (@leq_trans (2 * n.-1)).
+- by case: n n2 => [|[|k]] // _; rewrite mul2n -addnn addSn ltnS leq_addl.
+- by rewrite leq_mul2l /=; apply: Delta_complete_ge; exact: leq_trans n2.
+Qed.
+
+(** ** Row 11 — TEETH on the [(partition + block-size ≤ r)] guard at [r = 0]:
+    a NONEMPTY graph has no partition all of whose blocks have size ≤ 0 (blocks
+    are nonempty), so [strongly_colorable G 0] holds vacuously for [0 < #|G|].
+    The guard genuinely constrains — it is contradictory here — rather than being
+    trivially satisfiable. *)
+Lemma strongly_colorable0 (G : sgraph) : 0 < #|G| -> strongly_colorable G 0.
+Proof.
+move=> /card_gt0P[v _] P Ppart Hsz; exfalso.
+have vcov : v \in cover P by rewrite (cover_partition Ppart) inE.
+have Bin : pblock P v \in P by rewrite pblock_mem.
+have := Hsz _ Bin; rewrite leqn0 cards_eq0 => /eqP e0.
+by move: (mem_pblock P v); rewrite vcov e0 in_set0.
+Qed.
+
+(** ** Row 11 helper — [Δ('K_1) = 0]: the single vertex has no neighbours. *)
+Lemma Delta_K1 : Delta 'K_1 = 0.
+Proof. by rewrite /Delta big_ord1 card_N_complete. Qed.
+
+(** ** Row 11 — the statement decided on a NONEMPTY edgeless graph ['K_1], where
+    [2·Δ = 0]: an immediate consequence of the [r = 0] teeth lemma above.
+    Distinct from the primitive-validation [strongly_colorable_K1] (which fixed
+    [r = 1], not the conjecture's [r = 2·Δ = 0]). *)
+Lemma strong_K1 : strongly_colorable 'K_1 (2 * Delta 'K_1).
+Proof.
+by rewrite Delta_K1 muln0; apply: strongly_colorable0; rewrite card_ord.
+Qed.

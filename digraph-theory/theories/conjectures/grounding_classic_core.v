@@ -261,3 +261,117 @@ Proof.
 apply/forallPn; exists (0%R : C3).
 by rewrite negb_and C3_outdeg.
 Qed.
+
+(** ** GROUNDING: Laborde–Payan–Xuong — a stable set meeting all longest dipaths.
+
+    The open row [stable_meeting_longest_dipaths_statement] asks, for EVERY digraph,
+    for a stable (independent) set [S] that meets every longest directed path. The
+    genuine open content lives in the interior regime 0 < ell D < #|D|-1, where the
+    stability constraint and the "stab every longest path" constraint really compete.
+    We ground only the honest right-polarity fragments:
+
+      - [stable_set0]                     : the stable-guard witness class is inhabited.
+      - [not_stable_setT_C3]              : TEETH — [stable] is a real constraint (you can
+                                            NOT always take S := setT: setT of C3 is unstable).
+      - [exists_meeting_set]             : ALWAYS-TRUE HALF — the meeting conjunct alone is
+                                            unconditionally satisfiable (S := setT meets every
+                                            longest path at its start), so any LPX
+                                            counterexample must fail on stability, never on
+                                            meeting.
+      - [stable_meeting_when_setT_stable] : the FULL conclusion holds on the ell D = 0
+                                            (edgeless) boundary, where setT is itself stable.
+      - [stable_meeting_hamiltonian]      : SETTLED SUB-CASE — the FULL conclusion holds for
+                                            every LOOPLESS digraph carrying a Hamiltonian
+                                            directed path (ell D = #|D|-1); a longest path then
+                                            covers ALL vertices, so a single vertex is a stable
+                                            meeting set. Covers every tournament (incl. C3).
+    We do NOT attempt the open interior or any non-trivial structured settled family. *)
+
+(** The stable guard is realizable: [set0] is stable in every digraph
+    (no members, hence no forbidden arc between members). *)
+Lemma stable_set0 (D : diGraphType) : stable (set0 : {set D}).
+Proof. by apply/forallP=> u; rewrite inE. Qed.
+
+(** TEETH on a real object: the full vertex set of C3 is NOT stable — the arc
+    0 --> 1 lies inside it. So one cannot always take S := setT; the [stable]
+    requirement genuinely constrains the LPX witness. *)
+Section StableC3Teeth.
+Local Open Scope ring_scope.
+Import GRing.Theory.
+
+Lemma not_stable_setT_C3 : ~~ stable [set: C3].
+Proof.
+apply/negP => /forall_inP/(_ (0%R : C3) (in_setT _))
+              /forall_inP/(_ (1%R : C3) (in_setT _)).
+by rewrite arcC3E add0r eqxx.
+Qed.
+
+End StableC3Teeth.
+
+(** ALWAYS-TRUE HALF: the "meets every longest directed path" conjunct on its own is
+    unconditionally satisfiable — S := setT meets every longest path at its start vertex.
+    This isolates the difficulty of LPX entirely into the simultaneous stability constraint. *)
+Lemma exists_meeting_set (D : diGraphType) :
+  exists S : {set D}, forall (x : D) (s : seq D),
+    dipath x s -> size s = ell D -> exists2 v : D, v \in S & v \in x :: s.
+Proof.
+exists [set: D] => x s _ _.
+by exists x; [exact: in_setT | exact: mem_head].
+Qed.
+
+(** BOUNDARY ell D = 0 (edgeless regime): whenever setT is itself stable, it is a stable
+    set meeting every longest path (at its start), so the FULL statement conclusion holds.
+    Pins the correct TRUE value on the edgeless boundary of LPX. *)
+Lemma stable_meeting_when_setT_stable (D : diGraphType) :
+  stable [set: D] ->
+  exists S : {set D}, stable S /\
+    forall (x : D) (s : seq D), dipath x s -> size s = ell D ->
+      exists2 v : D, v \in S & v \in x :: s.
+Proof.
+move=> Hst; exists [set: D]; split=> // x s _ _.
+by exists x; [exact: in_setT | exact: mem_head].
+Qed.
+
+(** Helper: a duplicate-free list whose length equals #|T| enumerates all of T, hence
+    contains every element. (Used to show a Hamiltonian dipath covers every vertex.) *)
+Lemma mem_uniq_full (T : finType) (l : seq T) (y : T) :
+  uniq l -> size l = #|T| -> y \in l.
+Proof.
+move=> ul sl.
+have /card_uniqP cardE := ul.
+have cE : #|mem l| = #|T| by rewrite cardE.
+have hs : (mem l) =i predT by apply/(subset_cardP cE); exact: subset_predT.
+by rewrite (hs y).
+Qed.
+
+(** SETTLED SUB-CASE, Hamiltonian-dipath class (ell D = #|D|-1, includes every tournament
+    and C3): for a LOOPLESS digraph whose longest directed path is Hamiltonian, [dipath_size]
+    forces size (x :: s) <= #|D| and the hypothesis forces #|D| <= size (x :: s), so a longest
+    path is a uniq list of length #|D| covering EVERY vertex. Hence a single (loopless) vertex
+    [set x0] is a stable set meeting every longest path. The looplessness hypothesis is the
+    standard LPX class restriction, not a vacuizer (it is exactly what makes a singleton
+    stable). Pins the correct TRUE value on the ell D = #|D|-1 boundary. *)
+Lemma stable_meeting_hamiltonian (D : diGraphType) :
+  (forall v : D, ~~ (v --> v)) -> #|D| <= (ell D).+1 ->
+  exists S : {set D}, stable S /\
+    forall (x : D) (s : seq D), dipath x s -> size s = ell D ->
+      exists2 v : D, v \in S & v \in x :: s.
+Proof.
+move=> loopless Hell.
+have [n0|n0] := posnP #|D|.
+  exists set0; split; first exact: stable_set0.
+  move=> x s _ _; exfalso.
+  have h : (0 < #|D|)%N by apply/card_gt0P; exists x.
+  by rewrite n0 in h.
+have /card_gt0P[x0 _] := n0.
+exists [set x0]; split.
+  apply/forallP=> u; apply/implyP; rewrite inE => /eqP->.
+  apply/forallP=> v; apply/implyP; rewrite inE => /eqP->; exact: loopless.
+move=> x s dp sE; exists x0; first by rewrite inE.
+have usz : uniq (x :: s) by case/andP: dp.
+have szle : size (x :: s) <= #|D|.
+  by have /card_uniqP cardE := usz; rewrite -cardE; apply: max_card.
+have szge : #|D| <= size (x :: s) by rewrite /= sE.
+have szxs : size (x :: s) = #|D| by apply/eqP; rewrite eqn_leq szle szge.
+by apply: mem_uniq_full.
+Qed.

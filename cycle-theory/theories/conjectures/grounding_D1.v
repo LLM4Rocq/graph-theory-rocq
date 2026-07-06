@@ -33,6 +33,10 @@ From mathcomp Require Import all_algebra all_fingroup.
 From Cycle.conjectures Require Import D1.
 
 Import GRing.Theory Num.Theory.
+(* [Order.TTheory] (via the fully-qualified path, to disambiguate the two
+   in-scope [Order] modules) supplies the total-order transitivity/weakening
+   lemmas [ltW], [le_trans], [le_lt_trans] used in [cflow_T3_le4]. *)
+Import mathcomp.order.order.Order.TTheory.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -502,4 +506,104 @@ Proof.
 exists (fun _ => 1); split; first exact: iconservative_Lp1.
 move=> e; rewrite normr1; split; first by [].
 by rewrite ler1n.
+Qed.
+
+(** ================================================================= *)
+(** ** Row 1 (D1) — the decided [t=1] instance on a concrete cubic
+       class-1 graph: the triple edge [T3].
+
+    [T3] is the 3-dipole (2 vertices joined by 3 parallel edges), a genuine
+    cubic ([3]-regular) multigraph obtained by adding a third parallel edge to
+    the digon [Gd].  It is the smallest [(2·1+1)]-regular class-1 witness, and
+    the [t=1] case of Steffen's circular-flow conjecture predicts exactly
+    [F_c(T3) <= 2 + 2/1 = 4].  We verify that conclusion directly (right
+    polarity: TRUE on the settled [t=1] witness), together with the guard
+    teeth that make the instance non-vacuous. *)
+
+Definition T3 : mgraph := mgraph.add_edge Gd (inl tt) (inr tt) tt.
+
+Lemma card_edge_T3 : #|edge T3| = 3.
+Proof. by rewrite /T3 card_option card_edge_Gd. Qed.
+
+(** Enumerate a sum over the three edges of [T3]. *)
+Lemma big_edgeT3 (F : edge T3 -> rat) :
+  \sum_(e : edge T3) F e
+   = F None + F (Some None) + F (Some (Some None)).
+Proof.
+rewrite (bigD1 None) //=.
+rewrite (bigD1 (Some None)) //=.
+rewrite (bigD1 (Some (Some None))) //=.
+rewrite big_pred0; last by move=> e; case: e => [[[[[]|[]]|]|]|].
+by rewrite addr0 addrA.
+Qed.
+
+(** Every vertex is incident to every edge (all three edges join the two
+    vertices), mirroring [inc_all]/[edges_at_Gd] for the digon. *)
+Lemma inc_all_T3 (v : T3) (e : edge T3) : incident v e.
+Proof.
+rewrite /incident; apply/existsP.
+by case: v => -[]; case: e => [[[[[]|[]]|]|]|];
+  solve [by exists true | by exists false].
+Qed.
+
+Lemma edges_at_T3 (v : T3) : edges_at v = [set: edge T3].
+Proof. by apply/setP => e; rewrite !inE inc_all_T3. Qed.
+
+Lemma mdeg_T3 (v : T3) : mdeg v = 3.
+Proof. by rewrite /mdeg edges_at_T3 cardsT card_edge_T3. Qed.
+
+(** Teeth: [T3] genuinely inhabits the odd-regularity guard at [t=1]
+    ([mreg T3 (2·1+1)]) — a graph that really has edges, not the vacuous
+    edge-less witness [U] (which is only [0]-regular). *)
+Lemma mreg_T3 : mreg T3 (2 * 1 + 1)%N.
+Proof. by move=> v; rewrite mdeg_T3. Qed.
+
+(** Small instance / always-true conclusion: [T3] meets the conjecture's exact
+    [t=1] bound [F_c(T3) <= 2 + 2/1 = 4], witnessed for every [r > 4] by the
+    nowhere-zero rational flow [phi] carrying [2] on the middle edge and [1] on
+    the two outer edges (Kirchhoff-balanced: [1 + 1 = 2] at each vertex). *)
+Lemma cflow_T3_le4 : circular_flow_number_le T3 (2%:R + 2%:R / 1%:R).
+Proof.
+move=> r Hr.
+have Hr' : (2%:R + 2%:R < r)%R by move: Hr; rewrite divr1.
+have H2 : (2%:R <= r - 1 :> rat)%R.
+  rewrite lerBrDr; apply: ltW.
+  apply: le_lt_trans Hr'.
+  by rewrite lerD2l ler1n.
+have Hle1 : (1%:R <= r - 1 :> rat)%R by apply: le_trans H2; rewrite ler_nat.
+exists (fun e : edge T3 => if e is Some None then 2%:R else 1%:R).
+split.
+- move=> v; rewrite big_mkcond [X in _ = X]big_mkcond !big_edgeT3.
+  by case: v => -[] /=; rewrite ?addr0 ?add0r -natrD.
+- move=> e; case: e => [[[[[]|[]]|]|]|] /=;
+    rewrite normr_nat; (split; first by rewrite ler1n);
+    [exact: Hle1 | exact: H2 | exact: Hle1].
+Qed.
+
+(** Teeth (unconditional): the odd-regularity guard is non-degenerate — any
+    [(2t+1)]-regular graph on a nonempty vertex set has a nonempty edge set
+    (every vertex has positive multidegree [2t+1 > 0]).  Rules out a vacuous
+    edge-less reading of the statement's decided cases. *)
+Lemma reg_odd_has_edge (t : nat) (G : mgraph) :
+  (1 <= t)%N -> (0 < #|G|)%N -> mreg G (2 * t + 1)%N -> (0 < #|edge G|)%N.
+Proof.
+move=> _ /card_gt0P[v _] Hreg.
+have Hpos : (0 < mdeg v)%N by rewrite Hreg addn1.
+apply: leq_trans Hpos _.
+rewrite /mdeg -cardsT.
+by apply: subset_leq_card; apply: subsetT.
+Qed.
+
+(** Boundary: the conjectured target bound [2 + 2/t] lies in the valid
+    circular-flow window [(2, 4]] for every [t >= 1]: strictly above [2] and at
+    most [4] (hitting [4] exactly at [t = 1]). *)
+Lemma cflow_bound_range (t : nat) : (1 <= t)%N ->
+  (2%:R < (2%:R + 2%:R / t%:R : rat))%R /\ ((2%:R + 2%:R / t%:R : rat) <= 4%:R)%R.
+Proof.
+move=> Ht; have Ht0 : (0 < t%:R :> rat)%R by rewrite ltr0n.
+split.
+- by rewrite ltrDl divr_gt0 // ltr0n.
+- have -> : (4%:R = 2%:R + 2%:R :> rat)%R by rewrite (natrD _ 2 2).
+  rewrite lerD2l ler_pdivrMr // -natrM ler_nat.
+  by apply: leq_pmulr.
 Qed.

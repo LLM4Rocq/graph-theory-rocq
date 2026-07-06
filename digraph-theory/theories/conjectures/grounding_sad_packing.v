@@ -330,3 +330,130 @@ Proof.
 split; first by [].
 by apply/forallP => -[].
 Qed.
+
+(** ** GROUNDING 4 — the Hoàng–Reed intersection-forest clause, right polarity
+
+    We now ground the ACTUAL laminar / intersection-forest conclusion of
+    [packing.hoang_reed_statement]
+      [forall j, 0 < j -> #|C_j ∩ ⋃_{i<j} C_i| <= 1]
+    (the third conjunct in the [exists P] witness), which the existing grounding
+    only touched in the weaker "[all dicycle]" form ([hoang_reed_k1_holds]) or
+    inlined inside [bermond_thomassen_implies_hoang_reed_weak].
+
+    (4a)  ALWAYS-TRUE DIRECTION.  For ANY vertex-disjoint cycle pack, the laminar
+          clause holds unconditionally at every index: each later cycle meets the
+          union of the earlier ones in the EMPTY set (cardinality 0 ≤ 1).  This is
+          the trivially-true half of the statement's conclusion, valid at every k
+          — it decouples the post-processing from the hard cycle-production step.
+          (Factors out the argument inlined in the edge theorem
+          [bermond_thomassen_implies_hoang_reed_weak] into a reusable standalone.) *)
+Lemma vtx_disjoint_pack_laminar (D : diGraphType) (P : seq (seq D)) :
+  vtx_disjoint_pack P ->
+  forall j : 'I_(size P), (0 < j)%N ->
+    (#|[set v : D | (v \in nth [::] P j) &&
+         [exists i : 'I_(size P), (i < j)%N && (v \in nth [::] P i)]]| <= 1)%N.
+Proof.
+move=> vdp j _.
+have hE : [set v : D | (v \in nth [::] P j) &&
+            [exists i : 'I_(size P), (i < j)%N && (v \in nth [::] P i)]] == set0.
+  rewrite -subset0; apply/subsetP => v; rewrite inE.
+  move=> /andP[vj /existsP[i /andP[ij vi]]].
+  have iNj : i != j by rewrite -val_eqE (ltn_eqF ij).
+  have vd : vtx_disjoint (nth [::] P i) (nth [::] P j).
+    by move/forallP/(_ i)/forallP/(_ j)/implyP/(_ iNj): vdp.
+  rewrite /vtx_disjoint in vd.
+  move/hasPn/(_ v vi): vd => /negP nvj.
+  by case: (nvj vj).
+by rewrite (eqP hE) cards0.
+Qed.
+
+(** (4b)  SMALL-INSTANCE, EXACT FORM.  The FULL [hoang_reed_statement] predicate
+          (with the real intersection-forest clause, not the weaker [all dicycle]
+          conjunct of [hoang_reed_k1_holds]) is TRUE at [k = 1]: min out-degree ≥ 1
+          forces one dicycle and the laminar clause is vacuous at size 1 (there is
+          no valid index [j] with [0 < j] in ['I_1]).  This pins the settled
+          [k = 1] case of Hoàng–Reed TRUE in the actual predicate form, reusing the
+          already-proven [min_outdeg_dicycle] and [vtx_disjoint_pack_laminar]. *)
+Lemma hoang_reed_k1_exact (D : diGraphType) :
+  (0 < #|D|)%N -> (forall v : D, (1 <= outdeg v)%N) ->
+  exists P : seq (seq D),
+    [/\ cycle_pack P, size P = 1 &
+        forall j : 'I_(size P), (0 < j)%N ->
+          (#|[set v : D | (v \in nth [::] P j) &&
+               [exists i : 'I_(size P), (i < j)%N && (v \in nth [::] P i)]]| <= 1)%N].
+Proof.
+move=> Dpos hdeg.
+have [c dc] := min_outdeg_dicycle Dpos hdeg.
+exists [:: c]; split.
+- by rewrite /cycle_pack /= dc.
+- by [].
+- apply: (@vtx_disjoint_pack_laminar D [:: c]).
+  by apply/forallP=> a; apply/forallP=> b; apply/implyP=> ab;
+     move: ab; rewrite (ord1 a) (ord1 b) eqxx.
+Qed.
+
+(** (4c)  TEETH — the intersection-forest guard genuinely CONSTRAINS.
+
+    A right-polarity fragment must be two-sided: the laminar clause is not
+    vacuously satisfiable.  We exhibit a concrete cycle pack of TWO dicycles that
+    share exactly two vertices, on which the clause is FALSE (cardinality 2 > 1).
+    Hence the "settled TRUE" of Hoàng–Reed at [k ≥ 2] is nontrivial: it asks for
+    cycles that a general pack need NOT provide.  Concretely, on the 4-vertex
+    digraph with arcs 0→1, 1→2, 2→0, 1→3, 3→0, the two triangles
+    [C1 = 0,1,2] and [C2 = 0,1,3] both share {0,1}. *)
+
+Inductive V4 := A0 | A1 | A2 | A3.
+Definition V4_eq (a b : V4) : bool :=
+  match a, b with A0,A0 | A1,A1 | A2,A2 | A3,A3 => true | _,_ => false end.
+Lemma V4_eqP : Equality.axiom V4_eq.
+Proof. by case=> [] []; constructor. Qed.
+HB.instance Definition _ := hasDecEq.Build V4 V4_eqP.
+Definition V4_pickle (a : V4) : nat :=
+  match a with A0=>0 | A1=>1 | A2=>2 | A3=>3 end.
+Definition V4_unpickle (n : nat) : option V4 :=
+  match n with 0=>Some A0 | 1=>Some A1 | 2=>Some A2 | 3=>Some A3 | _=>None end.
+Lemma V4_pickleK : pcancel V4_pickle V4_unpickle. Proof. by case. Qed.
+HB.instance Definition _ := PCanIsCountable V4_pickleK.
+Definition V4_enum : seq V4 := [:: A0; A1; A2; A3].
+Lemma V4_enumP : Finite.axiom V4_enum. Proof. by case. Qed.
+HB.instance Definition _ := isFinite.Build V4 V4_enumP.
+
+Definition arc4_rel (u v : V4) : bool :=
+  match u, v with
+  | A0, A1 => true
+  | A1, A2 => true
+  | A2, A0 => true
+  | A1, A3 => true
+  | A3, A0 => true
+  | _, _ => false
+  end.
+HB.instance Definition _ := HasArc.Build V4 arc4_rel.
+Definition D4 : diGraphType := V4.
+
+Definition C1 : seq D4 := [:: A0; A1; A2].
+Definition C2 : seq D4 := [:: A0; A1; A3].
+Definition Pk : seq (seq D4) := [:: C1; C2].
+
+(** Index 1 (the second cycle [C2]) and index 0 (the first cycle [C1]). *)
+Definition jj : 'I_(size Pk) := @Ordinal (size Pk) 1 isT.
+Definition ii : 'I_(size Pk) := @Ordinal (size Pk) 0 isT.
+
+Lemma laminar_predicate_discriminating :
+  exists (D : diGraphType) (P : seq (seq D)),
+    cycle_pack P /\
+    ~ (forall j : 'I_(size P), (0 < j)%N ->
+        (#|[set v : D | (v \in nth [::] P j) &&
+             [exists i : 'I_(size P), (i < j)%N && (v \in nth [::] P i)]]| <= 1)%N).
+Proof.
+exists D4, Pk; split; first by [].
+move=> H.
+have card2 : #|[set A0; A1] : {set D4}| = 2%N by rewrite cards2.
+have Hge : (2 <= #|[set v : D4 | (v \in nth [::] Pk jj) &&
+             [exists i : 'I_(size Pk), (i < jj)%N && (v \in nth [::] Pk i)]]|)%N.
+  rewrite -card2; apply: subset_leq_card.
+  apply/subsetP => v; rewrite !inE => /orP[/eqP->|/eqP->];
+    (apply/andP; split; first by []);
+    by apply/existsP; exists ii.
+have Hle := H jj isT.
+by move: (leq_trans Hge Hle).
+Qed.

@@ -426,4 +426,75 @@ Lemma is_tjoin_charact (G : mgraph) (T : {set G}) (J : {set edge G}) :
   is_tjoin T J -> T = [set v | odd #|edges_at v :&: J|].
 Proof. by move=> HJ; apply/setP=> v; rewrite inE HJ. Qed.
 
+(** ============================================================================
+    Row 7 — Jones' conjecture: right-polarity fragments.
+
+    The row [jones_statement] asserts, for a [wagner_planar] (= no K5/K3,3 minor)
+    graph, the factor-2 Erdős–Pósa bound [cc(G) <= 2*cp(G)] with cc = minimum
+    feedback vertex set ([is_min_fvs]) and cp = maximum cycle packing
+    ([is_max_cycle_packing]).  The tight planar factor 2 is a research-level
+    structural theorem and is NOT reproven.  What follows are honest fragments:
+
+      - [jones_acyclic_slice]: the UNCONDITIONAL always-true direction — on the
+        cp(G)=0 (acyclic) slice the conclusion holds for EVERY graph (no
+        planarity needed), because a single genuine cycle would be a size-1
+        packing, so [set0] hits all cycles and cc(G)=0.
+      - [wagner_planar_small]: guard inhabitation with TEETH on a real family —
+        every graph on ≤ 4 vertices is [wagner_planar] (a K5-minor needs 5, a
+        K3,3-minor needs 6 vertices, by [minor_card]).  The planar hypothesis is
+        genuinely satisfiable, so the row is non-vacuous.
+      - [En_no_cycle]: edgeless graphs have no genuine cycle (the first cycle
+        step forces a non-existent adjacency).
+      - [jones_En]: a fully-decided instance of the row's conclusion on the
+        concrete planar family [En n] (edgeless ⇒ cp=0 ⇒ cc=0).
+    ========================================================================== *)
+
+(** always-true direction: on the acyclic (cp = 0) slice the conclusion of
+    [jones_statement] holds for EVERY graph, with no planarity hypothesis. *)
+Lemma jones_acyclic_slice (G : sgraph) (ccn : nat) :
+  is_min_fvs G ccn -> is_max_cycle_packing G 0 -> ccn <= 2 * 0.
+Proof.
+move=> [_ minlb] [_ maxub]; rewrite muln0.
+have h0 : hits_all_cycles (set0 : {set G}).
+  move=> c uc sz; exfalso.
+  have cp1 : cycle_packing [:: c].
+    split; last by move=> v /=; case: (v \in c).
+    by move=> c'; rewrite inE => /eqP ->; split; [exact: uc | exact: sz].
+  by move: (maxub _ cp1).
+have hh := minlb _ h0; rewrite cards0 in hh; exact: hh.
+Qed.
+
+(** teeth: every graph on at most four vertices is [wagner_planar]; the planar
+    guard of [jones_statement] is genuinely inhabited by a whole family, so the
+    row is not vacuously true. *)
+Lemma wagner_planar_small (G : sgraph) : #|G| <= 4 -> wagner_planar G.
+Proof.
+move=> h; split=> hm; move: (minor_card hm).
+- rewrite card_ord => h5; by move: (leq_trans h5 h).
+- rewrite card_sum !card_ord => h6; by move: (leq_trans h6 h).
+Qed.
+
+(** structural: an edgeless graph has no genuine cycle. *)
+Lemma En_no_cycle (n : nat) (c : seq (En n)) :
+  ucycle (--) c -> 2 < size c -> False.
+Proof. by case: c => [|x0 [|x1 c']] uc sz. Qed.
+
+(** small-instance: the full row conclusion holds on the concrete planar family
+    [En n] — being edgeless forces cp = 0, hence cc = 0.  (Planarity of [En n]
+    for [n <= 4] is separately certified by [wagner_planar_small], making this a
+    genuine planar instance.) *)
+Lemma jones_En (n ccn cpn : nat) :
+  is_min_fvs (En n) ccn -> is_max_cycle_packing (En n) cpn -> ccn <= 2 * cpn.
+Proof.
+move=> hf hp.
+have cpn0 : cpn = 0.
+  case: hp => [[cs [cpk szcs]] _].
+  case: cs cpk szcs => [|c0 cs'] cpk szcs; first by rewrite -szcs.
+  case: cpk => cpk1 _.
+  have [uc long] := cpk1 c0 (mem_head _ _).
+  by exfalso; apply: (En_no_cycle uc long).
+rewrite cpn0 in hp *.
+exact: (jones_acyclic_slice hf hp).
+Qed.
+
 

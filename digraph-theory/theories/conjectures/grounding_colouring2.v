@@ -329,3 +329,79 @@ Proof. exact: majority_k1col_implies_majority_3col. Qed.
 Lemma conj2_specialises_tournament :
   majority_3col_statement -> majority_3col_tournament_statement.
 Proof. exact: majority_3col_implies_tournament. Qed.
+
+(** ==================================================================== *)
+(** ** H. RIGHT-POLARITY fragments of [mono_reach_or_rainbow_statement].
+
+    The open statement is: every nonempty 3-arc-coloured tournament has a
+    rainbow triangle OR a monochromatic-reachability root.  The grounding above
+    (sections A/D/E/F) only inhabits the class and exercises the two disjuncts
+    in isolation on a fixed colouring.  Here we PIN THE STATEMENT TRUE, via its
+    RIGHT disjunct [exists v, mono_root c v], on the settled dominating-vertex
+    sub-cases — for ARBITRARY 3-arc-colourings — and we confirm the [0 < #|T|]
+    guard is load-bearing (not vacuizing).  These are genuine truth-value
+    forcing facts: they discharge the conjecture on an infinite sub-family and
+    the smallest nonempty parameter without touching the open general case. *)
+
+(** *** H.1  ALWAYS-TRUE-DIRECTION.  In ANY tournament, a source vertex [v]
+    (one that dominates every other vertex) is a monochromatic-reachability
+    root for EVERY 3-arc-colouring: it reaches itself by the empty colour-[ord0]
+    path, and every other [w] by the single arc [v --> w] taken in its own
+    colour [c v w].  So the RIGHT disjunct of the statement holds outright, and
+    it holds uniformly over all colourings — the colouring is never consulted to
+    decide reachability past the first arc.  This is the reusable core: the
+    whole tournaments-with-a-source class satisfies the statement. *)
+Lemma dominating_mono_root (T : tournament) (c : arc_colouring T 3) (v : T) :
+  (forall w : T, w != v -> v --> w) -> mono_root c v.
+Proof.
+move=> Hdom; apply/forallP => w; apply/existsP.
+case: (eqVneq w v) => [->|wv].
+- by exists ord0; exact: mono_reach_refl.
+- exists (c v w); apply: connect1.
+  by rewrite /mono_rel eqxx andbT; exact: (Hdom _ wv).
+Qed.
+
+(** *** H.2  SMALL-INSTANCE (infinite settled sub-family).  The FULL conclusion
+    of [mono_reach_or_rainbow_statement] holds for EVERY transitive tournament
+    [TT n] with [n >= 1], under EVERY 3-arc-colouring: vertex [0 = Ordinal n0]
+    dominates all others (in [TT n], [0 --> w] iff [0 < val w], which holds for
+    all [w != 0]).  This decides the open conjecture TRUE on the whole family
+    {TT n : n >= 1}, for arbitrary colourings — the right disjunct, via H.1. *)
+Lemma mono_reach_or_rainbow_TTn (n : nat) (c : arc_colouring (TT n) 3) :
+  (0 < n)%N -> rainbow_triangle c \/ exists v : TT n, mono_root c v.
+Proof.
+move=> n0; right; exists (Ordinal n0); apply: dominating_mono_root => w wne.
+rewrite arcTTE lt0n.
+by move: wne; rewrite -val_eqE.
+Qed.
+
+(** *** H.3  SMALL-INSTANCE (base case).  The full conclusion holds for EVERY
+    singleton tournament ([#|T| = 1]) under EVERY 3-arc-colouring: its unique
+    vertex vacuously dominates (there is no [w != v]), hence is a mono-root by
+    H.1.  This is the smallest nonempty parameter of the statement, decided TRUE
+    on the right disjunct.  (The dominating hypothesis is met vacuously: any
+    [w != v] would give a second element, contradicting [#|T| = 1].) *)
+Lemma mono_reach_or_rainbow_card1 (T : tournament) (c : arc_colouring T 3) :
+  #|T| = 1%N -> rainbow_triangle c \/ exists v : T, mono_root c v.
+Proof.
+move=> T1; have /card_gt0P [v _] : (0 < #|T|)%N by rewrite T1.
+right; exists v; apply: dominating_mono_root => w wv.
+have /card_le1_eqP eqall : (#|[set: T]| <= 1)%N by rewrite cardsT T1.
+have wveq : w = v := eqall v w (in_setT v) (in_setT w).
+by rewrite wveq eqxx in wv.
+Qed.
+
+(** *** H.4  GUARD FAITHFULNESS (the [0 < #|T|] hypothesis is load-bearing).
+    On the EMPTY tournament [TT 0] the conclusion is FALSE: a rainbow triangle
+    needs three vertices and a mono-root needs one, but [TT 0 = 'I_0] has NONE
+    (every purported vertex [Ordinal m] would carry [m < 0], impossible).  So
+    dropping the guard would make the statement false for a trivial reason;
+    keeping it does NOT vacuize the statement (H.2/H.3 show the guarded class is
+    richly satisfiable), it exactly excludes the single degenerate falsifier. *)
+Lemma TT0_no_conclusion (c : arc_colouring (TT 0) 3) :
+  ~ (rainbow_triangle c \/ exists v : TT 0, mono_root c v).
+Proof.
+case.
+- by case=> a [b [c0 _]]; case: a => m; rewrite ltn0.
+- by case=> v _; case: v => m; rewrite ltn0.
+Qed.

@@ -231,3 +231,181 @@ Qed.
     coq-graph-theory lemma yields [χ <= 2] without constructing that colouring
     (a genuine case split on whether the two K_2's share a vertex), so this is
     left unproven rather than weakened. *)
+
+(** ** Erdős–Lovász double-critical (Row 1, U1) — right-polarity fragments.
+
+    The full [double_critical_graph_statement] (every connected double-critical
+    [n]-chromatic graph is [K_n]) is the Erdős–Lovász conjecture; its
+    load-bearing settled cases [k=4,5] are the Mozhan (1983) / Stiebitz (1987)
+    structural theorems, OUT OF SCOPE and NOT attempted.  We ground the
+    fragments that force the correct truth value without those theorems: the
+    whole conjectured-extremal family [K_n] genuinely satisfies every hypothesis
+    of the statement (teeth), and the elementary [n=1] slice of the FULL
+    statement is proved TRUE.
+
+    Reused API: [chi_clique], [sub_clique], [subsetDl], [cardsD], [clique_bound],
+    [omega_leq_chi] (core/coloring.v), [connectedTI]/[connect0]/[connect1],
+    [connected_card_gt1], [sg_edgeNeq], [Diso''] (core/sgraph.v, core/digraph.v),
+    and the local [clique_complete]/[chi_complete]/[Delta_complete]. *)
+
+(** (A) TEETH — the whole extremal family [K_{n+2}] is double-critical:
+    deleting any adjacent pair leaves a [K_n], dropping [χ] by exactly [2].
+    Strictly generalises the existing [double_critical_K2] witness (its [n=0]
+    case), so the [double_critical] hypothesis is non-vacuous on every [K_n]
+    with [n ≥ 2] — the conjecture targets the correct graph class. *)
+Lemma double_critical_complete n : double_critical 'K_n.+2.
+Proof.
+move=> x y xy.
+have xney : x != y by move: xy; rewrite /edge_rel /=.
+have cardT : #|[set: 'K_n.+2]| = n.+2 by rewrite cardsT card_ord.
+have subxy : [set x; y] \subset [set: 'K_n.+2] by apply: subsetT.
+have c2 : #|[set x; y]| = 2 by rewrite cards2 xney.
+have clqS : clique ([set: 'K_n.+2] :\: [set x; y]).
+  apply: sub_clique; [ exact: subsetDl | exact: clique_complete ].
+have cardS : #|[set: 'K_n.+2] :\: [set x; y]| = n.
+  by rewrite cardsD (setIidPr subxy) c2 cardT -addn2 addnK.
+by rewrite chi_clique // cardS chi_complete addn2.
+Qed.
+
+(** (B) TEETH — every complete graph [K_{n+1}] is connected, so the
+    connectivity hypothesis of the statement is satisfied by exactly the
+    conjectured extremal graphs. *)
+Lemma connected_complete n : connected [set: 'K_n.+1].
+Proof.
+apply: connectedTI => x y.
+case: (eqVneq x y) => [->|xney]; first exact: connect0.
+by apply: connect1; rewrite /edge_rel /= xney.
+Qed.
+
+(** (C) TEETH — the extremal family [K_{n+2}] jointly satisfies ALL premises of
+    the statement AND its conclusion ([K ≃ K] via [diso_id]); so each [K_n]
+    ([n ≥ 2]) is a genuine fixed point of the conjecture's implication, and the
+    premise/conclusion set is inhabited for every chromatic number [≥ 2]. *)
+Lemma double_critical_witness n :
+  0 < #|'K_n.+2| /\ connected [set: 'K_n.+2] /\ double_critical 'K_n.+2 /\
+  χ([set: 'K_n.+2]) = n.+2 /\ inhabited ('K_n.+2 ≃ 'K_n.+2).
+Proof.
+split; first by rewrite card_ord.
+split; first exact: connected_complete.
+split; first exact: double_critical_complete.
+split; first exact: chi_complete.
+exact: (inhabits diso_id).
+Qed.
+
+(** (D) SMALL-INSTANCE — the FULL statement at [n=1], proved TRUE: a connected
+    double-critical graph with [χ = 1] is [K_1].  [χ = 1] forces edgelessness
+    (an edge is a 2-clique, so [ω ≥ 2 ≤ χ], contradiction); connectivity plus
+    edgelessness plus non-emptiness force [#|G| = 1] (by [connected_card_gt1]);
+    the single-vertex graph is then explicitly [≃ 'K_1].  A genuine settled
+    slice of the conjecture, not a vacuous one. *)
+Lemma double_critical_n1 (G : sgraph) :
+  0 < #|G| -> connected [set: G] -> double_critical G ->
+  χ([set: G]) = 1 -> inhabited (G ≃ 'K_1).
+Proof.
+move=> gt0 conn _ chi1.
+have edgeless : forall x y : G, ~~ (x -- y).
+  move=> x y; apply/negP => xy.
+  have xney : x != y by rewrite (sg_edgeNeq xy).
+  have cl2 : clique [set x; y].
+    move=> a b; rewrite !inE => /orP[/eqP->|/eqP->] /orP[/eqP->|/eqP->] ne.
+    - by move: ne; rewrite eqxx.
+    - exact: xy.
+    - by rewrite sgP.
+    - by move: ne; rewrite eqxx.
+  have clm : [set x; y] \in cliques [set: G].
+    by rewrite inE subsetT /=; apply/cliqueP.
+  have h2 := clique_bound clm; rewrite cards2 xney in h2.
+  by move: (leq_trans h2 (omega_leq_chi [set: G])); rewrite chi1.
+have le1 : #|G| <= 1.
+  rewrite leqNgt; apply/negP => gt1.
+  have gt1T : 1 < #|[set: G]| by rewrite cardsT.
+  case/card_gt1P: gt1T => x [y] [_ _ xney].
+  have xT : x \in [set: G] by rewrite inE.
+  have yT : y \in [set: G] by rewrite inE.
+  case: (connected_card_gt1 conn xT yT xney) => z _ xz.
+  by move: (edgeless x z); rewrite xz.
+have alleq : forall x y : G, x = y.
+  have /card_le1_eqP h : #|[set: G]| <= 1 by rewrite cardsT.
+  by move=> x y; apply: h; rewrite inE.
+have [x0 _] : exists x0 : G, x0 \in [set: G].
+  by apply/card_gt0P; rewrite cardsT.
+pose f (_ : G) : 'K_1 := ord0.
+pose g (_ : 'K_1) : G := x0.
+constructor.
+apply: (@Diso'' G 'K_1 f g).
+- by move=> x; apply: alleq.
+- by move=> y; rewrite /f (ord1 y).
+- by move=> x y xy; move: (edgeless x y); rewrite xy.
+- by move=> x y; rewrite /edge_rel /= (ord1 x) (ord1 y) eqxx.
+Qed.
+
+(** ** Cycles in graphs of large chromatic number (Row 3, U1).
+
+    The full [cycles_in_graphs_of_large_chromatic_number_statement]
+    ([2 < k] and [k < χ] ⟹ [(k+1)(k-1)! ≤ 2·count_cycles_mod G k]) is the
+    Erdős/Gyárfás cycle-counting conjecture; every settled sub-case is itself a
+    nontrivial theorem and the one decidable instance ([K_4], [k=3]) is blocked
+    by a stuck [Finite.enum] cardinality — both OUT OF SCOPE.  We ground the
+    fragments that pin the primitive's boundary behaviour and the guard's
+    truth-value role. *)
+
+(** (A) BOUNDARY — [count_cycles_mod 'K_2 1 = 0]: the genuine-cycle filter
+    [2 < L] is empty over the tiny index range [L < #|'K_2|.+1 = 3], so the
+    degenerate [k=1] count vanishes (companion to the existing [count_cycles_mod_0]
+    at [k=0]).  Purely structural (empty [bigop] filter). *)
+Lemma cnt_K2_1 : count_cycles_mod 'K_2 1 = 0.
+Proof.
+rewrite /count_cycles_mod big_pred0 // => L.
+by case: L => m Hm /=; rewrite card_ord in Hm; case: m Hm => [|[|[|m]]].
+Qed.
+
+(** (B) INHABITATION — the guard regime [2 < k] and [k < χ] is satisfiable
+    (witness [k=3], [G = 'K_4], [χ = 4]); the statement genuinely asserts a
+    cycle-count lower bound on real graphs, not a vacuous implication. *)
+Lemma cycles_guard_inhabited :
+  exists (k : nat) (G : sgraph), 2 < k /\ k < χ([set: G]).
+Proof. exists 3, 'K_4. rewrite chi_complete. by split. Qed.
+
+(** (C) BOUNDARY — the [2 < k] guard is LOAD-BEARING: dropping it makes the
+    proposition FALSE.  Witness [k=1], [G = 'K_2]: [1 < χ = 2] holds but the
+    LHS [2·0! = 2 > 0 = 2·count] fails (using [cnt_K2_1]).  Pins the correct
+    truth value (FALSE) of the un-guarded variant. *)
+Lemma cycles_guard_necessary :
+  ~ (forall (k : nat) (G : sgraph),
+        k < χ([set: G]) -> (k.+1) * (k.-1)`! <= 2 * count_cycles_mod G k).
+Proof.
+move=> H; move: (H 1 'K_2).
+rewrite chi_complete cnt_K2_1 muln0 => /(_ (ltnSn 1)) Hle.
+have Hpos : 0 < (1.+1) * (1.-1)`! by rewrite muln_gt0 fact_gt0.
+by rewrite leqNgt Hpos in Hle.
+Qed.
+
+(** ** Vertex colouring of graph fractional powers (Row 7, U1).
+
+    The full [vertex_coloring_of_graph_fractional_powers_statement]
+    (connected [G], [Δ ≥ 3], [1 < m < n] ⟹ [χ(G^{m/n}) = ω(G^{m/n})]) is
+    Iradmusa's conjecture; the hard direction [χ ≤ ω] carries all the content
+    and is OUT OF SCOPE.  We ground the always-true half of the equality and
+    the non-emptiness of the guard. *)
+
+(** (A) ALWAYS-TRUE DIRECTION — the [ω ≤ χ] half of the conjectured equality
+    holds for ALL [G, m, n] (a maximum clique needs that many colours), so the
+    only open content is the reverse inequality [χ ≤ ω]. *)
+Lemma vcgfp_omega_leq_chi (G : sgraph) (m n : nat) :
+  ω([set: frac_power G m n]) <= χ([set: frac_power G m n]).
+Proof. exact: omega_leq_chi. Qed.
+
+(** (B) INHABITATION — the four-fold guard (connected [G], [Δ G ≥ 3],
+    [1 < m], [m < n]) is jointly satisfiable ([G = 'K_4], [Δ = 3], [m=2],
+    [n=3]), so the statement is not vacuously true; the [Δ ≥ 3] clause genuinely
+    excludes paths/cycles/[K_2]. *)
+Lemma vcgfp_guard_inhabited :
+  exists (G : sgraph) (m n : nat),
+    [/\ connected [set: G], 3 <= Delta G, 1 < m & m < n].
+Proof.
+exists 'K_4; exists 2; exists 3; split.
+- exact: connected_complete.
+- by rewrite (Delta_complete 3).
+- by [].
+- by [].
+Qed.

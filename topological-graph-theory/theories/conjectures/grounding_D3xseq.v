@@ -43,3 +43,61 @@ Lemma xseq_hyp_inhab :
         (forall j : nat, j.+1 < size a -> nth 0 a j.+1 < nth 0 a j)
       & nth 0 a (size a).-1 = 0].
 Proof. by exists [:: 0]; split=> // j; rewrite ltnS leqn0 => /eqP. Qed.
+
+(** GUARDED-BODY INHABITATION on a REAL connected object.  The statement's
+    existential body is [connected [set: G] /\ is_crossing_genus G i (nth 0 a i)];
+    here we exhibit a genuine connected graph ([K_3], not a degenerate/edgeless
+    map) that JOINTLY satisfies the connectivity guard and the realization
+    predicate at crossing value 0.  This strengthens [xseq_realizable] above,
+    which lacked the connectivity conjunct the statement demands: it pins TRUE on
+    the achievability of the exact shape the conjecture's [exists G] ranges over,
+    so the conjecture is not vacuously false.  ([i] is existential — supplied by
+    [is_crossing_genus_inhab] as the embedding genus — so no [euler_genus]
+    computation is triggered.) *)
+Lemma K3_conn : connected [set: 'K_3].
+Proof.
+apply: connectedTI => x y.
+case: (eqVneq x y) => [->|xy]; [exact: connect0 | by apply: connect1].
+Qed.
+
+Lemma xseq_connected_realizer :
+  exists (G : sgraph) (i : nat), connected [set: G] /\ is_crossing_genus G i 0.
+Proof.
+case: (is_crossing_genus_inhab 'K_3) => i Hi.
+by exists ('K_3), i; split; [exact: K3_conn | exact: Hi].
+Qed.
+
+(** TEETH on the premise: an INFINITE FAMILY of GENUINELY NONTRIVIAL
+    strictly-decreasing-to-0 sequences [(n, n-1, …, 1, 0)] all satisfy the
+    statement's guard.  This shows the conjecture ranges over the substantive,
+    undecided cases — arbitrarily long sequences with a positive leading term
+    [n] — not merely the trivial all-zero [[:: 0]] of [xseq_hyp_inhab] above.
+    (Takes [n = mkseq (subn n) n.+1 = [n; n-1; …; 0]].) *)
+Lemma xseq_hyp_family (n : nat) :
+  let a := mkseq (subn n) n.+1 in
+  [/\ 0 < size a,
+      (forall j : nat, j.+1 < size a -> nth 0 a j.+1 < nth 0 a j)
+    & nth 0 a (size a).-1 = 0].
+Proof.
+cbv zeta; rewrite !size_mkseq; split.
+- by [].
+- move=> j Hj.
+  rewrite (nth_mkseq _ _ Hj) (nth_mkseq _ _ (ltnW Hj)).
+  move: Hj; rewrite ltnS => jn.
+  by rewrite subnS ltn_predL subn_gt0.
+- by rewrite nth_mkseq ?ltnSn // subnn.
+Qed.
+
+(** ALWAYS-TRUE DIRECTION (a real structural half of the object the conjecture
+    ranges over): the genus crossing SEQUENCE is GLOBALLY non-increasing — for any
+    [i <= j], [cr_j(G) <= cr_i(G)], not just for consecutive indices.  This
+    strengthens [xseq_nonincreasing] above (which covers only [i], [i.+1]) to
+    arbitrary index gaps, confirming that any realizer's crossing sequence has
+    exactly the monotone "strictly decreases until 0" shape the premise
+    presupposes — an unconditional theorem, not an assumption. *)
+Lemma xseq_nonincreasing_le (G : sgraph) (i j m n : nat) :
+  i <= j -> is_crossing_genus G i m -> is_crossing_genus G j n -> n <= m.
+Proof.
+move=> Hij [Pm _] [_ Ln]; apply: Ln.
+exact: (crossing_genus_in_leq Hij Pm).
+Qed.
