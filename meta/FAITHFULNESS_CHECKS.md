@@ -23,8 +23,9 @@ green release) is the standing reminder of why this matters.
 
 ## What is already in place (keep + scale)
 
-- **Gates** (`make gate` / `check_milestone.py`): compiles, axiom-free, `Print Assumptions` clean.
-  Rules out hidden axioms — **not** meaning.
+- **Gates** (`make gate` / `check_milestone.py`): compiles, axiom-free, `Print Assumptions`
+  clean, and exact-type faithfulness probes for the two cheap signatures below. Rules out hidden
+  axioms and blatant committed proof/refutation regressions — **not** deeper meaning.
 - **Grounding lemmas** (Qed'd, per milestone `grounding_<phase>.v`): the machine-checked faithfulness
   anchors —
   - *inhabitation / non-vacuity*: a real witness exists (`iRay_proper_self_minor`, `is_crossing_genus_inhab`);
@@ -61,7 +62,7 @@ subtler modes (#3/#4/#5), which need the stronger techniques below.
 
 ### 1. Refutation-scan gate check *(cheap — do first)*
 The gate verifies each statement compiles + is axiom-free, but **never checks that
-`~ <name>_statement` is not provable** — the precise hole U4 fell through. Add a check to
+`~ <name>_statement` is not provable** — the precise hole U4 fell through. This is now implemented in
 `check_milestone.py`: **fail any `done`/`partial` row (manifest `status` ≠ `disproved`) that has a
 committed *unconditional* theorem of type exactly `~ <name>_statement` / `<name>_statement -> False`.**
 Auto-catches mode #2 forever.
@@ -72,8 +73,9 @@ Implement it as a **declaration scanner + Rocq `Check` probe, not a raw regex.**
 `Theorem/Lemma` headers that mention a row name, then for each candidate emit
 `Check (lemma_name : ~ <name>_statement).` and fail **only if Rocq accepts that exact (hypothesis-free)
 type** — and skip the `disproved` row. This decides "is this an *unconditional* refutation of the row?"
-at the type level, immune to the syntactic false positives. (The sweep above is its one-shot form; the
-baseline is already clean, so this only *locks in* the invariant.)
+at the type level, immune to the syntactic false positives. The implemented gate also rejects direct
+proofs of manifest `open`/`partial` rows by the same exact-type `Fail Check` mechanism. (The sweep
+above was the one-shot form; the baseline is clean, and the invariant is now locked into `make gate`.)
 
 ### 2. Settled-case proof applications *(strongest forcing function — follow-up issue #4)*
 For every row whose manifest `status` is **solved** or **disproved** (`status` field; free-text
@@ -98,6 +100,23 @@ hypothesis — and confirm that **some** check catches it (grounding fails to co
 becomes axiom-free provable/refutable, or an audit flags it). A mutation that survives every check is a
 hole in that row's faithfulness net. This is how one would have *predicted* the U4 gap.
 
+Standing seed harness: `meta/faithfulness_mutation.py` (also exposed as `make mutation`) runs isolated
+temporary-workspace mutants, then requires `check_milestone.py` to reject each mutant for the expected
+signature. The current suite covers both exact-type gate failures and semantic drift in load-bearing
+definitions:
+
+- U4 open row mutated to `True` plus a direct proof (`direct-proof-undecided`);
+- U4 open row mutated to `False` plus an unconditional refutation (`unconditional-refutation`);
+- `list_colourable_on` changed back to total colouring instead of partial-on-`W`;
+- `girth_geq` with the genuine-cycle guard `2 < size c` removed;
+- `wagner_planar` weakened to `True`;
+- `has_girth` weakened by dropping the witnessed cycle of length `g`;
+- `strongly_colorable` weakened from "all partitions" to "some partition".
+
+Current baseline: **7/7 mutants killed**. This is now a standing mutation smoke test for the checks
+themselves. It is not an exhaustive mutation campaign; add a targeted mutant whenever a new
+load-bearing definition, guard, inequality, or quantifier choice becomes part of a faithfulness claim.
+
 ### 5. Blind readback / the `audit_page` (correspondence) leg
 The five-leg model reserves a 5th leg (`audit_page` / correspondence), mostly `todo` today. Fill it: an
 agent reads **only the Rocq `Definition`** (blind to the source), reconstructs the conjecture in prose,
@@ -110,12 +129,12 @@ review of the statements is the most cost-effective single technique; schedule i
 
 ## Recommended order
 
-1. **#1 refutation-scan gate check** — locks in mode #2; the corpus is already clean, so it is pure
-   regression protection. *(cheap, immediate.)*
+1. **#1 refutation/direct-proof exact-type gate check** — now in `check_milestone.py`; keep it green
+   as pure regression protection.
 2. **#2 settled-case proofs** — the deepest track; maps onto follow-up issue #4. Forces the right truth
    value on every decided row.
-3. **#3 equivalent re-encodings** + **#4 mutation testing** on the load-bearing definitions
-   (minor relation, ends, crossing number, geometry) — where modes #3/#4/#5 are most likely.
+3. **#3 equivalent re-encodings** + keep extending **#4 mutation testing** on the load-bearing
+   definitions (minor relation, ends, crossing number, geometry) — where modes #3/#4/#5 are most likely.
 4. **#5 readback leg** + **#6 recurring external review** — the systematic and human layers.
 
 ## What faithfulness checking can and cannot deliver

@@ -8,6 +8,8 @@ Verifies, against the live opam switch `digraph`:
   4. Print Assumptions is clean (Closed under the global context) for every statement node;
   5. no top-level Axiom / Parameter / Admitted / Conjecture / Hypothesis (outside comments);
   6. each non-todo leg in meta/opg_legs_state.json is justified by an artifact + carries provenance.
+  7. no forbidden exact-type faithfulness signatures are committed:
+     unconditional refutations of non-disproved rows, or direct proofs of undecided rows.
 Exit 0 iff all pass. Run only inside (or with) the `digraph` switch on PATH.
 """
 import json, os, re, sys, subprocess, glob
@@ -27,6 +29,90 @@ pkg = os.path.join(MONO, package)
 ns = NS.get(package)
 results = []  # (ok, label, detail)
 def chk(ok, label, detail=""): results.append((bool(ok), label, detail))
+
+def strip_comments(t):
+    """Strip nested Rocq block comments while preserving line/column shape."""
+    out, i, depth = [], 0, 0
+    while i < len(t):
+        if t.startswith("(*", i):
+            depth += 1
+            out.extend("  ")
+            i += 2
+        elif depth and t.startswith("*)", i):
+            depth -= 1
+            out.extend("  ")
+            i += 2
+        elif depth:
+            out.append("\n" if t[i] == "\n" else " ")
+            i += 1
+        else:
+            out.append(t[i])
+            i += 1
+    return "".join(out)
+
+DECL_RE = re.compile(
+    r"^\s*(?:(?:Local|Global|Polymorphic|Program)\s+)*"
+    r"(?:Lemma|Theorem|Corollary|Proposition|Fact|Remark)\s+([A-Za-z0-9_']+)\b",
+    re.M,
+)
+IDENT_CHARS = "A-Za-z0-9_'"
+
+def coq_sentence_from(t, start):
+    """Return the declaration command starting at start, approximately through its final period."""
+    i = start
+    while True:
+        j = t.find(".", i)
+        if j < 0:
+            return t[start:]
+        nxt = t[j + 1:j + 2]
+        # Qualified names contain dots followed by identifier chars; command terminators do not.
+        if not nxt or nxt.isspace():
+            return t[start:j + 1]
+        i = j + 1
+
+def module_of_rel(ns, rel):
+    mod = rel[:-2].replace(os.sep, ".").replace("/", ".")
+    if mod.startswith("theories."):
+        mod = mod[len("theories."):]
+    return f"{ns}.{mod}"
+
+def project_v_files(pkg, cqp_txt):
+    files = []
+    for raw in cqp_txt.splitlines():
+        line = raw.split("#", 1)[0].strip()
+        if not line:
+            continue
+        rel = line.split()[0]
+        if rel.startswith("theories/") and rel.endswith(".v") and os.path.exists(os.path.join(pkg, rel)):
+            files.append(rel)
+    return files
+
+def incl_flags_from_cqp(cqp_txt):
+    incl_flags = []
+    for m in re.findall(r"-[QR]\s+\S+\s+\S+", cqp_txt):
+        incl_flags += m.split()
+    return incl_flags
+
+def faithfulness_candidates(pkg, ns, cqp_txt, target_names):
+    files = project_v_files(pkg, cqp_txt)
+    candidates = {n: [] for n in target_names}
+    pats = {n: re.compile(rf"(?<![{IDENT_CHARS}]){re.escape(n)}(?![{IDENT_CHARS}])")
+            for n in target_names}
+    for rel in files:
+        try:
+            src = strip_comments(open(os.path.join(pkg, rel)).read())
+        except OSError:
+            continue
+        mod = module_of_rel(ns, rel)
+        for m in DECL_RE.finditer(src):
+            decl = coq_sentence_from(src, m.start())
+            mentioned = [n for n, pat in pats.items() if pat.search(decl)]
+            if not mentioned:
+                continue
+            qname = f"{mod}.{m.group(1)}"
+            for n in mentioned:
+                candidates[n].append((qname, rel, m.group(1)))
+    return candidates
 
 # switch resolution: prefer PATH, else the known global switch bin
 SW = os.path.expanduser("~/.opam/digraph/bin")
@@ -91,9 +177,7 @@ mk = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f
 compiles = mk.returncode == 0
 chk(compiles, "package compiles", "" if compiles else (mk.stdout + mk.stderr)[-500:])
 
-# 5) no top-level axioms/admits (outside comments) — strip block comments first
-def strip_comments(t):
-    return re.sub(r"\(\*.*?\*\)", "", t, flags=re.S)
+# 5) no top-level axioms/admits (outside comments)
 axiom_re = re.compile(r"^\s*(Axiom|Parameter|Admitted|Conjecture|Hypothesis|admit)\b", re.M)
 ax_hits = []
 for p in (stmt, grounding, implications):
@@ -113,9 +197,7 @@ if compiles and ns:
            "".join(f"Print Assumptions {n}.\n" for n in expected)
     open(probe, "w").write(body)
     # build coqc include flags as an argv LIST (no shell string interpolation of _CoqProject paths)
-    incl_flags = []
-    for m in re.findall(r"-[QR]\s+\S+\s+\S+", cqp_txt):
-        incl_flags += m.split()
+    incl_flags = incl_flags_from_cqp(cqp_txt)
     if not incl_flags:
         incl_flags = ["-R", "theories", ns]
     pr = run(["coqc"] + incl_flags + [f"theories/conjectures/_assum_{phase}.v"])
@@ -129,6 +211,54 @@ if compiles and ns:
         os.remove(f)
 n_axfree = closed if (compiles and ns) else 0
 chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements)", assum_detail)
+
+# 7) Exact-type faithfulness probes:
+#    - no unconditional refutation of a non-disproved row;
+#    - no direct proof of an undecided row (manifest status open/partial).
+faith_ok, faith_detail = False, "skipped (compile failed)"
+cases = []
+if compiles and ns:
+    probe = os.path.join(pkg, "theories", "conjectures", f"_faith_{phase}.v")
+    incl_flags = incl_flags_from_cqp(cqp_txt)
+    if not incl_flags:
+        incl_flags = ["-R", "theories", ns]
+    rows_by_name = {r["formal_name"]: r for r in rows}
+    candidates = faithfulness_candidates(pkg, ns, cqp_txt, [n for n in expected if n in defined_in])
+    modules = {f"{ns}.conjectures.{defined_in[n]}" for n in expected if n in defined_in}
+    for n in expected:
+        row = rows_by_name.get(n, {})
+        status = row.get("status", "")
+        stmt_q = f"{ns}.conjectures.{defined_in[n]}.{n}" if n in defined_in else n
+        for qname, rel, decl in candidates.get(n, []):
+            modules.add(qname.rsplit(".", 1)[0])
+            if status != "disproved":
+                cases.append(("unconditional-refutation", n, qname, rel, decl, f"~ {stmt_q}"))
+            if status in ("open", "partial"):
+                cases.append(("direct-proof-undecided", n, qname, rel, decl, stmt_q))
+
+    lines = [f"Require Import {m}." for m in sorted(modules)]
+    line_map = {}
+    for kind, n, qname, rel, decl, typ in cases:
+        lines.append(f"(* FAITHFULNESS {kind}: {rel}:{decl} against {n} *)")
+        line_no = len(lines) + 1
+        line_map[line_no] = f"{kind}: {qname} has forbidden exact type {typ}"
+        lines.append(f"Fail Check ({qname} : {typ}).")
+    open(probe, "w").write("\n".join(lines) + "\n")
+    pr = run(["coqc"] + incl_flags + [f"theories/conjectures/_faith_{phase}.v"])
+    out = pr.stdout + pr.stderr
+    faith_ok = pr.returncode == 0
+    if faith_ok:
+        faith_detail = ""
+    else:
+        line_matches = re.findall(r"_faith_[^\"']+\.v\"?, line (\d+)", out)
+        mapped = ""
+        if line_matches:
+            mapped = line_map.get(int(line_matches[-1]), "")
+        faith_detail = (mapped + "; " if mapped else "") + out[-500:]
+    for f in glob.glob(os.path.join(pkg, "theories", "conjectures", f"_faith_{phase}*")) + \
+             glob.glob(os.path.join(pkg, "theories", "conjectures", f"._faith_{phase}*")):
+        os.remove(f)
+chk(faith_ok, f"faithfulness exact-type probes ({len(cases)} forbidden shapes tested)", faith_detail)
 
 # 6) overlay legs justified by artifacts + provenance
 legs_path = os.path.join(META, "opg_legs_state.json")
