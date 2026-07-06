@@ -41,11 +41,18 @@ green release) is the standing reminder of why this matters.
 
 Two blatant modes are cheap to check corpus-wide by static scan of every `theories/**/*.v`:
 
-- **Committed refutations** — any `Lemma/Theorem _ : ~ <name>_statement` or `<name>_statement -> False`
-  on a non-`todo` row (this is exactly the U4 skeleton). **Result: 0** across the corpus.
-- **Directly-proven open conjectures** — any committed `Lemma _ : <name>_statement.` whose OPG
-  proposition is a Conjecture/Problem/Question (⇒ the statement is vacuously/trivially true).
-  **Result: 0.**
+- **Committed refutations** — any committed *unconditional* `Lemma/Theorem _ : ~ <name>_statement`
+  (or `… : <name>_statement -> False`) on a non-`disproved` row (this is exactly the U4 skeleton).
+  The *unconditional* qualifier is load-bearing: a **conditional** refutation edge is legitimate and
+  must not trip the check — e.g. `clique_cluster.v` proves
+  `conjecture_5_10_statement -> ~ question_5_9_statement` (a stated A ⟹ ¬B implication, not a
+  standalone disproof of B). The one `disproved` row (Shitov / Hedetniemi) is *also* exempt: there a
+  `~ <name>_statement` is the *correct* artifact, not a bug. **Result: 0** across the corpus.
+- **Directly-proven undecided conjectures** — any committed `Lemma _ : <name>_statement.` on a row
+  whose **manifest `status` is `open` or `partial`** (⇒ the statement is vacuously/trivially true).
+  Keyed off `status`, *not* the OPG proposition kind: the corpus has 3 `solved` + 1 `disproved` rows
+  where a proof / refutation is *valid* optional `applications/` work (plan §3), so only `open`/`partial`
+  rows may not be directly provable. **Result: 0.**
 
 So the two most blatant unfaithfulness signatures are absent today. The remaining risk lives in the
 subtler modes (#3/#4/#5), which need the stronger techniques below.
@@ -54,18 +61,29 @@ subtler modes (#3/#4/#5), which need the stronger techniques below.
 
 ### 1. Refutation-scan gate check *(cheap — do first)*
 The gate verifies each statement compiles + is axiom-free, but **never checks that
-`~ <name>_statement` is not provable** — the precise hole U4 fell through. Add a ~20-line check to
-`check_milestone.py`: **fail any `done`/`partial` row that has a committed `~ <name>_statement` /
-`<name>_statement -> False`.** Auto-catches mode #2 forever. (The sweep above is its one-shot form;
-the baseline is already clean, so this only *locks in* the invariant.)
+`~ <name>_statement` is not provable** — the precise hole U4 fell through. Add a check to
+`check_milestone.py`: **fail any `done`/`partial` row (manifest `status` ≠ `disproved`) that has a
+committed *unconditional* theorem of type exactly `~ <name>_statement` / `<name>_statement -> False`.**
+Auto-catches mode #2 forever.
+
+Implement it as a **declaration scanner + Rocq `Check` probe, not a raw regex.** A regex on
+`<name>_statement -> False` / `~ <name>_statement` false-positives on legitimate conditional edges
+(`A_statement -> ~ B_statement`), on comments, and on multi-line declarations. Instead: scan
+`Theorem/Lemma` headers that mention a row name, then for each candidate emit
+`Check (lemma_name : ~ <name>_statement).` and fail **only if Rocq accepts that exact (hypothesis-free)
+type** — and skip the `disproved` row. This decides "is this an *unconditional* refutation of the row?"
+at the type level, immune to the syntactic false positives. (The sweep above is its one-shot form; the
+baseline is already clean, so this only *locks in* the invariant.)
 
 ### 2. Settled-case proof applications *(strongest forcing function — follow-up issue #4)*
-For every row whose OPG status is **solved** or **disproved** (`status_semantics` in the manifest
-records these), actually **prove `<name>_statement`** (solved-true) or **`~ <name>_statement`**
-(disproved) in Rocq. A faithful encoding of a *decided* conjecture must be provable/refutable with the
-right polarity; if it is not, the encoding is wrong. This forces the correct **truth value** on every
-decided case and catches modes #1–#5 at once. Almost none of this exists yet (corpus is
-statement-only) — the biggest untapped signal.
+For every row whose manifest `status` is **solved** or **disproved** (`status` field; free-text
+rationale in `status_semantics`), actually **prove `<name>_statement`** (solved-true) or
+**`~ <name>_statement`** (disproved) in Rocq. A faithful encoding of a *decided* conjecture must be
+provable/refutable with the right polarity; if it is not, the encoding is wrong. This forces the
+correct **truth value** on every decided case, and is the strongest truth-value-forcing check —
+catching many instances of modes #1–#5. (It does not by itself prove semantic *equivalence*: a
+wrong/proxy encoding that happens to share the row's truth value would still pass, so pair it with #3.)
+Almost none of this exists yet (corpus is statement-only) — the biggest untapped signal.
 
 ### 3. Independent equivalent re-encoding + `<->` proof
 For the load-bearing / complex statements (the infinite-minor relation, combinatorial ends, the genus
