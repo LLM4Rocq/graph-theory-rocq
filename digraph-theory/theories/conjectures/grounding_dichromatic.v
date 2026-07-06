@@ -322,3 +322,36 @@ Qed.
 Lemma dichromatic_bounded_acyclic :
   dichromatic_bounded (fun D : diGraphType => acyclicb D).
 Proof. by exists 1 => D Dac; rewrite dicolorableb1. Qed.
+
+(** ** Technique-#3 faithfulness cross-check for [acyclicb] (from [dichromatic.v]).
+
+    Second, structurally independent encoding of acyclicity: "no directed cycle"
+    stated combinatorially with the seq-level [dicycle] predicate of [dipath.v]
+    ([dicycle c = [&& ~~ nilp c, cycle arc c & uniq c]]) — an explicit finite
+    [uniq] closed-walk witness — versus the original [acyclicb] which is the global
+    reachability statement [forall v w, v --> w -> ~~ connect arc w v] (fingraph
+    transitive-closure [connect]).
+
+    The [reflect] is NOT definitional. Forward reuses the already-proved
+    contrapositive [dicycle_not_acyclicb]. The backward (load-bearing) direction
+    takes a witness [v --> w] with [connect arc w v], turns the reachability into an
+    explicit arc-path via [connectP], shortens it to a simple path with [shortenP],
+    and closes it with the back-arc [v --> w] to manufacture a genuine [dicycle
+    (w :: p')] — contradicting "no dicycle". A reversed arc or a [connect w v] vs
+    [connect v w] confusion breaks the equivalence. *)
+Lemma acyclicbP (D : diGraphType) :
+  reflect (forall c : seq D, ~~ dicycle c) (acyclicb D).
+Proof.
+apply: (iffP idP).
+- move=> ac c; apply/negP=> dc.
+  by move/negbTE: (dicycle_not_acyclicb dc); rewrite ac.
+- move=> noC; apply/forallP=> v; apply/forallP=> w; apply/implyP=> vw.
+  apply/negP=> /connectP[p pp lp].
+  move: lp; case: (shortenP pp) => p' pp' up' _ lp'.
+  have dc : dicycle (w :: p').
+    rewrite /dicycle; apply/and3P; split.
+    - by [].
+    - by rewrite /= rcons_path pp' /= -lp'.
+    - exact: up'.
+  by move/negbTE: (noC (w :: p')); rewrite dc.
+Qed.

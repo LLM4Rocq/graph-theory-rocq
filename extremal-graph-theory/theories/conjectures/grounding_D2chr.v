@@ -234,3 +234,125 @@ have kk0 : (0 < k * k)%N by rewrite muln_gt0 k0.
 have hk : (2 * (k * k) <= k * k)%N by exact: (H k kN).
 by move: hk; rewrite -{2}(mul1n (k * k))%N (leq_pmul2r kk0).
 Qed.
+
+(** ** Technique #3 — independent re-encodings with a proved equivalence
+
+    For two load-bearing definitions we record a SECOND, structurally different
+    encoding and prove it equivalent (Qed, axiom-free).  Agreement between two
+    independent formalizations is the faithfulness evidence: neither <-> is a
+    definitional restatement — each needs a genuine induction / algebraic bridge. *)
+
+(** *** [graph_power] (base) — neighbourhood-closure vs bounded walk.
+
+    base defines reachability inside the [m]-th power via the iterated
+    neighbourhood-SET closure [ball]: [reach_le m x y := y \in ball m x], where
+    [ball 0 x = [set x]] and [ball k.+1 x = ball k x :|: \bigcup_{z in ball k x} N(z)]
+    — a global, quantifier-free set fixpoint.  The independent characterization is
+    the textbook one: [y] is reachable from [x] in at most [m] steps iff there is a
+    WALK (an explicit [path]/[last] witness, mathcomp's shape) of length [<= m] from
+    [x] to [y].  The equivalence is proved by induction on [m], peeling the last
+    edge with [rcons_path]/[last_rcons] and using [bigcupP]/[in_opn] — it is NOT
+    reflexivity. *)
+Definition reach_le_alt (G : sgraph) (m : nat) (x y : G) : Prop :=
+  exists p : seq G, [/\ path (--) x p, last x p = y & (size p <= m)%N].
+
+Lemma reach_le_altE (G : sgraph) (m : nat) (x y : G) :
+  reach_le m x y <-> reach_le_alt m x y.
+Proof.
+rewrite /reach_le /reach_le_alt.
+elim: m y => [|m IH] y /=.
+- rewrite inE; split.
+  + move/eqP => xy; exists [::]; split => //=; by rewrite xy.
+  + move=> [p [pp lp sp]]; move: sp; rewrite leqn0 => /nilP p0.
+    by rewrite -lp p0 /= eqxx.
+- rewrite inE; split.
+  + case/orP => [yb | /bigcupP[z zb zy]].
+    * have [p [pp lp sp]] := (proj1 (IH y)) yb.
+      by exists p; split => //; exact: (leqW sp).
+    * have [q [pq lq sq]] := (proj1 (IH z)) zb.
+      rewrite in_opn in zy.
+      exists (rcons q y); rewrite rcons_path last_rcons size_rcons lq.
+      split; [ by rewrite pq zy | by [] | by rewrite ltnS ].
+  + move=> [p [pp lp sp]].
+    move: sp; rewrite leq_eqVlt ltnS => /orP[/eqP sz | sle].
+    * apply/orP; right; apply/bigcupP.
+      move: sz pp lp; case: (lastP p) => [|q w].
+      -- by [].
+      -- rewrite size_rcons rcons_path last_rcons => -[sq] /andP[pq edge] lw.
+         exists (last x q); last by rewrite in_opn -lw.
+         apply: (proj2 (IH (last x q))); exists q; split => //.
+         by rewrite sq.
+    * apply/orP; left; apply: (proj2 (IH y)); exists p; split => //.
+Qed.
+
+(** The [graph_power] adjacency itself, unfolded through the walk encoding. *)
+Lemma pow_relE (G : sgraph) (m : nat) (x y : G) :
+  pow_rel m x y <-> (x != y) /\ (reach_le_alt m x y \/ reach_le_alt m y x).
+Proof.
+rewrite /pow_rel; split.
+- move=> /andP[nxy /orP[r|r]]; (split; first exact: nxy);
+    [left|right]; exact/reach_le_altE.
+- move=> [nxy H]; rewrite nxy /=; apply/orP.
+  by case: H => /reach_le_altE r; [left|right].
+Qed.
+
+(** *** [pq_colouring] (foundations) — linear band vs cyclic metric.
+
+    [circular_colouring.pq_colouring] follows the source verbatim: on every edge
+    [uv], the LINEAR colour distance [d := |c u - c v|] lies in the two-sided band
+    [q <= d <= p - q].  The standard Vince/Zhu textbook definition instead uses the
+    CYCLIC metric on the palette [Z/p] and a single min-based lower bound:
+    [q <= circ_dist p (c u) (c v)] with [circ_dist p a b := minn |a-b| (p - |a-b|)].
+    Proving these equivalent is exactly the faithfulness check an off-by-one in the
+    band ([p-q] vs [p-q-1], or [<] vs [<=]) would break: it needs [d < p] (from the
+    colour bound, [absz_sub_lt]) and the truncated-subtraction bridge [leq_subCr]. *)
+Definition circ_dist (p a b : nat) : nat :=
+  minn (absz (Posz a - Posz b)) (p - absz (Posz a - Posz b))%N.
+
+Definition pq_colouring_cyc (V : Type) (adj : V -> V -> bool) (p q : nat) (c : V -> nat) : Prop :=
+  (forall v, (c v < p)%N) /\
+  (forall u v, adj u v -> (q <= circ_dist p (c u) (c v))%N).
+
+(** A linear colour distance between two colours in [{0,…,p-1}] stays [< p]. *)
+Lemma absz_sub_lt (p a b : nat) : (a < p)%N -> (b < p)%N ->
+  (absz (Posz a - Posz b) < p)%N.
+Proof.
+move=> ap bp; case: (leqP a b) => [ab | /ltnW ba].
+- have -> : absz (Posz a - Posz b) = (b - a)%N.
+    by rewrite -opprB abszN subzn // absz_nat.
+  exact: leq_ltn_trans (leq_subr a b) bp.
+- have -> : absz (Posz a - Posz b) = (a - b)%N.
+    by rewrite subzn // absz_nat.
+  exact: leq_ltn_trans (leq_subr b a) ap.
+Qed.
+
+(** The per-edge kernel: for a distance [d <= p] with [q <= p], the two-sided band
+    is exactly the min-based cyclic lower bound. *)
+Lemma pq_band_min (p q d : nat) : (d <= p)%N -> (q <= p)%N ->
+  (((q <= d)%N /\ (d <= p - q)%N) <-> (q <= minn d (p - d))%N).
+Proof.
+move=> dp qp; rewrite leq_min (leq_subCr qp dp).
+by split=> [[-> ->] // | /andP[-> ->]].
+Qed.
+
+Lemma pq_colouring_cycE (V : Type) (adj : V -> V -> bool) (p q : nat) (c : V -> nat) :
+  pq_colouring adj p q c <-> pq_colouring_cyc adj p q c.
+Proof.
+rewrite /pq_colouring /pq_colouring_cyc /circ_dist.
+split.
+- move=> [cb Hedge]; split; first exact: cb.
+  move=> u v uv.
+  have du : (absz (Posz (c u) - Posz (c v)) <= p)%N.
+    by apply/ltnW/absz_sub_lt; apply: cb.
+  have [qd _] := Hedge u v uv.
+  have qp : (q <= p)%N by exact: leq_trans qd du.
+  by apply: (proj1 (pq_band_min du qp)); exact: Hedge.
+- move=> [cb Hedge]; split; first exact: cb.
+  move=> u v uv.
+  have du : (absz (Posz (c u) - Posz (c v)) <= p)%N.
+    by apply/ltnW/absz_sub_lt; apply: cb.
+  have qp : (q <= p)%N.
+    apply: leq_trans (Hedge u v uv) _.
+    exact: leq_trans (geq_minl _ _) du.
+  by apply: (proj2 (pq_band_min du qp)); exact: Hedge.
+Qed.

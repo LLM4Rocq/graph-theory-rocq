@@ -24,6 +24,7 @@
     checks. *)
 
 From GTBase Require Import base.
+From GraphTheory Require Import preliminaries.
 From mathcomp Require Import fingroup perm.
 From GTMisc.conjectures Require Import U13.
 
@@ -489,3 +490,95 @@ Qed.
 Lemma weighted_chromatic_number_zero (G : sgraph) :
   weighted_chromatic_number (fun _ : G => 0) 0.
 Proof. by split; [exact: weighted_colourable_zero | move=> m _]. Qed.
+
+(** ============================================================================
+    TECHNIQUE #3 — independent second encodings + proved equivalences.
+
+    For two load-bearing primitives of [U13.v] we give a SECOND, structurally
+    unrelated formalization and prove it equivalent to the original (Qed,
+    axiom-free).  Agreement between the two independent encodings is the
+    faithfulness evidence for the chosen definition.
+    ========================================================================== *)
+
+(** ---------------------------------------------------------------------------
+    [stage_reachable] — combinatorial walk  vs  iterated relational power.
+
+    [stage_reachable S m a b] is an EXISTENTIAL over an explicit witness sequence
+    [w] (a length-[m] walk along [S] from [a] to [b]).  The independent encoding
+    [relpow] is the [m]-fold relational composition of [S] — a fuel-recursive
+    boolean fixpoint (the "matrix power" characterization), with no witness list.
+    The equivalence is the classic "walk exists  iff  reachable in a bounded
+    number of relational-composition steps"; the proof is a genuine induction on
+    [m] with a [c :: w'] / [exists c] case analysis, not a definitional unfold. *)
+
+Fixpoint relpow {t : nat} (S : rel 'I_t) (m : nat) (a b : 'I_t) : bool :=
+  match m with
+  | 0 => a == b
+  | m'.+1 => [exists c : 'I_t, S a c && relpow S m' c b]
+  end.
+
+Definition stage_reachable_alt {t} (S : rel 'I_t) (m : nat) (a b : 'I_t) : Prop :=
+  relpow S m a b.
+
+Lemma stage_reachableP (t : nat) (S : rel 'I_t) (m : nat) (a b : 'I_t) :
+  stage_reachable S m a b <-> stage_reachable_alt S m a b.
+Proof.
+rewrite /stage_reachable /stage_reachable_alt.
+elim: m a => [|m IH] a /=.
+- split.
+  + by move=> [w [/size0nil -> _ <-]]; rewrite eqxx.
+  + by move=> /eqP <-; exists [::].
+- split.
+  + move=> [w [sz]]; case: w sz => [|c w'] // [sz] /=.
+    move=> /andP[Sac pcw] lcw.
+    apply/existsP; exists c; rewrite Sac /=.
+    by apply/IH; exists w'.
+  + move=> /existsP[c] /andP[Sac /IH [w' [sz pcw lcw]]].
+    by exists (c :: w'); split=> //=; [rewrite sz | rewrite Sac].
+Qed.
+
+(** ---------------------------------------------------------------------------
+    [n_edges] — oriented-pair edge count  vs  local degree-sum (handshake).
+
+    [n_edges G = #|oedges G|] counts undirected edges via a GLOBAL set of
+    [enum_rank]-ORDERED pairs [(lo, hi)] (one canonical representative per edge).
+    The independent encoding [n_edges_alt G = (\sum_v #|N(v)|)./2] is the LOCAL
+    per-vertex degree sum, halved — the handshaking-lemma characterization, which
+    never mentions an ordering or a representative choice.
+
+    Bridge: [#|oedges G| = #|E(G)|] via the bijection [p |-> [set p.1; p.2]] onto
+    coq-graph-theory's UNORDERED 2-set edge set [E(G)] (injective because the
+    [enum_rank] order pins which endpoint is which; surjective by ordering the
+    two endpoints of any [set x;y]); then reuse the library handshake theorem
+    [edges_sum_degrees : 2 * #|E(G)| = \sum_(x in G) #|N(x)|] and halve. *)
+
+Definition n_edges_alt (G : sgraph) : nat := (\sum_(v : G) #|N(v)|)./2.
+
+Lemma oedges_card_edges (G : sgraph) : #|oedges G| = #|E(G)|.
+Proof.
+pose f (p : G * G) := [set p.1; p.2].
+have finj : {in oedges G &, injective f}.
+  move=> [a b] [c d]; rewrite !inE /= => /andP[_ rab] /andP[_ rcd].
+  rewrite /f /= => /doubleton_eq_iff[[-> ->]//|[ea bd]].
+  move: rab rcd; rewrite ea bd => rab' rcd'.
+  by move: (ltn_trans rab' rcd'); rewrite ltnn.
+have imf : [set f p | p in oedges G] = E(G).
+  apply/setP => e; apply/idP/idP.
+  - move=> /imsetP[[a b] Hab He]; move: Hab; rewrite inE /= => /andP[ab _].
+    by apply/edgesP; exists a, b; split; [rewrite He /f /= | exact: ab].
+  - move=> /edgesP[x [y [He xy]]].
+    have rxy : enum_rank x != enum_rank y.
+      by rewrite (inj_eq enum_rank_inj) (sg_edgeNeq xy).
+    apply/imsetP; rewrite He.
+    case: (ltngtP (enum_rank x) (enum_rank y)) => [lt|gt|eqn].
+    + by exists (x, y); [rewrite inE /= xy lt | rewrite /f /=].
+    + by exists (y, x); [rewrite inE /= sgP xy gt | rewrite /f /= setUC].
+    + by move: rxy; rewrite (val_inj eqn) eqxx.
+by rewrite -imf (card_in_imset finj).
+Qed.
+
+Lemma n_edges_double (G : sgraph) : 2 * n_edges G = \sum_(v : G) #|N(v)|.
+Proof. by rewrite /n_edges oedges_card_edges edges_sum_degrees. Qed.
+
+Theorem n_edges_handshake (G : sgraph) : n_edges G = n_edges_alt G.
+Proof. by rewrite /n_edges_alt -n_edges_double mul2n doubleK. Qed.

@@ -409,3 +409,69 @@ exists 'K_4; exists 2; exists 3; split.
 - by [].
 - by [].
 Qed.
+
+(** ============================================================================
+    TECHNIQUE #3 — independent re-encoding of [valency_variety] and a proved [=].
+
+    [valency_variety G] is defined as the LENGTH OF A DEDUPLICATED LIST of
+    natural-number degrees: [size (undup [seq #|N x| | x <- enum setT])].  The
+    independent second encoding counts the same quantity — the number of
+    distinct vertex-degrees — but as the CARDINALITY OF A FINSET IMAGE inside a
+    bounded ordinal type: every degree [#|N x|] is [≤ #|G|], hence lands
+    faithfully (via [inord]) in ['I_(#|G|.+1)], and
+
+        valency_variety G  =  #| [set inord #|N x| | x in [set: G]] |.
+
+    The two are structurally different formalisations (nat-list [undup] length
+    vs. [{set 'I_(#|G|.+1)}] image cardinality), and the equality is NOT
+    definitional.  Its load-bearing content is exactly the faithfulness of the
+    [inord] embedding: degrees are [< #|G|.+1] ([max_card]), so [inord] is
+    INJECTIVE on the attained degrees ([inordK]) and no two distinct degrees are
+    collapsed — a wrong bound (or a missing [undup]) would break the equality.
+    The bridge is a genuine induction: [size_undup_map_in] proves that mapping a
+    list by a function injective on its elements preserves the deduplicated
+    length, via a per-element membership case analysis. *)
+
+(** Generic helper: the finset-cardinality of a seq's membership predicate
+    equals the length of its deduplication. *)
+Lemma card_mem_undup (T : finType) (s : seq T) : #|mem s| = size (undup s).
+Proof.
+rewrite -(eq_card (mem_undup s)).
+by apply/card_uniqP; exact: undup_uniq.
+Qed.
+
+(** Generic helper: a map by a function injective ON THE LIST's ELEMENTS
+    preserves deduplicated length.  (Induction with a membership case split;
+    NOT a consequence of the global-injectivity [undup_map_inj].) *)
+Lemma size_undup_map_in (T rT : eqType) (g : T -> rT) (s : seq T) :
+  {in s &, injective g} -> size (undup (map g s)) = size (undup s).
+Proof.
+elim: s => [//| x s' IH] inj_s /=.
+have inj_s' : {in s' &, injective g}.
+  move=> a b Ha Hb eq; apply: (inj_s a b _ _ eq); by rewrite inE ?Ha ?Hb orbT.
+have memeq : (g x \in map g s') = (x \in s').
+  apply/idP/idP.
+  - move=> /mapP[y Hy Heq].
+    have xin : x \in (x :: s') by rewrite inE eqxx.
+    have yin : y \in (x :: s') by rewrite inE Hy orbT.
+    by rewrite (inj_s x y xin yin Heq).
+  - by move=> Hx; apply/mapP; exists x.
+rewrite memeq; case: ifP => _.
+- exact: IH inj_s'.
+- by rewrite /= IH.
+Qed.
+
+(** The re-encoding, proved equal to [valency_variety]. *)
+Lemma valency_varietyE (G : sgraph) :
+  valency_variety G = #| [set (inord #|N(x)| : 'I_(#|G|.+1)) | x in [set: G]] |.
+Proof.
+rewrite /valency_variety imset_card card_mem_undup.
+have -> : [seq inord #|N(x)| | x in [set: G]]
+        = map (inord : nat -> 'I_(#|G|.+1)) [seq #|N(x)| | x <- enum [set: G]].
+  by rewrite -map_comp.
+symmetry; apply: size_undup_map_in.
+have bound : forall d, d \in [seq #|N(x)| | x <- enum [set: G]] -> d < #|G|.+1.
+  by move=> d /mapP[x _ ->]; rewrite ltnS; exact: max_card.
+move=> a b Ha Hb Hab.
+by rewrite -(inordK (bound a Ha)) -(inordK (bound b Hb)) Hab.
+Qed.

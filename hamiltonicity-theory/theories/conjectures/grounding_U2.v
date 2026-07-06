@@ -224,3 +224,79 @@ have eac : (@ord0 2 : 'K_3) -- (@Ordinal 3 2 isT) by rewrite /edge_rel /= /compl
 move: (Hf _ _ eab) (Hf _ _ ebc) (Hf _ _ eac).
 by case: (f (@ord0 2)); case: (f (@Ordinal 3 1 isT)); case: (f (@Ordinal 3 2 isT)).
 Qed.
+
+(** ** [is_hamiltonian] — independent re-encoding (Technique #3).
+
+    The primitive [is_hamiltonian] is a SEQ / list encoding: a graph is
+    Hamiltonian iff it carries a list [c] of vertices that is a uniq closed
+    walk ([ucycleb (--) c], an rcons-path fold + [uniq]) visiting every vertex
+    exactly once ([size c = #|G|]).
+
+    We give a STRUCTURALLY DIFFERENT, group-theoretic characterization with no
+    seq at all: a graph is Hamiltonian iff there is a permutation [sigma] of
+    its vertices such that (i) every vertex is adjacent to its image
+    ([forall x, x -- sigma x]) and (ii) the cyclic group [<[sigma]>] acts
+    transitively on the vertices ([forall x y, exists k, (sigma ^+ k) x = y]).
+    Clause (ii) is what pins down a SINGLE spanning cycle (rather than a union
+    of several shorter disjoint cycles): it is a transitive-closure / orbit
+    condition on the iterates of [sigma], replacing the list's [uniq] + [size]
+    bookkeeping and [ucycleb]'s closed-walk fold.
+
+    Both encodings agree on the degenerate empty graph (there [is_hamiltonian]
+    holds via the empty list [[::]], and the permutation condition holds
+    vacuously), so no artificial guard is needed and the equivalence is exact.
+
+    The proof is genuinely non-trivial (NOT [by []] / reflexivity): it bridges
+    the two structures in both directions.
+    - seq -> perm: a uniq spanning list [c] makes [next c] a bijection (inverse
+      [prev c], via [prev_next]); package it as [sigma : {perm G}]; adjacency
+      from [next_cycle] on the cycle; transitivity from [fconnect_cycle] +
+      [iter_findex], bridged to group powers by [permX] / [eq_iter].
+    - perm -> seq: take the orbit [c := orbit sigma x0]; transitivity forces
+      [order sigma x0 = #|G|] (via [fconnect_iter] + [eq_card]), giving
+      [size c = #|G|] and [uniq c] ([orbit_uniq]); the closed-walk condition
+      comes from [cycle_orbit] transported along [sub_cycle] using clause (i). *)
+Definition is_hamiltonian_perm (G : sgraph) : Prop :=
+  exists sigma : {perm G},
+    (forall x : G, x -- sigma x) /\
+    (forall x y : G, exists k : nat, (sigma ^+ k)%g x = y).
+
+Lemma is_hamiltonian_permE (G : sgraph) :
+  is_hamiltonian G <-> is_hamiltonian_perm G.
+Proof.
+split.
+- (* seq -> perm *)
+  case=> c /andP[/andP[Cc Uc] /eqP szc].
+  have span : mem c =i predT.
+    apply/(subset_cardP _)/subset_predT.
+    by rewrite (card_uniqP Uc) szc.
+  pose sigma : {perm G} := perm (can_inj (prev_next Uc)).
+  have Es : sigma =1 next c by move=> x; rewrite permE.
+  exists sigma; split.
+  + move=> x; rewrite Es; apply: (next_cycle Cc); by rewrite span.
+  + move=> x y.
+    have Fxy : fconnect (next c) x y.
+      by rewrite (fconnect_cycle (cycle_next Uc) (x:=x)) ?span // span.
+    exists (findex (next c) x y).
+    by rewrite permX (eq_iter Es) (iter_findex Fxy).
+- (* perm -> seq *)
+  case=> sigma [Hadj Htrans].
+  have [n0|Hpos] := posnP #|G|.
+  + exists [::]; rewrite /hamiltonian_cycle /ucycleb /=.
+    by rewrite eq_sym -n0.
+  + have [x0 _] : exists x : G, x \in predT.
+      by apply/card_gt0P.
+    pose c := orbit sigma x0.
+    have Hfc : fconnect sigma x0 =i predT.
+      move=> y; rewrite !inE.
+      have [k Hk] := Htrans x0 y.
+      by rewrite -Hk permX fconnect_iter.
+    have Hord : order sigma x0 = #|G|.
+      by rewrite /order (eq_card Hfc).
+    exists c; rewrite /hamiltonian_cycle /ucycleb.
+    have Hsz : size c = #|G| by rewrite /c size_orbit Hord.
+    rewrite Hsz eqxx andbT orbit_uniq andbT.
+    apply: (@sub_cycle G (coerced_frel sigma) (--)).
+    * by move=> a b; rewrite /= => /eqP <-; apply: Hadj.
+    * exact: (cycle_orbit (@perm_inj _ sigma) x0).
+Qed.

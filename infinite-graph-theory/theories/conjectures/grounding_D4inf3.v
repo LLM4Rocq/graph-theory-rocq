@@ -176,3 +176,65 @@ Qed.
     nothing. *)
 Lemma zline_countable : countable_graph zline.
 Proof. by exists pickle; apply: (pcan_inj pickleK). Qed.
+
+(** ================================================================= *)
+(** ** Technique #3: a SECOND, independent encoding of [reachP]
+
+    [reachP] (foundations/igraph.v) is a LEFT-TO-RIGHT inductive relation: a
+    derivation tree built by appending one edge at the tail ([reachPS]).  The
+    standard alternative characterization of a finite reachability is an
+    EXPLICIT finite walk given as an index function [f : nat -> iV G] of a
+    stated length [n], whose walk conditions are written as UNIVERSAL
+    statements over positions: every prefix vertex [f k] (k <= n) lies in [P],
+    and every consecutive pair [f k, f k.+1] (k < n) is [iadj].  This replaces
+    "induction over a proof term" by "quantification over nat-indices" — the
+    classic  reflexive-transitive closure  <->  exists finite chain  pair.
+
+    Nothing in the package already relates the two: the sibling inductive walk
+    [bwalk] above uses the SAME tail-append recursion scheme but carries NO
+    [P]-constraint, so it is not [reachP].  The equivalence below is therefore
+    a genuine cross-check, and its proof is real work (two structured
+    inductions plus nat-index bookkeeping), not [reflexivity]. *)
+
+Definition reach_walk (G : iGraph) (P : iV G -> Prop) (x y : iV G) : Prop :=
+  exists (n : nat) (f : nat -> iV G),
+    f 0%N = x /\ f n = y /\
+    (forall k, (k <= n)%N -> P (f k)) /\
+    (forall k, (k < n)%N -> iadj (f k) (f k.+1)).
+
+Lemma reachP_walkP (G : iGraph) (P : iV G -> Prop) (x y : iV G) :
+  reachP P x y <-> reach_walk P x y.
+Proof.
+split.
+- (* inductive derivation -> explicit indexed walk *)
+  move=> H; elim: H => {x y} [a Pa | a b c Hab IH e Pc].
+  + exists 0%N, (fun=> a); split; last split; last split.
+    * by [].
+    * by [].
+    * by move=> k _.
+    * by move=> k Hk; rewrite ltn0 in Hk.
+  + case: IH => n [f [Hf0 [Hfn [HP Hadj]]]].
+    exists n.+1, (fun k => if (n < k)%N then c else f k).
+    split; last split; last split.
+    * by rewrite /=.
+    * by rewrite /= ltnSn.
+    * move=> k _ /=; case: (ltnP n k) => Hnk; first exact: Pc.
+      by apply: HP.
+    * move=> k Hk /=; rewrite ltnS in Hk.
+      have F0 : (n < k)%N = false by rewrite ltnNge Hk.
+      rewrite F0; case: (ltnP n k.+1) => Hnk1.
+      -- rewrite ltnS in Hnk1.
+         have -> : k = n by apply/eqP; rewrite eqn_leq Hk Hnk1.
+         by rewrite Hfn.
+      -- by apply: Hadj.
+- (* explicit indexed walk -> inductive derivation *)
+  move=> [n [f [Hf0 [Hfn [HP Hadj]]]]].
+  have main : forall k, (k <= n)%N -> reachP P x (f k).
+    elim=> [_ | k IH Hk].
+    + have Px : P (f 0) by apply: HP.
+      by rewrite Hf0 in Px *; apply: reachP0.
+    + apply: (reachPS (IH (ltnW Hk))).
+      * by apply: Hadj.
+      * by apply: HP.
+  by rewrite -Hfn; exact: (main n (leqnn n)).
+Qed.

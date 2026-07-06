@@ -229,3 +229,116 @@ Print Assumptions lif_small.
 Print Assumptions wagner_planar_small.
 Print Assumptions K5_forest_le2.
 Print Assumptions K5_teeth.
+
+(** ============================================================================
+    TECHNIQUE #3 — independent re-encoding of [k_degenerate_on] with a proved
+    [<->].
+
+    [k_degenerate_on W k] (base) is the SUBSET-QUANTIFIED characterisation: EVERY
+    nonempty [S ⊆ W] contains a vertex of within-[S] degree [≤ k] (a witness per
+    subset).  We give the classical ELIMINATION-ORDERING characterisation, encoded
+    as a RANK FUNCTION [r : G -> nat] that is injective on [W] (a single linear
+    order) such that each [x ∈ W] has [≤ k] neighbours of strictly smaller rank
+    ("earlier" in the order).  These are the two textbook definitions of
+    degeneracy, structurally opposite: a UNIVERSAL over all [2^{|W|}] subsets vs.
+    the EXISTENCE of ONE global order with a LOCAL earlier-neighbour bound.
+
+    The equivalence is genuinely non-trivial (NOT definitional).
+    - [rank ⟹ on] (easy half): given the order, the vertex of MAXIMAL rank inside
+      any nonempty [S ⊆ W] has all its [S]-neighbours strictly earlier, so its
+      within-[S] degree is [≤ k].
+    - [on ⟹ rank] (the load-bearing half): strong induction on [#|W|].  Apply the
+      degeneracy hypothesis to [S := W] to peel a low-degree vertex [v], recurse on
+      [W :\ v] (still degenerate, [k_degenerate_on_subset]) for a rank [r'], and
+      extend it by ranking [v] TOP ([r v := #|W|-1]); a bound invariant [r x < #|W|]
+      keeps the extended rank injective and the earlier-neighbour count within [k].
+    Agreement of the two faithful encodings is the faithfulness evidence for
+    [k_degenerate_on].
+    ========================================================================== *)
+
+(** Elimination-ordering (rank-function) reading of degeneracy. *)
+Definition k_degenerate_rank (G : sgraph) (W : {set G}) (k : nat) : Prop :=
+  exists r : G -> nat,
+    {in W &, injective r} /\
+    (forall x, x \in W -> #|[set y in W | (y \in N(x)) && (r y < r x)]| <= k).
+
+(** Easy half: an elimination order certifies degeneracy (max-rank vertex of any
+    nonempty subset has all its neighbours in the subset ranked strictly lower). *)
+Lemma kdeg_rank_to_on (G : sgraph) (W : {set G}) (k : nat) :
+  k_degenerate_rank W k -> k_degenerate_on W k.
+Proof.
+move=> [r [rinj rprop]] S subW /set0Pn[x0 x0S].
+have [x xS xmax] := arg_maxnP (fun i => r i) x0S.
+have xW : x \in W := subsetP subW _ xS.
+exists x; split=> //.
+apply: leq_trans (rprop x xW).
+apply: subset_leq_card; apply/subsetP => y.
+rewrite !inE => /andP[yNx yS].
+have yW : y \in W := subsetP subW _ yS.
+rewrite yW yNx /=.
+have yx : y != x by apply/eqP => e; move: yNx; rewrite e sg_irrefl.
+rewrite ltn_neqAle; apply/andP; split; last exact: (xmax y yS).
+apply/eqP => e; apply/negP: yx; rewrite negbK; apply/eqP; exact: rinj yW xW e.
+Qed.
+
+(** Hard half, strengthened for the induction with a rank-bound invariant. *)
+Lemma kdeg_on_to_rank_aux (G : sgraph) (k : nat) :
+  forall n (W : {set G}), #|W| = n -> k_degenerate_on W k ->
+    exists r : G -> nat,
+      [/\ {in W &, injective r},
+          (forall x, x \in W -> r x < n) &
+          (forall x, x \in W -> #|[set y in W | (y \in N(x)) && (r y < r x)]| <= k) ].
+Proof.
+elim=> [|n IH] W cardW deg.
+- move: cardW => /cards0_eq ->.
+  exists (fun=> 0); split=> // x; by rewrite inE.
+- have Wne : W != set0 by rewrite -card_gt0 cardW.
+  have [v [vW Hv]] := deg W (subxx W) Wne.
+  have subW' : W :\ v \subset W by exact: subsetDl.
+  have cardW' : #|W :\ v| = n by move: cardW; rewrite (cardsD1 v) vW add1n => -[].
+  have deg' : k_degenerate_on (W :\ v) k.
+    move=> S subS Sne; apply: deg => //; exact: subset_trans subS subW'.
+  have [r' [inj' bound' prop']] := IH _ cardW' deg'.
+  pose r := fun z => if z == v then n else r' z.
+  have rv : r v = n by rewrite /r eqxx.
+  have rnv : forall z, z != v -> r z = r' z by move=> z zv; rewrite /r (negbTE zv).
+  exists r; split.
+  + have inD : forall z, z \in W -> z != v -> z \in W :\ v by
+      move=> z zW zv; rewrite in_setD1 zv zW.
+    move=> x1 x2 x1W x2W.
+    case: (eqVneq x1 v) => [->|x1v]; case: (eqVneq x2 v) => [->|x2v] //.
+    * by rewrite rv (rnv _ x2v) => e; move: (bound' x2 (inD _ x2W x2v)); rewrite -e ltnn.
+    * by rewrite (rnv _ x1v) rv => e; move: (bound' x1 (inD _ x1W x1v)); rewrite e ltnn.
+    * by rewrite (rnv _ x1v) (rnv _ x2v) => e; exact: inj' (inD _ x1W x1v) (inD _ x2W x2v) e.
+  + have inD : forall z, z \in W -> z != v -> z \in W :\ v by
+      move=> z zW zv; rewrite in_setD1 zv zW.
+    move=> x xW; case: (eqVneq x v) => [->|xv].
+    * by rewrite rv.
+    * by rewrite (rnv _ xv); apply: (leq_trans (bound' x (inD _ xW xv))); exact: leqnSn.
+  + have inD : forall z, z \in W -> z != v -> z \in W :\ v by
+      move=> z zW zv; rewrite in_setD1 zv zW.
+    move=> x xW; case: (eqVneq x v) => [->|xv].
+    * rewrite rv; apply: leq_trans Hv; apply: subset_leq_card; apply/subsetP => y.
+      by rewrite !inE => /and3P[yW yNv _]; rewrite yNv yW.
+    * rewrite (rnv _ xv); apply: leq_trans (prop' x (inD _ xW xv)).
+      apply: subset_leq_card; apply/subsetP => y; rewrite !inE => /and3P[yW yNx ryx].
+      have yv : y != v.
+        apply/eqP => e; move: ryx; rewrite e rv => h.
+        by move: (ltn_trans (bound' x (inD _ xW xv)) h); rewrite ltnn.
+      by rewrite yv yW yNx -(rnv _ yv).
+Qed.
+
+Lemma kdeg_on_to_rank (G : sgraph) (W : {set G}) (k : nat) :
+  k_degenerate_on W k -> k_degenerate_rank W k.
+Proof.
+move=> deg; have [r [ri _ rp]] := kdeg_on_to_rank_aux (erefl #|W|) deg.
+by exists r.
+Qed.
+
+(** MAIN [<->]: the subset-quantified encoding [k_degenerate_on] agrees with the
+    elimination-ordering encoding [k_degenerate_rank].  Axiom-free (below). *)
+Lemma k_degenerate_ordP (G : sgraph) (W : {set G}) (k : nat) :
+  k_degenerate_on W k <-> k_degenerate_rank W k.
+Proof. split; [exact: kdeg_on_to_rank | exact: kdeg_rank_to_on]. Qed.
+
+Print Assumptions k_degenerate_ordP.

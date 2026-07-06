@@ -236,3 +236,171 @@ Proof.
 split=> //.
 by rewrite big_nil /char_poly det_mx00.
 Qed.
+
+(** ============================================================================
+    TECHNIQUE #3 — independent re-encodings + proved [<->].
+
+    Two load-bearing definitions of this package are each given a SECOND,
+    structurally unrelated encoding, and the two are proved equivalent (Qed,
+    axiom-free).  Agreement between the two independent formalisations is the
+    faithfulness evidence.
+
+    (1) [liso] (foundations/spectral): the combinatorial "relation-preserving
+        vertex bijection" definition, re-encoded ALGEBRAICALLY as permutation-
+        matrix similarity of the integer adjacency matrices
+        ([ladjmx r' = P^-1 A P] with [P = perm_mx s]).  Bridge [lisoE].
+
+    (2) [strongly_regular] (conjectures/D5): the combinatorial neighbour-counting
+        definition, re-encoded as the classical SRG MATRIX identity
+        [A^2 = k I + lam A + mu (J - I - A)] over [int].  Bridge [strongly_regularE].
+    ========================================================================== *)
+
+(** ---- (1) [liso] : combinatorial bijection  <->  permutation-matrix similarity ---- *)
+
+(** ALGEBRAIC re-encoding: [r] and [r'] are isomorphic iff their integer adjacency
+    matrices are conjugate by a permutation matrix (simultaneous row+column
+    relabelling), the textbook "similar via a permutation matrix" characterisation. *)
+Definition liso2 (n : nat) (r r' : ladj n) : bool :=
+  [exists s : 'S_n, ladjmx r' == perm_mx s *m ladjmx r *m perm_mx s^-1].
+
+(** Entry of the conjugated matrix: [(P A P^-1) i j = A (s i) (s j)]. *)
+Lemma ladjmx_conjE (n:nat) (r:ladj n) (s:'S_n) (i j : 'I_n) :
+  (perm_mx s *m ladjmx r *m perm_mx s^-1) i j = ladjmx r (s i) (s j).
+Proof. by rewrite -col_permE -row_permE !mxE. Qed.
+
+(** The 0/1 image of a boolean injects into [int]. *)
+Lemma int01_inj (b c : bool) :
+  ((if b then 1 else 0) : int) = (if c then 1 else 0) -> b = c.
+Proof.
+by case: b; case: c => //= /eqP; rewrite ?oner_eq0 // eq_sym oner_eq0.
+Qed.
+
+(** For a FIXED permutation [s], relation-preservation and matrix conjugation agree. *)
+Lemma liso_clause_matE (n:nat) (r r':ladj n) (s:'S_n) :
+  [forall i, [forall j, r (s i, s j) == r' (i, j)]]
+   = (ladjmx r' == perm_mx s *m ladjmx r *m perm_mx s^-1).
+Proof.
+apply/idP/idP.
+- move=> /forallP H; apply/eqP/matrixP => i j.
+  move: (H i) => /forallP /(_ j) /eqP Hij.
+  by rewrite ladjmx_conjE !mxE Hij.
+- move=> /eqP /matrixP H; apply/forallP => i; apply/forallP => j; apply/eqP.
+  move: (H i j); rewrite ladjmx_conjE !mxE => /int01_inj ->.
+  by [].
+Qed.
+
+(** MAIN BRIDGE (1): the combinatorial and matrix isomorphism predicates coincide. *)
+Lemma lisoE (n:nat) (r r':ladj n) : liso r r' = liso2 r r'.
+Proof.
+by apply: eq_existsb => s; rewrite liso_clause_matE.
+Qed.
+
+(** ---- (2) [strongly_regular] : neighbour counting  <->  adjacency-matrix identity ---- *)
+Lemma mulif (P Q : bool) :
+  ((if P then 1 else 0) : int) * (if Q then 1 else 0) = if P && Q then 1 else 0.
+Proof. by case: P; case: Q; rewrite ?mul0r ?mul1r ?mulr0. Qed.
+
+Lemma card_evpre (G:sgraph) (Q : pred G) :
+  #|[set k : 'I_#|G| | Q (enum_val k)]| = #|[set v : G | Q v]|.
+Proof.
+have -> : [set v : G | Q v]
+        = enum_val @: [set k : 'I_#|G| | Q (enum_val k)].
+  apply/setP => v; rewrite inE; apply/idP/imsetP.
+  - move=> Qv; exists (enum_rank v); last by rewrite enum_rankK.
+    by rewrite inE enum_rankK.
+  - by move=> [k]; rewrite inE => Qk ->.
+by rewrite (card_imset _ (@enum_val_inj _ G)).
+Qed.
+
+Lemma count_cn (G:sgraph) (a b : G) :
+  #|[set k : 'I_#|G| | (a -- enum_val k) && (enum_val k -- b)]| = #|common_nbr a b|.
+Proof.
+rewrite (card_evpre (fun v => (a -- v) && (v -- b))).
+suff -> : [set v : G | (a -- v) && (v -- b)] = common_nbr a b by [].
+rewrite /common_nbr; apply/setP => v; rewrite !inE.
+by rewrite (@sg_sym G v b).
+Qed.
+
+Lemma adjmx2_common (G:sgraph) (i j : 'I_#|G|) :
+  (adjmx int G *m adjmx int G) i j
+   = #|common_nbr (enum_val i) (enum_val j)|%:R.
+Proof.
+rewrite mxE.
+under eq_bigr => k _ do rewrite !mxE mulif.
+rewrite -big_mkcond.
+rewrite (eq_bigr (fun _ => (1%N)%:R : int)); last by move=> k _; rewrite mulr1n.
+rewrite -natr_sum sum1dep_card; congr (_ %:R).
+by move: (enum_val i) (enum_val j) => a b; exact: count_cn.
+Qed.
+
+Definition sr_clauses (G:sgraph) (k lam mu : nat) : Prop :=
+  [/\ regular G k,
+      (forall u v : G, u -- v -> #|common_nbr u v| = lam) &
+      (forall u v : G, u != v -> ~~ (u -- v) -> #|common_nbr u v| = mu)].
+
+Definition sr_mateq (G : sgraph) (k lam mu : nat) : Prop :=
+  adjmx int G *m adjmx int G
+    = k%:R%:M + lam%:R *: adjmx int G
+      + mu%:R *: (const_mx 1 - 1%:M - adjmx int G).
+
+Lemma natr_int_inj (a b : nat) : (a%:R = b%:R :> int) -> a = b.
+Proof. by move=> /eqP; rewrite eqr_nat => /eqP. Qed.
+
+Lemma sr_rhs_diag (G:sgraph) (k lam mu:nat) (i:'I_#|G|) :
+  (k%:R%:M + lam%:R *: adjmx int G + mu%:R *: (const_mx 1 - 1%:M - adjmx int G)) i i = k%:R.
+Proof.
+by rewrite !mxE eqxx sg_irrefl mulr0 mulr1n subr0 addr0 mulr0 addr0.
+Qed.
+
+Lemma sr_rhs_off (G:sgraph) (k lam mu:nat) (i j:'I_#|G|) : i != j ->
+  (k%:R%:M + lam%:R *: adjmx int G + mu%:R *: (const_mx 1 - 1%:M - adjmx int G)) i j
+  = lam%:R * (if enum_val i -- enum_val j then 1 else 0)
+    + mu%:R * (if enum_val i -- enum_val j then 0 else 1).
+Proof.
+move=> nij; rewrite !mxE (negbTE nij) mulr0n add0r subr0.
+by case: (enum_val i -- enum_val j); rewrite ?subrr ?subr0.
+Qed.
+
+Lemma sr_mateqE (G:sgraph) (k lam mu : nat) :
+  sr_mateq G k lam mu <-> sr_clauses G k lam mu.
+Proof.
+rewrite /sr_mateq /sr_clauses; split.
+- move=> Heq; split.
+  + move=> v; move: Heq => /matrixP/(_ (enum_rank v) (enum_rank v)).
+    rewrite adjmx2_common sr_rhs_diag => /natr_int_inj.
+    by rewrite enum_rankK /common_nbr setIid.
+  + move=> u v uv; have nij : enum_rank u != enum_rank v.
+      by rewrite (inj_eq enum_rank_inj) (sg_edgeNeq uv).
+    move: Heq => /matrixP/(_ (enum_rank u) (enum_rank v)).
+    rewrite adjmx2_common (sr_rhs_off _ _ _ nij) !enum_rankK uv.
+    by rewrite mulr1 mulr0 addr0 => /natr_int_inj.
+  + move=> u v ne nadj; have nij : enum_rank u != enum_rank v.
+      by rewrite (inj_eq enum_rank_inj) (negbTE ne).
+    move: Heq => /matrixP/(_ (enum_rank u) (enum_rank v)).
+    rewrite adjmx2_common (sr_rhs_off _ _ _ nij) !enum_rankK (negbTE nadj).
+    by rewrite mulr0 mulr1 add0r => /natr_int_inj.
+- move=> [rk hlam hmu]; apply/matrixP => i j.
+  rewrite adjmx2_common.
+  case: (eqVneq i j) => [->|nij].
+  + by rewrite sr_rhs_diag /common_nbr setIid (rk (enum_val j)).
+  + rewrite (sr_rhs_off _ _ _ nij).
+    case: (boolP (enum_val i -- enum_val j)) => [adj|nadj].
+    * by rewrite mulr1 mulr0 addr0 (hlam _ _ adj).
+    * rewrite mulr0 mulr1 add0r hmu //.
+      by apply: contra_neq nij => /enum_val_inj ->.
+Qed.
+
+Definition strongly_regular_alg (G : sgraph) : Prop :=
+  exists k lam mu : nat,
+    [/\ connected [set: G], (0 < k)%N /\ (k < (#|G|).-1)%N & sr_mateq G k lam mu].
+
+Lemma strongly_regularE (G : sgraph) :
+  strongly_regular G <-> strongly_regular_alg G.
+Proof.
+split.
+- case=> k [lam] [mu] [conn kk rk hlam hmu].
+  exists k, lam, mu; split=> //.
+  by apply/sr_mateqE; split.
+- case=> k [lam] [mu] [conn kk /sr_mateqE [rk hlam hmu]].
+  by exists k, lam, mu; split.
+Qed.

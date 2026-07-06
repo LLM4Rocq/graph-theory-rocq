@@ -397,3 +397,99 @@ rewrite leq_min; apply/andP; split.
 - apply: (chi_hom_le (f := fun p : tensor_product G H => p.2)) => x y xy.
   by have /andP[_ h] := tensor_edge_proj xy.
 Qed.
+
+(** ** [chord] — independent re-encoding via cyclic successor/predecessor
+    (TECHNIQUE #3: a second, structurally unrelated encoding + a proved [<->]).
+
+    [chord] (U3.v) identifies "cyclically consecutive in [c]" with membership
+    in the positional edge-list [zip c (rot 1 c)].  We give here a second,
+    structurally unrelated characterization [chord_succ] built from MathComp's
+    cyclic combinators [next] / [path.prev] (path.v) — index-lookup fixpoints
+    ([next_nth] / [prev_nth]) with no [zip] and no [rot].  A chord is then an
+    edge [x -- y] between two cycle vertices such that [y] is NEITHER the
+    cyclic successor [next c x] NOR the cyclic predecessor [path.prev c x] of
+    [x].  (We qualify [path.prev] because [GraphTheory] shadows the bare name
+    [prev].)
+
+    For [uniq c] — the regime of every [longest_cycle], since
+    [ucycle = cycle && uniq] — the two encodings coincide ([chordE], Qed).
+    The bridge is the crux [zip_rot1_next]: for [uniq c], the pair [(x,y)] is
+    a cycle-edge exactly when [x \in c] and [y = next c x].  That is a genuine
+    [nth] / [index] / [rot] identity (NOT reflexivity): it reconciles the
+    positional zip-with-rotation encoding of adjacency-in-the-cycle with the
+    functional [next] encoding, and its proof needs [nthP], [nth_zip],
+    [index_uniq], and the pointwise bridge [next_nth_rot]. *)
+
+(** Pointwise bridge: the cyclic successor is the rotated-list lookup at the
+    vertex's own index (this is where [next] and [rot 1] are reconciled). *)
+Lemma next_nth_rot (T : eqType) (c : seq T) (x : T) :
+  x \in c -> next c x = nth x (rot 1 c) (index x c).
+Proof.
+move=> xc.
+rewrite next_nth xc.
+case: c xc => [//|y0 c'] xc.
+rewrite rot1_cons nth_rcons.
+have hi : index x (y0 :: c') < size (y0 :: c') by rewrite index_mem.
+case: ltnP => [hlt|hge].
+- by apply: set_nth_default.
+- suff -> : index x (y0 :: c') = size c' by rewrite eqxx nth_default.
+  by apply/eqP; rewrite eqn_leq hge andbT -ltnS.
+Qed.
+
+(** Crux: for [uniq c], [(x,y)] lies in the cycle-edge list [zip c (rot 1 c)]
+    exactly when [x] is a vertex and [y] is its cyclic successor. *)
+Lemma zip_rot1_next (T : eqType) (c : seq T) (x y : T) :
+  uniq c -> ((x, y) \in zip c (rot 1 c)) = (x \in c) && (next c x == y).
+Proof.
+move=> uc.
+apply/idP/idP.
+- move=> /(nthP (x, y)) [i]; rewrite size_zip size_rot minnn => hi hxy.
+  move: hxy; rewrite nth_zip; last by rewrite size_rot.
+  case=> hx hy.
+  have xc : x \in c by rewrite -hx; apply: mem_nth.
+  have idx : index x c = i by rewrite -hx index_uniq.
+  rewrite xc /=; apply/eqP.
+  rewrite (next_nth_rot xc) idx -hy.
+  by apply: set_nth_default; rewrite size_rot.
+- case/andP => xc /eqP hn.
+  apply/(nthP (x, y)); exists (index x c).
+    by rewrite size_zip size_rot minnn index_mem.
+  rewrite nth_zip; last by rewrite size_rot.
+  rewrite nth_index //.
+  congr (_, _).
+  rewrite -hn (next_nth_rot xc).
+  by apply: set_nth_default; rewrite size_rot index_mem.
+Qed.
+
+(** For [uniq c]: "[x] is the successor of [y]" and "[y] is the predecessor of
+    [x]" are the same boolean (the [next]/[path.prev] cancellation). *)
+Lemma succ_pred_eq (T : eqType) (c : seq T) (x y : T) :
+  uniq c -> (next c y == x) = (path.prev c x == y).
+Proof.
+move=> uc; apply/idP/idP => /eqP H; apply/eqP.
+- by rewrite -H prev_next.
+- by rewrite -H next_prev.
+Qed.
+
+(** Independent re-encoding of [chord]: an edge [x -- y] joining two cycle
+    vertices that are neither cyclic successors nor cyclic predecessors. *)
+Definition chord_succ (G : sgraph) (c : seq G) : Prop :=
+  exists x y : G,
+    [/\ x \in c, y \in c, x -- y, next c x != y & path.prev c x != y].
+
+(** TECHNIQUE #3 target (Qed, axiom-free): on the [uniq] cycles to which
+    [chord] is applied, the zip/rot encoding and the successor/predecessor
+    encoding agree. *)
+Lemma chordE (G : sgraph) (c : seq G) :
+  uniq c -> (chord c <-> chord_succ c).
+Proof.
+move=> uc; split.
+- move=> [x [y] [xc yc xy nxy nyx]].
+  exists x, y; split=> //.
+  + by rewrite zip_rot1_next // xc andTb in nxy.
+  + by rewrite zip_rot1_next // yc andTb succ_pred_eq // in nyx.
+- move=> [x [y] [xc yc xy nxy nyx]].
+  exists x, y; split=> //.
+  + by rewrite zip_rot1_next // xc andTb.
+  + by rewrite zip_rot1_next // yc andTb succ_pred_eq.
+Qed.

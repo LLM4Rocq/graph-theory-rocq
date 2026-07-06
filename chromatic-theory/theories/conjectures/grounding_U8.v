@@ -179,3 +179,43 @@ move=> H.
 by apply: (H (@Ordinal 3 0 isT) (@Ordinal 3 1 isT) (@Ordinal 3 2 isT));
    rewrite /edge_rel /=.
 Qed.
+
+(** ============================================================================
+    TECHNIQUE #3 — independent re-encoding of [triangle_free] and a proved [<->].
+
+    [triangle_free] is a LOCAL statement: no three vertices are pairwise
+    adjacent.  The independent second encoding is the GLOBAL girth condition
+    [girth_geq G 4] (from base): every genuine [ucycle] (size > 2) has length
+    ≥ 4 — i.e. there is no 3-cycle, stated over ALL edge-sequences that are
+    unordered cycles rather than over triples of vertices.
+
+    The two are structurally unrelated (three-vertex local triple vs universal
+    over [ucycle]s = [cycle && uniq] closed walks), and the equivalence is NOT
+    definitional: the forward direction case-splits on [size c] and unfolds
+    [cycle]/[path]/[rcons] on a 3-element list to expose the three triangle
+    edges; the backward direction builds the explicit 3-cycle [[x; y; z]],
+    discharging [cycle] from the three edges and [uniq] from pairwise
+    distinctness (via [sg_edgeNeq]).  A dropped edge or a wrong threshold would
+    break the [<->]. *)
+Lemma triangle_free_girth (G : sgraph) : triangle_free G <-> girth_geq G 4.
+Proof.
+split.
+- (* local no-triangle  ⇒  every genuine cycle has length ≥ 4 *)
+  move=> tf c uc sz.
+  case: c uc sz => [|a [|b [|c' [|d l]]]] //= uc sz.
+  (* the only non-immediate branch is [c = [:: a; b; c']] (size 3) *)
+  exfalso.
+  move: uc => /andP[Hc _].
+  move: Hc => /=; rewrite andbT => /andP[Hab /andP[Hbc Hca]].
+  exact: (tf a b c' Hab Hbc Hca).
+- (* girth ≥ 4  ⇒  no triangle: a triangle would be a genuine 3-cycle *)
+  move=> gg x y z xy yz zx.
+  have xny : x != y by rewrite (sg_edgeNeq xy).
+  have ynz : y != z by rewrite (sg_edgeNeq yz).
+  have znx : z != x by rewrite (sg_edgeNeq zx).
+  have xnz : x != z by rewrite eq_sym.
+  have Huc : ucycle (--) [:: x; y; z].
+    rewrite /ucycle /= xy yz zx /= !negb_or.
+    by rewrite xny xnz ynz.
+  by move: (gg [:: x; y; z] Huc isT).
+Qed.

@@ -607,3 +607,120 @@ split.
   rewrite lerD2l ler_pdivrMr // -natrM ler_nat.
   by apply: leq_pmulr.
 Qed.
+
+(** ================================================================= *)
+(** ** TECHNIQUE #3 — an independent second encoding of [petersen], with a
+       proved graph isomorphism (faithfulness cross-check).
+
+    [D1.petersen] is a hand-drawn adjacency LIST on ['I_10] (outer 5-cycle
+    [0..4], spokes [i ~ i+5], inner pentagram [5-7-9-6-8-5]).  The package's
+    [Cycle.conjectures.U10] carries a STRUCTURALLY UNRELATED construction of the
+    same graph: the Kneser graph [KG(5,2)] whose vertices are the 2-subsets of
+    ['I_5] and whose adjacency is set-DISJOINTNESS ([U10.petersen]).  Neither
+    definition mentions the other's data.
+
+    We exhibit the classical Petersen<->KG(5,2) labelling [kmap] (outer vertex
+    [i] |-> [{2i, 2i+1}] mod 5; inner vertex [i+5] |-> the complementary
+    disjoint pair) and prove the two graphs are ISOMORPHIC as simple graphs
+    ([petersen_diso : D1.petersen ≃ U10.petersen], an sgraph [diso]).  Agreement
+    of the two independent formalizations is the faithfulness evidence: a bug in
+    either the drawn edge list or the Kneser predicate would break the iso.
+
+    NOTE.  Both set-disjointness and set-equality are lowered to ordinal
+    (in)equalities via [disjoint2] / [eqEsubset] before deciding the 100
+    vertex-pairs, because the HB [finType] [card]/[enum] on ['I_5]/['I_10] is
+    opaque to [vm_compute]. *)
+
+From GraphTheory Require Import digraph.
+From Cycle.conjectures Require U10.
+
+Notation O5 i := (@Ordinal 5 i isT).
+
+(** The Petersen<->KG(5,2) vertex labelling: each ['I_10] vertex to its
+    2-subset of ['I_5]. *)
+Definition klabel (i : 'I_10) : {set 'I_5} :=
+  match val i with
+  | 0 => [set O5 0; O5 1]
+  | 1 => [set O5 2; O5 3]
+  | 2 => [set O5 0; O5 4]
+  | 3 => [set O5 1; O5 2]
+  | 4 => [set O5 3; O5 4]
+  | 5 => [set O5 2; O5 4]
+  | 6 => [set O5 1; O5 4]
+  | 7 => [set O5 1; O5 3]
+  | 8 => [set O5 0; O5 3]
+  | _ => [set O5 0; O5 2]
+  end.
+
+Lemma klabel_card2 (i : 'I_10) : #|klabel i| == 2%N.
+Proof. by case: i => -[|[|[|[|[|[|[|[|[|[|n]]]]]]]]]] Hi //=; rewrite cards2. Qed.
+
+Definition kmap (i : 'I_10) : U10.petersenV := Sub (klabel i) (klabel_card2 i).
+
+Lemma val_kmap (i : 'I_10) : val (kmap i) = klabel i.
+Proof. by rewrite /kmap SubK. Qed.
+
+Lemma U10padjE (a b : U10.petersenV) : U10.padj a b = [disjoint val a & val b].
+Proof. by []. Qed.
+
+(** Set-disjointness of two 2-sets, lowered to ordinal inequalities. *)
+Lemma disjoint2 (T : finType) (a b c d : T) :
+  [disjoint [set a; b] & [set c; d]] = [&& a != c, a != d, b != c & b != d].
+Proof.
+by rewrite disjoints_subset subUset !sub1set !in_setC !in_set2 !negb_or -andbA.
+Qed.
+
+(** Edge-preservation BOTH ways: the drawn adjacency [padj] on ['I_10] matches
+    Kneser disjointness under [kmap], checked on every ordered vertex pair. *)
+Lemma kmap_adj (x y : 'I_10) : U10.padj (kmap x) (kmap y) = padj x y.
+Proof.
+rewrite U10padjE !val_kmap /padj /pconn /klabel.
+case: x => -[|[|[|[|[|[|[|[|[|[|nx]]]]]]]]]] Hx //=;
+  case: y => -[|[|[|[|[|[|[|[|[|[|ny]]]]]]]]]] Hy //=;
+  rewrite disjoint2; by vm_compute.
+Qed.
+
+(** [klabel] is injective: distinct ['I_10] vertices get distinct 2-subsets. *)
+Lemma klabel_inj_bool (x y : 'I_10) : (klabel x == klabel y) = (x == y).
+Proof.
+rewrite /klabel.
+case: x => -[|[|[|[|[|[|[|[|[|[|nx]]]]]]]]]] Hx //=;
+  case: y => -[|[|[|[|[|[|[|[|[|[|ny]]]]]]]]]] Hy //=;
+  rewrite eqEsubset !subUset !sub1set !in_set2; by vm_compute.
+Qed.
+
+Lemma kmap_inj : injective kmap.
+Proof.
+move=> x y /(f_equal val); rewrite !val_kmap => /eqP H.
+by apply/eqP; rewrite -klabel_inj_bool.
+Qed.
+
+Lemma card_petersenV10 : #|U10.petersenV| = 10%N.
+Proof. by rewrite card_sig -cardsE card_draws card_ord. Qed.
+
+Lemma card_le_pv : (#|U10.petersenV| <= #|'I_10|)%N.
+Proof. by rewrite card_petersenV10 card_ord. Qed.
+
+(** [kmap] is onto (equal finite cardinalities): its codomain is everything. *)
+Lemma codom_kmap (v : U10.petersenV) : v \in codom kmap.
+Proof.
+have [g _ cg] := inj_card_bij kmap_inj card_le_pv.
+by apply/codomP; exists (g v); rewrite cg.
+Qed.
+
+Definition kinv (v : U10.petersenV) : 'I_10 := iinv (codom_kmap v).
+
+Lemma kmapK : cancel kinv kmap.
+Proof. by move=> v; rewrite /kinv f_iinv. Qed.
+
+Lemma kinvK : cancel kmap kinv.
+Proof. by move=> x; apply: kmap_inj; rewrite kmapK. Qed.
+
+(** The faithfulness theorem: the hand-drawn Petersen graph and the Kneser
+    graph [KG(5,2)] are one and the same simple graph. *)
+Lemma petersen_diso : D1.petersen ≃ U10.petersen.
+Proof.
+apply: (@Diso' (D1.petersen : diGraph) (U10.petersen : diGraph)
+          kmap kinv kinvK kmapK) => x y.
+exact: kmap_adj.
+Qed.

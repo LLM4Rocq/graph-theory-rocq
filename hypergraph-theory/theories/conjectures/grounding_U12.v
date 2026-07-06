@@ -334,3 +334,106 @@ move: (H _ _ HA HB); rewrite !inE => /orP[] /eqP/setP H2.
 - by move: (H2 (O2 1)); rewrite !inE eqxx orbT -val_eqE.
 - by move: (H2 (O2 0)); rewrite !inE eqxx -val_eqE.
 Qed.
+
+(** ================================================================= *)
+(** ** [hg_connected] : SECOND, INDEPENDENT ENCODING (Technique #3)
+
+    [hg_connected] is defined LOCALLY, as an existential intersection-WALK: any
+    two hyperedges are joined by a path whose consecutive members intersect.  The
+    classical, structurally opposite characterisation of connectivity is GLOBAL
+    and universal — the "no cut" / "no clopen proper subfamily" formulation:
+    a hypergraph is connected iff every proper nonempty subfamily [E1] has a
+    hyperedge meeting a hyperedge outside it (there is no way to split [E] into two
+    parts with no crossing intersecting pair).  We give that encoding as
+    [hg_connected_cut] and prove [hg_connected E <-> hg_connected_cut E].
+
+    The two encodings are genuinely independent (exists-walk vs forall-partition),
+    and the proof is NOT definitional: forward needs a first-exit induction on the
+    walk ([first_exit]) to expose the crossing edge; backward runs the
+    reachable-set argument over mathcomp's [connect] (transitive closure), using
+    the cut clause to close reachability.  The bridge between the raw
+    intersection-walk and the [connect]-walk-inside-[E] is [pathR_iff]. *)
+
+(** First-exit: a path whose start satisfies [P] and whose endpoint does not must
+    contain a consecutive pair [(a,b)] with [P a] and [~~ P b] — the step where
+    the walk first leaves the region [P].  Pure induction on the path. *)
+Lemma first_exit (S : Type) (R : rel S) (P : pred S) :
+  forall (p : seq S) (x : S),
+    P x -> ~~ P (last x p) -> path R x p ->
+    exists a b, [/\ R a b, P a & ~~ P b].
+Proof.
+elim => [|c p IH] x Px /=.
+- by move=> H; rewrite (negbTE H) in Px.
+- move=> Hlast /andP[Rxc Hpath].
+  case Pc: (P c).
+  + exact: (IH c Pc Hlast Hpath).
+  + by exists x, c; split=> //; rewrite Pc.
+Qed.
+
+(** Bridge: a walk for the "target-in-[E] and intersecting" relation is exactly an
+    intersection-walk all of whose members lie in [E].  Induction + Boolean
+    rearrangement. *)
+Lemma pathR_iff (T : finType) (E : {set {set T}}) (e : {set T})
+  (p : seq {set T}) :
+  path (fun a b => (b \in E) && (a :&: b != set0)) e p
+  = path (fun a b => a :&: b != set0) e p && all (fun a => a \in E) p.
+Proof.
+elim: p e => [|c p IH] e //=.
+by rewrite IH; case: (c \in E); rewrite /= ?andbF ?andbT ?andbA.
+Qed.
+
+(** The GLOBAL "no-cut" encoding: nonempty, and every proper nonempty subfamily
+    [E1] has a hyperedge [e in E1] meeting a hyperedge [f] outside [E1]. *)
+Definition hg_connected_cut (T : finType) (E : {set {set T}}) : Prop :=
+  E != set0 /\
+  forall E1 : {set {set T}},
+    E1 \subset E -> E1 != set0 -> E1 != E ->
+    exists e f : {set T}, [/\ e \in E1, f \in E :\: E1 & e :&: f != set0].
+
+(** FAITHFULNESS (Technique #3): the local exists-walk encoding [hg_connected]
+    and the global no-cut encoding [hg_connected_cut] agree.  Axiom-free. *)
+Lemma hg_connected_cutE (T : finType) (E : {set {set T}}) :
+  hg_connected E <-> hg_connected_cut E.
+Proof.
+pose R := fun a b : {set T} => (b \in E) && (a :&: b != set0).
+split.
+- (* walk => cut: the walk from an inside edge to an outside edge must cross. *)
+  move=> [HE Hwalk]; split => // E1 sub1 ne0 neE.
+  have Fne : E :\: E1 != set0.
+    rewrite setD_eq0; apply/negP => Esub.
+    by move: neE; rewrite eqEsubset sub1 Esub.
+  case/set0Pn: ne0 => e0 He0.
+  case/set0Pn: Fne => f0 Hf0.
+  have He0E : e0 \in E by apply: (subsetP sub1).
+  have Hf0E : f0 \in E by move: Hf0; rewrite in_setD => /andP[_].
+  have [p [Pp Lp Ap]] := Hwalk _ _ He0E Hf0E.
+  have PRp : path R e0 p by rewrite /R pathR_iff Pp Ap.
+  have Hnl : last e0 p \notin E1.
+    by rewrite Lp; move: Hf0; rewrite in_setD => /andP[].
+  have [a [b [Rab Pa Pb]]] := @first_exit _ R (mem E1) p e0 He0 Hnl PRp.
+  exists a, b; split.
+  + exact: Pa.
+  + rewrite in_setD; apply/andP; split; first exact: Pb.
+    by move: Rab; rewrite /R => /andP[].
+  + by move: Rab; rewrite /R => /andP[_].
+- (* cut => walk: the reachable set from [e] is clopen, hence all of [E]. *)
+  move=> [HE Hcut]; split; first exact: HE.
+  move=> e f He Hf.
+  have SsubE : [set g in E | connect R e g] \subset E.
+    by apply/subsetP => g; rewrite inE => /andP[].
+  have SE : [set g in E | connect R e g] = E.
+    case: (eqVneq [set g in E | connect R e g] E) => [//|Sne].
+    have Sne0 : [set g in E | connect R e g] != set0.
+      by apply/set0Pn; exists e; rewrite inE He connect0.
+    have [a [b [Ha Hb Hab]]] := Hcut _ SsubE Sne0 Sne.
+    move: Ha; rewrite inE => /andP[aE cea].
+    have bE : b \in E by move: Hb; rewrite in_setD => /andP[_].
+    have Rab : R a b by rewrite /R bE Hab.
+    have bS : b \in [set g in E | connect R e g].
+      by rewrite inE bE /=; apply: connect_trans cea _; apply: connect1.
+    move: Hb; rewrite in_setD => /andP[bnS _].
+    by rewrite bS in bnS.
+  have Cef : connect R e f by move: Hf; rewrite -SE inE => /andP[].
+  case/connectP: Cef => p; rewrite pathR_iff => /andP[Hp Hall] Hlast.
+  by exists p; split => //; rewrite Hlast.
+Qed.

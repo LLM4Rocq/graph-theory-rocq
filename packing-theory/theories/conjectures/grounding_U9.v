@@ -497,4 +497,118 @@ rewrite cpn0 in hp *.
 exact: (jones_acyclic_slice hf hp).
 Qed.
 
+(** ============================================================================
+    TECHNIQUE #3 — independent re-encoding of [is_P3] + proved equivalence.
+
+    [is_P3] (U9.v) is the "named-centre witness" encoding:
+      exists b x y, [/\ b -- x, b -- y, x != y & S = [set x; b; y]].
+    We give a second, structurally unrelated characterisation that names NO
+    centre and mentions NO explicit adjacency: a 3-vertex INDUCED-CONNECTED set,
+      #|S| = 3  /\  connected S,
+    using coq-graph-theory's [connected] (reflexive-transitive closure of
+    [restrict S edge_rel]).  The two agree because a connected graph on three
+    vertices is exactly a [P3] or a triangle, and in both a vertex is adjacent
+    to the other two (this matches [is_P3]'s triangle-allowing semantics).
+
+    The proof is genuinely non-trivial (NOT [by []]): the backward direction
+    enumerates the three vertices from the cardinality, extracts one edge per
+    vertex from [connected_card_gt1], and case-analyses to locate the centre;
+    the forward direction rebuilds connectivity from two shared-endpoint edges
+    via [connectedU_common_point].
+    ========================================================================== *)
+
+Lemma cards3 (T : finType) (a b c : T) :
+  a != b -> a != c -> b != c -> #|[set a; b; c]| = 3.
+Proof.
+move=> ab ac bc.
+have -> : [set a; b; c] = a |: [set b; c] by rewrite setUA.
+by rewrite cardsU1 in_set2 (negbTE ab) (negbTE ac) cards2 bc.
+Qed.
+
+(** The independent second encoding: a 3-vertex induced-connected subset. *)
+Definition is_P3_alt (G : sgraph) (S : {set G}) : Prop :=
+  #|S| = 3 /\ connected S.
+
+(** Faithfulness cross-check: the two encodings coincide. *)
+Lemma is_P3_altE (G : sgraph) (S : {set G}) : is_P3 S <-> is_P3_alt S.
+Proof.
+split.
+- (* named-centre witness -> cardinality + connectivity *)
+  case=> b [x] [y] [hbx hby hxy ->].
+  have xb : (x == b) = false by rewrite eq_sym; exact: (sg_edgeNeq hbx).
+  split.
+  + apply: cards3.
+    * by rewrite xb.
+    * exact: hxy.
+    * by rewrite (sg_edgeNeq hby).
+  + have -> : [set x; b; y] = [set b; x] :|: [set b; y].
+      by apply/setP=> v; rewrite !inE; do 3 case: (_ == _).
+    apply: (@connectedU_common_point _ [set b; x] [set b; y] b).
+    * by rewrite !inE eqxx.
+    * by rewrite !inE eqxx.
+    * exact: (connected2 hbx).
+    * exact: (connected2 hby).
+- (* cardinality + connectivity -> named-centre witness *)
+  case=> cardS conn.
+  have h0 : 0 < #|S| by rewrite cardS.
+  case/card_gt0P: h0 => x0 x0S.
+  have c1 : #|S :\ x0| = 2 by move: cardS; rewrite (cardsD1 x0) x0S add1n; case.
+  have h1 : 0 < #|S :\ x0| by rewrite c1.
+  case/card_gt0P: h1 => x1; rewrite !inE => /andP[x1n0 x1S].
+  have c2 : #|(S :\ x0) :\ x1| = 1
+    by move: c1; rewrite (cardsD1 x1) !inE x1n0 x1S add1n; case.
+  have h2 : 0 < #|(S :\ x0) :\ x1| by rewrite c2.
+  case/card_gt0P: h2 => x2; rewrite !inE => /and3P[x2n1 x2n0 x2S].
+  have x0n1 : x0 != x1 by rewrite eq_sym.
+  have x0n2 : x0 != x2 by rewrite eq_sym.
+  have x1n2 : x1 != x2 by rewrite eq_sym.
+  have HS : S = [set x0; x1; x2].
+    apply/eqP; rewrite eq_sym eqEcard.
+    rewrite !subUset !sub1set x0S x1S x2S /=.
+    by rewrite cardS cards3.
+  have neigh := connected_card_gt1 conn.
+  have e0 : (x0 -- x1) || (x0 -- x2).
+    have [z zS x0z] := neigh x0 x1 x0S x1S x0n1.
+    move: zS x0z; rewrite HS !inE => /orP[/orP[/eqP->|/eqP->]|/eqP->] x0z.
+    - by rewrite sg_irrefl in x0z.
+    - by rewrite x0z.
+    - by rewrite x0z orbT.
+  have e1 : (x1 -- x0) || (x1 -- x2).
+    have [z zS x1z] := neigh x1 x0 x1S x0S x1n0.
+    move: zS x1z; rewrite HS !inE => /orP[/orP[/eqP->|/eqP->]|/eqP->] x1z.
+    - by rewrite x1z.
+    - by rewrite sg_irrefl in x1z.
+    - by rewrite x1z orbT.
+  have e2 : (x2 -- x0) || (x2 -- x1).
+    have [z zS x2z] := neigh x2 x0 x2S x0S x2n0.
+    move: zS x2z; rewrite HS !inE => /orP[/orP[/eqP->|/eqP->]|/eqP->] x2z.
+    - by rewrite x2z.
+    - by rewrite x2z orbT.
+    - by rewrite sg_irrefl in x2z.
+  case: (boolP (x0 -- x1)) => [c01 | nc01].
+  + case/orP: e2 => [c20 | c21].
+    * (* centre x0, leaves x1 x2 *)
+      exists x0, x1, x2; split.
+      -- exact: c01.
+      -- by rewrite sg_sym.
+      -- exact: x1n2.
+      -- rewrite HS; apply/setP=> v; rewrite !inE.
+         by do 3 case: (_ == _).
+    * (* centre x1, leaves x0 x2 *)
+      exists x1, x0, x2; split.
+      -- by rewrite sg_sym.
+      -- by rewrite sg_sym.
+      -- exact: x0n2.
+      -- exact: HS.
+  + (* ~ x0 -- x1 : centre x2, leaves x0 x1 *)
+    have c02 : x0 -- x2 by move: e0; rewrite (negbTE nc01) /=.
+    have c12 : x1 -- x2 by move: e1; rewrite [x1 -- x0]sg_sym (negbTE nc01) /=.
+    exists x2, x0, x1; split.
+    * by rewrite sg_sym.
+    * by rewrite sg_sym.
+    * exact: x0n1.
+    * rewrite HS; apply/setP=> v; rewrite !inE.
+      by do 3 case: (_ == _).
+Qed.
+
 

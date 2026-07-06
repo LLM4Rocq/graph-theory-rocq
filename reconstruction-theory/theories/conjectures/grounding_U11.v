@@ -109,6 +109,53 @@ Lemma sdel_edge_removes (G : sgraph) (x y : G) :
   @sedge (sdel_edge [set x; y]) x y = false.
 Proof. by rewrite /= /sde_rel eqxx andbF. Qed.
 
+(** ----------------------------------------------------------------------------
+    TECHNIQUE #3 — independent re-encoding of [sdel_edge] via base's [del_edges].
+
+    [sdel_edge e] (U11) removes the SINGLE adjacency whose endpoint set EQUALS
+    [e] (per-pair test [[set x; y] != e]).  base's independently-authored
+    [del_edges A] (GraphTheory.core.sgraph, re-exported by GTBase.base) removes
+    EVERY adjacency whose endpoint set is a SUBSET of the vertex set [A]
+    (per-pair test [~~ ([set x; y] \subset A)]):
+
+        del_edges_rel A := [rel x y | x -- y && ~~ ([set x; y] \subset A)]
+        del_edges A      := SGraph del_edges_sym del_edges_irrefl.
+
+    These are two structurally different edge-deletion schemes
+    (equality-of-endpoint-set vs subset-of-a-vertex-set).  On a genuine edge
+    [e ∈ E(G)] they coincide, and the bridge is the real 2-set combinatorial
+    fact [edges_eqn_sub] (two DISTINCT edges are never [\subset]-related, proved
+    in base by [cards2]/[pred2P] case analysis) — NOT reflexivity.  A bug in
+    [sde_rel] (a flipped test, [:&:] for the endpoint test, or a reversed subset
+    direction) breaks the equivalences below against the independent [del_edges].
+
+    Core: on a genuine edge, the two deletion RELATIONS agree pointwise. *)
+Lemma sde_del_edges_rel (G : sgraph) (e : {set G}) :
+  e \in E(G) -> sde_rel e =2 del_edges_rel e.
+Proof.
+move=> He x y; rewrite /sde_rel /del_edges_rel /=.
+case: (boolP (x -- y)) => xy; last by [].
+have He2 : [set x; y] \in E(G) by rewrite in_edges.
+apply/idP/idP => [neq | nsub].
+  exact: edges_eqn_sub He2 He neq.
+by apply: contraNneq nsub => ->; exact: subxx.
+Qed.
+
+(** The [<->] at adjacency level: a pair [x, y] survives U11's [sdel_edge e]
+    iff it survives base's [del_edges e], whenever [e] is a genuine edge. *)
+Lemma sde_del_edges_adj (G : sgraph) (e : {set G}) (x y : G) :
+  e \in E(G) ->
+  (@sedge (sdel_edge e) x y <-> @sedge (del_edges e) x y).
+Proof. by move=> He; rewrite /edge_rel /= (sde_del_edges_rel He). Qed.
+
+(** Whole-graph faithfulness: on a genuine edge, U11's [sdel_edge e] and base's
+    [del_edges e] are the SAME simple graph (isomorphic via the identity vertex
+    map) — two independently authored formalizations of "delete the edge [e]"
+    provably agree. *)
+Lemma sdel_edge_diso_del_edges (G : sgraph) (e : {set G}) :
+  e \in E(G) -> diso (sdel_edge e) (del_edges e).
+Proof. by move=> He; apply: eq_diso; apply: sde_del_edges_rel He. Qed.
+
 (** ============================================================================
     [sline_graph] — simple-graph line operation.
     ========================================================================== *)

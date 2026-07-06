@@ -551,3 +551,48 @@ Qed.
     [CL1_premises_inhabited] (the previously-open [CL1_bridge_*] trailer, here closed via
     the generic [SAD_complete3] and the 6-vertex two-triangle host [H6]) are all PROVED,
     [Qed], axiom-free. *)
+
+(** ** Technique-#3 faithfulness cross-check for [strongb] (from [strong.v]).
+
+    We give an INDEPENDENT second encoding of strong connectivity — the global
+    min-cut characterization [arc_strong D 1] of [sad.v] ("every nonempty proper
+    vertex set has a non-empty out-cut") — and prove it equivalent to the
+    reachability encoding [strongb D = forall x y, connect arc x y].
+
+    The two are genuinely different mathematics: [strongb] is a transitive-closure
+    reachability statement (fingraph [connect]); [arc_strong 1] is a universal
+    counting/min-cut condition over the 2^|D| vertex subsets (a Robbins/Menger-
+    flavoured global characterization). The proof is NOT definitional — the forward
+    direction extracts a crossing arc from a reachability path via [connect_cross],
+    and the backward direction runs the sink/reachable-set argument ([rset_closed],
+    [rset_id]) showing a closed reachable set has an empty out-cut, so [arc_strong 1]
+    forces it to be everything. A direction bug (arc orientation, one-way vs two-way
+    reachability, or an off-by-one in the cut) breaks the [<->]. *)
+Lemma strongbP_cut (D : diGraphType) : strongb D <-> arc_strong D 1.
+Proof.
+split.
+- move=> /strongP str X Xn0 XnT.
+  have/set0Pn[x xX] := Xn0.
+  have [y _ yNX] : exists2 y, y \in [set: D] & y \notin X.
+    by apply/subsetPn; rewrite subTset.
+  have [u [v [uCX vCX auv]]] :
+      exists u v, [/\ u \notin ~: X, v \in ~: X & u --> v].
+    apply: (connect_cross (str x y)); rewrite in_setC.
+    + by rewrite negbK.
+    + by [].
+  rewrite lt0n cards_eq0; apply/set0Pn; exists (u, v).
+  rewrite in_outcutE auv /=.
+  move: uCX; rewrite in_setC negbK => ->.
+  by move: vCX; rewrite in_setC => ->.
+- move=> as1; apply/strongP=> x y.
+  have main : rset x = [set: D].
+    have Xn0 : rset x != set0 by apply/set0Pn; exists x; exact: rset_id.
+    have cut0 : outcut (rset x) = set0.
+      apply/setP=> - [u v]; rewrite in_set0 in_outcutE.
+      apply/negP=> /and3P[auv uR vNR].
+      by move: vNR; rewrite (rset_closed auv uR).
+    apply/eqP/negPn/negP => XnT.
+    by move: (as1 (rset x) Xn0 XnT); rewrite cut0 cards0.
+  have hy : y \in rset x by rewrite main inE.
+  by rewrite inE in hy.
+Qed.
