@@ -16,8 +16,9 @@
 
     NOTE on directed walks: U6's [walk] traverses edges source->target, so an
     [is_circuit] needs oppositely-oriented edges (the digon), and [is_path] /
-    [cubic] / [two_connected] have no cheap concrete nonempty witness; for those
-    we record the structural identities only. *)
+    [two_connected] have no cheap concrete nonempty witness; for those we record
+    structural identities / teeth.  [cubic] is grounded by a two-vertex graph
+    with three parallel non-loop edges. *)
 
 From GraphTheory Require Import mgraph.
 From GTBase Require Import base.
@@ -32,6 +33,8 @@ Unset Printing Implicit Defensive.
 Definition G0 : mgraph := two_graph tt tt.
 Definition G1 : mgraph := mgraph.add_edge G0 (inl tt) (inr tt) tt.
 Definition Gd : mgraph := mgraph.add_edge G1 (inr tt) (inl tt) tt.
+Definition G2p : mgraph := mgraph.add_edge G1 (inl tt) (inr tt) tt.
+Definition G3p : mgraph := mgraph.add_edge G2p (inl tt) (inr tt) tt.
 
 (** Trivial witness graphs: one vertex (no edges) and the empty graph. *)
 Definition U : mgraph := unit_graph tt.
@@ -40,6 +43,9 @@ Definition V : mgraph := void_graph unit unit.
 Lemma card_edge_Gd : #|edge Gd| = 2.
 Proof. by rewrite /Gd /G1 /G0 !card_option card_sum !card_void. Qed.
 
+Lemma card_edge_G3p : #|edge G3p| = 3.
+Proof. by rewrite /G3p /G2p /G1 /G0 !card_option card_sum !card_void. Qed.
+
 Lemma inc_all (v : Gd) (e : edge Gd) : incident v e.
 Proof.
 rewrite /incident; apply/existsP.
@@ -47,14 +53,27 @@ by case: v => -[]; case: e => [[[[]|[]]|]|];
   [exists false|exists true|exists true|exists false].
 Qed.
 
+Lemma inc_all_G3p (v : G3p) (e : edge G3p) : incident v e.
+Proof.
+rewrite /incident; apply/existsP.
+by case: v => -[]; case: e => [[[[[]|[]]|]|]|];
+  [exists false|exists false|exists false|exists true|exists true|exists true].
+Qed.
+
 Lemma edges_at_Gd (v : Gd) : edges_at v = [set: edge Gd].
 Proof. by apply/setP => e; rewrite !inE inc_all. Qed.
+
+Lemma edges_at_G3p (v : G3p) : edges_at v = [set: edge G3p].
+Proof. by apply/setP => e; rewrite !inE inc_all_G3p. Qed.
 
 Lemma subdeg_Gd (H : {set edge Gd}) (v : Gd) : subdeg H v = #|H|.
 Proof. by rewrite /subdeg edges_at_Gd setTI. Qed.
 
 Lemma mdeg_Gd (v : Gd) : mdeg v = 2.
 Proof. by rewrite /mdeg edges_at_Gd cardsT card_edge_Gd. Qed.
+
+Lemma mdeg_G3p (v : G3p) : mdeg v = 3.
+Proof. by rewrite /mdeg edges_at_G3p cardsT card_edge_G3p. Qed.
 
 (** ** [subdeg] / [mdeg] : identities *)
 
@@ -121,10 +140,13 @@ Lemma connected_del_verts_unit :
   connected_del_verts (G:=U) set0.
 Proof. by move=> x y _ _; exists [::]; split; [case: x; case: y|]. Qed.
 
-(** ** [two_connected] : identity (no cheap nonempty witness) *)
+(** ** [two_connected] : identity + teeth *)
 
 Lemma two_connected_card (G : mgraph) : two_connected G -> (3 <= #|G|)%N.
 Proof. by case. Qed.
+
+Lemma not_two_connected_unit : ~ two_connected U.
+Proof. by move=> /two_connected_card; rewrite card_unit. Qed.
 
 (** ** [edge_connected] : witness (vacuous at k=0) + identity *)
 
@@ -195,13 +217,20 @@ Qed.
 Lemma bridgeless_unit : bridgeless (U).
 Proof. by case. Qed.
 
-(** ** [cubic] : identities (no cheap 3-regular witness) *)
+(** ** [cubic] : witness + identities *)
 
 Lemma cubic_loopless (G : mgraph) : cubic G -> loopless G.
 Proof. by case. Qed.
 
 Lemma cubic_mdeg (G : mgraph) : cubic G -> forall v : G, mdeg v = 3.
 Proof. by case. Qed.
+
+(** Witness: two vertices joined by three parallel non-loop edges are cubic. *)
+Lemma loopless_G3p : loopless G3p.
+Proof. by case=> [[[[[]|[]]|]|]|]. Qed.
+
+Lemma cubic_G3p : cubic G3p.
+Proof. by split; [exact: loopless_G3p | exact: mdeg_G3p]. Qed.
 
 (** ** [simple_mgraph] : witness *)
 

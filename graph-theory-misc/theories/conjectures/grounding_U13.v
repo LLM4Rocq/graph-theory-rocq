@@ -17,11 +17,11 @@
     NOT re-grounded here; they come verbatim from the imported libraries.
 
     Coverage notes (honest): every new primitive gets at least one Qed-closed
-    identity; almost all also get a satisfiable witness.  The two exact-extremal
-    predicates [has_diameter] and [has_girth] are grounded by their structural
-    projection identities only — a positive witness would require constructing a
-    concrete graph of prescribed diameter/girth (genuine distance/cycle
-    computation), which is out of scope for these SIMPLE sanity checks. *)
+    identity; almost all also get a satisfiable witness.  The exact-diameter
+    predicate has a concrete [K2] witness below.  Exact girth is grounded by its
+    two structural projections; a positive prescribed-girth witness requires a
+    genuine cycle computation, which is out of scope for these SIMPLE sanity
+    checks. *)
 
 From GTBase Require Import base.
 From mathcomp Require Import fingroup perm.
@@ -322,7 +322,24 @@ Lemma has_diameter_ball (G : sgraph) (d : nat) :
   has_diameter G d -> forall u v : G, v \in ball d u.
 Proof. by case. Qed.
 
+(** Witness: [K2] has exact diameter 1. *)
+Lemma has_diameter_K2_1 : has_diameter K2 1.
+Proof.
+split.
+- move=> u v; rewrite /= !inE.
+  case uv: (v == u); first by [].
+  rewrite /=.
+  apply/bigcupP; exists u; first by rewrite inE eqxx.
+  by rewrite inE K2_edge eq_sym uv.
+- exists (ord0 : K2); exists (ord_max : K2).
+  by rewrite /= !inE.
+Qed.
+
 Lemma has_girth_geq (G : sgraph) (g : nat) : has_girth G g -> girth_geq G g.
+Proof. by case. Qed.
+
+Lemma has_girth_cycle (G : sgraph) (g : nat) :
+  has_girth G g -> exists c : seq G, ucycle (--) c /\ size c = g.
 Proof. by case. Qed.
 
 (** ============================================================================

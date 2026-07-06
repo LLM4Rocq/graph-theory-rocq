@@ -22,9 +22,9 @@
 
     NOTE.  A nowhere-zero flow needs incidence symmetry to balance Kirchhoff;
     the loop [Lp] supplies it for vertex-flow rows, while bidirected balance on
-    [Lp] needs opposite endpoint signs.  Primitives with no cheap concrete
-    nonempty witness ([is_2t1_graph], [is_class1], [mtreewidth_le], [mg_minor])
-    are grounded by their structural identities / monotonicities instead. *)
+    [Lp] needs opposite endpoint signs.  The low-level guard predicates below
+    are also grounded by concrete positive witnesses or negative "teeth" on
+    the one-vertex graph. *)
 
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import mgraph sgraph treewidth.
@@ -194,6 +194,27 @@ Lemma is_2t1_mreg (G : mgraph) (t : nat) :
   is_2t1_graph G t -> mreg G (2 * t + 1).
 Proof. by case. Qed.
 
+(** Teeth: the one-vertex edge-less graph cannot satisfy any odd positive
+    regularity guard. *)
+Lemma not_is_2t1_U (t : nat) : ~ is_2t1_graph U t.
+Proof.
+move=> [H _].
+have := H (tt : U); rewrite mdeg_U.
+by case: (2 * t)%N.
+Qed.
+
+(** Witness: the edge-less graph is class-1, since its line graph has no
+    vertices and its maximum degree is 0. *)
+Lemma chromatic_index_U : chromatic_index U = 0.
+Proof.
+rewrite /chromatic_index.
+have -> : [set: line_graph U] = set0 by apply/setP => e; case: e.
+by rewrite chi0.
+Qed.
+
+Lemma is_class1_U : is_class1 U.
+Proof. by rewrite /is_class1 chromatic_index_U mDelta_U. Qed.
+
 (** Identity: class-1 means [chi' = Delta]. *)
 Lemma is_class1E (G : mgraph) : is_class1 G -> chromatic_index G = mDelta G.
 Proof. by []. Qed.
@@ -288,6 +309,20 @@ Proof. by case. Qed.
 (** Witness: the empty branch set is (vacuously) branch-connected. *)
 Lemma mg_branch_connected_set0 (G : mgraph) : mg_branch_connected (G:=G) set0.
 Proof. by move=> x y; rewrite in_set0. Qed.
+
+(** Witness: the one-vertex graph contains its own vertex skeleton as a
+    multigraph minor; the single branch set is connected and edge obligations
+    are vacuous. *)
+Lemma mg_minor_U_vskel : mg_minor U (vskel U).
+Proof.
+exists (fun _ : vskel U => [set tt]).
+split.
+- by move=> x; apply/set0Pn; exists tt; rewrite inE.
+- by move=> x y; case: x; case: y; rewrite eqxx.
+- move=> x a b; rewrite !inE => /eqP -> /eqP ->.
+  by exists [::]; split.
+- by move=> x y; case: x; case: y; rewrite /edge_rel /=.
+Qed.
 
 (** ================================================================= *)
 (** ** Unit-vector (S^2) flows *)
@@ -439,6 +474,17 @@ Proof. by split; [|move=> e; rewrite big_nil]. Qed.
 (** Identity: the empty multiflow has value 0. *)
 Lemma frac_value_nil (G : mgraph) : frac_value (G:=G) [::] = 0.
 Proof. by rewrite /frac_value big_nil. Qed.
+
+(** Witness: the one-vertex graph has treewidth at most 1, by the trivial
+    decomposition. *)
+Lemma mtreewidth_le_U1 : mtreewidth_le U 1.
+Proof.
+exists tunit, (fun _ => [set: vskel U]).
+split; first exact: triv_sdecomp.
+have Hw := width_bound (fun _ : tunit => [set: vskel U]).
+apply: leq_trans Hw _.
+by rewrite card_unit.
+Qed.
 
 (** Identity: bounded treewidth is upward closed in the width bound. *)
 Lemma mtreewidth_le_mono (G : mgraph) (w w' : nat) :
