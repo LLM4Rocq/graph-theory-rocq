@@ -340,3 +340,130 @@ case=> f Hf.
 have E : (ord0 : K2) -- ord_max by rewrite K2_edge -val_eqE.
 by move: (Hf _ _ E); rewrite [f ord0]ord1 [f ord_max]ord1 sg_irrefl.
 Qed.
+
+(** ============================================================================
+    Row 4 (faithfulness) — [fas_ptas_spec] genuinely constrains the output.
+
+    The PTAS statement is [forall p q, 0<p -> 0<q -> exists alg, realizes_on
+    enc_tournament (fas_ptas_spec p q) alg /\ poly_cost_on ...].  Proving it in
+    full is the Kenyon-Mathieu-Schudy PTAS — out of scope here.  What we DO pin
+    down is that the [exists alg] is not a vacuous proxy: [fas_ptas_spec] forces
+    the output VALUE to track the per-instance feedback-arc-set optimum [k], so
+    no program emitting a fixed answer can realize it.  We exhibit two genuine
+    tournaments with DIFFERENT optima:
+      - the cyclic 3-tournament [c3] (0->1->2->0), whose minimum feedback arc
+        set is exactly 1 ([fas_opt_c3] — its unique directed triangle forces a
+        backward arc under every linear order); and
+      - the one-vertex tournament, acyclic, optimum 0 ([fas_opt_r1]);
+    and show no single output [data] satisfies [fas_ptas_spec p q] on both. *)
+Section FASteeth.
+
+Definition c3 : rel 'I_3 := fun i j =>
+  [|| (val i == 0) && (val j == 1),
+      (val i == 1) && (val j == 2)
+    | (val i == 2) && (val j == 0)].
+
+Lemma c3_tournament : is_tournament c3.
+Proof.
+split.
+- by move=> x; rewrite /c3; case: x => -[|[|[|?]]] //.
+- by move=> x y; rewrite /c3; case: x => -[|[|[|?]]] ? //; case: y => -[|[|[|?]]] ? //.
+Qed.
+
+Local Notation o0 := (@ord0 2 : 'I_3).
+Local Notation o1 := (@Ordinal 3 1 isT : 'I_3).
+Local Notation o2 := (@Ordinal 3 2 isT : 'I_3).
+
+Definition c3set (pos : 'I_3 -> nat) : {set 'I_3 * 'I_3} :=
+  [set p : 'I_3 * 'I_3 | c3 p.1 p.2 && (pos p.2 < pos p.1)].
+
+(** Under the natural order 0<1<2 only the wrap-around arc 2->0 points backward,
+    so [back_arcs] there is exactly 1 (the achievable optimum witness). *)
+Lemma back_arcs_c3_val : back_arcs c3 (@nat_of_ord 3) = 1.
+Proof.
+rewrite /back_arcs -/(c3set (@nat_of_ord 3)).
+have -> : c3set (@nat_of_ord 3) = [set (o2, o0)].
+  apply/setP => p; rewrite !inE; case: p => a b /=.
+  by case: a => -[|[|[|?]]] ? //; case: b => -[|[|[|?]]] ? //.
+by rewrite cards1.
+Qed.
+
+(** Every injective order leaves at least one backward arc: an arc-free order
+    would linearise the directed triangle, forcing pos o0 <= pos o1 <= pos o2 <=
+    pos o0, hence o0 = o2, contradicting injectivity. *)
+Lemma back_arcs_c3_lb (pos : 'I_3 -> nat) : injective pos -> 1 <= back_arcs c3 pos.
+Proof.
+move=> Hpos; rewrite lt0n; apply/eqP => H0.
+have Hset : c3set pos = set0 by exact: cards0_eq H0.
+have arc : forall a b : 'I_3, c3 a b -> pos a <= pos b.
+  move=> a b Hab; move: (in_set0 (a, b)); rewrite -Hset inE /= Hab /=.
+  by move/negbT; rewrite -leqNgt.
+have H01 : pos o0 <= pos o1 by apply: arc; rewrite /c3 /=.
+have H12 : pos o1 <= pos o2 by apply: arc; rewrite /c3 /=.
+have H20 : pos o2 <= pos o0 by apply: arc; rewrite /c3 /=.
+have E : pos o0 = pos o2 by apply/eqP; rewrite eqn_leq (leq_trans H01 H12) H20.
+move/Hpos: E => E2.
+have Hne : (o0 == o2 :> 'I_3) = false by rewrite -val_eqE.
+by move: Hne; rewrite E2 eqxx.
+Qed.
+
+(** The feedback-arc-set optimum of the cyclic 3-tournament is exactly 1. *)
+Lemma fas_opt_c3 : fas_opt c3 1.
+Proof.
+split.
+- by exists (@nat_of_ord 3); split; [exact: val_inj|exact: back_arcs_c3_val].
+- exact: back_arcs_c3_lb.
+Qed.
+
+(** The one-vertex tournament (no arcs) is acyclic: its optimum is 0. *)
+Lemma fas_opt_r1 : fas_opt (fun _ _ : 'I_1 => false) 0.
+Proof.
+split.
+- by exists (@nat_of_ord 1); split; [exact: val_inj|exact: back_arcs_nil].
+- by move=> pos _; exact: leq0n.
+Qed.
+
+Definition c3_input : t_input := existT (fun T : finType => rel T) 'I_3 c3.
+Definition triv_input : t_input :=
+  existT (fun T : finType => rel T) 'I_1 (fun _ _ => false).
+
+(** TEETH (the requested probe): the constant output [Dnat 0] does NOT satisfy
+    [fas_ptas_spec p q] on the cyclic 3-tournament — the achievability clause
+    [k <= dnat_val out] at the true optimum [k = 1] would demand [1 <= 0].  So
+    the spec is not vacuously met by the zero program; it constrains the output. *)
+Lemma fas_ptas_spec_teeth (p q : nat) :
+  ~ fas_ptas_spec p q c3_input (Dnat 0).
+Proof.
+move=> H; have [H1 _] := H 1 c3_tournament fas_opt_c3.
+by [].
+Qed.
+
+(** STRONGER — the output must track the optimum: NO single output [data]
+    realizes [fas_ptas_spec p q] on BOTH the cyclic (optimum 1) and the
+    one-vertex (optimum 0) tournaments.  On the one-vertex instance the ratio
+    clause forces [q * dnat_val out <= 0], i.e. value 0 (as [0 < q]); on the
+    cyclic instance the achievability clause forces [1 <= dnat_val out].  Hence
+    the [exists alg] of the PTAS statement cannot be met by any constant-output
+    program: the answer genuinely depends on the instance optimum [k]. *)
+Lemma fas_ptas_spec_no_output (p q : nat) : 0 < q ->
+  forall out : data,
+    ~ (fas_ptas_spec p q c3_input out /\ fas_ptas_spec p q triv_input out).
+Proof.
+move=> Hq out [Hc Ht].
+have [Hc1 _] := Hc 1 c3_tournament fas_opt_c3.
+have [_ Ht2] := Ht 0 is_tournament_triv fas_opt_r1.
+move: Ht2; rewrite muln0 leqn0 muln_eq0 (gtn_eqF Hq) /= => /eqP Hv0.
+by move: Hc1; rewrite Hv0.
+Qed.
+
+(** Corollary: every positive constant value [n] fails the spec on the
+    one-vertex tournament (the ratio clause forces value 0). *)
+Lemma fas_ptas_spec_teeth_pos (p q n : nat) : 0 < q -> 0 < n ->
+  ~ fas_ptas_spec p q triv_input (Dnat n).
+Proof.
+move=> Hq Hn H.
+have [_ H2] := H 0 is_tournament_triv fas_opt_r1.
+by move: H2; rewrite muln0 leqn0 muln_eq0 (gtn_eqF Hq) (gtn_eqF Hn).
+Qed.
+
+End FASteeth.

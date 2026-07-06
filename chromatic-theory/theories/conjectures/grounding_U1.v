@@ -163,3 +163,71 @@ apply/eqP; rewrite eqn_leq; apply/andP; split.
     by apply/cliqueP; apply: clique_complete.
   by rewrite cardKn in H.
 Qed.
+
+(** ** Erdős–Faber–Lovász (Row 5, U1) — SETTLED-CASE truth-value forcing.
+
+    The full statement [erdos_faber_lovasz_statement] asserts
+    [edge_disjoint_clique_union G k -> χ([set: G]) = k].  The nontrivial
+    UPPER bound [χ([set: G]) <= k] for all [k] is exactly the Kang–Kelly–
+    Kühn–Methuku–Osthus (2023) theorem — a major result, OUT OF SCOPE and
+    NOT attempted here.  We ground the right-polarity fragments that follow
+    from the primitive by pure colouring theory: the always-true lower bound
+    for every [k], and full equality in the two settled small cases [k=0,1].
+
+    Reused coq-graph-theory colouring API (core/coloring.v):
+      [sub_chi : A ⊆ B -> χ(A) <= χ(B)], [chi_clique : clique C -> χ(C) = #|C|],
+      [leq_chi : χ(A) <= #|A|]. *)
+
+(** (A) Always-true LOWER bound, ALL [k]: an edge-disjoint clique union with
+    parameter [k] contains (for [k>0]) the [k]-vertex clique [cliqs ord0],
+    whose chromatic number is [k]; monotonicity of [χ] under [⊆] lifts this to
+    the whole graph.  For [k=0] the bound [0 <= χ] is trivial. *)
+Lemma efl_lower_bound (G : sgraph) (k : nat) :
+  edge_disjoint_clique_union G k -> (k <= χ([set: G]))%N.
+Proof.
+case: k => [|k]; first by move=> _; exact: leq0n.
+case=> cliqs [Hcard Hclq _ _ _].
+have H0 : #|cliqs ord0| = k.+1 by apply: Hcard.
+have Hc0 : clique (cliqs ord0) by apply: Hclq.
+apply: leq_trans _ (sub_chi (subsetT (cliqs ord0))).
+rewrite chi_clique; first by rewrite H0.
+exact: Hc0.
+Qed.
+
+(** (B) Settled case [k=0]: the cover clause quantifies over [i : 'I_0], which
+    is empty, so no vertex can be covered — hence [G] has no vertices,
+    [#|[set: G]| = 0], and [χ = 0]. *)
+Lemma efl_k0 (G : sgraph) :
+  edge_disjoint_clique_union G 0 -> χ([set: G]) = 0.
+Proof.
+case=> cliqs [_ _ _ Hcov _].
+have hG : #|[set: G]| = 0.
+  apply/eqP; rewrite cards_eq0 -subset0; apply/subsetP => x _; exfalso.
+  case: (Hcov x) => i _.
+  by move: (ltn_ord i); rewrite ltn0.
+apply/eqP; rewrite -leqn0.
+by apply: leq_trans (leq_chi [set: G]) _; rewrite hG.
+Qed.
+
+(** (C) Settled case [k=1]: [cliqs ord0] is a 1-vertex clique, and the cover
+    clause (with the only index [ord0 : 'I_1]) forces every vertex into it, so
+    [[set: G] = cliqs ord0] is a clique of size 1 and [χ = 1]. *)
+Lemma efl_k1 (G : sgraph) :
+  edge_disjoint_clique_union G 1 -> χ([set: G]) = 1.
+Proof.
+case=> cliqs [Hcard Hclq _ Hcov _].
+have H0 : #|cliqs ord0| = 1 by apply: Hcard.
+have Hc0 : clique (cliqs ord0) by apply: Hclq.
+have Heq : [set: G] = cliqs ord0.
+  apply/eqP; rewrite eqEsubset subsetT andbT; apply/subsetP => x _.
+  by case: (Hcov x) => i Hxi; rewrite (ord1 i) in Hxi.
+rewrite Heq chi_clique; first by rewrite H0.
+exact: Hc0.
+Qed.
+
+(** (D) k=2 — SKIPPED (reported as a blocker below).  Full equality
+    [χ = 2] here needs the UPPER bound [χ([set: G]) <= 2], i.e. an explicit
+    2-colouring / bipartition of the union of two ≤1-vertex-sharing edges.  No
+    coq-graph-theory lemma yields [χ <= 2] without constructing that colouring
+    (a genuine case split on whether the two K_2's share a vertex), so this is
+    left unproven rather than weakened. *)

@@ -193,6 +193,20 @@ Lemma spectral_radius_le_mono (R:rcfType) n (A:'M[R]_n) (b b':R) :
   b <= b' -> spectral_radius_le A b -> spectral_radius_le A b'.
 Proof. move=> hb H x /H hx; exact: (Order.le_trans hx hb). Qed.
 
+(** BOUND ARITHMETIC AT [d = 2] (Row 2).  At the smallest Ramanujan degree [d = 2]
+    the target bound [2*sqrt(d-1)] appearing in the Row-2 statement collapses to
+    exactly [2 = d], since [sqrt(2-1) = sqrt 1 = 1].  This records the numeric reason
+    [d = 2] is the boundary: a Gershgorin/Perron-type bound (every eigenvalue of a
+    [d]-regular adjacency matrix has magnitude [<= d]) would meet the Ramanujan target
+    [2*sqrt(d-1)] EXACTLY when [d = 2] and STRICTLY fails it for [d >= 3] (there
+    [2*sqrt(d-1) < d]), where the full Marcus-Spielman-Srivastava interlacing-families
+    theorem is required.  NOTE: this is ONLY the arithmetic of the bound expression at
+    [d = 2]; it is NOT the eigenvalue-magnitude bound (that bound is not available in
+    the imported libraries — see the D5 ledger blocker). *)
+Lemma ramanujan_bound_d2 (R:rcfType) :
+  2%:R * Num.sqrt (2%N.-1)%:R = 2%:R :> R.
+Proof. by rewrite /= sqrtr1 mulr1. Qed.
+
 (** SATISFIABLE WITNESS (Row 3).  There is always at least one labelled [n]-graph
     (the edgeless one), so [total_count n > 0] and the spectral-determination
     density [determined_count n / total_count n] has a non-zero denominator. *)

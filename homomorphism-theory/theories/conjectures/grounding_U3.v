@@ -15,6 +15,7 @@
     faithfulness fix away from the inert inner [forall is_planar]. *)
 
 From GTBase Require Import base.
+From GraphTheory Require Import dom.
 From mathcomp Require Import fingroup.
 From Hom.conjectures Require Import U3.
 
@@ -324,3 +325,75 @@ Qed.
     satisfiable, not accidentally always-false. *)
 Lemma is_core_K1 : is_core 'K_1.
 Proof. by move=> f _; exists f; move=> x; rewrite (ord1 (f (f x))) (ord1 x). Qed.
+
+(** ** Row 1 — Hedetniemi's EASY direction (the always-true [<=] half).
+
+    Hedetniemi's equality [χ(G × H) = min(χ G, χ H)] was DISPROVED by Shitov
+    (2019): there are finite [G],[H] with [χ(G × H) < min(χ G, χ H)].  That
+    refutation is the [>=] direction and is OUT OF SCOPE here — it requires
+    Shitov's giant construction (χ ~ 3400+); no small counterexample exists
+    (Hedetniemi holds whenever [min(χ G, χ H) <= 4], El-Zahar–Sauer), so the
+    inequality cannot be violated by any graph a proof-assistant could enumerate.
+
+    The [<=] direction, however, is TRUE FOR ALL graphs, and we prove it here.
+    It rests on the categorical-product structure recorded by [tensor_edge_proj]:
+    both coordinate projections [p ↦ p.1] and [p ↦ p.2] are graph homomorphisms
+    [tensor_product G H → G] (resp. [→ H]).  The engine is [chi_hom_le]: a
+    homomorphism [f : A → B] pulls any proper colouring of [B] back to a proper
+    colouring of [A] (the fibres over the colour classes stay stable because
+    [f] preserves edges), whence [χ A <= χ B]. *)
+
+(** Colouring pulls back along a homomorphism, so χ is monotone under [homs_to]:
+    if [f : A → B] is edge-preserving then [χ(A) <= χ(B)].  Proof: take an optimal
+    colouring [P] of [B]; the map [g z := pblock P (f z)] (the [P]-block of [f z])
+    induces the partition [P' := preim_partition g [set: A]] of [A].  Each block of
+    [P'] is stable — two vertices [u],[v] in one block share a block [T := g u = g v]
+    of [P], and if [u -- v] then [f u -- f v] with [f u, f v ∈ T], contradicting
+    stability of [T].  And [#|P'| <= #|P|] because each block is [g]-constant and
+    [g] lands in [P].  Then [color_bound] gives [χ(A) <= #|P'| <= #|P| = χ(B)]. *)
+Lemma chi_hom_le (A B : sgraph) (f : A -> B) :
+  is_hom f -> (χ([set: A]) <= χ([set: B]))%N.
+Proof.
+move=> homf.
+case: (chiP [set: B]) => P colP _.
+have [partP stabP] := andP colP.
+have covP : cover P = [set: B] := cover_partition partP.
+pose g (z : A) := pblock P (f z).
+have gP z : g z \in P by apply: pblock_mem; rewrite covP inE.
+pose P' := preim_partition g [set: A].
+have colP' : coloring P' [set: A].
+  apply/andP; split; first exact: preim_partitionP.
+  apply/forall_inP => S SP'.
+  move: SP'; rewrite /P' /preim_partition /equivalence_partition.
+  move=> /imsetP[x _ ->].
+  apply/stableP => u v uS vS.
+  move: uS vS; rewrite !inE => /andP[_ /eqP gxu] /andP[_ /eqP gxv].
+  apply/negP => uv.
+  have fuv : f u -- f v := homf _ _ uv.
+  have stT : stable (pblock P (f u)) by move/forall_inP: stabP; apply; exact: gP.
+  have fuT : f u \in pblock P (f u) by rewrite mem_pblock covP inE.
+  have Euv : pblock P (f u) = pblock P (f v) by rewrite -/(g u) -/(g v) -gxu gxv.
+  have fvT : f v \in pblock P (f u) by rewrite Euv mem_pblock covP inE.
+  by move/stableP: stT => /(_ _ _ fuT fvT); rewrite fuv.
+apply: leq_trans (color_bound colP') _.
+have HP' : P' = (fun T : {set B} => [set y in [set: A] | T == g y]) @: (g @: [set: A]).
+  rewrite -imset_comp /P' /preim_partition /equivalence_partition.
+  by apply: eq_imset => x /=.
+rewrite HP'.
+apply: leq_trans (leq_imset_card _ _) _.
+apply: subset_leq_card; apply/subsetP => T /imsetP[z _ ->].
+exact: gP.
+Qed.
+
+(** Hedetniemi's EASY direction: [χ(G × H) <= min(χ G, χ H)], for ALL [G],[H].
+    Both projections of the tensor product are homomorphisms ([tensor_edge_proj]),
+    so [chi_hom_le] bounds [χ(G × H)] by [χ G] and by [χ H] simultaneously. *)
+Lemma hedetniemi_le G H :
+  (χ([set: tensor_product G H]) <= minn (χ([set: G])) (χ([set: H])))%N.
+Proof.
+rewrite leq_min; apply/andP; split.
+- apply: (chi_hom_le (f := fun p : tensor_product G H => p.1)) => x y xy.
+  by have /andP[h _] := tensor_edge_proj xy.
+- apply: (chi_hom_le (f := fun p : tensor_product G H => p.2)) => x y xy.
+  by have /andP[_ h] := tensor_edge_proj xy.
+Qed.
