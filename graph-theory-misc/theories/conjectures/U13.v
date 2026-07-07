@@ -138,7 +138,10 @@ Definition book_thickness_of_subdivisions_statement : Prop :=
       - [subgraph_of H G] (subgraph): [H] is a (not necessarily induced)
         subgraph of [G] iff there is an injective homomorphism [H → G] (base's
         [is_hom] preserves edges), i.e. [G] contains a copy of [H].
-    "girth greater than g" reuses base's [girth_geq] as [girth_geq H g.+1]. *)
+    "girth greater than g" reuses base's [girth_geq] as [girth_geq H g.+1].
+    Average degree is undefined on the empty graph in the source sense, so the
+    host graph is guarded by [0 < #|G|] before applying the fraction-free
+    average-degree premise. *)
 Definition avgdeg_geq (G : sgraph) (d : nat) : Prop := average_degree_geq G d 1.
 
 Definition subgraph_of (H G : sgraph) : Prop :=
@@ -149,6 +152,7 @@ Definition subgraph_of_large_average_degree_and_large_average_d_statement : Prop
     0 < g -> 0 < k ->
     exists d : nat,
       forall G : sgraph,
+        0 < #|G| ->
         avgdeg_geq G d ->
         exists H : sgraph,
           [/\ 0 < #|H|, subgraph_of H G, avgdeg_geq H k & girth_geq H g.+1].

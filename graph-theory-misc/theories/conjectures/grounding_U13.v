@@ -340,7 +340,7 @@ Lemma has_girth_geq (G : sgraph) (g : nat) : has_girth G g -> girth_geq G g.
 Proof. by case. Qed.
 
 Lemma has_girth_cycle (G : sgraph) (g : nat) :
-  has_girth G g -> exists c : seq G, ucycle (--) c /\ size c = g.
+  has_girth G g -> exists c : seq G, ucycle (--) c /\ 2 < size c /\ size c = g.
 Proof. by case. Qed.
 
 (** ============================================================================

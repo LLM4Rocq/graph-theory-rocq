@@ -123,6 +123,10 @@ agent reads **only the Rocq `Definition`** (blind to the source), reconstructs t
 and a second agent diffs it against the OPG statement. Divergence flags modes #3/#4/#5 — the systematic
 version of "does it say what the paper says."
 
+Pilot run: `meta/FAITHFULNESS_READBACK_REVIEW_2026-07-07.md` records a targeted readback/review over
+high-risk load-bearing definitions. It repaired three local statement bugs and left one larger D3
+crossing-number proxy issue open for a drawing/rotation layer or status downgrade.
+
 ### 6. External expert / peer review *(highest signal-per-effort)*
 The audit that found U4 was exactly this and it beat the internal audits. Recurring domain-expert
 review of the statements is the most cost-effective single technique; schedule it.

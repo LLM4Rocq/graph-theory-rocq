@@ -390,11 +390,10 @@ apply: (@leq_trans (2 * n.-1)).
 - by rewrite leq_mul2l /=; apply: Delta_complete_ge; exact: leq_trans n2.
 Qed.
 
-(** ** Row 11 — TEETH on the [(partition + block-size ≤ r)] guard at [r = 0]:
+(** ** Row 11 diagnostic — TEETH on the [(partition + block-size ≤ r)] guard at [r = 0]:
     a NONEMPTY graph has no partition all of whose blocks have size ≤ 0 (blocks
     are nonempty), so [strongly_colorable G 0] holds vacuously for [0 < #|G|].
-    The guard genuinely constrains — it is contradictory here — rather than being
-    trivially satisfiable. *)
+    This is the audited corner that the statement now excludes with [0 < Delta G]. *)
 Lemma strongly_colorable0 (G : sgraph) : 0 < #|G| -> strongly_colorable G 0.
 Proof.
 move=> /card_gt0P[v _] P Ppart Hsz; exfalso.
@@ -408,10 +407,9 @@ Qed.
 Lemma Delta_K1 : Delta 'K_1 = 0.
 Proof. by rewrite /Delta big_ord1 card_N_complete. Qed.
 
-(** ** Row 11 — the statement decided on a NONEMPTY edgeless graph ['K_1], where
-    [2·Δ = 0]: an immediate consequence of the [r = 0] teeth lemma above.
-    Distinct from the primitive-validation [strongly_colorable_K1] (which fixed
-    [r = 1], not the conjecture's [r = 2·Δ = 0]). *)
+(** ** Row 11 diagnostic — the old unguarded statement was vacuous on a NONEMPTY
+    edgeless graph ['K_1], where [2·Δ = 0].  Kept as a regression witness for why
+    [strong_colorability_statement] carries the [0 < Delta G] guard. *)
 Lemma strong_K1 : strongly_colorable 'K_1 (2 * Delta 'K_1).
 Proof.
 by rewrite Delta_K1 muln0; apply: strongly_colorable0; rewrite card_ord.

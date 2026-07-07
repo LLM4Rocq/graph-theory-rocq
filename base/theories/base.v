@@ -262,7 +262,7 @@ Definition average_degree_geq (G : sgraph) (a b : nat) : Prop :=
 
 (** Exact girth g: girth ≥ g and a genuine g-cycle exists. *)
 Definition has_girth (G : sgraph) (g : nat) : Prop :=
-  girth_geq G g /\ (exists c : seq G, ucycle (--) c /\ size c = g).
+  girth_geq G g /\ (exists c : seq G, ucycle (--) c /\ 2 < size c /\ size c = g).
 
 (** ** Combinatorial planarity (Wagner's theorem) — the G2-lite façade
 

@@ -266,6 +266,9 @@ Definition acyclic_list_colouring_of_planar_graphs_statement : Prop :=
     wagner_planar G -> acyclically_choosable G 5.
 
 (** ** Row 11 — Strong colourability (PARTIAL).
-    "If Δ is the maximum degree of G, then G is strongly 2Δ-colourable." *)
+    "If Δ is the maximum degree of G, then G is strongly 2Δ-colourable."  The
+    source defines strong [r]-colourability for positive [r]; the formal row
+    therefore states the non-degenerate [0 < Δ] case, excluding the otherwise
+    vacuous [r = 0] partition corner on nonempty edgeless graphs. *)
 Definition strong_colorability_statement : Prop :=
-  forall G : sgraph, strongly_colorable G (2 * Delta G).
+  forall G : sgraph, 0 < Delta G -> strongly_colorable G (2 * Delta G).
