@@ -257,6 +257,47 @@ for rec in sorted(erdos, key=lambda r: r["number"]):
         sys.exit(f"unexpected erdos status {rec.get('status')!r} for #{n}")
     rows.append(row)
 
+# ── B6: derived rows (X0c; meta/v2_derived_rows.json, mined from the attack folders) ──
+DERIVED_PATH = os.path.join(META, "v2_derived_rows.json")
+if os.path.exists(DERIVED_PATH):
+    v2_slug_to_rid = {r["slug"]: r["row_id"] for r in rows}
+    opg_slugs = {r["slug"] for r in REG.load_manifest("opg")["rows"]}
+    for d in json.load(open(DERIVED_PATH))["rows"]:
+        parent = d.get("parent")
+        if parent in v2_slug_to_rid:
+            parent = v2_slug_to_rid[parent]
+        elif parent in opg_slugs:
+            parent = f"opg:{parent}"
+        elif parent:
+            sys.stderr.write(f"WARNING: derived row {d['slug']} parent {parent!r} matches no "
+                             f"corpus row; kept verbatim\n")
+        rows.append({
+            "row_id": f"derived:{d['slug']}", "slug": d["slug"], "corpus": "derived",
+            "record_key": f"{d['folder']}/{d['hyp_id']}", "kind": "Derived",
+            "title": d["title"], "arxiv_id": None, "erdos_id": None,
+            "abs_url": None,
+            "statement_text": d["statement"], "context_text": None,
+            "source_text": d["statement"],
+            "source_locator": f"graph-conjectures/problems/{d['folder']}/{d['source_ref']}"
+                              f"@{(d.get('ledger_commit') or '')[:12]}",
+            "source_hash": sha256_text(d["statement"]),
+            "source_excerpt": None,
+            "license": "project (graph-conjectures attack-engine artifact, same authorship)",
+            "implemented_by": None, "source_verified_by": None, "source_verified_at": None,
+            "verification_note": None, "status_verified_at": None,
+            "status": d["status"],
+            "status_semantics": (d["statement"] if d["status"] == "disproved" else None),
+            "review_status": d["status"], "review_date": None,
+            "t2_certificate": d["t2_certificate"],
+            "recovery": "none",
+            "b1_candidate": False, "opg_match": None,
+            "alias_of": None, "parent": parent, "disposition": None,
+            "bucket": "B6", "topic": None, "formalizability": None, "defer_reason": None,
+            "repo": None, "phase": None, "formal_name": None, "rocq_idiom": None,
+            "new_primitives": None, "class_notes": d.get("notes"),
+            "legs": legs_for(d["slug"]),
+        })
+
 # merge classifier output (fields the classifier owns; None until it has run)
 for r in rows:
     c = CLASS.get(r["slug"], {})
