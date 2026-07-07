@@ -5,15 +5,15 @@
     base case to be [embedding.embeds_in_genus _ i] (a rotation system of Euler
     genus ≤ i).  With [xsplit] (one crossing resolution, from crossing.v):
 
-      [crossing_genus_in i k G] : G is drawn on the genus-i surface with EXACTLY
-                                  k crossings (k resolutions land in a graph
-                                  embeddable in genus i);
-      [is_crossing_genus G i n] : n is the LEAST such k  ( = cr_i(G) ).
+      [crossing_genus_in i k G] : k split resolutions land G in a graph
+                                  embeddable in genus i;
+      [is_crossing_genus G i n] : n is the LEAST such k in this split model.
 
     So [is_crossing_number G n] (crossing.v) is the genus-0 analogue with a
     minor-based base; here the base is embedding-based, uniform across all i.
 
-    FAITHFULNESS ON CONNECTED GRAPHS (exact, not a proxy).  [euler_genus] is the
+    CONNECTED-GRAPH GUARANTEE (fixes the Euler-genus side, not the whole crossing
+    correspondence).  [euler_genus] is the
     CONNECTED-map Euler relation [2-2g = V-E+F] and is EXACT on connected maps
     with an edge (its only anomalies — understatement on disconnected maps, and
     genus 1 for the edgeless/one-vertex map — are documented in embedding.v).
@@ -21,10 +21,12 @@
     the new vertex [None] is adjacent to [a,b,c,d], so a deleted edge reroutes
     ([a--None--b]) and no component is broken — this is proved here
     ([xsplit_connected]).  Hence for a CONNECTED [G] every planarization stays
-    connected, [euler_genus] is exact on each, and [is_crossing_genus] is EXACTLY
-    the topological genus crossing number.  Consumers must therefore carry a
-    connectivity guard (as [crossing_sequences] does); an unguarded use on
-    possibly-disconnected graphs inherits the [euler_genus] proxy. *)
+    connected and [euler_genus] is exact on each.  This does NOT by itself prove
+    equivalence to the usual drawing genus-crossing number, because the inherited
+    [xsplit] model still lacks local rotation/alternation data at crossing
+    vertices.  Consumers must therefore carry a connectivity guard (as
+    [crossing_sequences] does), and the crossing-sequence row remains PARTIAL
+    until a drawing/rotation equivalence layer is built. *)
 
 From GTBase Require Export base.
 From Topological.foundations Require Import embedding crossing.
@@ -109,7 +111,7 @@ End XsplitConnected.
 
 (** ** Genus crossing number. *)
 
-(** cr_i drawing model: EXACTLY k crossing splits land G in orientable genus i. *)
+(** Split-genus model: EXACTLY k crossing splits land G in orientable genus i. *)
 Fixpoint crossing_genus_in (i k : nat) (G : sgraph) {struct k} : Prop :=
   match k with
   | 0 => embeds_in_genus G i

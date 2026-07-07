@@ -1762,44 +1762,44 @@
       "package": "extremal-graph-theory"
     },
     "the_crossing_number_of_the_complete_graph": {
-      "statement": "done",
+      "statement": "partial",
       "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: direct form is_crossing_number 'K_n (Guy value) \u2014 non-vacuous (achievability part of the claim); %/4 exact for all n (audited)"
+      "note": "PARTIAL proxy: direct form is_crossing_number 'K_n (Guy value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; needs a drawing/rotation layer to return to done."
     },
     "the_crossing_number_of_the_complete_bipartite_graph": {
-      "statement": "done",
+      "statement": "partial",
       "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: direct form is_crossing_number (KB m n) (Zarankiewicz value) \u2014 non-vacuous; degenerate m,n<=2 verified planar/0"
+      "note": "PARTIAL proxy: direct form is_crossing_number (KB m n) (Zarankiewicz value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; degenerate m,n<=2 planar/0 checks remain useful grounding."
     },
     "crossing_numbers_and_coloring": {
-      "statement": "done",
+      "statement": "partial",
       "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: sub-level form (forall k achievable for G, exists j<=k achievable for K_t) \u2014 robust to exactly-k non-monotonicity; t=5 slice carries 4CT strength (audited)"
+      "note": "PARTIAL proxy: sub-level comparison over xsplit-achievable counts, robust to exactly-k non-monotonicity but not yet validated as drawing crossing number because local rotation/alternation data is missing. The t=5 slice remains a useful strength check."
     },
     "the_crossing_number_of_the_hypercube": {
-      "statement": "done",
+      "statement": "partial",
       "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
       "commit": "d9a21d4",
       "package": "topological-graph-theory",
-      "note": "Wave 2: two-sided eps-N on achievable counts \u2014 body <-> minimum-in-window proven by audit probes; N>=4 quantifier order load-bearing and correct"
+      "note": "PARTIAL proxy: two-sided eps-N statement over xsplit-achievable counts; body/minimum-window probes and quantifier-order checks remain useful, but equivalence to drawing crossing number is unvalidated without a drawing/rotation layer."
     },
     "3_colourability_of_arrangements_of_great_circles": {
       "statement": "blocked",
@@ -1829,7 +1829,7 @@
       "audit_page": "todo",
       "commit": "2ef97d6",
       "package": "topological-graph-theory",
-      "note": "genus crossing-number layer (foundations/crossing_genus.v): is_crossing_genus G i n = cr_i(G) via k xsplit crossing-resolutions landing in embeds_in_genus i; crossing sequence provably NON-INCREASING (is_crossing_genus_nonincreasing), functional (is_crossing_genus_uniq), inhabited (is_crossing_genus_inhab). Statement: forall strictly-decreasing-to-0 seq nat a, exists CONNECTED G realizing cr_i(G)=a_i for all i<size a (orientable primary). EXACT-FAITHFUL: xsplit PRESERVES connectivity (xsplit_connected, machine-checked) => for a connected witness euler_genus is exact on every planarization => is_crossing_genus is the EXACT topological genus crossing number (not a proxy); connected-witness is faithful to the source (a realizer is connectible via a bridge in a common face without changing any cr_i or genus). NONORIENTABLE twin (semb_in_genus) not built (scope). Audited: 3-skeptic SOUND (partial for the unguarded version; connected-guard flip verified exact-faithful). check_milestone D3xseq ACCEPTED, axiom-free. Caveats (none blocking): connected<=>general realizability is the one remaining MATH (not machine-checked) assumption (standard: bridge + genus-additivity; only OPG-true=>guarded-true matters); exactness is 'connected WITH an edge' but the sole connected edgeless graph K1 is provably outside is_crossing_genus's domain and never appears as a planarization, so closed by construction."
+      "note": "PARTIAL: orientable-primary crossing-sequence row over the xsplit genus-crossing model. The statement realizes strictly-decreasing-to-0 sequences by a CONNECTED graph and has useful structure (non-increasing, functional, inhabited; xsplit_connected checked), but readback/external-review proxy flagged the same missing local drawing rotation/alternation equivalence as D3cr, and the nonorientable resp. twin is not built."
     },
     "drawing_disconnected_graphs_on_surfaces": {
       "statement": "blocked",

@@ -4,7 +4,7 @@
     Admitted) of four crossing-number conjectures.
 
     CROSSING NUMBER.  All four rows are about the crossing number [cr(G)].  We use
-    the FAITHFUL combinatorial planarization invariant from
+    the axiom-free combinatorial split-planarization proxy from
     [Topological.foundations.crossing]:
 
       [is_crossing_number G n]  :  n is the least number of "crossing splits"
@@ -13,7 +13,7 @@
 
     This needs NO geometry / drawings / surfaces / faces / point-sets and NO
     planarity stack (it bottoms out at the Wagner no-K5/K3,3-minor predicate), and
-    it is grounded there by:  [crossing_number0] (cr = 0 ⇔ planar, both ways),
+    it is grounded there by:  [crossing_number0] (split-cr = 0 ⇔ planar, both ways),
     [wagner_planar_sub] (planarity subgraph-closed — the base case of cr
     monotonicity), and [not_wagner_planar_K5] ⇒ [is_crossing_number_K5] (cr(K5) ≥ 1).
     See crossing.v for why cr is exposed RELATIONALLY (a total [nat]-valued cr
@@ -21,9 +21,12 @@
     honest note on the full subgraph-monotonicity (open in this model).
     [is_crossing_number] is FUNCTIONAL ([is_crossing_number_uniq]).
 
-    WAVE 2 (post-review upgrade): the rows are stated in DIRECT, NON-VACUOUS form.
-    Rows 1–2 assert [is_crossing_number <carrier> <formula>] outright — the
-    conjectured value both achievable and minimal, no inhabitance gate (the former
+    STATUS.  The rows are stated in DIRECT, NON-VACUOUS form, but are recorded as
+    PARTIAL after the #5/#6 readback review: the [xsplit] model lacks local
+    drawing rotation/alternation data at crossing vertices, so equivalence to the
+    usual drawing crossing number is not yet validated.  Rows 1–2 assert
+    [is_crossing_number <carrier> <formula>] outright — the conjectured split
+    value both achievable and minimal, no inhabitance gate (the former
     [forall v, is_crossing_number _ v -> v = _] shape was vacuity-conditional).
     Row 3 uses the sub-level comparison of minima ([forall k achievable for G,
     exists j <= k achievable for K_t] — robust to the exactly-k non-monotonicity
@@ -113,9 +116,10 @@ Definition the_crossing_number_of_the_complete_graph_statement : Prop :=
     Carrier: arbitrary [sgraph]; χ([set: G]) is the whole-graph chromatic number
     (base/coloring).
 
-    WAVE-2 FORM (sub-level, NON-VACUOUS): cr(K_t) ≤ cr(G) is stated as "every
-    planarization count achievable for G dominates some achievable count for
-    K_t": [forall k, crossing_planar_in k G -> exists j <= k, crossing_planar_in
+    WAVE-2 FORM (sub-level, NON-VACUOUS): the source inequality cr(K_t) ≤ cr(G)
+    is represented in the split model as "every planarization count achievable
+    for G dominates some achievable count for K_t":
+    [forall k, crossing_planar_in k G -> exists j <= k, crossing_planar_in
     j 'K_t].  The [exists j <= k] (rather than exactly [k]) is deliberate —
     [crossing_planar_in] counts EXACT split numbers and is not monotone in [k],
     so the sub-level form is the correct encoding of the ≤ comparison of minima.

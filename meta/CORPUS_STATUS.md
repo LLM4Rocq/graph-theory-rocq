@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **212 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **8 partial** · **7 blocked**.
+- **208 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **12 partial** · **7 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -25,8 +25,8 @@
 | packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
-| topological-graph-theory | Topological | 13 | 0 | 5 | 18 |
-| **TOTAL** | | **212** | **8** | **7** | **227** |
+| topological-graph-theory | Topological | 9 | 4 | 5 | 18 |
+| **TOTAL** | | **208** | **12** | **7** | **227** |
 
 ## Per-phase (milestones)
 
@@ -34,7 +34,7 @@
 |---|--:|--:|--:|--:|
 | D1 | 15 | 0 | 0 | 15 |
 | D2 | 29 | 3 | 0 | 32 |
-| D3 | 6 | 0 | 4 | 10 |
+| D3 | 2 | 4 | 4 | 10 |
 | D4 | 8 | 4 | 2 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 3 | 0 | 1 | 4 |
@@ -54,7 +54,7 @@
 | U8 | 3 | 0 | 0 | 3 |
 | U9 | 13 | 0 | 0 | 13 |
 
-## Partial — faithful but conditional / needs a deferred layer (8)
+## Partial — faithful but conditional / needs a deferred layer (12)
 
 | area | slug | reason |
 |---|---|---|
@@ -66,6 +66,10 @@
 | infinite-graph-theory | hamiltonian_cycles_in_line_graphs_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity (topological double-ray cycles) |
 | infinite-graph-theory | hamiltonian_cycles_in_powers_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity |
 | infinite-graph-theory | infinite_uniquely_hamiltonian_graphs | D4inf3: exists locally_finite 1-ended r-regular (r>2) uniquely-hamiltonian G. PROXY: uniquely_hamiltonian = spanning DOUBLE RAY (int-indexed), faithful to a Hamilton CIRCLE only in the co-assumed 1-ended locally-finite class (not the general Freudenthal topological circle). Audited partial: guards 2<r/one_ended/locally_finite load-bearing, trivialization+refutation fail, axiom-free. |
+| topological-graph-theory | crossing_numbers_and_coloring | PARTIAL proxy: sub-level comparison over xsplit-achievable counts, robust to exactly-k non-monotonicity but not yet validated as drawing crossing number because local rotation/alternation data is missing. The t=5 slice remains a useful strength check. |
+| topological-graph-theory | the_crossing_number_of_the_complete_bipartite_graph | PARTIAL proxy: direct form is_crossing_number (KB m n) (Zarankiewicz value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; degenerate m,n<=2 planar/0 checks remain useful grounding. |
+| topological-graph-theory | the_crossing_number_of_the_complete_graph | PARTIAL proxy: direct form is_crossing_number 'K_n (Guy value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; needs a drawing/rotation layer to return to done. |
+| topological-graph-theory | the_crossing_number_of_the_hypercube | PARTIAL proxy: two-sided eps-N statement over xsplit-achievable counts; body/minimum-window probes and quantifier-order checks remain useful, but equivalence to drawing crossing number is unvalidated without a drawing/rotation layer. |
 
 ## Blocked — needs a layer deliberately out of scope (7)
 

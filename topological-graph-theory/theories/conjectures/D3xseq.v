@@ -23,17 +23,17 @@ Unset Strict Implicit.
     The non-increasing shape the conjecture presupposes is here a THEOREM, not an
     assumption ([is_crossing_genus_nonincreasing]).
 
-    EXACTLY FAITHFUL (why the witness is [connected]).  [is_crossing_genus] rests
-    on [embeds_in_genus]/[euler_genus], which is the connected-map Euler relation
-    — EXACT on connected maps, but understating on disconnected ones.  [xsplit]
-    PRESERVES connectivity ([crossing_genus.xsplit_connected], machine-checked:
-    the new vertex reroutes each deleted edge), so for a CONNECTED witness every
-    planarization stays connected and [euler_genus] is exact throughout; hence
-    [is_crossing_genus] is EXACTLY the topological genus crossing number and the
-    encoding is faithful (not a proxy).  Restricting to a connected witness is
-    faithful to the source: a crossing-sequence realizer can always be taken
-    connected (a bridge added in a common face joins components without changing
-    any cr_i or genus), so connected-realizability ⇔ realizability.
+    PARTIAL / PROXY STATUS (why the witness is [connected]).  [is_crossing_genus]
+    rests on [embeds_in_genus]/[euler_genus], which is the connected-map Euler
+    relation — exact on connected maps, but understating on disconnected ones.
+    [xsplit] preserves connectivity ([crossing_genus.xsplit_connected],
+    machine-checked), so for a connected witness every split target stays
+    connected and the Euler-genus side is exact.  This does not by itself validate
+    equality with the usual drawing genus-crossing number, because the inherited
+    [xsplit] model lacks local rotation/alternation data at crossing vertices.
+    Restricting to a connected witness is still the intended faithful side of the
+    source, but the row remains partial until the drawing/rotation equivalence is
+    built.
 
     SCOPE.  Only the ORIENTABLE variant is formalized; the conjecture's
     NONORIENTABLE "(resp.)" twin is the analogous separate statement over the

@@ -124,8 +124,9 @@ and a second agent diffs it against the OPG statement. Divergence flags modes #3
 version of "does it say what the paper says."
 
 Pilot run: `meta/FAITHFULNESS_READBACK_REVIEW_2026-07-07.md` records a targeted readback/review over
-high-risk load-bearing definitions. It repaired three local statement bugs and left one larger D3
-crossing-number proxy issue open for a drawing/rotation layer or status downgrade.
+high-risk load-bearing definitions. It repaired three local statement bugs and triggered a downgrade
+of the four D3cr crossing-number rows to `partial`; a drawing/rotation layer is still needed to move
+them back to `done`.
 
 ### 6. External expert / peer review *(highest signal-per-effort)*
 The audit that found U4 was exactly this and it beat the internal audits. Recurring domain-expert

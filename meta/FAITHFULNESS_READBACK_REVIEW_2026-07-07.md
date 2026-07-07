@@ -88,9 +88,10 @@ These findings were local statement/primitive bugs and were repaired in this run
    - `the_crossing_number_of_the_hypercube_statement`
    - `crossing_sequences_statement` via `is_crossing_genus`
 
-   Required follow-up: either build a drawing/rotation equivalence layer for the
-   split model, or downgrade the affected D3 statement legs/status notes to make
-   the proxy explicit.
+   Follow-up applied after this review: the four D3cr rows were downgraded to
+   `statement = partial` with explicit proxy notes in `opg_legs_state.json` and
+   `opg_corpus_manifest.json`.  The path back to `done` is still to build a
+   drawing/rotation equivalence layer for the split model.
 
 2. `crossing_sequences_statement` covers only the orientable half.
    The source includes the nonorientable "resp." variant.  The current formal row
@@ -108,5 +109,5 @@ These findings were local statement/primitive bugs and were repaired in this run
 - REPAIRED in this run: `has_girth`, U13 average-degree/girth host graph,
   `strong_colorability_statement`.
 - OPEN/BLOCKING REVIEW ITEM: the D3 crossing-number and crossing-genus split
-  model needs a drawing/rotation equivalence or a status downgrade.
-
+  model needs a drawing/rotation equivalence to return the affected rows to
+  `done`; the four D3cr rows have been downgraded to `partial`.
