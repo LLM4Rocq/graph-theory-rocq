@@ -1,0 +1,62 @@
+{
+ "_README": "Statement-wave assignments for v2 rows authored after X1 reconciliation. build_v2_manifest.py merges these rows into the manifest, assigns phase/repo/formal_name/source-verification metadata, and drives the statement=done overlay entries.",
+ "waves": {
+  "X2": {
+   "phase": "X2",
+   "repo": "digraph-theory",
+   "defines_file": "X2.v",
+   "implemented_by": "Codex X2 clean-11 statement authoring pass",
+   "source_verified_by": "Codex X2 clean-11 source readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x2-clean11",
+   "rows": {
+    "axv_1610_00876_00": {
+     "formal_name": "mader_delta0_transitive_tournament_statement",
+     "note": "Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k."
+    },
+    "axv_1610_00876_01": {
+     "formal_name": "oriented_trees_delta_plus_maderian_statement",
+     "note": "Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision."
+    },
+    "axv_1610_00876_02": {
+     "formal_name": "delta_plus_maderian_disjoint_union_statement",
+     "note": "Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union."
+    },
+    "axv_1702_01607_00": {
+     "formal_name": "large_domination_contains_Si_statement",
+     "note": "Encodes Problem 3 with the recursively defined S_i tournament family and directed domination number."
+    },
+    "axv_1702_01607_01": {
+     "formal_name": "large_domination_contains_large_dom_subtournament_statement",
+     "note": "Encodes Problem 4: large tournament domination forces a bounded-order subtournament of large domination."
+    },
+    "axv_1812_02420_03": {
+     "formal_name": "directed_kneser_existence_statement",
+     "note": "Encodes Problem 5.40 as existence of an arc relation on b-subsets whose induced acyclicity exactly matches nonempty common intersection."
+    },
+    "axv_2305_15585_00": {
+     "formal_name": "tournament_outneighborhood_degeneracy_statement",
+     "note": "Encodes Question 10 using a same-carrier simple graph relation over the tournament vertices and degeneracy in an out-neighbourhood."
+    },
+    "axv_2305_15585_01": {
+     "formal_name": "tournament_outneighborhood_cycle_statement",
+     "note": "Encodes Conjecture 11 as the cycle-containing out-neighbourhood special case."
+    },
+    "axv_2409_05039_00": {
+     "formal_name": "split_digraph_strong_two_kernel_statement",
+     "note": "Encodes the split-digraph strong 2-kernel question, including the no-source hypothesis and |K| <= |G|/2 bound."
+    },
+    "axv_2503_23191_00": {
+     "formal_name": "semidegree_oriented_paths_statement",
+     "note": "Encodes Question 5.1: semidegree at least k/2 forces every non-antidirected orientation of the k-edge path."
+    },
+    "axv_2602_16333_02": {
+     "formal_name": "vertex_transitive_longest_dicycles_intersect_statement",
+     "note": "Encodes Question 4.3: connected vertex-transitive digraphs have pairwise-intersecting longest directed cycles."
+    }
+   },
+   "faithfulness_verified_by": "x2-faithfulness-verify workflow wf_cf217e26 (11 independent second readers) + adversarial re-verification of the corrected split-digraph row wf_33ede959, 2026-07-08",
+   "faithfulness_result": "10/11 confirmed faithful on first pass. split_digraph_strong_two_kernel_statement was found PROVABLY FALSE (a directed triangle with self-loops satisfied the hypotheses but had no strong 2-kernel); the object must be ORIENTED. Fixed by adding an explicit x2_oriented guard (loopless + digon-free); adversarially re-verified (machine-checked counterexample exclusion + exhaustive oriented-split-digraph search to n=12, zero counterexamples; axiom-free positive witness). All 11 now faithful and genuinely open."
+  }
+ }
+}

@@ -349,8 +349,8 @@ for r in rows:
     if r.get("bucket") in ("B4", "B5") and not r.get("disposition"):
         r["disposition"] = "parked"
 
-# ── X1: directed reconciliation (meta/v2_reconciliation.json) — runs LAST so it wins over the
-# classifier on repo/phase: reconciled rows live in digraph-theory regardless of topical area.
+# ── X1: directed reconciliation (meta/v2_reconciliation.json) — runs after the classifier so it
+# wins on repo/phase: reconciled rows live in digraph-theory regardless of topical area.
 # Maps rows onto pre-existing digraph-theory constants verified faithful; assigns
 # formal_name/repo/phase/already_formalized + the source-verification tuple, and marks the
 # statement leg done in the overlay (with provenance).
@@ -386,6 +386,44 @@ if os.path.exists(RECON_PATH):
             "note": r["verification_note"],
         }
         r["legs"] = {lg: recon_overlay[slug][lg] for lg in LEGS}
+
+# ── Statement waves after X1 (meta/v2_statement_waves.json): new authored statement files.
+# This keeps milestone assignment reproducible instead of hand-editing the generated manifest.
+WAVES_PATH = os.path.join(META, "v2_statement_waves.json")
+wave_overlay = {}   # slug -> overlay entry to force (statement=done + provenance)
+if os.path.exists(WAVES_PATH):
+    WAVES = json.load(open(WAVES_PATH))
+    row_by_slug = {r["slug"]: r for r in rows}
+    for wave_name, wave in WAVES.get("waves", {}).items():
+        phase, repo, defines_file = wave["phase"], wave["repo"], wave["defines_file"]
+        if phase != wave_name:
+            sys.exit(f"statement wave key {wave_name!r} disagrees with phase {phase!r}")
+        for slug, wr in wave["rows"].items():
+            if slug in recon_overlay:
+                sys.exit(f"statement wave {phase} targets X1-reconciled slug {slug!r}")
+            r = row_by_slug.get(slug)
+            if r is None:
+                sys.exit(f"statement wave {phase} targets unknown v2 slug {slug!r}")
+            if r.get("alias_of"):
+                sys.exit(f"statement wave {phase} targets alias row {slug!r} (aliases own no statement)")
+            r["formal_name"] = wr["formal_name"]
+            r["repo"] = repo
+            r["phase"] = phase
+            r["already_formalized"] = False
+            r["implemented_by"] = wave["implemented_by"]
+            r["source_verified_by"] = wave["source_verified_by"]
+            r["source_verified_at"] = wave["source_verified_at"]
+            r["verification_note"] = (
+                f"Authored in {defines_file}:{wr['formal_name']}. {wr.get('note', '')}")[:600]
+            r["source_locator"] = (r.get("source_locator") or "") + \
+                f" | Rocq: {repo}/theories/conjectures/{defines_file}#{wr['formal_name']}"
+            wave_overlay[slug] = {
+                "statement": "done", "grounding": "todo", "edges": "todo",
+                "correspondence": "todo", "audit_page": "todo",
+                "commit": wave.get("commit", phase.lower()), "package": repo,
+                "note": r["verification_note"],
+            }
+            r["legs"] = {lg: wave_overlay[slug][lg] for lg in LEGS}
 
 rows.sort(key=lambda r: r["row_id"])
 slugs = [r["slug"] for r in rows]
@@ -441,8 +479,9 @@ overlay = {
                "the source-verification tuple on the manifest row (gated by check_milestone.py).",
     "_allowed_states": ["todo", "partial", "done", "blocked"],
     "_legs": LEGS,
-    # reconciliation (X1) forces statement=done + provenance; else preserve prior overlay, else todo
+    # reconciliation/waves force statement=done + provenance; else preserve prior overlay, else todo
     "entries": {r["slug"]: (recon_overlay.get(r["slug"])
+                            or wave_overlay.get(r["slug"])
                             or prior_entries.get(r["slug"], {lg: "todo" for lg in LEGS}))
                 for r in rows if not r["alias_of"]},
 }

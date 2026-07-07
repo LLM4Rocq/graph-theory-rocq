@@ -425,25 +425,34 @@
    "audit_page": "todo"
   },
   "axv_1610_00876_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:mader_delta0_transitive_tournament_statement. Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k."
   },
   "axv_1610_00876_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:oriented_trees_delta_plus_maderian_statement. Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision."
   },
   "axv_1610_00876_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union."
   },
   "axv_1610_00876_03": {
    "statement": "todo",
@@ -593,18 +602,24 @@
    "audit_page": "todo"
   },
   "axv_1702_01607_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:large_domination_contains_Si_statement. Encodes Problem 3 with the recursively defined S_i tournament family and directed domination number."
   },
   "axv_1702_01607_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:large_domination_contains_large_dom_subtournament_statement. Encodes Problem 4: large tournament domination forces a bounded-order subtournament of large domination."
   },
   "axv_1702_02888_00": {
    "statement": "todo",
@@ -1300,11 +1315,14 @@
    "audit_page": "todo"
   },
   "axv_1812_02420_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:directed_kneser_existence_statement. Encodes Problem 5.40 as existence of an arc relation on b-subsets whose induced acyclicity exactly matches nonempty common intersection."
   },
   "axv_1812_07327_00": {
    "statement": "todo",
@@ -3693,18 +3711,24 @@
    "audit_page": "todo"
   },
   "axv_2305_15585_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:tournament_outneighborhood_degeneracy_statement. Encodes Question 10 using a same-carrier simple graph relation over the tournament vertices and degeneracy in an out-neighbourhood."
   },
   "axv_2305_15585_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:tournament_outneighborhood_cycle_statement. Encodes Conjecture 11 as the cycle-containing out-neighbourhood special case."
   },
   "axv_2305_15585_02": {
    "statement": "todo",
@@ -4439,11 +4463,14 @@
    "audit_page": "todo"
   },
   "axv_2409_05039_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:split_digraph_strong_two_kernel_statement. Encodes the split-digraph strong 2-kernel question, including the no-source hypothesis and |K| <= |G|/2 bound."
   },
   "axv_2409_18220_00": {
    "statement": "todo",
@@ -4697,11 +4724,14 @@
    "audit_page": "todo"
   },
   "axv_2503_23191_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:semidegree_oriented_paths_statement. Encodes Question 5.1: semidegree at least k/2 forces every non-antidirected orientation of the k-edge path."
   },
   "axv_2504_00153_00": {
    "statement": "todo",
@@ -5264,11 +5294,14 @@
    "audit_page": "todo"
   },
   "axv_2602_16333_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x2-clean11",
+   "package": "digraph-theory",
+   "note": "Authored in X2.v:vertex_transitive_longest_dicycles_intersect_statement. Encodes Question 4.3: connected vertex-transitive digraphs have pairwise-intersecting longest directed cycles."
   },
   "axv_2602_16333_03": {
    "statement": "todo",
