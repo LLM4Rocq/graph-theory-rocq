@@ -298,6 +298,45 @@ if os.path.exists(DERIVED_PATH):
             "legs": legs_for(d["slug"]),
         })
 
+# ── S6: studies-slice rows (X0d; meta/v2_studies_rows.json, adjudicated third-party conjectures) ──
+STUDIES_PATH = os.path.join(META, "v2_studies_rows.json")
+if os.path.exists(STUDIES_PATH):
+    known_rids = {r["row_id"] for r in rows} | {f"opg:{r['slug']}"
+                                                 for r in REG.load_manifest("opg")["rows"]}
+    for s in json.load(open(STUDIES_PATH))["rows"]:
+        alias = s.get("alias_of")
+        if alias and alias not in known_rids:
+            sys.exit(f"studies row {s['slug']} aliases unknown row {alias!r}")
+        rows.append({
+            "row_id": f"studies:{s['slug']}", "slug": s["slug"], "corpus": "arxiv-studied",
+            "record_key": ",".join(s.get("papers", []))[:120], "kind": s.get("kind"),
+            "title": s["canonical_name"], "arxiv_id": None, "erdos_id": None, "abs_url": None,
+            "statement_text": s.get("statement"), "context_text": None,
+            # promoted rows own a statement (source_text); alias/edge-anchor/parked do not.
+            "source_text": s.get("statement") if s["disposition"] == "promoted" else None,
+            "source_locator": f"graph-conjectures/data/arxiv_extracted (studies-role, "
+                              f"{s.get('n_records')} record(s): {','.join(s.get('papers', [])[:3])})",
+            "source_hash": sha256_text(s.get("statement") or ""),
+            "source_excerpt": None,
+            "license": "arXiv-derived (studies-role extraction; per-paper license at REC time)",
+            "implemented_by": None, "source_verified_by": None, "source_verified_at": None,
+            "verification_note": None, "status_verified_at": None,
+            "status": "open",   # studied third-party conjectures; SVER revisits promoted rows
+            "status_semantics": None, "review_status": "open", "review_date": None,
+            "recovery": "none",
+            "b1_candidate": False, "opg_match": None,
+            "alias_of": alias, "parent": None,
+            "disposition": s["disposition"] if s["disposition"] != "promoted" else None,
+            "bucket": "S6-promoted" if s["disposition"] == "promoted" else "S6",
+            "topic": s.get("topic"), "formalizability": s.get("formalizability"),
+            "defer_reason": (s.get("reason") if s["disposition"] in ("edge-anchor", "parked") else None),
+            "repo": s.get("repo"), "phase": None, "formal_name": None, "rocq_idiom": None,
+            "new_primitives": None, "class_notes": s.get("reason"),
+            "attributed_to": s.get("attributed_to"),
+            # alias rows own no legs; the rest get overlay-tracked todo legs
+            "legs": ({lg: "todo" for lg in LEGS} if alias else legs_for(s["slug"])),
+        })
+
 # merge classifier output (fields the classifier owns; None until it has run)
 for r in rows:
     c = CLASS.get(r["slug"], {})
