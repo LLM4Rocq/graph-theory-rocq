@@ -8,21 +8,32 @@ embedded literal M (validated rows from milestone_rows.py + gate flags). A heade
 manifest sha256 + row count + phase/package/gates so the generated file is reproducible/auditable.
 
 Usage:
-    python3 meta/make_milestone_workflow.py <phase> <package> [--base-ready] [--g1-ready] [--g2-ready] [--no-g0]
+    python3 meta/make_milestone_workflow.py <phase> <package> [--base-ready] [--g1-ready] [--g2-ready] [--no-g0] [--reconcile]
 Then launch:   Workflow({ scriptPath: "<printed path>" })   # no args needed
+
+--reconcile (v2 X1-style milestones): KEEP already_formalized rows — the milestone's job is to
+map pre-existing constants onto manifest rows and re-audit them under the current gates, so
+"all rows already formalized" is the expected input, not an error.
 """
 import json, os, re, sys, subprocess, hashlib, datetime
 
 META = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, META)
+import corpus_registry as REG
 TEMPLATE = os.path.join(META, "area_milestone_pipeline.workflow.js")
-MANIFEST = os.path.join(META, "opg_corpus_manifest.json")
 OUTDIR = os.path.join(META, "generated")
 START, END = "// <<MILESTONE-SPEC-START>>", "// <<MILESTONE-SPEC-END>>"
 
 if len(sys.argv) < 3:
-    sys.exit("usage: make_milestone_workflow.py <phase> <package> [--base-ready] [--g1-ready] [--g2-ready] [--no-g0]")
+    sys.exit("usage: make_milestone_workflow.py <phase> <package> "
+             "[--base-ready] [--g1-ready] [--g2-ready] [--no-g0] [--reconcile]")
 phase, package = sys.argv[1], sys.argv[2]
 flags = set(sys.argv[3:])
+CORPUS = REG.corpus_for_phase(phase)
+MANIFEST = REG.manifest_path(CORPUS)
+if "--reconcile" in flags and REG.CORPORA[CORPUS]["frozen_total"] is not None:
+    sys.exit(f"--reconcile is for growing corpora (reconciliation milestones); "
+             f"corpus {CORPUS!r} is frozen — its already-formalized rows stay skipped")
 mono = os.path.dirname(META)
 pkg_exists = os.path.isdir(os.path.join(mono, package, "theories"))
 base_has_v = os.path.isdir(os.path.join(mono, "base", "theories")) and any(
@@ -36,6 +47,7 @@ gates = {
     "g1_ready": "--g1-ready" in flags,
     "base_ready": (base_has_v or "--base-ready" in flags) and not directed_repo,
     "g2_ready": "--g2-ready" in flags,
+    "reconcile": "--reconcile" in flags,
 }
 
 # 1) validated rows via the deterministic loader (errors out on multi-repo phase, bad ids, etc.)
@@ -46,12 +58,21 @@ if proc.returncode != 0:
 rows = json.loads(proc.stdout)
 # Never restate ALREADY-FORMALIZED rows (e.g. the 12 directed conjectures already in digraph-theory):
 # they are a pre-existing bridge (leg=done), so only the NEW rows are sent to the implement step.
-skipped = [r["slug"] for r in rows if r.get("already_formalized")]
-rows = [r for r in rows if not r.get("already_formalized")]
-if not rows:
-    sys.exit(f"no NEW rows for {phase}/{package} (all {len(skipped)} already-formalized)")
-if skipped:
-    sys.stderr.write(f"skipping {len(skipped)} already-formalized rows (pre-existing bridge): {skipped}\n")
+# EXCEPT in --reconcile mode, where mapping/re-auditing existing constants IS the milestone (v2 X1).
+reconcile = "--reconcile" in flags
+if reconcile:
+    if not rows:
+        sys.exit(f"no rows at all for {phase}/{package}")
+    sys.stderr.write(f"reconcile mode: keeping all {len(rows)} rows "
+                     f"({sum(1 for r in rows if r.get('already_formalized'))} already-formalized)\n")
+else:
+    skipped = [r["slug"] for r in rows if r.get("already_formalized")]
+    rows = [r for r in rows if not r.get("already_formalized")]
+    if not rows:
+        sys.exit(f"no NEW rows for {phase}/{package} (all {len(skipped)} already-formalized; "
+                 f"use --reconcile if mapping them IS the milestone)")
+    if skipped:
+        sys.stderr.write(f"skipping {len(skipped)} already-formalized rows (pre-existing bridge): {skipped}\n")
 
 # 2) manifest provenance
 mhash = hashlib.sha256(open(MANIFEST, "rb").read()).hexdigest()
@@ -67,15 +88,20 @@ spec = (
     f"// manifest sha256={mhash[:16]} | rows={len(rows)} | {phase}/{package} | gates={json.dumps(gates)} | {stamp}\n"
     f"const M = {{ phase: {json.dumps(phase)}, repo: {json.dumps(package)},\n"
     f"  base_ready: {str(gates['base_ready']).lower()}, g0_ready: {str(gates['g0_ready']).lower()}, "
-    f"g1_ready: {str(gates['g1_ready']).lower()}, g2_ready: {str(gates['g2_ready']).lower()},\n"
+    f"g1_ready: {str(gates['g1_ready']).lower()}, g2_ready: {str(gates['g2_ready']).lower()}, "
+    f"reconcile: {str(gates['reconcile']).lower()},\n"
     f"  rows: {json.dumps(rows, ensure_ascii=False)} }}\n"
     f"if (!Array.isArray(M.rows) || M.rows.length === 0) return {{ error: 'generated wrapper: no rows' }}\n"
+    # the archived template has no reconcile branch yet (X1 deliverable): a reconcile wrapper must
+    # not push already-formalized rows through the ordinary implement pipeline — self-refuse.
+    f"if (M.reconcile) return {{ error: 'reconcile milestone: template lacks reconcile support "
+    f"(lands with X1); do not run the implement pipeline on already-formalized rows' }}\n"
     f"{END}"
 )
 header = (
     f"/* GENERATED milestone workflow — {phase}/{package}\n"
     f" * Source: meta/area_milestone_pipeline.workflow.js (template) + meta/milestone_rows.py {phase} {package}\n"
-    f" * Manifest: meta/opg_corpus_manifest.json @ sha256 {mhash[:16]} ({len(rows)} rows)\n"
+    f" * Manifest: meta/{os.path.basename(MANIFEST)} @ sha256 {mhash[:16]} ({len(rows)} rows)\n"
     f" * Gates: {json.dumps(gates)}    Generated: {stamp}\n"
     f" * Regenerate (do not hand-edit): python3 meta/make_milestone_workflow.py {phase} {package}\n"
     f" * Run: Workflow({{ scriptPath: this-file }})  — no runtime args needed. */\n"

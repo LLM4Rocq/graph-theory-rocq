@@ -22,6 +22,8 @@ import json, os, re, sys
 
 META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
+sys.path.insert(0, META)
+import corpus_registry as REG
 OUT = os.path.join(META, "dependency_graph.json")
 PACKAGES = sorted(d for d in os.listdir(MONO)
                   if os.path.isdir(os.path.join(MONO, d, "theories", "conjectures")) and d != "digraph-theory")
@@ -65,14 +67,33 @@ for pkg in PACKAGES:
 # BETWEEN corpus nodes are federation edges. (Its legacy INTERNAL _implies_ theorems are NOT
 # federation edges — they use short non-corpus node names — so we take digraph's EDGES only,
 # never its theorems, and keep only edges whose both endpoints are corpus formal_names.)
-try:
-    corpus_nodes = {r.get("formal_name")
-                    for r in json.load(open(os.path.join(META, "opg_corpus_manifest.json")))["rows"]}
-except (OSError, ValueError, KeyError):
-    corpus_nodes = set()
+# The endpoint domain is the UNION over every existing corpus manifest (opg + v2 once X0b lands)
+# via corpus_registry — a v2-endpoint edge hosted in a digraph file must survive this filter.
+corpus_nodes = REG.all_corpus_nodes()
 if os.path.isdir(os.path.join(MONO, "digraph-theory", "theories", "conjectures")):
     dg_edges, _dg_thms = scan("digraph-theory")
-    all_edges += [e for e in dg_edges if e["from"] in corpus_nodes and e["to"] in corpus_nodes]
+    # Dropping is EXPECTED for legacy internal digraph edges, but an endpoint that follows the
+    # corpus `*_statement` convention and is still unknown is suspicious (typo, or a row that
+    # should exist in a manifest) — warn loudly instead of silently truncating the graph.
+    for e in dg_edges:
+        if e["from"] in corpus_nodes and e["to"] in corpus_nodes:
+            all_edges.append(e)
+            continue
+        odd = [n for n in (e["from"], e["to"]) if n.endswith("_statement") and n not in corpus_nodes]
+        if odd:
+            sys.stderr.write(f"WARNING: digraph-hosted @EDGE dropped ({e['file']}): "
+                             f"{e['from']} -> {e['to']} — corpus-looking non-corpus endpoint(s) "
+                             f"{odd} (add the row to a manifest, or rename if internal)\n")
+
+# Alias rows own no statements and may never be edge endpoints (plan §1.4): reject any edge
+# touching a formal_name that belongs to an alias_of row (should not exist; fail loudly if it does).
+ALIASES = REG.alias_formal_names()
+for e in all_edges:
+    bad = [n for n in (e["from"], e["to"]) if n in ALIASES]
+    if bad:
+        sys.exit(f"EDGE-GRAPH INVARIANT VIOLATED: edge {e['from']} -> {e['to']} ({e['file']}) uses "
+                 f"alias-row endpoint(s) {bad}; point the edge at the canonical row "
+                 f"({', '.join(str(ALIASES[n]) for n in bad)}) instead")
 
 def need(c, m):
     if not c:
@@ -132,10 +153,12 @@ if os.path.isdir(dt):
 
 graph = {
     "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations across "
-               "graph-theory-rocq packages + the absorbed digraph-theory's @EDGEs BETWEEN corpus nodes (P9); "
-               "digraph's legacy internal theorems are not federation edges (see `legacy`). Verified edges name "
-               "their backing theorem via proof=<name>. Regenerate: `python3 meta/build_edge_graph.py`; gate: "
-               "`--check` fails on drift + validates verified-edge proofs. Sorted (from,to,kind,status) for determinism.",
+               "graph-theory-rocq packages + the absorbed digraph-theory's @EDGEs BETWEEN corpus nodes; the "
+               "endpoint domain is the union over every corpus manifest in meta/corpus_registry.py (opg + v2), "
+               "so cross-corpus edges are first-class. Digraph's legacy internal theorems are not federation "
+               "edges (see `legacy`); alias rows may never be endpoints. Verified edges name their backing "
+               "theorem via proof=<name>. Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails "
+               "on drift + validates verified-edge proofs. Sorted (from,to,kind,status) for determinism.",
     "packages": PACKAGES,
     "totals": {"edges": len(edges_sorted),
                "by_status": {s: sum(1 for e in edges_sorted if e["status"] == s) for s in sorted(STATUSES)},

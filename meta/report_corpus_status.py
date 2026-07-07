@@ -1,33 +1,34 @@
 #!/usr/bin/env python3
-"""Static corpus-status audit report for graph-theory-rocq (the OPG formalization).
+"""Static corpus-status audit report for graph-theory-rocq (all corpora).
 
-Deterministic from the committed sources of truth:
-  - meta/opg_corpus_manifest.json  (routing/provenance: slug, title, repo, phase, status, legs)
-  - meta/opg_legs_state.json       (leg state + per-row note + commit/package provenance)
+Deterministic from the committed sources of truth, routed by meta/corpus_registry.py:
+  - meta/opg_corpus_manifest.json + meta/opg_legs_state.json   (the frozen v1 OPG corpus)
+  - meta/v2_corpus_manifest.json  + meta/v2_legs_state.json    (the growing v2 corpus, from X0b)
   - meta/dependency_graph.json     (the federation edge graph)
   - base/theories/base.v           (the cross-area base surfaces)
 
-Default: regenerate meta/CORPUS_STATUS.md.
-`--check`: regenerate in-memory and (1) assert the headline invariants (227 total, 0 todo,
-done+partial+blocked == total) and (2) fail on drift vs the committed report — so the public
-"statement-complete" claim is machine-backed. No volatile data (timestamps / global HEAD) is
-embedded, so the report is stable until the manifest/overlay genuinely change.
+Default: regenerate meta/CORPUS_STATUS.md (OPG section always; v2 section once its manifest
+exists). `--check`: regenerate in-memory and assert PER-CORPUS invariants —
+  OPG (frozen): 227 total, 0 todo, done+partial+blocked == total, overlay mirrored;
+  v2 (growing): todo allowed; every non-alias row has an overlay entry; alias rows own no
+  formal_name and no non-todo legs; gate-compatible status vocabulary; statement=done rows
+  carry a complete source-verification tuple —
+then fail on drift vs the committed report, so the public claims are machine-backed. No
+volatile data (timestamps / global HEAD) is embedded, so the report is stable until a
+manifest/overlay genuinely changes.
 """
 import json, os, re, sys
 
 META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
+sys.path.insert(0, META)
+import corpus_registry as REG
 OUT = os.path.join(META, "CORPUS_STATUS.md")
 
-NS = {'chromatic-theory': 'Chromatic', 'hamiltonicity-theory': 'Hamilton', 'homomorphism-theory': 'Hom',
-      'cycle-theory': 'Cycle', 'minor-theory': 'Minor', 'packing-theory': 'Packing',
-      'reconstruction-theory': 'Reconstruction', 'hypergraph-theory': 'Hypergraph',
-      'topological-graph-theory': 'Topological', 'graph-theory-misc': 'GTMisc',
-      'spectral-graph-theory': 'Spectral', 'extremal-graph-theory': 'Extremal',
-      'infinite-graph-theory': 'Infinite', 'digraph-theory': 'Digraph', 'graph-theory-base': 'GTBase'}
+NS = REG.NS
 
-manifest = json.load(open(os.path.join(META, "opg_corpus_manifest.json")))
-overlay = json.load(open(os.path.join(META, "opg_legs_state.json")))
+manifest = REG.load_manifest("opg")
+overlay = REG.load_overlay("opg")
 edges = json.load(open(os.path.join(META, "dependency_graph.json")))
 rows = manifest["rows"]
 ent = overlay["entries"]
@@ -146,34 +147,116 @@ w("```sh\nmake gate    # regenerates the manifest, then check_milestone for EVER
 w("Per-row provenance (the commit + package that landed each leg) lives in `meta/opg_legs_state.json`; "
   "routing/source-text provenance in `meta/opg_corpus_manifest.json`.\n")
 
+# ── v2 corpus section (graph-conjectures beyond OPG; present from milestone X0b onward) ──
+v2m = REG.load_manifest("v2", required=False)
+v2rows, v2ent = [], {}
+v2_stmt = {s: 0 for s in STATES}
+if v2m is not None:
+    v2rows = v2m["rows"]
+    v2ent = (REG.load_overlay("v2", required=False) or {}).get("entries", {})
+    v2_alias = [r for r in v2rows if r.get("alias_of")]
+    v2_live = [r for r in v2rows if not r.get("alias_of")]
+    for r in v2_live:
+        v2_stmt[state_of(r)] = v2_stmt.get(state_of(r), 0) + 1
+    by_tag = {}
+    for r in v2rows:
+        by_tag[r.get("corpus", "?")] = by_tag.get(r.get("corpus", "?"), 0) + 1
+    w("## v2 corpus — graph-conjectures beyond OPG (growing)\n")
+    w("> Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are "
+      "expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, "
+      "not completion.\n")
+    w(f"- **{len(v2rows)} tracked rows** — by corpus tag: "
+      + ", ".join(f"{k} {v}" for k, v in sorted(by_tag.items()))
+      + f"; **{len(v2_alias)} alias rows** (no statement owed).")
+    w(f"- Statement legs over the {len(v2_live)} non-alias rows: "
+      f"**{v2_stmt['done']} done** · {v2_stmt['partial']} partial · {v2_stmt['blocked']} blocked · "
+      f"{v2_stmt['todo']} todo.")
+    v2_phases = {}
+    for r in v2_live:
+        if r.get("phase"):
+            v2_phases.setdefault(r["phase"], []).append(r)
+    if v2_phases:
+        w("\n| v2 phase | done | partial | blocked | todo | total |")
+        w("|---|--:|--:|--:|--:|--:|")
+        for ph in sorted(v2_phases):
+            c = count(v2_phases[ph])
+            w(f"| {ph} | {c['done']} | {c['partial']} | {c['blocked']} | {c['todo']} | {len(v2_phases[ph])} |")
+    w("")
+
 report = "\n".join(L) + "\n"
+
+GATE_STATUSES = {"open", "partial", "solved", "disproved"}  # exact-type-gate vocabulary (v1)
 
 if "--check" in sys.argv:
     errs = []
-    if total != 227:
-        errs.append(f"expected 227 rows, found {total}")
+    # ── OPG (frozen v1) invariants ──
+    FROZEN = REG.CORPORA["opg"]["frozen_total"]
+    if total != FROZEN:
+        errs.append(f"expected {FROZEN} OPG rows, found {total}")
     if overall["todo"] != 0:
-        errs.append(f"{overall['todo']} rows still todo (corpus not statement-complete)")
+        errs.append(f"{overall['todo']} OPG rows still todo (v1 is statement-complete/frozen)")
     if overall["done"] + overall["partial"] + overall["blocked"] != total:
-        errs.append("done+partial+blocked != total (a row has an unexpected leg state)")
+        errs.append("OPG done+partial+blocked != total (a row has an unexpected leg state)")
     # overlay is the source of truth for per-row leg-state + provenance; assert the manifest
     # mirrors it exactly, and that EVERY row has an overlay entry (so provenance is real, not a
     # generated default). Catches overlay edits not re-merged into the manifest.
     no_overlay = [r["slug"] for r in rows if r["slug"] not in ent]
     if no_overlay:
-        errs.append(f"{len(no_overlay)} rows lack an overlay entry (provenance leak): {no_overlay[:6]}")
+        errs.append(f"{len(no_overlay)} OPG rows lack an overlay entry (provenance leak): {no_overlay[:6]}")
     drift = [r["slug"] for r in rows
              if r["slug"] in ent and ent[r["slug"]].get("statement", "todo") != state_of(r)]
     if drift:
-        errs.append(f"{len(drift)} rows: overlay statement != manifest legs (re-run build_opg_manifest): {drift[:6]}")
+        errs.append(f"{len(drift)} OPG rows: overlay statement != manifest legs (re-run build_opg_manifest): {drift[:6]}")
+    # ── v2 (growing) invariants — consistency, not completion ──
+    if v2m is not None:
+        LEG_NAMES = ["statement", "grounding", "edges", "correspondence", "audit_page"]
+        v2_no_ov = [r["slug"] for r in v2rows if not r.get("alias_of") and r["slug"] not in v2ent]
+        if v2_no_ov:
+            errs.append(f"{len(v2_no_ov)} v2 non-alias rows lack an overlay entry: {v2_no_ov[:6]}")
+        # leg vocabulary: a rogue state ("Done", "verified", ...) would silently escape every
+        # count AND the statement=done sweeps below — reject it outright, for every leg.
+        bad_state = [r["slug"] for r in v2rows
+                     if any(r.get("legs", {}).get(lg, "todo") not in STATES for lg in LEG_NAMES)]
+        if bad_state:
+            errs.append(f"{len(bad_state)} v2 rows have an out-of-vocabulary leg state: {bad_state[:6]}")
+        if v2_stmt["done"] + v2_stmt["partial"] + v2_stmt["blocked"] + v2_stmt["todo"] != len(v2_live):
+            errs.append("v2 done+partial+blocked+todo != non-alias total (rogue statement-leg state)")
+        bad_alias = [r["slug"] for r in v2rows if r.get("alias_of")
+                     and (r.get("formal_name")
+                          or any(r.get("legs", {}).get(lg, "todo") != "todo" for lg in LEG_NAMES))]
+        if bad_alias:
+            errs.append(f"{len(bad_alias)} v2 alias rows own a formal_name or non-todo legs "
+                        f"(aliases own nothing): {bad_alias[:6]}")
+        bad_status = [r["slug"] for r in v2rows if not r.get("alias_of")
+                      and r.get("status") not in GATE_STATUSES]
+        if bad_status:
+            errs.append(f"{len(bad_status)} v2 rows have a status outside the exact-type-gate "
+                        f"vocabulary {sorted(GATE_STATUSES)}: {bad_status[:6]}")
+        v2_drift = [r["slug"] for r in v2rows if r["slug"] in v2ent
+                    and v2ent[r["slug"]].get("statement", "todo") != state_of(r)]
+        if v2_drift:
+            errs.append(f"{len(v2_drift)} v2 rows: overlay statement != manifest legs: {v2_drift[:6]}")
+        # corpus-wide sweep of the source-verification invariant (plan §2): statement=done
+        # requires the complete tuple — catches rows flipped done outside a gated milestone.
+        unver = []
+        for r in v2rows:
+            if state_of(r) == "done":
+                for e in REG.verification_tuple_errors(r):
+                    unver.append(f"{r['slug']}: {e}")
+        if unver:
+            errs.append(f"{len(unver)} v2 statement=done verification-tuple violations: {unver[:6]}")
     committed = open(OUT).read() if os.path.exists(OUT) else ""
     if committed != report:
         errs.append("CORPUS_STATUS.md is stale — run `python3 meta/report_corpus_status.py`")
     if errs:
         sys.exit("CORPUS-STATUS GATE FAILED:\n  - " + "\n  - ".join(errs))
-    print(f"corpus-status gate OK: {attempted}/{total} attempted, 0 todo; "
-          f"{overall['done']} done / {overall['partial']} partial / {overall['blocked']} blocked; no drift")
+    v2note = (f"; v2: {len(v2rows)} rows, {v2_stmt['done']} done / {v2_stmt['partial']} partial / "
+              f"{v2_stmt['blocked']} blocked / {v2_stmt['todo']} todo" if v2m is not None else "")
+    print(f"corpus-status gate OK: OPG {attempted}/{total} attempted, 0 todo; "
+          f"{overall['done']} done / {overall['partial']} partial / {overall['blocked']} blocked; "
+          f"no drift{v2note}")
 else:
     open(OUT, "w").write(report)
-    print(f"wrote {os.path.relpath(OUT, MONO)}: {attempted}/{total} attempted, "
-          f"{overall['done']} done / {overall['partial']} partial / {overall['blocked']} blocked")
+    v2note = f" | v2: {len(v2rows)} rows" if v2m is not None else ""
+    print(f"wrote {os.path.relpath(OUT, MONO)}: OPG {attempted}/{total} attempted, "
+          f"{overall['done']} done / {overall['partial']} partial / {overall['blocked']} blocked{v2note}")

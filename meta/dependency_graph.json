@@ -1,5 +1,5 @@
 {
- "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations across graph-theory-rocq packages + the absorbed digraph-theory's @EDGEs BETWEEN corpus nodes (P9); digraph's legacy internal theorems are not federation edges (see `legacy`). Verified edges name their backing theorem via proof=<name>. Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails on drift + validates verified-edge proofs. Sorted (from,to,kind,status) for determinism.",
+ "_README": "Federation-wide conjecture dependency graph (G1). Edges from (*@EDGE ...*) annotations across graph-theory-rocq packages + the absorbed digraph-theory's @EDGEs BETWEEN corpus nodes; the endpoint domain is the union over every corpus manifest in meta/corpus_registry.py (opg + v2), so cross-corpus edges are first-class. Digraph's legacy internal theorems are not federation edges (see `legacy`); alias rows may never be endpoints. Verified edges name their backing theorem via proof=<name>. Regenerate: `python3 meta/build_edge_graph.py`; gate: `--check` fails on drift + validates verified-edge proofs. Sorted (from,to,kind,status) for determinism.",
  "packages": [
   "chromatic-theory",
   "cycle-theory",

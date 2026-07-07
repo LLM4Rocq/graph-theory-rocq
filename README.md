@@ -1,11 +1,13 @@
 # graph-theory-rocq
 
 ![corpus-status](https://github.com/LLM4Rocq/graph-theory-rocq/actions/workflows/corpus-status.yml/badge.svg)
-**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **212 done** (axiom-free
-`Definition <name>_statement : Prop`, `Print Assumptions` clean) · **8 partial** · **7 blocked**.
-Release: **`opg-v1.0.1-227-attempted`**. Full breakdown:
-[`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md); v1 completion report + future tracks:
-[`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALIZATION_PLAN.md).
+**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **208 done** (axiom-free
+`Definition <name>_statement : Prop`, `Print Assumptions` clean) · **12 partial** · **7 blocked**.
+Release: **`opg-v1.0.1-227-attempted`** (release-time counts 212/8/7; 4 crossing-number rows were
+since downgraded to partial — `meta/CORPUS_STATUS.md` is the canonical living report). v1
+completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALIZATION_PLAN.md);
+the v2 programme (all conjecture sources of the upstream `graph-conjectures` repo):
+[`meta/V2_FULL_CORPUS_PLAN.md`](meta/V2_FULL_CORPUS_PLAN.md).
 
 A monorepo of Rocq/MathComp **graph-theory** libraries — the math-comp model (one repo,
 many independently-installable opam packages). Each `<area>-theory/` subdir states the open

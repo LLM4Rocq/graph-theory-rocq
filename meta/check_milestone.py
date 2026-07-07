@@ -7,7 +7,10 @@ Verifies, against the live opam switch `digraph`:
   3. the package compiles (coq_makefile + make);
   4. Print Assumptions is clean (Closed under the global context) for every statement node;
   5. no top-level Axiom / Parameter / Admitted / Conjecture / Hypothesis (outside comments);
-  6. each non-todo leg in meta/opg_legs_state.json is justified by an artifact + carries provenance.
+  6. each non-todo leg in the corpus overlay (meta/opg_legs_state.json or meta/v2_legs_state.json,
+     routed by phase via meta/corpus_registry.py) is justified by an artifact + carries provenance;
+     for source-verified corpora (v2), a statement leg may be `done` only with a complete
+     source-verification tuple (locator + hash + second-reader identity + date).
   7. no forbidden exact-type faithfulness signatures are committed:
      unconditional refutations of non-disproved rows, or direct proofs of undecided rows.
 Exit 0 iff all pass. Run only inside (or with) the `digraph` switch on PATH.
@@ -16,17 +19,18 @@ import json, os, re, sys, subprocess, glob
 
 META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
-NS = {'chromatic-theory': 'Chromatic', 'hamiltonicity-theory': 'Hamilton', 'homomorphism-theory': 'Hom',
-      'cycle-theory': 'Cycle', 'minor-theory': 'Minor', 'packing-theory': 'Packing',
-      'reconstruction-theory': 'Reconstruction', 'hypergraph-theory': 'Hypergraph',
-      'topological-graph-theory': 'Topological', 'graph-theory-misc': 'GTMisc', 'digraph-theory': 'Digraph',
-      'extremal-graph-theory': 'Extremal', 'infinite-graph-theory': 'Infinite', 'spectral-graph-theory': 'Spectral'}
+sys.path.insert(0, META)
+import corpus_registry as REG
+NS = REG.NS
 
 if len(sys.argv) < 3:
     sys.exit("usage: check_milestone.py <phase> <package>")
 phase, package = sys.argv[1], sys.argv[2]
+CORPUS = REG.corpus_for_phase(phase)
 pkg = os.path.join(MONO, package)
-ns = NS.get(package)
+# graph-theory-base is in the registry NS map (report display) but is NOT a milestone package —
+# keep the historical rejection the private dict encoded by omitting it.
+ns = None if package == "graph-theory-base" else NS.get(package)
 results = []  # (ok, label, detail)
 def chk(ok, label, detail=""): results.append((bool(ok), label, detail))
 
@@ -260,9 +264,11 @@ if compiles and ns:
         os.remove(f)
 chk(faith_ok, f"faithfulness exact-type probes ({len(cases)} forbidden shapes tested)", faith_detail)
 
-# 6) overlay legs justified by artifacts + provenance
-legs_path = os.path.join(META, "opg_legs_state.json")
+# 6) overlay legs justified by artifacts + provenance (+ v2: source-verification tuple)
+legs_path = REG.overlay_path(CORPUS)
 overlay = json.load(open(legs_path)).get("entries", {}) if os.path.exists(legs_path) else {}
+needs_sver = REG.CORPORA[CORPUS]["requires_source_verification"]
+rows_by_slug = {r["slug"]: r for r in rows}
 unjust = []
 for s in slugs:
     e = overlay.get(s)
@@ -275,9 +281,18 @@ for s in slugs:
         unjust.append(f"{s}: grounding=done but grounding file missing/not compiled")
     if e.get("edges") in ("partial", "done") and not os.path.exists(implications):
         unjust.append(f"{s}: edges={e.get('edges')} but no implications file")
+    for lg in ("statement", "grounding", "edges", "correspondence", "audit_page"):
+        if e.get(lg, "todo") not in ("todo", "partial", "done", "blocked"):
+            unjust.append(f"{s}: leg {lg} has out-of-vocabulary state {e.get(lg)!r}")
     for lg in ("statement", "grounding", "edges"):
         if e.get(lg, "todo") != "todo" and not (e.get("commit") and e.get("package")):
             unjust.append(f"{s}: non-todo {lg} lacks commit+package provenance")
+    # v2 invariant (plan §2): statement=done requires the auditable verification tuple —
+    # locator + hash + a second reader distinct from the implementer + a date. The tuple lives
+    # on the manifest row (emitted by milestone_rows.py); the boolean flag is never trusted.
+    if needs_sver and e.get("statement") == "done":
+        for err in REG.verification_tuple_errors(rows_by_slug.get(s, {})):
+            unjust.append(f"{s}: statement=done without source verification ({err})")
 chk(not unjust, "overlay leg-state justified by artifacts", "; ".join(unjust[:6]) if unjust else "")
 
 # ── report ──

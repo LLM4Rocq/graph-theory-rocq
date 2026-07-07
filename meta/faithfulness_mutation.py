@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import dataclasses
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -239,9 +240,33 @@ def ignore_build_artifacts(_dir: str, names: list[str]) -> list[str]:
     return ignored
 
 
+def sibling_deps(package: str) -> list[str]:
+    """Sibling packages the target references in its _CoqProject (e.g. hamiltonicity-theory
+    and packing-theory map ../topological-graph-theory) — the sandbox build fails without them.
+    Comments are stripped line-wise; references to non-existent directories are skipped with a
+    warning rather than crashing the suite."""
+    cqp = ROOT / package / "_CoqProject"
+    if not cqp.is_file():
+        return []
+    deps = []
+    for raw in cqp.read_text().splitlines():
+        line = raw.split("#", 1)[0]
+        for dep in re.findall(r"-[QR]\s+\.\./([\w.-]+)/theories\s+\S+", line):
+            if (ROOT / dep).is_dir():
+                deps.append(dep)
+            else:
+                print(f"  [warn] {package}/_CoqProject references missing sibling ../{dep} — skipped",
+                      file=sys.stderr)
+    return deps
+
+
 def copy_workspace(mutant: Mutant, dst: Path) -> None:
     """Copy the minimal monorepo subset needed by check_milestone."""
-    for rel in ("meta", "base", mutant.package):
+    rels = ["meta", "base", mutant.package]
+    for dep in sibling_deps(mutant.package):
+        if dep not in rels:
+            rels.append(dep)
+    for rel in rels:
         shutil.copytree(
             ROOT / rel,
             dst / rel,
