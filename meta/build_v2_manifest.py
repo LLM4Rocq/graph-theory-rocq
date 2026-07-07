@@ -349,6 +349,44 @@ for r in rows:
     if r.get("bucket") in ("B4", "B5") and not r.get("disposition"):
         r["disposition"] = "parked"
 
+# ── X1: directed reconciliation (meta/v2_reconciliation.json) — runs LAST so it wins over the
+# classifier on repo/phase: reconciled rows live in digraph-theory regardless of topical area.
+# Maps rows onto pre-existing digraph-theory constants verified faithful; assigns
+# formal_name/repo/phase/already_formalized + the source-verification tuple, and marks the
+# statement leg done in the overlay (with provenance).
+RECON_PATH = os.path.join(META, "v2_reconciliation.json")
+recon_overlay = {}   # slug -> overlay entry to force (statement=done + provenance)
+if os.path.exists(RECON_PATH):
+    RC = json.load(open(RECON_PATH))
+    row_by_slug = {r["slug"]: r for r in rows}
+    for slug, rc in RC["reconciled"].items():
+        r = row_by_slug.get(slug)
+        if r is None:
+            sys.exit(f"reconciliation targets unknown v2 slug {slug!r}")
+        if r.get("alias_of"):
+            sys.exit(f"reconciliation targets alias row {slug!r} (aliases own no statement)")
+        r["formal_name"] = rc["formal_name"]
+        r["repo"] = RC["repo"]
+        r["phase"] = RC["phase"]
+        r["already_formalized"] = True
+        r["reencodings"] = rc.get("reencodings") or None
+        r["implemented_by"] = RC["implemented_by"]
+        r["source_verified_by"] = RC["source_verified_by"]
+        r["source_verified_at"] = RC["source_verified_at"]
+        r["verification_note"] = (
+            f"Reconciled to {rc['defines_file']}:{rc['formal_name']}"
+            + (f" (re-encodings: {', '.join(rc['reencodings'])})" if rc.get("reencodings") else "")
+            + f". {rc.get('note', '')}")[:600]
+        r["source_locator"] = (r.get("source_locator") or "") + \
+            f" | Rocq: digraph-theory/theories/conjectures/{rc['defines_file']}#{rc['formal_name']}"
+        recon_overlay[slug] = {
+            "statement": "done", "grounding": "todo", "edges": "todo",
+            "correspondence": "todo", "audit_page": "todo",
+            "commit": "x1-reconcile", "package": RC["repo"],
+            "note": r["verification_note"],
+        }
+        r["legs"] = {lg: recon_overlay[slug][lg] for lg in LEGS}
+
 rows.sort(key=lambda r: r["row_id"])
 slugs = [r["slug"] for r in rows]
 assert len(slugs) == len(set(slugs)), "duplicate slug"
@@ -403,7 +441,9 @@ overlay = {
                "the source-verification tuple on the manifest row (gated by check_milestone.py).",
     "_allowed_states": ["todo", "partial", "done", "blocked"],
     "_legs": LEGS,
-    "entries": {r["slug"]: prior_entries.get(r["slug"], {lg: "todo" for lg in LEGS})
+    # reconciliation (X1) forces statement=done + provenance; else preserve prior overlay, else todo
+    "entries": {r["slug"]: (recon_overlay.get(r["slug"])
+                            or prior_entries.get(r["slug"], {lg: "todo" for lg in LEGS}))
                 for r in rows if not r["alias_of"]},
 }
 new_overlay = json.dumps(overlay, ensure_ascii=False, indent=1) + "\n"

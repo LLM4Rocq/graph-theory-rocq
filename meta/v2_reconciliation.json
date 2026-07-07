@@ -1,0 +1,361 @@
+{
+ "_README": "X1 directed reconciliation (plan §1.5). Maps 24 v2 rows onto pre-existing Rocq constants in digraph-theory (written in the pre-monorepo directed campaign), verified faithful by the x1-reconcile-directed workflow (run wf_05f12221: per-file matcher + independent second-reader faithfulness check; only both-agree-faithful rows kept). Merged by build_v2_manifest.py: sets formal_name/repo=digraph-theory/phase=X1/already_formalized + the source-verification tuple, and drives the v2 overlay statement=done. re-encodings are technique-#3 independent encodings of the same row (recorded, not the canonical formal_name). followups_* are X2 work: proxy = an existing NON-faithful constant (row stays todo — do not mark partial for a vacuous/weaker encoding); unmatched = an existing constant with no corpus row (candidate to mint a row or an OPG/settled-theorem to leave alone).",
+ "phase": "X1",
+ "repo": "digraph-theory",
+ "implemented_by": "digraph-theory pre-monorepo directed campaign",
+ "source_verified_by": "x1-reconcile-directed workflow wf_05f12221 (2 independent readers)",
+ "source_verified_at": "2026-07-07",
+ "reconciled": {
+  "axv_1605_07411_00": {
+   "row_id": "arxiv:1605.07411#00",
+   "formal_name": "conj2_1605_statement",
+   "defines_file": "chi_bounded.v",
+   "reencodings": [],
+   "note": "forall oriented H: chi_bounded_under (oriented G /\\ ind_free H G) <-> oriented_forest H. Encodes Conj 2 'Forb(H) is chi-bounded iff H is a forest'. chi_bounded_under = exists f, chi(U(G)) <= f(omega(U(G))) [the paper's undirected chi/omega of the underlying graph, per docstring]; ind_free = no induced-subdigraph copy (arc-preserving-and-reflecting injection); oriented_forest = underlying graph of "
+  },
+  "axv_1605_07411_01": {
+   "row_id": "arxiv:1605.07411#01",
+   "formal_name": "conj4_1605_statement",
+   "defines_file": "chi_bounded.v",
+   "reencodings": [],
+   "note": "forall oriented star S: chi_bounded_under (oriented G /\\ ind_free S G). Encodes Conj 4 'for any oriented star S, Forb(S) is chi-bounded'. oriented_star = oriented + a centre c urel-adjacent to every other vertex with leaves pairwise non-adjacent = an orientation of K_{1,t}. Class = oriented graphs avoiding an induced S. Matches the row exactly. Faithful."
+  },
+  "axv_2310_04265_10": {
+   "row_id": "arxiv:2310.04265#10",
+   "formal_name": "conjecture_5_10_statement",
+   "defines_file": "clique_cluster.v",
+   "reencodings": [],
+   "note": "Rocq: forall k, 3<=k -> forall N, exists T:tournament, kcritical k T /\\ N < #|T|. Encodes AACL (arXiv:2310.04265 v2) Conjecture 5.10 'For every integer k>=3, there are an infinite number of k-omegabar-critical tournaments.' kcritical (critical.v) = (omegabar T == k) && forall v, omegabar(del_tournament v)==k-1, exactly the paper's k-omegabar-critical definition. Quantifier nesting and the k>=3 gua"
+  },
+  "axv_2310_04265_09": {
+   "row_id": "arxiv:2310.04265#09",
+   "formal_name": "question_5_9_statement",
+   "defines_file": "clique_cluster.v",
+   "reencodings": [],
+   "note": "Rocq: exists ell:nat->nat, forall (T:tournament)(k:nat), k<=omegabar(T) -> exists S:{set T}, #|S|<=ell k /\\ k<=omegabar(sub_tournament S). Encodes AACL Question 5.9 (positive form): 'Is there a function ell such that, for every tournament T, if omegabar(T)>=k then T has a subtournament A with |A|<=ell(k) and omegabar(A)>=k.' Single function ell (f=id), object=tournament, sub_tournament S = induced"
+  },
+  "axv_2310_04265_07": {
+   "row_id": "arxiv:2310.04265#07",
+   "formal_name": "dom_omega_cluster_statement",
+   "defines_file": "clique_cluster.v",
+   "reencodings": [],
+   "note": "Rocq: exists f ell:nat->nat, forall (T:tournament)(k:nat), f k<=domnum T -> exists S:{set T}, #|S|<=ell k /\\ k<=omegabar(sub_tournament S). Encodes AACL Conjecture 5.3 (Large dom implies an omegabar-cluster) = manifest #07, whose statement_text ('two functions f and ell ... every tournament T with dom(T)>=f(k) contains a subtournament X with |X|<=ell(k) and omegabar(X)>=k') matches verbatim. domnu"
+  },
+  "axv_1608_03040_00": {
+   "row_id": "arxiv:1608.03040#00",
+   "formal_name": "majority_3col_statement",
+   "defines_file": "colouring_variants.v",
+   "reencodings": [],
+   "note": "`forall D:diGraphType, exists col:D->'I_3, majority_col col`, where majority_col = [forall v, 2*#|same_col_outnb col v| <= outdeg v] and same_col_outnb = out-neighbours w with col w = col v. This is exactly Conjecture 2 (Kreutzer-Oum-Seymour-van der Zypen-Wood, 1608.03040): 'Every digraph has a majority 3-colouring'. 2*#same<=outdeg encodes 'at most half of out-neighbours share the colour' faithfu"
+  },
+  "axv_1608_03040_01": {
+   "row_id": "arxiv:1608.03040#01",
+   "formal_name": "majority_k1col_statement",
+   "defines_file": "colouring_variants.v",
+   "reencodings": [],
+   "note": "`forall k, 2<=k -> forall D, exists col:D->'I_k.+1, kmajority_col k col` with kmajority_col k = [forall v, k*#same <= outdeg v]. Matches Conjecture 9 (1608.03040): for k>=2 every digraph has a (k+1)-colouring with at most (1/k)deg+(v) same-coloured out-neighbours. k+1 colours (I_{k.+1}), k*#same<=outdeg <=> #same<=deg+/k, guard 2<=k all match. (Row status is 'disproved' mathematically; encoding is"
+  },
+  "axv_1608_03040_03": {
+   "row_id": "arxiv:1608.03040#03",
+   "formal_name": "majority_3col_tournament_statement",
+   "defines_file": "colouring_variants.v",
+   "reencodings": [],
+   "note": "`forall T:tournament, exists col:T->'I_3, majority_col col`. Matches Open Problem 2 (1608.03040): 'Does every tournament have a majority 3-colouring?'. Object is the HB `tournament` structure (finite irreflexive complete digraph, core/tournament.v); majority_col reused. Faithful."
+  },
+  "axv_1608_03040_04": {
+   "row_id": "arxiv:1608.03040#04",
+   "formal_name": "majority_3col_eulerian_statement",
+   "defines_file": "colouring_variants.v",
+   "reencodings": [],
+   "note": "`forall D, eulerian D -> exists col:D->'I_3, majority_col col` with eulerian = [forall v, indeg v == outdeg v]. Matches Open Problem 3 (1608.03040): 'Does every Eulerian digraph have a majority 3-colouring?'. Caveat: `eulerian` encodes only the balanced (in=out at every vertex) condition, dropping the classical connectivity requirement; but majority colouring is a per-vertex local condition preser"
+  },
+  "axv_2009_13319_01": {
+   "row_id": "arxiv:2009.13319#01",
+   "formal_name": "conj_4_2",
+   "defines_file": "heroes_dichotomy.v",
+   "reencodings": [],
+   "note": "forall (H F:orientedDigraph), hero H -> oriented_forest F -> (dichromatic_bounded {D | oriented_dg D /\\ ind_free H D /\\ ind_free F D} <-> (union_of_oriented_stars F \\/ transitive_tournament H)). Encodes Conjecture 4.2 exactly: LHS = {digon,H,F} heroic (oriented_dg = digon-free/loopless = forbidding the bidirected K2; ind_free H/F = H-free/F-free), RHS = F is a disjoint union of oriented stars (uni"
+  },
+  "axv_2009_13319_02": {
+   "row_id": "arxiv:2009.13319#02",
+   "formal_name": "conj_4_4",
+   "defines_file": "heroes_dichotomy.v",
+   "reencodings": [],
+   "note": "forall (F:orientedDigraph)(l:nat), oriented_forest F -> dichromatic_bounded {D | oriented_dg D /\\ no_induced_Kl l D /\\ ind_free F D}. Encodes Conjecture 4.4: for every oriented forest F and every k, {digon, K_k, F} is heroic. oriented_dg = forbid digon; no_induced_Kl l = no l pairwise-adjacent vertices = forbid every orientation of K_l as induced subdigraph; ind_free F = F-free. Quantifier structu"
+  },
+  "drv_heroforest_h1": {
+   "row_id": "derived:drv_heroforest_h1",
+   "formal_name": "conj_6_2",
+   "defines_file": "heroes_dichotomy.v",
+   "reencodings": [],
+   "note": "forall D:diGraphType, oriented_dg D -> no_induced_C3 D -> no_induced_S2plus D -> dicolorableb D 2. Encodes Conjecture 6.2 chi_d(Forb_ind(digon,->C3,S2+)) <= 2. Matches the attack-engine derived row drv_heroforest_h1 (titled 'Conjecture 6.2'); no arxiv row exists for it (2009.13319 arxiv rows are only Problem 1.2, Conj 4.2, Conj 4.4, research-direction). Condition check: oriented_dg = no digon + lo"
+  },
+  "axv_2410_23566_00": {
+   "row_id": "arxiv:2410.23566#00",
+   "formal_name": "prob_6",
+   "defines_file": "unvd.v",
+   "reencodings": [
+    "prob6_unvd_statement"
+   ],
+   "note": "prob_6 := forall alpha:rat, exists a d b:nat, forall D with 0<#|D| and mad D <= alpha, for unvd-value nD: nD <= a*#|D|^d + b. Matches Problem 6: 'for every (positive) alpha, does there exist a polynomial P_alpha with unvd(D) <= P_alpha(|V(D)|) for every digraph of max average degree <= alpha?'. mad correctly = max over nonempty S of 2*narcs_in(S)/|S| (average-degree density). Caveats (all non-defe"
+  },
+  "drv_sad_wc3": {
+   "row_id": "derived:drv_sad_wc3",
+   "formal_name": "WC3_statement",
+   "defines_file": "sad.v",
+   "reencodings": [],
+   "note": "forall D:diGraphType, (0<#|D|) -> arc_strong D 3 -> SAD D; arc_strong D 3 = every nonempty proper X has #|outcut X|>=3 (3-arc-strong), SAD D = arcset partitions into two disjoint covering spanning_strong parts. Matches drv_sad_wc3 'Every 3-arc-strong digraph D admits a strong arc decomposition: partition A(D)=A1|_|A2 with both spanning subdigraphs strongly connected'. Quantifier (forall D), object"
+  },
+  "axv_2310_04265_02": {
+   "row_id": "arxiv:2310.04265#02",
+   "formal_name": "conj_3_12_statement",
+   "defines_file": "twinwidth.v",
+   "reencodings": [
+    "conj_3_12_classwise"
+   ],
+   "note": "forall k, exists f, forall nonempty tournament T with tww_le T k -> dicolorableb T (f (omegabar T)). Encodes Conj 3.12 'the class of tournaments with twin-width <= k is chi-vec-bounded': dicolorableb T m = chi-vec(T)<=m, omegabar T = omega-bar(T), tww_le is the concrete contraction-sequence twin-width. Deltas are harmless: k ranges over all nat vs paper's k>=1 (k=0 class subset of k=1 class, so eq"
+  },
+  "axv_2310_04265_03": {
+   "row_id": "arxiv:2310.04265#03",
+   "formal_name": "conj_3_13_statement",
+   "defines_file": "twinwidth.v",
+   "reencodings": [
+    "conj_3_13_concrete"
+   ],
+   "note": "exists f, forall nonempty tournament T, exists order p:{perm T}, bclique p <= f(omegabar T) /\\ otww_le p (f(omegabar T)). Encodes Conj 3.13 'exists f s.t. every T has an ordering with omega(T^p)<=f(omega-bar) AND tww(T,p)<=f(omega-bar)': bclique p = omega(T^p) backedge clique number, both conjuncts present with correct exists-f/forall-T/exists-p structure. CAVEAT: ordered twin-width tww(T,p) is PA"
+  },
+  "axv_2310_04265_04": {
+   "row_id": "arxiv:2310.04265#04",
+   "formal_name": "conj_3_16_statement",
+   "defines_file": "twinwidth.v",
+   "reencodings": [
+    "conj_3_16_concrete"
+   ],
+   "note": "exists f, forall nonempty tournament T, exists order p:{perm T}, bst_order p /\\ bclique p <= f(omegabar T). Encodes Conj 3.16 'exists f s.t. every T has a BST-ordering with omega(T^p)<=f(omega-bar)': bclique p = omega(T^p), correct exists-f/forall-T/exists-p structure with the BST-ordering conjunct. CAVEAT: BST-ordering is PARAMETRIC -- bst_order is an abstract Section Variable (recursive BST in-o"
+  },
+  "drv_twoext_h6": {
+   "row_id": "derived:drv_twoext_h6",
+   "formal_name": "H6_no_full_cover",
+   "defines_file": "two_extremal.v",
+   "reencodings": [],
+   "note": "forall D llD, (0<#|D|) -> strongb D -> Eulerian D -> arc_conn D = 2 -> three_connected_sg(underlyingG llD) -> ~connected[set:digonG llD] -> dicolorableb D 2. Encodes the criticality/no-full-cover barrier of drv_twoext_h6: 3-connected + Eulerian + lambda=2 + digon-free cut => chi_vec<=2. Mappings are exact: arc_conn=2 is lambda(D)=2, ~connected(digonG) is 'F_D disconnected' = digon-free cut exists,"
+  },
+  "drv_twoext_conjp": {
+   "row_id": "derived:drv_twoext_conjp",
+   "formal_name": "conjecture_P",
+   "defines_file": "two_extremal.v",
+   "reencodings": [],
+   "note": "forall D llD, two_extremal llD -> planar_sg(underlyingG llD). Matches drv_twoext_conjp exactly: 'for every 2-extremal digraph D, U(D) is planar.' two_extremal = k_extremal 2 = [strongb D, two_connected_sg(underlyingG), arc_conn=2, chi_vec_eq D 3] which is strong + U(D) 2-connected + lambda=2 + chi_vec=3 (chi_vec_eq D 3 = 0<3 /\\ dicolorableb D 3 /\\ ~~dicolorableb D 2 = chi_vec=3), matching the row'"
+  },
+  "drv_twoext_step1": {
+   "row_id": "derived:drv_twoext_step1",
+   "formal_name": "three_connected_digonG_connected",
+   "defines_file": "two_extremal.v",
+   "reencodings": [],
+   "note": "forall D llD, two_extremal llD -> three_connected_sg(underlyingG llD) -> connected[set:digonG llD]. Matches drv_twoext_step1: 'for every 2-extremal D with U(D) 3-connected, F_D is a spanning tree, i.e. F_D is connected on all of V(D).' The row itself equates spanning-tree with 'connected on all V(D)' given the (separate) forest lemma, and the Rocq states exactly that connected form (three_connecte"
+  },
+  "axv_2410_23566_03": {
+   "row_id": "arxiv:2410.23566#03",
+   "formal_name": "conj_9",
+   "defines_file": "unvd.v",
+   "reencodings": [],
+   "note": "conj_9 := exists C:nat, forall acyclic D (acyclicb) with 1<#|D| and vertex v, for the unvd-relation values nD of D and nDv of (del_vertex v = D-v): nD <= C*nDv. Matches Conjecture 9: 'There exists a constant C such that unvd(D) <= C*unvd(D-v) for every acyclic digraph D and every vertex v'. Quantifier structure, object (digraph), acyclicity guard, and D-v (del_vertex = induced on [set~ v]) all cor"
+  }
+ },
+ "followups_proxy": [
+  {
+   "constant": "conj5_1605_statement",
+   "file": "chi_bounded.v",
+   "v2_row_id": "arxiv:1605.07411#02",
+   "issue": "Targets Conj 5 (nonempty P subset of Or(P4), P != {P+(3)} and P != {P+(1,1,1)} => Forb(P) chi-bounded). Row identity is certain. FAITHFULNESS GAP: the paper's exclusion is exactly the two bad singletons, but the Rocq hypothesis H3 ('forb contains a member that is neither is_dirP4 nor is_altP4') is s"
+  },
+  {
+   "constant": "avec_core_statement",
+   "file": "chi_bounded.v",
+   "v2_row_id": "arxiv:2403.02298#00",
+   "issue": "Targets Conj 3, a_vec(n)=Theta(sqrt(n log n)) (row identity certain — named a_vec, docstring cites arXiv:2403.02298). FAITHFULNESS: encodes only 'exists g, forall n>0: (every order-n oriented triangle-free D has an acyclic set of size g n) AND (some such D has none of size g n +1)'. This merely pins"
+  },
+  {
+   "constant": "tvec_core_statement",
+   "file": "chi_bounded.v",
+   "v2_row_id": "arxiv:2403.02298#01",
+   "issue": "Targets Conj 4, t_vec(n)=Theta(sqrt(n/log n)) (row identity certain). FAITHFULNESS: encodes only 'exists h, forall n>0: (every order-n oriented triangle-free D is h n-dicolourable) AND (some such D is not (h n -1)-dicolourable)'. This pins h(n)=t_vec(n) (max dichromatic number), which always exists,"
+  },
+  {
+   "constant": "caccetta_haggkvist_triangle_statement",
+   "file": "classic_core.v",
+   "v2_row_id": "studies:std_caccetta_h_ggkvist_conjecture",
+   "issue": "Rocq: forall D:orientedDigraph, 0<#|D| -> (forall v, #|D| <= 3*outdeg v) -> exists c, dicycle c /\\ size c = 3. Hypothesis n<=3*delta+ is equivalent to delta+ >= ceil(n/3) (integer out-degree); conclusion size c = 3 in an orientedDigraph (irreflexive+asymmetric, min cycle length 3 by oriented_dicycle"
+  },
+  {
+   "constant": "sands_sauer_woodrow_statement",
+   "file": "colouring_variants.v",
+   "v2_row_id": "studies:std_general_sands_sauer_woodrow_conjecture",
+   "issue": "`forall k, exists f, forall D (c:arc_colouring D k), exists S, union_of_stables f S /\\ forall v, exists2 s, s in S & mono_reach_any c v s`. Matches the General Sands-Sauer-Woodrow conjecture (studied row): 'for every k there is f(k) s.t. every multidigraph whose arcs are the union of k quasi-orders "
+  },
+  {
+   "constant": "conj_9_2_glued_e",
+   "file": "glue_eul_subtype.v",
+   "v2_row_id": "arxiv:2304.04690#00",
+   "issue": "conj_9_2_glued_e := conj_9_2_concrete realises_E, unfolding to (forall D (llD:loopless D), two_extremal llD <-> in_H2_concrete realises_E D) — the Conjecture-9.2 characterization 'D is 2-extremal iff D in H2' (Aboulker-Aubian-Charbit arXiv:2304.04690 Section 9) instantiated at the concrete realisati"
+  },
+  {
+   "constant": "pathFAS_iff_LFO_statement",
+   "file": "path_fas.v",
+   "v2_row_id": "arxiv:2402.10782#01",
+   "issue": "forall T:tournament, has_pathFAS T <-> has_LFO T (path-shaped FAS whose underlying simple graph is a linear forest <-> some vertex order has a linear-forest back-arc graph). This is the file's encoding of the C=paths branch of Aboulker-Aubian-Lopes Problem 4.4. NOT faithful: #01 is an open COMPLEXIT"
+  },
+  {
+   "constant": "matchingFAS_iff_dw1_statement",
+   "file": "path_fas.v",
+   "v2_row_id": "arxiv:2402.10782#01",
+   "issue": "forall T:tournament, has_matchingFAS T <-> Delta_star T <= 1 (a feedback arc set whose underlying graph is a matching <-> degreewidth <= 1). Corresponds to the C=max-degree-1 branch of Problem 4.4 (#01); it is the KNOWN Davot-Isenmann-Roy-Thiebaut (arXiv:2212.06007) characterization, stated 'uniform"
+  },
+  {
+   "constant": "conj_9_2",
+   "file": "two_extremal.v",
+   "v2_row_id": "arxiv:2304.04690#00",
+   "issue": "fun in_H2 => forall D llD, two_extremal llD <-> in_H2 D. Unambiguously targets Conjecture 9.2 (arXiv:2304.04690 Section 9, the k=2 characterization; the arxiv row's statement_text was unextractable but context confirms 'discuss 2-extremal digraphs and propose a conjecture for their characterization'"
+  },
+  {
+   "constant": "conj_9_2_glued",
+   "file": "two_extremal_glue.v",
+   "v2_row_id": "arxiv:2304.04690#00",
+   "issue": "Definition conj_9_2_glued : Prop := conj_9_2_concrete realises_W, which unfolds to `forall (D:diGraphType) (llD:loopless D), two_extremal llD <-> in_H2_concrete realises_W D` — a fully-instantiated (glued) re-encoding of Conjecture 9.2 (Section 9 characterization of 2-extremal digraphs, arXiv:2304.0"
+  },
+  {
+   "constant": "conj_9_2_concrete",
+   "file": "two_extremal_hajos.v",
+   "v2_row_id": "arxiv:2304.04690#00",
+   "issue": "`forall (D:diGraphType)(llD:loopless D), two_extremal llD <-> in_H2_concrete D` — the *_concrete re-encoding of Conjecture 9.2 (2-extremal digraph iff in H2). Primary encoding is `conj_9_2` in sibling two_extremal.v, so this is a variant. Object is digraph (correct); two_extremal = k-extremal at k=2"
+  },
+  {
+   "constant": "conj_9_2_treejoin",
+   "file": "two_extremal_hajos.v",
+   "v2_row_id": "arxiv:2304.04690#00",
+   "issue": "`in_H2_contains_base in_H2 -> in_H2_closed_dhajos in_H2 -> in_H2_closed_treejoin -> forall D llD, two_extremal llD <-> in_H2 D` — the parametric-with-all-three-closure-constraints re-encoding of Conjecture 9.2 (strictly more faithful than committed conj_9_2, which folded the tree-join into in_H2 as "
+  }
+ ],
+ "followups_unmatched": [
+  {
+   "constant": "chordal_not_dichromatic_bounded_statement",
+   "file": "chi_bounded.v",
+   "role": "conjecture-statement",
+   "note": "~ dichromatic_bounded chordal_C3 (chordal_C3 = oriented, no induced TT3, no induced dicycle of length >=4). This is the settled HEADLINE theorem of arXiv:2202.01006 'Chordal directed graphs are not chi-bounded'. No corpus row states it: the only arxiv row for that paper (arxiv:2202.01006#00) is the "
+  },
+  {
+   "constant": "m3_landmark_statement",
+   "file": "chi_bounded.v",
+   "role": "conjecture-statement",
+   "note": "exists nonempty oriented triangle-free D with ~~ dicolorableb D 2 = there is an oriented triangle-free digraph with dichromatic number >= 3, i.e. m(3) is finite (the settled D25-type landmark from arXiv:2403.02298). Not a corpus row: the 2403.02298 arxiv rows are only Conj 3 / Conj 4; all otf derive"
+  },
+  {
+   "constant": "jackson_hamilton_small_diregular_statement",
+   "file": "classic_core.v",
+   "role": "conjecture-statement",
+   "note": "Rocq: forall D:orientedDigraph, forall d, 0<#|D| -> 2<d -> diregular D d -> #|D| <= 4*d+1 -> exists c, dicycle c /\\ size c = #|D|. diregular D d = [forall v, (outdeg v == d) && (indeg v == d)] (exact in-=out-=d); size c = #|D| is a directed Hamilton cycle. This is Jackson's diregular Hamiltonicity C"
+  },
+  {
+   "constant": "conjecture_5_8_statement",
+   "file": "clique_cluster.v",
+   "role": "conjecture-statement",
+   "note": "Rocq: exists f ell:nat->nat, forall (T:tournament)(k:nat), f k<=omegabar(T) -> exists S:{set T}, #|S|<=ell k /\\ k<=omegabar(sub_tournament S). This VERBATIM matches AACL (arXiv:2310.04265 v2) Conjecture 5.8 (Large omegabar implies an omegabar-cluster): 'There exists two functions f and ell such that"
+  },
+  {
+   "constant": "oriented_chromatic_planar_bounded_statement",
+   "file": "colouring_variants.v",
+   "role": "conjecture-statement",
+   "note": "`exists k, forall D (llD:loopless D), planar_sg(underlyingG llD) -> oriented_kcolouring D k`, i.e. a uniform bound k on the oriented chromatic number over all orientations of planar graphs (oriented_kcolouring = dhom onto some tournament on k vertices). This is the SETTLED Raspaud-Sopena theorem (at"
+  },
+  {
+   "constant": "berger_characterization",
+   "file": "heroes.v",
+   "role": "conjecture-statement",
+   "note": "Statement: forall H, hero H <-> dichromatic_bounded (fun D => is_tournament D /\\ ind_free H D). Helpers: hero (inductive K1/domination-join/C3-substitution recursion), dichromatic_bounded (dichromatic.v: exists B, forall D in class, dicolorableb D B), is_tournament (irreflexive+semicomplete+asymmetr"
+  },
+  {
+   "constant": "thm_6_1",
+   "file": "heroes_dichotomy.v",
+   "role": "conjecture-statement",
+   "note": "forall D:diGraphType, oriented_dg D -> no_induced_C3 D -> no_induced_arrowK2_K1 D -> dicolorableb D 2. This is Theorem 6.1 of Aboulker-Charbit-Naserasr (2009.13319): every oriented, ->C3-free, ->K2+K1-free digraph is 2-dicolourable (no_induced_arrowK2_K1 = an arc a->b together with a vertex c isolat"
+  },
+  {
+   "constant": "LFO_iff_34transversal_statement",
+   "file": "path_fas.v",
+   "role": "conjecture-statement",
+   "note": "forall T:tournament, has_LFO T <-> (exists arc set F with farc_graph F a linear forest that hits every directed 3-cycle and every directed 4-cycle). Internal attack-engine equivalence target from path_matching_fas/docs/q2_acyclicity_core.md serving Problem 4.4's paths branch. No corpus row encodes t"
+  },
+  {
+   "constant": "minimal_LFO_no_infinite_statement",
+   "file": "path_fas.v",
+   "role": "conjecture-statement",
+   "note": "forall N:nat, exists tournament T, minimal_LFO_no T /\\ N < #|T| (infinitely many vertex-minimal LFO-NO tournaments, i.e. no finite forbidden-subtournament characterization of Path-FAS). Internal minimal-obstruction-catalogue conjecture (path_matching_fas/docs/minimal_no_obstruction_catalogue.md). No"
+  },
+  {
+   "constant": "ec_log_statement",
+   "file": "reals_growth.v",
+   "role": "conjecture-statement",
+   "note": "exists c>0, forall Eulerian D (indeg=outdeg) with #|D|>=3, arc_strong D k and INR k >= c*log2(INR #|D|) -> SAD D (arc_strong/SAD confirmed in sad.v; log2 x = ln x/ln 2). This is the EC-log Eulerian LOGARITHMIC-threshold SAD milestone, a proof leg toward the Bang-Jensen-Yeo SAD conjecture (parent opg"
+  },
+  {
+   "constant": "ec_log_c6_statement",
+   "file": "reals_growth.v",
+   "role": "variant-encoding",
+   "note": "Concrete C=6 specialization of ec_log_statement (drops the exists c, hard-codes 6, keeps n0=3 guard; theorem ec_log_c6_implies_exists proves it entails the exists-C form; registry marks it specializes ec_log_statement). Re-encodes ec_log_statement, which itself matches no v2 row (proof milestone tow"
+  },
+  {
+   "constant": "CL1_statement",
+   "file": "sad.v",
+   "role": "conjecture-statement",
+   "note": "forall D V1 (V2:=~:V1), |V1|>=2 -> |V2|>=2 -> SAD(induced_digraph V1) -> SAD(induced_digraph V2) -> (outcut V1 splits into two disjoint nonempty covering parts) -> (outcut V2 splits into two disjoint nonempty covering parts) -> SAD D. This is the bilateral controlled-lifting lemma (ledger entry P2-C"
+  },
+  {
+   "constant": "three_connected_generalised_wheel",
+   "file": "two_extremal.v",
+   "role": "conjecture-statement",
+   "note": "forall D llD, two_extremal llD -> three_connected_sg(underlyingG llD) -> generalised_wheel D, parametrized over an abstract generalised_wheel : diGraphType -> Prop. This is the 3-connected / base case of Conjecture 9.2 (every 3-connected 2-extremal digraph is a generalised wheel). No dedicated v2 ro"
+  },
+  {
+   "constant": "two_extremal_digonG_forest",
+   "file": "two_extremal.v",
+   "role": "conjecture-statement",
+   "note": "forall D llD, two_extremal llD -> is_forest[set:digonG llD]. The F_D-is-a-forest lemma (docs/lemma_a.md), a PROVED unconditional structural fact. It is not itself a manifest row: 'F_D is a forest for 2-extremal D' appears only as a SETTING/premise inside the derived rows drv_twoext_step1, _h3, _h4, "
+  }
+ ],
+ "helpers": [
+  "tt_is_TT",
+  "in_arcset",
+  "spanning_strong",
+  "otww_dominates_tww",
+  "otww_total",
+  "bst_order_exists",
+  "concrete_bst_order",
+  "in_H2_closed_dhajos",
+  "in_H2_contains_base",
+  "in_H2_closed_treejoin",
+  "realises_Eulerian",
+  "realises_digonG_forest",
+  "realises_loopless"
+ ],
+ "followups_duplicate_opg": [
+  {
+   "constant": "hoang_reed_statement",
+   "file": "packing.v",
+   "note": "Duplicate encoding of the OPG row hoand_reed_conjecture (formal_name hoand_reed_statement, already frozen in v1). The v2 studies row std_ho_ng_reed_conjecture correctly aliases opg:hoand_reed_conjecture; no separate v2 statement is owed."
+  }
+ ],
+ "followups_axiom_dependent": [
+  {
+   "slug": "axv_2403_02298_00",
+   "constant": "conj3_avec_Theta_statement",
+   "file": "reals_growth.v",
+   "note": "Faithful (2 readers) BUT depends on ClassicalDedekindReals + funext axioms (concrete reals). Violates the axiom-free invariant; not done. Needs an axiom-free re-encoding over rcfType (abstract real-closed field, the v1 D2 idiom) in the asymptotics wave. Re-encodings ['conj3_avec_exists_statement']"
+  },
+  {
+   "slug": "axv_2403_02298_01",
+   "constant": "conj4_tvec_Theta_statement",
+   "file": "reals_growth.v",
+   "note": "Faithful (2 readers) BUT depends on ClassicalDedekindReals + funext axioms (concrete reals). Violates the axiom-free invariant; not done. Needs an axiom-free re-encoding over rcfType (abstract real-closed field, the v1 D2 idiom) in the asymptotics wave. Re-encodings ['conj4_tvec_exists_statement']"
+  }
+ ]
+}

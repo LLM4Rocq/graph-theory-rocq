@@ -232,18 +232,24 @@
    "audit_page": "todo"
   },
   "axv_1605_07411_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to chi_bounded.v:conj2_1605_statement. forall oriented H: chi_bounded_under (oriented G /\\ ind_free H G) <-> oriented_forest H. Encodes Conj 2 'Forb(H) is chi-bounded iff H is a forest'. chi_bounded_under = exists f, chi(U(G)) <= f(omega(U(G))) [the paper's undirected chi/omega of the underlying graph, per docstring]; ind_free = no induced-subdigraph copy (arc-preserving-and-reflecting injection); oriented_forest = underlying graph of "
   },
   "axv_1605_07411_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to chi_bounded.v:conj4_1605_statement. forall oriented star S: chi_bounded_under (oriented G /\\ ind_free S G). Encodes Conj 4 'for any oriented star S, Forb(S) is chi-bounded'. oriented_star = oriented + a centre c urel-adjacent to every other vertex with leaves pairwise non-adjacent = an orientation of K_{1,t}. Class = oriented graphs avoiding an induced S. Matches the row exactly. Faithful."
   },
   "axv_1605_07411_02": {
    "statement": "todo",
@@ -288,18 +294,24 @@
    "audit_page": "todo"
   },
   "axv_1608_03040_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to colouring_variants.v:majority_3col_statement. `forall D:diGraphType, exists col:D->'I_3, majority_col col`, where majority_col = [forall v, 2*#|same_col_outnb col v| <= outdeg v] and same_col_outnb = out-neighbours w with col w = col v. This is exactly Conjecture 2 (Kreutzer-Oum-Seymour-van der Zypen-Wood, 1608.03040): 'Every digraph has a majority 3-colouring'. 2*#same<=outdeg encodes 'at most half of out-neighbours share the colour' faithfu"
   },
   "axv_1608_03040_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to colouring_variants.v:majority_k1col_statement. `forall k, 2<=k -> forall D, exists col:D->'I_k.+1, kmajority_col k col` with kmajority_col k = [forall v, k*#same <= outdeg v]. Matches Conjecture 9 (1608.03040): for k>=2 every digraph has a (k+1)-colouring with at most (1/k)deg+(v) same-coloured out-neighbours. k+1 colours (I_{k.+1}), k*#same<=outdeg <=> #same<=deg+/k, guard 2<=k all match. (Row status is 'disproved' mathematically; encoding is"
   },
   "axv_1608_03040_02": {
    "statement": "todo",
@@ -309,18 +321,24 @@
    "audit_page": "todo"
   },
   "axv_1608_03040_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to colouring_variants.v:majority_3col_tournament_statement. `forall T:tournament, exists col:T->'I_3, majority_col col`. Matches Open Problem 2 (1608.03040): 'Does every tournament have a majority 3-colouring?'. Object is the HB `tournament` structure (finite irreflexive complete digraph, core/tournament.v); majority_col reused. Faithful."
   },
   "axv_1608_03040_04": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to colouring_variants.v:majority_3col_eulerian_statement. `forall D, eulerian D -> exists col:D->'I_3, majority_col col` with eulerian = [forall v, indeg v == outdeg v]. Matches Open Problem 3 (1608.03040): 'Does every Eulerian digraph have a majority 3-colouring?'. Caveat: `eulerian` encodes only the balanced (in=out at every vertex) condition, dropping the classical connectivity requirement; but majority colouring is a per-vertex local condition preser"
   },
   "axv_1608_03040_05": {
    "statement": "todo",
@@ -2241,18 +2259,24 @@
    "audit_page": "todo"
   },
   "axv_2009_13319_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to heroes_dichotomy.v:conj_4_2. forall (H F:orientedDigraph), hero H -> oriented_forest F -> (dichromatic_bounded {D | oriented_dg D /\\ ind_free H D /\\ ind_free F D} <-> (union_of_oriented_stars F \\/ transitive_tournament H)). Encodes Conjecture 4.2 exactly: LHS = {digon,H,F} heroic (oriented_dg = digon-free/loopless = forbidding the bidirected K2; ind_free H/F = H-free/F-free), RHS = F is a disjoint union of oriented stars (uni"
   },
   "axv_2009_13319_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to heroes_dichotomy.v:conj_4_4. forall (F:orientedDigraph)(l:nat), oriented_forest F -> dichromatic_bounded {D | oriented_dg D /\\ no_induced_Kl l D /\\ ind_free F D}. Encodes Conjecture 4.4: for every oriented forest F and every k, {digon, K_k, F} is heroic. oriented_dg = forbid digon; no_induced_Kl l = no l pairwise-adjacent vertices = forbid every orientation of K_l as induced subdigraph; ind_free F = F-free. Quantifier structu"
   },
   "axv_2009_13319_03": {
    "statement": "todo",
@@ -3893,25 +3917,34 @@
    "audit_page": "todo"
   },
   "axv_2310_04265_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to twinwidth.v:conj_3_12_statement (re-encodings: conj_3_12_classwise). forall k, exists f, forall nonempty tournament T with tww_le T k -> dicolorableb T (f (omegabar T)). Encodes Conj 3.12 'the class of tournaments with twin-width <= k is chi-vec-bounded': dicolorableb T m = chi-vec(T)<=m, omegabar T = omega-bar(T), tww_le is the concrete contraction-sequence twin-width. Deltas are harmless: k ranges over all nat vs paper's k>=1 (k=0 class subset of k=1 class, so eq"
   },
   "axv_2310_04265_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to twinwidth.v:conj_3_13_statement (re-encodings: conj_3_13_concrete). exists f, forall nonempty tournament T, exists order p:{perm T}, bclique p <= f(omegabar T) /\\ otww_le p (f(omegabar T)). Encodes Conj 3.13 'exists f s.t. every T has an ordering with omega(T^p)<=f(omega-bar) AND tww(T,p)<=f(omega-bar)': bclique p = omega(T^p) backedge clique number, both conjuncts present with correct exists-f/forall-T/exists-p structure. CAVEAT: ordered twin-width tww(T,p) is PA"
   },
   "axv_2310_04265_04": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to twinwidth.v:conj_3_16_statement (re-encodings: conj_3_16_concrete). exists f, forall nonempty tournament T, exists order p:{perm T}, bst_order p /\\ bclique p <= f(omegabar T). Encodes Conj 3.16 'exists f s.t. every T has a BST-ordering with omega(T^p)<=f(omega-bar)': bclique p = omega(T^p), correct exists-f/forall-T/exists-p structure with the BST-ordering conjunct. CAVEAT: BST-ordering is PARAMETRIC -- bst_order is an abstract Section Variable (recursive BST in-o"
   },
   "axv_2310_04265_05": {
    "statement": "todo",
@@ -3928,11 +3961,14 @@
    "audit_page": "todo"
   },
   "axv_2310_04265_07": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to clique_cluster.v:dom_omega_cluster_statement. Rocq: exists f ell:nat->nat, forall (T:tournament)(k:nat), f k<=domnum T -> exists S:{set T}, #|S|<=ell k /\\ k<=omegabar(sub_tournament S). Encodes AACL Conjecture 5.3 (Large dom implies an omegabar-cluster) = manifest #07, whose statement_text ('two functions f and ell ... every tournament T with dom(T)>=f(k) contains a subtournament X with |X|<=ell(k) and omegabar(X)>=k') matches verbatim. domnu"
   },
   "axv_2310_04265_08": {
    "statement": "todo",
@@ -3942,18 +3978,24 @@
    "audit_page": "todo"
   },
   "axv_2310_04265_09": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to clique_cluster.v:question_5_9_statement. Rocq: exists ell:nat->nat, forall (T:tournament)(k:nat), k<=omegabar(T) -> exists S:{set T}, #|S|<=ell k /\\ k<=omegabar(sub_tournament S). Encodes AACL Question 5.9 (positive form): 'Is there a function ell such that, for every tournament T, if omegabar(T)>=k then T has a subtournament A with |A|<=ell(k) and omegabar(A)>=k.' Single function ell (f=id), object=tournament, sub_tournament S = induced"
   },
   "axv_2310_04265_10": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to clique_cluster.v:conjecture_5_10_statement. Rocq: forall k, 3<=k -> forall N, exists T:tournament, kcritical k T /\\ N < #|T|. Encodes AACL (arXiv:2310.04265 v2) Conjecture 5.10 'For every integer k>=3, there are an infinite number of k-omegabar-critical tournaments.' kcritical (critical.v) = (omegabar T == k) && forall v, omegabar(del_tournament v)==k-1, exactly the paper's k-omegabar-critical definition. Quantifier nesting and the k>=3 gua"
   },
   "axv_2310_04265_11": {
    "statement": "todo",
@@ -4446,11 +4488,14 @@
    "audit_page": "todo"
   },
   "axv_2410_23566_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to unvd.v:prob_6 (re-encodings: prob6_unvd_statement). prob_6 := forall alpha:rat, exists a d b:nat, forall D with 0<#|D| and mad D <= alpha, for unvd-value nD: nD <= a*#|D|^d + b. Matches Problem 6: 'for every (positive) alpha, does there exist a polynomial P_alpha with unvd(D) <= P_alpha(|V(D)|) for every digraph of max average degree <= alpha?'. mad correctly = max over nonempty S of 2*narcs_in(S)/|S| (average-degree density). Caveats (all non-defe"
   },
   "axv_2410_23566_01": {
    "statement": "todo",
@@ -4467,11 +4512,14 @@
    "audit_page": "todo"
   },
   "axv_2410_23566_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to unvd.v:conj_9. conj_9 := exists C:nat, forall acyclic D (acyclicb) with 1<#|D| and vertex v, for the unvd-relation values nD of D and nDv of (del_vertex v = D-v): nD <= C*nDv. Matches Conjecture 9: 'There exists a constant C such that unvd(D) <= C*unvd(D-v) for every acyclic digraph D and every vertex v'. Quantifier structure, object (digraph), acyclicity guard, and D-v (del_vertex = induced on [set~ v]) all cor"
   },
   "axv_2410_23566_04": {
    "statement": "todo",
@@ -5720,11 +5768,14 @@
    "audit_page": "todo"
   },
   "drv_heroforest_h1": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to heroes_dichotomy.v:conj_6_2. forall D:diGraphType, oriented_dg D -> no_induced_C3 D -> no_induced_S2plus D -> dicolorableb D 2. Encodes Conjecture 6.2 chi_d(Forb_ind(digon,->C3,S2+)) <= 2. Matches the attack-engine derived row drv_heroforest_h1 (titled 'Conjecture 6.2'); no arxiv row exists for it (2009.13319 arxiv rows are only Problem 1.2, Conj 4.2, Conj 4.4, research-direction). Condition check: oriented_dg = no digon + lo"
   },
   "drv_heroforest_h5": {
    "statement": "todo",
@@ -6147,18 +6198,24 @@
    "audit_page": "todo"
   },
   "drv_sad_wc3": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to sad.v:WC3_statement. forall D:diGraphType, (0<#|D|) -> arc_strong D 3 -> SAD D; arc_strong D 3 = every nonempty proper X has #|outcut X|>=3 (3-arc-strong), SAD D = arcset partitions into two disjoint covering spanning_strong parts. Matches drv_sad_wc3 'Every 3-arc-strong digraph D admits a strong arc decomposition: partition A(D)=A1|_|A2 with both spanning subdigraphs strongly connected'. Quantifier (forall D), object"
   },
   "drv_twoext_conjp": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to two_extremal.v:conjecture_P. forall D llD, two_extremal llD -> planar_sg(underlyingG llD). Matches drv_twoext_conjp exactly: 'for every 2-extremal digraph D, U(D) is planar.' two_extremal = k_extremal 2 = [strongb D, two_connected_sg(underlyingG), arc_conn=2, chi_vec_eq D 3] which is strong + U(D) 2-connected + lambda=2 + chi_vec=3 (chi_vec_eq D 3 = 0<3 /\\ dicolorableb D 3 /\\ ~~dicolorableb D 2 = chi_vec=3), matching the row'"
   },
   "drv_twoext_g15": {
    "statement": "todo",
@@ -6189,11 +6246,14 @@
    "audit_page": "todo"
   },
   "drv_twoext_h6": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to two_extremal.v:H6_no_full_cover. forall D llD, (0<#|D|) -> strongb D -> Eulerian D -> arc_conn D = 2 -> three_connected_sg(underlyingG llD) -> ~connected[set:digonG llD] -> dicolorableb D 2. Encodes the criticality/no-full-cover barrier of drv_twoext_h6: 3-connected + Eulerian + lambda=2 + digon-free cut => chi_vec<=2. Mappings are exact: arc_conn=2 is lambda(D)=2, ~connected(digonG) is 'F_D disconnected' = digon-free cut exists,"
   },
   "drv_twoext_h8": {
    "statement": "todo",
@@ -6203,11 +6263,14 @@
    "audit_page": "todo"
   },
   "drv_twoext_step1": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x1-reconcile",
+   "package": "digraph-theory",
+   "note": "Reconciled to two_extremal.v:three_connected_digonG_connected. forall D llD, two_extremal llD -> three_connected_sg(underlyingG llD) -> connected[set:digonG llD]. Matches drv_twoext_step1: 'for every 2-extremal D with U(D) 3-connected, F_D is a spanning tree, i.e. F_D is connected on all of V(D).' The row itself equates spanning-tree with 'connected on all V(D)' given the (separate) forest lemma, and the Rocq states exactly that connected form (three_connecte"
   },
   "drv_tww_g10": {
    "statement": "todo",

@@ -110,3 +110,4 @@ theories/conjectures/grounding_dichromatic_cycle.v
 theories/conjectures/P9.v
 theories/conjectures/grounding_P9.v
 theories/conjectures/implications_P9.v
+theories/conjectures/X1.v
