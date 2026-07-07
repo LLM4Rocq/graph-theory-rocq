@@ -130,3 +130,10 @@ make gate    # regenerates the manifest, then check_milestone for EVERY LANDED m
 
 Per-row provenance (the commit + package that landed each leg) lives in `meta/opg_legs_state.json`; routing/source-text provenance in `meta/opg_corpus_manifest.json`.
 
+## v2 corpus — graph-conjectures beyond OPG (growing)
+
+> Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
+
+- **1039 tracked rows** — by corpus tag: arxiv 762, erdos 277; **15 alias rows** (no statement owed).
+- Statement legs over the 1024 non-alias rows: **0 done** · 0 partial · 0 blocked · 1024 todo.
+

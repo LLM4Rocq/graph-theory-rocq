@@ -5,9 +5,13 @@
 `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **12 partial** · **7 blocked**.
 Release: **`opg-v1.0.1-227-attempted`** (release-time counts 212/8/7; 4 crossing-number rows were
 since downgraded to partial — `meta/CORPUS_STATUS.md` is the canonical living report). v1
-completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALIZATION_PLAN.md);
-the v2 programme (all conjecture sources of the upstream `graph-conjectures` repo):
-[`meta/V2_FULL_CORPUS_PLAN.md`](meta/V2_FULL_CORPUS_PLAN.md).
+completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALIZATION_PLAN.md).
+
+**v2 corpus (growing)** — every conjecture source of the upstream `graph-conjectures` repo:
+**1,039 rows tracked** (762 arXiv + 277 erdősproblems; 703 statement-owing after triage, 321
+parked with documented reasons, 15 aliases) · 0 statements yet. Plan:
+[`meta/V2_FULL_CORPUS_PLAN.md`](meta/V2_FULL_CORPUS_PLAN.md); live counts in
+[`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md).
 
 A monorepo of Rocq/MathComp **graph-theory** libraries — the math-comp model (one repo,
 many independently-installable opam packages). Each `<area>-theory/` subdir states the open
