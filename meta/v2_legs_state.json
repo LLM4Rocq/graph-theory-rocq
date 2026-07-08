@@ -127,18 +127,24 @@
    "audit_page": "todo"
   },
   "axv_1509_06563_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:bounded_clique_consecutive_hole_lengths_statement. Encodes the bounded-clique generalisation: for nu>0 and k>=3, large chi and omega<k force holes of nu consecutive lengths."
   },
   "axv_1509_06563_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:bounded_gaps_sets_are_constricting_statement. Encodes Conjecture 1.5 using the recovered context definition of k-constricting/constricting sets."
   },
   "axv_1509_06563_02": {
    "statement": "todo",
@@ -588,18 +594,24 @@
    "audit_page": "todo"
   },
   "axv_1702_01094_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:rainbow_consecutive_vertices_in_hole_statement. Encodes the rainbow-hole question: bounded omega and large chi force, in every proper colouring, a hole with s consecutive rainbow vertices."
   },
   "axv_1702_01094_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:stable_cover_unique_induced_path_statement. Encodes the stable-cover question via a finite family of stable vertex subsets covering G and an s-vertex induced path uniquely covered at each path vertex."
   },
   "axv_1702_01607_00": {
    "statement": "done",
@@ -692,11 +704,14 @@
    "audit_page": "todo"
   },
   "axv_1705_04609_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:clique_or_consecutive_holes_statement. Encodes Conjecture 1.8: sufficiently large chi forces either a kappa-clique or holes of ell consecutive lengths."
   },
   "axv_1706_00337_00": {
    "statement": "todo",
@@ -1745,11 +1760,14 @@
    "audit_page": "todo"
   },
   "axv_1910_00697_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:hereditary_chi_bounded_not_polynomial_statement. Encodes the solved Esperet problem as existence of an induced-hereditary chi-bounded graph class not bounded by any natural-coefficient polynomial in omega."
   },
   "axv_1911_03427_00": {
    "statement": "todo",
@@ -2682,11 +2700,14 @@
    "audit_page": "todo"
   },
   "axv_2110_00278_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:polynomial_gyarfas_sumner_statement. Encodes Conjecture 1.3: for every forbidden forest H, H-induced-free graphs satisfy chi(G) <= omega(G)^c for some c>0."
   },
   "axv_2110_09403_00": {
    "statement": "todo",
@@ -2808,11 +2829,14 @@
    "audit_page": "todo"
   },
   "axv_2201_08204_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:omega3_large_chi_triangle_free_induced_subgraphs_statement. Encodes Question 3.1 as arbitrarily large chromatic graphs with omega=3 whose triangle-free induced subgraphs all have chromatic number at most 3."
   },
   "axv_2201_08204_01": {
    "statement": "todo",
@@ -6691,11 +6715,14 @@
    "audit_page": "todo"
   },
   "erdos_1111": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:erdos_anticomplete_pairs_statement. Encodes Erdos Problems #1111: bounded clique number plus large chi forces disjoint anticomplete vertex sets with large subset chromatic numbers."
   },
   "erdos_112": {
    "statement": "todo",
@@ -9806,11 +9833,14 @@
    "audit_page": "todo"
   },
   "std_galvin_r_dl_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:galvin_rodl_induced_omega2_subgraph_statement. Encodes the Galvin-Rodl conjecture: large chi and omega<=k force an induced subgraph with chi>=r and omega=2."
   },
   "std_gantert_s_question_edge_reachability_weight_boun": {
    "statement": "todo",
@@ -9981,18 +10011,24 @@
    "audit_page": "todo"
   },
   "std_gy_rf_s_complementation_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:gyarfas_complementation_chi_bounded_statement. Encodes the Gyarfas complementation conjecture: complements of classes whose induced subgraphs satisfy chi<=omega+c are chi-bounded."
   },
   "std_gy_rf_s_conjecture_6_8_h_h_h_1_classes_are_bound": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:gyarfas_alpha_omega_chi_bounded_statement. Encodes Gyarfas Conjecture 6.8: the class satisfying alpha(H) omega(H) >= |V(H)|-1 for every induced subgraph H is chi-bounded."
   },
   "std_gy_rf_s_lehel_conjecture": {
    "statement": "todo",
@@ -10023,11 +10059,14 @@
    "audit_page": "todo"
   },
   "std_gy_rf_s_sumner_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x3-clean13",
+   "package": "chromatic-theory",
+   "note": "Authored in X3.v:gyarfas_sumner_two_forbidden_statement. Encodes the two-forbidden-graphs Gyarfas-Sumner statement using absolute bounded chromatic number, complete graphs, and forests."
   },
   "std_h_hadwiger_conjecture": {
    "statement": "todo",

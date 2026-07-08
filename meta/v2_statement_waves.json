@@ -57,6 +57,71 @@
    },
    "faithfulness_verified_by": "x2-faithfulness-verify workflow wf_cf217e26 (11 independent second readers) + adversarial re-verification of the corrected split-digraph row wf_33ede959, 2026-07-08",
    "faithfulness_result": "10/11 confirmed faithful on first pass. split_digraph_strong_two_kernel_statement was found PROVABLY FALSE (a directed triangle with self-loops satisfied the hypotheses but had no strong 2-kernel); the object must be ORIENTED. Fixed by adding an explicit x2_oriented guard (loopless + digon-free); adversarially re-verified (machine-checked counterexample exclusion + exhaustive oriented-split-digraph search to n=12, zero counterexamples; axiom-free positive witness). All 11 now faithful and genuinely open."
+  },
+  "X3": {
+   "phase": "X3",
+   "repo": "chromatic-theory",
+   "defines_file": "X3.v",
+   "implemented_by": "Codex X3 clean-13 statement authoring pass",
+   "source_verified_by": "Ptolemy independent X3 faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x3-clean13",
+   "rows": {
+    "axv_1509_06563_00": {
+     "formal_name": "bounded_clique_consecutive_hole_lengths_statement",
+     "note": "Encodes the bounded-clique generalisation: for nu>0 and k>=3, large chi and omega<k force holes of nu consecutive lengths."
+    },
+    "axv_1509_06563_01": {
+     "formal_name": "bounded_gaps_sets_are_constricting_statement",
+     "note": "Encodes Conjecture 1.5 using the recovered context definition of k-constricting/constricting sets."
+    },
+    "axv_1702_01094_00": {
+     "formal_name": "rainbow_consecutive_vertices_in_hole_statement",
+     "note": "Encodes the rainbow-hole question: bounded omega and large chi force, in every proper colouring, a hole with s consecutive rainbow vertices."
+    },
+    "axv_1702_01094_01": {
+     "formal_name": "stable_cover_unique_induced_path_statement",
+     "note": "Encodes the stable-cover question via a finite family of stable vertex subsets covering G and an s-vertex induced path uniquely covered at each path vertex."
+    },
+    "axv_1705_04609_00": {
+     "formal_name": "clique_or_consecutive_holes_statement",
+     "note": "Encodes Conjecture 1.8: sufficiently large chi forces either a kappa-clique or holes of ell consecutive lengths."
+    },
+    "axv_1910_00697_00": {
+     "formal_name": "hereditary_chi_bounded_not_polynomial_statement",
+     "note": "Encodes the solved Esperet problem as existence of an induced-hereditary chi-bounded graph class not bounded by any natural-coefficient polynomial in omega."
+    },
+    "axv_2110_00278_00": {
+     "formal_name": "polynomial_gyarfas_sumner_statement",
+     "note": "Encodes Conjecture 1.3: for every forbidden forest H, H-induced-free graphs satisfy chi(G) <= omega(G)^c for some c>0."
+    },
+    "axv_2201_08204_00": {
+     "formal_name": "omega3_large_chi_triangle_free_induced_subgraphs_statement",
+     "note": "Encodes Question 3.1 as arbitrarily large chromatic graphs with omega=3 whose triangle-free induced subgraphs all have chromatic number at most 3."
+    },
+    "erdos_1111": {
+     "formal_name": "erdos_anticomplete_pairs_statement",
+     "note": "Encodes Erdos Problems #1111: bounded clique number plus large chi forces disjoint anticomplete vertex sets with large subset chromatic numbers."
+    },
+    "std_galvin_r_dl_conjecture": {
+     "formal_name": "galvin_rodl_induced_omega2_subgraph_statement",
+     "note": "Encodes the Galvin-Rodl conjecture: large chi and omega<=k force an induced subgraph with chi>=r and omega=2."
+    },
+    "std_gy_rf_s_complementation_conjecture": {
+     "formal_name": "gyarfas_complementation_chi_bounded_statement",
+     "note": "Encodes the Gyarfas complementation conjecture: complements of classes whose induced subgraphs satisfy chi<=omega+c are chi-bounded."
+    },
+    "std_gy_rf_s_conjecture_6_8_h_h_h_1_classes_are_bound": {
+     "formal_name": "gyarfas_alpha_omega_chi_bounded_statement",
+     "note": "Encodes Gyarfas Conjecture 6.8: the class satisfying alpha(H) omega(H) >= |V(H)|-1 for every induced subgraph H is chi-bounded."
+    },
+    "std_gy_rf_s_sumner_conjecture": {
+     "formal_name": "gyarfas_sumner_two_forbidden_statement",
+     "note": "Encodes the two-forbidden-graphs Gyarfas-Sumner statement using absolute bounded chromatic number, complete graphs, and forests."
+    }
+   },
+   "faithfulness_verified_by": "Ptolemy independent X3 faithfulness readback pass, 2026-07-08 + independent adversarial cross-check wf_4d0ecbcb (13 readers, 2026-07-08)",
+   "faithfulness_result": "13/13 confirmed faithful. No well-formed-but-unfaithful issues found in statements or local primitives. Residual assumptions recorded by reviewer: 'colouring' in the rainbow-hole row is proper colouring; natural-coefficient polynomials/natural exponents are faithful discretizations of polynomial bounds on integer graph invariants; finite indexed stable covers are no loss for finite graphs. The Scott-Seymour tournament out-neighbourhood row was explicitly deferred as a directed/tournament followup, not part of the undirected X3 batch. | Independent cross-check (distinct reader set): 13/13 faithful, quantifier-order trap cleared on every chi-bounded row."
   }
  }
 }
