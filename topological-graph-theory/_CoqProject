@@ -22,3 +22,4 @@ theories/conjectures/implications_D3geo.v
 theories/conjectures/D3xseq.v
 theories/conjectures/grounding_D3xseq.v
 theories/conjectures/implications_D3xseq.v
+theories/conjectures/X6.v

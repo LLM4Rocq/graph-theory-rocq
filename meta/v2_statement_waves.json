@@ -122,6 +122,702 @@
    },
    "faithfulness_verified_by": "Ptolemy independent X3 faithfulness readback pass, 2026-07-08 + independent adversarial cross-check wf_4d0ecbcb (13 readers, 2026-07-08)",
    "faithfulness_result": "13/13 confirmed faithful. No well-formed-but-unfaithful issues found in statements or local primitives. Residual assumptions recorded by reviewer: 'colouring' in the rainbow-hole row is proper colouring; natural-coefficient polynomials/natural exponents are faithful discretizations of polynomial bounds on integer graph invariants; finite indexed stable covers are no loss for finite graphs. The Scott-Seymour tournament out-neighbourhood row was explicitly deferred as a directed/tournament followup, not part of the undirected X3 batch. | Independent cross-check (distinct reader set): 13/13 faithful, quantifier-order trap cleared on every chi-bounded row."
+  },
+  "X4": {
+   "phase": "X4",
+   "repo": "extremal-graph-theory",
+   "defines_file": "X4.v",
+   "implemented_by": "Codex X4 clean-12 statement authoring pass",
+   "source_verified_by": "Maxwell independent X4 faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x4-clean12",
+   "rows": {
+    "erdos_551": {
+     "formal_name": "cycle_clique_ramsey_formula_statement",
+     "note": "Encodes the exact two-colour Ramsey formula R(C_k,K_n)=(k-1)(n-1)+1 for k>=n>=3, excluding n=k=3."
+    },
+    "erdos_556": {
+     "formal_name": "three_colour_cycle_ramsey_bound_statement",
+     "note": "Encodes R_3(C_n) <= 4n-3 as the 3-colour complete-graph arrow at the stated bound, in the meaningful cycle regime n>=3."
+    },
+    "erdos_582": {
+     "formal_name": "folkman_k4_free_triangle_arrow_statement",
+     "note": "Encodes the finite Folkman question: existence of a K4-free graph whose every 2-edge-colouring contains a monochromatic triangle."
+    },
+    "erdos_617": {
+     "formal_name": "missing_colour_complete_edge_colouring_statement",
+     "note": "Encodes the r-colouring statement for K_{r^2+1}: some r+1 vertex set has a missing colour on its induced edges."
+    },
+    "erdos_639": {
+     "formal_name": "monochromatic_triangle_edge_bound_statement",
+     "note": "Encodes the 2-colouring bound by counting unordered complete-graph edges that lie in no monochromatic triangle and cross-multiplying the n^2/4 inequality."
+    },
+    "erdos_924": {
+     "formal_name": "folkman_clique_arrow_statement",
+     "note": "Encodes the general Folkman graph statement: for k>=2,l>=3 a K_{l+1}-free graph arrows K_l under every k-edge-colouring."
+    },
+    "std_thomason_s_conjecture_on_book_ramsey_numbers": {
+     "formal_name": "thomason_book_ramsey_bound_statement",
+     "note": "Encodes the diagonal book Ramsey bound r(B_n^(k)) <= 2^k(n+k-2)+2 using the standard k-spine, n-page book graph."
+    },
+    "erdos_904": {
+     "formal_name": "turan_degree_sum_clique_statement",
+     "note": "Encodes the Turan degree-sum result: if |E(G)| >= t_r(n), G has an r-clique whose degree sum satisfies n*sum d(x_i) >= 2r|E(G)|."
+    },
+    "erdos_905": {
+     "formal_name": "book_triangle_edge_statement",
+     "note": "Encodes the n^2/4 edge-threshold book result by requiring an edge with at least n/6 common neighbours, cross-multiplied."
+    },
+    "erdos_608": {
+     "formal_name": "c5_edge_count_above_turan_statement",
+     "note": "Encodes the C5-contained edge lower bound above the n^2/4 threshold, counting unordered edges lying on a 5-cycle and cross-multiplying 2n^2/9."
+    },
+    "erdos_621": {
+     "formal_name": "triangle_alpha_tau_bound_statement",
+     "note": "Encodes alpha_1(G)+tau_1(G)<=n^2/4 via finite edge-set maximum and triangle-hitting minimum predicates."
+    },
+    "erdos_1010": {
+     "formal_name": "triangle_supersaturation_statement",
+     "note": "Encodes the exact-edge supersaturation statement: if |E(G)|=floor(n^2/4)+t and t<floor(n/2), then G has at least t floor(n/2) triangles."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X5:minor-theory": {
+   "phase": "X5",
+   "repo": "minor-theory",
+   "defines_file": "X5.v",
+   "implemented_by": "Codex X5 structural statement authoring pass",
+   "source_verified_by": "Euclid independent X5 structural faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x5-structural",
+   "rows": {
+    "axv_1907_12999_00": {
+     "formal_name": "hadwiger_independence_minor_statement",
+     "note": "Encodes the K_{t+1}-minor-free independence lower bound as n <= t*alpha(G)."
+    },
+    "axv_2204_10119_00": {
+     "formal_name": "six_regular_has_k6_minor_statement",
+     "note": "Encodes that every non-null 6-regular graph has a K6 minor."
+    },
+    "axv_2204_10119_01": {
+     "formal_name": "min_degree_six_max_degree_eight_k6_minor_statement",
+     "note": "Encodes the min-degree at least six and max-degree at most eight K6-minor question."
+    },
+    "axv_2204_10119_02": {
+     "formal_name": "bipartite_min_degree_five_k6_minor_statement",
+     "note": "Encodes the bipartite variant asking whether the six in the min-degree-six K6-minor question can be replaced by five."
+    },
+    "axv_2204_10119_03": {
+     "formal_name": "bipartite_average_degree_five_max_six_k5_minor_statement",
+     "note": "Encodes the bipartite average-degree-at-least-five, maximum-degree-at-most-six K5-minor question."
+    },
+    "std_clique_minor_conjecture_for_bounded_independence": {
+     "formal_name": "bounded_independence_clique_minor_statement",
+     "note": "Encodes the bounded-independence clique-minor conjecture as alpha(G)<=r forcing a clique minor of order ceil(n/r)."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X5:cycle-theory": {
+   "phase": "X5",
+   "repo": "cycle-theory",
+   "defines_file": "X5.v",
+   "implemented_by": "Codex X5 structural statement authoring pass",
+   "source_verified_by": "Euclid independent X5 structural faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x5-structural",
+   "rows": {
+    "erdos_64": {
+     "formal_name": "min_degree_three_power_two_cycle_statement",
+     "note": "Encodes the minimum-degree-three power-of-two cycle-length question."
+    },
+    "erdos_577": {
+     "formal_name": "min_degree_half_disjoint_four_cycles_statement",
+     "note": "Encodes the 4k-vertex, minimum-degree-2k statement forcing k vertex-disjoint 4-cycles."
+    },
+    "erdos_916": {
+     "formal_name": "cycle_with_external_three_neighbours_statement",
+     "note": "Encodes the 2n-2 edge statement forcing a cycle and an external vertex adjacent to at least three vertices on it."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X5:packing-theory": {
+   "phase": "X5",
+   "repo": "packing-theory",
+   "defines_file": "X5.v",
+   "implemented_by": "Codex X5 structural statement authoring pass",
+   "source_verified_by": "Euclid independent X5 structural faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x5-structural",
+   "rows": {
+    "erdos_167": {
+     "formal_name": "triangle_packing_transversal_statement",
+     "note": "Encodes the edge-disjoint triangle packing versus triangle edge-transversal bound tau <= 2k."
+    },
+    "erdos_914": {
+     "formal_name": "clique_factor_min_degree_statement",
+     "note": "Encodes the rm-vertex minimum-degree m(r-1) condition forcing m vertex-disjoint K_r copies."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X5:hamiltonicity-theory": {
+   "phase": "X5",
+   "repo": "hamiltonicity-theory",
+   "defines_file": "X5.v",
+   "implemented_by": "Codex X5 structural statement authoring pass",
+   "source_verified_by": "Euclid independent X5 structural faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x5-structural",
+   "rows": {
+    "axv_1608_07568_00": {
+     "formal_name": "subcubic_two_connected_tsp_walk_bound_statement",
+     "note": "Encodes the 2-connected subcubic TSP-walk length bound 4L <= 5n+n_2-4."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X6:hypergraph-theory": {
+   "phase": "X6",
+   "repo": "hypergraph-theory",
+   "defines_file": "X6.v",
+   "implemented_by": "Codex X6 hypergraph/spectral/topological statement authoring pass",
+   "source_verified_by": "Tesla independent X6 faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x6-hypergraph-spectral-topological",
+   "rows": {
+    "std_lov_sz_conjecture_on_r_partite_hypergraph_matchi": {
+     "formal_name": "lovasz_r_partite_matching_deletion_statement",
+     "note": "Encodes the Lovasz r-partite r-uniform hypergraph matching deletion conjecture."
+    },
+    "axv_2505_05339_02": {
+     "formal_name": "r_partite_matching_deletion_tradeoff_statement",
+     "note": "Encodes the k(r-1)-vertex deletion tradeoff reducing matching number by at least k."
+    },
+    "erdos_1020": {
+     "formal_name": "erdos_matching_extremal_formula_statement",
+     "note": "Encodes the Erdos matching conjecture formula for the maximum edge count of an r-uniform hypergraph with no k disjoint edges."
+    },
+    "erdos_794": {
+     "formal_name": "three_uniform_hypergraph_dense_small_configuration_statement",
+     "note": "Encodes the 3-uniform dense small-configuration statement on 3n vertices."
+    },
+    "erdos_834": {
+     "formal_name": "critical_three_uniform_min_degree_seven_statement",
+     "note": "Encodes existence of a chromatic-edge-critical 3-uniform hypergraph with chromatic number 3 and every vertex degree at least seven."
+    },
+    "erdos_835": {
+     "formal_name": "subset_kneser_full_palette_statement",
+     "note": "Encodes the k-subset colouring of {1,...,2k} with k+1 colours so every (k+1)-set sees all colours among its k-subsets."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X6:spectral-graph-theory": {
+   "phase": "X6",
+   "repo": "spectral-graph-theory",
+   "defines_file": "X6.v",
+   "implemented_by": "Codex X6 hypergraph/spectral/topological statement authoring pass",
+   "source_verified_by": "Tesla independent X6 faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x6-hypergraph-spectral-topological",
+   "rows": {
+    "std_elphick_farber_goldberg_wocjan_conjecture_s_s": {
+     "formal_name": "elphick_farber_goldberg_wocjan_splus_sminus_statement",
+     "note": "Encodes min{s+(G),s-(G)} >= n-1 by requiring both positive and negative squared-adjacency-eigenvalue sums to be at least n-1."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X6:topological-graph-theory": {
+   "phase": "X6",
+   "repo": "topological-graph-theory",
+   "defines_file": "X6.v",
+   "implemented_by": "Codex X6 hypergraph/spectral/topological statement authoring pass",
+   "source_verified_by": "Tesla independent X6 faithfulness readback pass",
+   "source_verified_at": "2026-07-08",
+   "commit": "x6-hypergraph-spectral-topological",
+   "rows": {
+    "std_akiyama_watanabe_conjecture_induced_forest_on_5": {
+     "formal_name": "bipartite_planar_induced_forest_five_eighths_statement",
+     "note": "Encodes the bipartite planar induced-forest lower bound 5|V(G)|/8."
+    },
+    "std_kowalik_lu_ar_krekovski_conjecture_induced_fores": {
+     "formal_name": "girth_five_planar_induced_forest_seven_tenths_statement",
+     "note": "Encodes the planar girth-at-least-five induced-forest lower bound 7|V(G)|/10."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE1:chromatic-theory": {
+   "phase": "XE1",
+   "repo": "chromatic-theory",
+   "defines_file": "XE1.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_108": {
+     "formal_name": "erdos_108_statement",
+     "note": "Encodes Erdos Problems #108 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_149": {
+     "formal_name": "erdos_149_statement",
+     "note": "Encodes Erdos Problems #149 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_628": {
+     "formal_name": "erdos_628_statement",
+     "note": "Encodes Erdos Problems #628 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_944": {
+     "formal_name": "erdos_944_statement",
+     "note": "Encodes Erdos Problems #944 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE2:chromatic-theory": {
+   "phase": "XE2",
+   "repo": "chromatic-theory",
+   "defines_file": "XE2.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09 + Harvey deferred erdos_753 focused readback, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_1091": {
+     "formal_name": "erdos_1091_statement",
+     "note": "Encodes Erdos Problems #1091 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_58": {
+     "formal_name": "erdos_58_statement",
+     "note": "Encodes Erdos Problems #58 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_630": {
+     "formal_name": "erdos_630_statement",
+     "note": "Encodes Erdos Problems #630 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_632": {
+     "formal_name": "erdos_632_statement",
+     "note": "Encodes Erdos Problems #632 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_751": {
+     "formal_name": "erdos_751_statement",
+     "note": "Encodes Erdos Problems #751 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_758": {
+     "formal_name": "erdos_758_statement",
+     "note": "Encodes Erdos Problems #758 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_762": {
+     "formal_name": "erdos_762_statement",
+     "note": "Encodes Erdos Problems #762 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_842": {
+     "formal_name": "erdos_842_statement",
+     "note": "Encodes Erdos Problems #842 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_922": {
+     "formal_name": "erdos_922_statement",
+     "note": "Encodes Erdos Problems #922 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_923": {
+     "formal_name": "erdos_923_statement",
+     "note": "Encodes Erdos Problems #923 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_753": {
+     "formal_name": "erdos_753_statement",
+     "note": "Encodes Erdos Problems #753 in the XE deferred-followup statement pass. Rational cross-multiplied exponent wrapper for n^(1/2+c)."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE1:cycle-theory": {
+   "phase": "XE1",
+   "repo": "cycle-theory",
+   "defines_file": "XE1.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_184": {
+     "formal_name": "erdos_184_statement",
+     "note": "Encodes Erdos Problems #184 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE2:cycle-theory": {
+   "phase": "XE2",
+   "repo": "cycle-theory",
+   "defines_file": "XE2.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_641": {
+     "formal_name": "erdos_641_statement",
+     "note": "Encodes Erdos Problems #641 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_71": {
+     "formal_name": "erdos_71_statement",
+     "note": "Encodes Erdos Problems #71 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_752": {
+     "formal_name": "erdos_752_statement",
+     "note": "Encodes Erdos Problems #752 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_815": {
+     "formal_name": "erdos_815_statement",
+     "note": "Encodes Erdos Problems #815 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE1:graph-theory-misc": {
+   "phase": "XE1",
+   "repo": "graph-theory-misc",
+   "defines_file": "XE1.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_883": {
+     "formal_name": "erdos_883_statement",
+     "note": "Encodes Erdos Problems #883 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE2:graph-theory-misc": {
+   "phase": "XE2",
+   "repo": "graph-theory-misc",
+   "defines_file": "XE2.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_715": {
+     "formal_name": "erdos_715_statement",
+     "note": "Encodes Erdos Problems #715 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_895": {
+     "formal_name": "erdos_895_statement",
+     "note": "Encodes Erdos Problems #895 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE1:hypergraph-theory": {
+   "phase": "XE1",
+   "repo": "hypergraph-theory",
+   "defines_file": "XE1.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_564": {
+     "formal_name": "erdos_564_statement",
+     "note": "Encodes Erdos Problems #564 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_719": {
+     "formal_name": "erdos_719_statement",
+     "note": "Encodes Erdos Problems #719 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_836": {
+     "formal_name": "erdos_836_statement",
+     "note": "Encodes Erdos Problems #836 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE2:hypergraph-theory": {
+   "phase": "XE2",
+   "repo": "hypergraph-theory",
+   "defines_file": "XE2.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_775": {
+     "formal_name": "erdos_775_statement",
+     "note": "Encodes Erdos Problems #775 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_832": {
+     "formal_name": "erdos_832_statement",
+     "note": "Encodes Erdos Problems #832 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_833": {
+     "formal_name": "erdos_833_statement",
+     "note": "Encodes Erdos Problems #833 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE1:packing-theory": {
+   "phase": "XE1",
+   "repo": "packing-theory",
+   "defines_file": "XE1.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_151": {
+     "formal_name": "erdos_151_statement",
+     "note": "Encodes Erdos Problems #151 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_743": {
+     "formal_name": "erdos_743_statement",
+     "note": "Encodes Erdos Problems #743 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_81": {
+     "formal_name": "erdos_81_statement",
+     "note": "Encodes Erdos Problems #81 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_993": {
+     "formal_name": "erdos_993_statement",
+     "note": "Encodes Erdos Problems #993 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE2:digraph-theory": {
+   "phase": "XE2",
+   "repo": "digraph-theory",
+   "defines_file": "XE2.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Hooke independent XE Erdos non-extremal faithfulness pass + focused re-check, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_1006": {
+     "formal_name": "erdos_1006_statement",
+     "note": "Encodes Erdos Problems #1006 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_1216": {
+     "formal_name": "erdos_1216_statement",
+     "note": "Encodes Erdos Problems #1216 in the XE Erdos clean/bounded statement wave."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE1:extremal-graph-theory": {
+   "phase": "XE1",
+   "repo": "extremal-graph-theory",
+   "defines_file": "XE1.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Aristotle independent XE Erdos extremal faithfulness pass + focused re-checks, 2026-07-09 + Copernicus deferred extremal focused readback, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_1035": {
+     "formal_name": "erdos_1035_statement",
+     "note": "Encodes Erdos Problems #1035 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_128": {
+     "formal_name": "erdos_128_statement",
+     "note": "Encodes Erdos Problems #128 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_23": {
+     "formal_name": "erdos_23_statement",
+     "note": "Encodes Erdos Problems #23 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_545": {
+     "formal_name": "erdos_545_statement",
+     "note": "Encodes Erdos Problems #545 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_548": {
+     "formal_name": "erdos_548_statement",
+     "note": "Encodes Erdos Problems #548 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_552": {
+     "formal_name": "erdos_552_statement",
+     "note": "Encodes Erdos Problems #552 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_566": {
+     "formal_name": "erdos_566_statement",
+     "note": "Encodes Erdos Problems #566 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_567": {
+     "formal_name": "erdos_567_statement",
+     "note": "Encodes Erdos Problems #567 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_568": {
+     "formal_name": "erdos_568_statement",
+     "note": "Encodes Erdos Problems #568 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_802": {
+     "formal_name": "erdos_802_statement",
+     "note": "Encodes Erdos Problems #802 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_812": {
+     "formal_name": "erdos_812_statement",
+     "note": "Encodes Erdos Problems #812 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_85": {
+     "formal_name": "erdos_85_statement",
+     "note": "Encodes Erdos Problems #85 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_87": {
+     "formal_name": "erdos_87_statement",
+     "note": "Encodes Erdos Problems #87 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_129": {
+     "formal_name": "erdos_129_statement",
+     "note": "Encodes Erdos Problems #129 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
+    },
+    "erdos_550": {
+     "formal_name": "erdos_550_statement",
+     "note": "Encodes Erdos Problems #550 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
+    },
+    "erdos_557": {
+     "formal_name": "erdos_557_statement",
+     "note": "Encodes Erdos Problems #557 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
+    },
+    "erdos_561": {
+     "formal_name": "erdos_561_statement",
+     "note": "Encodes Erdos Problems #561 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
+    },
+    "erdos_619": {
+     "formal_name": "erdos_619_statement",
+     "note": "Encodes Erdos Problems #619 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
+    },
+    "erdos_766": {
+     "formal_name": "erdos_766_statement",
+     "note": "Encodes Erdos Problems #766 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
+    },
+    "erdos_813": {
+     "formal_name": "erdos_813_statement",
+     "note": "Encodes Erdos Problems #813 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "XE2:extremal-graph-theory": {
+   "phase": "XE2",
+   "repo": "extremal-graph-theory",
+   "defines_file": "XE2.v",
+   "implemented_by": "Codex XE1-XE2 Erdos clean/bounded statement authoring pass",
+   "source_verified_by": "Aristotle independent XE Erdos extremal faithfulness pass + focused re-checks, 2026-07-09 + Copernicus deferred extremal focused readback, 2026-07-09",
+   "source_verified_at": "2026-07-09",
+   "commit": "xe-erdos-clean-bounded",
+   "rows": {
+    "erdos_1009": {
+     "formal_name": "erdos_1009_statement",
+     "note": "Encodes Erdos Problems #1009 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_1019": {
+     "formal_name": "erdos_1019_statement",
+     "note": "Encodes Erdos Problems #1019 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_1080": {
+     "formal_name": "erdos_1080_statement",
+     "note": "Encodes Erdos Problems #1080 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_22": {
+     "formal_name": "erdos_22_statement",
+     "note": "Encodes Erdos Problems #22 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_518": {
+     "formal_name": "erdos_518_statement",
+     "note": "Encodes Erdos Problems #518 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_547": {
+     "formal_name": "erdos_547_statement",
+     "note": "Encodes Erdos Problems #547 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_549": {
+     "formal_name": "erdos_549_statement",
+     "note": "Encodes Erdos Problems #549 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_559": {
+     "formal_name": "erdos_559_statement",
+     "note": "Encodes Erdos Problems #559 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_565": {
+     "formal_name": "erdos_565_statement",
+     "note": "Encodes Erdos Problems #565 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_570": {
+     "formal_name": "erdos_570_statement",
+     "note": "Encodes Erdos Problems #570 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_613": {
+     "formal_name": "erdos_613_statement",
+     "note": "Encodes Erdos Problems #613 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_73": {
+     "formal_name": "erdos_73_statement",
+     "note": "Encodes Erdos Problems #73 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_742": {
+     "formal_name": "erdos_742_statement",
+     "note": "Encodes Erdos Problems #742 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_767": {
+     "formal_name": "erdos_767_statement",
+     "note": "Encodes Erdos Problems #767 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_800": {
+     "formal_name": "erdos_800_statement",
+     "note": "Encodes Erdos Problems #800 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_801": {
+     "formal_name": "erdos_801_statement",
+     "note": "Encodes Erdos Problems #801 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_803": {
+     "formal_name": "erdos_803_statement",
+     "note": "Encodes Erdos Problems #803 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_814": {
+     "formal_name": "erdos_814_statement",
+     "note": "Encodes Erdos Problems #814 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_816": {
+     "formal_name": "erdos_816_statement",
+     "note": "Encodes Erdos Problems #816 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_915": {
+     "formal_name": "erdos_915_statement",
+     "note": "Encodes Erdos Problems #915 in the XE Erdos clean/bounded statement wave."
+    },
+    "erdos_1018": {
+     "formal_name": "erdos_1018_statement",
+     "note": "Encodes Erdos Problems #1018 in the XE deferred-followup statement pass. Planarity/asymptotic edge threshold repaired and independently confirmed."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
   }
  }
 }

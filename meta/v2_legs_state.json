@@ -375,11 +375,14 @@
    "audit_page": "todo"
   },
   "axv_1608_07568_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "hamiltonicity-theory",
+   "note": "Authored in X5.v:subcubic_two_connected_tsp_walk_bound_statement. Encodes the 2-connected subcubic TSP-walk length bound 4L <= 5n+n_2-4."
   },
   "axv_1608_07680_00": {
    "statement": "todo",
@@ -1620,11 +1623,14 @@
    "audit_page": "todo"
   },
   "axv_1907_12999_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "minor-theory",
+   "note": "Authored in X5.v:hadwiger_independence_minor_statement. Encodes the K_{t+1}-minor-free independence lower bound as n <= t*alpha(G)."
   },
   "axv_1907_12999_01": {
    "statement": "todo",
@@ -3042,32 +3048,44 @@
    "audit_page": "todo"
   },
   "axv_2204_10119_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "minor-theory",
+   "note": "Authored in X5.v:six_regular_has_k6_minor_statement. Encodes that every non-null 6-regular graph has a K6 minor."
   },
   "axv_2204_10119_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "minor-theory",
+   "note": "Authored in X5.v:min_degree_six_max_degree_eight_k6_minor_statement. Encodes the min-degree at least six and max-degree at most eight K6-minor question."
   },
   "axv_2204_10119_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "minor-theory",
+   "note": "Authored in X5.v:bipartite_min_degree_five_k6_minor_statement. Encodes the bipartite variant asking whether the six in the min-degree-six K6-minor question can be replaced by five."
   },
   "axv_2204_10119_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "minor-theory",
+   "note": "Authored in X5.v:bipartite_average_degree_five_max_six_k5_minor_statement. Encodes the bipartite average-degree-at-least-five, maximum-degree-at-most-six K5-minor question."
   },
   "axv_2204_12330_00": {
    "statement": "todo",
@@ -4835,11 +4853,14 @@
    "audit_page": "todo"
   },
   "axv_2505_05339_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "hypergraph-theory",
+   "note": "Authored in X6.v:r_partite_matching_deletion_tradeoff_statement. Encodes the k(r-1)-vertex deletion tradeoff reducing matching number by at least k."
   },
   "axv_2505_05339_03": {
    "statement": "todo",
@@ -6435,11 +6456,14 @@
    "audit_page": "todo"
   },
   "erdos_1006": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "digraph-theory",
+   "note": "Authored in XE2.v:erdos_1006_statement. Encodes Erdos Problems #1006 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1007": {
    "statement": "todo",
@@ -6456,18 +6480,24 @@
    "audit_page": "todo"
   },
   "erdos_1009": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_1009_statement. Encodes Erdos Problems #1009 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1010": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:triangle_supersaturation_statement. Encodes the exact-edge supersaturation statement: if |E(G)|=floor(n^2/4)+t and t<floor(n/2), then G has at least t floor(n/2) triangles."
   },
   "erdos_1011": {
    "statement": "todo",
@@ -6519,25 +6549,34 @@
    "audit_page": "todo"
   },
   "erdos_1018": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_1018_statement. Encodes Erdos Problems #1018 in the XE deferred-followup statement pass. Planarity/asymptotic edge threshold repaired and independently confirmed."
   },
   "erdos_1019": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_1019_statement. Encodes Erdos Problems #1019 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1020": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "hypergraph-theory",
+   "note": "Authored in X6.v:erdos_matching_extremal_formula_statement. Encodes the Erdos matching conjecture formula for the maximum edge count of an r-uniform hypergraph with no k disjoint edges."
   },
   "erdos_1021": {
    "statement": "todo",
@@ -6596,11 +6635,14 @@
    "audit_page": "todo"
   },
   "erdos_1035": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_1035_statement. Encodes Erdos Problems #1035 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1036": {
    "statement": "todo",
@@ -6659,25 +6701,34 @@
    "audit_page": "todo"
   },
   "erdos_108": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE1.v:erdos_108_statement. Encodes Erdos Problems #108 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1080": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_1080_statement. Encodes Erdos Problems #1080 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1091": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_1091_statement. Encodes Erdos Problems #1091 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1092": {
    "statement": "todo",
@@ -6767,11 +6818,14 @@
    "audit_page": "todo"
   },
   "erdos_1216": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "digraph-theory",
+   "note": "Authored in XE2.v:erdos_1216_statement. Encodes Erdos Problems #1216 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_127": {
    "statement": "todo",
@@ -6781,18 +6835,24 @@
    "audit_page": "todo"
   },
   "erdos_128": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_128_statement. Encodes Erdos Problems #128 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_129": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_129_statement. Encodes Erdos Problems #129 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
   },
   "erdos_130": {
    "statement": "todo",
@@ -6837,11 +6897,14 @@
    "audit_page": "todo"
   },
   "erdos_149": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE1.v:erdos_149_statement. Encodes Erdos Problems #149 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_150": {
    "statement": "todo",
@@ -6851,11 +6914,14 @@
    "audit_page": "todo"
   },
   "erdos_151": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "packing-theory",
+   "note": "Authored in XE1.v:erdos_151_statement. Encodes Erdos Problems #151 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_159": {
    "statement": "todo",
@@ -6879,11 +6945,14 @@
    "audit_page": "todo"
   },
   "erdos_167": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "packing-theory",
+   "note": "Authored in X5.v:triangle_packing_transversal_statement. Encodes the edge-disjoint triangle packing versus triangle edge-transversal bound tau <= 2k."
   },
   "erdos_181": {
    "statement": "todo",
@@ -6907,25 +6976,34 @@
    "audit_page": "todo"
   },
   "erdos_184": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "cycle-theory",
+   "note": "Authored in XE1.v:erdos_184_statement. Encodes Erdos Problems #184 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_22": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_22_statement. Encodes Erdos Problems #22 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_23": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_23_statement. Encodes Erdos Problems #23 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_426": {
    "statement": "todo",
@@ -6942,11 +7020,14 @@
    "audit_page": "todo"
   },
   "erdos_518": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_518_statement. Encodes Erdos Problems #518 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_533": {
    "statement": "todo",
@@ -6963,11 +7044,14 @@
    "audit_page": "todo"
   },
   "erdos_545": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_545_statement. Encodes Erdos Problems #545 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_546": {
    "statement": "todo",
@@ -6977,46 +7061,64 @@
    "audit_page": "todo"
   },
   "erdos_547": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_547_statement. Encodes Erdos Problems #547 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_548": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_548_statement. Encodes Erdos Problems #548 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_549": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_549_statement. Encodes Erdos Problems #549 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_550": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_550_statement. Encodes Erdos Problems #550 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
   },
   "erdos_551": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:cycle_clique_ramsey_formula_statement. Encodes the exact two-colour Ramsey formula R(C_k,K_n)=(k-1)(n-1)+1 for k>=n>=3, excluding n=k=3."
   },
   "erdos_552": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_552_statement. Encodes Erdos Problems #552 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_553": {
    "statement": "todo",
@@ -7040,18 +7142,24 @@
    "audit_page": "todo"
   },
   "erdos_556": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:three_colour_cycle_ramsey_bound_statement. Encodes R_3(C_n) <= 4n-3 as the 3-colour complete-graph arrow at the stated bound, in the meaningful cycle regime n>=3."
   },
   "erdos_557": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_557_statement. Encodes Erdos Problems #557 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
   },
   "erdos_558": {
    "statement": "todo",
@@ -7061,11 +7169,14 @@
    "audit_page": "todo"
   },
   "erdos_559": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_559_statement. Encodes Erdos Problems #559 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_560": {
    "statement": "todo",
@@ -7075,11 +7186,14 @@
    "audit_page": "todo"
   },
   "erdos_561": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_561_statement. Encodes Erdos Problems #561 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
   },
   "erdos_562": {
    "statement": "todo",
@@ -7096,39 +7210,54 @@
    "audit_page": "todo"
   },
   "erdos_564": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "hypergraph-theory",
+   "note": "Authored in XE1.v:erdos_564_statement. Encodes Erdos Problems #564 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_565": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_565_statement. Encodes Erdos Problems #565 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_566": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_566_statement. Encodes Erdos Problems #566 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_567": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_567_statement. Encodes Erdos Problems #567 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_568": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_568_statement. Encodes Erdos Problems #568 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_569": {
    "statement": "todo",
@@ -7145,11 +7274,14 @@
    "audit_page": "todo"
   },
   "erdos_570": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_570_statement. Encodes Erdos Problems #570 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_571": {
    "statement": "todo",
@@ -7194,11 +7326,14 @@
    "audit_page": "todo"
   },
   "erdos_577": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "cycle-theory",
+   "note": "Authored in X5.v:min_degree_half_disjoint_four_cycles_statement. Encodes the 4k-vertex, minimum-degree-2k statement forcing k vertex-disjoint 4-cycles."
   },
   "erdos_578": {
    "statement": "todo",
@@ -7215,11 +7350,14 @@
    "audit_page": "todo"
   },
   "erdos_58": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_58_statement. Encodes Erdos Problems #58 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_581": {
    "statement": "todo",
@@ -7229,11 +7367,14 @@
    "audit_page": "todo"
   },
   "erdos_582": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:folkman_k4_free_triangle_arrow_statement. Encodes the finite Folkman question: existence of a K4-free graph whose every 2-edge-colouring contains a monochromatic triangle."
   },
   "erdos_584": {
    "statement": "todo",
@@ -7320,11 +7461,14 @@
    "audit_page": "todo"
   },
   "erdos_608": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:c5_edge_count_above_turan_statement. Encodes the C5-contained edge lower bound above the n^2/4 threshold, counting unordered edges lying on a 5-cycle and cross-multiplying 2n^2/9."
   },
   "erdos_609": {
    "statement": "todo",
@@ -7355,11 +7499,14 @@
    "audit_page": "todo"
   },
   "erdos_613": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_613_statement. Encodes Erdos Problems #613 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_614": {
    "statement": "todo",
@@ -7383,11 +7530,14 @@
    "audit_page": "todo"
   },
   "erdos_617": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:missing_colour_complete_edge_colouring_statement. Encodes the r-colouring statement for K_{r^2+1}: some r+1 vertex set has a missing colour on its induced edges."
   },
   "erdos_618": {
    "statement": "todo",
@@ -7397,11 +7547,14 @@
    "audit_page": "todo"
   },
   "erdos_619": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_619_statement. Encodes Erdos Problems #619 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
   },
   "erdos_620": {
    "statement": "todo",
@@ -7411,11 +7564,14 @@
    "audit_page": "todo"
   },
   "erdos_621": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:triangle_alpha_tau_bound_statement. Encodes alpha_1(G)+tau_1(G)<=n^2/4 via finite edge-set maximum and triangle-hitting minimum predicates."
   },
   "erdos_622": {
    "statement": "todo",
@@ -7446,11 +7602,14 @@
    "audit_page": "todo"
   },
   "erdos_628": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE1.v:erdos_628_statement. Encodes Erdos Problems #628 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_629": {
    "statement": "todo",
@@ -7467,18 +7626,24 @@
    "audit_page": "todo"
   },
   "erdos_630": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_630_statement. Encodes Erdos Problems #630 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_632": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_632_statement. Encodes Erdos Problems #632 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_636": {
    "statement": "todo",
@@ -7495,25 +7660,34 @@
    "audit_page": "todo"
   },
   "erdos_639": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:monochromatic_triangle_edge_bound_statement. Encodes the 2-colouring bound by counting unordered complete-graph edges that lie in no monochromatic triangle and cross-multiplying the n^2/4 inequality."
   },
   "erdos_64": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "cycle-theory",
+   "note": "Authored in X5.v:min_degree_three_power_two_cycle_statement. Encodes the minimum-degree-three power-of-two cycle-length question."
   },
   "erdos_641": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "cycle-theory",
+   "note": "Authored in XE2.v:erdos_641_statement. Encodes Erdos Problems #641 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_642": {
    "statement": "todo",
@@ -7579,11 +7753,14 @@
    "audit_page": "todo"
   },
   "erdos_71": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "cycle-theory",
+   "note": "Authored in XE2.v:erdos_71_statement. Encodes Erdos Problems #71 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_712": {
    "statement": "todo",
@@ -7607,11 +7784,14 @@
    "audit_page": "todo"
   },
   "erdos_715": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "graph-theory-misc",
+   "note": "Authored in XE2.v:erdos_715_statement. Encodes Erdos Problems #715 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_716": {
    "statement": "todo",
@@ -7628,11 +7808,14 @@
    "audit_page": "todo"
   },
   "erdos_719": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "hypergraph-theory",
+   "note": "Authored in XE1.v:erdos_719_statement. Encodes Erdos Problems #719 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_72": {
    "statement": "todo",
@@ -7649,11 +7832,14 @@
    "audit_page": "todo"
   },
   "erdos_73": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_73_statement. Encodes Erdos Problems #73 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_736": {
    "statement": "todo",
@@ -7698,18 +7884,24 @@
    "audit_page": "todo"
   },
   "erdos_742": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_742_statement. Encodes Erdos Problems #742 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_743": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "packing-theory",
+   "note": "Authored in XE1.v:erdos_743_statement. Encodes Erdos Problems #743 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_744": {
    "statement": "todo",
@@ -7747,32 +7939,44 @@
    "audit_page": "todo"
   },
   "erdos_751": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_751_statement. Encodes Erdos Problems #751 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_752": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "cycle-theory",
+   "note": "Authored in XE2.v:erdos_752_statement. Encodes Erdos Problems #752 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_753": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_753_statement. Encodes Erdos Problems #753 in the XE deferred-followup statement pass. Rational cross-multiplied exponent wrapper for n^(1/2+c)."
   },
   "erdos_758": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_758_statement. Encodes Erdos Problems #758 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_759": {
    "statement": "todo",
@@ -7796,11 +8000,14 @@
    "audit_page": "todo"
   },
   "erdos_762": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_762_statement. Encodes Erdos Problems #762 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_765": {
    "statement": "todo",
@@ -7810,18 +8017,24 @@
    "audit_page": "todo"
   },
   "erdos_766": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_766_statement. Encodes Erdos Problems #766 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
   },
   "erdos_767": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_767_statement. Encodes Erdos Problems #767 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_77": {
    "statement": "todo",
@@ -7831,11 +8044,14 @@
    "audit_page": "todo"
   },
   "erdos_775": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "hypergraph-theory",
+   "note": "Authored in XE2.v:erdos_775_statement. Encodes Erdos Problems #775 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_777": {
    "statement": "todo",
@@ -7866,11 +8082,14 @@
    "audit_page": "todo"
   },
   "erdos_794": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "hypergraph-theory",
+   "note": "Authored in X6.v:three_uniform_hypergraph_dense_small_configuration_statement. Encodes the 3-uniform dense small-configuration statement on 3n vertices."
   },
   "erdos_797": {
    "statement": "todo",
@@ -7894,32 +8113,44 @@
    "audit_page": "todo"
   },
   "erdos_800": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_800_statement. Encodes Erdos Problems #800 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_801": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_801_statement. Encodes Erdos Problems #801 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_802": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_802_statement. Encodes Erdos Problems #802 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_803": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_803_statement. Encodes Erdos Problems #803 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_804": {
    "statement": "todo",
@@ -7957,11 +8188,14 @@
    "audit_page": "todo"
   },
   "erdos_81": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "packing-theory",
+   "note": "Authored in XE1.v:erdos_81_statement. Encodes Erdos Problems #81 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_811": {
    "statement": "todo",
@@ -7971,39 +8205,54 @@
    "audit_page": "todo"
   },
   "erdos_812": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_812_statement. Encodes Erdos Problems #812 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_813": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_813_statement. Encodes Erdos Problems #813 in the XE deferred-followup statement pass. Deferred extremal followup repaired and independently confirmed."
   },
   "erdos_814": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_814_statement. Encodes Erdos Problems #814 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_815": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "cycle-theory",
+   "note": "Authored in XE2.v:erdos_815_statement. Encodes Erdos Problems #815 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_816": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_816_statement. Encodes Erdos Problems #816 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_82": {
    "statement": "todo",
@@ -8013,39 +8262,54 @@
    "audit_page": "todo"
   },
   "erdos_832": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "hypergraph-theory",
+   "note": "Authored in XE2.v:erdos_832_statement. Encodes Erdos Problems #832 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_833": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "hypergraph-theory",
+   "note": "Authored in XE2.v:erdos_833_statement. Encodes Erdos Problems #833 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_834": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "hypergraph-theory",
+   "note": "Authored in X6.v:critical_three_uniform_min_degree_seven_statement. Encodes existence of a chromatic-edge-critical 3-uniform hypergraph with chromatic number 3 and every vertex degree at least seven."
   },
   "erdos_835": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "hypergraph-theory",
+   "note": "Authored in X6.v:subset_kneser_full_palette_statement. Encodes the k-subset colouring of {1,...,2k} with k+1 colours so every (k+1)-set sees all colours among its k-subsets."
   },
   "erdos_836": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "hypergraph-theory",
+   "note": "Authored in XE1.v:erdos_836_statement. Encodes Erdos Problems #836 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_837": {
    "statement": "todo",
@@ -8062,18 +8326,24 @@
    "audit_page": "todo"
   },
   "erdos_842": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_842_statement. Encodes Erdos Problems #842 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_85": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_85_statement. Encodes Erdos Problems #85 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_86": {
    "statement": "todo",
@@ -8083,11 +8353,14 @@
    "audit_page": "todo"
   },
   "erdos_87": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE1.v:erdos_87_statement. Encodes Erdos Problems #87 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_88": {
    "statement": "todo",
@@ -8097,18 +8370,24 @@
    "audit_page": "todo"
   },
   "erdos_883": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "graph-theory-misc",
+   "note": "Authored in XE1.v:erdos_883_statement. Encodes Erdos Problems #883 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_895": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "graph-theory-misc",
+   "note": "Authored in XE2.v:erdos_895_statement. Encodes Erdos Problems #895 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_900": {
    "statement": "todo",
@@ -8125,18 +8404,24 @@
    "audit_page": "todo"
   },
   "erdos_904": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:turan_degree_sum_clique_statement. Encodes the Turan degree-sum result: if |E(G)| >= t_r(n), G has an r-clique whose degree sum satisfies n*sum d(x_i) >= 2r|E(G)|."
   },
   "erdos_905": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:book_triangle_edge_statement. Encodes the n^2/4 edge-threshold book result by requiring an edge with at least n/6 common neighbours, cross-multiplied."
   },
   "erdos_911": {
    "statement": "todo",
@@ -8146,25 +8431,34 @@
    "audit_page": "todo"
   },
   "erdos_914": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "packing-theory",
+   "note": "Authored in X5.v:clique_factor_min_degree_statement. Encodes the rm-vertex minimum-degree m(r-1) condition forcing m vertex-disjoint K_r copies."
   },
   "erdos_915": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "extremal-graph-theory",
+   "note": "Authored in XE2.v:erdos_915_statement. Encodes Erdos Problems #915 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_916": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "cycle-theory",
+   "note": "Authored in X5.v:cycle_with_external_three_neighbours_statement. Encodes the 2n-2 edge statement forcing a cycle and an external vertex adjacent to at least three vertices on it."
   },
   "erdos_917": {
    "statement": "todo",
@@ -8202,25 +8496,34 @@
    "audit_page": "todo"
   },
   "erdos_922": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_922_statement. Encodes Erdos Problems #922 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_923": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE2.v:erdos_923_statement. Encodes Erdos Problems #923 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_924": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:folkman_clique_arrow_statement. Encodes the general Folkman graph statement: for k>=2,l>=3 a K_{l+1}-free graph arrows K_l under every k-edge-colouring."
   },
   "erdos_925": {
    "statement": "todo",
@@ -8251,11 +8554,14 @@
    "audit_page": "todo"
   },
   "erdos_944": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "chromatic-theory",
+   "note": "Authored in XE1.v:erdos_944_statement. Encodes Erdos Problems #944 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_986": {
    "statement": "todo",
@@ -8265,11 +8571,14 @@
    "audit_page": "todo"
   },
   "erdos_993": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "xe-erdos-clean-bounded",
+   "package": "packing-theory",
+   "note": "Authored in XE1.v:erdos_993_statement. Encodes Erdos Problems #993 in the XE Erdos clean/bounded statement wave."
   },
   "std_aboulker_aubian_charbit_lopes_question_on_certif": {
    "statement": "todo",
@@ -8377,11 +8686,14 @@
    "audit_page": "todo"
   },
   "std_akiyama_watanabe_conjecture_induced_forest_on_5": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "topological-graph-theory",
+   "note": "Authored in X6.v:bipartite_planar_induced_forest_five_eighths_statement. Encodes the bipartite planar induced-forest lower bound 5|V(G)|/8."
   },
   "std_albertson_s_problem_on_distance_constrained_list": {
    "statement": "todo",
@@ -9126,11 +9438,14 @@
    "audit_page": "todo"
   },
   "std_clique_minor_conjecture_for_bounded_independence": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x5-structural",
+   "package": "minor-theory",
+   "note": "Authored in X5.v:bounded_independence_clique_minor_statement. Encodes the bounded-independence clique-minor conjecture as alpha(G)<=r forcing a clique minor of order ceil(n/r)."
   },
   "std_clock_free_graphs_are_clean": {
    "statement": "todo",
@@ -9413,11 +9728,14 @@
    "audit_page": "todo"
   },
   "std_elphick_farber_goldberg_wocjan_conjecture_s_s": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "spectral-graph-theory",
+   "note": "Authored in X6.v:elphick_farber_goldberg_wocjan_splus_sminus_statement. Encodes min{s+(G),s-(G)} >= n-1 by requiring both positive and negative squared-adjacency-eigenvalue sums to be at least n-1."
   },
   "std_elphick_farber_goldberg_wocjan_conjecture_square": {
    "statement": "todo",
@@ -10405,11 +10723,14 @@
    "audit_page": "todo"
   },
   "std_kowalik_lu_ar_krekovski_conjecture_induced_fores": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "topological-graph-theory",
+   "note": "Authored in X6.v:girth_five_planar_induced_forest_seven_tenths_statement. Encodes the planar girth-at-least-five induced-forest lower bound 7|V(G)|/10."
   },
   "std_krekovski_conjecture_separation_choosability_of": {
    "statement": "todo",
@@ -10601,11 +10922,14 @@
    "audit_page": "todo"
   },
   "std_lov_sz_conjecture_on_r_partite_hypergraph_matchi": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x6-hypergraph-spectral-topological",
+   "package": "hypergraph-theory",
+   "note": "Authored in X6.v:lovasz_r_partite_matching_deletion_statement. Encodes the Lovasz r-partite r-uniform hypergraph matching deletion conjecture."
   },
   "std_lov_sz_ne_et_il_pultr_problem_on_product_dimensi": {
    "statement": "todo",
@@ -11294,11 +11618,14 @@
    "audit_page": "todo"
   },
   "std_thomason_s_conjecture_on_book_ramsey_numbers": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x4-clean12",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X4.v:thomason_book_ramsey_bound_statement. Encodes the diagonal book Ramsey bound r(B_n^(k)) <= 2^k(n+k-2)+2 using the standard k-spine, n-page book graph."
   },
   "std_thomassen_s_conjecture_disjoint_dipaths_in_highl": {
    "statement": "todo",

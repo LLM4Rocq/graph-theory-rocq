@@ -1,4 +1,5 @@
 -R theories Digraph
+-Q ../base/theories GTBase
 
 -arg -w -arg -notation-overridden,-ambiguous-paths
 
@@ -112,3 +113,4 @@ theories/conjectures/grounding_P9.v
 theories/conjectures/implications_P9.v
 theories/conjectures/X1.v
 theories/conjectures/X2.v
+theories/conjectures/XE2.v

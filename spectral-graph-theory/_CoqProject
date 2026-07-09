@@ -14,3 +14,6 @@ theories/conjectures/grounding_D5.v
 
 # --- implications (D5) ---
 theories/conjectures/implications_D5.v
+
+# --- v2 statement waves ---
+theories/conjectures/X6.v

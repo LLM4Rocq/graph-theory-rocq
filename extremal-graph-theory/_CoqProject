@@ -22,3 +22,6 @@ theories/conjectures/implications_D2pr.v
 theories/conjectures/D2str.v
 theories/conjectures/grounding_D2str.v
 theories/conjectures/implications_D2str.v
+theories/conjectures/X4.v
+theories/conjectures/XE1.v
+theories/conjectures/XE2.v

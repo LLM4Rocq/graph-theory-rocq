@@ -5,3 +5,6 @@
 theories/conjectures/U12.v
 theories/conjectures/grounding_U12.v
 theories/conjectures/implications_U12.v
+theories/conjectures/X6.v
+theories/conjectures/XE1.v
+theories/conjectures/XE2.v

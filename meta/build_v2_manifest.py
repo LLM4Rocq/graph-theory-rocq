@@ -396,7 +396,7 @@ if os.path.exists(WAVES_PATH):
     row_by_slug = {r["slug"]: r for r in rows}
     for wave_name, wave in WAVES.get("waves", {}).items():
         phase, repo, defines_file = wave["phase"], wave["repo"], wave["defines_file"]
-        if phase != wave_name:
+        if phase != wave_name and not wave_name.startswith(f"{phase}:"):
             sys.exit(f"statement wave key {wave_name!r} disagrees with phase {phase!r}")
         for slug, wr in wave["rows"].items():
             if slug in recon_overlay:

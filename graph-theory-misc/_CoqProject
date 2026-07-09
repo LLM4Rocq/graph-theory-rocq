@@ -4,6 +4,8 @@
 
 theories/foundations/complexity.v
 theories/conjectures/U13.v
+theories/conjectures/XE1.v
+theories/conjectures/XE2.v
 theories/conjectures/grounding_U13.v
 theories/conjectures/implications_U13.v
 theories/conjectures/D7.v
