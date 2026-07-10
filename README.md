@@ -10,7 +10,7 @@ completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALI
 **v2 corpus (growing)** — every conjecture source of the upstream `graph-conjectures` repo:
 **1,745 rows tracked** (762 arXiv + 277 erdősproblems + 138 attack-engine derived + 568
 studies-slice) · ~1,075 statement-owing after triage, the rest parked/alias/edge-anchor with
-documented dispositions · **154 statements done** (waves X1–XE2: directed reconciliation +
+documented dispositions · **163 statements done** (waves X1–X9: directed reconciliation +
 directed/χ-boundedness/extremal/structural/topological/erdős authored statements — every one
 axiom-free and faithfulness-verified by an independent reader distinct from the author). Plan:
 [`meta/V2_FULL_CORPUS_PLAN.md`](meta/V2_FULL_CORPUS_PLAN.md); live counts in
