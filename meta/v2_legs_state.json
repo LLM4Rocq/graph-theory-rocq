@@ -1011,11 +1011,14 @@
    "audit_page": "todo"
   },
   "axv_1803_01051_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x7-chromatic-clean5",
+   "package": "chromatic-theory",
+   "note": "Authored in X7.v:list_reed_choice_number_statement. Encodes the list-chromatic analogue of Reed's conjecture as ch(G) <= ceil((Delta(G)+1+omega(G))/2)."
   },
   "axv_1803_03588_00": {
    "statement": "todo",
@@ -1109,11 +1112,14 @@
    "audit_page": "todo"
   },
   "axv_1806_00825_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x9-cycle-clean2",
+   "package": "cycle-theory",
+   "note": "Authored in X9.v:proper_edge_coloured_short_cycle_statement. Encodes Conjecture 4: an n-colour edge-colouring of an n-vertex graph with every colour class of size at least r has a cycle of length at most ceil(n/r) whose incident edge pairs receive distinct colours."
   },
   "axv_1806_00825_01": {
    "statement": "todo",
@@ -2716,11 +2722,14 @@
    "note": "Authored in X3.v:polynomial_gyarfas_sumner_statement. Encodes Conjecture 1.3: for every forbidden forest H, H-induced-free graphs satisfy chi(G) <= omega(G)^c for some c>0."
   },
   "axv_2110_09403_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x7-chromatic-clean5",
+   "package": "chromatic-theory",
+   "note": "Authored in X7.v:list_hadwiger_two_t_statement. Encodes Problem 1: every K_t-minor-free graph is 2t-list-colourable."
   },
   "axv_2110_09970_00": {
    "statement": "todo",
@@ -2852,18 +2861,24 @@
    "audit_page": "todo"
   },
   "axv_2201_09115_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x8-minor-list-clean2",
+   "package": "minor-theory",
+   "note": "Authored in X8.v:kt_minor_free_seven_choosable_statement. Encodes Question 1 as the conjunction that K_{4,4}-minor-free graphs and K_{3,5}-minor-free graphs are 7-choosable."
   },
   "axv_2201_09115_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x8-minor-list-clean2",
+   "package": "minor-theory",
+   "note": "Authored in X8.v:kt_minor_free_two_s_plus_t_choosable_statement. Encodes Question 2: for all 1 <= s <= t, every K_{s,t}-minor-free graph has list chromatic number at most 2s+t."
   },
   "axv_2201_09115_02": {
    "statement": "todo",
@@ -4071,11 +4086,14 @@
    "audit_page": "todo"
   },
   "axv_2310_12891_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x7-chromatic-clean5",
+   "package": "chromatic-theory",
+   "note": "Authored in X7.v:fixed_k_vertex_critical_edge_robust_statement. Encodes the fixed-k open case: for every k>=4 and arbitrarily large r, a k-vertex-critical graph remains k-chromatic after deleting any at most r edges."
   },
   "axv_2311_00779_00": {
    "statement": "todo",
@@ -4498,11 +4516,14 @@
    "audit_page": "todo"
   },
   "axv_2408_02400_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x7-chromatic-clean5",
+   "package": "chromatic-theory",
+   "note": "Authored in X7.v:cochromatic_gap_three_statement. Encodes Problem 1.5: for every k>=5 there is a graph with omega<5, cochromatic number k, and chi=k+3."
   },
   "axv_2409_05039_00": {
    "statement": "done",
@@ -4675,11 +4696,14 @@
    "audit_page": "todo"
   },
   "axv_2502_04726_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x9-cycle-clean2",
+   "package": "cycle-theory",
+   "note": "Authored in X9.v:min_degree_three_linearly_many_chords_cycle_statement. Encodes Question 4.3 using a positive rational constant cnum/cden: every nonempty graph of minimum degree at least 3 contains a genuine cycle whose chord count is at least (cnum/cden) times its length."
   },
   "axv_2502_05289_00": {
    "statement": "todo",
@@ -5024,11 +5048,14 @@
    "audit_page": "todo"
   },
   "axv_2508_08703_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x7-chromatic-clean5",
+   "package": "chromatic-theory",
+   "note": "Authored in X7.v:six_regular_four_one_graph_statement. Encodes Problem 5.2: existence of a 6-regular (4,1)-graph, i.e. a 4-vertex-critical graph with no critical edge."
   },
   "axv_2508_08870_00": {
    "statement": "todo",

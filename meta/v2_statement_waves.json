@@ -818,6 +818,81 @@
    },
    "faithfulness_verified_by": "independent adversarial audit + 2 re-verify rounds (2026-07-09)",
    "faithfulness_result": "Independent adversarial faithfulness audit (wf_ee870b8e, 28 readers, distinct from author): 92/109 faithful on first pass; 17 unfaithful FIXED (10 missing 0<#|G|/size guards, 4 logn->trunc_log floor-log2, 1 walk->simple-path uniq, 1 empty-witness guard, 2 large-n exists-N restructure, erdos_802 avg-degree direction, erdos_832 equality characterization); re-verified (wf_bc52f0e6 + wf_ff0347c9, 2 rounds) -> 109/109 faithful, every prior counterexample excluded, no new holes."
+  },
+  "X7": {
+   "phase": "X7",
+   "repo": "chromatic-theory",
+   "defines_file": "X7.v",
+   "implemented_by": "Codex X7 chromatic clean-5 starter pass",
+   "source_verified_by": "Nietzsche independent X7 faithfulness readback pass",
+   "source_verified_at": "2026-07-10",
+   "commit": "x7-chromatic-clean5",
+   "rows": {
+    "axv_1803_01051_01": {
+     "formal_name": "list_reed_choice_number_statement",
+     "note": "Encodes the list-chromatic analogue of Reed's conjecture as ch(G) <= ceil((Delta(G)+1+omega(G))/2)."
+    },
+    "axv_2110_09403_00": {
+     "formal_name": "list_hadwiger_two_t_statement",
+     "note": "Encodes Problem 1: every K_t-minor-free graph is 2t-list-colourable."
+    },
+    "axv_2310_12891_00": {
+     "formal_name": "fixed_k_vertex_critical_edge_robust_statement",
+     "note": "Encodes the fixed-k open case: for every k>=4 and arbitrarily large r, a k-vertex-critical graph remains k-chromatic after deleting any at most r edges."
+    },
+    "axv_2408_02400_00": {
+     "formal_name": "cochromatic_gap_three_statement",
+     "note": "Encodes Problem 1.5: for every k>=5 there is a graph with omega<5, cochromatic number k, and chi=k+3."
+    },
+    "axv_2508_08703_00": {
+     "formal_name": "six_regular_four_one_graph_statement",
+     "note": "Encodes Problem 5.2: existence of a 6-regular (4,1)-graph, i.e. a 4-vertex-critical graph with no critical edge."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit wf_c1378af1 (2026-07-10)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_c1378af1, distinct reader per statement): 9/9 faithful, no fixes. List-colouring quantifier order sound (choice number pinned relationally, bounds are fixed constants); empty-graph guards present; objects correct (chi_L not chi, K_t minor not subgraph, proper edge colouring)."
+  },
+  "X8": {
+   "phase": "X8",
+   "repo": "minor-theory",
+   "defines_file": "X8.v",
+   "implemented_by": "Codex X8 minor/list-colouring clean-2 pass",
+   "source_verified_by": "Noether independent X8 faithfulness readback pass",
+   "source_verified_at": "2026-07-10",
+   "commit": "x8-minor-list-clean2",
+   "rows": {
+    "axv_2201_09115_00": {
+     "formal_name": "kt_minor_free_seven_choosable_statement",
+     "note": "Encodes Question 1 as the conjunction that K_{4,4}-minor-free graphs and K_{3,5}-minor-free graphs are 7-choosable."
+    },
+    "axv_2201_09115_01": {
+     "formal_name": "kt_minor_free_two_s_plus_t_choosable_statement",
+     "note": "Encodes Question 2: for all 1 <= s <= t, every K_{s,t}-minor-free graph has list chromatic number at most 2s+t."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit wf_c1378af1 (2026-07-10)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_c1378af1, distinct reader per statement): 9/9 faithful, no fixes. List-colouring quantifier order sound (choice number pinned relationally, bounds are fixed constants); empty-graph guards present; objects correct (chi_L not chi, K_t minor not subgraph, proper edge colouring)."
+  },
+  "X9": {
+   "phase": "X9",
+   "repo": "cycle-theory",
+   "defines_file": "X9.v",
+   "implemented_by": "Codex X9 cycle clean-2 pass",
+   "source_verified_by": "Fermat independent X9 faithfulness readback pass",
+   "source_verified_at": "2026-07-10",
+   "commit": "x9-cycle-clean2",
+   "rows": {
+    "axv_1806_00825_00": {
+     "formal_name": "proper_edge_coloured_short_cycle_statement",
+     "note": "Encodes Conjecture 4: an n-colour edge-colouring of an n-vertex graph with every colour class of size at least r has a cycle of length at most ceil(n/r) whose incident edge pairs receive distinct colours."
+    },
+    "axv_2502_04726_03": {
+     "formal_name": "min_degree_three_linearly_many_chords_cycle_statement",
+     "note": "Encodes Question 4.3 using a positive rational constant cnum/cden: every nonempty graph of minimum degree at least 3 contains a genuine cycle whose chord count is at least (cnum/cden) times its length."
+    }
+   },
+   "faithfulness_verified_by": "independent adversarial audit wf_c1378af1 (2026-07-10)",
+   "faithfulness_result": "Independent adversarial faithfulness audit (wf_c1378af1, distinct reader per statement): 9/9 faithful, no fixes. List-colouring quantifier order sound (choice number pinned relationally, bounds are fixed constants); empty-graph guards present; objects correct (chi_L not chi, K_t minor not subgraph, proper edge colouring)."
   }
  }
 }
