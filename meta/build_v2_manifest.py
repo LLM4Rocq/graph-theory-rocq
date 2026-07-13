@@ -406,19 +406,44 @@ if os.path.exists(WAVES_PATH):
                 sys.exit(f"statement wave {phase} targets unknown v2 slug {slug!r}")
             if r.get("alias_of"):
                 sys.exit(f"statement wave {phase} targets alias row {slug!r} (aliases own no statement)")
+            if not r.get("source_text") and r.get("statement_text"):
+                r["source_text"] = r["statement_text"]
+            # A wave row is `done` by default. `state: "partial"` marks an authored, faithful-but-
+            # PROXY statement (a documented weakening/approximation of the source under an explicit
+            # modelling assumption, e.g. an order-Theta form of an ill-posed exact bound): it keeps
+            # its source-verification tuple (verified faithful AS a proxy) and carries a
+            # `partial_reason`. `state: "blocked"` marks an authored-but-unfaithful statement awaiting
+            # a layer deliberately out of scope: it carries a `blocked_reason`, claims NO source-
+            # verification tuple. Both keep formal_name/phase/commit+package provenance so the
+            # milestone gate still checks the .v compiles axiom-free.
+            state = wr.get("state", "done")
+            if state not in ("done", "partial", "blocked"):
+                sys.exit(f"statement wave {phase} row {slug!r} has unsupported state {state!r}")
             r["formal_name"] = wr["formal_name"]
             r["repo"] = repo
             r["phase"] = phase
             r["already_formalized"] = False
             r["implemented_by"] = wave["implemented_by"]
-            r["source_verified_by"] = wave["source_verified_by"]
-            r["source_verified_at"] = wave["source_verified_at"]
-            r["verification_note"] = (
-                f"Authored in {defines_file}:{wr['formal_name']}. {wr.get('note', '')}")[:600]
+            if state == "done":
+                r["source_verified_by"] = wave["source_verified_by"]
+                r["source_verified_at"] = wave["source_verified_at"]
+                r["verification_note"] = (
+                    f"Authored in {defines_file}:{wr['formal_name']}. {wr.get('note', '')}")[:600]
+            elif state == "partial":
+                r["source_verified_by"] = wave["source_verified_by"]
+                r["source_verified_at"] = wave["source_verified_at"]
+                r["verification_note"] = (
+                    f"PARTIAL (proxy) — {wr.get('partial_reason', wr.get('note', ''))} "
+                    f"Authored in {defines_file}:{wr['formal_name']}.")[:600]
+            else:  # blocked: no source-verification tuple is claimed
+                r["source_verified_by"] = None
+                r["source_verified_at"] = None
+                r["verification_note"] = (
+                    f"BLOCKED — {wr.get('blocked_reason', wr.get('note', ''))}")[:600]
             r["source_locator"] = (r.get("source_locator") or "") + \
                 f" | Rocq: {repo}/theories/conjectures/{defines_file}#{wr['formal_name']}"
             wave_overlay[slug] = {
-                "statement": "done", "grounding": "todo", "edges": "todo",
+                "statement": state, "grounding": "todo", "edges": "todo",
                 "correspondence": "todo", "audit_page": "todo",
                 "commit": wave.get("commit", phase.lower()), "package": repo,
                 "note": r["verification_note"],

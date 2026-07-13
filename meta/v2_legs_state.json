@@ -22,11 +22,14 @@
    "audit_page": "todo"
   },
   "axv_0911_0885_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x68-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X68.v:triangle_free_planar_distant_precolouring_extension_statement. Encodes Conjecture 1.4: distant precoloured vertices in a plane triangle-free graph extend to a 3-colouring."
   },
   "axv_1010_2472_00": {
    "statement": "todo",
@@ -106,18 +109,24 @@
    "audit_page": "todo"
   },
   "axv_1507_08208_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x47-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X47.v:tree_decomposition_delta_edge_connected_statement. Encodes the tree edge-decomposition row with edge-connectivity controlled by f(Delta_T) and minimum degree by f(|E(T)|)."
   },
   "axv_1508_03437_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x28-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X28.v:planar_no_4_to_6_cycles_three_choosable_statement. Encodes the wide-open latter question from the source: excluding cycles of lengths 4, 5, and 6 from planar graphs forces 3-choosability."
   },
   "axv_1508_03437_01": {
    "statement": "todo",
@@ -320,11 +329,14 @@
    "note": "Reconciled to colouring_variants.v:majority_k1col_statement. `forall k, 2<=k -> forall D, exists col:D->'I_k.+1, kmajority_col k col` with kmajority_col k = [forall v, k*#same <= outdeg v]. Matches Conjecture 9 (1608.03040): for k>=2 every digraph has a (k+1)-colouring with at most (1/k)deg+(v) same-coloured out-neighbours. k+1 colours (I_{k.+1}), k*#same<=outdeg <=> #same<=deg+/k, guard 2<=k all match. (Row status is 'disproved' mathematically; encoding is"
   },
   "axv_1608_03040_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x45-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X45.v:majority_three_colouring_beta_statement. Encodes the majority-colouring row: a universal beta<1 allows every digraph to be 3-coloured with at most beta out-neighbours of each vertex sharing its colour."
   },
   "axv_1608_03040_03": {
    "statement": "done",
@@ -354,11 +366,14 @@
    "audit_page": "todo"
   },
   "axv_1608_03040_06": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x51-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X51.v:majority_choosable_universal_constant_statement. Encodes Open Problem 7: a universal list-size constant c makes every digraph majority c-choosable."
   },
   "axv_1608_03040_07": {
    "statement": "todo",
@@ -464,11 +479,14 @@
    "note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union."
   },
   "axv_1610_00876_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x52-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X52.v:oriented_tree_mader_chi_linear_bound_statement. Encodes Conjecture 11: every oriented tree T of order k has chromatic Mader threshold at most 2k-2."
   },
   "axv_1610_00876_04": {
    "statement": "todo",
@@ -506,32 +524,44 @@
    "audit_page": "todo"
   },
   "axv_1611_03196_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x18-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X18.v:path_partition_independent_set_balance_statement. Encodes Conjecture 1.6: every partition of a finite path's vertices has an independent set S with per-part lower bounds |S cap V_i| >= |V_i|/2 - b_i, total sum b_i <= m/2, and each b_i <= 1, using cross-multiplied natural inequalities."
   },
   "axv_1611_03196_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x18-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X18.v:knn_fair_perfect_matching_statement. Encodes Conjecture 1.9: every edge partition of K_{n,n} and distinguished part j admits a perfect matching meeting all other parts at least floor(|E_i|/n) times and part j at least floor(|E_j|/n)-1 times."
   },
   "axv_1611_03196_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x15-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X15.v:fair_matching_edge_partition_statement. Encodes Conjecture 1.14: every partition of a graph's edge set admits a matching meeting each part in at least floor(|E_i|/(Delta(H)+2)) edges."
   },
   "axv_1611_03196_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x15-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X15.v:bipartite_matching_underrepresentation_statement. Encodes Conjecture 1.15: for every number of edge-sets there is c(m) so every positive-maximum-degree bipartite graph has a matching of size at least |E(G)|/Delta(G)-c(m) while meeting each set in at most ceil(|E_i|/Delta(G)) edges."
   },
   "axv_1612_06539_00": {
    "statement": "todo",
@@ -815,11 +845,14 @@
    "audit_page": "todo"
   },
   "axv_1709_04036_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x32-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X32.v:triangle_free_planar_large_induced_two_degenerate_statement. Encodes the triangle-free planar induced-degeneracy row: an induced 2-degenerate subgraph has at least 7/8 of the vertices."
   },
   "axv_1709_04036_01": {
    "statement": "todo",
@@ -955,25 +988,34 @@
    "audit_page": "todo"
   },
   "axv_1802_03727_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x13-extremal-clean2",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X13.v:min_degree_forces_large_clique_or_bipartite_induced_statement. Encodes Conjecture 1.4 with two positive unbounded functions x2,x3: every nonempty graph of minimum degree at least d contains either a clique of size at least x2(d) or a nonempty induced bipartite subgraph of minimum degree at least x3(d)."
   },
   "axv_1802_03727_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x30-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X30.v:triangle_free_min_degree_log_bipartite_induced_statement. Encodes the triangle-free induced-bipartite row: minimum degree at least d forces an induced bipartite subgraph of minimum degree at least C log d."
   },
   "axv_1802_03727_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x13-extremal-clean2",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X13.v:large_girth_min_degree_bipartite_induced_statement. Encodes Conjecture 1.6: for some positive thresholds d0,g0, every nonempty graph of girth at least g0 and minimum degree at least d0 contains a nonempty induced bipartite subgraph of minimum degree at least 3."
   },
   "axv_1802_04179_00": {
    "statement": "todo",
@@ -1185,11 +1227,14 @@
    "audit_page": "todo"
   },
   "axv_1808_01605_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x31-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X31.v:chromatic_girth_average_degree_subgraph_statement. Encodes the chromatic-girth row: for every positive k and g>=3, sufficiently large chromatic number forces a subgraph of girth at least g and average degree at least k."
   },
   "axv_1808_10370_00": {
    "statement": "todo",
@@ -1206,25 +1251,34 @@
    "audit_page": "todo"
   },
   "axv_1809_08324_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x46-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X46.v:bipartite_digraph_outdegree_girth_statement. Encodes the bipartite Caccetta-Haggkvist row: balanced bipartite digraphs with outdegree > n/(k+1) have directed girth at most 2k."
   },
   "axv_1809_08324_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x53-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X53.v:bipartite_digraph_asymmetric_outdegree_girth_statement. Encodes Conjecture 1.5: asymmetric alpha/beta outdegree conditions in a bipartite digraph force directed girth at most 2k."
   },
   "axv_1810_00058_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x58-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X58.v:epsilon_bounded_h_free_anticomplete_pair_statement. Encodes Conjecture 1.4: epsilon-bounded H-free graphs contain a linear anticomplete pair."
   },
   "axv_1810_00058_01": {
    "statement": "todo",
@@ -1248,11 +1302,14 @@
    "audit_page": "todo"
   },
   "axv_1810_00811_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x57-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X57.v:sparse_strong_eh_iff_forest_statement. Encodes Conjecture 1.5: sparse strong EH-property iff H is a forest."
   },
   "axv_1810_06704_00": {
    "statement": "todo",
@@ -1503,11 +1560,14 @@
    "audit_page": "todo"
   },
   "axv_1904_12060_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x33-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X33.v:total_list_colouring_delta_plus_two_statement. Encodes the total list-colouring conjecture: every simple graph is total-list-colourable with Delta+2 colours."
   },
   "axv_1904_12273_00": {
    "statement": "todo",
@@ -1615,11 +1675,14 @@
    "audit_page": "todo"
   },
   "axv_1907_11600_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x48-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X48.v:tree_decomposition_leaf_edge_connected_statement. Encodes the leaf-parameter tree edge-decomposition row with edge-connectivity controlled by f(number of leaves)."
   },
   "axv_1907_12091_00": {
    "statement": "todo",
@@ -1887,18 +1950,24 @@
    "audit_page": "todo"
   },
   "axv_2001_01607_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x42-minor-clean1",
+   "package": "minor-theory",
+   "note": "Authored in X42.v:even_hole_k4_diamond_free_bounded_treewidth_statement. Encodes the bounded-treewidth side of the (even hole, K4, diamond)-free question."
   },
   "axv_2001_01607_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x67-minor-clean1",
+   "package": "minor-theory",
+   "note": "Authored in X67.v:theta_triangle_free_bounded_degree_treewidth_statement. Encodes the bounded-treewidth question for bounded-degree theta-free triangle-free graphs."
   },
   "axv_2001_01607_02": {
    "statement": "todo",
@@ -2237,11 +2306,14 @@
    "audit_page": "todo"
   },
   "axv_2008_05504_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x27-minor-clean1",
+   "package": "minor-theory",
+   "note": "Authored in X27.v:bounded_degree_even_hole_free_bounded_treewidth_statement. Encodes the even-hole-free bounded-treewidth theorem row as a function f with treewidth at most f(d) for graphs of degree at most d."
   },
   "axv_2008_05504_01": {
    "statement": "todo",
@@ -2397,11 +2469,14 @@
    "audit_page": "todo"
   },
   "axv_2102_04994_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x56-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X56.v:c8_complement_c8_erdos_hajnal_statement. Encodes the Erdos-Hajnal property for graphs with no induced C8 or complement C8."
   },
   "axv_2102_07705_00": {
    "statement": "todo",
@@ -2656,18 +2731,24 @@
    "audit_page": "todo"
   },
   "axv_2108_02685_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x37-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X37.v:regular_graph_spanning_subgraph_degree_class_balance_statement. Encodes the regular irregular-subgraph row: a spanning edge-subgraph balances every degree class m(H,k) within two of n/(d+1)."
   },
   "axv_2108_02685_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x38-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X38.v:min_degree_spanning_subgraph_small_degree_multiplicity_statement. Encodes the minimum-degree irregular-subgraph row: a spanning edge-subgraph has maximum degree-class multiplicity at most n/(delta+1)+2."
   },
   "axv_2108_12669_00": {
    "statement": "todo",
@@ -2854,11 +2935,14 @@
    "note": "Authored in X3.v:omega3_large_chi_triangle_free_induced_subgraphs_statement. Encodes Question 3.1 as arbitrarily large chromatic graphs with omega=3 whose triangle-free induced subgraphs all have chromatic number at most 3."
   },
   "axv_2201_08204_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x54-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X54.v:odd_dicycle_free_dichromatic_chi_bound_statement. Encodes Question 3.2: no induced odd directed cycle should bound dichromatic number by a function of clique number."
   },
   "axv_2201_09115_00": {
    "statement": "done",
@@ -2881,11 +2965,14 @@
    "note": "Authored in X8.v:kt_minor_free_two_s_plus_t_choosable_statement. Encodes Question 2: for all 1 <= s <= t, every K_{s,t}-minor-free graph has list chromatic number at most 2s+t."
   },
   "axv_2201_09115_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x11-minor-clean2",
+   "package": "minor-theory",
+   "note": "Authored in X11.v:woodall_fixed_s_eventual_choosability_statement. Encodes the fixed-s Woodall regime: for every s>=1, all sufficiently large t make every K_{s,t}-minor-free graph (s+t-1)-choosable."
   },
   "axv_2201_09115_03": {
    "statement": "todo",
@@ -2902,11 +2989,14 @@
    "audit_page": "todo"
   },
   "axv_2202_05557_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x65-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X65.v:forest_free_polynomial_chi_bound_statement. Encodes Conjecture 1.3: every forest-free graph class is polynomially chi-bounded."
   },
   "axv_2202_05557_01": {
    "statement": "todo",
@@ -2965,11 +3055,14 @@
    "audit_page": "todo"
   },
   "axv_2202_09118_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x66-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X66.v:good_trees_disjoint_union_good_statement. Encodes the open problem that the disjoint union of two good trees is good."
   },
   "axv_2202_09118_04": {
    "statement": "todo",
@@ -3028,11 +3121,14 @@
    "audit_page": "todo"
   },
   "axv_2203_03612_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x50-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X50.v:triangle_free_same_girth_high_chromatic_induced_free_statement. Encodes the same-girth triangle-free row: for each triangle-free F there are arbitrarily high-chromatic graphs with the same girth and bounded-chromatic F-free induced subgraphs."
   },
   "axv_2203_06775_00": {
    "statement": "todo",
@@ -3558,11 +3654,14 @@
    "audit_page": "todo"
   },
   "axv_2301_08707_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x62-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X62.v:rainbow_paths_linear_edge_cover_statement. Encodes Problem 4: properly edge-coloured graphs have O(|V|) rainbow paths covering all edges."
   },
   "axv_2301_11019_00": {
    "statement": "todo",
@@ -3684,11 +3783,14 @@
    "audit_page": "todo"
   },
   "axv_2302_13312_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x34-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X34.v:planar_odd_degree_linear_forests_plus_matching_statement. Encodes the odd-maximum-degree planar linear-arboricity refinement: (Delta-1)/2 linear forests plus one matching."
   },
   "axv_2303_11766_00": {
    "statement": "todo",
@@ -3872,11 +3974,14 @@
    "audit_page": "todo"
   },
   "axv_2307_08361_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x59-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X59.v:c4_free_subgraph_polynomial_average_degree_statement. Encodes the polynomial threshold question for C4-free subgraphs of prescribed average degree."
   },
   "axv_2307_15048_00": {
    "statement": "todo",
@@ -3977,11 +4082,14 @@
    "audit_page": "todo"
   },
   "axv_2309_07905_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x26-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X26.v:bounded_degree_distant_induced_menger_statement. Encodes the bounded-degree distant induced-Menger row: for every d and maximum-degree bound Delta, either k distant X-Y paths exist or a separator of size less than Ck exists."
   },
   "axv_2310_04265_00": {
    "statement": "todo",
@@ -4901,18 +5009,24 @@
    "audit_page": "todo"
   },
   "axv_2505_24100_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x49-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X49.v:induced_saturation_even_cycle_existence_statement. Encodes Question 1.7 as existence of a graph with at least one nonedge, no induced C_(2t-2), and every added nonedge creating an induced C_(2t-2)."
   },
   "axv_2505_24100_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x60-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X60.v:induced_saturation_even_cycle_polynomial_size_statement. Encodes Question 1.8 with the same even-cycle repair as X49."
   },
   "axv_2506_07264_00": {
    "statement": "todo",
@@ -4957,11 +5071,14 @@
    "audit_page": "todo"
   },
   "axv_2506_08810_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x61-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X61.v:infinite_family_without_finite_induced_saturation_statement. Encodes Problem 21: infinitely many non-clique non-independent finite graphs with no finite H-induced-saturated graph."
   },
   "axv_2506_08810_01": {
    "statement": "todo",
@@ -5065,11 +5182,14 @@
    "audit_page": "todo"
   },
   "axv_2508_14332_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x40-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X40.v:coarse_menger_distance_two_separator_statement. Encodes the c=2 coarse Menger question: k S-T paths pairwise at distance at least 2, or a size <=k-1 set whose ell-ball meets every S-T path."
   },
   "axv_2509_02561_00": {
    "statement": "todo",
@@ -5107,11 +5227,14 @@
    "audit_page": "todo"
   },
   "axv_2510_01791_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x35-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X35.v:sparse_graph_low_chromatic_cut_statement. Encodes the sparse graph cut statement: if |E(G)| < k|V(G)| - k(k+1)/2 and |V(G)|>=k, there is a cut X with chi(G[X])<k."
   },
   "axv_2510_01916_00": {
    "statement": "todo",
@@ -5177,25 +5300,34 @@
    "audit_page": "todo"
   },
   "axv_2511_02892_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x43-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X43.v:diamond_free_claw_free_cubic_strong_six_edge_colourable_statement. Encodes the strong edge-colouring row: every diamond-free claw-free cubic graph is strongly 6-edge-colourable."
   },
   "axv_2511_02892_04": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x63-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X63.v:cubic_two_homogeneous_four_colour_statement. Encodes Problem 5.1: cubic graphs admitting a 2-homogeneous colouring admit one with four colours."
   },
   "axv_2511_02892_05": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x64-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X64.v:finite_bridgeless_cubic_two_homogeneous_exceptions_statement. Encodes Problem 5.2: finitely many connected bridgeless cubic graphs lack a 2-homogeneous colouring."
   },
   "axv_2511_02892_06": {
    "statement": "todo",
@@ -5261,11 +5393,14 @@
    "audit_page": "todo"
   },
   "axv_2512_17232_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x11-minor-clean2",
+   "package": "minor-theory",
+   "note": "Authored in X11.v:induced_menger_anticomplete_paths_statement. Encodes Conjecture 6: every graph and X,Y either has k pairwise vertex-disjoint anticomplete X-Y paths, or a set Z of size at most k-1 whose closed neighbourhood deletion leaves no X-Y path."
   },
   "axv_2512_17342_00": {
    "statement": "todo",
@@ -8615,11 +8750,14 @@
    "audit_page": "todo"
   },
   "std_aboulker_charbit_naserasr_conjecture_directed_gy": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x71-digraph-fixed1",
+   "package": "digraph-theory",
+   "note": "Authored in X71.v:directed_gyarfas_sumner_oriented_forest_dichromatic_statement. Encodes the Aboulker-Charbit-Naserasr directed Gyarfas-Sumner conjecture: for every oriented forest F, Forb_ind(F) is chi-vec-bounded (dichromatic number <= f(omega-vec), the X54 idiom dicolorableb D (f (omega(underlying D)))). Corrected 2026-07-13 from a false constant-bound encoding (dichromatic_bounded); see meta/X111-X130_faithfulness_audit.md."
   },
   "std_aboulker_charbit_naserasr_conjecture_every_trans": {
    "statement": "todo",
@@ -8657,11 +8795,14 @@
    "audit_page": "todo"
   },
   "std_abu_khazneh_bar_t_pokrovskiy_szab_question_on_co": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x72-hypergraph-clean1",
+   "package": "hypergraph-theory",
+   "note": "Authored in X72.v:ryser_intersecting_partite_cover_gap_statement. Encodes the Ryser-adjacent question: exists universal K such that every r has an intersecting r-partite r-uniform hypergraph with tau at least r-K."
   },
   "std_agrawal_et_al_question_on_wml_k_cis_in_p5_free_g": {
    "statement": "todo",
@@ -8671,11 +8812,14 @@
    "audit_page": "todo"
   },
   "std_aharoni_charbit_howard_conjecture_on_matchings_i": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x73-hypergraph-clean1",
+   "package": "hypergraph-theory",
+   "note": "Authored in X73.v:regular_tripartite_hypergraph_matching_lower_bound_statement. Encodes the Aharoni-Charbit-Howard matching lower bound in d-regular balanced tripartite 3-uniform hypergraphs."
   },
   "std_aharoni_s_rainbow_conjecture_rainbow_girth_at_mo": {
    "statement": "todo",
@@ -8692,25 +8836,34 @@
    "audit_page": "todo"
   },
   "std_aharoni_s_rainbow_generalization_of_the_caccetta_43": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x10-cycle-clean2",
+   "package": "cycle-theory",
+   "note": "Authored in X10.v:aharoni_rainbow_caccetta_haggkvist_statement. Encodes the rainbow-cycle version: an n-colour edge-colouring of an n-vertex simple graph with every colour class of size at least k has a rainbow cycle of length at most ceil(n/k)."
   },
   "std_akbari_amanihamedani_mousavi_nikpey_sheybani_con": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x74-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X74.v:induced_linear_forest_caro_wei_bound_statement. Encodes the induced linear forest lower bound by the sum of 2/(d(v)+1)."
   },
   "std_akbari_etesami_mahini_mahmoody_question_on_long": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x24-cycle-clean1",
+   "package": "cycle-theory",
+   "note": "Authored in X24.v:one_factorization_long_rainbow_cycle_statement. Encodes the Akbari-Etesami-Mahini-Mahmoody question: every 1-factorization of K_n has a rainbow cycle of length at least n-2."
   },
   "std_akiyama_watanabe_conjecture_induced_forest_on_5": {
    "statement": "done",
@@ -8723,11 +8876,14 @@
    "note": "Authored in X6.v:bipartite_planar_induced_forest_five_eighths_statement. Encodes the bipartite planar induced-forest lower bound 5|V(G)|/8."
   },
   "std_albertson_s_problem_on_distance_constrained_list": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x75-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X75.v:albertson_distance_constrained_list_colouring_statement. Encodes Albertson's planar list-colouring problem with singleton lists pairwise far apart."
   },
   "std_aldous_mcdiarmid_scott_conjecture_on_random_mult": {
    "statement": "todo",
@@ -8744,18 +8900,24 @@
    "audit_page": "todo"
   },
   "std_alon_et_al_c_k_free_max_cut_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x76-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X76.v:ck_free_max_cut_polynomial_surplus_statement. Encodes the C_k-free max-cut surplus Omega_k(m^((k+1)/(k+2))) conjecture."
   },
   "std_alon_et_al_conjecture_on_separation_dimension_an": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x77-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X77.v:separation_dimension_maximum_degree_linear_statement. Encodes separation dimension O(Delta) using separating families of vertex orders."
   },
   "std_alon_et_al_problem_on_bounded_separation_dimensi": {
    "statement": "todo",
@@ -8772,18 +8934,24 @@
    "audit_page": "todo"
   },
   "std_alon_friedland_kalai_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x36-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X36.v:alon_friedland_kalai_divisible_subgraph_statement. Encodes the Alon-Friedland-Kalai divisible-subgraph conjecture: no nonempty k-divisible subgraph implies e(G) <= (k-1)|V(G)|."
   },
   "std_alon_grytczuk_ha_uszczak_riordan_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x23-topological-clean1",
+   "package": "topological-graph-theory",
+   "note": "Authored in X23.v:planar_bounded_nonrepetitive_chromatic_statement. Encodes bounded nonrepetitive chromatic number for planar graphs as an existential global colour bound k."
   },
   "std_alon_hefetz_krivelevich_tyomkyn_conjecture": {
    "statement": "todo",
@@ -8800,18 +8968,24 @@
    "audit_page": "todo"
   },
   "std_alon_krivelevich_sudakov_max_cut_exponent_conjec": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x78-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X78.v:h_free_max_cut_three_fourths_surplus_statement. Encodes the fixed-H-free max-cut surplus Omega_H(m^(3/4)) conjecture."
   },
   "std_alon_pach_solymosi_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x79-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X79.v:alon_pach_solymosi_tournament_erdos_hajnal_statement. Encodes the tournament Erdos-Hajnal polynomial transitive-subtournament conjecture."
   },
   "std_alon_s_conjecture_on_halving_the_minimum_out_deg": {
    "statement": "todo",
@@ -8842,25 +9016,34 @@
    "audit_page": "todo"
   },
   "std_andersen_s_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x14-misc-clean2",
+   "package": "graph-theory-misc",
+   "note": "Authored in X14.v:andersen_rainbow_path_statement. Encodes Andersen's conjecture: every proper edge-colouring of K_n has a rainbow path with n-2 edges, represented by a vertex sequence of size n-1."
   },
   "std_andreae_schr_der_conjecture_toroidal_cop_number": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x80-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X80.v:toroidal_graph_cop_number_three_statement. Encodes the toroidal cop-number-at-most-three conjecture using the topological torus embedding predicate and a finite cops-win certificate."
   },
   "std_ara_jo_cohen_de_rezende_havet_moura_conjecture_p": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x81-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X81.v:bipartite_proper_orientation_half_delta_constant_statement. Encodes the bipartite proper-orientation number bound Delta/2 + O(1)."
   },
   "std_ara_jo_et_al_problem_proper_orientation_number_b": {
    "statement": "todo",
@@ -8870,32 +9053,44 @@
    "audit_page": "todo"
   },
   "std_araujo_havet_linhares_sales_silva_conjecture_on": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x82-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X82.v:outerplanar_bounded_proper_orientation_number_statement. Encodes bounded proper orientation number for outerplanar graphs."
   },
   "std_aravind_s_rainbow_induced_path_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x83-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X83.v:aravind_rainbow_induced_chromatic_path_statement. Encodes Aravind's rainbow induced path conjecture for arbitrary colourings of triangle-free graphs."
   },
   "std_arman_gunderson_tsaturian_conjecture_maximum_cyc": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x84-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X84.v:odd_cycle_free_turan2_unique_cycle_extremal_statement. Encodes that, for k>1 and large n, T_2(n) uniquely maximizes cycle count among C_(2k+1)-free n-vertex graphs."
   },
   "std_arman_tsaturian_conjecture_on_the_number_of_cycl": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x85-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X85.v:arman_tsaturian_average_degree_cycle_count_statement. Encodes the Arman-Tsaturian average-degree cycle-count upper envelope with a logarithmic correction."
   },
   "std_asgarli_krehbiel_levinson_russell_conjecture_fin": {
    "statement": "todo",
@@ -8940,39 +9135,54 @@
    "audit_page": "todo"
   },
   "std_balliu_brunelli_crescenzi_olivetti_viennot_conje": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x86-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X86.v:strongly_connected_same_root_linear_branchings_statement. Encodes same-root arc-disjoint in- and out-branchings of linear vertex size in strongly connected digraphs."
   },
   "std_balogh_bollob_s_morris_conjecture_speed_gap_for": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x87-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X87.v:hereditary_ordered_graph_speed_gap_statement. Encodes the hereditary ordered-graph speed gap: at most 2^O(n) or at least n^(n/2+o(n))."
   },
   "std_balogh_clemen_lavrov_lidick_pfender_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x88-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X88.v:pentagonal_turan_stability_dominates_clique_count_statement. Encodes the pentagonal Turan stability statement for near-extremal K_(r+1)-free graphs."
   },
   "std_bandelt_dress_conjecture_maximum_quartet_distanc": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x89-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X89.v:bandelt_dress_maximum_quartet_distance_statement. Encodes the maximum quartet distance asymptotic (2/3+o(1))*binomial(n,4)."
   },
   "std_bang_jensen_et_al_conjecture_f_subdivision_compl": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x90-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "BLOCKED — Statement compiles axiom-free but is VACUOUS: the local poly-time cost model decouples cost/cert_size from any computation, so x90_in_np holds for every problem and poly-time-decidability collapses to bare decidability (machine-checked component triviality). A faithful encoding needs a genuine polynomial-TIME computation model (reified programs + operational step count), a foundation deliberately out of scope for the corpus. See meta/X90_polytime_fix_sketch.md."
   },
   "std_barba_pilz_schnider_question_k_level_in_great_ci": {
    "statement": "todo",
@@ -8982,25 +9192,34 @@
    "audit_page": "todo"
   },
   "std_behzad_chartrand_wall_conjecture_girth_of_regula": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x19-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X19.v:behzad_chartrand_wall_girth_regular_digraph_statement. Encodes the Behzad-Chartrand-Wall conjecture: every nonempty loopless r-regular digraph of directed girth at least g has at least r(g-1)+1 vertices."
   },
   "std_beisegel_chudnovsky_gurvich_milani_servatius_con": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x91-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X91.v:avoidable_path_or_pk_free_statement. Encodes that every graph is P_k-free or contains an avoidable induced P_k, for every positive k."
   },
   "std_belkhechine_bouaziz_boudabbous_pouzet_inversion": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x92-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X92.v:tournament_inversion_number_half_bound_statement. Encodes inv(n) <= floor((n-1)/2) using subset inversions that make each n-vertex tournament acyclic."
   },
   "std_ben_david_eiron_simon_question_sign_rank_of_larg": {
    "statement": "todo",
@@ -9024,18 +9243,24 @@
    "audit_page": "todo"
   },
   "std_berger_et_al_local_to_global_tournament_colourin": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x93-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X93.v:local_tournament_dichromatic_bound_statement. Encodes that bounded out-neighbourhood dichromatic number in tournaments forces bounded global dichromatic number."
   },
   "std_biedl_demaine_duncan_fleischer_kobourov_subcubic": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x14-misc-clean2",
+   "package": "graph-theory-misc",
+   "note": "Authored in X14.v:subcubic_matching_lower_bound_statement. Encodes the subcubic matching conjecture as the existence of a matching M with 9|M| >= 3n+n2, where n2 counts degree-two vertices."
   },
   "std_big_big_conjecture_nguyen_scott_seymour": {
    "statement": "todo",
@@ -9045,18 +9270,24 @@
    "audit_page": "todo"
   },
   "std_bipartite_strong_erd_s_hajnal_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x94-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X94.v:bipartite_strong_erdos_hajnal_forest_bigraph_statement. Encodes the bipartite strong Erdos-Hajnal conjecture for forest bigraphs and their bicomplements."
   },
   "std_blanco_cook_hatzel_hilaire_illingworth_mccarty_q": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x95-minor-clean1",
+   "package": "minor-theory",
+   "note": "Authored in X95.v:subgraph_indexed_tree_decomposition_pathwidth_bound_statement. Encodes a function of pathwidth bounding the width of a tree-decomposition whose indexing tree embeds as a subgraph."
   },
   "std_blumenthal_et_al_question_on_fractional_chromati": {
    "statement": "todo",
@@ -9066,11 +9297,14 @@
    "audit_page": "todo"
   },
   "std_bollob_s_erd_s_problem_on_large_c_free_subgraphs": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x96-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X96.v:bollobas_erdos_large_c4_free_subgraph_statement. Encodes the Omega(m^(3/4)) lower bound for C4-free subgraphs of m-edge graphs."
   },
   "std_bollob_s_erd_s_tuza_conjecture": {
    "statement": "todo",
@@ -9080,11 +9314,14 @@
    "audit_page": "todo"
   },
   "std_bollob_s_erd_s_tuza_conjecture_105": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x97-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X97.v:bollobas_erdos_tuza_independent_set_hitting_statement. Encodes eta(G)=o(|V(G)|) for graphs whose independence number is at least a fixed positive fraction of |V(G)|."
   },
   "std_bollob_s_leader_malvenuto_conjecture_on_l_d": {
    "statement": "todo",
@@ -9129,25 +9366,34 @@
    "audit_page": "todo"
   },
   "std_bonamy_et_al_polynomial_k_hn_osthus_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x98-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X98.v:polynomial_kuhn_osthus_induced_subdivision_statement. Encodes that the Kuhn-Osthus induced-subdivision threshold p(s,H) can be polynomial in s."
   },
   "std_bosek_dudek_farnik_grytczuk_mazur_conjecture_hat": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x99-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X99.v:hat_guessing_number_hadwiger_bound_statement. Encodes that the hat guessing number of a graph is at most its Hadwiger number."
   },
   "std_botler_colucci_kohayakawa_modular_edge_colouring": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x100-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X100.v:modular_edge_colouring_k_plus_constant_statement. Encodes that for each k>=2, chi'_k(G) <= k+C for a constant C independent of G."
   },
   "std_bounded_degree_product_structure_conjecture_for": {
    "statement": "todo",
@@ -9171,25 +9417,34 @@
    "audit_page": "todo"
   },
   "std_bounded_proper_orientation_number_of_planar_grap_436": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x101-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X101.v:planar_bounded_proper_orientation_number_statement. Encodes a universal constant bound on the proper orientation number of planar graphs."
   },
   "std_bounded_tree_independence_number_conjecture_dall": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x102-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X102.v:bounded_tree_independence_forbidden_family_statement. Encodes the finite forbidden-family characterization for bounded tree-independence number."
   },
   "std_brass_et_al_simultaneous_embeddability_problem": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x103-topological-clean1",
+   "package": "topological-graph-theory",
+   "note": "Authored in X103.v:two_planar_graphs_not_simultaneously_embeddable_statement. Encodes existence of two same-order planar graphs with no common point-set straight-line embedding."
   },
   "std_brass_moser_pach_problems_on_unit_distances_in_h": {
    "statement": "todo",
@@ -9213,39 +9468,54 @@
    "audit_page": "todo"
   },
   "std_brown_erd_s_s_s_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x104-hypergraph-clean1",
+   "package": "hypergraph-theory",
+   "note": "Authored in X104.v:brown_erdos_sos_three_uniform_statement. Encodes f(n,e+3,e)=o(n^2) for fixed e>=3 in 3-uniform hypergraphs."
   },
   "std_brualdi_stein_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x18-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X18.v:brualdi_stein_partial_transversal_statement. Encodes the Brualdi-Stein special case: if E(K_{n,n}) is partitioned into n parts of size n, there is a matching of size at least n-1 using at most one edge from each part."
   },
   "std_bubeck_linial_problem_4_tree_inducibility_bounde": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x105-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X105.v:non_star_non_path_tree_inducibility_bounded_away_statement. Encodes a universal epsilon gap from inducibility 1 for trees that are neither stars nor paths."
   },
   "std_bubeck_linial_problem_5_universal_convergent_seq": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x106-extremal-clean1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X106.v:universal_convergent_tree_sequence_positive_density_statement. Encodes existence of a convergent tree sequence in which every fixed tree has positive limiting density."
   },
   "std_buci_letzter_sudakov_problem_oriented_ramsey_num": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x107-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X107.v:bounded_degree_acyclic_oriented_ramsey_linear_statement. Encodes the O_Delta(n) oriented Ramsey bound for bounded-degree acyclic digraphs."
   },
   "std_buci_sudakov_tran_conjecture_multidimensional_er": {
    "statement": "todo",
@@ -9262,18 +9532,24 @@
    "audit_page": "todo"
   },
   "std_burning_number_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x20-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X20.v:burning_number_conjecture_statement. Encodes the burning number conjecture: every nonempty connected graph has a burning sequence of length ceil(sqrt(|V(G)|)), represented by radius t-1-i closed neighbourhood growth from the i-th chosen vertex."
   },
   "std_burr_erd_s_conjecture_for_3_uniform_hypergraphs": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x108-hypergraph-clean1",
+   "package": "hypergraph-theory",
+   "note": "Authored in X108.v:three_uniform_degenerate_hypergraph_ramsey_linear_statement. Encodes linear two-colour Ramsey number for d-degenerate 3-uniform hypergraphs."
   },
   "std_burr_erd_s_problem_on_2_ramsey_complete_sequence": {
    "statement": "todo",
@@ -9353,11 +9629,14 @@
    "audit_page": "todo"
   },
   "std_cereceda_s_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x109-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X109.v:cereceda_degenerate_recolouring_quadratic_diameter_statement. Encodes Cereceda's O(n^2) diameter conjecture for the (k+2)-colouring recolouring graph of k-degenerate graphs."
   },
   "std_cereceda_s_conjecture_single_vertex_recoloring_f": {
    "statement": "todo",
@@ -9374,25 +9653,34 @@
    "audit_page": "todo"
   },
   "std_chen_chv_tal_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x55-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X55.v:chen_chvatal_metric_lines_statement. Encodes the Chen-Chvatal finite metric-space line conjecture."
   },
   "std_chen_chv_tal_conjecture_146": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x110-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X110.v:chen_chvatal_guarded_metric_lines_statement. Encodes the finite metric-space line conjecture with the canonical n>=2 guard."
   },
   "std_chepoi_estellon_vax_s_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x111-packing-batch1",
+   "package": "packing-theory",
+   "note": "Authored in X111.v:chepoi_estellon_vaxes_ball_hypergraph_transversal_statement. Encodes the Chepoi-Estellon-Vaxes conjecture: one universal constant c with tau(H)<=c*nu(H) for the r-ball hypergraph (over any centre set) of every planar graph."
   },
   "std_chernikov_starchenko_thomas_conjecture": {
    "statement": "todo",
@@ -9402,25 +9690,34 @@
    "audit_page": "todo"
   },
   "std_chudnovsky_penev_scott_trotignon_conjecture_boun": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x112-chromatic-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X112.v:chi_bounded_closure_substitution_gluing_statement. Encodes the Chudnovsky-Penev-Scott-Trotignon question: the closure of a chi-bounded class under (single-vertex) substitution and gluing along <=b vertices is chi-bounded; substitution/gluing encoded relationally via an inductive closure."
   },
   "std_chudnovsky_seymour_coarse_erd_s_p_sa_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x113-misc-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X113.v:coarse_erdos_posa_cycles_forest_statement. Encodes the Chudnovsky-Seymour coarse Erdos-Posa conjecture with the two Erdos-Posa functions f,g quantified before the universal (k cycles pairwise distance >d, or delete a bounded ball to leave a forest)."
   },
   "std_chudnovsky_seymour_trotignon_question_on_subcubi": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x114-misc-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X114.v:subcubic_induced_subdivision_np_complete_statement. Encodes the Chudnovsky-Seymour-Trotignon question: existence of a subcubic H whose induced-subdivision-containment problem is NP-complete (in_NP /\\ NP_hard) on the D7 relational complexity layer, with the X98 induced-subdivision model (byte-identical reuse). Graph content fully faithful; the D7 in_NP/NP_hard layer is the corpus-standard relational-complexity proxy (same layer as the done row complexity_of_the_h_factor_problem) -- no machine model, so classically weak but NOT axiom-free refutable in Rocq's constructive logic"
   },
   "std_chung_s_question_on_efficient_generalized_regula": {
    "statement": "todo",
@@ -9430,11 +9727,14 @@
    "audit_page": "todo"
   },
   "std_chv_tal_tuza_conjecture_on_maximum_odd_induced_c": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x115-extremal-batch1",
+   "package": "extremal-graph-theory",
+   "note": "PARTIAL (proxy) — PROXY: encodes the maximum number of odd induced cycles as a two-sided Theta(3^{n/3}) constant-factor bound (cubed to stay integral) under the disclosed modelling assumption 'is 3^{n/3}' = 'of order Theta(3^{n/3})'. This is strictly weaker than the source's literal '= 3^{n/3}', which is ill-posed (3^{n/3} irrational for n not divisible by 3) and machine-refuted (K6: count>=20, 20^3=8000>729=3^6); the sharp asymptotic is also false (Morrison-Scott, arXiv:1603.02960). Faithful odd-induced-cycle helper, correct exists-Cu-Cl-N-before-forall-n quantifier order, non-vacuous. Author"
   },
   "std_chv_tal_tuza_question_on_maximum_induced_cycles": {
    "statement": "todo",
@@ -9482,11 +9782,14 @@
    "audit_page": "todo"
   },
   "std_coarse_menger_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x116-misc-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X116.v:coarse_menger_paths_bounded_separator_statement. Encodes the coarse Menger conjecture with l depending on both k and d (forall k,d exists l) -- distinct from X39 (forall k exists c, radius c*d)."
   },
   "std_coarse_menger_conjecture_159": {
    "statement": "todo",
@@ -9496,11 +9799,14 @@
    "audit_page": "todo"
   },
   "std_coarse_menger_conjecture_georgakopoulos_papasogl": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x39-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X39.v:coarse_menger_ball_separator_statement. Encodes the Georgakopoulos-Papasoglu coarse Menger conjecture: k distant disjoint X-Y paths or a size-<k set whose cd-ball separates X and Y."
   },
   "std_colouring_reconfiguration_complexity_classificat": {
    "statement": "todo",
@@ -9559,39 +9865,54 @@
    "audit_page": "todo"
   },
   "std_conlon_fox_r_dl_question_on_hedgehog_ramsey_numb": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x117-hypergraph-batch1",
+   "package": "hypergraph-theory",
+   "note": "Authored in X117.v:conlon_fox_rodl_hedgehog_ramsey_statement. Encodes the Conlon-Fox-Rodl hedgehog Ramsey question r(H_t;2)=t^{2+o(1)} as a two-sided rational-epsilon bound on the least forcing size, with the hedgehog built as a concrete 3-uniform hypergraph."
   },
   "std_conlon_fox_sudakov_conjecture_dense_pair": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x118-extremal-batch1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X118.v:conlon_fox_sudakov_dense_pair_statement. Encodes the Conlon-Fox-Sudakov dense-pair conjecture (epsilon,sigma before forall G; rational-exponent cross-multiplication for |A|>=eps*c^sigma*n; density between A,B <=c or >=1-c)."
   },
   "std_conlon_fox_sudakov_problem_on_3_uniform_hypergra": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x119-hypergraph-batch1",
+   "package": "hypergraph-theory",
+   "note": "Authored in X119.v:conlon_fox_sudakov_three_uniform_ramsey_tower_statement. Encodes the Conlon-Fox-Sudakov 3-uniform Ramsey tower bound r_3(H;q)<=2^{2^{c_q*sqrt m}} (forall q>=2 exists c_q; no-isolated-vertices guard load-bearing)."
   },
   "std_conlon_fox_sudakov_sparse_linear_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x41-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X41.v:sparse_linear_pure_pair_statement. Encodes the Conlon-Fox-Sudakov pure-pair conjecture: every induced-H-free graph on more than one vertex has a pure pair of linear size."
   },
   "std_conlon_fox_sudakov_sparse_pair_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x120-extremal-batch1",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X120.v:conlon_fox_sudakov_sparse_pair_statement. Encodes the Conlon-Fox-Sudakov sparse-pair conjecture (c1,c2 before forall G; double rational-exponent cross-multiplication; B x-sparse to A in one of G, complement via separate non-edge count)."
   },
   "std_constant_bound_on_the_hat_guessing_number_of_pla": {
    "statement": "todo",
@@ -9601,11 +9922,14 @@
    "audit_page": "todo"
   },
   "std_dallard_milani_torgel_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x121-minor-batch1",
+   "package": "minor-theory",
+   "note": "Authored in X121.v:dallard_milanic_storgel_tw_omega_tree_alpha_statement. Encodes the Dallard-Milanic-Storgel (tw,omega)-bounded <-> bounded tree-alpha equivalence over all classes, tree-alpha via the corpus tree-decomposition predicate (all bags independence-number <=k)."
   },
   "std_damron_gravner_junge_lyu_sivakoff_parking_proces": {
    "statement": "todo",
@@ -9657,18 +9981,24 @@
    "audit_page": "todo"
   },
   "std_dijoin_conjecture_bang_jensen_da_silva_havet": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x122-digraph-batch1",
+   "package": "digraph-theory",
+   "note": "Authored in X122.v:dijoin_inversion_number_additive_statement. Encodes the Bang-Jensen-da Silva-Havet dijoin conjecture inv(L->R)=inv(L)+inv(R) for oriented L,R, reusing X92's inversion apparatus and a sum-type dijoin (all arcs L->R)."
   },
   "std_directed_gy_rf_s_sumner_conjecture_aboulker_char": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x123-digraph-batch1",
+   "package": "digraph-theory",
+   "note": "Authored in X123.v:directed_gyarfas_sumner_tournament_forest_statement. Encodes the Aboulker-Charbit-Naserasr directed Gyarfas-Sumner conjecture: forbidding the PAIR {transitive tournament, oriented forest} gives bounded dichromatic number (distinct from X71's forest-only form)."
   },
   "std_dom_enum_problem_output_polynomial_enumeration_o": {
    "statement": "todo",
@@ -9678,25 +10008,34 @@
    "audit_page": "todo"
   },
   "std_dreier_toru_czyk_conjecture_merge_width_polynomi": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x124-chromatic-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Statement compiles axiom-free but is not faithful: merge-width (Dreier-Torunczyk 2024, a tree of merge operations over a labelled-graph algebra) has no foundation in the corpus, so the hypothesis 'bounded merge-width' is a PLACEHOLDER (bounded order). The consequent (polynomial chi-boundedness) is faithful; a faithful antecedent needs a merge-width foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
   },
   "std_drier_linial_conjecture_haj_s_number_of_random_l": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x125-extremal-batch1",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — Statement compiles axiom-free but is not faithful: random ell-lifts of K_n, the Hajos number, and the 'almost all' (asymptotic-probability) quantifier are quantified abstractly with no defining axioms. A faithful encoding needs a random-lift + probability foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
   },
   "std_dujmovi_et_al_question_thue_choice_number_bounde": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x126-chromatic-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X126.v:dujmovic_thue_choice_number_pathwidth_statement. Encodes the Dujmovic et al. question: exists f, Thue choice number pi_l(G) <= f(pathwidth(G)) (list/choosability nonrepetitive colouring + path-index tree-decomposition, both replicated locally)."
   },
   "std_dujmovi_joret_morin_norin_wood_problem_orthogona": {
    "statement": "todo",
@@ -9706,32 +10045,44 @@
    "audit_page": "todo"
   },
   "std_dujmovi_joret_morin_norin_wood_question_2_tree_w": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x127-minor-batch1",
+   "package": "minor-theory",
+   "note": "Authored in X127.v:dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement. Encodes the DJMNW 2-tree-width question (median tree-width, arXiv:1703.07871): exists f, every graph admitting two tree-decompositions with pairwise bag-intersection <=k has chi <= f(k). FAITHFUL-TO-REFUTED: resolved negatively by the Burling graphs (FJMTW Thm 1+2: 2-tree-width <=2 with unbounded chi); distinct from FJMTW's still-open spaghetti+path Conjecture 3. Audit rewrote an earlier Conjecture-3 encoding to this faithful median-width form."
   },
   "std_dvo_k_conjecture_cheap_balanced_separators_with": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x128-misc-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Statement compiles axiom-free but is not faithful: bounded expansion (grad_r / shallow-minor densities), real-valued cost assignments, cheap balanced separators, and outlier counts are quantified abstractly with no defining axioms. A faithful encoding needs a bounded-expansion sparsity + real-cost separator foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
   },
   "std_dvo_k_kr_nejedl_krekovski_conjecture_square_of_p": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x129-chromatic-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X129.v:dvorak_kral_nejedly_skrekovski_planar_girth5_square_statement. Encodes the Dvorak-Kral-Nejedly-Skrekovski conjecture: exists Delta0 with chi(G^2)<=Delta(G)+2 for planar G of girth>=5 and Delta(G)>=Delta0 (G^2=graph_power G 2, girth>=5 via girth_geq)."
   },
   "std_dvo_k_mnich_conjecture_fractional_chromatic_numb": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x130-chromatic-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X130.v:dvorak_mnich_planar_girth5_fractional_chromatic_statement. Encodes the Dvorak-Mnich conjecture: exists rational p/q<3 with fractional chromatic number <=p/q for every planar graph of girth>=5 (rational threshold faithful since chi_f of finite graphs is rational)."
   },
   "std_dvo_k_mnich_conjecture_fractional_chromatic_numb_186": {
    "statement": "todo",
@@ -10397,11 +10748,14 @@
    "audit_page": "todo"
   },
   "std_gy_rf_s_s_rk_zy_monochromatic_component_conjectu": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x20-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X20.v:gyarfas_sarkozy_monochromatic_component_statement. Encodes the Gyarfas-Sarkozy conjecture: for k>=3, minimum degree at least (1-(k-1)/k^2)n in a k-edge-coloured graph forces a monochromatic connected vertex set of order at least n/(k-1), with the degree and size inequalities cross-multiplied over naturals."
   },
   "std_gy_rf_s_sumner_conjecture": {
    "statement": "done",
@@ -10484,11 +10838,14 @@
    "audit_page": "todo"
   },
   "std_havel_s_problem": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x69-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X69.v:havel_distant_triangles_three_colourable_statement. Encodes Havel's problem: planar graphs with pairwise distant triangles are 3-colourable."
   },
   "std_heath_rosenberg_conjecture": {
    "statement": "todo",
@@ -10596,11 +10953,14 @@
    "audit_page": "todo"
   },
   "std_jaeger_s_conjecture_high_girth_planar_graphs_and": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x22-homomorphism-clean1",
+   "package": "homomorphism-theory",
+   "note": "Authored in X22.v:jaeger_high_girth_planar_odd_cycle_hom_statement. Encodes Jaeger's conjecture: every planar graph of girth at least 4k has a homomorphism to C_(2k+1)."
   },
   "std_javadi_hajebi_question_linear_clique_covers_for": {
    "statement": "todo",
@@ -10666,11 +11026,14 @@
    "audit_page": "todo"
   },
   "std_kelly_manvel_conjecture_reconstruction_from_the": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x21-reconstruction-clean1",
+   "package": "reconstruction-theory",
+   "note": "Authored in X21.v:kelly_manvel_n_minus_r_deck_reconstruction_statement. Encodes the Kelly-Manvel row: for every r there is N such that every n-vertex graph with N<=n is reconstructible from its (n-r)-deck."
   },
   "std_kelly_postle_conjecture_occupancy_in_triangle_fr": {
    "statement": "todo",
@@ -10743,11 +11106,14 @@
    "audit_page": "todo"
   },
   "std_kotzig_s_perfect_1_factorization_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x25-packing-clean1",
+   "package": "packing-theory",
+   "note": "Authored in X25.v:kotzig_perfect_one_factorization_statement. Encodes Kotzig's conjecture: K_n has a perfect 1-factorization for every even n>2."
   },
   "std_kowalik_lu_ar_krekovski_conjecture_induced_fores": {
    "statement": "done",
@@ -10879,11 +11245,14 @@
    "audit_page": "todo"
   },
   "std_lichiardopol_s_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x19-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X19.v:lichiardopol_distinct_length_dicycle_packing_statement. Encodes Lichiardopol's conjecture: for every k there is a threshold g(k) so every nonempty loopless digraph with minimum outdegree at least g(k) contains k vertex-disjoint directed cycles of pairwise distinct lengths."
   },
   "std_liebenau_pilipczuk_conjecture": {
    "statement": "todo",
@@ -10966,11 +11335,14 @@
    "audit_page": "todo"
   },
   "std_lov_sz_s_even_directed_cycle_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x44-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X44.v:lovasz_even_directed_cycle_statement. Encodes Lovasz's even directed cycle conjecture: some p makes every p-strongly connected digraph contain an even directed cycle."
   },
   "std_majority_3_coloring_conjecture_kreutzer_oum_seym": {
    "statement": "todo",
@@ -11043,11 +11415,14 @@
    "audit_page": "todo"
   },
   "std_n_dl_s_conjecture_deck_reconstruction_of_trees": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x21-reconstruction-clean1",
+   "package": "reconstruction-theory",
+   "note": "Authored in X21.v:nydl_tree_l_deck_reconstruction_statement. Encodes the Nydl tree deck row: for n>=4 and ell>=floor(n/2)+1, two n-vertex trees with the same ell-deck are isomorphic."
   },
   "std_nadjafi_arani_khodashenas_ashrafi_conjecture_sze": {
    "statement": "todo",
@@ -11099,11 +11474,14 @@
    "audit_page": "todo"
   },
   "std_normal_graph_conjecture_de_simone_k_rner": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x29-misc-clean1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X29.v:no_c5_c7_complement_c7_normal_graph_statement. Encodes the normal graph conjecture: no induced C5, C7, or complement of C7 implies normality."
   },
   "std_nowhere_fo_dense_conjecture": {
    "statement": "todo",
@@ -11253,11 +11631,14 @@
    "audit_page": "todo"
   },
   "std_planar_linear_arboricity_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x23-topological-clean1",
+   "package": "topological-graph-theory",
+   "note": "Authored in X23.v:planar_linear_arboricity_statement. Encodes the planar linear arboricity conjecture: maximum degree Delta>=5 implies la(G)=ceil(Delta/2)."
   },
   "std_plane_matching_decomposition_problem": {
    "statement": "todo",
@@ -11470,11 +11851,14 @@
    "audit_page": "todo"
   },
   "std_scott_seymour_tournament_chi_boundedness_conject": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x70-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X70.v:scott_seymour_tournament_outneighbourhood_chi_statement. Encodes the Scott-Seymour tournament out-neighbourhood chi-boundedness conjecture."
   },
   "std_seymour_s_pathwidth_conjecture": {
    "statement": "todo",
@@ -11505,11 +11889,14 @@
    "audit_page": "todo"
   },
   "std_small_quasi_kernel_conjecture_erd_s_sz_kely": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x16-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X16.v:small_quasi_kernel_statement. Encodes the Erdős-Székely small quasi-kernel conjecture: every loopless digraph with no source has a 2-kernel K with 2|K| <= |G|."
   },
   "std_smallest_3_cop_win_planar_graph_conjecture": {
    "statement": "todo",
@@ -11519,11 +11906,14 @@
    "audit_page": "todo"
   },
   "std_smith_s_conjecture_longest_cycles_in_r_connected": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x10-cycle-clean2",
+   "package": "cycle-theory",
+   "note": "Authored in X10.v:smith_longest_cycles_r_connected_statement. Encodes Smith's conjecture: for every r>=2, any two longest cycles in an r-connected graph meet in at least r vertices."
   },
   "std_soko_owski_s_conjecture_polynomial_neighborhood": {
    "statement": "todo",
@@ -11540,18 +11930,24 @@
    "audit_page": "todo"
   },
   "std_spinoza_west_connectedness_threshold_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x21-reconstruction-clean1",
+   "package": "reconstruction-theory",
+   "note": "Authored in X21.v:spinoza_west_l_deck_connectedness_statement. Encodes the Spinoza-West connectedness threshold row: for n>=6 and ell>=floor(n/2)+1, same ell-deck implies connectedness is equivalent."
   },
   "std_spiro_s_quasi_kernel_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x16-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X16.v:spiro_quasi_kernel_half_covered_statement. Encodes Spiro's conjecture: every loopless digraph has a 2-kernel K such that at least half the vertices lie in K or have an in-neighbour in K."
   },
   "std_stack_number_versus_queue_number_problem_heath_l": {
    "statement": "todo",
@@ -11575,11 +11971,14 @@
    "audit_page": "todo"
   },
   "std_stein_s_conjecture_on_oriented_paths": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x17-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X17.v:stein_oriented_paths_strict_semidegree_statement. Encodes Stein's conjecture: every nonempty oriented graph with strict minimum semidegree greater than k/2 contains every orientation of the k-edge path."
   },
   "std_steinberg_s_conjecture": {
    "statement": "todo",
@@ -11617,11 +12016,14 @@
    "audit_page": "todo"
   },
   "std_sumner_s_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x17-digraph-clean1",
+   "package": "digraph-theory",
+   "note": "Authored in X17.v:sumner_oriented_tree_unavoidable_statement. Encodes Sumner's conjecture: every oriented tree of order n>1 is (2n-2)-unavoidable in tournaments."
   },
   "std_sylvester_s_question_on_twin_width_of_sparse_ran": {
    "statement": "todo",
@@ -11865,11 +12267,14 @@
    "audit_page": "todo"
   },
   "std_woodall_s_list_colouring_conjecture_for_k_minor": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x12-chromatic-clean1",
+   "package": "chromatic-theory",
+   "note": "Authored in X12.v:woodall_ks_t_minor_free_list_colouring_statement. Encodes Woodall's list-colouring conjecture: for all positive s,t, every K_{s,t}-minor-free graph has choice number at most s+t-1."
   },
   "std_yang_s_conjecture_two_simultaneous_cops_cop_numb": {
    "statement": "todo",

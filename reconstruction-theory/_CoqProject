@@ -3,5 +3,6 @@
 -arg -w -arg -notation-overridden
 
 theories/conjectures/U11.v
+theories/conjectures/X21.v
 theories/conjectures/grounding_U11.v
 theories/conjectures/implications_U11.v

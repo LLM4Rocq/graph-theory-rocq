@@ -10,9 +10,9 @@ completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALI
 **v2 corpus (growing)** — every conjecture source of the upstream `graph-conjectures` repo:
 **1,745 rows tracked** (762 arXiv + 277 erdősproblems + 138 attack-engine derived + 568
 studies-slice) · ~1,075 statement-owing after triage, the rest parked/alias/edge-anchor with
-documented dispositions · **163 statements done** (waves X1–X9: directed reconciliation +
-directed/χ-boundedness/extremal/structural/topological/erdős authored statements — every one
-axiom-free and faithfulness-verified by an independent reader distinct from the author). Plan:
+documented dispositions · **293 statements done · 1 partial · 4 blocked** (waves X1–X130: directed reconciliation +
+directed/χ-boundedness/extremal/structural/topological/cycle/minor/misc/packing/quasi-kernel/reconstruction/deck/nonrepetitive/normal/treewidth/total-list/linear-arboricity/coarse-Menger/coarse-Erdős–Pósa/tree-decomposition/hedgehog-and-3-uniform-Ramsey/Erdős–Hajnal-pairs/dijoin-inversion/directed-Gyárfás–Sumner/fractional-and-distance-colouring/induced-subdivision-complexity authored statements — every one
+axiom-free with an independent second-reader faithfulness audit recorded in the manifest; blocked rows need a foundation deliberately out of scope, e.g. merge-width, random-lift probability, bounded-expansion sparsity). Plan:
 [`meta/V2_FULL_CORPUS_PLAN.md`](meta/V2_FULL_CORPUS_PLAN.md); live counts in
 [`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md).
 

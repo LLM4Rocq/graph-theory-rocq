@@ -1,5 +1,7 @@
 -R theories GTMisc
 -Q ../base/theories GTBase
+-Q ../topological-graph-theory/theories Topological
+-Q ../minor-theory/theories Minor
 -arg -w -arg -notation-overridden
 
 theories/foundations/complexity.v
@@ -11,3 +13,29 @@ theories/conjectures/implications_U13.v
 theories/conjectures/D7.v
 theories/conjectures/grounding_D7.v
 theories/conjectures/implications_D7.v
+theories/conjectures/X14.v
+theories/conjectures/X20.v
+theories/conjectures/X29.v
+theories/conjectures/X37.v
+theories/conjectures/X38.v
+theories/conjectures/X39.v
+theories/conjectures/X40.v
+theories/conjectures/X41.v
+theories/conjectures/X55.v
+theories/conjectures/X62.v
+theories/conjectures/X74.v
+theories/conjectures/X77.v
+theories/conjectures/X80.v
+theories/conjectures/X82.v
+theories/conjectures/X87.v
+theories/conjectures/X89.v
+theories/conjectures/X91.v
+theories/conjectures/X94.v
+theories/conjectures/X99.v
+theories/conjectures/X101.v
+theories/conjectures/X102.v
+theories/conjectures/X110.v
+theories/conjectures/X113.v
+theories/conjectures/X114.v
+theories/conjectures/X116.v
+theories/conjectures/X128.v

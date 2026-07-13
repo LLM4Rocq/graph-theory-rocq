@@ -14,5 +14,7 @@ theories/conjectures/grounding_D1.v
 theories/conjectures/implications_D1.v
 theories/conjectures/X5.v
 theories/conjectures/X9.v
+theories/conjectures/X10.v
+theories/conjectures/X24.v
 theories/conjectures/XE1.v
 theories/conjectures/XE2.v
