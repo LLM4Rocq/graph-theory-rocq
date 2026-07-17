@@ -22,7 +22,7 @@
       "audit_page": "todo",
       "commit": "13cd1ad",
       "package": "chromatic-theory",
-      "note": "axiom-free, compiles; Reed\u22a5B-K refuted-direction recorded (see AUDIT_NOTES.md)"
+      "note": "axiom-free, compiles; Reed⊥B-K refuted-direction recorded (see AUDIT_NOTES.md)"
     },
     "the_borodin_kostochka_conjecture": {
       "statement": "done",
@@ -60,7 +60,7 @@
       "audit_page": "todo",
       "commit": "13cd1ad",
       "package": "chromatic-theory",
-      "note": "2<k floor confirmed faithful (k=1,2 are genuine counterexamples) \u2014 see AUDIT_NOTES.md"
+      "note": "2<k floor confirmed faithful (k=1,2 are genuine counterexamples) — see AUDIT_NOTES.md"
     },
     "high_girth_low_degree_4_chromatic_graphs": {
       "statement": "done",
@@ -107,7 +107,7 @@
       "audit_page": "todo",
       "commit": "b262ac7",
       "package": "hamiltonicity-theory",
-      "note": "Lov\u00e1sz; faithful, axiom-free"
+      "note": "Lovász; faithful, axiom-free"
     },
     "hamiltonicity_of_cayley_graphs": {
       "statement": "done",
@@ -1383,7 +1383,7 @@
       "audit_page": "todo",
       "commit": "27f7a11",
       "package": "graph-theory-misc",
-      "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) \u2014 fixed to a<b"
+      "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) — fixed to a<b"
     },
     "algorithm_for_graph_homomorphisms": {
       "statement": "done",
@@ -1403,7 +1403,7 @@
       "audit_page": "todo",
       "commit": "27f7a11",
       "package": "graph-theory-misc",
-      "note": "Track B: selected proposition = the o(sqrt n)-improvement branch (the source's disjunction is a classical tautology \u2014 audit-caught); value-estimation form, coupled prog + poly cost; no-const-prog defense Qed'd"
+      "note": "Track B: selected proposition = the o(sqrt n)-improvement branch (the source's disjunction is a classical tautology — audit-caught); value-estimation form, coupled prog + poly cost; no-const-prog defense Qed'd"
     },
     "ptas_for_feedback_arc_set_in_tournaments": {
       "statement": "done",
@@ -1423,7 +1423,7 @@
       "audit_page": "todo",
       "commit": "27f7a11",
       "package": "graph-theory-misc",
-      "note": "Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial \u2014 proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up)"
+      "note": "Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up)"
     },
     "triangle_free_strongly_regular_graphs": {
       "statement": "done",
@@ -1803,23 +1803,23 @@
     },
     "3_colourability_of_arrangements_of_great_circles": {
       "statement": "blocked",
-      "grounding": "blocked",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "retarget-audit-reblock-2026-07-17",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: spherical arrangement geometry"
+      "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "are_different_notions_of_the_crossing_number_the_same": {
       "statement": "blocked",
-      "grounding": "blocked",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "retarget-audit-reblock-2026-07-17",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: two distinct drawing semantics"
+      "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "crossing_sequences": {
       "statement": "done",
@@ -1833,23 +1833,23 @@
     },
     "drawing_disconnected_graphs_on_surfaces": {
       "statement": "blocked",
-      "grounding": "blocked",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "retarget-audit-reblock-2026-07-17",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: optimal drawings on a surface"
+      "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "obstacle_number_of_planar_graphs": {
       "statement": "blocked",
-      "grounding": "blocked",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "retarget-audit-reblock-2026-07-17",
       "package": "topological-graph-theory",
-      "note": "needs topological layer: obstacle/visibility geometry"
+      "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "small_universal_point_sets_for_planar_graphs": {
       "statement": "done",
@@ -1859,17 +1859,17 @@
       "audit_page": "todo",
       "commit": "7e6bf03",
       "package": "topological-graph-theory",
-      "note": "faithful finite-geometry encoding (foundations/geometry.v, orient-only): n_universal over R:rcfType \u2014 injective placement, no vertex on a non-incident edge, independent edges never seg_meet (full closed-segment test); NO general-position side condition. forall R:rcfType + Tarski-Seidenberg => equivalent to the R^2 source (proof AND disproof transfer). Audited 3/3 SOUND (oracle-attack + source-faithfulness + rocq-semantics), synth SOUND_DONE, 0 blockers; 5 note-level caveats recorded (metatheoretic Tarski transfer; all-n O(n) form; seq-multiplicity; c-inside-forall-R; K1-only grounding)."
+      "note": "faithful finite-geometry encoding (foundations/geometry.v, orient-only): n_universal over R:rcfType — injective placement, no vertex on a non-incident edge, independent edges never seg_meet (full closed-segment test); NO general-position side condition. forall R:rcfType + Tarski-Seidenberg => equivalent to the R^2 source (proof AND disproof transfer). Audited 3/3 SOUND (oracle-attack + source-faithfulness + rocq-semantics), synth SOUND_DONE, 0 blockers; 5 note-level caveats recorded (metatheoretic Tarski transfer; all-n O(n) form; seq-multiplicity; c-inside-forall-R; K1-only grounding)."
     },
     "consecutive_non_orientable_embedding_obstructions": {
       "statement": "blocked",
-      "grounding": "blocked",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "1ebccac",
+      "commit": "retarget-audit-reblock-2026-07-17",
       "package": "topological-graph-theory",
-      "note": "signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes \u2014 K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate"
+      "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "grunbaums_conjecture": {
       "statement": "done",
@@ -1929,7 +1929,7 @@
       "audit_page": "todo",
       "commit": "fe8fcfc",
       "package": "infinite-graph-theory",
-      "note": "D4inf3: combinatorial Halin ends (end_equiv via finite separators + reachP, no topology); countable end + disjoint wray-family => devouring reconfiguration with same_start. Audited done: K:=K and self-repeat trivialization fail, conclusion is Halin countable theorem (no refutation); axiom-free. Caveat: guarded by countable_graph G (stronger than the source countable END) \u2014 formalizes the countable-graph special case, documented, non-vacuous."
+      "note": "D4inf3: combinatorial Halin ends (end_equiv via finite separators + reachP, no topology); countable end + disjoint wray-family => devouring reconfiguration with same_start. Audited done: K:=K and self-repeat trivialization fail, conclusion is Halin countable theorem (no refutation); axiom-free. Caveat: guarded by countable_graph G (stronger than the source countable END) — formalizes the countable-graph special case, documented, non-vacuous."
     },
     "hamiltonian_cycles_in_line_graphs_of_infinite_graphs": {
       "statement": "partial",
@@ -1993,13 +1993,13 @@
     },
     "characterizing_aleph_0_aleph_1_graphs": {
       "statement": "blocked",
-      "grounding": "blocked",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "retarget-audit-reblock-2026-07-17",
       "package": "infinite-graph-theory",
-      "note": "out of scope: aleph_1 cardinal arithmetic"
+      "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "coloring_the_odd_distance_graph": {
       "statement": "partial",
@@ -2013,13 +2013,13 @@
     },
     "highly_arc_transitive_two_ended_digraphs": {
       "statement": "blocked",
-      "grounding": "blocked",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "b300860",
+      "commit": "retarget-audit-reblock-2026-07-17",
       "package": "infinite-graph-theory",
-      "note": "out of scope: ends + automorphism action"
+      "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "unions_of_triangle_free_graphs": {
       "statement": "done",

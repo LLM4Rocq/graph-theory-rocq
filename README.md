@@ -10,9 +10,9 @@ completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALI
 **v2 corpus (growing)** — every conjecture source of the upstream `graph-conjectures` repo:
 **1,745 rows tracked** (762 arXiv + 277 erdősproblems + 138 attack-engine derived + 568
 studies-slice) · ~1,075 statement-owing after triage, the rest parked/alias/edge-anchor with
-documented dispositions · **293 statements done · 1 partial · 4 blocked** (waves X1–X130: directed reconciliation +
+documented dispositions · **312 statements done · 1 partial · 65 blocked** (waves X1–X210: directed reconciliation +
 directed/χ-boundedness/extremal/structural/topological/cycle/minor/misc/packing/quasi-kernel/reconstruction/deck/nonrepetitive/normal/treewidth/total-list/linear-arboricity/coarse-Menger/coarse-Erdős–Pósa/tree-decomposition/hedgehog-and-3-uniform-Ramsey/Erdős–Hajnal-pairs/dijoin-inversion/directed-Gyárfás–Sumner/fractional-and-distance-colouring/induced-subdivision-complexity authored statements — every one
-axiom-free with an independent second-reader faithfulness audit recorded in the manifest; blocked rows need a foundation deliberately out of scope, e.g. merge-width, random-lift probability, bounded-expansion sparsity). Plan:
+axiom-free with a faithfulness audit recorded in the manifest; blocked rows need a foundation deliberately out of scope, e.g. merge-width, random-lift probability, bounded-expansion sparsity, fixed-surface clustered colouring, graphon forcing, asymptotic dimension, computation-model, random-graph, DP-colouring, Kempe-class, polyhedral extension-complexity, metric-line/bridge-generation, poset-dimension, flow, thin-overlay, Ramsey-nice, cops-and-robbers, hypergraph-cut, or conflict-colouring layers). Plan:
 [`meta/V2_FULL_CORPUS_PLAN.md`](meta/V2_FULL_CORPUS_PLAN.md); live counts in
 [`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md).
 

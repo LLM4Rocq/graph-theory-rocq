@@ -15,11 +15,14 @@
  ],
  "entries": {
   "axv_0806_0178_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X151.v:random_graph_chromatic_not_constant_concentrated_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: random_graph_chromatic_not_constant_concentrated_statement."
   },
   "axv_0911_0885_00": {
    "statement": "done",
@@ -32,39 +35,54 @@
    "note": "Authored in X68.v:triangle_free_planar_distant_precolouring_extension_statement. Encodes Conjecture 1.4: distant precoloured vertices in a plane triangle-free graph extend to a 3-colouring."
   },
   "axv_1010_2472_00": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the surface model, which is load-bearing here: the Class is `surface_embeddable surface G` (GTBase.surface, WATCH-flagged LIGHTWEIGHT). Unfolded it is `exists E, surface_euler_genus E <= surface` with `surface_euler_genus = (2+E-V-F)/2` = ORIENTABLE genus (Euler genus halved, misleading name), built from a pure rotation system `surface_erot:{perm surface_dart}` that CANNOT encode any non-orientable emb Authored in X152.v:fixed_surface_four_colourability_polytime_statement."
   },
   "axv_1302_2158_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X153.v:planar_girth5_two_cycles_list_critical_subgraph_statement. Encodes Conjecture 1.7: for bounded short cycles in planar girth>=5 graphs, non-list-colourability has a bounded induced subgraph witness containing both cycles."
   },
   "axv_1404_6356_00": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: could be trivially-true if the class had no χ>4 members (then Pconst(Dnat 1) decides it) — resolved NO: for positive genus the class contains both χ≤4 graphs (genus-0 small graphs) and χ>4 graphs (K_5 embeds on the torus, surface_euler_genus=1; K_n for larger surface), so neither Pconst(Dnat 1) nor Pconst(Dnat 0) works and a real poly-time 4-colourability decider is required. The load-bearing \"poly-time testable\" co Authored in X154.v:fixed_surface_four_colourability_polytime_duplicate_statement."
   },
   "axv_1407_5833_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "packing-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = the assembled dichotomy is provably FALSE, and it resolves against faithfulness: the statement is `forall C hereditary, (A1 /\\ A2) \\/ (B1 /\\ B2)` where A1=x155_log_lower_bound, B1=x155_polynomial_lower_bound both require `exists G, C G /\\ ...`. Instantiating C := (fun _:sgraph => False) — vacuously hereditary — makes A1 and B1 each False, so the whole disjunction is False regardless of B2. Machine-refuted (probe co"
   },
   "axv_1408_4257_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the `f`-hypothesis `forall N, exists n, N<=n /\\ N<=f n` encodes \"f unbounded (limsup=∞)\", NOT the conjecture's \"f tends to ∞\", which is strictly stronger and renders the statement FALSE (machine-confirmed): an f dipping to 0 on odd n>=5 still satisfies it, forcing certificate diameter sqrt_ceil(n)*f(n)=0 at infinitely many n, which GTBase.finite_graph.fg_whp's cofinite GTBase.asymptotics.eventually cann"
   },
   "axv_1410_5292_00": {
    "statement": "todo",
@@ -81,11 +99,14 @@
    "audit_page": "todo"
   },
   "axv_1505_01616_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X157.v:local_connectivity_k_colouring_polytime_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: local_connectivity_k_colouring_polytime_statement."
   },
   "axv_1505_05637_00": {
    "statement": "todo",
@@ -102,11 +123,14 @@
    "audit_page": "todo"
   },
   "axv_1507_01120_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "topological-graph-theory",
+   "note": "Authored in X158.v:planar_graphs_bounded_queue_number_statement. Encodes the solved bounded-queue-number question: exists q such that every planar graph has a q-queue layout."
   },
   "axv_1507_08208_00": {
    "statement": "done",
@@ -129,11 +153,14 @@
    "note": "Authored in X28.v:planar_no_4_to_6_cycles_three_choosable_statement. Encodes the wide-open latter question from the source: excluding cycles of lengths 4, 5, and 6 from planar graphs forces 3-choosability."
   },
   "axv_1508_03437_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X159.v:planar_no_cycles_4_to_8_correspondence_chromatic_three_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: planar_no_cycles_4_to_8_correspondence_chromatic_three_statement."
   },
   "axv_1509_06563_00": {
    "statement": "done",
@@ -156,25 +183,34 @@
    "note": "Authored in X3.v:bounded_gaps_sets_are_constricting_statement. Encodes Conjecture 1.5 using the recovered context definition of k-constricting/constricting sets."
   },
   "axv_1509_06563_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X160.v:density_zero_constricting_set_statement. Encodes Problem 1.6 using X3's constricting-set vocabulary plus a rational-epsilon natural-density-zero condition."
   },
   "axv_1509_06563_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X161.v:controlled_triangle_free_four_hole_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: controlled_triangle_free_four_hole_statement."
   },
   "axv_1510_06964_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the retargeted statement is TRIVIALLY TRUE and captures none of the WSK ergodicity conjecture — it holds for every finite graph and every q, so the triangular lattice, periodic BCs and q=5 are decorative. Two encoding defects in the Kempe-move surface (built on GTBase.base sgraph/finite_graph primitives) cause the collapse: (1) x162_kempe_step requires only `connected S` + `uses_only_two_colours col a b"
   },
   "axv_1601_01129_00": {
    "statement": "todo",
@@ -184,18 +220,24 @@
    "audit_page": "todo"
   },
   "axv_1601_01129_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X163.v:random_graphs_normal_whp_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: random_graphs_normal_whp_statement."
   },
   "axv_1601_01197_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = a missing-precondition over-strengthening that makes the row provably FALSE (a witness-collapse cousin of X125). Source (arXiv:1601.01197 Open Problem) asks whether the OUTPUT of a 3-colouring — Theorem 1.4's quadratic algorithm, run \"in the affirmative case\" — can be made linear-time. The formalization's class `x164_instance_class` = triangle_free /\\ surface_embeddable /\\ #|B|<=boundary DROPS the esse"
   },
   "axv_1601_01886_00": {
    "statement": "todo",
@@ -205,11 +247,14 @@
    "audit_page": "todo"
   },
   "axv_1602_05184_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X165.v:szeged_wiener_difference_exceptional_graphs_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: szeged_wiener_difference_exceptional_graphs_statement."
   },
   "axv_1603_07056_00": {
    "statement": "todo",
@@ -219,32 +264,44 @@
    "audit_page": "todo"
   },
   "axv_1604_02317_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "digraph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): see below"
   },
   "axv_1604_07976_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = vacuous witness surface / trivially-true collapse, and it fully realizes. The conjecture (Aprile-Fiorini) is that the EXTENSION COMPLEXITY xc(P_sp.trees(G)) = min #facets of an extended formulation whose linear projection is the spanning-tree polytope is O(|V|) for fixed-surface graphs. The Rocq surface (X167.v) models none of this: x167_spanning_tree_polytope_xc G facets := exists (r : x167_extension_"
   },
   "axv_1604_07976_01": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the extension-complexity notion is not modelled at all, making the statement vacuous. `x168_spanning_tree_polytope_xc G facets` only demands an `x168_extension_system G facets` to exist, but that record's only non-free field `x168_ineq_count : #|{:ineq_index}| <= facets` is satisfied by an empty inequality index (0<=facets), and its two linking fields `x168_accepts_tree`/`x168_rejects_non_tree` both con"
   },
   "axv_1605_00442_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the decided predicate is not TS_k connectivity. x169_ts_step (X169.v:31-36) constrains only #|B|==k, b∉A, a--b, B==(A:\\a):|:[set b] — it NEVER requires the intermediate set to be a stable set, so path (x169_ts_step k) A p may traverse non-independent configurations. Intermediate-independence is the defining constraint of token sliding of independent sets and the sole source of the problem's hardness; dr"
   },
   "axv_1605_07411_00": {
    "statement": "done",
@@ -267,46 +324,64 @@
    "note": "Reconciled to chi_bounded.v:conj4_1605_statement. forall oriented star S: chi_bounded_under (oriented G /\\ ind_free S G). Encodes Conj 4 'for any oriented star S, Forb(S) is chi-bounded'. oriented_star = oriented + a centre c urel-adjacent to every other vertex with leaves pairwise non-adjacent = an orientation of K_{1,t}. Class = oriented graphs avoiding an induced S. Matches the row exactly. Faithful."
   },
   "axv_1605_07411_02": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x151-x170-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the exceptional-set predicate is mis-encoded, making the statement FALSE (not merely a weaker proxy). Source Conjecture 5 excludes exactly the two non-chi-bounded singletons {P^+(3)} (directed P4) and {P^+(1,1,1)} (antidirected P4); the manifest/paper confirm these are the ONLY two non-chi-bounded orientations. The Rocq x170_nonexceptional instead excludes [set inord 7] and [set ord0], both of which are"
   },
   "axv_1606_06011_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "graph-metric-foundation-retarget",
+   "package": "graph-theory-misc",
+   "note": "Authored in X171.v:finite_exception_pendant_or_metric_lines_bridges_statement. Retargeted using GTBase.graph_metric: graph-metric lines use finite shortest-path distance, bridge counts delete one graph edge, and the finite exceptional family is encoded by an order bound."
   },
   "axv_1606_06011_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "graph-metric-foundation-retarget",
+   "package": "graph-theory-misc",
+   "note": "Authored in X172.v:metric_lines_bridges_counterexamples_finitely_generated_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: metric_lines_bridges_counterexamples_finitely_generated_statement."
   },
   "axv_1606_06265_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X173.v:planar_triangle_free_fractional_chromatic_bound_statement. Encodes the bound chi_f(G) <= 3|V(G)|/(|V(G)|+1) for every planar triangle-free graph, using X130 fractional-colouring witnesses."
   },
   "axv_1606_06810_00": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "graph-metric-foundation-retarget",
+   "package": "minor-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypot Authored in X174.v:kt_immersion_clique_count_extremal_statement."
   },
   "axv_1606_06810_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "asymptotics-foundation-retarget",
+   "package": "minor-theory",
+   "note": "Authored in X175.v:kt_subdivision_clique_count_asymptotic_statement. Retargeted after GTBase.asymptotics: K_t-subdivision is injective branch vertices joined by internally vertex-disjoint simple paths; the conjectured 3^(2t/3+o(t)) n upper envelope is encoded by rational-epsilon eventual integer inequalities. The known lower-bound construction is source context, not the open upper-bound claim."
   },
   "axv_1608_03040_00": {
    "statement": "done",
@@ -414,18 +489,24 @@
    "audit_page": "todo"
   },
   "axv_1608_07680_02": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "topological-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = a double weakening that makes the surface miss the open conjecture entirely, so no faithful proxy survives. (1) MIS-QUANTIFIED EXTREMAL: the paper's f_s(k) is the MAXIMUM of cr(cone G) over graphs with cr(G)=k (worst-case cone blow-up; f_s(1)=3=cr(K6)=cr(cone K5), the extremal cr=1 graph). But x176_simple_cone_crossing_value pins n by `forall H m, is_cr H k -> is_cr(cone H) m -> n<=m`, i.e. the MINIMUM cone-crossin"
   },
   "axv_1609_00314_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the word \"induced\" — the crux of the entire Chudnovsky–Scott–Seymour \"Induced subgraphs of graphs with large chromatic number\" program — is absent from BOTH the antecedent (forest of lanterns) and the consequent (induced ≥ℓ-subdivision), so the surface does not encode the conjecture. MACHINE-CONFIRMED: the helper x177_induced_path_between's 4th clause is a pure tautology. Its `exists z, (u==z /\\ v∈p /\\ "
   },
   "axv_1609_05458_00": {
    "statement": "todo",
@@ -435,11 +516,14 @@
    "audit_page": "todo"
   },
   "axv_1609_06257_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "packing-theory",
+   "note": "Authored in X178.v:gallai_odd_semiclique_path_decomposition_statement. Encodes the Bonamy-Perrett question: connected non-odd-semi-cliques have an edge decomposition into at most floor(|V|/2) paths."
   },
   "axv_1610_00239_00": {
    "statement": "todo",
@@ -496,11 +580,14 @@
    "audit_page": "todo"
   },
   "axv_1610_00876_05": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "digraph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = mis-encoded k-strong-connectivity premise, and it does NOT resolve: x179_k_vertex_strongly_connected G k := (forall S, #|S|<k -> G-S strongly connected) DROPS the standard |V(G)|>=k+1 guard, so degenerate tiny graphs (1-vertex, even 0-vertex) are vacuously k-strong for EVERY k while being unable to host a subdivision of any D with >=2 vertices; this makes x179_kappa_maderian D (exists k, forall k-stron"
   },
   "axv_1611_01270_00": {
    "statement": "todo",
@@ -517,11 +604,14 @@
    "audit_page": "todo"
   },
   "axv_1611_02400_01": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk (confirmed): mis-quantification + vacuous witness, same collapse family as the known-BROKEN X125 but on the \"constant independent of n\" axis. The source (arXiv:1611.02400, Alon-Cohen-Dey-Griffiths-Musslick-Ozcimder-Reichman-Shinkar-Wagner) asks whether a multitasker exists with capacity alpha > 0 INDEPENDENT of n at average degree Theta(log n) — i.e. a family {G_n} whose induced-matching capacity is boun"
   },
   "axv_1611_03196_00": {
    "statement": "done",
@@ -564,25 +654,34 @@
    "note": "Authored in X15.v:bipartite_matching_underrepresentation_statement. Encodes Conjecture 1.15: for every number of edge-sets there is c(m) so every positive-maximum-degree bipartite graph has a matching of size at least |E(G)|/Delta(G)-c(m) while meeting each set in at most ceil(|E_i|/Delta(G)) edges."
   },
   "axv_1612_06539_00": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conjecture is an EQUALITY chi_c(G(n,1/2)) = (1/2+o(1))log2 n whp, but the encoding captures only the UPPER half. The whp wrapper is faithful (fg_whp = ratio->1 over the n-indexed space; fg_gnp_weight 1 2 = nonzero G(n,1/2) weight, p=1<q=2; fg_labelled_sgraph faithful), and the paper-local x181_monochromatic / x181_maximal_clique / x181_clique_colourable correctly model \"chi_c(G) <= k\". The DEFECT is Authored in X181.v:random_graph_clique_chromatic_tight_constant_statement."
   },
   "axv_1612_07540_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "list-flexibility-poset-foundations",
+   "package": "graph-theory-misc",
+   "note": "Authored in X182.v:planar_cover_poset_dimension_polynomial_bound_statement. Retargeted after GTBase.posets: finite posets have explicit carriers and orders, cover graphs are concrete sgraphs, height is bounded via finite chains, dimension is bounded by a realizer of linear extensions, and planarity uses wagner_planar on the cover graph. States the polynomial-in-height version."
   },
   "axv_1612_08698_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "list-flexibility-poset-foundations",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = a fatal mis-quantification of list size that makes the retargeted Prop provably FALSE rather than the open conjecture. The surface uses GTBase.list_flexibility.weighted_epsilon_flexible G d.+1 p q, whose list constraint is `k <= #|L v|` (lists of size AT LEAST d+1) while its total request weight weighted_request_total sums w(v,c) over ALL colours c in L(v). Weighted flexibility is not monotone in list "
   },
   "axv_1612_09143_00": {
    "statement": "todo",
@@ -592,25 +691,34 @@
    "audit_page": "todo"
   },
   "axv_1701_03366_00": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "cycle-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no Authored in X184.v:z5_antisymmetric_flow_edge_connectivity_statement."
   },
   "axv_1701_05597_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: WRONG TARGET OBJECT. Scott-Seymour Conj 1.8 (\"every multigraph H is widespread\") requires that bounded-omega, large-chi graphs contain an INDUCED subgraph isomorphic to a long subdivision of H, where a subdivision replaces each edge uv of H by a path and the paths are vertex-disjoint except at their ends. The encoding instead subdivides line_graph(H): x185_widespread sets branch : line_graph H -> G, and line_graph's"
   },
   "axv_1701_05597_01": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the load-bearing \"induced\" qualifier of Conjecture 1.10 (\"some INDUCED subgraph of G is a subdivision of J\") is entirely absent from the local predicate x186_contains_induced_subdivision. Its body only requires an injective branch map plus, per J-edge, a simple path whose internal vertices avoid branch vertices — there is NO chord-freeness/induced condition and NO internal-disjointness across the per-ed"
   },
   "axv_1701_05597_02": {
    "statement": "todo",
@@ -620,11 +728,14 @@
    "audit_page": "todo"
   },
   "axv_1702_00588_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X187.v:planar_triangle_free_request_graph_fraction_statement. Encodes the refuted request-graph formulation using planar triangle-free graphs, equality/inequality degree-two request vertices, positive finite weights, and a uniform positive rational satisfied fraction."
   },
   "axv_1702_01094_00": {
    "statement": "done",
@@ -674,25 +785,34 @@
    "audit_page": "todo"
   },
   "axv_1703_05380_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the interactive-sum-choice-number encoding does not model chi_ISC at all. The game's `x188_add_colour` (foundation-local, defined in X188.v itself, built on GTBase.base list_colourable + mathcomp finset SET UNION) lets the adversary re-supply an already-present colour, which fails to grow the list — whereas the real Bonamy–Meeks game grows |L(v)| by 1 per request (the property that makes chi_ISC finite "
   },
   "axv_1703_07871_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conjecture's defining \"spaghetti\" hypothesis — for each vertex v, the bags containing v form a DIRECTED PATH from the root (arXiv:1703.07871 Conj. 3) — is entirely absent. In x189_spaghetti_tree_decomposition the only spaghetti-carrying clause is `forall t, t in {u|v in bag u} -> connect (--) root t`, which is provably vacuous: is_tree [set:T] gives connected [set:T], so connect (--) root t holds fo"
   },
   "axv_1704_00125_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x171-x190-batch1",
+   "package": "minor-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = trivially-satisfiable witness surface (LIGHTWEIGHT/BROKEN 'thin system of overlays'), and it fully realizes: the conclusion x190_thin_system_of_overlays C unfolds to `exists thin, forall G, C G -> exists (_:x190_overlay G thin), True`, and the x190_overlay record is inhabited for EVERY G by the identity cover (cover_graph:=G, cover_map:=id): each fibre [set x|x==v] is the singleton [set v] so card=1<=thin (thin:=1)"
   },
   "axv_1704_00125_01": {
    "statement": "todo",
@@ -761,11 +881,14 @@
    "audit_page": "todo"
   },
   "axv_1706_05642_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = FINITENESS COLLAPSE (foundation flag B) and it does NOT resolve. The conjecture's entire content is quantitative: the o(n^2) deletion error can be improved to O(n^{2-delta(H)}). In x191_subquadratic_deletion_to_partite the constant C is bound AFTER F is fixed, and the apparent asymptotic 'forall n, #|F|=n -> ...' pins n to the single value #|F| (one graph, not a growing family). So the exponent 2*delta"
   },
   "axv_1707_03747_00": {
    "statement": "todo",
@@ -775,11 +898,14 @@
    "audit_page": "todo"
   },
   "axv_1707_03888_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X192.v:triangle_free_minor_closed_chromatic_additive_approx_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: triangle_free_minor_closed_chromatic_additive_approx_statement."
   },
   "axv_1707_03888_01": {
    "statement": "todo",
@@ -796,32 +922,44 @@
    "audit_page": "todo"
   },
   "axv_1708_00423_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "digraph-theory",
+   "note": "Authored in X193.v:directed_triangle_free_domination_polynomial_statement. Encodes Conjecture 3.5: directed-triangle-free digraphs have domination number bounded by a polynomial in the independence number."
   },
   "axv_1708_02370_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = clustering-constant mis-quantification (the flagged BROKEN clustered_chromatic_at_most-in-conclusion pattern, same family as X138/X125), and it fully realizes: the conclusion x194_clustered_chromatic_minor_class_le H (2*k-2) unfolds to forall G, ~minor G H -> clustered_chromatic_at_most G (2*k-2), and clustered_chromatic_at_most G j := exists c, clustered_colouring G j c places the clustering constant c INSIDE fora"
   },
   "axv_1708_07369_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the surface does not encode \"k-nice\" and is outright FALSE, so no weaker true statement survives. The paper's k-nice = the k-COLOUR Ramsey number R(F;k) meeting the natural construction lower bound with EQUALITY; the Rocq x195_k_nice instead (a) fixes exactly 2 colours ({set 'K_N} -> 'I_2, never k), (b) leaves its `k` argument completely unused in the body (X125-family mis-quantification: machine-confirmed k_is_deco"
   },
   "axv_1708_07369_01": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = mis-quantification / lightweight-witness, and it fires on the load-bearing quantifier. The whole content of Conj 1.5 is that \"k-nice\" holds for INFINITELY MANY k, where k-nice is a genuinely k-dependent property (the k-colour Ramsey number R(F;k) meets its natural lower bound). But the imported predicate x195_k_nice (X195.v:21-25) takes a k parameter that NEVER appears in its body: it is hard-coded to 2-colourings "
   },
   "axv_1708_08486_00": {
    "statement": "todo",
@@ -883,11 +1021,14 @@
    "audit_page": "todo"
   },
   "axv_1709_09050_02": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the top statement does NOT say capt3(G) > n. Foundation primitives: wagner_planar (base.v) = FAITHFUL planarity; the cops/robbers game (x197_cops_win_in) and x197_capture_time are bespoke local definitions in X197.v, not phase-1 primitives. Mis-quantification: x197_capture_time G cops t := exists C0, (forall r0, win_in t C0 r0) /\\ (forall t'<t, exists r0, ~win_in t' C0 r0). The minimality clause is boun"
   },
   "axv_1709_09050_03": {
    "statement": "todo",
@@ -897,32 +1038,44 @@
    "audit_page": "todo"
   },
   "axv_1710_02727_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "minor-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = mis-quantification of the clustered/star coloring number col⋆: the paper (arXiv:1710.02727 lines 91-111) defines col⋆(G)≤t as \"∃C≥1 such that col_C(G)≤t for every G∈G\", where a t-island is a nonempty S with each vertex having <t neighbors outside S and NO intrinsic size bound — the size cap C is a separate, existentially-quantified, class-uniform constant that is the entire content of the parameter (cf. Observation"
   },
   "axv_1710_03117_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "minor-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the statement is not merely a weakening but is provably FALSE, so it can never be `done`. Source (Dvořák 1710.03117) is about a FIXED class C with *polynomial ω-expansion*: for such C and each ℓ there is a constant-sized M (dep. on C, ℓ) giving a balanced separator C∪M with the WEIGHTED bound q(C) ≤ q(V)/ℓ. The Rocq surface breaks this three ways: (1) FATAL dropped hypothesis — it quantifies `forall C "
   },
   "axv_1710_06282_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "minor-theory",
+   "note": "Authored in X200.v:planar_H_model_erdos_posa_oklogk_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: planar_H_model_erdos_posa_oklogk_statement."
   },
   "axv_1710_06282_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "minor-theory",
+   "note": "Authored in X201.v:treewidth_vertex_disjoint_subgraphs_log_bound_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: treewidth_vertex_disjoint_subgraphs_log_bound_statement."
   },
   "axv_1710_10663_00": {
    "statement": "todo",
@@ -932,11 +1085,14 @@
    "audit_page": "todo"
   },
   "axv_1710_11281_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "topological-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the two-sided asymptotic c(g)=g^{1/2+o(1)} (upper AND lower, for both orientable c and nonorientable ec) is rendered as a ONE-SIDED, wrong-shaped upper bound. The window predicate x202_cop_number_genus_window is `exists cops, x202_genus_cop_number_at_most g cops /\\ eps_den*cops*cops <= (eps_den+eps_num)*g.+1` — a single upper inequality. Because more cops always suffices, `exists cops` collapses it to c(g)^2 <= (1+e"
   },
   "axv_1710_11281_01": {
    "statement": "todo",
@@ -981,11 +1137,14 @@
    "audit_page": "todo"
   },
   "axv_1802_03727_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertic"
   },
   "axv_1802_03727_01": {
    "statement": "done",
@@ -1025,11 +1184,14 @@
    "audit_page": "todo"
   },
   "axv_1802_04179_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X204.v:planar_no_4_5_cycles_fractional_below_eleven_thirds_statement. Encodes the suspected non-optimality of 11/3 as a uniform rational bound p/q < 11/3 for planar graphs with no 4- or 5-cycles."
   },
   "axv_1802_05582_00": {
    "statement": "todo",
@@ -1039,18 +1201,24 @@
    "audit_page": "todo"
   },
   "axv_1802_05582_01": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = the conjecture's ENTIRE subject (round complexity of a randomized DISTRIBUTED list-colouring algorithm, and whether it avoids the poly-Delta factor) is not encoded at all. The `rounds` argument of the record `x205_randomized_local_algorithm` (X205.v:22) is a phantom parameter — it appears in the type signature and in the bound `rounds <= C*(trunc_log 2 #|G|)+1 + C` (lines 36-38) but in NONE of the record fields, so"
   },
   "axv_1803_01051_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "asymptotics-foundation-retarget",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted witness surface not faithful to the conjecture"
   },
   "axv_1803_01051_01": {
    "statement": "done",
@@ -1063,11 +1231,14 @@
    "note": "Authored in X7.v:list_reed_choice_number_statement. Encodes the list-chromatic analogue of Reed's conjecture as ch(G) <= ceil((Delta(G)+1+omega(G))/2)."
   },
   "axv_1803_03588_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = trivially-true (Foundation WATCH: nat-subtraction / mis-encoded density disjunction), and it resolves against the statement: it is a theorem, not an open conjecture. Rödl's theorem asks for an induced subgraph on >=δn vertices that is either ε-SPARSE (density <= ε) OR ε-DENSE (density >= 1-ε); the polynomial-Rödl conjecture is that δ >= poly(ε). The encoding breaks on three independent fronts, any one "
   },
   "axv_1803_05396_00": {
    "statement": "todo",
@@ -1077,25 +1248,34 @@
    "audit_page": "todo"
   },
   "axv_1803_05396_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X208.v:Pt_free_maximum_independent_set_polytime_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: Pt_free_maximum_independent_set_polytime_statement."
   },
   "axv_1803_08462_00": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "asymptotics-foundation-retarget",
+   "package": "hypergraph-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = a minimality mis-quantification in the extremal-min helper: X209.v line 41 reads `forall (T' : finType) (E' : {set {set T}}) (y : nat), ...` — the bound `T'` is unused and `E'` is typed over the OUTER witness type `T`, so \"smallest max r-cut over all m-edge k-graphs\" is actually the minimum over m-edge k-graphs on one chooseable vertex set, not all. `x209_is_min_scaled_excess` is thus non-functional and `exists exc Authored in X209.v:hypergraph_cut_excess_theta_sqrt_statement."
   },
   "axv_1803_10962_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x191-x210-batch1",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = dropped positivity of the constants, and it resolves against the statement: the source needs \"C, C' > 0\" (context even notes C < 1/2 is FORCED — the positive constant C in \"at most Ck conflicts\" is the entire content), but the formal statement quantifies `exists C C' : nat` with no positivity and leaves k unrestricted. The conflict machinery itself is faithful (x210_conflict_assignment = symmetric F wi"
   },
   "axv_1803_10962_01": {
    "statement": "todo",
@@ -9175,14 +9355,14 @@
    "note": "Authored in X89.v:bandelt_dress_maximum_quartet_distance_statement. Encodes the maximum quartet distance asymptotic (2/3+o(1))*binomial(n,4)."
   },
   "std_bang_jensen_et_al_conjecture_f_subdivision_compl": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x90-digraph-clean1",
    "package": "digraph-theory",
-   "note": "BLOCKED — Statement compiles axiom-free but is VACUOUS: the local poly-time cost model decouples cost/cert_size from any computation, so x90_in_np holds for every problem and poly-time-decidability collapses to bare decidability (machine-checked component triviality). A faithful encoding needs a genuine polynomial-TIME computation model (reified programs + operational step count), a foundation deliberately out of scope for the corpus. See meta/X90_polytime_fix_sketch.md."
+   "note": "Authored in X90.v:f_subdivision_complexity_dichotomy_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: f_subdivision_complexity_dichotomy_statement."
   },
   "std_barba_pilz_schnider_question_k_level_in_great_ci": {
    "statement": "todo",
@@ -10015,7 +10195,7 @@
    "audit_page": "todo",
    "commit": "x124-chromatic-batch1",
    "package": "chromatic-theory",
-   "note": "BLOCKED — Statement compiles axiom-free but is not faithful: merge-width (Dreier-Torunczyk 2024, a tree of merge operations over a labelled-graph algebra) has no foundation in the corpus, so the hypothesis 'bounded merge-width' is a PLACEHOLDER (bounded order). The consequent (polynomial chi-boundedness) is faithful; a faithful antecedent needs a merge-width foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the \"bounded merge-width\" ANTECEDENT is a trivially-satisfiable witness surface that does zero restricting work, so the implication collapses to the universal false claim \"every graph class is polynomially chi-bounded.\" Root cause: in x124_merge_realisation the labelled merge expression e is consumed ONLY via x124_expr_leaves e (one nat, an upper bound on #|premerge_vertices|); the x124_join_labels / x124_relabel / "
   },
   "std_drier_linial_conjecture_haj_s_number_of_random_l": {
    "statement": "blocked",
@@ -10025,7 +10205,7 @@
    "audit_page": "todo",
    "commit": "x125-extremal-batch1",
    "package": "extremal-graph-theory",
-   "note": "BLOCKED — Statement compiles axiom-free but is not faithful: random ell-lifts of K_n, the Hajos number, and the 'almost all' (asymptotic-probability) quantifier are quantified abstractly with no defining axioms. A faithful encoding needs a random-lift + probability foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the X125 quantifier-collapse (mis-quantified \"almost all\"), and it resolves against the row: x125_almost_all quantifies `forall (L:finType)(obs), <valid-lift-family> -> exists good, fg_event_at_least_ratio L (fun _=>1) good 9 10 /\\ forall x, good x -> P(obs x)`. Foundation primitives fg_event_at_least_ratio / fg_event_weight / fg_total_weight are FAITHFUL, but here fg_event_at_least_ratio unfolds to 10"
   },
   "std_dujmovi_et_al_question_thue_choice_number_bounde": {
    "statement": "done",
@@ -10055,14 +10235,14 @@
    "note": "Authored in X127.v:dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement. Encodes the DJMNW 2-tree-width question (median tree-width, arXiv:1703.07871): exists f, every graph admitting two tree-decompositions with pairwise bag-intersection <=k has chi <= f(k). FAITHFUL-TO-REFUTED: resolved negatively by the Burling graphs (FJMTW Thm 1+2: 2-tree-width <=2 with unbounded chi); distinct from FJMTW's still-open spaghetti+path Conjecture 3. Audit rewrote an earlier Conjecture-3 encoding to this faithful median-width form."
   },
   "std_dvo_k_conjecture_cheap_balanced_separators_with": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x128-misc-batch1",
    "package": "graph-theory-misc",
-   "note": "BLOCKED — Statement compiles axiom-free but is not faithful: bounded expansion (grad_r / shallow-minor densities), real-valued cost assignments, cheap balanced separators, and outlier counts are quantified abstractly with no defining axioms. A faithful encoding needs a bounded-expansion sparsity + real-cost separator foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
+   "note": "Authored in X128.v:dvorak_cheap_balanced_separator_bounded_expansion_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: dvorak_cheap_balanced_separator_bounded_expansion_statement."
   },
   "std_dvo_k_kr_nejedl_krekovski_conjecture_square_of_p": {
    "statement": "done",
@@ -10085,25 +10265,34 @@
    "note": "Authored in X130.v:dvorak_mnich_planar_girth5_fractional_chromatic_statement. Encodes the Dvorak-Mnich conjecture: exists rational p/q<3 with fractional chromatic number <=p/q for every planar graph of girth>=5 (rational threshold faithful since chi_f of finite graphs is rational)."
   },
   "std_dvo_k_mnich_conjecture_fractional_chromatic_numb_186": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X131.v:dvorak_mnich_planar_girth5_fractional_chromatic_duplicate_statement. Duplicate studies row for the X130 Dvorak-Mnich planar girth-5 fractional-chromatic conjecture; implemented as an X130 synonym to prevent drift."
   },
   "std_dvo_k_norin_postle_flexibility_conjecture_planar": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "list-flexibility-poset-foundations",
+   "package": "chromatic-theory",
+   "note": "Authored in X132.v:dvorak_norin_postle_planar_list_flexibility_statement. Retargeted after GTBase.list_flexibility: weighted epsilon-flexibility quantifies over arbitrary finite palettes, list assignments, natural request weights, and proper list-colourings satisfying at least a fixed rational p/q of total request weight. Preserves the planar, triangle-free, girth>=5, and list-size 5/4/3 cases."
   },
   "std_dvo_k_yepremyan_question_on_clique_minors_in_k_s": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "minor-theory",
+   "note": "Authored in X133.v:dvorak_yepremyan_ks_free_clique_minor_polynomial_statement. Encodes K_s-free, alpha(G)<=r, n/r large enough, and a clique minor of order at least (n/r)^(1+epsilon) via rational-exponent cross-multiplication."
   },
   "std_elphick_farber_goldberg_wocjan_conjecture_s_s": {
    "statement": "done",
@@ -10116,18 +10305,24 @@
    "note": "Authored in X6.v:elphick_farber_goldberg_wocjan_splus_sminus_statement. Encodes min{s+(G),s-(G)} >= n-1 by requiring both positive and negative squared-adjacency-eigenvalue sums to be at least n-1."
   },
   "std_elphick_farber_goldberg_wocjan_conjecture_square": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "spectral-graph-theory",
+   "note": "Authored in X134.v:elphick_farber_goldberg_wocjan_squared_energy_statement. Same squared-energy bound as X6's s+/s- statement: min{E2+,E2-}>=n-1 is encoded as both squared sums at least n-1."
   },
   "std_engbers_homomorphism_count_maximisation_conjectu": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "homomorphism-theory",
+   "note": "Authored in X135.v:engbers_homomorphism_count_maximisation_statement. Encodes Engbers' hom-count upper bound for min-degree-delta graphs, clearing the fractional exponents by raising to D=2*delta*(delta+1)."
   },
   "std_engbers_question_on_h_colourings_of_connected_gr": {
    "statement": "todo",
@@ -10214,11 +10409,14 @@
    "audit_page": "todo"
   },
   "std_erd_s_hajnal_conjecture_for_tournaments": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "digraph-theory",
+   "note": "Authored in X136.v:erdos_hajnal_tournament_transitive_subtournament_statement. Encodes tournament Erdos-Hajnal: forall forbidden tournament H exists positive rational exponent a/b, every induced-H-free tournament has a transitive subtournament S with |G|^a<=|S|^b."
   },
   "std_erd_s_hajnal_independence_number_problem_hypergr": {
    "statement": "todo",
@@ -10256,11 +10454,14 @@
    "audit_page": "todo"
   },
   "std_erd_s_rado_sunflower_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "hypergraph-theory",
+   "note": "Authored in X137.v:erdos_rado_sunflower_statement. Encodes f_r(k)<=C(r)^k as: every r-uniform family of size > C^k contains k distinct petals with a common pairwise intersection core."
   },
   "std_erd_s_s_question_on_the_3_k_tur_n_exponent_f_3_k": {
    "statement": "todo",
@@ -10312,11 +10513,14 @@
    "audit_page": "todo"
   },
   "std_esperet_joret_question_on_clustered_colouring_of": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "topological-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conclusion primitive `clustered_chromatic_at_most G 2 := exists c, clustered_colouring G 2 c` existentially binds the clustering constant c INSIDE, per-graph, AFTER G is fixed. For any finite sgraph G one takes c = #|G| and any 2-colouring, so every monochromatic connected set trivially satisfies #|S| <= #|G|. Hence the whole implication is trivially true independent of girth 4, the maximum-degree b"
   },
   "std_esperet_labourel_ochem_problem_on_induced_univer": {
    "statement": "todo",
@@ -10340,11 +10544,14 @@
    "audit_page": "todo"
   },
   "std_esperet_raymond_conjecture_polynomial_expansion": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: x139_scol_at_most drops the defining constraint of the STRONG colouring number. x139_strong_reach_set ord r v = [set u | graph_dist v u <= r && ord u <= ord v] omits the requirement that a witnessing length-<=r path have all INTERNAL vertices ordered after v; it therefore encodes col(G^r) / backward-r-ball size, not scol_r. Machine-confirmed consequence (foundation primitives: graph_metric.graph_dist FA"
   },
   "std_esperet_raymond_question_on_improvability_of_exp": {
    "statement": "todo",
@@ -10354,11 +10561,14 @@
    "audit_page": "todo"
   },
   "std_expected_number_of_faces_of_random_embeddings_co": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "topological-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the \"expected number of faces of a uniformly random orientable embedding\" is encoded so that ALL of its content is free/prover-chosen, making the statement vacuous. In X140.v, `x140_orientable_embedding` records `x140_faces : nat` as a FREE field (never computed from any rotation system; the \"rotation_system\" field is a meaningless `edge G -> bool`), and `x140_expected_random_embedding_faces_O` quantifi"
   },
   "std_explicit_construction_of_short_minimal_codes": {
    "statement": "todo",
@@ -10403,11 +10613,14 @@
    "audit_page": "todo"
   },
   "std_fitzpatrick_howell_messinger_pike_subadditivity": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X141.v:zero_forcing_cartesian_product_subadditivity_statement. Encodes z(G square H)<=z(G)+z(H) with a local zero-forcing closure relation and base cartesian_product."
   },
   "std_fitzsimons_angel_holroyd_problem_u_n_c_n_2": {
    "statement": "todo",
@@ -10417,11 +10630,14 @@
    "audit_page": "todo"
   },
   "std_flandrin_et_al_conjecture_neighbour_sum_distingu": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X142.v:flandrin_neighbour_sum_distinguishing_edge_colouring_statement. Encodes connected order>=3, excluding C5, and neighbour-sum-distinguishing proper edge-colouring with at most Delta(G)+2 colours."
   },
   "std_folklore_conjecture_high_girth_regular_graphs_of": {
    "statement": "todo",
@@ -10438,18 +10654,24 @@
    "audit_page": "todo"
   },
   "std_forcing_conjecture_skokan_thoma": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = trivially-satisfiable witness surface (X125-family mis-quantification, machine-confirmed). Source: Skokan-Thoma \"A is forcing iff bipartite and contains a cycle\", where \"forcing\" means a graph sequence with t(K2,Gn)->p and t(A,Gn)->p^{e(A)} must be quasirandom (t(F,Gn)->p^{e(F)} for all F, a TWO-SIDED convergence). The foundation primitives are fine — GTBase.asymptotics.eventually (FAITHFUL) and fg_edge_count (FAIT"
   },
   "std_fox_s_pure_pair_conjecture_for_perfect_graphs": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X144.v:fox_pure_pair_perfect_graphs_statement. Encodes perfect graphs and pure pairs directly; n^{1-o(1)} is the usual forall epsilon>0 eventually |A|,|B|>=n^{1-epsilon} rational-exponent form."
   },
   "std_fox_s_question_on_m_k_n": {
    "statement": "todo",
@@ -10508,11 +10730,14 @@
    "audit_page": "todo"
   },
   "std_fujiwara_papasoglu_question_asymptotic_dimension": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X145.v:fujiwara_papasoglu_planar_asymptotic_dimension_two_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: fujiwara_papasoglu_planar_asymptotic_dimension_two_statement."
   },
   "std_fujiwara_papasoglu_question_on_asymptotic_dimens": {
    "statement": "todo",
@@ -10546,11 +10771,14 @@
    "audit_page": "todo"
   },
   "std_geelen_s_coarse_gallai_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "graph-theory-misc",
+   "note": "Authored in X146.v:geelen_coarse_gallai_A_paths_statement. Encodes Geelen's coarse Gallai min-max: k pairwise distance-at-least-d A-paths or a bounded set Z whose g(d)-ball meets every A-path."
   },
   "std_general_induced_arithmetic_removal_lemma": {
    "statement": "todo",
@@ -10560,32 +10788,44 @@
    "audit_page": "todo"
   },
   "std_georgakopoulos_papasoglu_conjecture_fat_minors": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "minor-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conclusion x147_quasi_isometric_to_H_minor_free (X147.v:22-32) is strictly weaker than a quasi-isometry, so it does not encode \"G admits an (L,C)-quasi-isometry to an H-minor-free graph.\" It provides two DECOUPLED maps f:G->Q, g:Q->G, each with ONLY the upper Lipschitz bound graph_dist(fx,fy) <= L*graph_dist(x,y)+C plus coarse-surjectivity; there is no lower bound (>= dist/L - C) and no quasi-invers Authored in X147.v:georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement."
   },
   "std_gerbner_keszegh_methuku_abhishek_nagy_patk_s_tom": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "hypergraph-theory",
+   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the surface encodes the WRONG extremal object and is outright false, not the open conjecture. The source (Scott–Wilmer, verifying Gerbner et al. Conj. 2.5) fixes a UNIFORM profile |A_i|=a, |B_i|=b with t≤a≤b and bounds m ≤ AK(a+b,a,t) = max size of an a-UNIFORM t-intersecting family ⊆ C([a+b],a). The Rocq statement drops uniformity entirely (no a, no |A_i|=a/|B_i|=b) and sets the bound to x148_AK_bound |T| t = max_r"
   },
   "std_gimbel_k_ndgen_li_thomassen_conjecture": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "chromatic-theory",
+   "note": "Authored in X149.v:gimbel_kundgen_li_thomassen_four_chromatic_planar_fractional_statement. Encodes every 4-chromatic planar graph has fractional chromatic number strictly greater than 3, using X130's audited fractional-colouring relation."
   },
   "std_gimbel_thomassen_problem_3": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x131-x150-batch1",
+   "package": "chromatic-theory",
+   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the \"embeddable in a fixed surface\" hypothesis is modelled by surface_embeddable surface G (= exists rotation system E, surface_euler_genus E <= surface), the LIGHTWEIGHT surface primitive. By Euler's formula surface_euler_genus = (2+E-V-F)/2 is the ORIENTABLE genus, so the nat \"surface\" is orientable genus (not Euler genus) and ALL non-orientable surfaces (projective plane, Klein bottle, ...) are silently excluded, Authored in X150.v:gimbel_thomassen_triangle_free_surface_three_colourability_pol"
   },
   "std_gishboliner_steiner_szab_conjecture_on_the_dichr": {
    "statement": "todo",

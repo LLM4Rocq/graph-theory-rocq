@@ -49,14 +49,14 @@
       r-regular graph need not be 4-connected, so neither hypothesis specializes
       to the other and neither statement transports to the other.  Independent.
 
-    • Rows 5–8 are PLANARITY/GENUS-GATED placeholders (blocked): their geometric
-      hypothesis is an ABSTRACT predicate [forall (planar/toroidal : sgraph ->
-      Prop), ...].  Being universally quantified, the predicate can be
-      instantiated with [fun _ => True], collapsing each blocked row to an
+    • Rows 5–8 were PLANARITY/GENUS-GATED proxy forms in the original edge audit:
+      their geometric hypothesis is an ABSTRACT predicate [forall
+      (planar/toroidal : sgraph -> Prop), ...].  Being universally quantified,
+      the predicate can be instantiated with [fun _ => True], collapsing each to an
       absurdly strong placeholder-free statement (e.g. Row 6 ⟹ "EVERY
       4-connected graph is Hamiltonian").  Such collapses DO yield compiling
       implications into the real rows (Row 6 ⟹ Row 9 closes with [Qed]) — but
-      they are FORMALIZATION ARTIFACTS of the blocked placeholder, NOT literature
+      they are FORMALIZATION ARTIFACTS of the proxy form, NOT literature
       edges (no theorem says "4-connected toroidal Hamiltonicity ⟹ Thomassen's
       4-connected-line-graph conjecture").  Per the edge policy they are NOT
       scheduled; they are recorded as candidate-artifacts in the deliverable's

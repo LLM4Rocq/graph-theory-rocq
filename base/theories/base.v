@@ -24,6 +24,13 @@ From GraphTheory Require Import mgraph.
 (* minor is IMPORTED (for the combinatorial [wagner_planar] definition); downstream uses
    [wagner_planar] opaquely and need not import minor. *)
 From GraphTheory Require Import minor.
+From GTBase Require Export asymptotics.
+From GTBase Require Export complexity.
+From GTBase Require Export finite_graph.
+From GTBase Require Export graph_metric.
+From GTBase Require Export list_flexibility.
+From GTBase Require Export posets.
+From GTBase Require Export surface.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

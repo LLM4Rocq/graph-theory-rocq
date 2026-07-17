@@ -75,13 +75,13 @@
 
 | area | slug | reason |
 |---|---|---|
-| infinite-graph-theory | characterizing_aleph_0_aleph_1_graphs | out of scope: aleph_1 cardinal arithmetic |
-| infinite-graph-theory | highly_arc_transitive_two_ended_digraphs | out of scope: ends + automorphism action |
-| topological-graph-theory | 3_colourability_of_arrangements_of_great_circles | needs topological layer: spherical arrangement geometry |
-| topological-graph-theory | are_different_notions_of_the_crossing_number_the_same | needs topological layer: two distinct drawing semantics |
-| topological-graph-theory | consecutive_non_orientable_embedding_obstructions | signed layer (emap/orientable_map/seuler_genus) now EXISTS; still blocked on 4 statement-level items: (a) embeds-in-N_k (min over NON-orientable schemes; semb_in_genus leaks orientable schemes — K7 torus vs crosscap 3), (b) disconnected-graph embeddability semantics (obstruction minors ARE disconnected), (c) edgeless/K1 empty-map anomaly guard, (d) proper-minor predicate |
-| topological-graph-theory | drawing_disconnected_graphs_on_surfaces | needs topological layer: optimal drawings on a surface |
-| topological-graph-theory | obstacle_number_of_planar_graphs | needs topological layer: obstacle/visibility geometry |
+| infinite-graph-theory | characterizing_aleph_0_aleph_1_graphs | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
+| infinite-graph-theory | highly_arc_transitive_two_ended_digraphs | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
+| topological-graph-theory | 3_colourability_of_arrangements_of_great_circles | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
+| topological-graph-theory | are_different_notions_of_the_crossing_number_the_same | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
+| topological-graph-theory | consecutive_non_orientable_embedding_obstructions | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
+| topological-graph-theory | drawing_disconnected_graphs_on_surfaces | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
+| topological-graph-theory | obstacle_number_of_planar_graphs | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
 
 ## Base surfaces (`graph-theory-base`, cross-area primitives)
 
@@ -135,7 +135,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1745 tracked rows** — by corpus tag: arxiv 762, arxiv-studied 568, derived 138, erdos 277; **116 alias rows** (no statement owed).
-- Statement legs over the 1629 non-alias rows: **293 done** · 1 partial · 4 blocked · 1331 todo.
+- Statement legs over the 1629 non-alias rows: **330 done** · 9 partial · 39 blocked · 1251 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -171,19 +171,99 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X125 | 0 | 0 | 1 | 0 | 1 |
 | X126 | 1 | 0 | 0 | 0 | 1 |
 | X127 | 1 | 0 | 0 | 0 | 1 |
-| X128 | 0 | 0 | 1 | 0 | 1 |
+| X128 | 1 | 0 | 0 | 0 | 1 |
 | X129 | 1 | 0 | 0 | 0 | 1 |
 | X13 | 2 | 0 | 0 | 0 | 2 |
 | X130 | 1 | 0 | 0 | 0 | 1 |
+| X131 | 1 | 0 | 0 | 0 | 1 |
+| X132 | 1 | 0 | 0 | 0 | 1 |
+| X133 | 1 | 0 | 0 | 0 | 1 |
+| X134 | 1 | 0 | 0 | 0 | 1 |
+| X135 | 1 | 0 | 0 | 0 | 1 |
+| X136 | 1 | 0 | 0 | 0 | 1 |
+| X137 | 1 | 0 | 0 | 0 | 1 |
+| X138 | 0 | 0 | 1 | 0 | 1 |
+| X139 | 0 | 0 | 1 | 0 | 1 |
 | X14 | 2 | 0 | 0 | 0 | 2 |
+| X140 | 0 | 0 | 1 | 0 | 1 |
+| X141 | 1 | 0 | 0 | 0 | 1 |
+| X142 | 1 | 0 | 0 | 0 | 1 |
+| X143 | 0 | 0 | 1 | 0 | 1 |
+| X144 | 1 | 0 | 0 | 0 | 1 |
+| X145 | 1 | 0 | 0 | 0 | 1 |
+| X146 | 1 | 0 | 0 | 0 | 1 |
+| X147 | 0 | 1 | 0 | 0 | 1 |
+| X148 | 0 | 0 | 1 | 0 | 1 |
+| X149 | 1 | 0 | 0 | 0 | 1 |
 | X15 | 2 | 0 | 0 | 0 | 2 |
+| X150 | 0 | 1 | 0 | 0 | 1 |
+| X151 | 1 | 0 | 0 | 0 | 1 |
+| X152 | 0 | 1 | 0 | 0 | 1 |
+| X153 | 1 | 0 | 0 | 0 | 1 |
+| X154 | 0 | 1 | 0 | 0 | 1 |
+| X155 | 0 | 0 | 1 | 0 | 1 |
+| X156 | 0 | 0 | 1 | 0 | 1 |
+| X157 | 1 | 0 | 0 | 0 | 1 |
+| X158 | 1 | 0 | 0 | 0 | 1 |
+| X159 | 1 | 0 | 0 | 0 | 1 |
 | X16 | 2 | 0 | 0 | 0 | 2 |
+| X160 | 1 | 0 | 0 | 0 | 1 |
+| X161 | 1 | 0 | 0 | 0 | 1 |
+| X162 | 0 | 0 | 1 | 0 | 1 |
+| X163 | 1 | 0 | 0 | 0 | 1 |
+| X164 | 0 | 0 | 1 | 0 | 1 |
+| X165 | 1 | 0 | 0 | 0 | 1 |
+| X166 | 0 | 0 | 1 | 0 | 1 |
+| X167 | 0 | 0 | 1 | 0 | 1 |
+| X168 | 0 | 0 | 1 | 0 | 1 |
+| X169 | 0 | 0 | 1 | 0 | 1 |
 | X17 | 2 | 0 | 0 | 0 | 2 |
+| X170 | 0 | 0 | 1 | 0 | 1 |
+| X171 | 1 | 0 | 0 | 0 | 1 |
+| X172 | 1 | 0 | 0 | 0 | 1 |
+| X173 | 1 | 0 | 0 | 0 | 1 |
+| X174 | 0 | 1 | 0 | 0 | 1 |
+| X175 | 1 | 0 | 0 | 0 | 1 |
+| X176 | 0 | 0 | 1 | 0 | 1 |
+| X177 | 0 | 0 | 1 | 0 | 1 |
+| X178 | 1 | 0 | 0 | 0 | 1 |
+| X179 | 0 | 0 | 1 | 0 | 1 |
 | X18 | 3 | 0 | 0 | 0 | 3 |
+| X180 | 0 | 0 | 1 | 0 | 1 |
+| X181 | 0 | 1 | 0 | 0 | 1 |
+| X182 | 1 | 0 | 0 | 0 | 1 |
+| X183 | 0 | 0 | 1 | 0 | 1 |
+| X184 | 0 | 1 | 0 | 0 | 1 |
+| X185 | 0 | 0 | 1 | 0 | 1 |
+| X186 | 0 | 0 | 1 | 0 | 1 |
+| X187 | 1 | 0 | 0 | 0 | 1 |
+| X188 | 0 | 0 | 1 | 0 | 1 |
+| X189 | 0 | 0 | 1 | 0 | 1 |
 | X19 | 2 | 0 | 0 | 0 | 2 |
+| X190 | 0 | 0 | 1 | 0 | 1 |
+| X191 | 0 | 0 | 1 | 0 | 1 |
+| X192 | 1 | 0 | 0 | 0 | 1 |
+| X193 | 1 | 0 | 0 | 0 | 1 |
+| X194 | 0 | 0 | 1 | 0 | 1 |
+| X195 | 0 | 0 | 1 | 0 | 1 |
+| X196 | 0 | 0 | 1 | 0 | 1 |
+| X197 | 0 | 0 | 1 | 0 | 1 |
+| X198 | 0 | 0 | 1 | 0 | 1 |
+| X199 | 0 | 0 | 1 | 0 | 1 |
 | X2 | 11 | 0 | 0 | 0 | 11 |
 | X20 | 2 | 0 | 0 | 0 | 2 |
+| X200 | 1 | 0 | 0 | 0 | 1 |
+| X201 | 1 | 0 | 0 | 0 | 1 |
+| X202 | 0 | 0 | 1 | 0 | 1 |
+| X203 | 0 | 0 | 1 | 0 | 1 |
+| X204 | 1 | 0 | 0 | 0 | 1 |
+| X205 | 0 | 0 | 1 | 0 | 1 |
+| X206 | 0 | 0 | 1 | 0 | 1 |
+| X207 | 0 | 0 | 1 | 0 | 1 |
+| X208 | 1 | 0 | 0 | 0 | 1 |
+| X209 | 0 | 1 | 0 | 0 | 1 |
 | X21 | 3 | 0 | 0 | 0 | 3 |
+| X210 | 0 | 0 | 1 | 0 | 1 |
 | X22 | 1 | 0 | 0 | 0 | 1 |
 | X23 | 2 | 0 | 0 | 0 | 2 |
 | X24 | 1 | 0 | 0 | 0 | 1 |
@@ -259,7 +339,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X88 | 1 | 0 | 0 | 0 | 1 |
 | X89 | 1 | 0 | 0 | 0 | 1 |
 | X9 | 2 | 0 | 0 | 0 | 2 |
-| X90 | 0 | 0 | 1 | 0 | 1 |
+| X90 | 1 | 0 | 0 | 0 | 1 |
 | X91 | 1 | 0 | 0 | 0 | 1 |
 | X92 | 1 | 0 | 0 | 0 | 1 |
 | X93 | 1 | 0 | 0 | 0 | 1 |

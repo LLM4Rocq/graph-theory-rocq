@@ -1,4 +1,11 @@
 -R theories GTBase
 -arg -w -arg -notation-overridden
 
+theories/asymptotics.v
+theories/complexity.v
+theories/finite_graph.v
+theories/graph_metric.v
+theories/list_flexibility.v
+theories/posets.v
+theories/surface.v
 theories/base.v

@@ -2321,9 +2321,7 @@
       "rows": {
         "std_bang_jensen_et_al_conjecture_f_subdivision_compl": {
           "formal_name": "f_subdivision_complexity_dichotomy_statement",
-          "note": "Encodes the F-Subdivision polynomial-time versus NP-complete dichotomy for every fixed digraph F.",
-          "state": "blocked",
-          "blocked_reason": "Statement compiles axiom-free but is VACUOUS: the local poly-time cost model decouples cost/cert_size from any computation, so x90_in_np holds for every problem and poly-time-decidability collapses to bare decidability (machine-checked component triviality). A faithful encoding needs a genuine polynomial-TIME computation model (reified programs + operational step count), a foundation deliberately out of scope for the corpus. See meta/X90_polytime_fix_sketch.md."
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: f_subdivision_complexity_dichotomy_statement."
         }
       },
       "faithfulness_verified_by": "Codex X90 source readback pass (2026-07-11); OVERTURNED by faithfulness audit 2026-07-11",
@@ -2903,13 +2901,13 @@
       "rows": {
         "std_dreier_toru_czyk_conjecture_merge_width_polynomi": {
           "formal_name": "dreier_torunczyk_merge_width_poly_chi_bounded_statement",
-          "note": "Statement compiles axiom-free but is not faithful: merge-width (Dreier-Torunczyk 2024, a tree of merge operations over a labelled-graph algebra) has no foundation in the corpus, so the hypothesis 'bounded merge-width' is a PLACEHOLDER (bounded order). The consequent (polynomial chi-boundedness) is faithful; a faithful antecedent needs a merge-width foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md.",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: dreier_torunczyk_merge_width_poly_chi_bounded_statement.",
           "state": "blocked",
-          "blocked_reason": "Statement compiles axiom-free but is not faithful: merge-width (Dreier-Torunczyk 2024, a tree of merge operations over a labelled-graph algebra) has no foundation in the corpus, so the hypothesis 'bounded merge-width' is a PLACEHOLDER (bounded order). The consequent (polynomial chi-boundedness) is faithful; a faithful antecedent needs a merge-width foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the \"bounded merge-width\" ANTECEDENT is a trivially-satisfiable witness surface that does zero restricting work, so the implication collapses to the universal false claim \"every graph class is polynomially chi-bounded.\" Root cause: in x124_merge_realisation the labelled merge expression e is consumed ONLY via x124_expr_leaves e (one nat, an upper bound on #|premerge_vertices|); the x124_join_labels / x124_relabel / "
         }
       },
-      "faithfulness_verified_by": "Independent adversarial faithfulness audit (author+audit split, 6 distinct-reader agents; machine-checked refutations where suspect), 2026-07-13",
-      "faithfulness_result": "1/1 BLOCKED. Consequent (polynomial chi-boundedness) faithful, but merge-width (Dreier-Torunczyk 2024) has no corpus foundation so the antecedent is a placeholder; needs a merge-width layer, out of scope."
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk: the \"bounded merge-width\" ANTECEDENT is a trivially-satisfiable witness surface that does zero restricting work, so the implication collapses to the universal false claim \"every graph class is polynomially chi-bounded.\" Root cause: in x124_merge_realisation the labelled merge expression e is consumed ONLY via x124_expr_leaves e (one nat, an upper bound on #|premerge_vertices|); the x124_join_labels / x124_relabel / x124_merge_label constructors never constrain premerge_"
     },
     "X125": {
       "phase": "X125",
@@ -2922,13 +2920,13 @@
       "rows": {
         "std_drier_linial_conjecture_haj_s_number_of_random_l": {
           "formal_name": "drier_linial_random_lift_hajos_number_statement",
-          "note": "Statement compiles axiom-free but is not faithful: random ell-lifts of K_n, the Hajos number, and the 'almost all' (asymptotic-probability) quantifier are quantified abstractly with no defining axioms. A faithful encoding needs a random-lift + probability foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md.",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: drier_linial_random_lift_hajos_number_statement.",
           "state": "blocked",
-          "blocked_reason": "Statement compiles axiom-free but is not faithful: random ell-lifts of K_n, the Hajos number, and the 'almost all' (asymptotic-probability) quantifier are quantified abstractly with no defining axioms. A faithful encoding needs a random-lift + probability foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the X125 quantifier-collapse (mis-quantified \"almost all\"), and it resolves against the row: x125_almost_all quantifies `forall (L:finType)(obs), <valid-lift-family> -> exists good, fg_event_at_least_ratio L (fun _=>1) good 9 10 /\\ forall x, good x -> P(obs x)`. Foundation primitives fg_event_at_least_ratio / fg_event_weight / fg_total_weight are FAITHFUL, but here fg_event_at_least_ratio unfolds to 10"
         }
       },
-      "faithfulness_verified_by": "Independent adversarial faithfulness audit (author+audit split, 6 distinct-reader agents; machine-checked refutations where suspect), 2026-07-13",
-      "faithfulness_result": "1/1 BLOCKED. Random ell-lifts of K_n, the Hajos number, and the 'almost all' asymptotic-probability quantifier are quantified abstractly with no defining axioms; needs a random-lift + probability foundation, out of scope."
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = the X125 quantifier-collapse (mis-quantified \"almost all\"), and it resolves against the row: x125_almost_all quantifies `forall (L:finType)(obs), <valid-lift-family> -> exists good, fg_event_at_least_ratio L (fun _=>1) good 9 10 /\\ forall x, good x -> P(obs x)`. Foundation primitives fg_event_at_least_ratio / fg_event_weight / fg_total_weight are FAITHFUL, but here fg_event_at_least_ratio unfolds to 10*#|good| >= 9*#|L|; instantiating L:=unit, obs:=const G"
     },
     "X126": {
       "phase": "X126",
@@ -2975,9 +2973,7 @@
       "rows": {
         "std_dvo_k_conjecture_cheap_balanced_separators_with": {
           "formal_name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
-          "note": "Statement compiles axiom-free but is not faithful: bounded expansion (grad_r / shallow-minor densities), real-valued cost assignments, cheap balanced separators, and outlier counts are quantified abstractly with no defining axioms. A faithful encoding needs a bounded-expansion sparsity + real-cost separator foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md.",
-          "state": "blocked",
-          "blocked_reason": "Statement compiles axiom-free but is not faithful: bounded expansion (grad_r / shallow-minor densities), real-valued cost assignments, cheap balanced separators, and outlier counts are quantified abstractly with no defining axioms. A faithful encoding needs a bounded-expansion sparsity + real-cost separator foundation, deliberately out of scope. See meta/X111-X130_faithfulness_audit.md."
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: dvorak_cheap_balanced_separator_bounded_expansion_statement."
         }
       },
       "faithfulness_verified_by": "Independent adversarial faithfulness audit (author+audit split, 6 distinct-reader agents; machine-checked refutations where suspect), 2026-07-13",
@@ -3016,6 +3012,1456 @@
       },
       "faithfulness_verified_by": "Independent adversarial faithfulness audit (author+audit split, 6 distinct-reader agents; machine-checked refutations where suspect), 2026-07-13",
       "faithfulness_result": "1/1 FAITHFUL. exists rational p/q<3 before forall G; chi_f(G)<=p/q via a b-fold colouring (audit machine-refuted the p=0 degenerate witness); rational threshold faithful since chi_f of finite graphs is rational; girth>=5 via girth_geq."
+    },
+    "X131": {
+      "phase": "X131",
+      "repo": "chromatic-theory",
+      "defines_file": "X131.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_dvo_k_mnich_conjecture_fractional_chromatic_numb_186": {
+          "formal_name": "dvorak_mnich_planar_girth5_fractional_chromatic_duplicate_statement",
+          "note": "Duplicate studies row for the X130 Dvorak-Mnich planar girth-5 fractional-chromatic conjecture; implemented as an X130 synonym to prevent drift."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "faithfulness_result": "1/1 FAITHFUL. Exact duplicate of X130; synonym preserves the audited rational epsilon encoding, wagner_planar guard, and girth_geq>=5 guard."
+    },
+    "X132": {
+      "phase": "X132",
+      "repo": "chromatic-theory",
+      "defines_file": "X132.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass; retargeted by list-flexibility foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex list-flexibility retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "list-flexibility-poset-foundations",
+      "rows": {
+        "std_dvo_k_norin_postle_flexibility_conjecture_planar": {
+          "formal_name": "dvorak_norin_postle_planar_list_flexibility_statement",
+          "note": "Retargeted after GTBase.list_flexibility: weighted epsilon-flexibility quantifies over arbitrary finite palettes, list assignments, natural request weights, and proper list-colourings satisfying at least a fixed rational p/q of total request weight. Preserves the planar, triangle-free, girth>=5, and list-size 5/4/3 cases."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 DONE after retarget. Weighted request/list-flexibility is now concrete and axiom-free."
+    },
+    "X133": {
+      "phase": "X133",
+      "repo": "minor-theory",
+      "defines_file": "X133.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_dvo_k_yepremyan_question_on_clique_minors_in_k_s": {
+          "formal_name": "dvorak_yepremyan_ks_free_clique_minor_polynomial_statement",
+          "note": "Encodes K_s-free, alpha(G)<=r, n/r large enough, and a clique minor of order at least (n/r)^(1+epsilon) via rational-exponent cross-multiplication."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. K_s-free = omega<s; n/r large enough = N*r<=n; polynomially larger = exists positive rational epsilon with n^(1+epsilon)<=t*r^(1+epsilon), cross-multiplied."
+    },
+    "X134": {
+      "phase": "X134",
+      "repo": "spectral-graph-theory",
+      "defines_file": "X134.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_elphick_farber_goldberg_wocjan_conjecture_square": {
+          "formal_name": "elphick_farber_goldberg_wocjan_squared_energy_statement",
+          "note": "Same squared-energy bound as X6's s+/s- statement: min{E2+,E2-}>=n-1 is encoded as both squared sums at least n-1."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. Reuses the audited X6 spectral squared-sum encoding as a synonym."
+    },
+    "X135": {
+      "phase": "X135",
+      "repo": "homomorphism-theory",
+      "defines_file": "X135.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_engbers_homomorphism_count_maximisation_conjectu": {
+          "formal_name": "engbers_homomorphism_count_maximisation_statement",
+          "note": "Encodes Engbers' hom-count upper bound for min-degree-delta graphs, clearing the fractional exponents by raising to D=2*delta*(delta+1)."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. hom(G,H) counts adjacency-preserving finite functions; c(delta,H) is N; the three source terms are preserved after clearing denominators."
+    },
+    "X136": {
+      "phase": "X136",
+      "repo": "digraph-theory",
+      "defines_file": "X136.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_erd_s_hajnal_conjecture_for_tournaments": {
+          "formal_name": "erdos_hajnal_tournament_transitive_subtournament_statement",
+          "note": "Encodes tournament Erdos-Hajnal: forall forbidden tournament H exists positive rational exponent a/b, every induced-H-free tournament has a transitive subtournament S with |G|^a<=|S|^b."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. H-free is induced-free on tournaments; transitive subtournament uses sub_tournament S and transb; positive tau encoded by a/b."
+    },
+    "X137": {
+      "phase": "X137",
+      "repo": "hypergraph-theory",
+      "defines_file": "X137.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_erd_s_rado_sunflower_conjecture": {
+          "formal_name": "erdos_rado_sunflower_statement",
+          "note": "Encodes f_r(k)<=C(r)^k as: every r-uniform family of size > C^k contains k distinct petals with a common pairwise intersection core."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. r-uniform finite set families and k-sunflowers are defined directly; C depends only on r."
+    },
+    "X138": {
+      "phase": "X138",
+      "repo": "topological-graph-theory",
+      "defines_file": "X138.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_esperet_joret_question_on_clustered_colouring_of": {
+          "formal_name": "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: esperet_joret_surface_triangle_free_clustered_two_colouring_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conclusion primitive `clustered_chromatic_at_most G 2 := exists c, clustered_colouring G 2 c` existentially binds the clustering constant c INSIDE, per-graph, AFTER G is fixed. For any finite sgraph G one takes c = #|G| and any 2-colouring, so every monochromatic connected set trivially satisfies #|S| <= #|G|. Hence the whole implication is trivially true independent of girth 4, the maximum-degree b"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the conclusion primitive `clustered_chromatic_at_most G 2 := exists c, clustered_colouring G 2 c` existentially binds the clustering constant c INSIDE, per-graph, AFTER G is fixed. For any finite sgraph G one takes c = #|G| and any 2-colouring, so every monochromatic connected set trivially satisfies #|S| <= #|G|. Hence the whole implication is trivially true independent of girth 4, the maximum-degree bound, and surface embeddability — the three hypotheses "
+    },
+    "X139": {
+      "phase": "X139",
+      "repo": "graph-theory-misc",
+      "defines_file": "X139.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_esperet_raymond_conjecture_polynomial_expansion": {
+          "formal_name": "esperet_raymond_polynomial_expansion_scol_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: esperet_raymond_polynomial_expansion_scol_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: x139_scol_at_most drops the defining constraint of the STRONG colouring number. x139_strong_reach_set ord r v = [set u | graph_dist v u <= r && ord u <= ord v] omits the requirement that a witnessing length-<=r path have all INTERNAL vertices ordered after v; it therefore encodes col(G^r) / backward-r-ball size, not scol_r. Machine-confirmed consequence (foundation primitives: graph_metric.graph_dist FA"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: x139_scol_at_most drops the defining constraint of the STRONG colouring number. x139_strong_reach_set ord r v = [set u | graph_dist v u <= r && ord u <= ord v] omits the requirement that a witnessing length-<=r path have all INTERNAL vertices ordered after v; it therefore encodes col(G^r) / backward-r-ball size, not scol_r. Machine-confirmed consequence (foundation primitives: graph_metric.graph_dist FAITHFUL, finite_graph.fg_edge_count FAITHFUL): diameter<"
+    },
+    "X140": {
+      "phase": "X140",
+      "repo": "topological-graph-theory",
+      "defines_file": "X140.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_expected_number_of_faces_of_random_embeddings_co": {
+          "formal_name": "expected_faces_random_orientable_embeddings_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: expected_faces_random_orientable_embeddings_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the \"expected number of faces of a uniformly random orientable embedding\" is encoded so that ALL of its content is free/prover-chosen, making the statement vacuous. In X140.v, `x140_orientable_embedding` records `x140_faces : nat` as a FREE field (never computed from any rotation system; the \"rotation_system\" field is a meaningless `edge G -> bool`), and `x140_expected_random_embedding_faces_O` quantifi"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the \"expected number of faces of a uniformly random orientable embedding\" is encoded so that ALL of its content is free/prover-chosen, making the statement vacuous. In X140.v, `x140_orientable_embedding` records `x140_faces : nat` as a FREE field (never computed from any rotation system; the \"rotation_system\" field is a meaningless `edge G -> bool`), and `x140_expected_random_embedding_faces_O` quantifies existentially over an ARBITRARY finType `Emb` and an"
+    },
+    "X141": {
+      "phase": "X141",
+      "repo": "graph-theory-misc",
+      "defines_file": "X141.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_fitzpatrick_howell_messinger_pike_subadditivity": {
+          "formal_name": "zero_forcing_cartesian_product_subadditivity_statement",
+          "note": "Encodes z(G square H)<=z(G)+z(H) with a local zero-forcing closure relation and base cartesian_product."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. Zero forcing is defined by the standard unique-uncoloured-neighbour force closure; exact zero forcing numbers are relational; Cartesian product reuses base."
+    },
+    "X142": {
+      "phase": "X142",
+      "repo": "chromatic-theory",
+      "defines_file": "X142.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_flandrin_et_al_conjecture_neighbour_sum_distingu": {
+          "formal_name": "flandrin_neighbour_sum_distinguishing_edge_colouring_statement",
+          "note": "Encodes connected order>=3, excluding C5, and neighbour-sum-distinguishing proper edge-colouring with at most Delta(G)+2 colours."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. Edge palette uses positive colours 1..k in incident sums; proper edge-colouring and adjacent-vertex sum distinction are explicit; C5 exception is by isomorphism."
+    },
+    "X143": {
+      "phase": "X143",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X143.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_forcing_conjecture_skokan_thoma": {
+          "formal_name": "skokan_thoma_forcing_graph_characterisation_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: skokan_thoma_forcing_graph_characterisation_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = trivially-satisfiable witness surface (X125-family mis-quantification, machine-confirmed). Source: Skokan-Thoma \"A is forcing iff bipartite and contains a cycle\", where \"forcing\" means a graph sequence with t(K2,Gn)->p and t(A,Gn)->p^{e(A)} must be quasirandom (t(F,Gn)->p^{e(F)} for all F, a TWO-SIDED convergence). The foundation primitives are fine — GTBase.asymptotics.eventually (FAITHFUL) and fg_edge_count (FAIT"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = trivially-satisfiable witness surface (X125-family mis-quantification, machine-confirmed). Source: Skokan-Thoma \"A is forcing iff bipartite and contains a cycle\", where \"forcing\" means a graph sequence with t(K2,Gn)->p and t(A,Gn)->p^{e(A)} must be quasirandom (t(F,Gn)->p^{e(F)} for all F, a TWO-SIDED convergence). The foundation primitives are fine — GTBase.asymptotics.eventually (FAITHFUL) and fg_edge_count (FAITHFUL). The break is in the ad-hoc composite x143_densit"
+    },
+    "X144": {
+      "phase": "X144",
+      "repo": "graph-theory-misc",
+      "defines_file": "X144.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_fox_s_pure_pair_conjecture_for_perfect_graphs": {
+          "formal_name": "fox_pure_pair_perfect_graphs_statement",
+          "note": "Encodes perfect graphs and pure pairs directly; n^{1-o(1)} is the usual forall epsilon>0 eventually |A|,|B|>=n^{1-epsilon} rational-exponent form."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. Perfect graph = every induced subgraph has chi=omega; pure pair complete/anticomplete and nonempty/disjoint; asymptotic exponent order correct."
+    },
+    "X145": {
+      "phase": "X145",
+      "repo": "graph-theory-misc",
+      "defines_file": "X145.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_fujiwara_papasoglu_question_asymptotic_dimension": {
+          "formal_name": "fujiwara_papasoglu_planar_asymptotic_dimension_two_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: fujiwara_papasoglu_planar_asymptotic_dimension_two_statement."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 BLOCKED. Needs asymptotic-dimension foundation for graph classes."
+    },
+    "X146": {
+      "phase": "X146",
+      "repo": "graph-theory-misc",
+      "defines_file": "X146.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_geelen_s_coarse_gallai_conjecture": {
+          "formal_name": "geelen_coarse_gallai_A_paths_statement",
+          "note": "Encodes Geelen's coarse Gallai min-max: k pairwise distance-at-least-d A-paths or a bounded set Z whose g(d)-ball meets every A-path."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. A-path endpoints are in A with internal vertices outside A; pairwise distance uses closed (d-1)-balls; separator conclusion is exactly every A-path hits N[Z,g(d)]."
+    },
+    "X147": {
+      "phase": "X147",
+      "repo": "minor-theory",
+      "defines_file": "X147.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_georgakopoulos_papasoglu_conjecture_fat_minors": {
+          "formal_name": "georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement.",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conclusion x147_quasi_isometric_to_H_minor_free (X147.v:22-32) is strictly weaker than a quasi-isometry, so it does not encode \"G admits an (L,C)-quasi-isometry to an H-minor-free graph.\" It provides two DECOUPLED maps f:G->Q, g:Q->G, each with ONLY the upper Lipschitz bound graph_dist(fx,fy) <= L*graph_dist(x,y)+C plus coarse-surjectivity; there is no lower bound (>= dist/L - C) and no quasi-invers"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the conclusion x147_quasi_isometric_to_H_minor_free (X147.v:22-32) is strictly weaker than a quasi-isometry, so it does not encode \"G admits an (L,C)-quasi-isometry to an H-minor-free graph.\" It provides two DECOUPLED maps f:G->Q, g:Q->G, each with ONLY the upper Lipschitz bound graph_dist(fx,fy) <= L*graph_dist(x,y)+C plus coarse-surjectivity; there is no lower bound (>= dist/L - C) and no quasi-inverse coupling. A genuine QI needs the lower bound. Without"
+    },
+    "X148": {
+      "phase": "X148",
+      "repo": "hypergraph-theory",
+      "defines_file": "X148.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_gerbner_keszegh_methuku_abhishek_nagy_patk_s_tom": {
+          "formal_name": "gerbner_two_families_ahlswede_khachatrian_bound_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: gerbner_two_families_ahlswede_khachatrian_bound_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the surface encodes the WRONG extremal object and is outright false, not the open conjecture. The source (Scott–Wilmer, verifying Gerbner et al. Conj. 2.5) fixes a UNIFORM profile |A_i|=a, |B_i|=b with t≤a≤b and bounds m ≤ AK(a+b,a,t) = max size of an a-UNIFORM t-intersecting family ⊆ C([a+b],a). The Rocq statement drops uniformity entirely (no a, no |A_i|=a/|B_i|=b) and sets the bound to x148_AK_bound |T| t = max_r"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk: the surface encodes the WRONG extremal object and is outright false, not the open conjecture. The source (Scott–Wilmer, verifying Gerbner et al. Conj. 2.5) fixes a UNIFORM profile |A_i|=a, |B_i|=b with t≤a≤b and bounds m ≤ AK(a+b,a,t) = max size of an a-UNIFORM t-intersecting family ⊆ C([a+b],a). The Rocq statement drops uniformity entirely (no a, no |A_i|=a/|B_i|=b) and sets the bound to x148_AK_bound |T| t = max_r |{S⊆[n] : |S∩[t+2r]|≥t+r}| over ALL subset sizes — the"
+    },
+    "X149": {
+      "phase": "X149",
+      "repo": "chromatic-theory",
+      "defines_file": "X149.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_gimbel_k_ndgen_li_thomassen_conjecture": {
+          "formal_name": "gimbel_kundgen_li_thomassen_four_chromatic_planar_fractional_statement",
+          "note": "Encodes every 4-chromatic planar graph has fractional chromatic number strictly greater than 3, using X130's audited fractional-colouring relation."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. Strict chi_f>3 is negated X130 chi_f<=3; planarity uses wagner_planar; chromatic number hypothesis is chi=4."
+    },
+    "X150": {
+      "phase": "X150",
+      "repo": "chromatic-theory",
+      "defines_file": "X150.v",
+      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x131-x150-batch1",
+      "rows": {
+        "std_gimbel_thomassen_problem_3": {
+          "formal_name": "gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement.",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the \"embeddable in a fixed surface\" hypothesis is modelled by surface_embeddable surface G (= exists rotation system E, surface_euler_genus E <= surface), the LIGHTWEIGHT surface primitive. By Euler's formula surface_euler_genus = (2+E-V-F)/2 is the ORIENTABLE genus, so the nat \"surface\" is orientable genus (not Euler genus) and ALL non-orientable surfaces (projective plane, Klein bottle, ...) are silently excluded,"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest risk: the \"embeddable in a fixed surface\" hypothesis is modelled by surface_embeddable surface G (= exists rotation system E, surface_euler_genus E <= surface), the LIGHTWEIGHT surface primitive. By Euler's formula surface_euler_genus = (2+E-V-F)/2 is the ORIENTABLE genus, so the nat \"surface\" is orientable genus (not Euler genus) and ALL non-orientable surfaces (projective plane, Klein bottle, ...) are silently excluded, whereas the conjecture's \"a fixed surface\" includes th"
+    },
+    "X151": {
+      "phase": "X151",
+      "repo": "chromatic-theory",
+      "defines_file": "X151.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_0806_0178_00": {
+          "formal_name": "random_graph_chromatic_not_constant_concentrated_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: random_graph_chromatic_not_constant_concentrated_statement."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 BLOCKED. Needs random graph and concentration foundations."
+    },
+    "X152": {
+      "phase": "X152",
+      "repo": "chromatic-theory",
+      "defines_file": "X152.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1010_2472_00": {
+          "formal_name": "fixed_surface_four_colourability_polytime_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: fixed_surface_four_colourability_polytime_statement.",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the surface model, which is load-bearing here: the Class is `surface_embeddable surface G` (GTBase.surface, WATCH-flagged LIGHTWEIGHT). Unfolded it is `exists E, surface_euler_genus E <= surface` with `surface_euler_genus = (2+E-V-F)/2` = ORIENTABLE genus (Euler genus halved, misleading name), built from a pure rotation system `surface_erot:{perm surface_dart}` that CANNOT encode any non-orientable emb"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk = the surface model, which is load-bearing here: the Class is `surface_embeddable surface G` (GTBase.surface, WATCH-flagged LIGHTWEIGHT). Unfolded it is `exists E, surface_euler_genus E <= surface` with `surface_euler_genus = (2+E-V-F)/2` = ORIENTABLE genus (Euler genus halved, misleading name), built from a pure rotation system `surface_erot:{perm surface_dart}` that CANNOT encode any non-orientable embedding. So `0 < surface` covers only the torus and high"
+    },
+    "X153": {
+      "phase": "X153",
+      "repo": "chromatic-theory",
+      "defines_file": "X153.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1302_2158_00": {
+          "formal_name": "planar_girth5_two_cycles_list_critical_subgraph_statement",
+          "note": "Encodes Conjecture 1.7: for bounded short cycles in planar girth>=5 graphs, non-list-colourability has a bounded induced subgraph witness containing both cycles."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. List sizes, two precoloured cycles, planarity/girth guards, and bounded witness order are preserved; induced witness is no loss for non-colourability."
+    },
+    "X154": {
+      "phase": "X154",
+      "repo": "chromatic-theory",
+      "defines_file": "X154.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1404_6356_00": {
+          "formal_name": "fixed_surface_four_colourability_polytime_duplicate_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: fixed_surface_four_colourability_polytime_duplicate_statement.",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: could be trivially-true if the class had no χ>4 members (then Pconst(Dnat 1) decides it) — resolved NO: for positive genus the class contains both χ≤4 graphs (genus-0 small graphs) and χ>4 graphs (K_5 embeds on the torus, surface_euler_genus=1; K_n for larger surface), so neither Pconst(Dnat 1) nor Pconst(Dnat 0) works and a real poly-time 4-colourability decider is required. The load-bearing \"poly-time testable\" co"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest risk: could be trivially-true if the class had no χ>4 members (then Pconst(Dnat 1) decides it) — resolved NO: for positive genus the class contains both χ≤4 graphs (genus-0 small graphs) and χ>4 graphs (K_5 embeds on the torus, surface_euler_genus=1; K_n for larger surface), so neither Pconst(Dnat 1) nor Pconst(Dnat 0) works and a real poly-time 4-colourability decider is required. The load-bearing \"poly-time testable\" content is carried by the FAITHFUL cost-coupled complexit"
+    },
+    "X155": {
+      "phase": "X155",
+      "repo": "packing-theory",
+      "defines_file": "X155.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1407_5833_00": {
+          "formal_name": "identifying_code_vc_dimension_approximation_dichotomy_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: identifying_code_vc_dimension_approximation_dichotomy_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = the assembled dichotomy is provably FALSE, and it resolves against faithfulness: the statement is `forall C hereditary, (A1 /\\ A2) \\/ (B1 /\\ B2)` where A1=x155_log_lower_bound, B1=x155_polynomial_lower_bound both require `exists G, C G /\\ ...`. Instantiating C := (fun _:sgraph => False) — vacuously hereditary — makes A1 and B1 each False, so the whole disjunction is False regardless of B2. Machine-refuted (probe co"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = the assembled dichotomy is provably FALSE, and it resolves against faithfulness: the statement is `forall C hereditary, (A1 /\\ A2) \\/ (B1 /\\ B2)` where A1=x155_log_lower_bound, B1=x155_polynomial_lower_bound both require `exists G, C G /\\ ...`. Instantiating C := (fun _:sgraph => False) — vacuously hereditary — makes A1 and B1 each False, so the whole disjunction is False regardless of B2. Machine-refuted (probe compiled, exit 0). Second, independent defect: A2 x155_lo"
+    },
+    "X156": {
+      "phase": "X156",
+      "repo": "graph-theory-misc",
+      "defines_file": "X156.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1408_4257_00": {
+          "formal_name": "block_tree_diameter_bound_improvement_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: block_tree_diameter_bound_improvement_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the `f`-hypothesis `forall N, exists n, N<=n /\\ N<=f n` encodes \"f unbounded (limsup=∞)\", NOT the conjecture's \"f tends to ∞\", which is strictly stronger and renders the statement FALSE (machine-confirmed): an f dipping to 0 on odd n>=5 still satisfies it, forcing certificate diameter sqrt_ceil(n)*f(n)=0 at infinitely many n, which GTBase.finite_graph.fg_whp's cofinite GTBase.asymptotics.eventually cann"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the `f`-hypothesis `forall N, exists n, N<=n /\\ N<=f n` encodes \"f unbounded (limsup=∞)\", NOT the conjecture's \"f tends to ∞\", which is strictly stronger and renders the statement FALSE (machine-confirmed): an f dipping to 0 on odd n>=5 still satisfies it, forcing certificate diameter sqrt_ceil(n)*f(n)=0 at infinitely many n, which GTBase.finite_graph.fg_whp's cofinite GTBase.asymptotics.eventually cannot satisfy on any hard-graph model. This resolves again"
+    },
+    "X157": {
+      "phase": "X157",
+      "repo": "chromatic-theory",
+      "defines_file": "X157.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1505_01616_00": {
+          "formal_name": "local_connectivity_k_colouring_polytime_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: local_connectivity_k_colouring_polytime_statement."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 BLOCKED. Needs local-connectivity and computation-model foundations."
+    },
+    "X158": {
+      "phase": "X158",
+      "repo": "topological-graph-theory",
+      "defines_file": "X158.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1507_01120_00": {
+          "formal_name": "planar_graphs_bounded_queue_number_statement",
+          "note": "Encodes the solved bounded-queue-number question: exists q such that every planar graph has a q-queue layout."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. Queue layout is defined by a vertex order and edge partition with no nested pair in one queue; planarity uses wagner_planar."
+    },
+    "X159": {
+      "phase": "X159",
+      "repo": "chromatic-theory",
+      "defines_file": "X159.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1508_03437_01": {
+          "formal_name": "planar_no_cycles_4_to_8_correspondence_chromatic_three_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: planar_no_cycles_4_to_8_correspondence_chromatic_three_statement."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 BLOCKED. Needs correspondence/DP-colouring foundation."
+    },
+    "X160": {
+      "phase": "X160",
+      "repo": "chromatic-theory",
+      "defines_file": "X160.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1509_06563_02": {
+          "formal_name": "density_zero_constricting_set_statement",
+          "note": "Encodes Problem 1.6 using X3's constricting-set vocabulary plus a rational-epsilon natural-density-zero condition."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 FAITHFUL. Infinite positive integer set, constricting property, and density zero are all explicit; density uses decidable set witnesses to count initial segments."
+    },
+    "X161": {
+      "phase": "X161",
+      "repo": "chromatic-theory",
+      "defines_file": "X161.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1509_06563_03": {
+          "formal_name": "controlled_triangle_free_four_hole_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: controlled_triangle_free_four_hole_statement."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 BLOCKED. Needs the paper-local controlled-graph foundation."
+    },
+    "X162": {
+      "phase": "X162",
+      "repo": "chromatic-theory",
+      "defines_file": "X162.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1510_06964_00": {
+          "formal_name": "wsk_triangular_lattice_q5_kempe_class_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: wsk_triangular_lattice_q5_kempe_class_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the retargeted statement is TRIVIALLY TRUE and captures none of the WSK ergodicity conjecture — it holds for every finite graph and every q, so the triangular lattice, periodic BCs and q=5 are decorative. Two encoding defects in the Kempe-move surface (built on GTBase.base sgraph/finite_graph primitives) cause the collapse: (1) x162_kempe_step requires only `connected S` + `uses_only_two_colours col a b"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the retargeted statement is TRIVIALLY TRUE and captures none of the WSK ergodicity conjecture — it holds for every finite graph and every q, so the triangular lattice, periodic BCs and q=5 are decorative. Two encoding defects in the Kempe-move surface (built on GTBase.base sgraph/finite_graph primitives) cause the collapse: (1) x162_kempe_step requires only `connected S` + `uses_only_two_colours col a b S`, i.e. it does NOT require S to be a maximal connect"
+    },
+    "X163": {
+      "phase": "X163",
+      "repo": "graph-theory-misc",
+      "defines_file": "X163.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1601_01129_01": {
+          "formal_name": "random_graphs_normal_whp_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: random_graphs_normal_whp_statement."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 BLOCKED. Needs normal-graph and random-graph foundations."
+    },
+    "X164": {
+      "phase": "X164",
+      "repo": "chromatic-theory",
+      "defines_file": "X164.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1601_01197_00": {
+          "formal_name": "linear_time_surface_triangle_free_three_colouring_output_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: linear_time_surface_triangle_free_three_colouring_output_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = a missing-precondition over-strengthening that makes the row provably FALSE (a witness-collapse cousin of X125). Source (arXiv:1601.01197 Open Problem) asks whether the OUTPUT of a 3-colouring — Theorem 1.4's quadratic algorithm, run \"in the affirmative case\" — can be made linear-time. The formalization's class `x164_instance_class` = triangle_free /\\ surface_embeddable /\\ #|B|<=boundary DROPS the esse"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = a missing-precondition over-strengthening that makes the row provably FALSE (a witness-collapse cousin of X125). Source (arXiv:1601.01197 Open Problem) asks whether the OUTPUT of a 3-colouring — Theorem 1.4's quadratic algorithm, run \"in the affirmative case\" — can be made linear-time. The formalization's class `x164_instance_class` = triangle_free /\\ surface_embeddable /\\ #|B|<=boundary DROPS the essential affirmative-case (3-colorability-respecting-preco"
+    },
+    "X165": {
+      "phase": "X165",
+      "repo": "graph-theory-misc",
+      "defines_file": "X165.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1602_05184_00": {
+          "formal_name": "szeged_wiener_difference_exceptional_graphs_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: szeged_wiener_difference_exceptional_graphs_statement."
+        }
+      },
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_result": "1/1 BLOCKED. Needs Szeged-Wiener and exceptional-family foundations."
+    },
+    "X166": {
+      "phase": "X166",
+      "repo": "digraph-theory",
+      "defines_file": "X166.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1604_02317_00": {
+          "formal_name": "vertex_disjoint_paths_stability_two_np_complete_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: vertex_disjoint_paths_stability_two_np_complete_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): see below"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). see below"
+    },
+    "X167": {
+      "phase": "X167",
+      "repo": "graph-theory-misc",
+      "defines_file": "X167.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1604_07976_00": {
+          "formal_name": "fixed_surface_spanning_tree_polytope_linear_xc_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: fixed_surface_spanning_tree_polytope_linear_xc_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = vacuous witness surface / trivially-true collapse, and it fully realizes. The conjecture (Aprile-Fiorini) is that the EXTENSION COMPLEXITY xc(P_sp.trees(G)) = min #facets of an extended formulation whose linear projection is the spanning-tree polytope is O(|V|) for fixed-surface graphs. The Rocq surface (X167.v) models none of this: x167_spanning_tree_polytope_xc G facets := exists (r : x167_extension_"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = vacuous witness surface / trivially-true collapse, and it fully realizes. The conjecture (Aprile-Fiorini) is that the EXTENSION COMPLEXITY xc(P_sp.trees(G)) = min #facets of an extended formulation whose linear projection is the spanning-tree polytope is O(|V|) for fixed-surface graphs. The Rocq surface (X167.v) models none of this: x167_spanning_tree_polytope_xc G facets := exists (r : x167_extension_system G facets), True, and the record's only non-vacuo"
+    },
+    "X168": {
+      "phase": "X168",
+      "repo": "graph-theory-misc",
+      "defines_file": "X168.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1604_07976_01": {
+          "formal_name": "minor_closed_spanning_tree_polytope_linear_xc_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: minor_closed_spanning_tree_polytope_linear_xc_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the extension-complexity notion is not modelled at all, making the statement vacuous. `x168_spanning_tree_polytope_xc G facets` only demands an `x168_extension_system G facets` to exist, but that record's only non-free field `x168_ineq_count : #|{:ineq_index}| <= facets` is satisfied by an empty inequality index (0<=facets), and its two linking fields `x168_accepts_tree`/`x168_rejects_non_tree` both con"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the extension-complexity notion is not modelled at all, making the statement vacuous. `x168_spanning_tree_polytope_xc G facets` only demands an `x168_extension_system G facets` to exist, but that record's only non-free field `x168_ineq_count : #|{:ineq_index}| <= facets` is satisfied by an empty inequality index (0<=facets), and its two linking fields `x168_accepts_tree`/`x168_rejects_non_tree` both conclude `True` — so no polytope, projection, or linear in"
+    },
+    "X169": {
+      "phase": "X169",
+      "repo": "graph-theory-misc",
+      "defines_file": "X169.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1605_00442_00": {
+          "formal_name": "token_sliding_chordal_clique_tree_degree_polytime_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: token_sliding_chordal_clique_tree_degree_polytime_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the decided predicate is not TS_k connectivity. x169_ts_step (X169.v:31-36) constrains only #|B|==k, b∉A, a--b, B==(A:\\a):|:[set b] — it NEVER requires the intermediate set to be a stable set, so path (x169_ts_step k) A p may traverse non-independent configurations. Intermediate-independence is the defining constraint of token sliding of independent sets and the sole source of the problem's hardness; dr"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the decided predicate is not TS_k connectivity. x169_ts_step (X169.v:31-36) constrains only #|B|==k, b∉A, a--b, B==(A:\\a):|:[set b] — it NEVER requires the intermediate set to be a stable set, so path (x169_ts_step k) A p may traverse non-independent configurations. Intermediate-independence is the defining constraint of token sliding of independent sets and the sole source of the problem's hardness; dropping it turns the co-NP-hard TS-connectivity into (es"
+    },
+    "X170": {
+      "phase": "X170",
+      "repo": "chromatic-theory",
+      "defines_file": "X170.v",
+      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x151-x170-batch1",
+      "rows": {
+        "axv_1605_07411_02": {
+          "formal_name": "oriented_P4_forb_chi_bounded_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: oriented_P4_forb_chi_bounded_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the exceptional-set predicate is mis-encoded, making the statement FALSE (not merely a weaker proxy). Source Conjecture 5 excludes exactly the two non-chi-bounded singletons {P^+(3)} (directed P4) and {P^+(1,1,1)} (antidirected P4); the manifest/paper confirm these are the ONLY two non-chi-bounded orientations. The Rocq x170_nonexceptional instead excludes [set inord 7] and [set ord0], both of which are"
+        }
+      },
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the exceptional-set predicate is mis-encoded, making the statement FALSE (not merely a weaker proxy). Source Conjecture 5 excludes exactly the two non-chi-bounded singletons {P^+(3)} (directed P4) and {P^+(1,1,1)} (antidirected P4); the manifest/paper confirm these are the ONLY two non-chi-bounded orientations. The Rocq x170_nonexceptional instead excludes [set inord 7] and [set ord0], both of which are the directed path P^+(3) under the x170_code_forward b"
+    },
+    "X171": {
+      "phase": "X171",
+      "repo": "graph-theory-misc",
+      "defines_file": "X171.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass; retargeted by graph-metric foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex graph-metric retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "graph-metric-foundation-retarget",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1606_06011_00": {
+          "formal_name": "finite_exception_pendant_or_metric_lines_bridges_statement",
+          "note": "Retargeted using GTBase.graph_metric: graph-metric lines use finite shortest-path distance, bridge counts delete one graph edge, and the finite exceptional family is encoded by an order bound."
+        }
+      },
+      "faithfulness_result": "1/1 FAITHFUL. Metric lines and bridge counts are concrete; finite exceptions are represented by an order bound."
+    },
+    "X172": {
+      "phase": "X172",
+      "repo": "graph-theory-misc",
+      "defines_file": "X172.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass; counterexample predicate retargeted by graph-metric foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex graph-metric retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "graph-metric-foundation-retarget",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1606_06011_01": {
+          "formal_name": "metric_lines_bridges_counterexamples_finitely_generated_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: metric_lines_bridges_counterexamples_finitely_generated_statement."
+        }
+      },
+      "faithfulness_result": "1/1 BLOCKED. Counterexamplehood is grounded by GTBase.graph_metric; bridge-replacement generation is still missing."
+    },
+    "X173": {
+      "phase": "X173",
+      "repo": "chromatic-theory",
+      "defines_file": "X173.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "rows": {
+        "axv_1606_06265_00": {
+          "formal_name": "planar_triangle_free_fractional_chromatic_bound_statement",
+          "note": "Encodes the bound chi_f(G) <= 3|V(G)|/(|V(G)|+1) for every planar triangle-free graph, using X130 fractional-colouring witnesses."
+        }
+      },
+      "faithfulness_result": "1/1 FAITHFUL. Planarity uses wagner_planar, triangle-free is girth_geq 4, and the rational bound is 3n/(n+1)."
+    },
+    "X174": {
+      "phase": "X174",
+      "repo": "minor-theory",
+      "defines_file": "X174.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass; retargeted by immersion/extremal foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex immersion retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "graph-metric-foundation-retarget",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1606_06810_00": {
+          "formal_name": "kt_immersion_clique_count_extremal_statement",
+          "note": "Retargeted using the existing U7 immersion relation; exact maximum is encoded as a universal upper bound plus existence of an n-vertex graph attaining 2^(t-2)(n-t+3).",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypot"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypothesis `t-2 <= n` lets n<t (n in {t-2,t-1}), where n-t t"
+    },
+    "X175": {
+      "phase": "X175",
+      "repo": "minor-theory",
+      "defines_file": "X175.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass; retargeted by asymptotics foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex asymptotics retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "asymptotics-foundation-retarget",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1606_06810_01": {
+          "formal_name": "kt_subdivision_clique_count_asymptotic_statement",
+          "note": "Retargeted after GTBase.asymptotics: K_t-subdivision is injective branch vertices joined by internally vertex-disjoint simple paths; the conjectured 3^(2t/3+o(t)) n upper envelope is encoded by rational-epsilon eventual integer inequalities. The known lower-bound construction is source context, not the open upper-bound claim."
+        }
+      },
+      "faithfulness_result": "1/1 DONE after retarget. Subdivision containment and the rational-epsilon exponential upper envelope are now concrete and axiom-free."
+    },
+    "X176": {
+      "phase": "X176",
+      "repo": "topological-graph-theory",
+      "defines_file": "X176.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1608_07680_02": {
+          "formal_name": "simple_cone_crossing_function_asymptotic_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: simple_cone_crossing_function_asymptotic_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = a double weakening that makes the surface miss the open conjecture entirely, so no faithful proxy survives. (1) MIS-QUANTIFIED EXTREMAL: the paper's f_s(k) is the MAXIMUM of cr(cone G) over graphs with cr(G)=k (worst-case cone blow-up; f_s(1)=3=cr(K6)=cr(cone K5), the extremal cr=1 graph). But x176_simple_cone_crossing_value pins n by `forall H m, is_cr H k -> is_cr(cone H) m -> n<=m`, i.e. the MINIMUM cone-crossin"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = a double weakening that makes the surface miss the open conjecture entirely, so no faithful proxy survives. (1) MIS-QUANTIFIED EXTREMAL: the paper's f_s(k) is the MAXIMUM of cr(cone G) over graphs with cr(G)=k (worst-case cone blow-up; f_s(1)=3=cr(K6)=cr(cone K5), the extremal cr=1 graph). But x176_simple_cone_crossing_value pins n by `forall H m, is_cr H k -> is_cr(cone H) m -> n<=m`, i.e. the MINIMUM cone-crossing value — the trivial quantity (~k, achievable by all-v"
+    },
+    "X177": {
+      "phase": "X177",
+      "repo": "chromatic-theory",
+      "defines_file": "X177.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1609_00314_00": {
+          "formal_name": "forest_of_lanterns_pervasive_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: forest_of_lanterns_pervasive_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the word \"induced\" — the crux of the entire Chudnovsky–Scott–Seymour \"Induced subgraphs of graphs with large chromatic number\" program — is absent from BOTH the antecedent (forest of lanterns) and the consequent (induced ≥ℓ-subdivision), so the surface does not encode the conjecture. MACHINE-CONFIRMED: the helper x177_induced_path_between's 4th clause is a pure tautology. Its `exists z, (u==z /\\ v∈p /\\ "
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the word \"induced\" — the crux of the entire Chudnovsky–Scott–Seymour \"Induced subgraphs of graphs with large chromatic number\" program — is absent from BOTH the antecedent (forest of lanterns) and the consequent (induced ≥ℓ-subdivision), so the surface does not encode the conjecture. MACHINE-CONFIRMED: the helper x177_induced_path_between's 4th clause is a pure tautology. Its `exists z, (u==z /\\ v∈p /\\ last u [::v]=v) \\/ ...` uses `last u [::v]=v` / `last v"
+    },
+    "X178": {
+      "phase": "X178",
+      "repo": "packing-theory",
+      "defines_file": "X178.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "rows": {
+        "axv_1609_06257_00": {
+          "formal_name": "gallai_odd_semiclique_path_decomposition_statement",
+          "note": "Encodes the Bonamy-Perrett question: connected non-odd-semi-cliques have an edge decomposition into at most floor(|V|/2) paths."
+        }
+      },
+      "faithfulness_result": "1/1 FAITHFUL. Odd semi-cliques are encoded as K_(2k+1) with at most k-1 deleted edges; path decompositions partition the graph edge set into simple paths."
+    },
+    "X179": {
+      "phase": "X179",
+      "repo": "digraph-theory",
+      "defines_file": "X179.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1610_00876_05": {
+          "formal_name": "digraph_kappa_maderian_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: digraph_kappa_maderian_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = mis-encoded k-strong-connectivity premise, and it does NOT resolve: x179_k_vertex_strongly_connected G k := (forall S, #|S|<k -> G-S strongly connected) DROPS the standard |V(G)|>=k+1 guard, so degenerate tiny graphs (1-vertex, even 0-vertex) are vacuously k-strong for EVERY k while being unable to host a subdivision of any D with >=2 vertices; this makes x179_kappa_maderian D (exists k, forall k-stron"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = mis-encoded k-strong-connectivity premise, and it does NOT resolve: x179_k_vertex_strongly_connected G k := (forall S, #|S|<k -> G-S strongly connected) DROPS the standard |V(G)|>=k+1 guard, so degenerate tiny graphs (1-vertex, even 0-vertex) are vacuously k-strong for EVERY k while being unable to host a subdivision of any D with >=2 vertices; this makes x179_kappa_maderian D (exists k, forall k-strong G, G contains D-subdivision) false for all such D, an"
+    },
+    "X180": {
+      "phase": "X180",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X180.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1611_02400_01": {
+          "formal_name": "log_degree_multitasker_exists_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: log_degree_multitasker_exists_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk (confirmed): mis-quantification + vacuous witness, same collapse family as the known-BROKEN X125 but on the \"constant independent of n\" axis. The source (arXiv:1611.02400, Alon-Cohen-Dey-Griffiths-Musslick-Ozcimder-Reichman-Shinkar-Wagner) asks whether a multitasker exists with capacity alpha > 0 INDEPENDENT of n at average degree Theta(log n) — i.e. a family {G_n} whose induced-matching capacity is boun"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk (confirmed): mis-quantification + vacuous witness, same collapse family as the known-BROKEN X125 but on the \"constant independent of n\" axis. The source (arXiv:1611.02400, Alon-Cohen-Dey-Griffiths-Musslick-Ozcimder-Reichman-Shinkar-Wagner) asks whether a multitasker exists with capacity alpha > 0 INDEPENDENT of n at average degree Theta(log n) — i.e. a family {G_n} whose induced-matching capacity is bounded below by a UNIFORM positive constant. The formaliza"
+    },
+    "X181": {
+      "phase": "X181",
+      "repo": "chromatic-theory",
+      "defines_file": "X181.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1612_06539_00": {
+          "formal_name": "random_graph_clique_chromatic_tight_constant_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: random_graph_clique_chromatic_tight_constant_statement.",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conjecture is an EQUALITY chi_c(G(n,1/2)) = (1/2+o(1))log2 n whp, but the encoding captures only the UPPER half. The whp wrapper is faithful (fg_whp = ratio->1 over the n-indexed space; fg_gnp_weight 1 2 = nonzero G(n,1/2) weight, p=1<q=2; fg_labelled_sgraph faithful), and the paper-local x181_monochromatic / x181_maximal_clique / x181_clique_colourable correctly model \"chi_c(G) <= k\". The DEFECT is"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the conjecture is an EQUALITY chi_c(G(n,1/2)) = (1/2+o(1))log2 n whp, but the encoding captures only the UPPER half. The whp wrapper is faithful (fg_whp = ratio->1 over the n-indexed space; fg_gnp_weight 1 2 = nonzero G(n,1/2) weight, p=1<q=2; fg_labelled_sgraph faithful), and the paper-local x181_monochromatic / x181_maximal_clique / x181_clique_colourable correctly model \"chi_c(G) <= k\". The DEFECT is a mis-quantification in the assembly x181_clique_chrom"
+    },
+    "X182": {
+      "phase": "X182",
+      "repo": "graph-theory-misc",
+      "defines_file": "X182.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass; retargeted by poset foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex poset retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "list-flexibility-poset-foundations",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1612_07540_00": {
+          "formal_name": "planar_cover_poset_dimension_polynomial_bound_statement",
+          "note": "Retargeted after GTBase.posets: finite posets have explicit carriers and orders, cover graphs are concrete sgraphs, height is bounded via finite chains, dimension is bounded by a realizer of linear extensions, and planarity uses wagner_planar on the cover graph. States the polynomial-in-height version."
+        }
+      },
+      "faithfulness_result": "1/1 DONE after retarget. Poset height, cover graph, and order dimension are now concrete."
+    },
+    "X183": {
+      "phase": "X183",
+      "repo": "chromatic-theory",
+      "defines_file": "X183.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass; retargeted by list-flexibility foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex list-flexibility retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "list-flexibility-poset-foundations",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1612_08698_00": {
+          "formal_name": "degenerate_list_flexibility_d_plus_one_statement",
+          "note": "Retargeted after GTBase.list_flexibility and base k_degenerate: for every d there is a fixed rational epsilon p/q such that every d-degenerate graph is weighted epsilon-flexible for lists of size d+1. This states the stronger weighted branch from the source question.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = a fatal mis-quantification of list size that makes the retargeted Prop provably FALSE rather than the open conjecture. The surface uses GTBase.list_flexibility.weighted_epsilon_flexible G d.+1 p q, whose list constraint is `k <= #|L v|` (lists of size AT LEAST d+1) while its total request weight weighted_request_total sums w(v,c) over ALL colours c in L(v). Weighted flexibility is not monotone in list "
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = a fatal mis-quantification of list size that makes the retargeted Prop provably FALSE rather than the open conjecture. The surface uses GTBase.list_flexibility.weighted_epsilon_flexible G d.+1 p q, whose list constraint is `k <= #|L v|` (lists of size AT LEAST d+1) while its total request weight weighted_request_total sums w(v,c) over ALL colours c in L(v). Weighted flexibility is not monotone in list size: a uniform-weight vertex with a list of size N has"
+    },
+    "X184": {
+      "phase": "X184",
+      "repo": "cycle-theory",
+      "defines_file": "X184.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1701_03366_00": {
+          "formal_name": "z5_antisymmetric_flow_edge_connectivity_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement.",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no two edges with opposite values; in Z5 never both 1&4 n"
+    },
+    "X185": {
+      "phase": "X185",
+      "repo": "chromatic-theory",
+      "defines_file": "X185.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1701_05597_00": {
+          "formal_name": "every_multigraph_widespread_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: every_multigraph_widespread_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: WRONG TARGET OBJECT. Scott-Seymour Conj 1.8 (\"every multigraph H is widespread\") requires that bounded-omega, large-chi graphs contain an INDUCED subgraph isomorphic to a long subdivision of H, where a subdivision replaces each edge uv of H by a path and the paths are vertex-disjoint except at their ends. The encoding instead subdivides line_graph(H): x185_widespread sets branch : line_graph H -> G, and line_graph's"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk: WRONG TARGET OBJECT. Scott-Seymour Conj 1.8 (\"every multigraph H is widespread\") requires that bounded-omega, large-chi graphs contain an INDUCED subgraph isomorphic to a long subdivision of H, where a subdivision replaces each edge uv of H by a path and the paths are vertex-disjoint except at their ends. The encoding instead subdivides line_graph(H): x185_widespread sets branch : line_graph H -> G, and line_graph's vertex type is `edge H` (line_rel : rel (edge G), base"
+    },
+    "X186": {
+      "phase": "X186",
+      "repo": "chromatic-theory",
+      "defines_file": "X186.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1701_05597_01": {
+          "formal_name": "subdivision_or_local_chi_two_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: subdivision_or_local_chi_two_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the load-bearing \"induced\" qualifier of Conjecture 1.10 (\"some INDUCED subgraph of G is a subdivision of J\") is entirely absent from the local predicate x186_contains_induced_subdivision. Its body only requires an injective branch map plus, per J-edge, a simple path whose internal vertices avoid branch vertices — there is NO chord-freeness/induced condition and NO internal-disjointness across the per-ed"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the load-bearing \"induced\" qualifier of Conjecture 1.10 (\"some INDUCED subgraph of G is a subdivision of J\") is entirely absent from the local predicate x186_contains_induced_subdivision. Its body only requires an injective branch map plus, per J-edge, a simple path whose internal vertices avoid branch vertices — there is NO chord-freeness/induced condition and NO internal-disjointness across the per-edge paths (each path is existentially quantified indepen"
+    },
+    "X187": {
+      "phase": "X187",
+      "repo": "chromatic-theory",
+      "defines_file": "X187.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "rows": {
+        "axv_1702_00588_00": {
+          "formal_name": "planar_triangle_free_request_graph_fraction_statement",
+          "note": "Encodes the refuted request-graph formulation using planar triangle-free graphs, equality/inequality degree-two request vertices, positive finite weights, and a uniform positive rational satisfied fraction."
+        }
+      },
+      "faithfulness_result": "1/1 FAITHFUL-TO-REFUTED. Positive rational alpha is represented by p/q; finite rational weights are encoded as positive natural weights after clearing denominators."
+    },
+    "X188": {
+      "phase": "X188",
+      "repo": "chromatic-theory",
+      "defines_file": "X188.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1703_05380_00": {
+          "formal_name": "interactive_sum_choice_strict_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: interactive_sum_choice_strict_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the interactive-sum-choice-number encoding does not model chi_ISC at all. The game's `x188_add_colour` (foundation-local, defined in X188.v itself, built on GTBase.base list_colourable + mathcomp finset SET UNION) lets the adversary re-supply an already-present colour, which fails to grow the list — whereas the real Bonamy–Meeks game grows |L(v)| by 1 per request (the property that makes chi_ISC finite "
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the interactive-sum-choice-number encoding does not model chi_ISC at all. The game's `x188_add_colour` (foundation-local, defined in X188.v itself, built on GTBase.base list_colourable + mathcomp finset SET UNION) lets the adversary re-supply an already-present colour, which fails to grow the list — whereas the real Bonamy–Meeks game grows |L(v)| by 1 per request (the property that makes chi_ISC finite and ≤ chi_SC). With a fixed palette 'I_k and the reques"
+    },
+    "X189": {
+      "phase": "X189",
+      "repo": "chromatic-theory",
+      "defines_file": "X189.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1703_07871_00": {
+          "formal_name": "spaghetti_tree_path_decomposition_chi_bound_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: spaghetti_tree_path_decomposition_chi_bound_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conjecture's defining \"spaghetti\" hypothesis — for each vertex v, the bags containing v form a DIRECTED PATH from the root (arXiv:1703.07871 Conj. 3) — is entirely absent. In x189_spaghetti_tree_decomposition the only spaghetti-carrying clause is `forall t, t in {u|v in bag u} -> connect (--) root t`, which is provably vacuous: is_tree [set:T] gives connected [set:T], so connect (--) root t holds fo"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the conjecture's defining \"spaghetti\" hypothesis — for each vertex v, the bags containing v form a DIRECTED PATH from the root (arXiv:1703.07871 Conj. 3) — is entirely absent. In x189_spaghetti_tree_decomposition the only spaghetti-carrying clause is `forall t, t in {u|v in bag u} -> connect (--) root t`, which is provably vacuous: is_tree [set:T] gives connected [set:T], so connect (--) root t holds for every t (machine-confirmed). The remaining `connected"
+    },
+    "X190": {
+      "phase": "X190",
+      "repo": "minor-theory",
+      "defines_file": "X190.v",
+      "implemented_by": "Batch X171-X190 statement authoring pass (Codex), 2026-07-15",
+      "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
+      "source_verified_at": "2026-07-15",
+      "commit": "x171-x190-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1704_00125_00": {
+          "formal_name": "thin_overlay_without_bounded_degree_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: thin_overlay_without_bounded_degree_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = trivially-satisfiable witness surface (LIGHTWEIGHT/BROKEN 'thin system of overlays'), and it fully realizes: the conclusion x190_thin_system_of_overlays C unfolds to `exists thin, forall G, C G -> exists (_:x190_overlay G thin), True`, and the x190_overlay record is inhabited for EVERY G by the identity cover (cover_graph:=G, cover_map:=id): each fibre [set x|x==v] is the singleton [set v] so card=1<=thin (thin:=1)"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = trivially-satisfiable witness surface (LIGHTWEIGHT/BROKEN 'thin system of overlays'), and it fully realizes: the conclusion x190_thin_system_of_overlays C unfolds to `exists thin, forall G, C G -> exists (_:x190_overlay G thin), True`, and the x190_overlay record is inhabited for EVERY G by the identity cover (cover_graph:=G, cover_map:=id): each fibre [set x|x==v] is the singleton [set v] so card=1<=thin (thin:=1), and every edge u--v lifts to itself. Hence the conclu"
+    },
+    "X191": {
+      "phase": "X191",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X191.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1706_05642_00": {
+          "formal_name": "dense_H_free_clique_blowup_subquadratic_error_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: dense_H_free_clique_blowup_subquadratic_error_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = FINITENESS COLLAPSE (foundation flag B) and it does NOT resolve. The conjecture's entire content is quantitative: the o(n^2) deletion error can be improved to O(n^{2-delta(H)}). In x191_subquadratic_deletion_to_partite the constant C is bound AFTER F is fixed, and the apparent asymptotic 'forall n, #|F|=n -> ...' pins n to the single value #|F| (one graph, not a growing family). So the exponent 2*delta"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = FINITENESS COLLAPSE (foundation flag B) and it does NOT resolve. The conjecture's entire content is quantitative: the o(n^2) deletion error can be improved to O(n^{2-delta(H)}). In x191_subquadratic_deletion_to_partite the constant C is bound AFTER F is fixed, and the apparent asymptotic 'forall n, #|F|=n -> ...' pins n to the single value #|F| (one graph, not a growing family). So the exponent 2*delta_den-delta_num and the whole O(n^{2-delta}) bound are d"
+    },
+    "X192": {
+      "phase": "X192",
+      "repo": "chromatic-theory",
+      "defines_file": "X192.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1707_03888_00": {
+          "formal_name": "triangle_free_minor_closed_chromatic_additive_approx_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: triangle_free_minor_closed_chromatic_additive_approx_statement."
+        }
+      },
+      "faithfulness_result": "1/1 BLOCKED. Needs approximation-algorithm and minor-closed-class foundations."
+    },
+    "X193": {
+      "phase": "X193",
+      "repo": "digraph-theory",
+      "defines_file": "X193.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1708_00423_00": {
+          "formal_name": "directed_triangle_free_domination_polynomial_statement",
+          "note": "Encodes Conjecture 3.5: directed-triangle-free digraphs have domination number bounded by a polynomial in the independence number."
+        }
+      },
+      "faithfulness_result": "1/1 FAITHFUL. Directed triangles use dicycle length 3; independence is the maximum stable set under arcs; domination is by in-neighbours plus selected vertices; polynomial bound is an exponent ell."
+    },
+    "X194": {
+      "phase": "X194",
+      "repo": "chromatic-theory",
+      "defines_file": "X194.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1708_02370_00": {
+          "formal_name": "clustered_chromatic_minor_class_treedepth_bound_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: clustered_chromatic_minor_class_treedepth_bound_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = clustering-constant mis-quantification (the flagged BROKEN clustered_chromatic_at_most-in-conclusion pattern, same family as X138/X125), and it fully realizes: the conclusion x194_clustered_chromatic_minor_class_le H (2*k-2) unfolds to forall G, ~minor G H -> clustered_chromatic_at_most G (2*k-2), and clustered_chromatic_at_most G j := exists c, clustered_colouring G j c places the clustering constant c INSIDE fora"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = clustering-constant mis-quantification (the flagged BROKEN clustered_chromatic_at_most-in-conclusion pattern, same family as X138/X125), and it fully realizes: the conclusion x194_clustered_chromatic_minor_class_le H (2*k-2) unfolds to forall G, ~minor G H -> clustered_chromatic_at_most G (2*k-2), and clustered_chromatic_at_most G j := exists c, clustered_colouring G j c places the clustering constant c INSIDE forall G. The real conjecture chi*(M_H) <= 2td(H)-2 demands"
+    },
+    "X195": {
+      "phase": "X195",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X195.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1708_07369_00": {
+          "formal_name": "ramsey_nice_forest_family_eventual_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: ramsey_nice_forest_family_eventual_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the surface does not encode \"k-nice\" and is outright FALSE, so no weaker true statement survives. The paper's k-nice = the k-COLOUR Ramsey number R(F;k) meeting the natural construction lower bound with EQUALITY; the Rocq x195_k_nice instead (a) fixes exactly 2 colours ({set 'K_N} -> 'I_2, never k), (b) leaves its `k` argument completely unused in the body (X125-family mis-quantification: machine-confirmed k_is_deco"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk: the surface does not encode \"k-nice\" and is outright FALSE, so no weaker true statement survives. The paper's k-nice = the k-COLOUR Ramsey number R(F;k) meeting the natural construction lower bound with EQUALITY; the Rocq x195_k_nice instead (a) fixes exactly 2 colours ({set 'K_N} -> 'I_2, never k), (b) leaves its `k` argument completely unused in the body (X125-family mis-quantification: machine-confirmed k_is_decorative shows x195_k_nice k1 Fam <-> x195_k_nice k2 Fam "
+    },
+    "X196": {
+      "phase": "X196",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X196.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1708_07369_01": {
+          "formal_name": "ramsey_nice_forest_family_infinite_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: ramsey_nice_forest_family_infinite_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = mis-quantification / lightweight-witness, and it fires on the load-bearing quantifier. The whole content of Conj 1.5 is that \"k-nice\" holds for INFINITELY MANY k, where k-nice is a genuinely k-dependent property (the k-colour Ramsey number R(F;k) meets its natural lower bound). But the imported predicate x195_k_nice (X195.v:21-25) takes a k parameter that NEVER appears in its body: it is hard-coded to 2-colourings "
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = mis-quantification / lightweight-witness, and it fires on the load-bearing quantifier. The whole content of Conj 1.5 is that \"k-nice\" holds for INFINITELY MANY k, where k-nice is a genuinely k-dependent property (the k-colour Ramsey number R(F;k) meets its natural lower bound). But the imported predicate x195_k_nice (X195.v:21-25) takes a k parameter that NEVER appears in its body: it is hard-coded to 2-colourings ({set 'K_N} -> 'I_2) and only asserts existence of an N"
+    },
+    "X197": {
+      "phase": "X197",
+      "repo": "graph-theory-misc",
+      "defines_file": "X197.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1709_09050_02": {
+          "formal_name": "planar_cops_capture_time_linear_tight_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: planar_cops_capture_time_linear_tight_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the top statement does NOT say capt3(G) > n. Foundation primitives: wagner_planar (base.v) = FAITHFUL planarity; the cops/robbers game (x197_cops_win_in) and x197_capture_time are bespoke local definitions in X197.v, not phase-1 primitives. Mis-quantification: x197_capture_time G cops t := exists C0, (forall r0, win_in t C0 r0) /\\ (forall t'<t, exists r0, ~win_in t' C0 r0). The minimality clause is boun"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the top statement does NOT say capt3(G) > n. Foundation primitives: wagner_planar (base.v) = FAITHFUL planarity; the cops/robbers game (x197_cops_win_in) and x197_capture_time are bespoke local definitions in X197.v, not phase-1 primitives. Mis-quantification: x197_capture_time G cops t := exists C0, (forall r0, win_in t C0 r0) /\\ (forall t'<t, exists r0, ~win_in t' C0 r0). The minimality clause is bound to the SAME existential C0, so it unfolds to `exists "
+    },
+    "X198": {
+      "phase": "X198",
+      "repo": "minor-theory",
+      "defines_file": "X198.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1710_02727_00": {
+          "formal_name": "minor_closed_col_star_obstruction_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: minor_closed_col_star_obstruction_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = mis-quantification of the clustered/star coloring number col⋆: the paper (arXiv:1710.02727 lines 91-111) defines col⋆(G)≤t as \"∃C≥1 such that col_C(G)≤t for every G∈G\", where a t-island is a nonempty S with each vertex having <t neighbors outside S and NO intrinsic size bound — the size cap C is a separate, existentially-quantified, class-uniform constant that is the entire content of the parameter (cf. Observation"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = mis-quantification of the clustered/star coloring number col⋆: the paper (arXiv:1710.02727 lines 91-111) defines col⋆(G)≤t as \"∃C≥1 such that col_C(G)≤t for every G∈G\", where a t-island is a nonempty S with each vertex having <t neighbors outside S and NO intrinsic size bound — the size cap C is a separate, existentially-quantified, class-uniform constant that is the entire content of the parameter (cf. Observation 3). The formalization's x198_t_island hardcodes #|S|<="
+    },
+    "X199": {
+      "phase": "X199",
+      "repo": "minor-theory",
+      "defines_file": "X199.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1710_03117_00": {
+          "formal_name": "strongly_sublinear_separator_constant_M_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: strongly_sublinear_separator_constant_M_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the statement is not merely a weakening but is provably FALSE, so it can never be `done`. Source (Dvořák 1710.03117) is about a FIXED class C with *polynomial ω-expansion*: for such C and each ℓ there is a constant-sized M (dep. on C, ℓ) giving a balanced separator C∪M with the WEIGHTED bound q(C) ≤ q(V)/ℓ. The Rocq surface breaks this three ways: (1) FATAL dropped hypothesis — it quantifies `forall C "
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = the statement is not merely a weakening but is provably FALSE, so it can never be `done`. Source (Dvořák 1710.03117) is about a FIXED class C with *polynomial ω-expansion*: for such C and each ℓ there is a constant-sized M (dep. on C, ℓ) giving a balanced separator C∪M with the WEIGHTED bound q(C) ≤ q(V)/ℓ. The Rocq surface breaks this three ways: (1) FATAL dropped hypothesis — it quantifies `forall C : sgraph -> Prop` with NO ω-expansion constraint, so in"
+    },
+    "X200": {
+      "phase": "X200",
+      "repo": "minor-theory",
+      "defines_file": "X200.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1710_06282_00": {
+          "formal_name": "planar_H_model_erdos_posa_oklogk_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: planar_H_model_erdos_posa_oklogk_statement."
+        }
+      },
+      "faithfulness_result": "1/1 BLOCKED. Needs Erdos-Posa model foundations."
+    },
+    "X201": {
+      "phase": "X201",
+      "repo": "minor-theory",
+      "defines_file": "X201.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1710_06282_01": {
+          "formal_name": "treewidth_vertex_disjoint_subgraphs_log_bound_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: treewidth_vertex_disjoint_subgraphs_log_bound_statement."
+        }
+      },
+      "faithfulness_result": "1/1 BLOCKED. Needs treewidth packing/log-threshold foundations."
+    },
+    "X202": {
+      "phase": "X202",
+      "repo": "topological-graph-theory",
+      "defines_file": "X202.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1710_11281_00": {
+          "formal_name": "genus_cop_number_sqrt_asymptotic_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: genus_cop_number_sqrt_asymptotic_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the two-sided asymptotic c(g)=g^{1/2+o(1)} (upper AND lower, for both orientable c and nonorientable ec) is rendered as a ONE-SIDED, wrong-shaped upper bound. The window predicate x202_cop_number_genus_window is `exists cops, x202_genus_cop_number_at_most g cops /\\ eps_den*cops*cops <= (eps_den+eps_num)*g.+1` — a single upper inequality. Because more cops always suffices, `exists cops` collapses it to c(g)^2 <= (1+e"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk: the two-sided asymptotic c(g)=g^{1/2+o(1)} (upper AND lower, for both orientable c and nonorientable ec) is rendered as a ONE-SIDED, wrong-shaped upper bound. The window predicate x202_cop_number_genus_window is `exists cops, x202_genus_cop_number_at_most g cops /\\ eps_den*cops*cops <= (eps_den+eps_num)*g.+1` — a single upper inequality. Because more cops always suffices, `exists cops` collapses it to c(g)^2 <= (1+eps)(g+1): (a) the lower bound g^{1/2-eps} < c(g) — the "
+    },
+    "X203": {
+      "phase": "X203",
+      "repo": "chromatic-theory",
+      "defines_file": "X203.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1802_03727_00": {
+          "formal_name": "separation_choosability_min_degree_unbounded_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: separation_choosability_min_degree_unbounded_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertic"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertices). There, `x203_min_degree_at_least G d := forall v, "
+    },
+    "X204": {
+      "phase": "X204",
+      "repo": "chromatic-theory",
+      "defines_file": "X204.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1802_04179_01": {
+          "formal_name": "planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+          "note": "Encodes the suspected non-optimality of 11/3 as a uniform rational bound p/q < 11/3 for planar graphs with no 4- or 5-cycles."
+        }
+      },
+      "faithfulness_result": "1/1 FAITHFUL. Uses X130 fractional-colouring witnesses, Wagner planarity, explicit no-cycle-length predicates, and the strict rational inequality 3p < 11q."
+    },
+    "X205": {
+      "phase": "X205",
+      "repo": "graph-theory-misc",
+      "defines_file": "X205.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1802_05582_01": {
+          "formal_name": "randomized_distributed_delta_list_colouring_no_poly_delta_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: randomized_distributed_delta_list_colouring_no_poly_delta_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = the conjecture's ENTIRE subject (round complexity of a randomized DISTRIBUTED list-colouring algorithm, and whether it avoids the poly-Delta factor) is not encoded at all. The `rounds` argument of the record `x205_randomized_local_algorithm` (X205.v:22) is a phantom parameter — it appears in the type signature and in the bound `rounds <= C*(trunc_log 2 #|G|)+1 + C` (lines 36-38) but in NONE of the record fields, so"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = the conjecture's ENTIRE subject (round complexity of a randomized DISTRIBUTED list-colouring algorithm, and whether it avoids the poly-Delta factor) is not encoded at all. The `rounds` argument of the record `x205_randomized_local_algorithm` (X205.v:22) is a phantom parameter — it appears in the type signature and in the bound `rounds <= C*(trunc_log 2 #|G|)+1 + C` (lines 36-38) but in NONE of the record fields, so it constrains nothing (machine-confirmed: statement <-"
+    },
+    "X206": {
+      "phase": "X206",
+      "repo": "chromatic-theory",
+      "defines_file": "X206.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass; retargeted by asymptotics foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex asymptotics retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "asymptotics-foundation-retarget",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1803_01051_00": {
+          "formal_name": "list_chromatic_delta_over_c_subpower_clique_statement",
+          "note": "Retargeted after GTBase.asymptotics: real c>1 is represented by a positive rational a/b>1; chi_l(G)<=Delta/c is the cross-multiplied choice-number inequality a*m<=b*Delta(G); omega(G)<=Delta^(1/f(c)) is encoded as omega(G)^q<=Delta(G) for a positive integer exponent denominator q=f(a,b).",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted witness surface not faithful to the conjecture"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). "
+    },
+    "X207": {
+      "phase": "X207",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X207.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1803_03588_00": {
+          "formal_name": "polynomial_rodl_dependence_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: polynomial_rodl_dependence_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = trivially-true (Foundation WATCH: nat-subtraction / mis-encoded density disjunction), and it resolves against the statement: it is a theorem, not an open conjecture. Rödl's theorem asks for an induced subgraph on >=δn vertices that is either ε-SPARSE (density <= ε) OR ε-DENSE (density >= 1-ε); the polynomial-Rödl conjecture is that δ >= poly(ε). The encoding breaks on three independent fronts, any one "
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = trivially-true (Foundation WATCH: nat-subtraction / mis-encoded density disjunction), and it resolves against the statement: it is a theorem, not an open conjecture. Rödl's theorem asks for an induced subgraph on >=δn vertices that is either ε-SPARSE (density <= ε) OR ε-DENSE (density >= 1-ε); the polynomial-Rödl conjecture is that δ >= poly(ε). The encoding breaks on three independent fronts, any one fatal: (1) The disjunction is `density>=d` OR `density>"
+    },
+    "X208": {
+      "phase": "X208",
+      "repo": "graph-theory-misc",
+      "defines_file": "X208.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "rows": {
+        "axv_1803_05396_01": {
+          "formal_name": "Pt_free_maximum_independent_set_polytime_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: Pt_free_maximum_independent_set_polytime_statement."
+        }
+      },
+      "faithfulness_result": "1/1 BLOCKED. Needs graph-algorithm/MIS foundations."
+    },
+    "X209": {
+      "phase": "X209",
+      "repo": "hypergraph-theory",
+      "defines_file": "X209.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass; retargeted by asymptotics foundation pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex asymptotics retarget faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "asymptotics-foundation-retarget",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1803_08462_00": {
+          "formal_name": "hypergraph_cut_excess_theta_sqrt_statement",
+          "note": "Retargeted after GTBase.asymptotics: k-uniform hypergraphs, maximum r-cuts, denominator-scaled excess over the random-cut baseline, the extremal minimum over m-edge k-graphs, and Theta(sqrt m) as excess(m)^2 = Theta(m) are all explicit. Faithful-to-refuted: the source paper disproves this plausible conjecture outside the small tight cases.",
+          "state": "partial",
+          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = a minimality mis-quantification in the extremal-min helper: X209.v line 41 reads `forall (T' : finType) (E' : {set {set T}}) (y : nat), ...` — the bound `T'` is unused and `E'` is typed over the OUTER witness type `T`, so \"smallest max r-cut over all m-edge k-graphs\" is actually the minimum over m-edge k-graphs on one chooseable vertex set, not all. `x209_is_min_scaled_excess` is thus non-functional and `exists exc"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest risk = a minimality mis-quantification in the extremal-min helper: X209.v line 41 reads `forall (T' : finType) (E' : {set {set T}}) (y : nat), ...` — the bound `T'` is unused and `E'` is typed over the OUTER witness type `T`, so \"smallest max r-cut over all m-edge k-graphs\" is actually the minimum over m-edge k-graphs on one chooseable vertex set, not all. `x209_is_min_scaled_excess` is thus non-functional and `exists excess, forall m, is_min...` can pick any per-vertex-set l"
+    },
+    "X210": {
+      "phase": "X210",
+      "repo": "chromatic-theory",
+      "defines_file": "X210.v",
+      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
+      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
+      "source_verified_at": "2026-07-16",
+      "commit": "x191-x210-batch1",
+      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "rows": {
+        "axv_1803_10962_00": {
+          "formal_name": "surface_conflict_colouring_sqrt_genus_statement",
+          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: surface_conflict_colouring_sqrt_genus_statement.",
+          "state": "blocked",
+          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = dropped positivity of the constants, and it resolves against the statement: the source needs \"C, C' > 0\" (context even notes C < 1/2 is FORCED — the positive constant C in \"at most Ck conflicts\" is the entire content), but the formal statement quantifies `exists C C' : nat` with no positivity and leaves k unrestricted. The conflict machinery itself is faithful (x210_conflict_assignment = symmetric F wi"
+        }
+      },
+      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = dropped positivity of the constants, and it resolves against the statement: the source needs \"C, C' > 0\" (context even notes C < 1/2 is FORCED — the positive constant C in \"at most Ck conflicts\" is the entire content), but the formal statement quantifies `exists C C' : nat` with no positivity and leaves k unrestricted. The conflict machinery itself is faithful (x210_conflict_assignment = symmetric F with #conflicts <= C*k per edge; x210_conflict_colouring "
     }
   }
 }

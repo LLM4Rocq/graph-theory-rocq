@@ -18,6 +18,7 @@ theories/conjectures/implications_D4inf3.v
 theories/conjectures/D4inf4.v
 theories/conjectures/grounding_D4inf4.v
 theories/conjectures/implications_D4inf4.v
+theories/conjectures/D4_unblocked.v
 theories/conjectures/D4inf5.v
 theories/conjectures/grounding_D4inf5.v
 theories/conjectures/implications_D4inf5.v
