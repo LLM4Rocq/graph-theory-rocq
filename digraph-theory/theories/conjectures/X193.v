@@ -30,10 +30,16 @@ Definition x193_independence_number (D : diGraphType) (a : nat) : Prop :=
 
 (** Harutyunyan-Le-Newman-Thomasse Conjecture 3.5: domination number in
     directed-triangle-free digraphs is bounded polynomially in the independence
-    number.  The polynomial is encoded by an existential exponent [ell]. *)
+    number.  The polynomial is encoded by an existential exponent [ell].
+    The looplessness guard is LOAD-BEARING: without it a loops-only digraph is
+    directed-triangle-free with independence number 0 yet domination number 2,
+    refuting the statement for every [ell] while the paper's conjecture (over
+    loopless digraphs) is open (audit fix 2026-07-18,
+    meta/BLOCKED_RETARGETING_AUDIT.md, fresh-rows section). *)
 Definition directed_triangle_free_domination_polynomial_statement : Prop :=
   exists ell : nat,
     forall (D : diGraphType) (alpha : nat),
+      (forall v : D, ~~ (v --> v)) ->
       x193_directed_triangle_free D ->
       x193_independence_number D alpha ->
       x193_domination_number_at_most D (alpha ^ ell).

@@ -14,14 +14,20 @@ Definition x138_embeddable_on_surface (surface : nat) (G : sgraph) : Prop :=
 Definition x138_clustered_two_colourable (G : sgraph) : Prop :=
   clustered_chromatic_at_most G 2.
 
+Definition x138_clustered_two_colourable_with_clustering
+    (c : nat) (G : sgraph) : Prop :=
+  clustered_colouring G 2 c.
+
 (** ** X138 statements *****************************************************)
 
 (** Esperet-Joret: for every surface Sigma and maximum-degree bound Delta,
     triangle-free graphs of maximum degree Delta embeddable in Sigma have
     clustered chromatic number at most two. *)
 Definition esperet_joret_surface_triangle_free_clustered_two_colouring_statement : Prop :=
-  forall (surface Delta0 : nat) (G : sgraph),
-    girth_geq G 4 ->
-    Delta G <= Delta0 ->
-    x138_embeddable_on_surface surface G ->
-    x138_clustered_two_colourable G.
+  forall surface Delta0 : nat,
+    exists c : nat,
+      forall G : sgraph,
+        girth_geq G 4 ->
+        Delta G <= Delta0 ->
+        x138_embeddable_on_surface surface G ->
+        x138_clustered_two_colourable_with_clustering c G.

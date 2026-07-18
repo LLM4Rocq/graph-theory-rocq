@@ -929,17 +929,17 @@
    "audit_page": "todo",
    "commit": "x191-x210-batch1",
    "package": "digraph-theory",
-   "note": "Authored in X193.v:directed_triangle_free_domination_polynomial_statement. Encodes Conjecture 3.5: directed-triangle-free digraphs have domination number bounded by a polynomial in the independence number."
+   "note": "Authored in X193.v:directed_triangle_free_domination_polynomial_statement. Encodes Conjecture 3.5: directed-triangle-free digraphs have domination number bounded by a polynomial in the independence number. | AUDIT DEFECT FIXED 2026-07-18: added load-bearing looplessness guard (loops-only refutation excluded). Recompiled axiom-free."
   },
   "axv_1708_02370_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x191-x210-batch1",
+   "commit": "faithful-reencoding-wave1",
    "package": "chromatic-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = clustering-constant mis-quantification (the flagged BROKEN clustered_chromatic_at_most-in-conclusion pattern, same family as X138/X125), and it fully realizes: the conclusion x194_clustered_chromatic_minor_class_le H (2*k-2) unfolds to forall G, ~minor G H -> clustered_chromatic_at_most G (2*k-2), and clustered_chromatic_at_most G j := exists c, clustered_colouring G j c places the clustering constant c INSIDE fora"
+   "note": "Authored in X194.v:clustered_chromatic_minor_class_treedepth_bound_statement. Faithful re-encoding 2026-07-17: x194_clustered_chromatic_minor_class_le now carries a class-uniform clustering constant c before quantifying over H-minor-free graphs. | VERIFY FIX 2026-07-18: 2<=k guard added (treedepth-1/edgeless-H hole: unguarded form was machine-refuted axiom-free via H=I2, 0 colours, K1). Recompiled axiom-free."
   },
   "axv_1708_07369_00": {
    "statement": "blocked",
@@ -1038,14 +1038,14 @@
    "audit_page": "todo"
   },
   "axv_1710_02727_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x191-x210-batch1",
+   "commit": "faithful-reencoding-wave1",
    "package": "minor-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = mis-quantification of the clustered/star coloring number col⋆: the paper (arXiv:1710.02727 lines 91-111) defines col⋆(G)≤t as \"∃C≥1 such that col_C(G)≤t for every G∈G\", where a t-island is a nonempty S with each vertex having <t neighbors outside S and NO intrinsic size bound — the size cap C is a separate, existentially-quantified, class-uniform constant that is the entire content of the parameter (cf. Observation"
+   "note": "Authored in X198.v:minor_closed_col_star_obstruction_statement. Faithful re-encoding 2026-07-17: separates the island threshold t from the class-uniform size cap c in col*, matching the source definition ∃c ∀ induced subgraphs. | VERIFY FIX 2026-07-18: 1<=t guard added (t=0 hole: unguarded iff was machine-refuted axiom-free via the single-vertex minor-closed class). Recompiled axiom-free."
   },
   "axv_1710_03117_00": {
    "statement": "blocked",
@@ -1211,14 +1211,14 @@
    "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = the conjecture's ENTIRE subject (round complexity of a randomized DISTRIBUTED list-colouring algorithm, and whether it avoids the poly-Delta factor) is not encoded at all. The `rounds` argument of the record `x205_randomized_local_algorithm` (X205.v:22) is a phantom parameter — it appears in the type signature and in the bound `rounds <= C*(trunc_log 2 #|G|)+1 + C` (lines 36-38) but in NONE of the record fields, so"
   },
   "axv_1803_01051_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "asymptotics-foundation-retarget",
    "package": "chromatic-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted witness surface not faithful to the conjecture"
+   "note": "Authored in X206.v:list_chromatic_delta_over_c_subpower_clique_statement. Retargeted after GTBase.asymptotics: real c>1 is represented by a positive rational a/b>1; chi_l(G)<=Delta/c is the cross-multiplied choice-number inequality a*m<=b*Delta(G); omega(G)<=Delta^(1/f(c)) is encoded as omega(G)^q<=Delta(G) for a positive integer exponent denominator q=f(a,b)."
   },
   "axv_1803_01051_01": {
    "statement": "done",
@@ -10203,9 +10203,9 @@
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x125-extremal-batch1",
+   "commit": "faithful-reencoding-wave1",
    "package": "extremal-graph-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the X125 quantifier-collapse (mis-quantified \"almost all\"), and it resolves against the row: x125_almost_all quantifies `forall (L:finType)(obs), <valid-lift-family> -> exists good, fg_event_at_least_ratio L (fun _=>1) good 9 10 /\\ forall x, good x -> P(obs x)`. Foundation primitives fg_event_at_least_ratio / fg_event_weight / fg_total_weight are FAITHFUL, but here fg_event_at_least_ratio unfolds to 10"
+   "note": "BLOCKED — Adversarial repair verification (2026-07-18): the 2026-07-17 fg_whp repair closed the family-forall collapse but introduced a NEW one: 'exists M : lift_model' admits a multiplicity-skewed observation model (extra sample points all observing the trivial disjoint-copies lift) satisfying every record field yet concentrating ratio->1 on one lift, making the statement provable with a=b=1 independently of Drier-Linial (whp engine machine-checked in probe_x125_skew.v). Structural fix needed: pin the canonical uniform LABELLED lift model (matching-tuple sample space) or add a measure-faithfu"
   },
   "std_dujmovi_et_al_question_thue_choice_number_bounde": {
    "statement": "done",
@@ -10315,14 +10315,14 @@
    "note": "Authored in X134.v:elphick_farber_goldberg_wocjan_squared_energy_statement. Same squared-energy bound as X6's s+/s- statement: min{E2+,E2-}>=n-1 is encoded as both squared sums at least n-1."
   },
   "std_engbers_homomorphism_count_maximisation_conjectu": {
-   "statement": "done",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x131-x150-batch1",
    "package": "homomorphism-theory",
-   "note": "Authored in X135.v:engbers_homomorphism_count_maximisation_statement. Encodes Engbers' hom-count upper bound for min-degree-delta graphs, clearing the fractional exponents by raising to D=2*delta*(delta+1)."
+   "note": "PARTIAL (proxy) — Fresh-rows independent adversarial audit (wf_bdaea8ab, 2026-07-18): Encoding is an exact rendering of the extracted statement (Conj 1.4 of arXiv 1611.02911 Guggiari-Scott, attrib. Engbers): quantifier order forall delta,H -> exists N=c(delta,H) -> forall n>=N, |G|=n, mindeg>=delta correct; K_{delta+1}=Kn(delta.+1), K_{delta,delta}=KB delta delta, K_{delta,n-delta}=KB delta (n-delta) all verified; fractional exponents cleared exactly by raising to D=2*delta*(delta+1) giving integral exponents 2*d Authored in X135.v:engbers_homomorphism_count_maximisation_statement."
   },
   "std_engbers_question_on_h_colourings_of_connected_gr": {
    "statement": "todo",
@@ -10461,7 +10461,7 @@
    "audit_page": "todo",
    "commit": "x131-x150-batch1",
    "package": "hypergraph-theory",
-   "note": "Authored in X137.v:erdos_rado_sunflower_statement. Encodes f_r(k)<=C(r)^k as: every r-uniform family of size > C^k contains k distinct petals with a common pairwise intersection core."
+   "note": "Authored in X137.v:erdos_rado_sunflower_statement. Encodes f_r(k)<=C(r)^k as: every r-uniform family of size > C^k contains k distinct petals with a common pairwise intersection core. | AUDIT DEFECT FIXED 2026-07-18: binder swap C(k)^r (was the lemma-implied C(r)^k form). Recompiled axiom-free."
   },
   "std_erd_s_s_question_on_the_3_k_tur_n_exponent_f_3_k": {
    "statement": "todo",
@@ -10513,14 +10513,14 @@
    "audit_page": "todo"
   },
   "std_esperet_joret_question_on_clustered_colouring_of": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x131-x150-batch1",
+   "commit": "faithful-reencoding-wave1",
    "package": "topological-graph-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conclusion primitive `clustered_chromatic_at_most G 2 := exists c, clustered_colouring G 2 c` existentially binds the clustering constant c INSIDE, per-graph, AFTER G is fixed. For any finite sgraph G one takes c = #|G| and any 2-colouring, so every monochromatic connected set trivially satisfies #|S| <= #|G|. Hence the whole implication is trivially true independent of girth 4, the maximum-degree b"
+   "note": "Authored in X138.v:esperet_joret_surface_triangle_free_clustered_two_colouring_statement. Faithful re-encoding 2026-07-17: moves the clustering bound outside the graph quantifier, asserting a surface/Delta-uniform constant c with clustered_colouring G 2 c."
   },
   "std_esperet_labourel_ochem_problem_on_induced_univer": {
    "statement": "todo",
@@ -10613,14 +10613,14 @@
    "audit_page": "todo"
   },
   "std_fitzpatrick_howell_messinger_pike_subadditivity": {
-   "statement": "done",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x131-x150-batch1",
    "package": "graph-theory-misc",
-   "note": "Authored in X141.v:zero_forcing_cartesian_product_subadditivity_statement. Encodes z(G square H)<=z(G)+z(H) with a local zero-forcing closure relation and base cartesian_product."
+   "note": "BLOCKED — Fresh-rows independent adversarial audit (wf_bdaea8ab, 2026-07-18): WRONG OBJECT. Manifest source is arXiv 2008.03587 'A note on deterministic zombies' (source_text: 'Is z(G box H) <= z(G)+z(H)?'); there and in FHMP 2016, z = deterministic ZOMBIE number (pursuit game where cops must move closer to the survivor). X141.v instead encodes z as the ZERO FORCING number (the corpus topic field 'zero-forcing' mislabel propagated into the formalization and its FHMP-attribution comment). The two parameter"
   },
   "std_fitzsimons_angel_holroyd_problem_u_n_c_n_2": {
    "statement": "todo",

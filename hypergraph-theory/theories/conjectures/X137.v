@@ -18,16 +18,20 @@ Definition x137_sunflower (T : finType) (petals : seq {set T}) : Prop :=
 
 (** ** X137 statements *****************************************************)
 
-(** Erdos-Rado sunflower conjecture: for every uniformity [r] there is a
-    constant [C(r)] such that every r-uniform family with more than [C^k] members
-    contains a k-sunflower. *)
+(** Erdos-Rado sunflower conjecture: for every petal count [k] there is a
+    constant [C(k)] such that every r-uniform family with more than [C^r]
+    members contains a k-sunflower.  The constant depends on the PETAL COUNT
+    and the exponent is the SET SIZE r; the opposite binder assignment
+    (C depending on r, exponent k) is a consequence of the 1960 Erdos-Rado
+    sunflower LEMMA and carries none of the open content (audit fix
+    2026-07-18, meta/BLOCKED_RETARGETING_AUDIT.md, fresh-rows section). *)
 Definition erdos_rado_sunflower_statement : Prop :=
-  forall r : nat,
+  forall k : nat,
+    2 <= k ->
     exists C : nat,
-      forall (k : nat) (T : finType) (F : {set {set T}}),
-        2 <= k ->
+      forall (r : nat) (T : finType) (F : {set {set T}}),
         x137_uniform F r ->
-        C ^ k < #|F| ->
+        C ^ r < #|F| ->
         exists petals : seq {set T},
           [/\ size petals = k,
               uniq petals,

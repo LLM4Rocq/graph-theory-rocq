@@ -36,24 +36,54 @@ Definition x125_random_lift_space
     (n ell : nat) (L : finType) (obs : L -> sgraph) : Prop :=
   forall x : L, x125_lift n ell (obs x).
 
-Definition x125_almost_all (n ell : nat) (P : sgraph -> Prop) : Prop :=
-  forall (L : finType) (obs : L -> sgraph),
-    x125_random_lift_space n ell obs ->
-    exists good : pred L,
-      @fg_event_at_least_ratio L (fun _ => 1) good 9 10 /\
-      forall x : L, good x -> P (obs x).
+Definition x125_isomorphic (G H : sgraph) : Prop :=
+  exists f : G -> H,
+    bijective f /\
+    forall x y : G, (x -- y) = (f x -- f y).
+
+Record x125_lift_model (ell : nat -> nat) := X125LiftModel {
+  x125_sample : nat -> finType;
+  x125_weight : forall n : nat, x125_sample n -> nat;
+  x125_observe : forall n : nat, x125_sample n -> sgraph;
+  x125_sample_nonempty :
+    forall n : nat, exists x : x125_sample n, True;
+  x125_positive_weight :
+    forall (n : nat) (x : x125_sample n), 0 < @x125_weight n x;
+  x125_sample_lift :
+    forall (n : nat) (x : x125_sample n),
+      x125_lift n (ell n) (@x125_observe n x);
+  x125_sample_complete :
+    forall (n : nat) (G : sgraph),
+      x125_lift n (ell n) G ->
+      exists x : x125_sample n, x125_isomorphic (@x125_observe n x) G;
+  x125_uniform_weight :
+    forall (n : nat) (x y : x125_sample n),
+      @x125_weight n x = @x125_weight n y
+}.
+
+Definition x125_linear_lower_bound (ell : nat -> nat) : Prop :=
+  exists c : nat, 0 < c /\ eventually (fun n => c * n <= ell n).
+
+Definition x125_almost_all
+    (ell : nat -> nat) (P : forall n : nat, sgraph -> Prop) : Prop :=
+  exists (M : x125_lift_model ell)
+         (good : forall n : nat, pred (x125_sample M n)),
+    @fg_whp (@x125_sample ell M) (@x125_weight ell M)
+      good /\
+    forall (n : nat) (x : x125_sample M n),
+      good n x -> P n (@x125_observe ell M n x).
 
 (** ** X125 statements *****************************************************)
 
 (** Studies slice: Drier-Linial conjecture -- for ell >= Omega(n), almost all
     ell-lifts of K_n have Hajos number Theta(n). *)
 Definition drier_linial_random_lift_hajos_number_statement : Prop :=
-  forall n ell : nat,
-    n <= ell ->
+  forall ell : nat -> nat,
+    x125_linear_lower_bound ell ->
     exists a b : nat,
       0 < a /\ 0 < b /\
-      x125_almost_all n ell
-        (fun G : sgraph =>
-           x125_lift n ell G ->
+      x125_almost_all ell
+        (fun n (G : sgraph) =>
+           x125_lift n (ell n) G ->
            x125_hajos_at_least G (a * n) /\
            forall k : nat, x125_hajos_at_least G k -> k <= b * n).

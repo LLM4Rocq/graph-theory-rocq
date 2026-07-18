@@ -9,6 +9,10 @@ Independent adversarial audit of the **72 rows** the 2026-07-16 pass (`meta/BLOC
 - **v2: 330 done - 9 partial - 39 blocked** (was 377/1/0).
 - **OPG: 208 done - 12 partial - 7 blocked** (was 215/12/0). All 7 OPG rows re-blocked.
 
+Addendum: `meta/BLOCKED_REENCODING_WAVE1.md` records the subsequent
+2026-07-17 faithful repairs for X125, X138, X194, and X198.  The table below
+still records the audit verdict on the rejected 2026-07-16 encodings.
+
 ## Foundation fidelity
 
 - `GTBase.finite_graph`: all primitives FAITHFUL, incl. a genuine `fg_whp` (ratio->1). BUT `fg_event_at_least_ratio` is a single-space constant-ratio threshold, NOT a whp notion -- the misuse vector for the **X125 collapse** (`forall family, exists good, ratio>=9/10 /\ good subset P` collapses to 'ALL objects satisfy P').
@@ -97,3 +101,35 @@ Rows kept `done` (genuinely faithful use of the new foundations): X90, X128, X13
 
 Reclassification is **legs-only**: the retargeted `.v` statements still compile axiom-free (gate-clean) but their statement legs are now `blocked`/`partial` with this audit as the record. A faithful re-encoding of the blocked rows remains future work; some ARE achievable on the real foundations (e.g. X125 via `fg_whp`, crossing rows need a genuine drawing/crossing layer).
 
+---
+
+## Fresh-rows audit (2026-07-18) — the 20 rows the retargeting audit did not cover
+
+The 2026-07-15/16 sessions also authored 20 *fresh* single-row waves (X131–X206 range, never
+blocked, hence outside the 72-row retargeting audit), verified only by single-author readback.
+Independent adversarial audit (workflow `wf_bdaea8ab`, one distinct reader per row, machine
+probes): **16 FAITHFUL · 1 PROXY · 3 DEFECT** — a 20% miss rate, consistent with the measured
+~14% single-reader escape rate.
+
+| row | verdict | outcome |
+|---|---|---|
+| X137 (Erdős–Rado sunflower) | DEFECT | **FIXED 2026-07-18**: binder swap — file had C(r)^k (a consequence of the 1960 sunflower *lemma*, zero open content); corrected to the conjecture's C(k)^r. Recompiled axiom-free. |
+| X193 (HLNT directed-triangle-free domination) | DEFECT | **FIXED 2026-07-18**: added the load-bearing looplessness guard (a loops-only digraph refuted the old form for every ℓ while the paper's conjecture is open). Recompiled axiom-free. |
+| X141 (Fitzpatrick–Howell–Messinger–Pike) | DEFECT | **re-blocked**: wrong object — file encodes ZERO-FORCING subadditivity (provably false: Z(K₃□K₃)=5>4), but the source (arXiv 2008.03587) is about the deterministic ZOMBIE number (a true, since-proved claim). A faithful encoding needs a zombie-game primitive absent from GTBase. |
+| X135 (Engbers hom-count maximisation) | PROXY | **→ partial**: encoding exact vs the extracted Conj 1.4 but restricts target H to loopless sgraphs where the literature allows loops (undocumented domain restriction). Curation note: source conjecture is refuted (Guggiari–Scott 2016, δ≥3); status should flip to refuted. |
+| X206 (BKNP list-chromatic Δ/f(c)) | FAITHFUL | **blocked → done**: overturns the 2026-07-17 conservative default (the row had simply never been audited). |
+| X131, X133, X134, X136, X142, X144, X146, X149, X153, X158, X160, X173, X178, X187, X204 | FAITHFUL | keep done (several with machine-checked non-vacuity probes; X131/X134 verified as transparent synonyms of their audited primaries X130/X6). |
+
+### Repaired-rows verification (2026-07-18)
+
+The four rows **X125, X138, X194, X198** were repaired (2026-07-17, author-side) to the
+audit-prescribed shapes and re-entered independent adversarial verification. Outcome — a live
+demonstration of why the re-verify loop is mandatory (2 of 4 repairs had *new* machine-refutable
+holes, and 1 had a fresh structural collapse):
+
+| row | verdict | outcome |
+|---|---|---|
+| X138 | CONFIRMED_REPAIRED | done stands. ∃c genuinely class-uniform; the old constant-colouring witness machine-checked to FAIL against the repaired form (evar scope blocks c:=#\|G\|). |
+| X194 | repair correct, **new hole machine-refuted** → FIXED | unguarded form axiom-free refuted (H=I₂ edgeless, td=1 ⇒ 0 colours, K₁ counterexample); **2≤k guard added 2026-07-18**, recompiled axiom-free. |
+| X198 | repair correct, **new hole machine-refuted** → FIXED | t=0 hole axiom-free refuted (single-vertex minor-closed class, 'I_0); **1≤t guard added 2026-07-18**, recompiled axiom-free. |
+| X125 | **STILL_DEFECTIVE** → re-blocked | the fg_whp repair closed the family-∀ collapse but `∃ M : lift_model` admits a multiplicity-skewed observation model concentrating measure on the trivial lift — statement provable with a=b=1 independently of the conjecture (whp engine machine-checked, probe_x125_skew.v). Structural fix required: canonical uniform *labelled* lift model, or a measure-faithfulness field. |

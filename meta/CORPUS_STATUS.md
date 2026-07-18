@@ -135,7 +135,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1745 tracked rows** — by corpus tag: arxiv 762, arxiv-studied 568, derived 138, erdos 277; **116 alias rows** (no statement owed).
-- Statement legs over the 1629 non-alias rows: **330 done** · 9 partial · 39 blocked · 1251 todo.
+- Statement legs over the 1629 non-alias rows: **332 done** · 10 partial · 36 blocked · 1251 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -179,14 +179,14 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X132 | 1 | 0 | 0 | 0 | 1 |
 | X133 | 1 | 0 | 0 | 0 | 1 |
 | X134 | 1 | 0 | 0 | 0 | 1 |
-| X135 | 1 | 0 | 0 | 0 | 1 |
+| X135 | 0 | 1 | 0 | 0 | 1 |
 | X136 | 1 | 0 | 0 | 0 | 1 |
 | X137 | 1 | 0 | 0 | 0 | 1 |
-| X138 | 0 | 0 | 1 | 0 | 1 |
+| X138 | 1 | 0 | 0 | 0 | 1 |
 | X139 | 0 | 0 | 1 | 0 | 1 |
 | X14 | 2 | 0 | 0 | 0 | 2 |
 | X140 | 0 | 0 | 1 | 0 | 1 |
-| X141 | 1 | 0 | 0 | 0 | 1 |
+| X141 | 0 | 0 | 1 | 0 | 1 |
 | X142 | 1 | 0 | 0 | 0 | 1 |
 | X143 | 0 | 0 | 1 | 0 | 1 |
 | X144 | 1 | 0 | 0 | 0 | 1 |
@@ -244,11 +244,11 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X191 | 0 | 0 | 1 | 0 | 1 |
 | X192 | 1 | 0 | 0 | 0 | 1 |
 | X193 | 1 | 0 | 0 | 0 | 1 |
-| X194 | 0 | 0 | 1 | 0 | 1 |
+| X194 | 1 | 0 | 0 | 0 | 1 |
 | X195 | 0 | 0 | 1 | 0 | 1 |
 | X196 | 0 | 0 | 1 | 0 | 1 |
 | X197 | 0 | 0 | 1 | 0 | 1 |
-| X198 | 0 | 0 | 1 | 0 | 1 |
+| X198 | 1 | 0 | 0 | 0 | 1 |
 | X199 | 0 | 0 | 1 | 0 | 1 |
 | X2 | 11 | 0 | 0 | 0 | 11 |
 | X20 | 2 | 0 | 0 | 0 | 2 |
@@ -258,7 +258,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X203 | 0 | 0 | 1 | 0 | 1 |
 | X204 | 1 | 0 | 0 | 0 | 1 |
 | X205 | 0 | 0 | 1 | 0 | 1 |
-| X206 | 0 | 0 | 1 | 0 | 1 |
+| X206 | 1 | 0 | 0 | 0 | 1 |
 | X207 | 0 | 0 | 1 | 0 | 1 |
 | X208 | 1 | 0 | 0 | 0 | 1 |
 | X209 | 0 | 1 | 0 | 0 | 1 |

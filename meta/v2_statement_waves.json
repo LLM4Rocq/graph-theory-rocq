@@ -2913,20 +2913,20 @@
       "phase": "X125",
       "repo": "extremal-graph-theory",
       "defines_file": "X125.v",
-      "implemented_by": "Batch X111-X130 area-grouped statement authoring pass (author subagents), 2026-07-13",
-      "source_verified_by": "Independent second-reader faithfulness audit (author+audit split), 2026-07-13",
-      "source_verified_at": "2026-07-13",
-      "commit": "x125-extremal-batch1",
+      "implemented_by": "Codex faithful re-encoding wave 1, 2026-07-17",
+      "source_verified_by": "Codex source-faithfulness re-read for repaired blocked rows, 2026-07-17",
+      "source_verified_at": "2026-07-17",
+      "commit": "faithful-reencoding-wave1",
       "rows": {
         "std_drier_linial_conjecture_haj_s_number_of_random_l": {
           "formal_name": "drier_linial_random_lift_hajos_number_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: drier_linial_random_lift_hajos_number_statement.",
+          "note": "Faithful re-encoding 2026-07-17: replaces the fixed 9/10 one-shot event by an indexed complete uniform lift model with nonempty positive-weight samples and fg_whp, with a Boolean high-probability event sound for the Hajos-number Θ(n) property.",
           "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = the X125 quantifier-collapse (mis-quantified \"almost all\"), and it resolves against the row: x125_almost_all quantifies `forall (L:finType)(obs), <valid-lift-family> -> exists good, fg_event_at_least_ratio L (fun _=>1) good 9 10 /\\ forall x, good x -> P(obs x)`. Foundation primitives fg_event_at_least_ratio / fg_event_weight / fg_total_weight are FAITHFUL, but here fg_event_at_least_ratio unfolds to 10"
+          "blocked_reason": "Adversarial repair verification (2026-07-18): the 2026-07-17 fg_whp repair closed the family-forall collapse but introduced a NEW one: 'exists M : lift_model' admits a multiplicity-skewed observation model (extra sample points all observing the trivial disjoint-copies lift) satisfying every record field yet concentrating ratio->1 on one lift, making the statement provable with a=b=1 independently of Drier-Linial (whp engine machine-checked in probe_x125_skew.v). Structural fix needed: pin the canonical uniform LABELLED lift model (matching-tuple sample space) or add a measure-faithfulness fiel"
         }
       },
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = the X125 quantifier-collapse (mis-quantified \"almost all\"), and it resolves against the row: x125_almost_all quantifies `forall (L:finType)(obs), <valid-lift-family> -> exists good, fg_event_at_least_ratio L (fun _=>1) good 9 10 /\\ forall x, good x -> P(obs x)`. Foundation primitives fg_event_at_least_ratio / fg_event_weight / fg_total_weight are FAITHFUL, but here fg_event_at_least_ratio unfolds to 10*#|good| >= 9*#|L|; instantiating L:=unit, obs:=const G"
+      "faithfulness_verified_by": "Adversarial repair verification, machine probes (2026-07-18) — overturns the Codex re-encoding self-audit",
+      "faithfulness_result": "STILL DEFECTIVE after the 2026-07-17 repair: new multiplicity-skew collapse via 'exists M'; re-blocked. See blocked_reason for the machine-checked attack and the prescribed structural fix."
     },
     "X126": {
       "phase": "X126",
@@ -3027,8 +3027,8 @@
           "note": "Duplicate studies row for the X130 Dvorak-Mnich planar girth-5 fractional-chromatic conjecture; implemented as an X130 synonym to prevent drift."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
-      "faithfulness_result": "1/1 FAITHFUL. Exact duplicate of X130; synonym preserves the audited rational epsilon encoding, wagner_planar guard, and girth_geq>=5 guard."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. X131 is a byte-for-byte transparent synonym of the audited X130 primary (probe-proved <-> by split). X130 encoding is faithful to the source: 'exists real c<3' rendered as exists p q with 0<q, p<3q in the correct uniform exists-before-forall-G order (lossless: rational density below 3 + attainment/rationality of chi_f on finite graphs); hypotheses use the right objects (wagner_planar = audited faithful planarity; girth_geq G 5 = girth>=5, not has_girth); chi_f<=p/q via (a:b)-fold colouring with exact #|f v|=b, disjointness on adjacent pairs, cross-multiplied a*q<=p*b, and the load-be"
     },
     "X132": {
       "phase": "X132",
@@ -3061,8 +3061,8 @@
           "note": "Encodes K_s-free, alpha(G)<=r, n/r large enough, and a clique minor of order at least (n/r)^(1+epsilon) via rational-exponent cross-multiplication."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. K_s-free = omega<s; n/r large enough = N*r<=n; polynomially larger = exists positive rational epsilon with n^(1+epsilon)<=t*r^(1+epsilon), cross-multiplied."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Hashed source (Bucic-Fox-Sudakov 2002.11100 recording the Dvorak-Yepremyan question) asks: every K_s-free n-vertex G with alpha(G)<=r and n/r large has a clique minor of order polynomially larger than n/r. Encoding matches on all axes: forall s>1 then uniform e1,e2>0 and threshold N BEFORE forall graphs (class-uniform, correct direction); omega([set:G])<s is exact K_s-subgraph-freeness; alpha(G)<=r is the independence number (coloring.v alpha_mem); minor G 'K_t is the branch-set minor of the t-vertex complete graph (minor.v:104, sgraph.v:1128); N*r<=n encodes n/r>=N with 0<r guard; c"
     },
     "X134": {
       "phase": "X134",
@@ -3078,8 +3078,8 @@
           "note": "Same squared-energy bound as X6's s+/s- statement: min{E2+,E2-}>=n-1 is encoded as both squared sums at least n-1."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. Reuses the audited X6 spectral squared-sum encoding as a synonym."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. X134 is a definitional synonym of X6's elphick_farber_goldberg_wocjan_splus_sminus_statement, which faithfully renders EFGW 2016: for connected G on n>=1 vertices, every sorted adjacency spectrum s (char_poly factorization, multiplicities counted) satisfies both s+>=n-1 and s->=n-1 (= min{s+,s-}>=n-1). Connectivity present (sgraph connected [set: G]), correct object (adjmx, not Laplacian), no nat-truncation (guard 0<n), no quantifier collapse, forall rcfType harmless by RCF transfer, is_spectrum non-vacuous (probe). 0<n guard only excludes the empty graph where the claim is trivially"
     },
     "X135": {
       "phase": "X135",
@@ -3092,11 +3092,13 @@
       "rows": {
         "std_engbers_homomorphism_count_maximisation_conjectu": {
           "formal_name": "engbers_homomorphism_count_maximisation_statement",
-          "note": "Encodes Engbers' hom-count upper bound for min-degree-delta graphs, clearing the fractional exponents by raising to D=2*delta*(delta+1)."
+          "note": "Encodes Engbers' hom-count upper bound for min-degree-delta graphs, clearing the fractional exponents by raising to D=2*delta*(delta+1).",
+          "state": "partial",
+          "partial_reason": "Fresh-rows independent adversarial audit (wf_bdaea8ab, 2026-07-18): Encoding is an exact rendering of the extracted statement (Conj 1.4 of arXiv 1611.02911 Guggiari-Scott, attrib. Engbers): quantifier order forall delta,H -> exists N=c(delta,H) -> forall n>=N, |G|=n, mindeg>=delta correct; K_{delta+1}=Kn(delta.+1), K_{delta,delta}=KB delta delta, K_{delta,n-delta}=KB delta (n-delta) all verified; fractional exponents cleared exactly by raising to D=2*delta*(delta+1) giving integral exponents 2*d"
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. hom(G,H) counts adjacency-preserving finite functions; c(delta,H) is N; the three source terms are preserved after clearing denominators."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "PROXY. Encoding is an exact rendering of the extracted statement (Conj 1.4 of arXiv 1611.02911 Guggiari-Scott, attrib. Engbers): quantifier order forall delta,H -> exists N=c(delta,H) -> forall n>=N, |G|=n, mindeg>=delta correct; K_{delta+1}=Kn(delta.+1), K_{delta,delta}=KB delta delta, K_{delta,n-delta}=KB delta (n-delta) all verified; fractional exponents cleared exactly by raising to D=2*delta*(delta+1) giving integral exponents 2*delta*n, (delta+1)*n, D (monotone-power equivalent, no truncation loss); nat n-delta truncation harmless under prover-chosen N. PROXY because: the H-colouring lit"
     },
     "X136": {
       "phase": "X136",
@@ -3112,8 +3114,8 @@
           "note": "Encodes tournament Erdos-Hajnal: forall forbidden tournament H exists positive rational exponent a/b, every induced-H-free tournament has a transitive subtournament S with |G|^a<=|S|^b."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. H-free is induced-free on tournaments; transitive subtournament uses sub_tournament S and transb; positive tau encoded by a/b."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Encoding is forall H, exists a b>0, forall G, ind_free H G -> exists S, #|G|^a <= #|S|^b /\\ transb (sub_tournament S). Quantifier order uniform (eps=a/b fixed before G); ind_free = induced-subdigraph-free which for tournaments equals subtournament-H-free (probe-verified); transb on arc-inherited subtype is exactly transitive subtournament; |S| >= n^(a/b) encoded exactly by n^a <= |S|^b with no nat-truncation loss; positive-rational exponent is equivalent to the literature's real eps>0 (shrink eps to a rational); positivity guards 0<a,0<b are present and block the empty-witness cheat "
     },
     "X137": {
       "phase": "X137",
@@ -3126,30 +3128,28 @@
       "rows": {
         "std_erd_s_rado_sunflower_conjecture": {
           "formal_name": "erdos_rado_sunflower_statement",
-          "note": "Encodes f_r(k)<=C(r)^k as: every r-uniform family of size > C^k contains k distinct petals with a common pairwise intersection core."
+          "note": "Encodes f_r(k)<=C(r)^k as: every r-uniform family of size > C^k contains k distinct petals with a common pairwise intersection core. | AUDIT DEFECT FIXED 2026-07-18: binder swap C(k)^r (was the lemma-implied C(r)^k form). Recompiled axiom-free."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. r-uniform finite set families and k-sunflowers are defined directly; C depends only on r."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "DEFECT found by audit, FIXED same day (mechanical, audit-prescribed), re-verified compile+axiom-free. Parameter swap: file has 'forall r, exists C, forall k, C^k < #|F| -> k-sunflower' (C depends on uniformity r, exponent = petal count k), but the conjecture is 'forall k, exists C(k), forall s, C(k)^s < #|F| -> k-sunflower' (C depends on petals, exponent = set size). The swapped form is a known consequence of the 1960 Erdos-Rado sunflower LEMMA (threshold r!(k-1)^r is dominated by C(r)^k since (r!(k-1)^r)^(1/k)->1), so the file encodes a known theorem carrying zero content of the open conjectu"
     },
     "X138": {
       "phase": "X138",
       "repo": "topological-graph-theory",
       "defines_file": "X138.v",
-      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
-      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
-      "source_verified_at": "2026-07-15",
-      "commit": "x131-x150-batch1",
+      "implemented_by": "Codex faithful re-encoding wave 1, 2026-07-17",
+      "source_verified_by": "Codex source-faithfulness re-read for repaired blocked rows, 2026-07-17",
+      "source_verified_at": "2026-07-17",
+      "commit": "faithful-reencoding-wave1",
       "rows": {
         "std_esperet_joret_question_on_clustered_colouring_of": {
           "formal_name": "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: esperet_joret_surface_triangle_free_clustered_two_colouring_statement.",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conclusion primitive `clustered_chromatic_at_most G 2 := exists c, clustered_colouring G 2 c` existentially binds the clustering constant c INSIDE, per-graph, AFTER G is fixed. For any finite sgraph G one takes c = #|G| and any 2-colouring, so every monochromatic connected set trivially satisfies #|S| <= #|G|. Hence the whole implication is trivially true independent of girth 4, the maximum-degree b"
+          "note": "Faithful re-encoding 2026-07-17: moves the clustering bound outside the graph quantifier, asserting a surface/Delta-uniform constant c with clustered_colouring G 2 c."
         }
       },
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the conclusion primitive `clustered_chromatic_at_most G 2 := exists c, clustered_colouring G 2 c` existentially binds the clustering constant c INSIDE, per-graph, AFTER G is fixed. For any finite sgraph G one takes c = #|G| and any 2-colouring, so every monochromatic connected set trivially satisfies #|S| <= #|G|. Hence the whole implication is trivially true independent of girth 4, the maximum-degree bound, and surface embeddability — the three hypotheses "
+      "faithfulness_verified_by": "Adversarial repair verification, machine probes both directions (2026-07-18)",
+      "faithfulness_result": "CONFIRMED REPAIRED. exists-c sits between (surface,Delta0) and forall-G; per-graph constant-colouring witness machine-checked to FAIL against the repaired statement (evar scope blocks c:=#|G|), while the old per-graph shape remains trivially provable (documents the closed collapse). Class matches the source (triangle-free via girth_geq 4, Delta<=Delta0, genus-bounded rotation-system embedding)."
     },
     "X139": {
       "phase": "X139",
@@ -3200,11 +3200,13 @@
       "rows": {
         "std_fitzpatrick_howell_messinger_pike_subadditivity": {
           "formal_name": "zero_forcing_cartesian_product_subadditivity_statement",
-          "note": "Encodes z(G square H)<=z(G)+z(H) with a local zero-forcing closure relation and base cartesian_product."
+          "note": "Encodes z(G square H)<=z(G)+z(H) with a local zero-forcing closure relation and base cartesian_product.",
+          "state": "blocked",
+          "blocked_reason": "Fresh-rows independent adversarial audit (wf_bdaea8ab, 2026-07-18): WRONG OBJECT. Manifest source is arXiv 2008.03587 'A note on deterministic zombies' (source_text: 'Is z(G box H) <= z(G)+z(H)?'); there and in FHMP 2016, z = deterministic ZOMBIE number (pursuit game where cops must move closer to the survivor). X141.v instead encodes z as the ZERO FORCING number (the corpus topic field 'zero-forcing' mislabel propagated into the formalization and its FHMP-attribution comment). The two parameter"
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. Zero forcing is defined by the standard unique-uncoloured-neighbour force closure; exact zero forcing numbers are relational; Cartesian product reuses base."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "DEFECT. WRONG OBJECT. Manifest source is arXiv 2008.03587 'A note on deterministic zombies' (source_text: 'Is z(G box H) <= z(G)+z(H)?'); there and in FHMP 2016, z = deterministic ZOMBIE number (pursuit game where cops must move closer to the survivor). X141.v instead encodes z as the ZERO FORCING number (the corpus topic field 'zero-forcing' mislabel propagated into the formalization and its FHMP-attribution comment). The two parameters diverge wildly (zombie z(K_n)=1 vs ZF Z(K_n)=n-1). Consequence: the encoded statement is provably FALSE — brute force gives Z(K3)=2 but Z(K3 box K3)=5 > 4, an"
     },
     "X142": {
       "phase": "X142",
@@ -3220,8 +3222,8 @@
           "note": "Encodes connected order>=3, excluding C5, and neighbour-sum-distinguishing proper edge-colouring with at most Delta(G)+2 colours."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. Edge palette uses positive colours 1..k in incident sums; proper edge-colouring and adjacent-vertex sum distinction are explicit; C5 exception is by isomorphism."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Exact match to Flandrin et al. 2013: forall connected G, |G|>=3, G not iso C5 (cycle_graph 5 is genuine C5, ~inhabited(diso) is genuine non-isomorphism) => exists proper edge colouring with colours {1..Delta+2} (I_k shifted +1, matching the literature's positive-integer colours) whose incident sums distinguish ADJACENT vertices. Edge set is exactly {{x,y}:x--y}; properness (distinct intersecting edges differ) present; sum-distinguishing (not the Zhang AVD set variant) is the right object; Delta is genuine max degree; per-graph existential = correct quantifier order; k=Delta+2>=2 so n"
     },
     "X143": {
       "phase": "X143",
@@ -3256,8 +3258,8 @@
           "note": "Encodes perfect graphs and pure pairs directly; n^{1-o(1)} is the usual forall epsilon>0 eventually |A|,|B|>=n^{1-epsilon} rational-exponent form."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. Perfect graph = every induced subgraph has chi=omega; pure pair complete/anticomplete and nonempty/disjoint; asymptotic exponent order correct."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Corpus source text (arXiv 2105.03956 studies-record) is exactly the n^{1-o(1)} form: 'for every sufficiently large n and every n-vertex perfect graph there is a pure pair A,B with |A|,|B|>=n^{1-o(1)}'. Encoding matches on every axis: (a) forall rational e1/e2 in (0,1), exists N, forall n>=N — correct epsilon-N unfolding of n^{1-o(1)}, o(1) uniform over graphs, rationals dense, e2-e1 nat-subtraction safe under e1<e2; (b) n^(e2-e1)<=|A|^e2 is a tight integer lower bound |A|>=n^{1-e1/e2} on BOTH sides (probe-proved direction+tightness); (c) x144_perfect_graph proved equivalent to standa"
     },
     "X145": {
       "phase": "X145",
@@ -3290,8 +3292,8 @@
           "note": "Encodes Geelen's coarse Gallai min-max: k pairwise distance-at-least-d A-paths or a bounded set Z whose g(d)-ball meets every A-path."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. A-path endpoints are in A with internal vertices outside A; pairwise distance uses closed (d-1)-balls; separator conclusion is exactly every A-path hits N[Z,g(d)]."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Exact match to source min-max: source itself fixes arities |Z|<=f(k), radius g(d), and encoding mirrors them with uniform 'exists f g' before forall k d G A. A-path helper is the standard Gallai A-path (>=1 edge, distinct endpoints in A, internal vertices notin A, uniq+adjacent). dist>=d rendered as ball_{d-1} disjointness (correct under the 1<=d guard); reversal-duplicate counting blocked by required vertex-disjointness. Source's deletion form 'G - N[Z,g(d)] has no A-path' is provably equivalent to the encoded hitting form 'every A-path meets ball_{g(d)}(Z)' (A-paths transfer both w"
     },
     "X147": {
       "phase": "X147",
@@ -3345,8 +3347,8 @@
           "note": "Encodes every 4-chromatic planar graph has fractional chromatic number strictly greater than 3, using X130's audited fractional-colouring relation."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. Strict chi_f>3 is negated X130 chi_f<=3; planarity uses wagner_planar; chromatic number hypothesis is chi=4."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Encoding forall G, wagner_planar G -> chi(G)=4 -> ~(exists (a:b)-fold colouring with a<=3b) exactly matches the source 'every 4-chromatic planar graph has chi_f > 3'. wagner_planar is Wagner-faithful planarity; chi_mem is the genuine chromatic number (exact =4, empty graph auto-excluded); the negated X130 witness gives chi_f>3 via the standard attainment theorem for finite graphs (chi_f is an attained rational min), documented in X130's audited comment. Full taxonomy sweep found no defect: correct object (fractional chi, proper b-fold colouring with exact set sizes and adjacent-disjo"
     },
     "X150": {
       "phase": "X150",
@@ -3417,8 +3419,8 @@
           "note": "Encodes Conjecture 1.7: for bounded short cycles in planar girth>=5 graphs, non-list-colourability has a bounded induced subgraph witness containing both cycles."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. List sizes, two precoloured cycles, planarity/girth guards, and bounded witness order are preserved; induced witness is no loss for non-colourability."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Encoding matches Conjecture 1.7 verbatim (source re-fetched from ar5iv, identical to manifest source_text) on every taxonomy axis: quantifier order forall k>=5, exists K, forall G/palette/L/c1/c2 (K uniform over palettes as source requires); wagner_planar = planarity; girth_geq G 5; x153_short_cycle = genuine ucycle with 3<=size<=k; list dichotomy exact (|L v|=1 on cycle vertices, >=3 off); hypothesis ~list_colourable = no proper coloring from lists. Sole deviation, documented in-file: source's arbitrary 'subgraph H' rendered as induced subgraph on S containing both cycle vertex sets"
     },
     "X154": {
       "phase": "X154",
@@ -3508,8 +3510,8 @@
           "note": "Encodes the solved bounded-queue-number question: exists q such that every planar graph has a q-queue layout."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. Queue layout is defined by a vertex order and edge partition with no nested pair in one queue; planarity uses wagner_planar."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Encodes exactly 'exists q, forall planar G, G has a q-queue layout': wagner_planar is the audited-faithful planarity; ord with uniq+size=#|G| is a full vertex order; x158_nested_edges is strict min(e)<min(f)<max(f)<max(e) nesting (queue obstruction, not stack crossing; shared-endpoint edges correctly non-nesting); col:'{set G}->I_q' on the 2-element edge set gives <=q queues with both nesting directions forbidden via the symmetric forall e f. Uniform exists-q-before-forall-G matches 'bounded queue-number'; empty graph and 'I_0 degeneracies absorbed by the existential. Source since pr"
     },
     "X159": {
       "phase": "X159",
@@ -3542,8 +3544,8 @@
           "note": "Encodes Problem 1.6 using X3's constricting-set vocabulary plus a rational-epsilon natural-density-zero condition."
         }
       },
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
-      "faithfulness_result": "1/1 FAITHFUL. Infinite positive integer set, constricting property, and density zero are all explicit; density uses decidable set witnesses to count initial segments."
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
+      "faithfulness_result": "FAITHFUL. Exact match to Problem 1.6 \"infinite set F of positive integers, constricting, density 0\". Constricting reuses X3's independently-verified vocabulary and matches the paper's definition verbatim (forall k, exists n, chi>=n -> K_k or hole with length exactly in F; correct quantifier order, hole=chordless ucycle size>3). x160_density_zero is genuine natural-density-zero: forall rational eps>0 eventually eps_den*|F cap [1,n]| <= eps_num*n, one-sidedness harmless since count>=0; integer cross-multiplication avoids nat-subtraction traps; count correctly indexes {1..n}. Probes prove: count("
     },
     "X161": {
       "phase": "X161",
@@ -3771,14 +3773,14 @@
       "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
       "source_verified_at": "2026-07-15",
       "commit": "x171-x190-batch1",
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
       "rows": {
         "axv_1606_06265_00": {
           "formal_name": "planar_triangle_free_fractional_chromatic_bound_statement",
           "note": "Encodes the bound chi_f(G) <= 3|V(G)|/(|V(G)|+1) for every planar triangle-free graph, using X130 fractional-colouring witnesses."
         }
       },
-      "faithfulness_result": "1/1 FAITHFUL. Planarity uses wagner_planar, triangle-free is girth_geq 4, and the rational bound is 3n/(n+1)."
+      "faithfulness_result": "FAITHFUL. File encodes forall G, wagner_planar G -> girth_geq G 4 -> x130_frac_chi_le G (3*#|G|) (#|G|.+1), i.e. chi_f(G) <= 3n/(n+1) = 3 - 3/(n+1) exactly. The manifest source_text (hash 1ce924...) is the DMMP open question \"chi_f of n-vertex planar triangle-free graphs might be bounded by 3 - 3/(n+1)\", verified verbatim in the arXiv 1606.06265 PDF; the orchestrator prompt's \"3 - 3/(3n+1)\" paraphrase is the already-PROVED DSV theorem, which the paper cites only as the weaker known bound — encoding the open 3-3/(n+1) question is correct curation. All taxonomy axes clear: girth_geq 4 = triangle"
     },
     "X174": {
       "phase": "X174",
@@ -3862,14 +3864,14 @@
       "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
       "source_verified_at": "2026-07-15",
       "commit": "x171-x190-batch1",
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
       "rows": {
         "axv_1609_06257_00": {
           "formal_name": "gallai_odd_semiclique_path_decomposition_statement",
           "note": "Encodes the Bonamy-Perrett question: connected non-odd-semi-cliques have an edge decomposition into at most floor(|V|/2) paths."
         }
       },
-      "faithfulness_result": "1/1 FAITHFUL. Odd semi-cliques are encoded as K_(2k+1) with at most k-1 deleted edges; path decompositions partition the graph edge set into simple paths."
+      "faithfulness_result": "FAITHFUL. Source (manifest source_text, Bonamy-Perrett Q1.1) asks: every connected non-odd-semi-clique graph admits a path decomposition into floor(|V|/2) paths (task prompt's 'ceil' was a truncation artifact). Encoding matches exactly: connected [set: G] -> ~odd_semi_clique -> exists r<=n%/2 simple paths (nonempty/uniq/sorted(--)) with pairwise-disjoint consecutive-pair edge sets unioning to edge_setG. Probes confirm: missing_edges = non-edges (so OSC = K_{2k+1} minus <=k-1 edges); K_3 correctly classified OSC (floor-bound counterexample excluded); 1<=k guard averts the 0.-1=0 nat-trap so K_1"
     },
     "X179": {
       "phase": "X179",
@@ -4029,14 +4031,14 @@
       "source_verified_by": "Codex X171-X190 faithfulness readback, 2026-07-15",
       "source_verified_at": "2026-07-15",
       "commit": "x171-x190-batch1",
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-15",
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
       "rows": {
         "axv_1702_00588_00": {
           "formal_name": "planar_triangle_free_request_graph_fraction_statement",
           "note": "Encodes the refuted request-graph formulation using planar triangle-free graphs, equality/inequality degree-two request vertices, positive finite weights, and a uniform positive rational satisfied fraction."
         }
       },
-      "faithfulness_result": "1/1 FAITHFUL-TO-REFUTED. Positive rational alpha is represented by p/q; finite rational weights are encoded as positive natural weights after clearing denominators."
+      "faithfulness_result": "FAITHFUL. Encoding matches arXiv 1702.00588 Problem 1 (Dvorak-Sereni request graphs): exists-p/q-before-forall-G uniform fraction, girth_geq 4 = triangle-free exactly, wagner_planar = planarity, degree-2 eq/neq request vertices with positive weights, weighted p*total<=q*satisfied fraction; Q+ weights -> nat is WLOG (documented in file). Sole deviation: paper requires R= u R!= independent, encoding omits it — provably equivalence-preserving (requests induce max-degree-<=2 subgraph, 3-partition into independent sets, alpha -> alpha/3 absorbed by the existential constant); benign but undocumented"
     },
     "X188": {
       "phase": "X188",
@@ -4139,33 +4141,31 @@
       "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
       "source_verified_at": "2026-07-16",
       "commit": "x191-x210-batch1",
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
       "rows": {
         "axv_1708_00423_00": {
           "formal_name": "directed_triangle_free_domination_polynomial_statement",
-          "note": "Encodes Conjecture 3.5: directed-triangle-free digraphs have domination number bounded by a polynomial in the independence number."
+          "note": "Encodes Conjecture 3.5: directed-triangle-free digraphs have domination number bounded by a polynomial in the independence number. | AUDIT DEFECT FIXED 2026-07-18: added load-bearing looplessness guard (loops-only refutation excluded). Recompiled axiom-free."
         }
       },
-      "faithfulness_result": "1/1 FAITHFUL. Directed triangles use dicycle length 3; independence is the maximum stable set under arcs; domination is by in-neighbours plus selected vertices; polynomial bound is an exponent ell."
+      "faithfulness_result": "DEFECT found by audit, FIXED same day (mechanical, audit-prescribed), re-verified compile+axiom-free. Source (HLNT Conj 3.5 verbatim: exists integer ell, gamma(G)<=alpha^ell for directed-triangle-free G) is matched on quantifier order, bound alpha^ell, out-domination, dicycle-size-3 triangle, and underlying-graph independence — but the encoding quantifies over all diGraphType, which admits LOOPS (repo models looplessness only in the separate Oriented structure). A loops-only digraph is directed-triangle-free with independence number 0 yet domination number 2, refuting the statement for every e"
     },
     "X194": {
       "phase": "X194",
       "repo": "chromatic-theory",
       "defines_file": "X194.v",
-      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "x191-x210-batch1",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Codex faithful re-encoding wave 1, 2026-07-17",
+      "source_verified_by": "Codex source-faithfulness re-read for repaired blocked rows, 2026-07-17",
+      "source_verified_at": "2026-07-17",
+      "commit": "faithful-reencoding-wave1",
+      "faithfulness_verified_by": "Adversarial repair verification, machine probes (2026-07-18)",
       "rows": {
         "axv_1708_02370_00": {
           "formal_name": "clustered_chromatic_minor_class_treedepth_bound_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: clustered_chromatic_minor_class_treedepth_bound_statement.",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = clustering-constant mis-quantification (the flagged BROKEN clustered_chromatic_at_most-in-conclusion pattern, same family as X138/X125), and it fully realizes: the conclusion x194_clustered_chromatic_minor_class_le H (2*k-2) unfolds to forall G, ~minor G H -> clustered_chromatic_at_most G (2*k-2), and clustered_chromatic_at_most G j := exists c, clustered_colouring G j c places the clustering constant c INSIDE fora"
+          "note": "Faithful re-encoding 2026-07-17: x194_clustered_chromatic_minor_class_le now carries a class-uniform clustering constant c before quantifying over H-minor-free graphs. | VERIFY FIX 2026-07-18: 2<=k guard added (treedepth-1/edgeless-H hole: unguarded form was machine-refuted axiom-free via H=I2, 0 colours, K1). Recompiled axiom-free."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = clustering-constant mis-quantification (the flagged BROKEN clustered_chromatic_at_most-in-conclusion pattern, same family as X138/X125), and it fully realizes: the conclusion x194_clustered_chromatic_minor_class_le H (2*k-2) unfolds to forall G, ~minor G H -> clustered_chromatic_at_most G (2*k-2), and clustered_chromatic_at_most G j := exists c, clustered_colouring G j c places the clustering constant c INSIDE forall G. The real conjecture chi*(M_H) <= 2td(H)-2 demands"
+      "faithfulness_result": "Quantifier repair CONFIRMED correctly implemented, but a degenerate-parameter hole survived and was machine-refuted; FIXED same day: 2<=k guard added (treedepth-1/edgeless-H hole: unguarded form was machine-refuted axiom-free via H=I2, 0 colours, K1)."
     },
     "X195": {
       "phase": "X195",
@@ -4228,20 +4228,18 @@
       "phase": "X198",
       "repo": "minor-theory",
       "defines_file": "X198.v",
-      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "x191-x210-batch1",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Codex faithful re-encoding wave 1, 2026-07-17",
+      "source_verified_by": "Codex source-faithfulness re-read for repaired blocked rows, 2026-07-17",
+      "source_verified_at": "2026-07-17",
+      "commit": "faithful-reencoding-wave1",
+      "faithfulness_verified_by": "Adversarial repair verification, machine probes (2026-07-18)",
       "rows": {
         "axv_1710_02727_00": {
           "formal_name": "minor_closed_col_star_obstruction_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: minor_closed_col_star_obstruction_statement.",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = mis-quantification of the clustered/star coloring number col⋆: the paper (arXiv:1710.02727 lines 91-111) defines col⋆(G)≤t as \"∃C≥1 such that col_C(G)≤t for every G∈G\", where a t-island is a nonempty S with each vertex having <t neighbors outside S and NO intrinsic size bound — the size cap C is a separate, existentially-quantified, class-uniform constant that is the entire content of the parameter (cf. Observation"
+          "note": "Faithful re-encoding 2026-07-17: separates the island threshold t from the class-uniform size cap c in col*, matching the source definition ∃c ∀ induced subgraphs. | VERIFY FIX 2026-07-18: 1<=t guard added (t=0 hole: unguarded iff was machine-refuted axiom-free via the single-vertex minor-closed class). Recompiled axiom-free."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest risk = mis-quantification of the clustered/star coloring number col⋆: the paper (arXiv:1710.02727 lines 91-111) defines col⋆(G)≤t as \"∃C≥1 such that col_C(G)≤t for every G∈G\", where a t-island is a nonempty S with each vertex having <t neighbors outside S and NO intrinsic size bound — the size cap C is a separate, existentially-quantified, class-uniform constant that is the entire content of the parameter (cf. Observation 3). The formalization's x198_t_island hardcodes #|S|<="
+      "faithfulness_result": "Quantifier repair CONFIRMED correctly implemented, but a degenerate-parameter hole survived and was machine-refuted; FIXED same day: 1<=t guard added (t=0 hole: unguarded iff was machine-refuted axiom-free via the single-vertex minor-closed class)."
     },
     "X199": {
       "phase": "X199",
@@ -4342,14 +4340,14 @@
       "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
       "source_verified_at": "2026-07-16",
       "commit": "x191-x210-batch1",
-      "faithfulness_verified_by": "Codex source-row readback against local v2 manifest/class notes, 2026-07-16",
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
       "rows": {
         "axv_1802_04179_01": {
           "formal_name": "planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
           "note": "Encodes the suspected non-optimality of 11/3 as a uniform rational bound p/q < 11/3 for planar graphs with no 4- or 5-cycles."
         }
       },
-      "faithfulness_result": "1/1 FAITHFUL. Uses X130 fractional-colouring witnesses, Wagner planarity, explicit no-cycle-length predicates, and the strict rational inequality 3p < 11q."
+      "faithfulness_result": "FAITHFUL. Encodes Dvorak-Hu (arXiv 1802.04179) open question: exists rational p/q < 11/3 (0<q, 3p<11q) uniformly bounding chi_f of all planar graphs without 4- and 5-cycles. All components unfold faithfully: wagner_planar = exact planarity (Wagner); x204_no_cycle_length matches the audited girth_geq ucycle idiom and for n=4,5 is exactly 'no subgraph n-cycle'; x130_frac_chi_le = exists proper (a:b)-fold colouring with a*q<=p*b, b>0 — correct chi_f<=p/q by attainment/rationality on finite graphs. Uniform exists-(p,q)-forall-G order, strict inequality matches 'strictly below 11/3' (the '<=11/3' r"
     },
     "X205": {
       "phase": "X205",
@@ -4378,16 +4376,14 @@
       "source_verified_by": "Codex asymptotics retarget faithfulness readback, 2026-07-16",
       "source_verified_at": "2026-07-16",
       "commit": "asymptotics-foundation-retarget",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
       "rows": {
         "axv_1803_01051_00": {
           "formal_name": "list_chromatic_delta_over_c_subpower_clique_statement",
-          "note": "Retargeted after GTBase.asymptotics: real c>1 is represented by a positive rational a/b>1; chi_l(G)<=Delta/c is the cross-multiplied choice-number inequality a*m<=b*Delta(G); omega(G)<=Delta^(1/f(c)) is encoded as omega(G)^q<=Delta(G) for a positive integer exponent denominator q=f(a,b).",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted witness surface not faithful to the conjecture"
+          "note": "Retargeted after GTBase.asymptotics: real c>1 is represented by a positive rational a/b>1; chi_l(G)<=Delta/c is the cross-multiplied choice-number inequality a*m<=b*Delta(G); omega(G)<=Delta^(1/f(c)) is encoded as omega(G)^q<=Delta(G) for a positive integer exponent denominator q=f(a,b)."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). "
+      "faithfulness_result": "FAITHFUL — overturns the 2026-07-17 conservative blocked-by-default (row was simply unaudited). Encoding matches BKNP Q1.5 (manifest source text: exists f:R->R, forall c>1, forall G with no clique > Delta^{1/f(c)}, chi_l <= Delta/c) on every axis: is_choice_number = least-k choosability = chi_l; omega([set:G]) = whole-graph clique number; omega^q <= Delta is exactly omega <= Delta^{1/q} over nats; a*m <= b*Delta is exactly chi_l <= Delta/(a/b); quantifier shape exists-f-then-forall-c preserved; 0 < f a b blocks the omega^0=1 cheat and matches the intended positive exponent. Real c -> rationals"
     },
     "X207": {
       "phase": "X207",
