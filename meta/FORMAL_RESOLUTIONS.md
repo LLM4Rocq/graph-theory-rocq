@@ -141,6 +141,50 @@ Problem 5.1 requires nontransitivity; the construction satisfies the stated
 conditions. The five implementation files are
 `digraph-theory/theories/applications/color_avoiding_{paths,benchmark,word_symmetry,word_certificate,tournament}.v`.
 
+## Directed Kneser nonexistence
+
+For source record `1812.02420__03`,
+`Digraph.applications.directed_kneser_nonexistence.directed_kneser_existence_disproved`
+refutes the unchanged `Digraph.conjectures.X2.directed_kneser_existence_statement`.
+There is no digraph on the three-element subsets of a five-element set whose
+induced acyclic families are exactly the families with nonempty intersection.
+This answers general existence negatively at `(k,b)=(5,3)`.
+
+The proof is symbolic. Four triples have empty total intersection, whereas every
+three intersect. Auxiliary triples force every pair among the four to have an
+arc between them. The intersection condition prohibits loops, digons and directed
+triangles, so these four vertices induce a transitive, acyclic tournament, a
+contradiction. Finite computation checks only small set facts.
+
+The [source paper](https://arxiv.org/html/1812.02420) permits antiparallel arcs and
+counts digons as cycles, matching the formal acyclicity predicate. Parallel arc
+multiplicities do not affect the property. This result establishes the finite
+counterexample; the informal attack's complete classification of all parameter
+pairs remains outside this formalization.
+
+## Alon–Tarsi orientation counterexample
+
+For source record `2209.09107__00`,
+`Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved` refutes the
+printed Question 6.1 of *List-avoiding orientations*. The triangle has no spanning
+subgraph with an Alon–Tarsi orientation meeting the requested bound at every
+vertex.
+
+The [printed question](https://arxiv.org/html/2209.09107v2) requires outdegree at
+least `(degree_G(v)-1)/2`, without a floor. The formal statement uses the exact
+integer inequality `degree_G(v) <= 2*outdegree(v)+1`, with degree measured in the
+original graph. Its chosen arc set may omit edges and retains all vertices.
+Eulerian subgraphs include the empty arc set.
+
+On the triangle, the bound forces the three-cycle orientation, which has equal
+even and odd Eulerian-subgraph counts. The reusable
+`foundations/alon_tarsi.v` proves the general reason: complementing an Eulerian
+subset inside any odd Eulerian arc set reverses its parity and gives a bijection
+between the two classes. The application proves the triangle constraints by
+expanding three vertices and considering its six possible directed nonloop arcs;
+it uses ordinary Boolean case analysis. This refutes the printed inequality;
+no floored variant is claimed.
+
 ## Regression tests
 
 The test suite uses isolated synthetic packages and real Rocq compilation. Its

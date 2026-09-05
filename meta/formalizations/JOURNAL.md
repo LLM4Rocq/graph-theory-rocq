@@ -85,3 +85,8 @@ The proof publication was assembled on `codex/formal-resolutions` from remote `m
 The clean build compiled all four proof dependency closures from source, checked exact theorem types and closed assumptions, and refreshed the assumptions transcript. A separate `rocqchk -silent` run checked all four final modules and their imported proof objects. All 14 regression tests passed. The X7 milestone passed all 11 acceptance checks in the isolated publication checkout.
 
 The clean remote baseline passed `make audit`. Adding the new foundation required one generated inventory change in `meta/CORPUS_STATUS.md`: list `list_ramsey` beside `circular_colouring`. After regeneration, the publication branch also passes `make audit`; its dependency graph has no drift. The original development tree, including its migration work and previously reported metadata drift, was preserved. All 2,099 tracked and nonignored untracked file hashes and the complete Git status were compared before publication and matched.
+
+
+## Continuation
+
+The [second formalization round](ROUND2_JOURNAL.md) starts from the pushed proof commit and adds directed Kneser nonexistence and the Alon–Tarsi Question 6.1 disproof in a separate worktree.
