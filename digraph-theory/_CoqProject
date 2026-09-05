@@ -145,3 +145,6 @@ theories/applications/color_avoiding_tournament.v
 theories/applications/color_avoiding_word_certificate.v
 theories/applications/color_avoiding_word_symmetry.v
 theories/applications/question_5_9_resolution.v
+
+# Further formal resolutions (2026-09-05)
+theories/applications/directed_kneser_nonexistence.v

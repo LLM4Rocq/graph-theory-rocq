@@ -84,6 +84,48 @@
         "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
         "reviewed_at": "2026-09-05"
       }
+    },
+    {
+      "record_key": "1812.02420__03",
+      "row_id": "arxiv:1812.02420#03",
+      "source_hash": "a79016bf2a8f707c42438df0b7f0fb8ee1094f5048bebc21649976856864618b",
+      "source_text": "For given $k,b\\in\\mathbb{N}$ with $k\\geq b$, is there a directed graph $\\vec{K}(k,b)$ with vertex set $\\binom{[k]}{b}$ such that the following holds? The subdigraph of $\\vec{K}(k,b)$ induced by any $\\{B_{1},\\ldots,B_{l}\\}\\subseteq\\binom{[k]}{b}$ is acylic if and only if $\\bigcap_{i=1}^{l}{B_{i}}\\neq\\emptyset$.",
+      "source_locator": "arXiv:1812.02420 — Problem 5.40 | Rocq: digraph-theory/theories/conjectures/X2.v#directed_kneser_existence_statement",
+      "corpus": "v2",
+      "package": "digraph-theory",
+      "direction": "disprove",
+      "statement": "Digraph.conjectures.X2.directed_kneser_existence_statement",
+      "statement_file": "digraph-theory/theories/conjectures/X2.v",
+      "statement_sha256": "f39e845e6ea268e50131eb7ece85ba414ef34cd2a298b5de5ef8e6509a42dced",
+      "theorem": "Digraph.applications.directed_kneser_nonexistence.directed_kneser_existence_disproved",
+      "theorem_file": "digraph-theory/theories/applications/directed_kneser_nonexistence.v",
+      "correspondence": {
+        "explanation": "The theorem refutes exactly the unchanged X2 proposition, which asserts existence for every positive b<=k of an arc relation on the b-subsets of a k-set whose induced acyclic families are exactly the families with nonempty common intersection. It proves no such relation exists at k=5,b=3. All pairs of three-subsets intersect, forcing looplessness and excluding digons. Four triples complementary to the edges of one four-edge star have empty total intersection but every three intersect. Auxiliary triples with empty intersection force every pair of star vertices to be comparable; their intersecting triples prohibit directed triangles, hence the induced tournament is transitive and acyclic, contradicting its empty common intersection. Independent review checked both general acyclicity lemmas, the finite set facts, the exact final universal-statement bridge, and the original paper at https://arxiv.org/html/1812.02420. The source permits antiparallel arcs and counts digons as cycles; parallel multiplicities do not affect acyclicity. This finite counterexample answers general existence negatively; the full parameter classification in the informal attack is not claimed here.",
+        "implemented_by": "Codex /root/tournament_proof",
+        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
+        "reviewed_at": "2026-09-05"
+      }
+    },
+    {
+      "record_key": "2209.09107__00",
+      "row_id": "arxiv:2209.09107#00",
+      "source_hash": "4429d4ab637cc816891ceb0680ef59b0bc25aa4c9471da94a82fe0a34ce7b7ef",
+      "source_text": "Does every graph $G$ have a spanning subgraph with an Alon-Tarsi orientation in which each vertex $v$ has out-degree at least $\\frac{1}{2}(\\deg_{G}(v)-1)$?",
+      "source_locator": "arXiv:2209.09107 — Question 6.1",
+      "corpus": "v2",
+      "package": "chromatic-theory",
+      "direction": "disprove",
+      "statement": "Chromatic.applications.alon_tarsi_triangle.question_6_1_statement",
+      "statement_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
+      "statement_sha256": "c8ca2a8bec5b5aee3949c1554964e80fa80cba3465999ceb43796a433b5a053f",
+      "theorem": "Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved",
+      "theorem_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
+      "correspondence": {
+        "explanation": "The positive statement encodes exactly the printed unfloored Question 6.1: for every finite simple graph G there is an arc set on all original vertices, contained in the edges of G and asymmetric, whose even and odd Eulerian-subgraph counts differ and whose outdegree satisfies degree_G(v)<=2*outdegree(v)+1. Edges may be omitted, so this is an orientation of a spanning subgraph; the degree bound uses the original G. Every Eulerian arc subset is counted, including the empty subset. The disproof instantiates G as the triangle: the orientation and degree constraints force the arc set to be Eulerian with odd cardinality. Complementation within an odd Eulerian arc set bijects its even and odd Eulerian subgraphs, contradicting the Alon-Tarsi condition. Independent review checked the generic degree-subtraction and complement-involution lemmas, the complete three-vertex/nine-pair enumeration identities and six offdiagonal Boolean cases, the exact universal-statement negation, and the original printed question at https://arxiv.org/html/2209.09107v2. No floored variant or weaker constant-error question is claimed.",
+        "implemented_by": "Codex /root (statement and MCP degree development), /root/cochromatic_proof (parity and symbolic closure)",
+        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
+        "reviewed_at": "2026-09-05"
+      }
     }
   ]
 }

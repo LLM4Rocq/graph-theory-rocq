@@ -95,6 +95,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 | area | foundation modules |
 |---|---|
+| chromatic-theory | `alon_tarsi` |
 | cycle-theory | `connectivity` |
 | digraph-theory | `interop_graph_theory`, `prelude` |
 | extremal-graph-theory | `circular_colouring`, `list_ramsey` |

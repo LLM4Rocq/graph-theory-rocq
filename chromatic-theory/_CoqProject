@@ -83,3 +83,7 @@ theories/applications/cochromatic_gap/fiber.v
 theories/applications/cochromatic_gap/mycielski_gap.v
 theories/applications/cochromatic_gap/seed_certificates.v
 theories/applications/cochromatic_gap/seed_colorings.v
+
+# Further formal resolutions (2026-09-05)
+theories/foundations/alon_tarsi.v
+theories/applications/alon_tarsi_triangle.v
