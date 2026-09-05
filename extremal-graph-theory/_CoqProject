@@ -55,3 +55,8 @@ theories/conjectures/X191.v
 theories/conjectures/X195.v
 theories/conjectures/X196.v
 theories/conjectures/X207.v
+
+# Checked formal resolutions (2026-09-05)
+theories/applications/list_ramsey_graph.v
+theories/applications/list_ramsey_nat.v
+theories/foundations/list_ramsey.v
