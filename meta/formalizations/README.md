@@ -11,11 +11,29 @@ Six source records now have exact, assumption-free Rocq proofs in this repositor
 | `1812.02420__03` | No directed Kneser graph at `(k,b)=(5,3)`, refuting the universal existence statement | [directed_kneser_nonexistence.v](../../digraph-theory/theories/applications/directed_kneser_nonexistence.v) |
 | `2209.09107__00` | The triangle refutes printed Alon–Tarsi Question 6.1 with its unfloored degree bound | [alon_tarsi_triangle.v](../../chromatic-theory/theories/applications/alon_tarsi_triangle.v) |
 
+## Checked repair artifacts
+
+Two further Rocq developments repair finite proof steps without resolving their
+source conjectures. The frozen-colouring modules prove `(n+4)F <= 4P` and
+`P > 0` for connected noncomplete graphs with `Delta+1` colours; the
+[frozen-colouring result](../../chromatic-theory/theories/applications/gap_repairs/frozen_coloring_resolution.v)
+also identifies frozen proper colourings with those isolated under one-vertex
+recolouring. The [six-cycle certificate](../../chromatic-theory/theories/applications/gap_repairs/viable_boundary.v)
+proves the exact grid-map viability condition for both boundary hue labellings.
+
+These artifacts are not entries in the resolution registry: the broader
+dynamics and arbitrary-parameter planar-construction conclusions remain
+unformalized. The [repair audit](../GAP_REPAIRS.md),
+[development journal](../GAP_REPAIRS_JOURNAL.md), and
+[assumption transcript](../GAP_REPAIR_ASSUMPTIONS.txt) record their scope and
+verification.
+
 From the repository root, using an installed compatible switch:
 
 ```sh
 ROCQ_OPAM_SWITCH=rocq-tools make resolutions
 ROCQ_OPAM_SWITCH=rocq-tools python3 meta/test_formal_resolutions.py
+ROCQ_OPAM_SWITCH=rocq-tools make gap-repairs
 make audit
 ROCQ_OPAM_SWITCH=rocq-tools python3 meta/formal_resolutions.py \
   --report meta/formalizations/ASSUMPTIONS.txt
