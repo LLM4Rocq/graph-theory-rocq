@@ -21,6 +21,9 @@ META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
 sys.path.insert(0, META)
 import corpus_registry as REG
+import gate_contracts as CONTRACTS
+import rocq_toolchain as ROCQ
+import formal_resolutions as RESOLUTIONS
 NS = REG.NS
 
 if len(sys.argv) < 3:
@@ -99,31 +102,18 @@ def incl_flags_from_cqp(cqp_txt):
 
 def faithfulness_candidates(pkg, ns, cqp_txt, target_names):
     files = project_v_files(pkg, cqp_txt)
-    candidates = {n: [] for n in target_names}
-    pats = {n: re.compile(rf"(?<![{IDENT_CHARS}]){re.escape(n)}(?![{IDENT_CHARS}])")
-            for n in target_names}
+    sources = []
     for rel in files:
         try:
-            src = strip_comments(open(os.path.join(pkg, rel)).read())
+            src = open(os.path.join(pkg, rel)).read()
         except OSError:
             continue
         mod = module_of_rel(ns, rel)
-        for m in DECL_RE.finditer(src):
-            decl = coq_sentence_from(src, m.start())
-            mentioned = [n for n, pat in pats.items() if pat.search(decl)]
-            if not mentioned:
-                continue
-            qname = f"{mod}.{m.group(1)}"
-            for n in mentioned:
-                candidates[n].append((qname, rel, m.group(1)))
-    return candidates
+        sources.append((mod, rel, src))
+    return CONTRACTS.faithfulness_candidate_records(sources, target_names)
 
-# switch resolution: prefer PATH, else the known global switch bin
-SW = os.path.expanduser("~/.opam/digraph/bin")
-env = dict(os.environ)
-if os.path.isdir(SW):
-    env["PATH"] = SW + os.pathsep + env.get("PATH", "")
-    env.setdefault("OPAM_SWITCH_PREFIX", os.path.expanduser("~/.opam/digraph"))
+# Use the same toolchain as the formal-resolution checker.
+env = ROCQ.environment()
 def run(cmd, cwd=None):
     return subprocess.run(cmd, cwd=cwd or pkg, env=env, capture_output=True, text=True)
 
@@ -221,6 +211,18 @@ chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements)"
 #    - no direct proof of an undecided row (manifest status open/partial).
 faith_ok, faith_detail = False, "skipped (compile failed)"
 cases = []
+verified_resolution_keys = set()
+resolution_error = ""
+if compiles and ns:
+    statement_names = {f"{ns}.conjectures.{defined_in[n]}.{n}"
+                       for n in expected if n in defined_in}
+    try:
+        checked_resolutions = RESOLUTIONS.verify_resolutions(
+            package=package, statement_names=statement_names, build=False)
+        verified_resolution_keys = {r.exact_type_key for r in checked_resolutions}
+    except (RESOLUTIONS.ResolutionError, RuntimeError) as exc:
+        resolution_error = str(exc)
+    chk(not resolution_error, "registered formal resolutions checked", resolution_error)
 if compiles and ns:
     probe = os.path.join(pkg, "theories", "conjectures", f"_faith_{phase}.v")
     incl_flags = incl_flags_from_cqp(cqp_txt)
@@ -235,10 +237,9 @@ if compiles and ns:
         stmt_q = f"{ns}.conjectures.{defined_in[n]}.{n}" if n in defined_in else n
         for qname, rel, decl in candidates.get(n, []):
             modules.add(qname.rsplit(".", 1)[0])
-            if status != "disproved":
-                cases.append(("unconditional-refutation", n, qname, rel, decl, f"~ {stmt_q}"))
-            if status in ("open", "partial"):
-                cases.append(("direct-proof-undecided", n, qname, rel, decl, stmt_q))
+            for kind, typ in CONTRACTS.forbidden_exact_types(
+                    status, stmt_q, qname, verified_resolution_keys):
+                cases.append((kind, n, qname, rel, decl, typ))
 
     lines = [f"Require Import {m}." for m in sorted(modules)]
     line_map = {}

@@ -1,5 +1,13 @@
 # Checking faithfulness of the statements
 
+**Formal-resolution update (2026-09-05):** the corpus still records statement
+formalization separately from proof status. Complete local proofs and disproofs
+are now recorded in [FORMAL_RESOLUTIONS.md](FORMAL_RESOLUTIONS.md) and checked by
+`meta/formal_resolutions.py`. An exact, freshly compiled and assumption-free
+`(statement, theorem, direction)` entry is accepted without changing the source
+status. All other exact-type faithfulness probes remain active. The baseline
+statement-only sweep described below is historical.
+
 For a **statement-first** corpus, *faithfulness is the whole game*. Nothing here is proven; every
 row is an axiom-free `Definition <name>_statement : Prop`. So the only thing separating "we
 formalized 227 OpenProblemGarden conjectures" from "we wrote 227 Props that don't mean what we

@@ -97,7 +97,7 @@ Area-local foundations (each area builds these on top of `base`):
 |---|---|
 | cycle-theory | `connectivity` |
 | digraph-theory | `interop_graph_theory`, `prelude` |
-| extremal-graph-theory | `circular_colouring` |
+| extremal-graph-theory | `circular_colouring`, `list_ramsey` |
 | graph-theory-misc | `complexity` |
 | infinite-graph-theory | `igraph` |
 | spectral-graph-theory | `spectral` |

@@ -24,6 +24,12 @@ Built on [`coq-graph-theory`](https://github.com/rocq-community/graph-theory) (u
 MathComp. The roadmap + the validated 227-problem manifest live in **`meta/`**. Verify the
 statement-complete claim with `make audit` (toolchain-free) or the full `make gate` (Coq builds).
 
+## Checked formal resolutions
+
+Three new Rocq formalizations prove the list Ramsey equality, the chromatic/cochromatic gap family, and the nine-vertex color-avoiding tournament construction. A fourth result connects the existing Question 5.9 counterexample family to its exact statement. All four have closed assumptions.
+
+See the [proof overview](meta/formalizations/README.md), [development journal](meta/formalizations/JOURNAL.md), and [resolution registry](meta/FORMAL_RESOLUTIONS.md). Run `ROCQ_OPAM_SWITCH=rocq-tools make resolutions` to build and check them with the compatible development switch.
+
 ## Packages
 | package | namespace | core | deferred |
 |---|---|---:|---:|

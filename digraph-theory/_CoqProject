@@ -137,3 +137,11 @@ theories/conjectures/X136.v
 theories/conjectures/X166.v
 theories/conjectures/X179.v
 theories/conjectures/X193.v
+
+# Checked formal resolutions (2026-09-05)
+theories/applications/color_avoiding_benchmark.v
+theories/applications/color_avoiding_paths.v
+theories/applications/color_avoiding_tournament.v
+theories/applications/color_avoiding_word_certificate.v
+theories/applications/color_avoiding_word_symmetry.v
+theories/applications/question_5_9_resolution.v
