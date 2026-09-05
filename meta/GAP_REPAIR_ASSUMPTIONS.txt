@@ -1,0 +1,141 @@
+six_cycle_precoloring_viable
+:
+viable (fun u v : boundary => u -- v) boundary_hue boundary_color
+     : viable (fun u v : boundary => u -- v) boundary_hue boundary_color
+six_cycle_precoloring_viable_swapped
+:
+viable (fun u v : boundary => u -- v) boundary_hue_swapped boundary_color
+     : viable (fun u v : boundary => u -- v) boundary_hue_swapped
+         boundary_color
+fc_frozen_isolated_iff
+:
+forall (G : sgraph) (C : finType) (f : fc_coloring G C),
+fc_proper (G:=G) (C:=C) f ->
+fc_frozen (G:=G) (C:=C) f = fc_isolated (G:=G) (C:=C) f
+     : forall (G : sgraph) (C : finType) (f : fc_coloring G C),
+       fc_proper (G:=G) (C:=C) f ->
+       fc_frozen (G:=G) (C:=C) f = fc_isolated (G:=G) (C:=C) f
+fc_frozen_count_bound
+:
+forall (G : sgraph) (C : finType),
+(forall x : G, #|fc_closed (G:=G) x| <= #|C|) ->
+connected (G:=G) [set: G] ->
+~ clique (G:=G) [set: G] ->
+(#|G| + 4) * #|[set f | fc_frozen_proper (G:=G) (C:=C) f]| <=
+4 * #|[set f | fc_proper (G:=G) (C:=C) f]|
+     : forall (G : sgraph) (C : finType),
+       (forall x : G, #|fc_closed (G:=G) x| <= #|C|) ->
+       connected (G:=G) [set: G] ->
+       ~ clique (G:=G) [set: G] ->
+       (#|G| + 4) * #|[set f | fc_frozen_proper (G:=G) (C:=C) f]| <=
+       4 * #|[set f | fc_proper (G:=G) (C:=C) f]|
+fc_frozen_count_quantitative
+:
+forall (G : sgraph) (C : finType),
+(forall x : G, #|fc_closed (G:=G) x| <= #|C|) ->
+connected (G:=G) [set: G] ->
+~ clique (G:=G) [set: G] ->
+forall k : nat,
+4 * k <= #|G| ->
+k * #|[set f | fc_frozen_proper (G:=G) (C:=C) f]| <=
+#|[set f | fc_proper (G:=G) (C:=C) f]|
+     : forall (G : sgraph) (C : finType),
+       (forall x : G, #|fc_closed (G:=G) x| <= #|C|) ->
+       connected (G:=G) [set: G] ->
+       ~ clique (G:=G) [set: G] ->
+       forall k : nat,
+       4 * k <= #|G| ->
+       k * #|[set f | fc_frozen_proper (G:=G) (C:=C) f]| <=
+       #|[set f | fc_proper (G:=G) (C:=C) f]|
+fc_proper_exists
+:
+forall (G : sgraph) (C : finType),
+C ->
+(forall x : G, #|fc_closed (G:=G) x| <= #|C|) ->
+exists f : fc_coloring G C, fc_proper (G:=G) (C:=C) f
+     : forall (G : sgraph) (C : finType),
+       C ->
+       (forall x : G, #|fc_closed (G:=G) x| <= #|C|) ->
+       exists f : fc_coloring G C, fc_proper (G:=G) (C:=C) f
+fc_delta_proper_positive : forall G : sgraph, 0 < fc_delta_proper_count G
+     : forall G : sgraph, 0 < fc_delta_proper_count G
+fc_delta_frozen_count_bound
+:
+forall G : sgraph,
+connected (G:=G) [set: G] ->
+~ clique (G:=G) [set: G] ->
+0 < fc_delta_proper_count G /\
+(#|G| + 4) * fc_delta_frozen_count G <= 4 * fc_delta_proper_count G
+     : forall G : sgraph,
+       connected (G:=G) [set: G] ->
+       ~ clique (G:=G) [set: G] ->
+       0 < fc_delta_proper_count G /\
+       (#|G| + 4) * fc_delta_frozen_count G <= 4 * fc_delta_proper_count G
+fc_delta_frozen_count_quantitative
+:
+forall G : sgraph,
+connected (G:=G) [set: G] ->
+~ clique (G:=G) [set: G] ->
+forall k : nat,
+4 * k <= #|G| -> k * fc_delta_frozen_count G <= fc_delta_proper_count G
+     : forall G : sgraph,
+       connected (G:=G) [set: G] ->
+       ~ clique (G:=G) [set: G] ->
+       forall k : nat,
+       4 * k <= #|G| ->
+       k * fc_delta_frozen_count G <= fc_delta_proper_count G
+fc_delta_isolated_count_bound
+:
+forall G : sgraph,
+connected (G:=G) [set: G] ->
+~ clique (G:=G) [set: G] ->
+0 < fc_delta_proper_count G /\
+(#|G| + 4) * fc_delta_isolated_count G <= 4 * fc_delta_proper_count G
+     : forall G : sgraph,
+       connected (G:=G) [set: G] ->
+       ~ clique (G:=G) [set: G] ->
+       0 < fc_delta_proper_count G /\
+       (#|G| + 4) * fc_delta_isolated_count G <= 4 * fc_delta_proper_count G
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ + _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ - _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ <= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ < _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ >= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ > _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ <= _ <= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ < _ <= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ <= _ < _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ < _ < _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-gap-repairs-jwxk2wxe/GapRepairCheck.v", line 2, characters 0-38:
+Warning: Notation "_ * _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]

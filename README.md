@@ -30,6 +30,15 @@ Six source records have checked formal resolutions: five new formalizations and 
 
 See the [proof overview](meta/formalizations/README.md), [latest development journal](meta/formalizations/ROUND2_JOURNAL.md), and [resolution registry](meta/FORMAL_RESOLUTIONS.md). Run `ROCQ_OPAM_SWITCH=rocq-tools make resolutions` to build and check them with the compatible development switch.
 
+## Checked repairs of proof gaps
+
+The frozen-colouring switching bound and a six-cycle viability certificate now
+have Rocq proofs. These are scoped results toward two source conjectures; the
+full dynamics and planar-construction conclusions remain unformalized. See the
+[repair audit](meta/GAP_REPAIRS.md) and [development journal](meta/GAP_REPAIRS_JOURNAL.md).
+Run `ROCQ_OPAM_SWITCH=rocq-tools make gap-repairs` to compile the artifacts and
+check their exact theorem types and closed assumptions.
+
 ## Packages
 | package | namespace | core | deferred |
 |---|---|---:|---:|
