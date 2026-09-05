@@ -87,3 +87,14 @@ theories/applications/cochromatic_gap/seed_colorings.v
 # Further formal resolutions (2026-09-05)
 theories/foundations/alon_tarsi.v
 theories/applications/alon_tarsi_triangle.v
+
+# Checked gap-repair artifacts (2026-09-05; source conjectures remain unresolved)
+theories/applications/gap_repairs/viable_boundary.v
+theories/applications/gap_repairs/frozen_coloring_core.v
+theories/applications/gap_repairs/frozen_coloring_switch.v
+theories/applications/gap_repairs/frozen_coloring_fiber.v
+theories/applications/gap_repairs/frozen_coloring_graph.v
+theories/applications/gap_repairs/frozen_coloring_recolor.v
+theories/applications/gap_repairs/frozen_coloring_greedy.v
+theories/applications/gap_repairs/frozen_coloring_bound.v
+theories/applications/gap_repairs/frozen_coloring_resolution.v
