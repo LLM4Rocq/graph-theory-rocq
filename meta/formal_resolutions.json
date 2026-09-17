@@ -2,6 +2,48 @@
   "schema_version": 1,
   "resolutions": [
     {
+      "record_key": "1611.03196__03",
+      "row_id": "arxiv:1611.03196#03",
+      "source_hash": "6d34c6d32eb47df94117adc8ce59852733760e23054c944d98385a85a7c18df8",
+      "source_text": "For every $m$ there exists a number $c(m)$ for which the following is true: if $G$ is a bipartite graph and $E_1, \\ldots, E_m$ are any sets of edges, then there exists a matching $S$ in $G$ of size at least $\\frac{|E(G)|}{\\Delta(G)} - c(m)$ such that $|S \\cap E_i| \\leq \\left\\lceil \\frac{|E_i|}{\\Delta(G)} \\right\\rceil$ for all $i \\leq m$.",
+      "source_locator": "arXiv:1611.03196 — Conjecture 1.15 | Rocq: packing-theory/theories/conjectures/X15.v#bipartite_matching_underrepresentation_statement",
+      "corpus": "v2",
+      "package": "packing-theory",
+      "statement": "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement",
+      "statement_file": "packing-theory/theories/conjectures/X15.v",
+      "statement_sha256": "c5ebb4f3fc2471ea9dc879e96848f457fb020dad1a00f6fb0891bd6b1cb0d6c5",
+      "theorem": "Packing.foundations.fair_matching.bipartite_matching_underrepresentation",
+      "theorem_file": "packing-theory/theories/foundations/fair_matching.v",
+      "direction": "prove",
+      "correspondence": {
+        "explanation": "Conjecture 1.15 asks, for every m, for a constant c(m) such that every bipartite G with Delta(G)>0 and any m edge sets E_1..E_m admit a matching S with |S| >= |E(G)|/Delta(G) - c(m) and |S cap E_i| <= ceil(|E_i|/Delta(G)). The formal statement quantifies m first, then c, then G and the family, uses the local X15 vocabulary (x15_edge_set = E(G), x15_matching = subset of edges meeting every vertex at most once, x15_edge_family = each E_i a set of edges, not necessarily a partition), and renders the size bound in natural-number form as floor(|E(G)|/Delta(G)) <= |S| + c, which is equivalent to |S| >= |E(G)|/Delta(G) - c over the integers, and the per-class bound with ceil_div. The proof follows the LLM attack write-up (attacks/1611.03196__03/output.md): Koenig line colouring splits E(G) into Delta(G) matchings, Caratheodory over the rationals reduces their average to at most m+2 of them, and an iterated halving built on Alon's Splitting Necklace Theorem (formalized in classical-lemmas) realises the convex combination up to an additive error; the per-class ceilings are then enforced by deletion. It deviates from the write-up in one point, documented in the header of the proof file: every interpolation is a halving (theta=1/2), an arbitrary ratio being realised by a chain of halvings along a binary expansion, instead of the write-up's prescribed-ratio Lemma 1. The constant obtained is c(m) = (m+1)*(m+1)*(16m+29) <= 32(m+1)^3.",
+        "implemented_by": "Claude Opus 5 via Claude Code (session 01P75Y6ikkgDyzUzzoef316Z)",
+        "reviewed_by": "PENDING: no independent source-correspondence review has been performed yet",
+        "reviewed_at": "2026-09-16"
+      }
+    },
+    {
+      "record_key": "1812.02420__03",
+      "row_id": "arxiv:1812.02420#03",
+      "source_hash": "a79016bf2a8f707c42438df0b7f0fb8ee1094f5048bebc21649976856864618b",
+      "source_text": "For given $k,b\\in\\mathbb{N}$ with $k\\geq b$, is there a directed graph $\\vec{K}(k,b)$ with vertex set $\\binom{[k]}{b}$ such that the following holds? The subdigraph of $\\vec{K}(k,b)$ induced by any $\\{B_{1},\\ldots,B_{l}\\}\\subseteq\\binom{[k]}{b}$ is acylic if and only if $\\bigcap_{i=1}^{l}{B_{i}}\\neq\\emptyset$.",
+      "source_locator": "arXiv:1812.02420 — Problem 5.40 | Rocq: digraph-theory/theories/conjectures/X2.v#directed_kneser_existence_statement",
+      "corpus": "v2",
+      "package": "digraph-theory",
+      "direction": "disprove",
+      "statement": "Digraph.conjectures.X2.directed_kneser_existence_statement",
+      "statement_file": "digraph-theory/theories/conjectures/X2.v",
+      "statement_sha256": "f39e845e6ea268e50131eb7ece85ba414ef34cd2a298b5de5ef8e6509a42dced",
+      "theorem": "Digraph.applications.directed_kneser_nonexistence.directed_kneser_existence_disproved",
+      "theorem_file": "digraph-theory/theories/applications/directed_kneser_nonexistence.v",
+      "correspondence": {
+        "explanation": "The theorem refutes exactly the unchanged X2 proposition, which asserts existence for every positive b<=k of an arc relation on the b-subsets of a k-set whose induced acyclic families are exactly the families with nonempty common intersection. It proves no such relation exists at k=5,b=3. All pairs of three-subsets intersect, forcing looplessness and excluding digons. Four triples complementary to the edges of one four-edge star have empty total intersection but every three intersect. Auxiliary triples with empty intersection force every pair of star vertices to be comparable; their intersecting triples prohibit directed triangles, hence the induced tournament is transitive and acyclic, contradicting its empty common intersection. Independent review checked both general acyclicity lemmas, the finite set facts, the exact final universal-statement bridge, and the original paper at https://arxiv.org/html/1812.02420. The source permits antiparallel arcs and counts digons as cycles; parallel multiplicities do not affect acyclicity. This finite counterexample answers general existence negatively; the full parameter classification in the informal attack is not claimed here.",
+        "implemented_by": "Codex /root/tournament_proof",
+        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
+        "reviewed_at": "2026-09-05"
+      }
+    },
+    {
       "record_key": "2103.15175__00",
       "row_id": "arxiv:2103.15175#00",
       "source_hash": "535d4a72e1dc3f9bb52adccf4ae3b9f5bbaf55de5275a5f497cc6ecdf9e32d31",
@@ -19,6 +61,27 @@
         "explanation": "For every s>=2 and k>=1, the least n admitting symmetric k-element lists on the unordered edges of K_n such that every list-respecting coloring has a monochromatic graph of chromatic number greater than s is s^k+1. Lists contain arbitrary natural-number colors, uniqueness enforces k distinct colors, list membership is symmetric, and diagonal values are irrelevant. The monochromatic spanning color graph uses GraphTheory chromatic number; a monochromatic member of H_s exists exactly when one such graph has chromatic number greater than s. Independent review checked the finite-palette union bound, natural-palette reduction, stable-partition coloring equivalence, finite support of used colors, and both least-number inequalities.",
         "implemented_by": "Codex /root (finite core and graph interpretation), integration_audit (natural palette reduction)",
         "reviewed_by": "Codex integration_audit (independent finite core and graph readback), /root (independent natural-palette readback)",
+        "reviewed_at": "2026-09-05"
+      }
+    },
+    {
+      "record_key": "2209.09107__00",
+      "row_id": "arxiv:2209.09107#00",
+      "source_hash": "4429d4ab637cc816891ceb0680ef59b0bc25aa4c9471da94a82fe0a34ce7b7ef",
+      "source_text": "Does every graph $G$ have a spanning subgraph with an Alon-Tarsi orientation in which each vertex $v$ has out-degree at least $\\frac{1}{2}(\\deg_{G}(v)-1)$?",
+      "source_locator": "arXiv:2209.09107 — Question 6.1",
+      "corpus": "v2",
+      "package": "chromatic-theory",
+      "direction": "disprove",
+      "statement": "Chromatic.applications.alon_tarsi_triangle.question_6_1_statement",
+      "statement_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
+      "statement_sha256": "c8ca2a8bec5b5aee3949c1554964e80fa80cba3465999ceb43796a433b5a053f",
+      "theorem": "Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved",
+      "theorem_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
+      "correspondence": {
+        "explanation": "The positive statement encodes exactly the printed unfloored Question 6.1: for every finite simple graph G there is an arc set on all original vertices, contained in the edges of G and asymmetric, whose even and odd Eulerian-subgraph counts differ and whose outdegree satisfies degree_G(v)<=2*outdegree(v)+1. Edges may be omitted, so this is an orientation of a spanning subgraph; the degree bound uses the original G. Every Eulerian arc subset is counted, including the empty subset. The disproof instantiates G as the triangle: the orientation and degree constraints force the arc set to be Eulerian with odd cardinality. Complementation within an odd Eulerian arc set bijects its even and odd Eulerian subgraphs, contradicting the Alon-Tarsi condition. Independent review checked the generic degree-subtraction and complement-involution lemmas, the complete three-vertex/nine-pair enumeration identities and six offdiagonal Boolean cases, the exact universal-statement negation, and the original printed question at https://arxiv.org/html/2209.09107v2. No floored variant or weaker constant-error question is claimed.",
+        "implemented_by": "Codex /root (statement and MCP degree development), /root/cochromatic_proof (parity and symbolic closure)",
+        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
         "reviewed_at": "2026-09-05"
       }
     },
@@ -81,48 +144,6 @@
       "correspondence": {
         "explanation": "The stronger concrete witness fixes q=6 and N=9: a nontransitive six-edge-colored nine-vertex tournament has longest color-avoiding simple directed path exactly seven vertices, while the minimum of longest avoiding-path sizes over every six-coloring of the canonical transitive nine-vertex tournament is exactly eight. Thus 6>=4 and 7<8 witness the source existential question. A color is avoided when no path edge uses it; lengths count vertices. The source definition of f_{q,r}(N) is minimization over transitive tournaments, so transitive_minimum_is 8 supplies f_{6,5}(9)=8. Independent review checked the directed-path and search-completeness definitions, explicit nontransitive tournament and coloring, positive seven-vertex witness, universal transitive benchmark, symmetry reduction of all eight-edge color words to two exhaustive six-letter suffix certificates, and the original paper definitions at https://arxiv.org/html/2512.10438v1. The source requires no strong connectivity.",
         "implemented_by": "Codex /root/tournament_proof",
-        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
-        "reviewed_at": "2026-09-05"
-      }
-    },
-    {
-      "record_key": "1812.02420__03",
-      "row_id": "arxiv:1812.02420#03",
-      "source_hash": "a79016bf2a8f707c42438df0b7f0fb8ee1094f5048bebc21649976856864618b",
-      "source_text": "For given $k,b\\in\\mathbb{N}$ with $k\\geq b$, is there a directed graph $\\vec{K}(k,b)$ with vertex set $\\binom{[k]}{b}$ such that the following holds? The subdigraph of $\\vec{K}(k,b)$ induced by any $\\{B_{1},\\ldots,B_{l}\\}\\subseteq\\binom{[k]}{b}$ is acylic if and only if $\\bigcap_{i=1}^{l}{B_{i}}\\neq\\emptyset$.",
-      "source_locator": "arXiv:1812.02420 — Problem 5.40 | Rocq: digraph-theory/theories/conjectures/X2.v#directed_kneser_existence_statement",
-      "corpus": "v2",
-      "package": "digraph-theory",
-      "direction": "disprove",
-      "statement": "Digraph.conjectures.X2.directed_kneser_existence_statement",
-      "statement_file": "digraph-theory/theories/conjectures/X2.v",
-      "statement_sha256": "f39e845e6ea268e50131eb7ece85ba414ef34cd2a298b5de5ef8e6509a42dced",
-      "theorem": "Digraph.applications.directed_kneser_nonexistence.directed_kneser_existence_disproved",
-      "theorem_file": "digraph-theory/theories/applications/directed_kneser_nonexistence.v",
-      "correspondence": {
-        "explanation": "The theorem refutes exactly the unchanged X2 proposition, which asserts existence for every positive b<=k of an arc relation on the b-subsets of a k-set whose induced acyclic families are exactly the families with nonempty common intersection. It proves no such relation exists at k=5,b=3. All pairs of three-subsets intersect, forcing looplessness and excluding digons. Four triples complementary to the edges of one four-edge star have empty total intersection but every three intersect. Auxiliary triples with empty intersection force every pair of star vertices to be comparable; their intersecting triples prohibit directed triangles, hence the induced tournament is transitive and acyclic, contradicting its empty common intersection. Independent review checked both general acyclicity lemmas, the finite set facts, the exact final universal-statement bridge, and the original paper at https://arxiv.org/html/1812.02420. The source permits antiparallel arcs and counts digons as cycles; parallel multiplicities do not affect acyclicity. This finite counterexample answers general existence negatively; the full parameter classification in the informal attack is not claimed here.",
-        "implemented_by": "Codex /root/tournament_proof",
-        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
-        "reviewed_at": "2026-09-05"
-      }
-    },
-    {
-      "record_key": "2209.09107__00",
-      "row_id": "arxiv:2209.09107#00",
-      "source_hash": "4429d4ab637cc816891ceb0680ef59b0bc25aa4c9471da94a82fe0a34ce7b7ef",
-      "source_text": "Does every graph $G$ have a spanning subgraph with an Alon-Tarsi orientation in which each vertex $v$ has out-degree at least $\\frac{1}{2}(\\deg_{G}(v)-1)$?",
-      "source_locator": "arXiv:2209.09107 — Question 6.1",
-      "corpus": "v2",
-      "package": "chromatic-theory",
-      "direction": "disprove",
-      "statement": "Chromatic.applications.alon_tarsi_triangle.question_6_1_statement",
-      "statement_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
-      "statement_sha256": "c8ca2a8bec5b5aee3949c1554964e80fa80cba3465999ceb43796a433b5a053f",
-      "theorem": "Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved",
-      "theorem_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
-      "correspondence": {
-        "explanation": "The positive statement encodes exactly the printed unfloored Question 6.1: for every finite simple graph G there is an arc set on all original vertices, contained in the edges of G and asymmetric, whose even and odd Eulerian-subgraph counts differ and whose outdegree satisfies degree_G(v)<=2*outdegree(v)+1. Edges may be omitted, so this is an orientation of a spanning subgraph; the degree bound uses the original G. Every Eulerian arc subset is counted, including the empty subset. The disproof instantiates G as the triangle: the orientation and degree constraints force the arc set to be Eulerian with odd cardinality. Complementation within an odd Eulerian arc set bijects its even and odd Eulerian subgraphs, contradicting the Alon-Tarsi condition. Independent review checked the generic degree-subtraction and complement-involution lemmas, the complete three-vertex/nine-pair enumeration identities and six offdiagonal Boolean cases, the exact universal-statement negation, and the original printed question at https://arxiv.org/html/2209.09107v2. No floored variant or weaker constant-error question is claimed.",
-        "implemented_by": "Codex /root (statement and MCP degree development), /root/cochromatic_proof (parity and symbolic closure)",
         "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
         "reviewed_at": "2026-09-05"
       }
