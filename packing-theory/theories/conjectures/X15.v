@@ -65,7 +65,8 @@ Definition bipartite_matching_underrepresentation_llm_statement : Prop :=
           #|S :&: E i| <= ceil_div #|E i| (Delta G).
 
 
-(** what is proved in foundations/fair_matching.v *)
+(** the constant of the first version of foundations/fair_matching.v: one
+    halving per pair along a binary mixing tree, then a trimming phase *)
 Definition bipartite_matching_underrepresentation_llm2_statement : Prop :=
   forall m : nat, exists c : nat,
     c <= (m + 1)^2 * (16*m + 29) /\
@@ -75,6 +76,23 @@ Definition bipartite_matching_underrepresentation_llm2_statement : Prop :=
       x15_edge_family E ->
       exists S : {set {set G}},
         x15_matching S /\
-        (#|x15_edge_set G| %/ Delta G <= #|S| + c)%N /\
+        (#|sg_edge_set G| %/ Delta G <= #|S| + c)%N /\
+        forall i : 'I_m,
+          #|S :&: E i| <= ceil_div #|E i| (Delta G).
+
+(** what is proved in foundations/fair_matching.v: the constant of the
+    synchronized-rounds proof, linear in m — one exact halving per round of a
+    balanced mixing of the colour classes, all the pairs of a round split by a
+    single necklace splitting.  The three statements above are corollaries. *)
+Definition bipartite_matching_underrepresentation_llm3_statement : Prop :=
+  forall m : nat, exists c : nat,
+    c <= 12 * m + 14 /\
+    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
+      bipartite G ->
+      0 < Delta G ->
+      x15_edge_family E ->
+      exists S : {set {set G}},
+        x15_matching S /\
+        (#|sg_edge_set G| %/ Delta G <= #|S| + c)%N /\
         forall i : 'I_m,
           #|S :&: E i| <= ceil_div #|E i| (Delta G).

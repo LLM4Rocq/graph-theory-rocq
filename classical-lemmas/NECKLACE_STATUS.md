@@ -339,6 +339,8 @@ Same conventions as above: axiom-free, `Print Assumptions`-clean, and every file
 opens with its own `Provenance, sources, and what corresponds to what` comment.
 
 The two developments that are *not* classical — the interpolation of two
-matchings by a necklace splitting, and the chains of halvings that realise an
-arbitrary convex combination of matchings — live with their only client, in
-`packing-theory/theories/foundations/fair_matching.v`.
+matchings by a necklace splitting, and the synchronized rounds that iterate it
+— live with their only client, in
+`packing-theory/theories/foundations/fair_matching.v`.  Since the
+synchronized-rounds rewrite of 18 Sep 2026, `caratheodory/` is no longer used by
+that proof; it stays here as a classical lemma in its own right.
