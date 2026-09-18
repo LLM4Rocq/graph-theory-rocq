@@ -1,6 +1,7 @@
 -R theories Packing
 -Q ../base/theories GTBase
 -Q ../topological-graph-theory/theories Topological
+-Q ../classical-lemmas/theories ClassicalLemmas
 -arg -w -arg -notation-overridden
 
 theories/conjectures/U9.v
@@ -11,6 +12,7 @@ theories/conjectures/grounding_U13.v
 theories/conjectures/implications_U13.v
 theories/conjectures/X5.v
 theories/conjectures/X15.v
+theories/foundations/fair_matching.v
 theories/conjectures/X18.v
 theories/conjectures/X25.v
 theories/conjectures/X26.v

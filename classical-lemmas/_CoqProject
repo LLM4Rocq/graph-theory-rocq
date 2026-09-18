@@ -1,0 +1,21 @@
+-R theories ClassicalLemmas
+-arg -w -arg -notation-overridden
+-arg -w -arg -ambiguous-paths
+
+theories/necklace/chains.v
+theories/necklace/necklace_complex.v
+theories/necklace/salt.v
+theories/necklace/cubical.v
+theories/necklace/hemispheres.v
+theories/necklace/simplotope.v
+theories/necklace/chainmap.v
+theories/necklace/bar.v
+theories/necklace/eta.v
+theories/necklace/tucker.v
+theories/necklace/necklace_prime.v
+theories/necklace/necklace.v
+
+theories/caratheodory/caratheodory.v
+
+theories/konig/paths2.v
+theories/konig/line_colouring.v

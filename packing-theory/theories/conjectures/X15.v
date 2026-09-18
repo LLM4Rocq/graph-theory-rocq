@@ -49,3 +49,32 @@ Definition bipartite_matching_underrepresentation_statement : Prop :=
         (#|x15_edge_set G| %/ Delta G <= #|S| + c)%N /\
         forall i : 'I_m,
           #|S :&: E i| <= ceil_div #|E i| (Delta G).
+
+(** according to https://github.com/graph-theory-AI/Graph-Theory-LLM-Proofs/blob/main/attacks/1611.03196__03/output.md *)
+Definition bipartite_matching_underrepresentation_llm_statement : Prop :=
+  forall m : nat, exists c : nat,
+    c <= 32 * (m + 1)^3 /\
+    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
+      bipartite G ->
+      0 < Delta G ->
+      x15_edge_family E ->
+      exists S : {set {set G}},
+        x15_matching S /\
+        (#|x15_edge_set G| %/ Delta G <= #|S| + c)%N /\
+        forall i : 'I_m,
+          #|S :&: E i| <= ceil_div #|E i| (Delta G).
+
+
+(** what is proved in foundations/fair_matching.v *)
+Definition bipartite_matching_underrepresentation_llm2_statement : Prop :=
+  forall m : nat, exists c : nat,
+    c <= (m + 1)^2 * (16*m + 29) /\
+    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
+      bipartite G ->
+      0 < Delta G ->
+      x15_edge_family E ->
+      exists S : {set {set G}},
+        x15_matching S /\
+        (#|x15_edge_set G| %/ Delta G <= #|S| + c)%N /\
+        forall i : 'I_m,
+          #|S :&: E i| <= ceil_div #|E i| (Delta G).
