@@ -101,6 +101,7 @@ Area-local foundations (each area builds these on top of `base`):
 | extremal-graph-theory | `circular_colouring`, `list_ramsey` |
 | graph-theory-misc | `complexity` |
 | infinite-graph-theory | `igraph` |
+| packing-theory | `fair_matching` |
 | spectral-graph-theory | `spectral` |
 | topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `signed_embedding` |
 
