@@ -120,8 +120,10 @@ Theorem caratheodory (d : nat) (T : finType) (z : T -> 'I_d -> rat) (lam : T -> 
 Theorem caratheodory_nat (d : nat) (T : finType) (z : T -> 'I_d -> nat) (w : T -> nat) : ...
 ```
 
-`caratheodory_nat` is the same with the denominators cleared, which is the form
-used downstream.  The proof is the standard one: more than `d+1` positive
+`caratheodory_nat` is the same with the denominators cleared.  It was written
+for the X15 proof of `packing-theory`, whose synchronized-rounds version (18 Sep
+2026) no longer needs it; it is kept here as a classical lemma in its own right.
+The proof is the standard one: more than `d+1` positive
 weights give an affine dependency — obtained from a nonzero kernel vector of the
 matrix of the points with a row of ones added — which is followed until one
 weight vanishes.
@@ -141,9 +143,10 @@ or, from the repository root, `make classical-lemmas`.  Rocq 9.1.1 with MathComp
 
 ## Who uses this
 
-`packing-theory` uses all four developments to prove Conjecture 1.15 of
-arXiv:1611.03196 (`packing-theory/theories/foundations/fair_matching.v`); the
-two parts of that proof that are *not* classical — the interpolation of two
-matchings by a necklace splitting, and the chains of halvings realising an
-arbitrary convex combination of matchings — live there, with their only client,
-and not here.
+`packing-theory` uses `necklace/` and `konig/` to prove Conjecture 1.15 of
+arXiv:1611.03196 (`packing-theory/theories/foundations/fair_matching.v`), with
+the linear constant `c(m) = 12m + 14`; the two parts of that proof that are
+*not* classical — the interpolation of two matchings by a necklace splitting,
+and the synchronized rounds that iterate it — live there, with their only
+client, and not here.  `caratheodory/` was written for an earlier version of
+that proof and is no longer used by it.

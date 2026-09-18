@@ -1,17 +1,17 @@
 (** * Packing.foundations.fair_matching — Conjecture 1.15 of arXiv:1611.03196
 
-    This file proves [bipartite_matching_underrepresentation_llm_statement],
-    [bipartite_matching_underrepresentation_llm2_statement] (the same with the
-    sharper constant actually obtained) and [bipartite_matching_underrepresentation]
-    of [Packing.conjectures.X15], i.e. Conjecture 1.15 of
+    This file proves [bipartite_matching_underrepresentation_llm3_statement],
+    [bipartite_matching_underrepresentation_llm2_statement],
+    [bipartite_matching_underrepresentation_llm_statement] and
+    [bipartite_matching_underrepresentation] of [Packing.conjectures.X15],
+    i.e. Conjecture 1.15 of
 
       R. Aharoni, N. Alon, E. Berger, M. Chudnovsky, D. Kotlar, M. Loebl,
       R. Ziv, "Fair representation by independent sets", arXiv:1611.03196,
 
-    with the explicit constant [c(m) <= 32(m+1)^3] claimed by the LLM attack the
-    statement refers to:
+    with the explicit constant [c(m) = 12m + 14], *linear* in [m]:
 
-      for every [m] there is a [c(m) <= 32(m+1)^3] such that, for every
+      for every [m] there is a [c(m) <= 12m + 14] such that, for every
       bipartite graph [G] with [Delta G > 0] and any sets of edges
       [E_1, ..., E_m], there is a matching [S] of [G] with
 
@@ -21,13 +21,19 @@
     gives the first (this is [x15_big_matching], König's theorem), and the empty
     matching gives the second.  The point is one matching doing both.
 
+    The LLM attack this file follows claims [c(m) <= 32(m+1)^3]; an earlier
+    version of this development reached [(m+1)^2 (16m+29)].  The proof below
+    reaches [12m + 14] — the [Theta(m)] that [AABCKLZ16] suggests — by
+    *synchronizing* the halvings, see step 3.
+
     ** THE PROOF, IN ENGLISH
 
     Throughout, [D := Delta G] is the maximum degree, and the *statistics* of a
     matching [M] are the [m+1] numbers [|M|], [|M :&: E_1|], ..., [|M :&: E_m|]
-    ([zstat] below).  The theorem asks for a matching whose statistics are close
-    to the averages [|E(G)|/D, |E_1|/D, ..., |E_m|/D]: at least the first of
-    them, at most each of the others.
+    (the [wpred W l] of a colour [l : 'I_m.+1], with [l = 0] standing for the
+    size).  The theorem asks for a matching whose statistics are close to the
+    averages [|E(G)|/D, |E_1|/D, ..., |E_m|/D]: at least the first of them, at
+    most each of the others.
 
     *** Step 1 — the edges are [D] matchings.
 
@@ -35,260 +41,317 @@
     edges can be coloured with [D] colours in such a way that each colour class
     is a matching:
     [ClassicalLemmas.konig.line_colouring.line_colouring_E].  Call the classes
-    [M_1, ..., M_D] ([cls] below).  Every edge gets exactly one colour
-    ([cls_uniq]), so every one of the [m+1] statistics is additive over the
-    classes ([cls_partition]).  In other words the vector of averages that the
-    theorem is aiming at is *exactly the average of the [D] statistic vectors*
-    of [M_1, ..., M_D].  If matchings could be averaged, we would be done.
+    [M_1, ..., M_D] ([cls] below).  Every edge gets exactly one colour, so every
+    one of the [m+1] statistics is additive over the classes ([cls_partition]).
+    In other words the vector of averages that the theorem is aiming at is
+    *exactly the average of the [D] statistic vectors* of [M_1, ..., M_D].  If
+    matchings could be averaged, we would be done.
 
-    *** Step 2 — only [m+2] of them are needed.
-
-    Carathéodory's theorem in dimension [m+1]: an average of [D] points of
-    [Q^(m+1)] is a convex combination of at most [m+2] of them.  Formalized as
-    [ClassicalLemmas.caratheodory.caratheodory.caratheodory_nat], in the form
-    with the denominators cleared: there are natural weights [a_j], at most
-    [m+2] of them nonzero, with
-    [(sum_j a_j z(M_j)) * D = (sum_j z(M_j)) * (sum_j a_j)] in every coordinate.
-    So it is enough to be able to average *few* matchings with *prescribed*
-    weights.
-
-    *** Step 3 — averaging two matchings, by splitting a necklace.
+    *** Step 2 — averaging two matchings, by splitting a necklace.
 
     This is where the topology enters.  Given matchings [A] and [B], one wants a
     matching [C] contained in [A :|: B] whose statistics are the averages of
-    those of [A] and of [B].  Exactly that is impossible; what is proved
-    ([matching_halving], below) is
+    those of [A] and of [B].
 
-      |A| + |B| <= 2|C| + (16m+28)   and   2|C :&: E_i| <= |A :&: E_i| + |B :&: E_i| + (8m+16),
-
-    i.e. the average up to an additive [O(m)] that does not depend on [G].
-    That construction, and the mixing of step 4, are the only parts of the
-    argument that are not classical lemmas; they are the two sections "Step 3"
-    and "Step 4" below.
-
-    The construction: in the symmetric difference [A △ B] every vertex meets at
-    most one edge of [A] and at most one edge of [B], so the relation "these two
-    edges share a vertex" has degree at most two — the classical fact that the
-    union of two matchings is a union of paths and even cycles.  Because [G] is
-    bipartite that relation can be *oriented*: it becomes a partial injection
-    [nxt] ([ClassicalLemmas.konig.paths2]), whose orbits linearise [A △ B] into
-    blocks in which consecutive edges are exactly the meeting ones.
+    In the symmetric difference [A △ B] every vertex meets at most one edge of
+    [A] and at most one edge of [B], so the relation "these two edges share a
+    vertex" has degree at most two — the classical fact that the union of two
+    matchings is a union of paths and even cycles.  Because [G] is bipartite
+    that relation can be *oriented*: it becomes a partial injection [nxt]
+    ([ClassicalLemmas.konig.paths2]), whose orbits linearise [A △ B] into a
+    sequence [bl f A B] of edges in which consecutive ones are exactly the
+    meeting ones.
 
     Choosing [C] means choosing, for each edge of that linear order, whether to
-    keep it.  Make a necklace of it: each edge contributes [m+1] beads, one per
-    statistic, and the *type* of a bead records both which of [A], [B] the edge
-    belongs to and which statistic it serves — [2(m+1)] types in all.  Alon's
-    Splitting Necklace Theorem for two thieves
+    keep it.  Make a necklace of it: each edge contributes a *block* of [m+1]
+    consecutive beads, one per statistic, and the *type* of a bead records both
+    which of [A], [B] the edge belongs to and which statistic it serves
+    ([beadty]) — [2(m+1)] types in all, plus one null type [tnull] for the beads
+    of statistics the edge does not serve.  Alon's Splitting Necklace Theorem
+    for two thieves
     ([ClassicalLemmas.necklace.necklace.splitting_necklace_seq] at [q = 2])
-    hands each of two thieves *exactly half* of every type, using at most
-    [2(m+1)] cuts.  Give each edge to the thief of its first bead and keep the
-    edges of [A] belonging to thief 0 and the edges of [B] belonging to thief 1:
-    every statistic is then halved on the nose.
+    hands each of two thieves *exactly half* of every type.  Give each edge to
+    the thief of its first bead and keep the edges of [A] belonging to thief 0
+    and the edges of [B] belonging to thief 1 ([sel], [Csel], [Chalf]): every
+    statistic is then halved on the nose.
 
-    What can go wrong is that two kept edges share a vertex.  Such a pair is
-    consecutive in a block and has two different thieves, so it sits at one of
-    the [<= 2(m+1)] cuts, or at the wrap-around of a block that is not
-    monochromatic — of which there are as many as cuts again.  Hence [O(m)]
-    conflicts; deleting one edge per conflict restores a matching, changes every
-    statistic by [O(m)] only, and changes it *downwards*, which is the harmless
-    direction for the [m] upper bounds.
+    Three things can go wrong, and each is repaired by *throwing edges away*,
+    which is the harmless direction for the [m] upper bounds:
 
-    *** Step 4 — from halving to arbitrary weights.
+      - an edge is not *unanimous*: a cut falls strictly inside its own group of
+        beads, so its statistics went to different thieves.  It is thrown away
+        ([runan], [rkeep]).  Distinct edges own disjoint groups, so distinct
+        non-unanimous edges are witnessed by distinct *interior* cuts, i.e. by
+        cuts at a position [p] with [p %% (m+1) <> m] ([rQint],
+        [r_nonunan_int]);
+      - two kept edges share a vertex.  Both are kept, hence unanimous, so all
+        the beads of the one carry a single thief and likewise for the other:
+        the thief change between them sits exactly at the *boundary* between
+        their two groups ([rQbnd], [r_lin_bnd]).  Interior cuts and boundary
+        cuts are disjoint ([r_cuts_split]), so the non-unanimous edges and the
+        conflicting ones together are paid for by at most [cuts] cuts, not by
+        [3 * cuts].  The one pair that escapes this is the *wrap* pair of a
+        cyclic orbit block, whose two ends are adjacent in [G] with no boundary
+        between them; there is at most one such pair per block
+        ([bl_block_succ], [r_wrap_last]), and it is charged to a thief change
+        inside that block ([r_wrap_block], [r_wrap_cuts]).  Altogether the
+        conflicting kept edges are [rPk], at most [#boundary cuts + cuts] of
+        them ([r_Pk_cuts]);
+      - a type occurs an odd number of times, so "exactly half" is impossible.
+        Rather than pad the necklace with extra beads of that type (which is
+        what the earlier version did, and what costs a factor [m+1] in the end),
+        the *first* bead of each odd type is *retyped to the null type*
+        ([rmvp], [retys]) and its edge thrown away ([rrmd], [rkeep]).  Only the
+        [2m] *class* types need be charged for here: a *size* type ([l = 0])
+        lives on the *head* bead of a group, and an edge whose head bead has
+        been retyped is already absent from the exact half, so charging it a
+        second time would be a double count ([rhnr], [r_count_size], [rrmdc],
+        [r_keep_count], [count_rmvp_class]).  After the retyping every non-null
+        type has even multiplicity, and one null bead is appended if needed
+        ([csq], [csq_even]).
 
-    The write-up being followed would now invoke a *prescribed-ratio* splitting
-    theorem.  We only have the equal-share one, so an arbitrary weight is
-    reached by a *chain of halvings along a binary expansion*: with
-    [y_(L+1) := B] and [y_j := (P_j + y_(j+1))/2], where [P_j] is [A] or [B]
-    according to the [j]-th bit of the desired ratio, [y_1] is the desired
-    mixture of [A] and [B] up to [2^(-L)].  The error of a halving is the
-    *average* of the errors of its two inputs plus a constant, so along such a
-    chain it obeys [e <= e/2 + c] and never exceeds [2c], however many bits are
-    used.  That is what keeps the final constant independent of the denominators
-    coming out of step 2.  All of this is done with every quantity scaled by the
-    common denominator, so that only natural numbers occur
-    ([realisesN], below); the [<= m+2] matchings of step 2 are then mixed in
-    one at a time ([mix_dyadic], then [mix_list]).
+    So the class counts round *down*, exactly, and only the size pays: with
+    [2 * cuts + 2m] edges thrown away ([rCr], [rCr_card_le], [rCr_card_ge],
+    [round_ind]).
 
-    *** Step 5 — trimming, and the constant.
+    *** Step 3 — synchronized rounds.
 
-    Feeding the colour classes selected in step 2 to [mix_list] and undoing the
-    scaling gives [approx_fair_core]: a matching [C] with
+    The earlier version mixed the [D] colour classes pairwise along a binary
+    tree, one splitting theorem per pair; the [log] of the tree and a final
+    trimming phase were what made [c(m)] cubic.
 
-      |E(G)|/D <= |C| + Bmix m   and   |C :&: E_i| <= |E_i|/D + Bmix m,
-      where [Bmix m = (m+1)(16m+29)],
+    The observation that removes both is that Alon's cut budget [t(q-1)] is per
+    *splitting*, not per pair.  So all the pairs of one round of the tree are
+    halved by a *single* splitting: their necklaces are concatenated ([gtys]),
+    the concatenation is split once, and each pair reads its own segment of the
+    resulting thief sequence ([rmatch], with an offset accumulator).  The exact
+    halves then hold for the *sums over the round*, which is all the induction
+    needs ([round_ind], [round_exists]).  Hence:
 
-    which is [x15_approx_fair m (Bmix m)] ([x15_approx_fair_proof]).  The upper
-    bounds are still off by [Bmix m] and the conjecture wants them exact, so
-    edges are deleted from [C], one at a time, out of the classes that exceed
-    their ceiling ([trim_exists]).  Each deletion costs one unit of size and
-    removes one unit of excess, and the total excess is at most [m * Bmix m], so
-    the size bound degrades from [Bmix m] to [(m+1) * Bmix m]
-    ([x15_approx_fair_instance]).  As [Bmix m <= 32(m+1)^2] ([Bmix_le]), the
-    constant obtained is
+      - the number of cuts is [<= 2(m+1)+1 = 2m+3] *for the whole round*,
+        not per pair;
+      - the parity loss charged is [<= 2m] *for the whole round*;
+      - one round of [k] pairs replaces [2k] matchings by [k], with
 
-      c(m) = (m+1) * Bmix m = (m+1)^2 (16m+29) <= 32(m+1)^3,
+          sum |A_i| + |B_i| <= 2 * sum |C_i| + (12m + 14)   and
+          2 * sum |C_i :&: E_l| <= sum (|A_i :&: E_l| + |B_i :&: E_l|)
 
-    which is [x15_llm_proof].  The trimming step is stated for an arbitrary
-    error as [x15_trim_instance], so the constant can also be read off exactly
-    rather than through [32(m+1)^3]: that sharper reading is [x15_llm2_proof],
-    with [c(m) = (m+1)^2 (16m+29)] — a factor [m+1] below the attack's claim.
-    Forgetting the bound on [c] altogether gives Conjecture 1.15 itself,
-    [bipartite_matching_underrepresentation].
+        ([round_exists]).  The ledger of the constant: [2 * (2m+3)] for the
+        discarded edges — one cut each for the non-unanimous edges and the
+        boundary conflicts together, since those charge *disjoint* cuts, and one
+        cut each for the wrap pairs of the cyclic blocks — plus [2m] for the
+        parity repair of the class types, that is [6m+6] per round; doubled
+        because the size inequality is stated at scale 2, plus [1] per
+        statistic-0 type for the rounding of the two halves:
+        [2(6m+6) + 2 = 12m + 14].
 
-    The case [m = 0] needs none of this: a maximum matching does it
-    ([x15_approx_fair0], [x15_llm_instance0]).
+    Iterating [L] rounds on [2^L] matchings ([pairup], [rounds_exists]) gives a
+    single matching [C] with
 
-    ** POSSIBLE FUTURE IMPROVEMENTS: c(m) from Theta(m^3) down to Theta(m log m)
+      sum_(M in s) |M| <= 2^L |C| + (2^L - 1)(12m+14)   and
+      2^L |C :&: E_l| <= sum_(M in s) |M :&: E_l|.
 
-    The constant [c(m) = (m+1)^2 (16m+29)] is a product of three factors [m],
-    two of which the argument above does not really need.
+    The errors of the rounds are *added*, but so are the sizes, so after
+    dividing by [2^L] the error is [< 12m+14] whatever [L] is: geometric
+    decay, no [log].
 
-      (a) the per-class error of one halving is [Theta(m)]: it is the term
-          [4 * cuts_seq a] of [Chalf_stat], coming from
-          [Dc], the number of edges whose class-[l] bead was given
-          to a different thief from their head bead — and the thief of the edge
-          is that of its head bead ([thj]).  [Dc_cuts] only bounds
-          it by the number of cuts, [cuts_seq a <= 2m+3];
-      (b) the [<= m+2] matchings of step 2 are mixed in a linear chain, so
-          [mix_list] accumulates [(size s).-1 = Theta(m)] halving errors;
-      (c) trimming turns a per-class error [B_class] into a size loss
-          [m * B_class] ([x15_trim_instance]).
+    *** Step 4 — the leaves, and no Carathéodory.
 
-    *** (a) is spurious: delete the edges that straddle a cut.
+    The earlier version used Carathéodory's theorem to reduce the [D] colour
+    classes to [m+2] of them with prescribed weights.  Here no weights are
+    needed: the leaves are simply [q] copies of the list [M_1, ..., M_D] of all
+    colour classes, padded with copies of the empty matching up to the next
+    power of two ([lv] in [approx_fair_rounds]).  Every statistic of the leaf
+    list is then exactly [q] times the corresponding [|X|] ([hsum], from
+    [cls_partition]), and [L] is chosen large enough ([L = D(|E(G)|+K+1)]) that
+    [q = 2^L %/ D] dwarfs both [|E(G)|] and the constant, so the padding and the
+    rounding of [2^L / D] are absorbed.
 
-    Each edge owns a *contiguous* block of [m+1] beads of the necklace
-    ([beadty], blocks of constant size [m.+1]), so an edge can
-    disagree with itself only if a cut falls strictly inside its own block;
-    blocks of distinct edges are disjoint, hence at most [cuts_seq a] edges are
-    not unanimous.  Deleting them — exactly as the conflicting edges
-    [Psrc] are already deleted — costs at most [cuts_seq a] more
-    in *size*, where [Theta(cuts_seq a)] is being paid anyway
-    ([Chalf_size] is [4 + 8 * cuts_seq a]); in exchange every kept
-    edge is unanimous, so each class count is its exact fair half up to the
-    padding of the type counts, and the error of [Chalf_stat] drops from
-    [4 + 4 * cuts_seq a = 8m + 16] to the constant [4].  [matching_halving]
-    would then read
+    The upper bounds come out *exact* — [|C :&: E_i| <= |E_i| %/ D <=
+    ceil(|E_i| / D)] — because the class inequality of [rounds_exists] points
+    the right way and the halvings round down.  There is no trimming phase, and
+    therefore no [m]-fold amplification of the error: [approx_fair_rounds]
+    already is the conjecture, with
 
-      |A| + |B| <= 2|C| + (20m + 34)   and   2|C :&: W i| <= |A :&: W i| + |B :&: W i| + 4.
+      c(m) = 12m + 14.
 
-    To exploit that asymmetry, [realisesN] has to carry two error budgets
-    (one for the size, one for the classes) instead of one, and
-    [x15_trim_instance] to be read with those two: [B_size = (m+1)(20m+35)],
-    [B_class = 5(m+1)], hence
+    In the X15 vocabulary that is [x15_rounds_instance], hence [x15_llm3_proof]
+    ([c <= 12m+14], the bound stated in X15.v), and a fortiori
+    [x15_llm2_proof], [x15_llm_proof] and
+    [bipartite_matching_underrepresentation], Conjecture 1.15 itself.
 
-      c(m) = B_size + m * B_class = (m+1)(25m+35) = Theta(m^2),
+    ** POSSIBLE FUTURE IMPROVEMENTS: [c(m)] from [12m+14] down to [8m+6]
 
-    against [Theta(m^3)] today — for a change localized to the selection and to
-    the three counting lemmas [Chalf_stat], [Chalf_size], [SelC_le] of step 3,
-    plus a mechanical two-budget refactor of step 4.
+    The constant is linear, so what is left is the *coefficient*.  Write [D] for
+    the number of edges a round discards and [C] for the number of cuts of its
+    splitting.  The proof below charges
 
-    *** (b) is reducible to Theta(log m): mix along a balanced tree.
+      D <= 2C + 2m,
 
-    [mix_dyadic] gives [e <= max (e_A) (e_B) + eh], so mixing the
-    [k <= m+2] matchings as a *balanced binary tree* (splitting the list in
-    halves) instead of folding them one at a time costs [ceil(log2 k) * (eh+1)]
-    in place of [(k-1) * (eh+1)].  Together with (a) this gives
-    [B_size = O(m log m)], [B_class = O(log m)], hence [c(m) = O(m log m)].
+    namely [C] cuts for the non-unanimous edges and the boundary conflicts
+    together (they charge *disjoint* cuts, [r_cuts_split]), [C] more for the
+    wrap pairs of the cyclic orbit blocks ([r_wrap_cuts]), and [2m] for the
+    parity repair of the class types ([count_rmvp_class]).  With [C <= 2m+3]
+    that is [6m+6] per round and [K = 2 + 2D = 12m + 14].
 
-    *** Theta(m log m) is the floor for this technique.
+    *** (a) the wrap term: [2C] down to [C].
 
-    One halving must lose [Theta(m)] in size: splitting [m+1] statistics exactly
-    needs [Omega(m)] cuts, and at a cut the selected edge of [A] and the selected
-    edge of [B] may share a vertex, forcing a deletion.  And iterated halving of
-    [k] matchings costs the sum, over the internal nodes of the mixing tree, of
-    the weight of the subtree below — that sum is an expected code length, hence
-    at least the entropy of the weight distribution, i.e. [Omega(log k)] for
-    uniform weights (Huffman).  So no arrangement of halvings goes below
-    [Omega(m log m)].
+    The second [C] pays for the *wrap* pair of a cyclic orbit block: its two
+    ends are adjacent in [G] but have no bead boundary between them, so no cut
+    witnesses the conflict directly.  The proof charges such a pair to a thief
+    change *inside* the block ([r_wrap_block]), and bounds the number of blocks
+    that wrap by [C].  That charge is crude: a cut inside a block may already be
+    paying for a non-unanimous edge of the same block.  If [A △ B] has no cycles
+    at all — every orbit block a path — the wrap term vanishes outright and
 
-    Reaching [Theta(m)] — the [c(m) = m/2] that [AABCKLZ16] suggests — needs a
-    different argument.  The natural discrepancy route does not work either:
-    every edge lies in at most [m] of the classes, so Beck-Fiala would give
-    discrepancy below [m], but its proof relaxes constraints once they hold few
-    floating variables, and the vertex constraints of a matching cannot be
-    relaxed at all.  That is presumably why Conjecture 1.15 is still open.
+      D <= C + 2m,   K = 2 + 2D = 8m + 8.
+
+    In general one would have to show that the interior cut charged to a wrap
+    can be chosen distinct from the interior cuts charged to hits, e.g. by
+    charging the wrap of a block to the *boundary* cut that must exist inside
+    the block when it wraps.  This is the cheapest remaining gain.
+
+    *** (b) the null type costs one cut: use variable-size bead groups.
+
+    Every edge contributes a full group of [m+1] beads, one per statistic, and
+    the beads of the statistics it does not serve are given the null type
+    [tnull].  That extra type raises the number of types from [2m+2] to [2m+3],
+    hence the cut budget [t(q-1)] of [A87] from [2m+2] to [2m+3].  Letting an
+    edge contribute only the beads of the statistics it serves — groups of
+    variable size — removes it, at the price of replacing the constant group
+    size [m.+1] by a prefix-sum index in every positional lemma ([beadty],
+    [count_block_tix_gen], [pos_lt], [r_block_lt], [r_mod_block], ...), and of
+    redoing the interior/boundary split of the cuts, which is currently a
+    statement about [p %% (m+1)].  On its own that gives [C <= 2m+2],
+    [D <= 6m+4] and [K = 12m + 10]; with (a), [D <= 4m+2] and
+
+      K = 8m + 6.
+
+    *** the floor for this technique
+
+    One round must lose [Theta(m)] in size: splitting [m+1] statistics exactly
+    needs [Omega(m)] cuts, and at a cut the selected edge of [A] and the
+    selected edge of [B] may share a vertex, forcing a deletion.  So [c(m) =
+    Omega(m)] for any argument of this shape, and [12m + 14] — or [8m + 6]
+    after (a) and (b) — is within a constant factor of it.  [AABCKLZ16]
+    suggests [c(m) = m/2]; closing that last constant factor would need a
+    different argument.
+
+    The natural discrepancy route does not work: every edge lies in at most [m]
+    of the classes, so Beck-Fiala would give discrepancy below [m], but its
+    proof relaxes constraints once they hold few floating variables, and the
+    vertex constraints of a matching cannot be relaxed at all.  That is
+    presumably why Conjecture 1.15 is still open.
 
     ** CONTENTS
 
     Vocabulary and elementary facts:
-    - [x15_edge_setE], [matching_x15], [x15_matching_sub] : the local X15
-      vocabulary of [X15.v] is the coq-graph-theory vocabulary ([E(G)],
-      [matching]), so the library's König/Hall infrastructure applies verbatim;
+    - [x15_edge_setE], [matching_x15] : the local X15 vocabulary of [X15.v] is
+      the coq-graph-theory vocabulary ([E(G)], [matching]), so the library's
+      König/Hall infrastructure applies verbatim;
     - [edges_leq_cover] : a vertex cover [V] bounds [#|E(G)| <= #|V| * Delta G];
     - [x15_big_matching] : a bipartite [G] with [Delta G > 0] has a matching of
-      size at least [#|E(G)| %/ Delta G] (König min-cover = max-matching);
-    - [x15_small_instance] : instances with [#|E(G)| %/ Delta G <= c] are
-      settled by [S = set0].
+      size at least [#|E(G)| %/ Delta G] (König min-cover = max-matching).
+      Not used below; it is the [m = 0] case, and the sanity check that the size
+      half of the conjecture alone is König's theorem.
 
-    The reduction (step 5 and the bookkeeping of the constant):
-    - [trim_exists] : per-class ceilings can be enforced by deletions, at a cost
-      equal to the total excess;
-    - [x15_trim_instance] : hence a [B]-approximately fair matching yields an
-      exactly fair one, of size within [(m+1)*B] of the target;
-    - [x15_approx_fair] : the additive-error form of the conjecture;
-    - [x15_approx_fair_instance], [x15_approx_fair_llm] : [x15_approx_fair] with
-      error [32(m+1)^2] implies the [32(m+1)^3] statement of X15;
-    - [x15_approx_fair0], [x15_llm_instance0] : the case [m = 0].
+    Counting along a necklace cut into blocks (step 2):
+    - [cuts_seq_cat], [cuts_seq_flatten], [cuts_seq_subseq],
+      [cuts_seq_map_nth], [cyc_le] : the number of changes along a sequence;
+    - [conflict_count] : conflicting pairs of kept edges are consecutive;
+    - [bl_block_succ] : the successor of a non-last edge of an orbit block, in
+      the flattened list, is its successor in the block;
+    - [count_iota_blocks], [count_iota_split], [count_block_tix_gen],
+      [count_creal_tix], [pos_lt] : counting a type over the blocks.
 
-    Step 3, halving two matchings along the necklace of their symmetric
-    difference:
-    - [cuts_seq_flatten], [conflict_count], [cyc_le] : counting the cuts along
-      the blocks of [ClassicalLemmas.konig.paths2];
-    - [beadty], [cs], [cs_even] : the necklace, one bead per (edge, statistic);
-    - [thj], [sel], [Csel], [Psrc], [Chalf] : the selection, and the deletion of
-      the conflicting edges;
-    - [Chalf_matching], [Chalf_stat], [Chalf_size] : what it is worth;
-    - [matching_halving] : the halving lemma.
+    Halving one pair (step 2), [Section Halving] and [Section WithSplit]:
+    - [beadty], [creal], [cs] : the necklace, one block of [m+1] beads per edge;
+    - [thj], [thE], [sel], [Csel], [Psrc], [Chalf] : the thief of an edge, the
+      selection it defines, the conflicting edges and the matching kept;
+    - [Chalf_matching], [card_Chalf_ge], [card_Csel_count], [card_split] : what
+      the selection is worth, in the form the round needs.
 
-    Step 4, interpolating several matchings:
-    - [realisesN], [eh] : the scaled error bookkeeping;
-    - [mix_half], [mix_dyadic] : one halving, and the chain of halvings that
-      realises an arbitrary dyadic ratio at no extra cost;
-    - [mix_list] : the convex combination of a list of matchings.
+    One pair inside a round, [Section PairRound]:
+    - [rbth], [runan], [rrmd], [rkeep] : the pair reads its own segment of the
+      round's thief sequence, and keeps only the unanimous, non-retyped edges;
+    - [rCr] : the pair's matching, [Chalf] minus the discarded edges;
+    - [rhnr], [rrmdc] : the head bead of an edge's group carries a *size* type,
+      so a removal there needs no charge in the ledger; only the removals at the
+      *class* beads do;
+    - [rQint], [rQbnd], [r_cuts_split] : the cuts interior to a bead group and
+      the cuts at a group boundary, which are disjoint;
+    - [r_nonunan_int] : the non-unanimous edges are charged to interior cuts;
+    - [r_lin_bnd], [r_wrap_block], [r_wrap_cuts], [r_Pk_cuts] : the conflicting
+      kept edges are charged to boundary cuts, except one wrap pair per cyclic
+      orbit block;
+    - [r_keep_count], [r_rmd_count] : the discarded edges, split into the
+      non-unanimous ones and those hit by a class removal;
+    - [r_nonunan_cuts], [r_Psrc_cuts] : the coarser bounds of the previous
+      ledger ([cuts] and [2 * cuts]), kept for reference;
+    - [rCr_card_le], [rCr_card_ge] : the two set-level bounds.
 
-    The approximate fair matching (steps 1 to 4):
-    - [cls], [cls_uniq], [cls_partition] : the colour classes of a line
-      colouring and their additivity;
-    - [zstat], [sum_zstat] : the statistics, and their averages;
-    - [approx_fair_core] : the matching produced by Carathéodory + mixing;
-    - [Bmix], [Bmix_le] : the constant;
-    - [x15_approx_fair_proof] : [x15_approx_fair m (Bmix m)].
+    One round and the rounds, [Section Round]:
+    - [gtys] : the concatenated necklace of a list of pairs;
+    - [rmvp], [retys], [csq], [csq_even] : the parity repair, by retyping one
+      bead of each odd type to the null type;
+    - [gtys_class], [size_class_types], [count_rmvp_class] : only the [2m]
+      *class* types are charged for ([count_rmvp], the coarser [2m+2], is kept
+      for reference);
+    - [rmatch], [gok], [Ycnt], [round_ind] : the induction over the pairs of a
+      round, at a shared thief sequence;
+    - [round_exists] : one round, with the error [12m + 14];
+    - [pairup], [rounds_exists] : [L] rounds on [2^L] matchings.
 
-    The conjecture:
-    - [x15_llm_proof] : [bipartite_matching_underrepresentation_llm_statement],
-      with the constant [32(m+1)^3] claimed by the attack;
-    - [x15_llm2_proof] : [bipartite_matching_underrepresentation_llm2_statement],
-      the same with the constant actually obtained, [(m+1)^2 (16m+29)];
-    - [bipartite_matching_underrepresentation] : Conjecture 1.15.
+    The assembly:
+    - [cls], [cls_partition] : the colour classes of a line colouring and their
+      additivity;
+    - [approx_fair_rounds] : the conjecture, for a graph equipped with a proper
+      line colouring;
+    - [x15_rounds_instance] : the same in the vocabulary of [X15];
+    - [x15_llm3_proof], [x15_llm2_proof], [x15_llm_proof],
+      [bipartite_matching_underrepresentation] : the four statements of X15.v.
 
     ** Provenance, sources, and what corresponds to what
 
     HOW THIS FILE WAS OBTAINED.  It was written with Claude Code (Anthropic),
     models Claude Opus 5 and (for the first sections) Claude Opus 4.8, between
-    11 and 16 September 2026.  Rocq was driven interactively.  The
+    11 and 19 September 2026.  Rocq was driven interactively.  The
     rocq-mcp-evolve MCP server of the LLM4Rocq project,
     https://github.com/LLM4Rocq/rocq-mcp-evolve (Apache-2.0; the opam package
     still carries its former slug LLM4Rocq/rocq-tools), is used throughout this
-    repository for that purpose and is gratefully acknowledged; for the last
-    sections its cached project configuration predated the move of
-    classical-lemmas into subdirectories, so goals were read instead from a
-    small [rocq repl] harness and files recompiled with [rocq c].  Every error
+    repository for that purpose and is gratefully acknowledged.  Every error
     that recurred, together with the tactic that fixed it, is recorded in
     tactics-playbook.md at the root of the repository.  Nothing is admitted:
     [Print Assumptions] on the results of this file answers "Closed under the
     global context".
 
-    ESTIMATED TOKEN COST FOR THIS FILE.  About 1.69M tokens, of which 670k
-    output: 703k (224k) for the vocabulary, the König bound and the reduction,
-    11-14 September; 464k (222k) for step 3, 345k (166k) for step 4 and 174k
-    (58k) for the assembly, 15-16 September.  Not counted here: the
-    classical-lemmas files this one rests on, about 0.3M tokens for
-    konig/paths2.v and konig/line_colouring.v, 0.16M for caratheodory/ and 3.9M
-    for necklace/.  Method: as in ClassicalLemmas.necklace.necklace — for every
+    ESTIMATED TOKEN COST FOR THIS FILE.  About 3.6M tokens, of which about
+    1.1M output, in three phases:
+
+      1.69M (670k output)  the version with [c(m) = (m+1)^2(16m+29)]:
+                           vocabulary, Koenig bound, reduction, the padded
+                           halving, the dyadic mixing and the trimming
+                           assembly, 11-16 September;
+      1.4M  (~0.3M)        the synchronized-rounds rewrite down to
+                           [c(m) = 16m+24] — design, the per-pair section, the
+                           round and its induction, the assembly, the merge and
+                           the deletion of the superseded code, 18 September;
+                           0.39M of it spent in two background agents;
+      0.5M  (~0.1M)        the sharpened ledger taking [16m+24] to [12m+14]:
+                           interior versus boundary cuts, the wrap of a cyclic
+                           block, the head-bead correction, 18-19 September;
+                           0.23M of it spent in one background agent.
+
+    Not counted here: the classical-lemmas files this one rests on, about 0.3M
+    tokens for konig/paths2.v and konig/line_colouring.v and 3.9M for
+    necklace/.  Method: as in ClassicalLemmas.necklace.necklace — for every
     assistant message of the Claude Code session, input + cache-creation +
     output tokens (the tokens processed anew, excluding the cached conversation
     that is re-read at each turn), charged to the file the message's tool calls
-    were acting on.
+    were acting on; a background agent is charged the token total its
+    completion notice reports.  The figures for 18-19 September are estimates:
+    the session transcript is flushed only up to its last checkpoint, and the
+    output share of the background agents is not reported separately.
 
     SOURCES.
 
@@ -300,8 +363,8 @@
       [A87]  N. Alon, "Splitting necklaces", Advances in Mathematics 63 (1987)
              247-253, formalized in this repository as
              [ClassicalLemmas.necklace.necklace.splitting_necklace_seq]
-             (through Meunier's simplotopal Tucker lemma); used at [q = 2] in
-             step 3.
+             (through Meunier's simplotopal Tucker lemma); used at [q = 2],
+             once per round.
 
       [LLM]  The proof sketch attacked here,
              https://github.com/graph-theory-AI/Graph-Theory-LLM-Proofs/blob/main/attacks/1611.03196__03/output.md
@@ -310,65 +373,104 @@
              comment on [bipartite_matching_underrepresentation_llm_statement]
              in X15.v.
 
-      DEVIATION FROM [LLM].  Step 3 of [LLM] invokes a *prescribed-ratio*
-      continuous splitting theorem (its Lemma 1, Hobby-Rice style): for any
-      ratio theta, a union of O(r) intervals carrying exactly a theta-share of
-      r measures.  That statement does not follow from the equal-share
-      Splitting Necklace Theorem with a number of cuts independent of theta:
-      reading theta = a/q off a q-splitting costs t(q-1) cuts, so the error
-      would grow with the denominator.  Here every interpolation is instead a
-      halving (theta = 1/2), which is exactly
-      [necklace.splitting_necklace_seq] at [q = 2], and an arbitrary ratio is
-      realised by a chain of halvings along the binary expansion of a dyadic
-      approximation, as described in step 4 above.  The result is the same
-      theorem with a better constant.
+      WHAT THE IMPROVEMENT OVER [LLM] IS DUE TO.  The write-up [LLM] yields
+      [c(m) = 32(m+1)^3 = O(m^3)].  Two suggestions of Laurent Viennot turned
+      that into [O(m)], and a third sharpened the coefficient.
+
+      1. *Remove one bead of every odd type — and throw its edge away —
+      instead of padding the type to an even count.*  The shares are then
+      rounded *down* rather than up, floors compose along the mixing, the
+      per-class ceilings [|C :&: E_i| <= ceil(|E_i|/Delta)] hold *by
+      construction*, and the whole trimming phase of [LLM] disappears together
+      with the outer factor [m+1] it cost.  This is what makes step 2 above,
+      the exact halving, exact.
+
+      2. *Combine the chain of halvings with the balanced mixing tree.*  Alon's
+      budget [t(q-1)] counts the cuts of ONE split, not of one pair, so a whole
+      level of the tree is halved by a single split of the concatenated
+      necklaces of its pairs — the types are shared, and exact halves for the
+      *sums* over the level are all the argument needs.  The per-round loss is
+      then paid once per level instead of once per pair, the losses telescope
+      ([sum_r 2^-r K <= 2K]), and both the [log m] of a balanced tree and the
+      second factor [m+1] disappear.  This is step 3 above, the synchronized
+      rounds, and it also removes the need for Carathéodory: the leaves are
+      [2^L] copies of the colour classes padded with the empty matching.
+
+      Together: [c(m) = O(m)] where the write-up gives [O(m^3)].
+
+      3. *Hits and conflicts charge disjoint cuts, and a conflict costs one
+      edge, not two.*  A cut interior to a bead group makes its edge
+      non-unanimous, so that edge is thrown away; it cannot also witness a
+      conflict, because a conflict is between two *kept* — hence unanimous —
+      edges, whose thief change therefore sits exactly at a group boundary.
+      Together with the observation that a removed *size* bead is a head bead,
+      whose edge is already absent from the exact half and so must not be
+      charged twice, the ledger of a round becomes [2 * #cuts + 2m] instead of
+      [3 * #cuts + t], i.e. [c(m) = 12m + 14] instead of [16m + 24].
+
+      DEVIATIONS FROM [LLM].  Three, all of which improve the constant.
+
+      (i) Step 3 of [LLM] invokes a *prescribed-ratio* continuous splitting
+      theorem (its Lemma 1, Hobby-Rice style): for any ratio theta, a union of
+      O(r) intervals carrying exactly a theta-share of r measures.  That
+      statement does not follow from the equal-share Splitting Necklace Theorem
+      with a number of cuts independent of theta: reading theta = a/q off a
+      q-splitting costs t(q-1) cuts, so the error would grow with the
+      denominator.  Here every interpolation is a halving (theta = 1/2), which
+      is exactly [necklace.splitting_necklace_seq] at [q = 2].
+
+      (ii) Steps 2 and 4 of [LLM] (Carathéodory, then one interpolation per
+      pair) are replaced by the synchronized rounds of step 3 above: one
+      splitting per *round* rather than per pair, on the concatenation of the
+      pairs' necklaces.  This is what turns [Theta(m^3)] into [Theta(m)], and
+      it makes Carathéodory unnecessary: the leaves are [2^L] copies of the
+      colour classes padded with the empty matching.
+
+      (iii) Step 5 of [LLM] (trimming the classes that exceed their ceiling,
+      which costs a further factor [m+1] in the size) disappears: because each
+      round halves the class counts *exactly*, rounding down, the upper bounds
+      hold already.
 
     WHAT CORRESPONDS TO WHAT.
 
       - the vocabulary of [AABCKLZ16] Conj. 1.15 versus that of
-        coq-graph-theory  -> [x15_edge_setE], [matching_x15],
-                             [x15_matching_sub]
+        coq-graph-theory  -> [x15_edge_setE], [matching_x15]
       - [LLM] step 1, König line colouring, instantiated at the colour classes
-                          -> [cls], [cls_uniq], [cls_partition]
-      - [LLM] step 2, Carathéodory, instantiated at the statistics
-                          -> [zstat], [sum_zstat]
+                          -> [cls], [cls_partition]
+      - [LLM] step 2, Carathéodory                -> not needed, see (ii)
       - [LLM] step 3, the interpolation of two matchings, from [A87] at [q = 2]
-                          -> [beadty], [cs_even], [thj], [sel], [Chalf],
-                             [Chalf_stat], [Chalf_size], [matching_halving]
-      - [LLM] step 4, the iterated interpolation, by chains of halvings along
-        binary expansions rather than by the prescribed-ratio Lemma 1
-                          -> [realisesN], [eh], [mix_half], [mix_dyadic],
-                             [mix_list]
-      - the mixing of the colour classes, and the passage from the scaled error
-        bound back to the averages |E(G)|/D and |E_i|/D
-                          -> [approx_fair_core], [Bmix]
+                          -> [beadty], [thj], [sel], [Chalf], [card_Chalf_ge],
+                             [card_Csel_count], and, inside a round, [rCr],
+                             [rCr_card_le], [rCr_card_ge]
+      - [LLM] step 4, the iterated interpolation, by synchronized rounds rather
+        than by the prescribed-ratio Lemma 1
+                          -> [gtys], [csq], [rmatch], [round_ind],
+                             [round_exists], [pairup], [rounds_exists]
+      - [LLM] step 5, trimming                    -> not needed, see (iii)
+      - the assembly and the passage from the leaf list back to the averages
+        |E(G)|/D and |E_i|/D
+                          -> [approx_fair_rounds], [x15_rounds_instance]
       - bookkeeping with no counterpart in [LLM]: the cut counting needed to
         pass between the flat necklace, the blocks of
         [ClassicalLemmas.konig.paths2] and the edge sets
                           -> [cuts_seq_cat], [cuts_seq_flatten],
-                             [cuts_seq_subseq], [conflict_count], [Dc_cuts]
-      - [LLM] step 5, trimming, and the final assembly
-                          -> [trim_exists], [x15_trim_instance],
-                             [x15_approx_fair_instance],
-                             [x15_approx_fair_proof], [x15_llm_proof],
-                             [x15_llm2_proof],
-                             [bipartite_matching_underrepresentation]
-      - the constant: one halving costs 8m+14 (scaled: [eh] = 16m+28), a chain
-        costs at most twice that, and at most m+1 chains are needed, so
-        [Bmix m] = (m+1)(16m+29) <= 32(m+1)^2 and c(m) = (m+1)[Bmix m] =
-        (m+1)^2(16m+29) <= 32(m+1)^3, the constant claimed by [LLM] and stated
-        in X15.v                  -> [Bmix_le], [x15_llm2_proof]
+                             [cuts_seq_subseq], [conflict_count],
+                             [bl_block_succ], [r_nonunan_int], [r_Pk_cuts]
+      - the constant: one round costs 2(2m+3) cuts-worth of edges plus 2m
+        class-parity edges, i.e. 6m+6; at scale 2 with the two roundings that is
+        [12m + 14], and the rounds' errors are absorbed by the geometric growth
+        of the leaf count
+                          -> [round_exists], [rounds_exists], [x15_llm3_proof]
       - with no counterpart in [LLM]: [edges_leq_cover], [x15_big_matching]
         (the case m = 0, and the sanity check that the size bound alone is
-        König's theorem), [x15_small_instance] *)
+        König's theorem) *)
 
 From GTBase Require Export base.
 From GraphTheory Require Import preliminaries digraph sgraph connectivity.
 From Packing Require Import X15.
 From Stdlib Require Import Lia.
 From ClassicalLemmas Require Import necklace.necklace konig.paths2
-                                    konig.line_colouring
-                                    caratheodory.caratheodory.
+                                    konig.line_colouring.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -393,14 +495,6 @@ case=> M1 M2; split.
 move=> v; apply/card_le1_eqP => e1 e2.
 rewrite !inE => /andP [e1M ve1] /andP [e2M ve2].
 exact: (M2 _ _ e2M e1M v ve2 ve1).
-Qed.
-
-Lemma x15_matching_sub (G : sgraph) (M M' : {set {set G}}) :
-  M' \subset M -> x15_matching M -> x15_matching M'.
-Proof.
-move=> sub [H1 H2]; split; first exact: subset_trans sub H1.
-move=> v; apply: leq_trans (H2 v); apply: subset_leq_card.
-by apply/subsetP => e; rewrite !inE => /andP [eM ve]; rewrite (subsetP sub) ?ve.
 Qed.
 
 (** ** A vertex cover bounds the number of edges ****************************)
@@ -453,161 +547,6 @@ exists M; split; first exact: matching_x15.
 rewrite x15_edge_setE -defM -(mulnK #|V| dpos).
 by apply: leq_div2r; apply: edges_leq_cover; case: smV.
 Qed.
-
-(** ** Enforcing per-class ceilings by deletion *****************************)
-
-Section Trim.
-Variables (T : finType) (m : nat) (E : 'I_m -> {set T}) (q : 'I_m -> nat).
-
-Definition trim_excess (C : {set T}) := \sum_(i < m) (#|C :&: E i| - q i).
-
-Lemma trim_exists (C : {set T}) :
-  exists C' : {set T},
-    [/\ C' \subset C,
-        forall i : 'I_m, #|C' :&: E i| <= q i &
-        #|C| <= #|C'| + trim_excess C].
-Proof.
-have key (a b : nat) : b < a -> (a.-1 - b).+1 <= a - b.
-  by case: a => // a; rewrite ltnS => hb; rewrite subSn.
-have [n] := ubnP (trim_excess C); elim: n C => [C|n IH C]; first by rewrite ltn0.
-rewrite ltnS => leC.
-have [allok|] := boolP [forall i : 'I_m, #|C :&: E i| <= q i].
-  by exists C; split; [exact: subxx | exact: (forallP allok) | exact: leq_addr].
-rewrite negb_forall => /existsP [i]; rewrite -ltnNge => hi.
-have /card_gt0P [e emem] : 0 < #|C :&: E i| by apply: leq_ltn_trans hi.
-have eC : e \in C by move: emem; rewrite inE => /andP [].
-have cardD (j : 'I_m) : (C :\ e) :&: E j = (C :&: E j) :\ e.
-  by rewrite setIC setIDA setIC.
-have cardi : #|(C :\ e) :&: E i| = (#|C :&: E i|).-1.
-  by rewrite cardD (cardsD1 e (C :&: E i)) emem.
-have dec : trim_excess (C :\ e) < trim_excess C.
-  rewrite /trim_excess (bigD1 i) //= [X in _ < X](bigD1 i) //= -addSn.
-  apply: leq_add; first by rewrite cardi; exact: key.
-  apply: leq_sum => j _; apply: leq_sub2r; apply: subset_leq_card.
-  by rewrite cardD; exact: subD1set.
-have [C' [sub' ok' big']] := IH (C :\ e) (leq_trans dec leC).
-exists C'; split.
-- exact: subset_trans sub' (subD1set _ _).
-- exact: ok'.
-- have step : #|C :\ e| + 1 <= #|C'| + trim_excess (C :\ e) + 1.
-    by rewrite leq_add2r.
-  rewrite (cardsD1 e C) eC add1n -addn1.
-  apply: leq_trans step _.
-  by rewrite -addnA addn1 leq_add2l.
-Qed.
-
-End Trim.
-
-(** ** The X15 statement, instance by instance ******************************)
-
-Definition x15_llm_instance (m : nat) : Prop :=
-  exists c : nat,
-    c <= 32 * (m + 1)^3 /\
-    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
-      bipartite G ->
-      0 < Delta G ->
-      x15_edge_family E ->
-      exists S : {set {set G}},
-        x15_matching S /\
-        (#|x15_edge_set G| %/ Delta G <= #|S| + c)%N /\
-        forall i : 'I_m,
-          #|S :&: E i| <= ceil_div #|E i| (Delta G).
-
-Lemma x15_llm_instanceE :
-  (forall m : nat, x15_llm_instance m) <->
-  bipartite_matching_underrepresentation_llm_statement.
-Proof. by []. Qed.
-
-(** The additive-error form: a matching within [B] of the target size whose
-    class intersections exceed their ceilings by at most [B].  This is exactly
-    (3)+(4) of the LLM write-up, i.e. what the necklace-splitting/Carathéodory
-    interpolation argument is supposed to deliver. *)
-Definition x15_approx_fair (m B : nat) : Prop :=
-  forall (G : sgraph) (E : 'I_m -> {set {set G}}),
-    bipartite G ->
-    0 < Delta G ->
-    x15_edge_family E ->
-    exists C : {set {set G}},
-      x15_matching C /\
-      (#|x15_edge_set G| %/ Delta G <= #|C| + B)%N /\
-      forall i : 'I_m, #|C :&: E i| <= ceil_div #|E i| (Delta G) + B.
-
-(** Step 5 of the LLM proof, for an arbitrary additive error [B]: a matching
-    that is [B]-approximately fair yields an *exactly* fair one, of size still
-    within [(m+1)*B] of the target.  One deletion removes one unit of excess and
-    costs one unit of size, and the total excess is at most [m*B]. *)
-Theorem x15_trim_instance (m B : nat) (G : sgraph) (E : 'I_m -> {set {set G}}) :
-  (exists C : {set {set G}},
-     x15_matching C /\
-     (#|x15_edge_set G| %/ Delta G <= #|C| + B)%N /\
-     forall i : 'I_m, #|C :&: E i| <= ceil_div #|E i| (Delta G) + B) ->
-  exists S : {set {set G}},
-    x15_matching S /\
-    (#|x15_edge_set G| %/ Delta G <= #|S| + (m + 1) * B)%N /\
-    forall i : 'I_m, #|S :&: E i| <= ceil_div #|E i| (Delta G).
-Proof.
-move=> [C [mC [sC fC]]].
-have [S [subS okS bigS]] :=
-  @trim_exists _ m E (fun i => ceil_div #|E i| (Delta G)) C.
-exists S; split; first exact: x15_matching_sub subS mC.
-split; last exact: okS.
-have hexc : trim_excess E (fun i => ceil_div #|E i| (Delta G)) C <= m * B.
-  rewrite /trim_excess (_ : m * B = \sum_(i < m) B); last first.
-    by rewrite big_const_ord iter_addn_0 mulnC.
-  by apply: leq_sum => i _; rewrite leq_subLR; apply: fC.
-apply: leq_trans sC _.
-rewrite mulnDl mul1n addnA leq_add2r.
-exact: leq_trans bigS (leq_add (leqnn _) hexc).
-Qed.
-
-Theorem x15_approx_fair_instance (m : nat) :
-  x15_approx_fair m (32 * (m + 1)^2) -> x15_llm_instance m.
-Proof.
-set B := 32 * (m + 1)^2 => hyp.
-exists ((m + 1) * B); split.
-  by rewrite /B mulnCA expnS.
-move=> G E bipG dpos famE.
-exact: x15_trim_instance (hyp G E bipG dpos famE).
-Qed.
-
-Corollary x15_approx_fair_llm :
-  (forall m : nat, x15_approx_fair m (32 * (m + 1)^2)) ->
-  bipartite_matching_underrepresentation_llm_statement.
-Proof. by move=> H m; apply: x15_approx_fair_instance. Qed.
-
-(** ** The unconditional case [m = 0] ***************************************)
-
-Lemma x15_approx_fair0 (B : nat) : x15_approx_fair 0 B.
-Proof.
-move=> G E bipG dpos _.
-have [M [mM sM]] := x15_big_matching bipG dpos.
-exists M; split => //; split => [|i]; first exact: leq_trans sM (leq_addr _ _).
-by have := ltn_ord i; rewrite ltn0.
-Qed.
-
-(** Small instances are trivial: the empty matching already works as soon as
-    the target [#|E(G)| %/ Δ(G)] is below the additive allowance [c].  Hence any
-    attack on the general case may assume the instance is large. *)
-Lemma x15_small_instance (G : sgraph) (m : nat)
-    (E : 'I_m -> {set {set G}}) (c : nat) :
-  #|x15_edge_set G| %/ Delta G <= c ->
-  exists S : {set {set G}},
-    x15_matching S /\
-    (#|x15_edge_set G| %/ Delta G <= #|S| + c)%N /\
-    forall i : 'I_m, #|S :&: E i| <= ceil_div #|E i| (Delta G).
-Proof.
-move=> hc; exists set0; split; last split.
-- split; first exact: sub0set.
-  move=> v; apply: leq_trans (leq0n 1).
-  rewrite leqn0 cards_eq0; apply/eqP; apply/setP => e.
-  by rewrite !inE /=.
-- by rewrite cards0.
-- by move=> i; rewrite set0I cards0.
-Qed.
-
-Theorem x15_llm_instance0 : x15_llm_instance 0.
-Proof. exact/x15_approx_fair_instance/x15_approx_fair0. Qed.
-
 
 (** * Step 3: halving two matchings with the Splitting Necklace Theorem ******)
 
@@ -764,6 +703,30 @@ rewrite map_flatten -(big_map (fun b => map th b) xpredT (fun s : seq bool => cu
 exact: cuts_seq_flatten.
 Qed.
 
+(** The flat order [bl] follows each block: the successor, in [bl], of the
+    [k]-th edge of a block is the [k.+1]-th edge of that block. *)
+Lemma bl_block_succ (b : seq {set G}) (k : nat) :
+  b \in blocks f A B -> k.+1 < size b ->
+  nth set0 (bl f A B) (index (nth set0 b k) (bl f A B)).+1 = nth set0 b k.+1.
+Proof.
+move=> hb hk.
+have hkk : k < size b by apply: ltn_trans hk; exact: ltnSn.
+have hub : uniq (bl f A B) by exact: uniq_bl.
+set i := index b (blocks f A B).
+have hi : i < size (blocks f A B) by rewrite index_mem.
+have hdec : blocks f A B = take i (blocks f A B) ++ b :: drop i.+1 (blocks f A B).
+  by rewrite -{1}(cat_take_drop i (blocks f A B)) (drop_nth [::] hi) nth_index.
+move: hub; rewrite /bl hdec flatten_cat /= => hub.
+have hmem : nth set0 b k \in b by exact: mem_nth.
+have hnot : nth set0 b k \notin flatten (take i (blocks f A B)).
+  move: hub; rewrite cat_uniq => /and3P[_ /hasPn hh _].
+  by apply: hh; rewrite mem_cat hmem.
+have hbu : uniq b.
+  by move: hub; rewrite cat_uniq => /and3P[_ _]; rewrite cat_uniq => /and3P[].
+rewrite index_cat (negbTE hnot) index_cat hmem index_uniq //.
+by rewrite -addnS nth_cat ltnNge leq_addr /= addKn nth_cat hk.
+Qed.
+
 End Conflicts.
 
 (** ** Counting over a sequence cut into blocks of constant size *)
@@ -788,38 +751,6 @@ Lemma count_iota_split (Q : pred nat) (n p : nat) :
 Proof.
 rewrite iotaD count_cat; congr (_ + _).
 by rewrite add0n -{1}(addn0 n) iotaDl count_map.
-Qed.
-
-(** Plain arithmetic, discharged by [lia] after translating [ssrnat] to the
-    stdlib operations. *)
-
-Lemma halving_arith_le (S Zt Zf Xf Xt K : nat) :
-  S + Zt = Zf + Xt ->
-  2 * Zf <= Xf + (1 + 2 * K) ->
-  Xt <= 2 * Zt + (3 + 2 * K) ->
-  2 * S <= Xf + Xt + (4 + 4 * K).
-Proof.
-move=> hid /leP h1 /leP h2; apply/leP.
-by move: hid h1 h2; rewrite -!plusE -!multE => *; lia.
-Qed.
-
-Lemma halving_arith_ge (S Zt Zf Xf Xt K : nat) :
-  S + Zt = Zf + Xt ->
-  Xf <= 2 * Zf + (3 + 2 * K) ->
-  2 * Zt <= Xt + (1 + 2 * K) ->
-  Xf + Xt <= 2 * S + (4 + 4 * K).
-Proof.
-move=> hid /leP h1 /leP h2; apply/leP.
-by move: hid h1 h2; rewrite -!plusE -!multE => *; lia.
-Qed.
-
-Lemma ZYD_arith (Z Y X D K : nat) :
-  2 * Y <= X + 1 -> X <= 2 * Y + 3 -> Z <= Y + D -> Y <= Z + D -> D <= K ->
-  (2 * Z <= X + (1 + 2 * K)) && (X <= 2 * Z + (3 + 2 * K)).
-Proof.
-move=> /leP h1 /leP h2 /leP h3 /leP h4 /leP h5; apply/andP.
-move: h1 h2 h3 h4 h5; rewrite -!plusE -!multE => *.
-by split; apply/leP; lia.
 Qed.
 
 Lemma count_split (T : eqType) (s : seq T) (P Q : pred T) :
@@ -946,20 +877,6 @@ move=> hl; rewrite /beadty divnMDl // modnMDl.
 by rewrite (divn_small hl) (modn_small hl) addn0.
 Qed.
 
-Lemma padding_uniq : uniq padding.
-Proof. by rewrite filter_uniq // enum_uniq. Qed.
-
-Lemma count_padding (k : 'I_t) :
-  count (pred1 k) padding = (odd (count (pred1 k) creal) : nat).
-Proof.
-by rewrite count_uniq_mem ?padding_uniq // mem_filter mem_enum andbT.
-Qed.
-
-Lemma cs_even (k : 'I_t) : 2 %| count (pred1 k) cs.
-Proof.
-by rewrite /cs count_cat count_padding dvdn2 oddD oddb addbb.
-Qed.
-
 (** Positions of the necklace. *)
 
 Lemma count_pair_pos (T Q : eqType) (x0 : T) (y0 : Q) (k : T) (j : Q)
@@ -975,12 +892,6 @@ have hzip : zip c u = [seq nth (x0, y0) (zip c u) p | p <- iota 0 (size c)].
 rewrite {1}hzip count_map; apply: eq_in_count => p _ /=.
 by rewrite nth_zip.
 Qed.
-
-Lemma size_cs : size cs = N * m.+1 + size padding.
-Proof. by rewrite /cs size_cat size_creal. Qed.
-
-Lemma nth_cs (p : nat) : p < N * m.+1 -> nth tnull cs p = beadty p.
-Proof. by move=> hp; rewrite /cs nth_cat size_creal hp nth_creal. Qed.
 
 
 Lemma count_block_tix (j : nat) (s : bool) (l : 'I_m.+1) :
@@ -1059,22 +970,6 @@ rewrite (@eq_count _ _ pred0); last by move=> l' /=; rewrite andbF.
 by rewrite count_pred0.
 Qed.
 
-Lemma count_pos_tix (s : bool) (l : 'I_m.+1) (R : nat -> bool) :
-  count (fun p => (nth tnull cs p == tix s l) && R p) (iota 0 (N * m.+1))
-  = \sum_(j < N) ((wpred l (nth set0 es j) && (sd (nth set0 es j) == s)
-                   && R (j * m.+1 + val l)) : nat).
-Proof.
-rewrite count_iota_blocks; apply: eq_bigr => j _.
-rewrite -(count_block_tix_gen j s l R); apply: eq_in_count => l'.
-by rewrite mem_iota /= add0n => hl'; rewrite nth_cs // pos_lt.
-Qed.
-
-
-Lemma nth_cs_pad (i : nat) : nth tnull cs (N * m.+1 + i) = nth tnull padding i.
-Proof.
-by rewrite /cs nth_cat size_creal ltnNge leq_addr /= addKn.
-Qed.
-
 Section WithSplit.
 Variable a : seq 'I_2.
 Hypothesis size_a : size a = size cs.
@@ -1083,127 +978,15 @@ Hypothesis share_a : forall (k : 'I_t) (j : 'I_2),
 
 Definition bth (p : nat) : 'I_2 := nth ord0 a p.
 
-Definition Xc (s : bool) (l : 'I_m.+1) : nat :=
-  count (fun e => wpred l e && (sd e == s)) es.
-Definition Yc (s : bool) (l : 'I_m.+1) : nat :=
-  \sum_(j < N) ((wpred l (nth set0 es j) && (sd (nth set0 es j) == s)
-                 && (bth (j * m.+1 + val l) == ord0)) : nat).
-
-Lemma pad_le1 (k : 'I_t) (R : nat -> bool) :
-  count (fun i => (nth tnull cs (N * m.+1 + i) == k) && R i)
-        (iota 0 (size padding)) <= 1.
-Proof.
-apply: (leq_trans (_ : _ <= count (fun i => nth tnull cs (N * m.+1 + i) == k)
-                             (iota 0 (size padding)))).
-  by apply: sub_count => i /=; case/andP.
-have -> : count (fun i => nth tnull cs (N * m.+1 + i) == k)
-                (iota 0 (size padding)) = count (pred1 k) padding.
-  rewrite (@eq_in_count _ _ (fun i => nth tnull padding i == k)); last first.
-    by move=> i _ /=; rewrite nth_cs_pad.
-  exact: (count_nth_iota tnull padding (pred1 k)).
-by rewrite count_padding; case: (odd _).
-Qed.
-
-Lemma share_bounds (s : bool) (l : 'I_m.+1) :
-  (2 * Yc s l <= Xc s l + 1) && (Xc s l <= 2 * Yc s l + 3).
-Proof.
-pose R := fun p : nat => bth p == ord0.
-have hcp : count_pair (tix s l) ord0 cs a
-         = Yc s l + count (fun i => (nth tnull cs (N * m.+1 + i) == tix s l)
-                                    && R (N * m.+1 + i))
-                          (iota 0 (size padding)).
-  rewrite (count_pair_pos tnull ord0) // size_cs count_iota_split; congr (_ + _).
-  by rewrite /Yc; exact: (count_pos_tix s l (fun p => bth p == ord0)).
-have hc : count (pred1 (tix s l)) cs = Xc s l + count (pred1 (tix s l)) padding.
-  by rewrite /cs count_cat count_creal_tix.
-have hpA := pad_le1 (tix s l) (fun i => R (N * m.+1 + i)).
-have hpX : count (pred1 (tix s l)) padding <= 1.
-  by rewrite count_padding; case: (odd _).
-move: (share_a (tix s l) ord0); rewrite hcp hc => heq.
-set PA := count _ _ in heq hpA.
-set PX := count (pred1 (tix s l)) padding in heq hpX.
-apply/andP; split.
-  apply: (leq_trans (_ : _ <= 2 * (Yc s l + PA))).
-    by rewrite leq_pmul2l // leq_addr.
-  rewrite heq.
-  apply: (leq_trans (_ : _ <= Xc s l + PX)); last by rewrite leq_add2l.
-  by rewrite {2}(divn_eq (Xc s l + PX) 2) mulnC leq_addr.
-apply: (leq_trans (_ : _ <= Xc s l + PX)); first by rewrite leq_addr.
-rewrite {1}(divn_eq (Xc s l + PX) 2) -heq mulnDl -addnA.
-apply: leq_add; first by rewrite mulnC.
-have -> : 3 = 2 + 1 by [].
-apply: leq_add.
-  by rewrite -{2}[2]mul1n leq_mul2r hpA orbT.
-by rewrite -ltnS ltn_mod.
-Qed.
-
-(** The thief of an edge is the thief of its first bead; it differs from the
-    thief of its [l]-th bead only for edges whose block is cut. *)
-
-Definition Dc (l : 'I_m.+1) : nat :=
-  \sum_(j < N) ((bth (j * m.+1) != bth (j * m.+1 + val l)) : nat).
-
-Lemma Dc_cuts (l : 'I_m.+1) : Dc l <= cuts_seq a.
-Proof.
-pose Q := fun p => (p.+1 < size a) && (bth p != bth p.+1).
-have hsz : N * m.+1 <= size a by rewrite size_a size_cs leq_addr.
-have hcut : cuts_seq a = count Q (iota 0 (size a)) by rewrite (cuts_seq_nth ord0).
-apply: (leq_trans (_ : _ <= count Q (iota 0 (N * m.+1)))); last first.
-  by rewrite hcut; apply: count_iota_le.
-rewrite count_iota_blocks /Dc.
-apply: leq_sum => j _.
-apply: (leq_trans (_ : _ <= count (fun i => bth (j * m.+1 + i)
-                                         != bth (j * m.+1 + i.+1)) (iota 0 (val l)))).
-  rewrite -{1}(addn0 (j * m.+1)).
-  exact: (diff_count (fun i => bth (j * m.+1 + i)) (val l)).
-apply: (leq_trans (_ : _ <= count (fun i => bth (j * m.+1 + i)
-                                         != bth (j * m.+1 + i.+1)) (iota 0 m))).
-  by apply: count_iota_le; rewrite -ltnS ltn_ord.
-rewrite (@eq_in_count _ _ (fun i => Q (j * m.+1 + i))); last first.
-  move=> i; rewrite mem_iota /= add0n => hi.
-  have hlt : j * m.+1 + i.+1 < size a.
-    by apply: leq_trans hsz; apply: pos_lt; rewrite ?ltn_ord.
-  by rewrite /Q -addnS hlt.
-by apply: count_iota_le.
-Qed.
-
 (** The thief of an edge, and the selection it defines. *)
 
 Definition thj (j : nat) : bool := bth (j * m.+1) == ord0.
 Definition thE (e : {set G}) : bool := thj (index e es).
 Definition sel (e : {set G}) : bool := if e \in A then thE e else ~~ thE e.
 
-Definition Zc (s : bool) (l : 'I_m.+1) : nat :=
-  \sum_(j < N) ((wpred l (nth set0 es j) && (sd (nth set0 es j) == s) && thj j) : nat).
-
-Lemma Zc_Yc_le (s : bool) (l : 'I_m.+1) : Zc s l <= Yc s l + Dc l.
-Proof.
-rewrite /Zc /Yc /Dc -big_split /=; apply: leq_sum => j _.
-case: (boolP (wpred l (nth set0 es j) && (sd (nth set0 es j) == s))) => hP /=; last by [].
-rewrite /thj; case: (altP (bth (j * m.+1) =P ord0)) => h1 /=; last by [].
-case: (altP (bth (j * m.+1 + val l) =P ord0)) => h2 /=; first by [].
-by rewrite h1 eq_sym h2.
-Qed.
-
-Lemma Yc_Zc_le (s : bool) (l : 'I_m.+1) : Yc s l <= Zc s l + Dc l.
-Proof.
-rewrite /Zc /Yc /Dc -big_split /=; apply: leq_sum => j _.
-case: (boolP (wpred l (nth set0 es j) && (sd (nth set0 es j) == s))) => hP /=; last by [].
-rewrite /thj; case: (altP (bth (j * m.+1 + val l) =P ord0)) => h2 /=; last by [].
-case: (altP (bth (j * m.+1) =P ord0)) => h1 /=; first by [].
-by rewrite h2 h1.
-Qed.
-
 Lemma thE_nth (j : nat) : j < N -> thE (nth set0 es j) = thj j.
 Proof.
 by move=> hj; rewrite /thE index_uniq // (uniq_bl bipf mA mB).
-Qed.
-
-Lemma Zc_count (s : bool) (l : 'I_m.+1) :
-  Zc s l = count (fun e => wpred l e && (sd e == s) && thE e) es.
-Proof.
-rewrite /Zc -(sum_ord_count set0 es (fun e => wpred l e && (sd e == s) && thE e)).
-by apply: eq_bigr => j _; rewrite thE_nth.
 Qed.
 
 Lemma map_thE_es : [seq thE e | e <- es] = [seq thj j | j <- iota 0 N].
@@ -1212,40 +995,6 @@ have hes : es = [seq nth set0 es j | j <- iota 0 N].
   by rewrite map_nth_iota0 // take_size.
 rewrite {1}hes -map_comp; apply/eq_in_map => j.
 by rewrite mem_iota /= add0n => hj; rewrite /= thE_nth.
-Qed.
-
-Lemma cuts_thE : cuts_seq [seq thE e | e <- es] <= cuts_seq a.
-Proof.
-pose Q := fun p => (p.+1 < size a) && (bth p != bth p.+1).
-have hsz : N * m.+1 <= size a by rewrite size_a size_cs leq_addr.
-have hcut : cuts_seq a = count Q (iota 0 (size a)) by rewrite (cuts_seq_nth ord0).
-rewrite map_thE_es (cuts_seq_map_nth 0) size_iota.
-rewrite (@eq_in_count _ _ (fun k => (k.+1 < N) && (thj k != thj k.+1))); last first.
-  move=> k; rewrite mem_iota /= add0n => hk.
-  case: (boolP (k.+1 < N)) => hk1 /=; last by [].
-  by rewrite !nth_iota // ?add0n //; apply: ltn_trans hk1.
-apply: (leq_trans (_ : _ <= count Q (iota 0 (N * m.+1)))); last first.
-  by rewrite hcut; apply: count_iota_le.
-rewrite [X in X <= _]count_iota_sum count_iota_blocks.
-apply: leq_sum => j _.
-case: (boolP (j.+1 < N)) => hj1 /=; last by [].
-apply: (leq_trans (_ : _ <= ((bth (j * m.+1) != bth (j * m.+1 + m.+1)) : nat))).
-  rewrite /thj (_ : j.+1 * m.+1 = j * m.+1 + m.+1); last by rewrite mulSnr.
-  case: (altP (bth (j * m.+1) =P bth (j * m.+1 + m.+1))) => [heq|hne].
-    by rewrite heq eqxx.
-  exact: leq_b1.
-apply: (leq_trans (_ : _ <= count (fun i => bth (j * m.+1 + i)
-                                         != bth (j * m.+1 + i.+1)) (iota 0 m.+1))).
-  rewrite -{1}(addn0 (j * m.+1)).
-  exact: (diff_count (fun i => bth (j * m.+1 + i)) m.+1).
-rewrite (@eq_in_count _ _ (fun i => Q (j * m.+1 + i))) //.
-move=> i; rewrite mem_iota /= add0n => hi.
-have hlt : j * m.+1 + i.+1 < size a.
-  apply: leq_trans hsz.
-  apply: (leq_ltn_trans (_ : j * m.+1 + i.+1 <= j.+1 * m.+1)).
-    by rewrite mulSnr leq_add2l.
-  by rewrite ltn_mul2r /= hj1.
-by rewrite /Q -addnS hlt.
 Qed.
 
 (** The selected edges, minus those that start a conflict. *)
@@ -1279,21 +1028,6 @@ have heA : e \notin A by move: he; rewrite inE => /andP[].
 move: hs; rewrite /sel (negbTE heA) => hs.
 move: hsn; rewrite /sel (SA_A (proj1 (andP hnA))) => hsn.
 by rewrite hsn; move: hs; case: (thE e).
-Qed.
-
-Lemma card_Psrc : #|Psrc| <= 2 * cuts_seq a.
-Proof.
-pose P := fun e : {set G} => (e \in SS A B) &&
-   (sel e && ((nxt f A B e != set0) && (nxt f A B e \in Csel))).
-have -> : #|Psrc| = count P es.
-  rewrite (@card_seq_count _ es (SS A B) _ (uniq_bl bipf mA mB) (mem_bl bipf mA mB)).
-  apply: eq_in_count => e; rewrite (mem_bl bipf mA mB) => he.
-  by rewrite /P he.
-apply: (leq_trans (_ : _ <= 2 * cuts_seq [seq thE e | e <- es])); last first.
-  by rewrite leq_pmul2l //; exact: cuts_thE.
-apply: (conflict_count bipf mA mB) => e /andP[he /andP[hs /andP[hn hin]]].
-split=> //.
-by apply: sel_opp => //; move: hin; rewrite mem_Csel => /andP[].
 Qed.
 
 (** Set-theoretic bookkeeping. *)
@@ -1349,89 +1083,6 @@ case/orP: (meetP bipf mA mB hs1 hs2 hne1 hv1 hv2) => /eqP hnx.
 have hne2 : e2 != e1 by rewrite eq_sym.
 by move: hnp2; rewrite mem_Psrc hs2 hsel2 hnx hin1 (SS_neq0 mA mB hs1).
 Qed.
-
-Lemma Chalf_sub : Chalf \subset A :|: B.
-Proof.
-apply/subsetP => e; rewrite inE => /orP[|].
-  by rewrite !inE => /andP[-> _].
-rewrite inE => /andP[_ /Csel_SS /SSP/orP[hs|hs]].
-  by rewrite inE (SA_A hs).
-by rewrite inE (SB_B hs) orbT.
-Qed.
-
-(** Counting the selection. *)
-
-Lemma sel_esE (e : {set G}) : e \in es -> sel e = (if sd e then ~~ thE e else thE e).
-Proof.
-rewrite (mem_bl bipf mA mB) => /SSP/orP[he|he]; rewrite /sel.
-  have -> : sd e = false by move: he; rewrite /sd inE => /andP[/negbTE].
-  by rewrite (SA_A he).
-have -> : sd e by rewrite /sd (SB_B he).
-by have -> : (e \in A) = false by apply/negbTE; move: he; rewrite inE => /andP[].
-Qed.
-
-
-Lemma SelC_id (l : 'I_m.+1) :
-  count (fun e => sel e && wpred l e) es + Zc true l = Zc false l + Xc true l.
-Proof.
-have hpred1 : {in es, (fun e => (sel e && wpred l e) && ~~ sd e)
-                   =1 (fun e => wpred l e && (sd e == false) && thE e)}.
-  move=> e he /=; rewrite (sel_esE he).
-  by case: (sd e); case: (thE e); case: (wpred l e).
-have hpred2 : {in es, (fun e => (sel e && wpred l e) && ~~ ~~ sd e)
-                   =1 (fun e => wpred l e && (sd e == true) && ~~ thE e)}.
-  move=> e he /=; rewrite (sel_esE he).
-  by case: (sd e); case: (thE e); case: (wpred l e).
-rewrite (count_split es (fun e => sel e && wpred l e) (fun e => ~~ sd e)).
-rewrite (eq_in_count hpred1) (eq_in_count hpred2) -Zc_count -addnA.
-congr (_ + _).
-rewrite addnC Zc_count /Xc.
-by rewrite (count_split es (fun e => wpred l e && (sd e == true)) (fun e => thE e)).
-Qed.
-
-Lemma Xc_split (l : 'I_m.+1) : Xc false l + Xc true l = count (wpred l) es.
-Proof.
-rewrite /Xc (count_split es (wpred l) (fun e => sd e)) addnC.
-congr (_ + _); apply: eq_count => e /=.
-  by case: (sd e); rewrite ?andbT ?andbF.
-by case: (sd e); rewrite ?andbT ?andbF.
-Qed.
-
-(** The two halving estimates. *)
-
-Lemma Zc_bounds (s : bool) (l : 'I_m.+1) :
-  (2 * Zc s l <= Xc s l + (1 + 2 * cuts_seq a))
-  && (Xc s l <= 2 * Zc s l + (3 + 2 * cuts_seq a)).
-Proof.
-have /andP[h1 h2] := share_bounds s l.
-apply: (ZYD_arith h1 h2 (Zc_Yc_le s l) (Yc_Zc_le s l) (Dc_cuts l)).
-Qed.
-
-Lemma SelC_le (l : 'I_m.+1) :
-  2 * count (fun e => sel e && wpred l e) es
-  <= count (wpred l) es + (4 + 4 * cuts_seq a).
-Proof.
-have /andP[h1f _] := Zc_bounds false l.
-have /andP[_ h2t] := Zc_bounds true l.
-rewrite -Xc_split.
-exact: (halving_arith_le (SelC_id l) h1f h2t).
-Qed.
-
-Lemma SelC_ge (l : 'I_m.+1) :
-  count (wpred l) es
-  <= 2 * count (fun e => sel e && wpred l e) es + (4 + 4 * cuts_seq a).
-Proof.
-have /andP[_ h2f] := Zc_bounds false l.
-have /andP[h1t _] := Zc_bounds true l.
-rewrite -Xc_split.
-exact: (halving_arith_ge (SelC_id l) h2f h1t).
-Qed.
-
-(** Cardinalities. *)
-
-Lemma card_setI_P (X : {set {set G}}) (P : pred {set G}) :
-  [set e in X | P e] = X :&: [set e | P e].
-Proof. by apply/setP => e; rewrite !inE. Qed.
 
 Lemma card_split (P : pred {set G}) :
   #|[set e in A | P e]| + #|[set e in B | P e]|
@@ -1501,16 +1152,6 @@ exact: (@card_seq_count _ es (SS A B) (fun e => sel e && P e)
                         (uniq_bl bipf mA mB) (mem_bl bipf mA mB)).
 Qed.
 
-Lemma card_Chalf_le (P : pred {set G}) :
-  #|[set e in Chalf | P e]|
-  <= #|[set e in A :&: B | P e]| + count (fun e => sel e && P e) es.
-Proof.
-rewrite card_Chalf -card_Csel_count leq_add2l.
-apply: subset_leq_card; apply/subsetP => e.
-rewrite memsetP in_setD => /andP[/andP[_ hc] hP].
-by rewrite memsetP hc hP.
-Qed.
-
 Lemma card_Chalf_ge (P : pred {set G}) :
   #|[set e in A :&: B | P e]| + count (fun e => sel e && P e) es
   <= #|[set e in Chalf | P e]| + #|Psrc|.
@@ -1524,398 +1165,15 @@ apply: (leq_trans (_ : _ <= #|[set e in Csel :\: Psrc | P e] :|: Psrc|)).
 apply: (leq_trans (leq_card_setU _ _).1) => //.
 Qed.
 
-(** The two halving estimates, in terms of cardinalities. *)
-
-Lemma Chalf_stat (l : 'I_m.+1) :
-  2 * #|[set e in Chalf | wpred l e]|
-  <= #|[set e in A | wpred l e]| + #|[set e in B | wpred l e]|
-     + (4 + 4 * cuts_seq a).
-Proof.
-rewrite card_split.
-move/leP: (card_Chalf_le (wpred l)) => h1; move/leP: (SelC_le l) => h2.
-by apply/leP; move: h1 h2; rewrite -!plusE -!multE => *; lia.
-Qed.
-
 Lemma wpred0 (e : {set G}) : wpred ord0 e = true.
 Proof. by rewrite /wpred unlift_none. Qed.
 
 Lemma set_wpred0 (X : {set {set G}}) : [set e in X | wpred ord0 e] = X.
 Proof. by apply/setP => e; rewrite memsetP wpred0 andbT. Qed.
 
-Lemma Chalf_size : #|A| + #|B| <= 2 * #|Chalf| + (4 + 8 * cuts_seq a).
-Proof.
-have hsplit := card_split (wpred ord0).
-have h1 := card_Chalf_ge (wpred ord0).
-move: hsplit h1; rewrite !set_wpred0 => hsplit h1.
-move/leP: h1 => h1; move/leP: (SelC_ge ord0) => h2; move/leP: card_Psrc => h3.
-apply/leP; move: hsplit h1 h2 h3.
-by rewrite -!plusE -!multE => *; lia.
-Qed.
-
 End WithSplit.
 
-(** ** The halving lemma *)
-
-Theorem matching_halving :
-  exists C : {set {set G}},
-    [/\ matching C, C \subset A :|: B,
-        #|A| + #|B| <= 2 * #|C| + (16 * m + 28) &
-        forall i : 'I_m,
-          2 * #|C :&: W i| <= #|A :&: W i| + #|B :&: W i| + (8 * m + 16)].
-Proof.
-have [a [hsz hcuts hshare]] :=
-  splitting_necklace_seq (ltn0Sn 1) (fun k => cs_even k).
-have ht : cuts_seq a <= 2 * m.+1 + 1.
-  by move: hcuts; rewrite muln1 card_TT addn1.
-exists (Chalf a); split.
-- exact: (Chalf_matching a).
-- exact: (Chalf_sub a).
-- apply: (leq_trans (Chalf_size hsz hshare)).
-  rewrite leq_add2l.
-  move/leP: ht => ht; apply/leP; move: ht.
-  by rewrite -!plusE -!multE => *; lia.
-- move=> i.
-  have hlift : forall e : {set G}, wpred (lift ord0 i) e = (e \in W i).
-    by move=> e; rewrite /wpred liftK.
-  have hWset : forall X : {set {set G}},
-      [set e in X | wpred (lift ord0 i) e] = X :&: W i.
-    by move=> X; apply/setP => e; rewrite memsetP hlift in_setI.
-  have := Chalf_stat hsz hshare (lift ord0 i).
-  rewrite !hWset => hstat.
-  apply: (leq_trans hstat); rewrite leq_add2l.
-  move/leP: ht => ht; apply/leP; move: ht.
-  by rewrite -!plusE -!multE => *; lia.
-Qed.
-
 End Halving.
-
-(** * Step 4: interpolating several matchings ******************************)
-
-(** Chains of halvings realise any convex combination of finitely many
-    matchings, with an error that does not grow with the precision of the
-    weights.  See step 4 of the header. *)
-
-(** Scaled arithmetic, discharged by [lia]. *)
-
-Lemma half_arith_size (d YA YB EA EB cA cB cC K : nat) :
-  YA <= d * cA + EA -> YB <= d * cB + EB ->
-  d * (cA + cB) <= d * (2 * cC + K) ->
-  YA + YB <= 2 * d * cC + (EA + EB + d * K).
-Proof.
-move=> /leP h1 /leP h2 /leP h3; apply/leP.
-by move: h1 h2 h3; rewrite -!plusE -!multE => *; lia.
-Qed.
-
-Lemma half_arith_stat (d VA VB EA EB cA cB cC K : nat) :
-  d * cA <= VA + EA -> d * cB <= VB + EB ->
-  d * (2 * cC) <= d * (cA + cB + K) ->
-  2 * d * cC <= VA + VB + (EA + EB + d * K).
-Proof.
-move=> /leP h1 /leP h2 /leP h3; apply/leP.
-by move: h1 h2 h3; rewrite -!plusE -!multE => *; lia.
-Qed.
-
-Lemma drift_arith (a b c dd e : nat) : a <= b + c -> b <= dd + e -> a <= dd + (c + e).
-Proof.
-move=> /leP h1 /leP h2; apply/leP.
-by move: h1 h2; rewrite -!plusE => *; lia.
-Qed.
-
-Lemma dyad_lo (X k YA YB : nat) : k <= X ->
-  X * YB + (k * YA + (X - k) * YB) = k * YA + (2 * X - k) * YB.
-Proof.
-move=> h; rewrite addnCA -mulnDl; congr (_ + _ * _).
-by rewrite addnBA // addnn -mul2n.
-Qed.
-
-Lemma dyad_hi {X k k' YA YB : nat} : k' <= X -> k = X + k' ->
-  X * YA + (k' * YA + (X - k') * YB) = k * YA + (2 * X - k) * YB.
-Proof.
-move=> h ->; rewrite addnA -mulnDl; congr (_ * _ + _ * _).
-by rewrite mul2n -addnn subnDl.
-Qed.
-
-Lemma dyad_err (X E d e : nat) :
-  X * E + X * (E + d * e) + X * d * e = 2 * X * (E + d * e).
-Proof. by rewrite -!plusE -!multE; lia. Qed.
-
-Lemma sub_id (M1 M2 M3 : nat) : M3 + M2 <= M1 -> M1 - M2 = M3 + (M1 - (M3 + M2)).
-Proof. by move=> /leP h; rewrite -!plusE -!minusE in h *; lia. Qed.
-
-Lemma sub_le (M1 M2 M3 : nat) : M1 <= M2 + M3 -> M1 - M2 <= M3.
-Proof. by move=> /leP h; apply/leP; rewrite -!plusE -!minusE in h *; lia. Qed.
-
-Lemma hE_arith (Lam L' X P e Nn : nat) : Lam * L' * Nn <= Lam * L' * X ->
-  Lam * (X * (L' * P + L' * e)) + Lam * L' * Nn
-  <= X * L' * (Lam * (P + (e + 1))).
-Proof.
-by move=> /leP h; apply/leP; rewrite -!plusE -!multE in h *; nia.
-Qed.
-
-Lemma key_id {k j a L' S c u : nat} :
-  j * L' = a * k + u ->
-  (k + j) * L' * (a * c + S) + L' * u * c
-  = (a + L') * (k * S + j * L' * c) + u * S.
-Proof. by move=> h; rewrite mulnDl !h -!plusE -!multE; nia. Qed.
-
-Lemma key_arith {k j a L' S c N u : nat} :
-  j * L' = a * k + u -> u <= a + L' -> S <= L' * N ->
-  (k + j) * L' * (a * c + S)
-  <= (a + L') * (k * S + j * L' * c) + (a + L') * L' * N.
-Proof.
-move=> hu hua hS.
-apply: (leq_trans (_ : _ <= (k + j) * L' * (a * c + S) + L' * u * c));
-  first exact: leq_addr.
-by rewrite (key_id hu) leq_add2l -mulnA; apply: leq_mul.
-Qed.
-
-Lemma key_arith2 {k j a L' S c N u : nat} :
-  j * L' = a * k + u -> u <= a + L' -> c <= N ->
-  (a + L') * (k * S + j * L' * c)
-  <= (k + j) * L' * (a * c + S) + (a + L') * L' * N.
-Proof.
-move=> hu hua hc.
-apply: (leq_trans (_ : _ <= (a + L') * (k * S + j * L' * c) + u * S));
-  first exact: leq_addr.
-rewrite -(key_id hu) leq_add2l.
-apply: leq_mul; last exact: hc.
-by rewrite mulnC leq_mul2r hua orbT.
-Qed.
-
-Section Mixing.
-Variables (G : sgraph) (f : G -> bool) (m : nat) (W : 'I_m -> {set {set G}}).
-Hypothesis bipf : forall x y : G, x -- y -> f x != f y.
-
-Definition realisesN (d : nat) (C : {set {set G}})
-    (Y : nat) (V : 'I_m -> nat) (E : nat) : Prop :=
-  (Y <= d * #|C| + E) /\ (forall i, d * #|C :&: W i| <= V i + E).
-
-(** The error of one halving, scaled by one. *)
-Definition eh : nat := 16 * m + 28.
-
-Lemma realisesN_le (d : nat) (C : {set {set G}}) (Y : nat) (V : 'I_m -> nat)
-    (E E' : nat) :
-  realisesN d C Y V E -> E <= E' -> realisesN d C Y V E'.
-Proof.
-move=> [h1 h2] hE; split.
-  by apply: leq_trans h1 _; rewrite leq_add2l.
-by move=> i; apply: leq_trans (h2 i) _; rewrite leq_add2l.
-Qed.
-
-Lemma realisesN_scale (c d : nat) (C : {set {set G}}) (Y : nat) (V : 'I_m -> nat)
-    (E : nat) :
-  realisesN d C Y V E ->
-  realisesN (c * d) C (c * Y) (fun i => c * V i) (c * E).
-Proof.
-move=> [h1 h2]; split.
-  rewrite -mulnA -mulnDr leq_mul2l; apply/orP; right; exact: h1.
-move=> i; rewrite -mulnA -mulnDr leq_mul2l; apply/orP; right; exact: (h2 i).
-Qed.
-
-Lemma realisesN_drift (d : nat) (C : {set {set G}}) (Y Y' : nat)
-    (V V' : 'I_m -> nat) (E D : nat) :
-  realisesN d C Y V E -> Y' <= Y + D -> (forall i, V i <= V' i + D) ->
-  realisesN d C Y' V' (E + D).
-Proof.
-move=> [h1 h2] hY hV; split.
-  by apply: leq_trans hY _; rewrite addnA leq_add2r.
-by move=> i; apply: (drift_arith (h2 i) (hV i)).
-Qed.
-
-(** ** Halving *)
-
-Lemma mix_half (A B : {set {set G}}) (d YA YB : nat) (VA VB : 'I_m -> nat)
-    (EA EB : nat) :
-  matching A -> matching B ->
-  realisesN d A YA VA EA -> realisesN d B YB VB EB ->
-  exists C, matching C /\
-    realisesN (2 * d) C (YA + YB) (fun i => VA i + VB i) (EA + EB + d * eh).
-Proof.
-move=> hmA hmB [hA1 hA2] [hB1 hB2].
-have [C [hmC hsubC hsize hstat]] := @matching_halving G f A B m W bipf hmA hmB.
-have hsized : d * (#|A| + #|B|) <= d * (2 * #|C| + (16 * m + 28)).
-  by rewrite leq_mul2l hsize orbT.
-exists C; split=> //; split.
-  by rewrite /eh; apply: (half_arith_size hA1 hB1 hsized).
-move=> i.
-have hstatd : d * (2 * #|C :&: W i|) <= d * (#|A :&: W i| + #|B :&: W i| + (8 * m + 16)).
-  by rewrite leq_mul2l (hstat i) orbT.
-apply: (leq_trans (half_arith_stat (hA2 i) (hB2 i) hstatd)).
-rewrite leq_add2l leq_add2l leq_mul2l /eh; apply/orP; right.
-by apply: leq_add; rewrite ?leq_mul2r ?orbT.
-Qed.
-
-Lemma realisesN_ext (d d' : nat) (C : {set {set G}}) (Y Y' : nat)
-    (V V' : 'I_m -> nat) (E E' : nat) :
-  realisesN d C Y V E -> d = d' -> Y' = Y -> V =1 V' -> E = E' ->
-  realisesN d' C Y' V' E'.
-Proof.
-by move=> [h1 h2] <- -> hV <-; split=> // i; rewrite -hV; exact: h2.
-Qed.
-
-(** ** Any dyadic ratio, by chaining halvings *)
-
-Lemma mix_dyadic (L : nat) (A B : {set {set G}}) (d YA YB : nat)
-    (VA VB : 'I_m -> nat) (E : nat) :
-  matching A -> matching B ->
-  realisesN d A YA VA E -> realisesN d B YB VB E ->
-  forall k : nat, k <= 2^L ->
-  exists C, matching C /\
-    realisesN (2^L * d) C (k * YA + (2^L - k) * YB)
-              (fun i => k * VA i + (2^L - k) * VB i) (2^L * (E + d * eh)).
-Proof.
-move=> hmA hmB hA hB; elim: L => [|L IH] k hk.
-  move: hk; rewrite expn0 !mul1n => hk.
-  case: (posnP k) => [->|hk0].
-    exists B; split=> //.
-    apply: (realisesN_le (E := E)); last by rewrite leq_addr.
-    apply: (realisesN_ext hB) => // [|i]; first by rewrite mul0n add0n subn0 mul1n.
-    by rewrite mul0n add0n subn0 mul1n.
-  have hk1 : k = 1 by apply/eqP; rewrite eqn_leq hk hk0.
-  exists A; split=> //.
-  apply: (realisesN_le (E := E)); last by rewrite leq_addr.
-  apply: (realisesN_ext hA) => // [|i]; first by rewrite hk1 mul1n subnn mul0n addn0.
-  by rewrite hk1 mul1n subnn mul0n addn0.
-have hexp : 2^(L.+1) = 2 * 2^L by rewrite expnS.
-case: (leqP k (2^L)) => hkL.
-  have [C' [hmC' hC']] := IH k hkL.
-  have [C [hmC hC]] := mix_half hmB hmC' (realisesN_scale (2^L) hB) hC'.
-  exists C; split=> //.
-  apply: (realisesN_ext hC).
-  - by rewrite hexp mulnA.
-  - by rewrite hexp dyad_lo.
-  - by move=> i; rewrite hexp dyad_lo.
-  - by rewrite hexp dyad_err.
-have hk' : k - 2^L <= 2^L.
-  by rewrite leq_subLR addnn -mul2n -hexp.
-have hkeq : k = 2^L + (k - 2^L) by rewrite subnKC // ltnW.
-have [C' [hmC' hC']] := IH (k - 2^L) hk'.
-have [C [hmC hC]] := mix_half hmA hmC' (realisesN_scale (2^L) hA) hC'.
-exists C; split=> //.
-apply: (realisesN_ext hC).
-- by rewrite hexp mulnA.
-- by rewrite hexp (dyad_hi hk' hkeq).
-- by move=> i; rewrite hexp (dyad_hi hk' hkeq).
-- by rewrite hexp dyad_err.
-Qed.
-
-(** ** Any convex combination of a list of matchings *)
-
-Lemma realisesN_conv (d d' : nat) (C : {set {set G}}) (Y Y' : nat)
-    (V V' : 'I_m -> nat) (E E' X : nat) :
-  0 < d -> realisesN d C Y V E ->
-  d * Y' <= d' * Y + X -> (forall i, d' * V i <= d * V' i + X) ->
-  d' * E + X <= d * E' ->
-  realisesN d' C Y' V' E'.
-Proof.
-move=> hd [h1 h2] hY hV hE; split.
-  rewrite -(leq_pmul2l hd).
-  apply: (leq_trans hY).
-  apply: (leq_trans (_ : d' * Y + X <= d' * (d * #|C| + E) + X)).
-    by rewrite leq_add2r leq_mul2l h1 orbT.
-  rewrite !mulnDr -addnA; apply: leq_add; last exact: hE.
-  by rewrite mulnCA.
-move=> i; rewrite -(leq_pmul2l hd) mulnDr.
-apply: (leq_trans (_ : d * (d' * #|C :&: W i|) <= d' * (V i + E))).
-  by rewrite mulnCA leq_mul2l (h2 i) orbT.
-rewrite mulnDr.
-apply: (leq_trans (_ : d' * V i + d' * E <= d * V' i + X + d' * E)).
-  by rewrite leq_add2r; exact: hV.
-by rewrite -addnA [X + d' * E]addnC leq_add2l; exact: hE.
-Qed.
-
-Lemma mix_list (N : nat) (s : seq ({set {set G}} * nat)) :
-  (forall p, p \in s -> matching p.1) ->
-  (forall p, p \in s -> #|p.1| <= N) ->
-  (forall p i, p \in s -> #|p.1 :&: W i| <= N) ->
-  0 < \sum_(p <- s) p.2 ->
-  exists C, matching C /\
-    realisesN (\sum_(p <- s) p.2) C (\sum_(p <- s) p.2 * #|p.1|)
-              (fun i => \sum_(p <- s) p.2 * #|p.1 :&: W i|)
-              ((\sum_(p <- s) p.2) * ((size s).-1 * (eh + 1))).
-Proof.
-elim: s => [|p s IH]; first by rewrite big_nil ltnn.
-move=> hm hN hNi; rewrite !big_cons /= => hsum.
-have hmp : matching p.1 by apply: hm; rewrite inE eqxx.
-have hNp : #|p.1| <= N by apply: hN; rewrite inE eqxx.
-have hNpi : forall i, #|p.1 :&: W i| <= N by move=> i; apply: hNi; rewrite inE eqxx.
-have hbase1 : realisesN 1 p.1 #|p.1| (fun i => #|p.1 :&: W i|) 0.
-  by split=> [|i]; rewrite mul1n addn0.
-have hbase : realisesN p.2 p.1 (p.2 * #|p.1|)
-                      (fun i => p.2 * #|p.1 :&: W i|) 0.
-  apply: (realisesN_ext (realisesN_scale p.2 hbase1)); rewrite ?muln1 ?muln0 //.
-case: (posnP (\sum_(q <- s) q.2)) => [hL0|hL].
-  have hz : \sum_(q <- s) q.2 * #|q.1| = 0.
-    apply: big1_seq => q /andP[_ hq]; apply/eqP; rewrite muln_eq0; apply/orP; left.
-    by move: hL0 => /eqP; rewrite sum_nat_seq_eq0 => /allP/(_ q hq).
-  have hzi : forall i, \sum_(q <- s) q.2 * #|q.1 :&: W i| = 0.
-    move=> i; apply: big1_seq => q /andP[_ hq]; apply/eqP.
-    rewrite muln_eq0; apply/orP; left.
-    by move: hL0 => /eqP; rewrite sum_nat_seq_eq0 => /allP/(_ q hq).
-  exists p.1; split=> //.
-  apply: (realisesN_le (E := 0)); last by [].
-  apply: (realisesN_ext hbase).
-  - by rewrite hL0 addn0.
-  - by rewrite hz addn0.
-  - by move=> i; rewrite big_cons hzi addn0.
-  - by [].
-have hmS : forall q, q \in s -> matching q.1 by move=> q hq; apply: hm; rewrite inE hq orbT.
-have hNS : forall q, q \in s -> #|q.1| <= N by move=> q hq; apply: hN; rewrite inE hq orbT.
-have hNSi : forall q i, q \in s -> #|q.1 :&: W i| <= N.
-  by move=> q i hq; apply: hNi; rewrite inE hq orbT.
-have [C' [hmC' hC']] := IH hmS hNS hNSi hL.
-set a := p.2; set L' := \sum_(q <- s) q.2.
-set S' := \sum_(q <- s) q.2 * #|q.1|.
-set E' := L' * ((size s).-1 * (eh + 1)).
-set Lam := a + L'.
-have hLam : 0 < Lam by rewrite /Lam addn_gt0 hL orbT.
-have h2N : 0 < 2^N by rewrite expn_gt0.
-set k := (L' * 2^N) %/ Lam.
-set j := 2^N - k.
-have hkle : k <= 2^N.
-  have h1 : L' * 2^N <= Lam * 2^N.
-    by rewrite leq_mul2r /Lam leq_addl orbT.
-  by rewrite /k -{2}(mulKn (2^N) hLam); apply: leq_div2r.
-have hkj : k + j = 2^N by rewrite /j subnKC.
-have hk1 : Lam * k <= L' * 2^N.
-  by rewrite mulnC /k leq_divM.
-have hk2 : L' * 2^N < Lam * k + Lam.
-  by rewrite -mulnSr [Lam * k.+1]mulnC /k ltn_ceil.
-have hbaseL : realisesN L' p.1 (L' * #|p.1|) (fun i => L' * #|p.1 :&: W i|) E'.
-  apply: (realisesN_le (E := 0)); last by [].
-  by apply: (realisesN_ext (realisesN_scale L' hbase1)); rewrite ?muln1 ?muln0.
-have [C [hmC hC]] := mix_dyadic hmC' hmp hC' hbaseL hkle.
-have hsizes : 0 < size s.
-  by rewrite lt0n size_eq0; apply/eqP => h0; move: hL; rewrite h0 big_nil ltnn.
-have hNexp : N <= 2^N by apply: ltnW; apply: ltn_expl.
-set u := L' * 2^N - Lam * k.
-have hu : j * L' = a * k + u.
-  rewrite /u /j /Lam mulnBl mulnDl [k * L']mulnC [2 ^ N * L']mulnC.
-  by apply: sub_id; move: hk1; rewrite /Lam mulnDl.
-have hua : u <= a + L'.
-  by rewrite /u -/Lam; apply: sub_le; exact: ltnW.
-have hSN : S' <= L' * N.
-  rewrite /S' /L' big_distrl /=.
-  rewrite big_seq_cond [X in _ <= X]big_seq_cond.
-  apply: leq_sum => q /andP[hq _].
-  by rewrite leq_mul2l hNS ?orbT.
-have hSNi : forall i, #|p.1 :&: W i| <= N by [].
-exists C; split=> //.
-have hd : 0 < 2^N * L' by rewrite muln_gt0 h2N hL.
-apply: (realisesN_conv (X := Lam * L' * N) hd hC).
-- rewrite -/j -hkj mulnA -/S'.
-  exact: (key_arith hu hua hSN).
-- move=> i; rewrite big_cons -/j -hkj mulnA.
-  by apply: (key_arith2 hu hua); exact: hNpi.
-- have hsz : size s * (eh + 1) = (size s).-1 * (eh + 1) + (eh + 1).
-    by rewrite -{1}(prednK hsizes) mulSnr.
-  rewrite /E' hsz.
-  apply: hE_arith.
-  by rewrite leq_mul2l hNexp orbT.
-Qed.
-
-End Mixing.
-
 (** ** The colour classes of a line colouring, as a family indexed by ['I_D] *)
 
 Section Assembly.
@@ -1966,175 +1224,1303 @@ case: (boolP (e \in X)) => heX //=.
 by rewrite (cls_uniq (subsetP hX _ heX)).
 Qed.
 
-(** ** Reducing to at most [m+2] colour classes *)
-
-Definition zstat (j : 'I_D) (l : 'I_m.+1) : nat :=
-  if unlift ord0 l is Some i then #|cls j :&: E i| else #|cls j|.
-
-Definition wone (j : 'I_D) : nat := 1.
-
-Lemma sum_wone : \sum_(j < D) wone j = D.
-Proof. by rewrite sum1_card card_ord. Qed.
-
-Lemma sum_zstat (l : 'I_m.+1) :
-  \sum_(j < D) wone j * zstat j l
-  = if unlift ord0 l is Some i then #|E i| else #|E(G)|.
-Proof.
-rewrite (eq_bigr (fun j => zstat j l)); last by move=> j _; rewrite mul1n.
-rewrite /zstat; case: (unlift ord0 l) => [i|].
-  rewrite -(cls_partition (subE i)).
-  by apply: eq_bigr => j _; rewrite setIC.
-rewrite -(cls_partition (subxx E(G))).
-apply: eq_bigr => j _.
-have -> : E(G) :&: cls j = cls j by apply/setIidPr; exact: cls_sub.
-by [].
-Qed.
-
-(** ** The approximate fair matching *)
-
-Definition Bmix : nat := m.+1 * (16 * m + 29).
-
-Theorem approx_fair_core :
-  exists C : {set {set G}},
-    [/\ matching C,
-        #|E(G)| %/ D <= #|C| + Bmix &
-        forall i : 'I_m, #|C :&: E i| <= #|E i| %/ D + Bmix].
-Proof.
-have hw : 0 < \sum_(j < D) wone j by rewrite sum_wone.
-have [a [hapos hasupp haeq]] := caratheodory_nat zstat hw.
-pose s : seq ({set {set G}} * nat) := [seq (cls j, a j) | j <- enum 'I_D & a j != 0].
-have hmatch : forall p, p \in s -> matching p.1.
-  by move=> p /mapP[j _ ->]; exact: cls_matching.
-have hNb : forall p, p \in s -> #|p.1| <= #|E(G)|.
-  by move=> p /mapP[j _ ->]; apply: subset_leq_card; exact: cls_sub.
-have hNbi : forall p (i : 'I_m), p \in s -> #|p.1 :&: E i| <= #|E(G)|.
-  move=> p i /mapP[j _ ->]; apply: subset_leq_card => /=.
-  by apply: (subset_trans (subsetIl _ _)); exact: cls_sub.
-have hsum2 : \sum_(p <- s) p.2 = \sum_(j < D) a j.
-  rewrite /s big_map big_filter big_enum_cond /= [RHS](bigID (fun j => a j != 0)) /=.
-  rewrite [X in _ + X]big1 ?addn0 // => j.
-  by rewrite negbK => /eqP.
-have hsumY : \sum_(p <- s) p.2 * #|p.1| = \sum_(j < D) a j * #|cls j|.
-  rewrite /s big_map big_filter big_enum_cond /= [RHS](bigID (fun j => a j != 0)) /=.
-  rewrite [X in _ + X]big1 ?addn0 // => j.
-  by rewrite negbK => /eqP ->; rewrite mul0n.
-have hsumV : forall i : 'I_m,
-    \sum_(p <- s) p.2 * #|p.1 :&: E i| = \sum_(j < D) a j * #|cls j :&: E i|.
-  move=> i; rewrite /s big_map big_filter big_enum_cond /= [RHS](bigID (fun j => a j != 0)) /=.
-  rewrite [X in _ + X]big1 ?addn0 // => j.
-  by rewrite negbK => /eqP ->; rewrite mul0n.
-have hsumpos : 0 < \sum_(p <- s) p.2 by rewrite hsum2.
-have hcount : forall (T : finType) (P : pred T),
-    #|[set t | P t]| = count P (enum T).
-  move=> T P; rewrite cardsE cardE /enum_mem -enumT size_filter.
-  by rewrite filter_predT.
-have hsize : size s <= m.+2.
-  apply: (leq_trans _ hasupp).
-  by rewrite /s size_map size_filter hcount.
-have hB0 : (size s).-1 * (eh m + 1) <= Bmix.
-  rewrite /Bmix /eh -addnA; apply: leq_mul; last by [].
-  by rewrite -subn1 -[m.+1]/(m.+2 - 1) leq_sub2r.
-have hz0 : forall j, zstat j ord0 = #|cls j|.
-  by move=> j; rewrite /zstat unlift_none.
-have hzi : forall j (i : 'I_m), zstat j (lift ord0 i) = #|cls j :&: E i|.
-  by move=> j i; rewrite /zstat liftK.
-have hzsum0 : \sum_(j < D) a j * zstat j ord0 = \sum_(j < D) a j * #|cls j|.
-  by apply: eq_bigr => j _; rewrite hz0.
-have hzsumi : forall i : 'I_m,
-    \sum_(j < D) a j * zstat j (lift ord0 i)
-    = \sum_(j < D) a j * #|cls j :&: E i|.
-  by move=> i; apply: eq_bigr => j _; rewrite hzi.
-have h0 : (\sum_(j < D) a j * #|cls j|) * D = #|E(G)| * (\sum_(j < D) a j).
-  move: (haeq ord0).
-  by rewrite hzsum0 sum_wone (sum_zstat ord0) unlift_none /= => ->.
-have hi : forall i : 'I_m,
-    (\sum_(j < D) a j * #|cls j :&: E i|) * D = #|E i| * (\sum_(j < D) a j).
-  move=> i; move: (haeq (lift ord0 i)).
-  by rewrite (hzsumi i) sum_wone (sum_zstat (lift ord0 i)) liftK /= => ->.
-have hL : 0 < \sum_(j < D) a j by rewrite -hsum2.
-have [C [hmC hC]] := mix_list bipf hmatch hNb hNbi hsumpos.
-case: hC => hY hV.
-rewrite hsumY hsum2 in hY.
-exists C; split => //.
-  have hYB : \sum_(j < D) a j * #|cls j|
-           <= (\sum_(j < D) a j) * #|C| + (\sum_(j < D) a j) * Bmix.
-    apply: leq_trans hY _; rewrite leq_add2l.
-    by apply: leq_mul.
-  have keyA : #|E(G)| <= (#|C| + Bmix) * D.
-    rewrite -(leq_pmul2l hL) [X in X <= _]mulnC -h0 mulnA mulnDr.
-    by rewrite leq_pmul2r.
-  apply: leq_trans (leq_div2r D keyA) _.
-  by rewrite mulnK.
-move=> i; move: (hV i); rewrite (hsumV i) hsum2 => hVi.
-have hVB : (\sum_(j < D) a j) * #|C :&: E i|
-         <= \sum_(j < D) a j * #|cls j :&: E i| + (\sum_(j < D) a j) * Bmix.
-  apply: leq_trans hVi _; rewrite leq_add2l.
-  by apply: leq_mul.
-have keyB : #|C :&: E i| * D <= #|E i| + Bmix * D.
-  rewrite -(leq_pmul2l hL) mulnA mulnDr [X in _ + X]mulnA.
-  have -> : (\sum_(j < D) a j) * #|E i|
-          = (\sum_(j < D) a j * #|cls j :&: E i|) * D.
-    by rewrite (hi i) mulnC.
-  by rewrite -mulnDl leq_pmul2r.
-rewrite addnC -leq_subLR leq_divRL // mulnBl leq_subLR addnC.
-exact: keyB.
-Qed.
-
 End Assembly.
 
-(** ** The approximate fair matching, in the vocabulary of [X15] *)
 
-Theorem x15_approx_fair_proof (m : nat) : x15_approx_fair m (Bmix m).
+Lemma sub_matching (G : sgraph) (M M' : {set {set G}}) :
+  M' \subset M -> matching M -> matching M'.
 Proof.
-move=> G E [f fP] dpos famE.
+move=> hsub [h1 h2]; split; first by move=> e he; apply: h1; exact: (subsetP hsub).
+by move=> e1 e2 h1' h2'; apply: h2; exact: (subsetP hsub).
+Qed.
+
+Definition gd (s : bool) : 'I_2 := if s then inord 1 else ord0.
+
+Lemma gdE (x : 'I_2) (s : bool) : (x == gd s) = ((x == ord0) == ~~ s).
+Proof.
+rewrite -!val_eqE /gd; case: s => /=; last by case: (val x).
+by rewrite inordK //; case: x => [[|[|i]] hi].
+Qed.
+
+(** ** One pair inside a round *)
+
+Section PairRound.
+Variables (G : sgraph) (f : G -> bool) (m : nat) (W : 'I_m -> {set {set G}}).
+Hypothesis bipf : forall x y : G, x -- y -> f x != f y.
+Variables (A B : {set {set G}}).
+Hypothesis mA : matching A.
+Hypothesis mB : matching B.
+Variables (a : seq 'I_2) (gty : nat -> 'I_#|{: bool * 'I_m.+1}|.+1).
+Variables (rm : pred nat) (off : nat).
+
+Local Notation es := (bl f A B).
+Local Notation N := (size (bl f A B)).
+Local Notation nul := (tnull m).
+Local Notation seg := (take (size (bl f A B) * m.+1) (drop off a)).
+
+Hypothesis hoff : off + N * m.+1 <= size a.
+Hypothesis hgty : forall p, p < N * m.+1 ->
+  gty (off + p) = (if rm (off + p) then nul else beadty f A B W p).
+
+(** the thief of position [p] of this pair *)
+Definition rbth (p : nat) : 'I_2 := nth ord0 a (off + p).
+
+Definition runan (j : nat) : bool :=
+  all (fun l => rbth (j * m.+1 + l) == rbth (j * m.+1)) (iota 0 m.+1).
+Definition rrmd (j : nat) : bool := has (fun l => rm (off + (j * m.+1 + l))) (iota 0 m.+1).
+Definition rkeep (j : nat) : bool := runan j && ~~ rrmd j.
+Definition rkeepE (e : {set G}) : bool := rkeep (index e es).
+
+(** [rhnr e]: the *head* bead of [e]'s group was not removed.  Vacuously true
+    off [es]; in particular on [A :&: B] ([set_rhnr]).  Removing a head bead is
+    removing a bead of a *size* type, and such an edge is already absent from
+    the exact half, so it must not be charged a second time in the ledger. *)
+Definition rhnr (e : {set G}) : bool :=
+  (e \notin SS A B) || ~~ rm (off + (index e es) * m.+1).
+
+(** a removal at a *class* bead of [e]'s group, i.e. strictly inside it *)
+Definition rrmdc (j : nat) : bool :=
+  has (fun l => rm (off + (j * m.+1 + l))) (iota 1 m).
+
+Lemma rrmdE (j : nat) : rrmd j = rm (off + j * m.+1) || rrmdc j.
+Proof. by rewrite /rrmd /rrmdc -[iota 0 m.+1]/(0 :: iota 1 m) /= addn0. Qed.
+
+Lemma set_rhnr : [set e in A :&: B | rhnr e] = A :&: B.
+Proof.
+apply/setP => e; rewrite memsetP.
+case: (boolP (e \in A :&: B)) => he /=; last by [].
+by rewrite /rhnr (AB_SS he).
+Qed.
+
+Definition rBad : {set {set G}} := [set e in SS A B | ~~ rkeepE e].
+Definition rCr : {set {set G}} := Chalf f A B m (drop off a) :\: rBad.
+
+Definition rYc (s : bool) (l : 'I_m.+1) : nat :=
+  count (fun p => (gty (off + p) == tix s l) && (nth ord0 a (off + p) == gd s))
+        (iota 0 (N * m.+1)).
+
+(** *** the pair's matching *)
+
+Lemma rCr_matching : matching rCr.
+Proof.
+apply: (sub_matching (M := Chalf f A B m (drop off a))); first exact: subsetDl.
+exact: (Chalf_matching m bipf mA mB).
+Qed.
+
+(** *** positional form of [rYc] *)
+
+Lemma rbth_seg (p : nat) : p < N * m.+1 -> nth ord0 seg p = rbth p.
+Proof. by move=> hp; rewrite nth_take // nth_drop. Qed.
+
+Lemma size_seg : size seg = N * m.+1.
+Proof.
+rewrite size_take size_drop.
+have hoa : off <= size a by apply: leq_trans hoff; exact: leq_addr.
+have h : N * m.+1 <= size a - off by rewrite -(leq_add2l off) subnKC.
+by case: ltnP => // h2; apply/eqP; rewrite eqn_leq h2 h.
+Qed.
+
+Lemma rYcE (s : bool) (l : 'I_m.+1) :
+  rYc s l = \sum_(j < N)
+    ((wpred W l (nth set0 es j) && (sd B (nth set0 es j) == s)
+      && (~~ rm (off + (j * m.+1 + val l)) && (nth ord0 a (off + (j * m.+1 + val l)) == gd s)))
+     : nat).
+Proof.
+rewrite /rYc count_iota_blocks; apply: eq_bigr => j _.
+rewrite -(count_block_tix_gen f A B W j s l
+            (fun p => ~~ rm (off + p) && (nth ord0 a (off + p) == gd s))).
+apply: eq_in_count => l'; rewrite mem_iota /= add0n => hl'.
+have hp : j * m.+1 + l' < N * m.+1 by apply: pos_lt => //; exact: ltn_ord j.
+rewrite (hgty hp); case: ifP => hr /=; last by [].
+by rewrite eq_sym tix_null andbF.
+Qed.
+
+(** *** the edges of the pair, indexed by position in [es] *)
+
+Lemma r_index (j : nat) : j < N -> index (nth set0 es j) es = j.
+Proof. by move=> hj; rewrite index_uniq // (uniq_bl bipf mA mB). Qed.
+
+Lemma r_mem (j : nat) : j < N -> nth set0 es j \in SS A B.
+Proof. by move=> hj; rewrite -(mem_bl bipf mA mB) mem_nth. Qed.
+
+Lemma r_bth_drop (p : nat) : nth ord0 (drop off a) p = rbth p.
+Proof. by rewrite nth_drop. Qed.
+
+Lemma r_selE (j : nat) : j < N ->
+  sel f A B m (drop off a) (nth set0 es j)
+  = (rbth (j * m.+1) == gd (sd B (nth set0 es j))).
+Proof.
+move=> hj; set e := nth set0 es j.
+have he : e \in SS A B by exact: r_mem.
+have hth : thE f A B m (drop off a) e = (rbth (j * m.+1) == ord0).
+  by rewrite /thE r_index // /thj /bth r_bth_drop.
+rewrite gdE /sel hth /sd.
+case/orP: (SSP he) => hs.
+  have hA : e \in A := @SA_A _ _ _ _ hs.
+  have hB : (e \in B) = false by apply/negbTE; move: hs; rewrite inE => /andP[].
+  by rewrite hA hB /= eqb_id.
+have hB : e \in B := @SB_B _ _ _ _ hs.
+have hA : (e \in A) = false by apply/negbTE; move: hs; rewrite inE => /andP[].
+by rewrite hA hB /= eqbF_neg.
+Qed.
+
+(** *** the class bound *)
+
+Lemma r_count_class (l : 'I_m.+1) :
+  count (fun e => sel f A B m (drop off a) e && (rkeepE e && wpred W l e)) es
+  <= rYc false l + rYc true l.
+Proof.
+rewrite -(sum_ord_count set0 es) !rYcE -big_split /=.
+apply: leq_sum => j _; set e := nth set0 es j.
+have hj : j < N by exact: ltn_ord.
+case: (boolP (sel f A B m (drop off a) e && (rkeepE e && wpred W l e))) => [hc|_] //=.
+move: hc => /andP[hsel /andP[hkeep hw]].
+have hk : rkeep j by move: hkeep; rewrite /rkeepE r_index.
+have hun : rbth (j * m.+1 + val l) == rbth (j * m.+1).
+  move: hk => /andP[/allP hall _]; apply: hall.
+  by rewrite mem_iota /= add0n ltn_ord.
+have hnr : ~~ rm (off + (j * m.+1 + val l)).
+  move: hk => /andP[_]; apply: contra => hr.
+  by apply/hasP; exists (val l) => //; rewrite mem_iota /= add0n ltn_ord.
+have hgood : nth ord0 a (off + (j * m.+1 + val l)) == gd (sd B e).
+  by rewrite -/(rbth _) (eqP hun) -(r_selE hj).
+case: (sd B e) hgood => hgood; rewrite ?addn0 ?add0n.
+  by rewrite hw /= hnr hgood.
+by rewrite hw /= hnr hgood.
+Qed.
+
+(** *** the size bound *)
+
+Lemma r_count_size :
+  rYc false ord0 + rYc true ord0
+  <= count (fun e => sel f A B m (drop off a) e && rhnr e) es.
+Proof.
+rewrite -(sum_ord_count set0 es) !rYcE -big_split /=.
+apply: leq_sum => j _; set e := nth set0 es j.
+have hj : j < N by exact: ltn_ord.
+have he : e \in SS A B by exact: r_mem.
+have hi : index e es = j by exact: r_index.
+rewrite (r_selE hj) /rhnr he /= hi /=.
+rewrite !wpred0 !addn0 /=.
+by case: (rm (off + j * m.+1)); case: (sd B e) => /=;
+   rewrite ?andbF ?andbT //=; case: (_ == _).
+Qed.
+
+(** *** cuts inside the pair's segment *)
+
+Lemma r_cuts_seg :
+  cuts_seq seg
+  = count (fun p => (p.+1 < N * m.+1) && (rbth p != rbth p.+1)) (iota 0 (N * m.+1)).
+Proof.
+rewrite (cuts_seq_nth ord0) size_seg; apply: eq_in_count => k.
+rewrite mem_iota /= add0n => hk.
+case: (boolP (k.+1 < N * m.+1)) => hk1 /=; last by [].
+by rewrite !rbth_seg.
+Qed.
+
+Lemma r_block_lt (j i : nat) : j < N -> i < m.+1 -> j * m.+1 + i < N * m.+1.
+Proof. by move=> hj hi; exact: pos_lt. Qed.
+
+Lemma r_block_cut (j : nat) : j < N -> ~~ runan j ->
+  0 < count (fun i => (j * m.+1 + i.+1 < N * m.+1)
+                      && (rbth (j * m.+1 + i) != rbth (j * m.+1 + i.+1))) (iota 0 m).
+Proof.
+move=> hj; rewrite /runan -has_predC => /hasP[l]; rewrite mem_iota /= add0n => hl hne.
+apply: (leq_trans (_ : _ <= count (fun i => rbth (j * m.+1 + i)
+                                         != rbth (j * m.+1 + i.+1)) (iota 0 l))).
+  apply: (leq_trans (_ : _ <= ((rbth (j * m.+1 + 0) != rbth (j * m.+1 + l)) : nat))).
+    by rewrite addn0 eq_sym hne.
+  exact: (diff_count (fun i => rbth (j * m.+1 + i)) l).
+apply: (leq_trans (_ : _ <= count (fun i => rbth (j * m.+1 + i)
+                                         != rbth (j * m.+1 + i.+1)) (iota 0 m))).
+  by apply: count_iota_le; rewrite -ltnS.
+apply: eq_leq; apply: eq_in_count => i; rewrite mem_iota /= add0n => hi.
+have hlt : j * m.+1 + i.+1 < N * m.+1.
+  apply: (leq_ltn_trans (_ : j * m.+1 + i.+1 <= j * m.+1 + m)).
+    by rewrite leq_add2l.
+  by apply: r_block_lt.
+by rewrite hlt.
+Qed.
+
+(** Superseded by [r_nonunan_int], which charges the non-unanimous edges to the
+    *interior* cuts only; kept as the coarse bound. *)
+Lemma r_nonunan_cuts : count (fun j => ~~ runan j) (iota 0 N) <= cuts_seq seg.
+Proof.
+rewrite r_cuts_seg count_iota_sum count_iota_blocks.
+apply: leq_sum => j _.
+have hj : j < N by exact: ltn_ord.
+case: (boolP (runan j)) => hu; first by [].
+apply: (leq_trans (leq_b1 _)).
+apply: (leq_trans (r_block_cut hj hu)).
+rewrite (@eq_in_count _ _ (fun i => (j * m.+1 + i.+1 < N * m.+1)
+          && (rbth (j * m.+1 + i) != rbth (j * m.+1 + i.+1))) (iota 0 m.+1));
+  first exact: count_iota_le.
+by move=> i _; rewrite -addnS.
+Qed.
+
+Lemma r_cuts_thE :
+  cuts_seq [seq thE f A B m (drop off a) e | e <- es] <= cuts_seq seg.
+Proof.
+rewrite (map_thE_es m bipf mA mB) (cuts_seq_map_nth 0) size_iota r_cuts_seg.
+rewrite (@eq_in_count _ _ (fun k => (k.+1 < N) && (thj m (drop off a) k
+                                                != thj m (drop off a) k.+1))); last first.
+  move=> k; rewrite mem_iota /= add0n => hk.
+  case: (boolP (k.+1 < N)) => hk1 /=; last by [].
+  by rewrite !nth_iota // ?add0n //; apply: ltn_trans hk1.
+rewrite [X in X <= _]count_iota_sum count_iota_blocks.
+apply: leq_sum => j _.
+have hj : j < N by exact: ltn_ord.
+case: (boolP (j.+1 < N)) => hj1; last by [].
+apply: (leq_trans (_ : _ <= ((rbth (j * m.+1) != rbth (j * m.+1 + m.+1)) : nat))).
+  rewrite andTb /thj /bth !r_bth_drop (_ : j.+1 * m.+1 = j * m.+1 + m.+1);
+    last by rewrite mulSnr.
+  case: (altP (rbth (j * m.+1) =P rbth (j * m.+1 + m.+1))) => [heq|hne];
+    first by rewrite heq eqxx.
+  exact: leq_b1.
+apply: (leq_trans (_ : _ <= count (fun i => rbth (j * m.+1 + i)
+                                         != rbth (j * m.+1 + i.+1)) (iota 0 m.+1))).
+  rewrite -{1}(addn0 (j * m.+1)).
+  exact: (diff_count (fun i => rbth (j * m.+1 + i)) m.+1).
+apply: eq_leq; apply: eq_in_count => i; rewrite mem_iota /= add0n => hi.
+have hlt : j * m.+1 + i.+1 < N * m.+1.
+  apply: (leq_ltn_trans (_ : j * m.+1 + i.+1 <= j * m.+1 + m.+1));
+    first by rewrite leq_add2l.
+  by rewrite -mulSnr ltn_mul2r /= hj1.
+by rewrite -addnS hlt.
+Qed.
+
+(** Superseded by [r_Pk_cuts], which charges only the conflicts between *kept*
+    edges, to boundary cuts; kept as the coarse bound. *)
+Lemma r_Psrc_cuts : #|Psrc f A B m (drop off a)| <= 2 * cuts_seq seg.
+Proof.
+apply: (leq_trans (_ : _ <= 2 * cuts_seq [seq thE f A B m (drop off a) e | e <- es]));
+  last by rewrite leq_pmul2l //; exact: r_cuts_thE.
+pose P := fun e : {set G} => (e \in SS A B) && (sel f A B m (drop off a) e
+            && ((nxt f A B e != set0) && (nxt f A B e \in Csel f A B m (drop off a)))).
+have hP : #|Psrc f A B m (drop off a)| = count P es.
+  rewrite (@card_seq_count _ es (SS A B) _ (uniq_bl bipf mA mB) (mem_bl bipf mA mB)).
+  apply: eq_in_count => e; rewrite (mem_bl bipf mA mB) => he.
+  by rewrite /P he.
+rewrite hP.
+apply: (conflict_count bipf mA mB) => e /and4P[he hs hn hin].
+split=> //.
+apply: (@sel_opp _ _ _ _ _ _ _ he hn hs).
+by move: hin; rewrite mem_Csel => /andP[].
+Qed.
+
+Lemma r_rmd_count :
+  count (fun j => rrmdc j) (iota 0 N)
+  <= count (fun p => rm (off + p) && (p %% m.+1 != 0)) (iota 0 (N * m.+1)).
+Proof.
+rewrite count_iota_sum count_iota_blocks; apply: leq_sum => j _.
+have hQ : count (fun l => rm (off + (j * m.+1 + l))
+                          && ((j * m.+1 + l) %% m.+1 != 0)) (iota 0 m.+1)
+        = count (fun l => rm (off + (j * m.+1 + l))) (iota 1 m).
+  rewrite -[iota 0 m.+1]/(0 :: iota 1 m) /= modnMDl mod0n eqxx andbF add0n.
+  apply: eq_in_count => l; rewrite mem_iota /= add1n => /andP[hl1 hl2].
+  by rewrite modnMDl (modn_small hl2) -lt0n hl1 andbT.
+rewrite hQ /rrmdc has_count.
+by case: (count (fun l => rm (off + (j * m.+1 + l))) (iota 1 m)).
+Qed.
+
+Lemma r_keep_count :
+  count (fun e => rhnr e && ~~ rkeepE e) es
+  <= count (fun j => ~~ runan j) (iota 0 N) + count (fun j => rrmdc j) (iota 0 N).
+Proof.
+rewrite -(sum_ord_count set0 es) !count_iota_sum -big_split /=.
+apply: leq_sum => j _; set e := nth set0 es j.
+have hj : j < N by exact: ltn_ord.
+have he : e \in SS A B by exact: r_mem.
+have hi : index e es = j by exact: r_index.
+rewrite /rkeepE hi /rhnr he /= hi /rkeep negb_and negbK rrmdE.
+by case: (rm (off + j * m.+1)); case: (runan j); case: (rrmdc j).
+Qed.
+
+(** *** interior cuts versus boundary cuts
+
+    A cut strictly inside an edge's bead group makes that edge non-unanimous
+    (it is thrown away); a cut at the boundary between two groups is what a
+    conflict between two *kept* edges needs.  The two are disjoint. *)
+
+Definition rQbnd (p : nat) : bool :=
+  ((p.+1 < N * m.+1) && (rbth p != rbth p.+1)) && (p %% m.+1 == m).
+Definition rQint (p : nat) : bool :=
+  ((p.+1 < N * m.+1) && (rbth p != rbth p.+1)) && (p %% m.+1 != m).
+
+Lemma r_cuts_split :
+  count rQbnd (iota 0 (N * m.+1)) + count rQint (iota 0 (N * m.+1)) = cuts_seq seg.
+Proof.
+by rewrite r_cuts_seg (count_split (iota 0 (N * m.+1))
+     (fun p => (p.+1 < N * m.+1) && (rbth p != rbth p.+1))
+     (fun p => p %% m.+1 == m)).
+Qed.
+
+Lemma r_mod_block (j i : nat) : i < m.+1 -> (j * m.+1 + i) %% m.+1 = i.
+Proof. by move=> hi; rewrite modnMDl modn_small. Qed.
+
+Lemma r_nonunan_int :
+  count (fun j => ~~ runan j) (iota 0 N) <= count rQint (iota 0 (N * m.+1)).
+Proof.
+rewrite count_iota_sum count_iota_blocks.
+apply: leq_sum => j _.
+have hj : j < N by exact: ltn_ord.
+case: (boolP (runan j)) => hu; first by [].
+apply: (leq_trans (leq_b1 _)).
+apply: (leq_trans (r_block_cut hj hu)).
+apply: (leq_trans (_ : _ <= count (fun l => rQint (j * m.+1 + l)) (iota 0 m)));
+  last exact: count_iota_le.
+apply: eq_leq; apply: eq_in_count => i; rewrite mem_iota /= add0n => hi.
+have hi1 : i < m.+1 by exact: (ltn_trans hi (ltnSn m)).
+rewrite /rQint -addnS r_mod_block // ltn_eqF //.
+by rewrite andbT !addnS.
+Qed.
+
+(** *** the conflicting edges that are kept *)
+
+Definition rPkp (e : {set G}) : bool :=
+  (sel f A B m (drop off a) e
+   && ((nxt f A B e != set0) && (nxt f A B e \in Csel f A B m (drop off a))))
+  && rkeepE e.
+
+Definition rlin (e : {set G}) : bool := nxt f A B e == nth set0 es (index e es).+1.
+
+Lemma r_thE_nth (j : nat) : j < N ->
+  thE f A B m (drop off a) (nth set0 es j) = (rbth (j * m.+1) == ord0).
+Proof. by move=> hj; rewrite /thE r_index // /thj /bth r_bth_drop. Qed.
+
+Lemma r_lin_bnd :
+  count (fun e => rPkp e && rlin e) es <= count rQbnd (iota 0 (N * m.+1)).
+Proof.
+rewrite -(sum_ord_count set0 es) count_iota_blocks.
+apply: leq_sum => j _.
+have hj : j < N by exact: ltn_ord.
+set e := nth set0 es j.
+case: (boolP (rPkp e && rlin e)) => [/andP[hP hlin]|_]; last by [].
+move: hP => /andP[/andP[hsel /andP[hn0 hin]] hkeep].
+have hj1 : j.+1 < N.
+  case: (ltnP j.+1 N) => // hge; move: hn0.
+  by rewrite (eqP hlin) /es r_index // nth_default ?eqxx.
+have hthne : thE f A B m (drop off a) e != thE f A B m (drop off a) (nxt f A B e).
+  apply: (@sel_opp _ _ _ _ _ _ _ (r_mem hj) hn0 hsel).
+  by move: hin; rewrite mem_Csel => /andP[].
+have hun : rbth (j * m.+1 + m) = rbth (j * m.+1).
+  move: hkeep; rewrite /rkeepE r_index // => /andP[/allP hall _].
+  by apply/eqP; apply: hall; rewrite mem_iota /= add0n ltnSn.
+rewrite -has_count.
+apply/hasP; exists m; first by rewrite mem_iota /= add0n ltnSn.
+have hsucc : (j * m.+1 + m).+1 = j.+1 * m.+1 by rewrite -addnS mulSnr.
+rewrite /rQbnd hsucc r_mod_block ?ltnSn // eqxx andbT.
+rewrite (_ : j.+1 * m.+1 < N * m.+1); last by rewrite ltn_mul2r /= hj1.
+rewrite andTb hun.
+apply: contra hthne => /eqP heq.
+by rewrite -/e (r_thE_nth hj) (eqP hlin) /es r_index // (r_thE_nth hj1) heq.
+Qed.
+
+Lemma r_wrap_last (b : seq {set G}) (k : nat) :
+  b \in blocks f A B -> k.+1 < size b ->
+  ~~ (rPkp (nth set0 b k) && ~~ rlin (nth set0 b k)).
+Proof.
+move=> hb hk; apply/negP => /andP[hP hnl].
+move: hP => /andP[/andP[_ /andP[hn0 _]] _].
+have hkk : k < size b by apply: ltn_trans hk; exact: ltnSn.
+have hs : nxt f A B (nth set0 b k) = nth set0 b k.+1.
+  by rewrite -(sigma_nxt hn0) (block_nth bipf mA mB hb hkk) modn_small.
+by move: hnl; rewrite /rlin (bl_block_succ bipf mA mB hb hk) hs eqxx.
+Qed.
+
+Lemma r_wrap_block (b : seq {set G}) :
+  b \in blocks f A B ->
+  count (fun e => rPkp e && ~~ rlin e) b
+  <= cuts_seq [seq thE f A B m (drop off a) e | e <- b].
+Proof.
+move=> hb.
+set Wp := fun e => rPkp e && ~~ rlin e.
+have hn : 0 < size b by exact: (block_size hb).
+have hle1 : count Wp b <= 1.
+  rewrite -(count_nth_iota set0 b Wp) count_iota_sum.
+  apply: (leq_trans (_ : _ <=
+     \sum_(j < size b) ((nat_of_ord j == (size b).-1 : bool) : nat))); last first.
+    rewrite -big_mkcond /= sum1dep_card.
+    apply/card_le1P => x y.
+    move: y; rewrite inE => /eqP hx z; rewrite !inE.
+    apply/idP/idP => [/eqP hz|/eqP ->]; last by rewrite hx.
+    by apply/eqP; apply: val_inj; rewrite /= hz hx.
+  apply: leq_sum => j _.
+  case: (boolP (Wp (nth set0 b j))) => hW //=.
+  have hj : j < size b by exact: ltn_ord.
+  have hnl : ~~ (j.+1 < size b).
+    apply/negP => hlt.
+    have := r_wrap_last hb hlt.
+    by rewrite -/(Wp _) (eqP (introT eqP hW)).
+  rewrite lt0n eqb0 negbK.
+  move: hnl; rewrite -leqNgt => hnl.
+  rewrite eqn_leq.
+  apply/andP; split; first by rewrite -ltnS prednK.
+  by rewrite -ltnS prednK // ltnS -ltnS prednK.
+case: (posnP (count Wp b)) => [-> //|hpos].
+apply: (leq_trans hle1).
+rewrite (cuts_seq_map_nth set0).
+apply/negPn/negP; rewrite -ltnNge ltnS leqn0 => /eqP h0.
+have hconst : forall j, j < size b ->
+    thE f A B m (drop off a) (nth set0 b j)
+  = thE f A B m (drop off a) (nth set0 b 0).
+  apply: (@const_iota _ (fun i => thE f A B m (drop off a) (nth set0 b i)) (size b)).
+  exact: h0.
+move: hpos; rewrite -has_count => /hasP[e he hWe].
+set j := index e b.
+have hj : j < size b by rewrite index_mem.
+have hej : nth set0 b j = e by rewrite nth_index.
+have hnl : ~~ (j.+1 < size b).
+  apply/negP => hlt.
+  have := r_wrap_last hb hlt.
+  by rewrite hej -/(Wp e) hWe.
+have hjl : j.+1 = size b.
+  move: hnl; rewrite -leqNgt => hnl.
+  by apply/eqP; rewrite eqn_leq hnl hj.
+move: hWe => /andP[hP _]; move: hP => /andP[/andP[hsel /andP[hn0 hin]] _].
+have hnxt : nxt f A B e = nth set0 b 0.
+  by rewrite -(sigma_nxt hn0) -hej (block_nth bipf mA mB hb hj) hjl modnn.
+have hthne : thE f A B m (drop off a) e != thE f A B m (drop off a) (nxt f A B e).
+  apply: (@sel_opp _ _ _ _ _ _ _ _ hn0 hsel).
+    by apply: (block_sub bipf mA mB hb he).
+  by move: hin; rewrite mem_Csel => /andP[].
+by move: hthne; rewrite hnxt -hej (hconst j hj) eqxx.
+Qed.
+
+Lemma r_wrap_cuts :
+  count (fun e => rPkp e && ~~ rlin e) es <= cuts_seq seg.
+Proof.
+apply: (leq_trans (_ : _ <= cuts_seq [seq thE f A B m (drop off a) e | e <- es]));
+  last exact: r_cuts_thE.
+rewrite /es /bl count_flatten sumnE big_map.
+apply: (leq_trans (_ : _ <= \sum_(b <- blocks f A B)
+                     cuts_seq [seq thE f A B m (drop off a) e | e <- b])); last first.
+  rewrite map_flatten
+    -(big_map (fun b => [seq thE f A B m (drop off a) e | e <- b]) xpredT
+              (fun s : seq bool => cuts_seq s)).
+  exact: cuts_seq_flatten.
+rewrite big_seq_cond [X in _ <= X]big_seq_cond.
+by apply: leq_sum => b /andP[hb _]; exact: r_wrap_block.
+Qed.
+
+(** *** the two set-level bounds *)
+
+Definition rPk : {set {set G}} := [set e in SS A B | rPkp e].
+
+Lemma r_Pk_cuts :
+  #|rPk| <= count rQbnd (iota 0 (N * m.+1)) + cuts_seq seg.
+Proof.
+rewrite (@card_seq_count _ es (SS A B) _ (uniq_bl bipf mA mB) (mem_bl bipf mA mB)).
+rewrite (count_split es rPkp rlin).
+by apply: leq_add; [exact: r_lin_bnd | exact: r_wrap_cuts].
+Qed.
+
+Lemma rCr_card_le (P : pred {set G}) :
+  #|[set e in rCr | P e]|
+  <= #|[set e in A :&: B | P e]|
+     + count (fun e => sel f A B m (drop off a) e && (rkeepE e && P e)) es.
+Proof.
+rewrite -(card_Csel_count m bipf mA mB (drop off a) (fun e => rkeepE e && P e)).
+apply: (leq_trans (_ : _ <= #|[set e in A :&: B | P e]
+                             :|: [set e in Csel f A B m (drop off a) | rkeepE e && P e]|));
+  last by apply: (leq_trans (leq_card_setU _ _).1).
+apply: subset_leq_card; apply/subsetP => e.
+rewrite memsetP in_setD /rCr => /andP[/andP[hb hch] hP].
+rewrite inE !memsetP.
+move: hch; rewrite /Chalf inE => /orP[hab|hcs]; first by rewrite -in_setI hab hP.
+have hcsel : e \in Csel f A B m (drop off a) by move: hcs; rewrite inE => /andP[].
+have hss : e \in SS A B by exact: (Csel_SS hcsel).
+have hk : rkeepE e by move: hb; rewrite /rBad memsetP hss /= negbK.
+move: hcsel; rewrite mem_Csel => /andP[_ hsel].
+by rewrite hss hsel hk hP orbT.
+Qed.
+
+Lemma rCr_card_ge (P : pred {set G}) :
+  #|[set e in A :&: B | P e]| + count (fun e => sel f A B m (drop off a) e && P e) es
+  <= #|[set e in rCr | P e]| + #|rPk| + count (fun e => P e && ~~ rkeepE e) es.
+Proof.
+rewrite -(card_Csel_count m bipf mA mB (drop off a) P).
+have hdisj : [set e in A :&: B | P e]
+             :&: [set e in Csel f A B m (drop off a) | P e] = set0.
+  apply/setP => e; rewrite !inE.
+  by case: (e \in A); case: (e \in B); rewrite //= ?andbF.
+have hsum : #|[set e in A :&: B | P e]|
+          + #|[set e in Csel f A B m (drop off a) | P e]|
+          = #|[set e in A :&: B | P e]
+              :|: [set e in Csel f A B m (drop off a) | P e]|.
+  by rewrite cardsU hdisj cards0 subn0.
+rewrite hsum.
+apply: (leq_trans (_ : _ <= #|([set e in rCr | P e] :|: rPk) :|: [set e in SS A B | P e && ~~ rkeepE e]|)); last first.
+  apply: (leq_trans (leq_card_setU _ _).1).
+  rewrite (@card_seq_count _ es (SS A B) _ (uniq_bl bipf mA mB) (mem_bl bipf mA mB))
+          leq_add2r.
+  exact: (leq_card_setU _ _).1.
+apply: subset_leq_card; apply/subsetP => e.
+rewrite in_setU !memsetP => /orP[] /andP[hmem hP]; rewrite !in_setU.
+  have hmemI : e \in A :&: B by rewrite in_setI hmem.
+  have hnb : e \notin rBad by rewrite /rBad memsetP negb_and negbK (AB_SS hmemI).
+  rewrite memsetP hP andbT /rCr in_setD hnb /=.
+  by rewrite /Chalf in_setU hmemI.
+move: hmem => /andP[hss hsel].
+case: (boolP (e \in [set e0 in SS A B | P e0 && ~~ rkeepE e0])) => hb;
+  first by rewrite orbT.
+have hkeep : rkeepE e.
+  by move: hb; rewrite memsetP hss /= negb_and hP /= negbK.
+have hnb : e \notin rBad by rewrite /rBad memsetP hss /= negbK.
+case: (boolP (e \in Psrc f A B m (drop off a))) => hps.
+  have hpk : e \in rPk.
+    rewrite /rPk memsetP hss /= /rPkp hkeep andbT.
+    by move: hps; rewrite mem_Psrc => /andP[_].
+  by rewrite hpk orbT.
+rewrite memsetP hP andbT /rCr in_setD hnb /= /Chalf in_setU.
+rewrite in_setD hps /=.
+by rewrite mem_Csel hss hsel orbT.
+Qed.
+
+End PairRound.
+
+(** ** One round: all the pairs split by a single necklace splitting *)
+
+Section Round.
+Variables (G : sgraph) (f : G -> bool) (m : nat) (W : 'I_m -> {set {set G}}).
+Hypothesis bipf : forall x y : G, x -- y -> f x != f y.
+
+Local Notation MM := ({set {set G}}).
+Local Notation TY := ('I_#|{: bool * 'I_m.+1}|.+1).
+Local Notation nul := (tnull m).
+
+Definition plen (p : MM * MM) : nat := size (bl f p.1 p.2) * m.+1.
+
+Fixpoint gtys (ps : seq (MM * MM)) : seq TY :=
+  if ps is p :: ps' then creal f p.1 p.2 W ++ gtys ps' else [::].
+
+Lemma size_gtys (ps : seq (MM * MM)) : size (gtys ps) = \sum_(p <- ps) plen p.
+Proof.
+elim: ps => [|p ps IH]; first by rewrite big_nil.
+by rewrite /= size_cat size_creal IH big_cons.
+Qed.
+
+(** *** parity: retype one bead of each odd (non-null) type *)
+
+Definition rmvp (r : seq TY) (p : nat) : bool :=
+  [&& nth nul r p != nul, odd (count_mem (nth nul r p) r) & index (nth nul r p) r == p].
+
+Definition retys (r : seq TY) : seq TY :=
+  [seq (if rmvp r p then nul else nth nul r p) | p <- iota 0 (size r)].
+
+Definition csq (r : seq TY) : seq TY :=
+  retys r ++ nseq (odd (count_mem nul (retys r))) nul.
+
+Lemma size_retys (r : seq TY) : size (retys r) = size r.
+Proof. by rewrite size_map size_iota. Qed.
+
+Lemma nth_retys (r : seq TY) (p : nat) : p < size r ->
+  nth nul (retys r) p = (if rmvp r p then nul else nth nul r p).
+Proof. by move=> hp; rewrite (nth_map 0) ?size_iota // nth_iota. Qed.
+
+Lemma nth_csq (r : seq TY) (p : nat) : p < size r ->
+  nth nul (csq r) p = (if rmvp r p then nul else nth nul r p).
+Proof. by move=> hp; rewrite nth_cat size_retys hp nth_retys. Qed.
+
+Lemma size_csq (r : seq TY) : size r <= size (csq r).
+Proof. by rewrite size_cat size_retys leq_addr. Qed.
+
+Lemma count_retys (r : seq TY) (k : TY) : k != nul ->
+  count_mem k (retys r) = count_mem k r - (odd (count_mem k r) : nat).
+Proof.
+move=> hk.
+rewrite /retys count_map.
+rewrite (@eq_in_count _ _ (fun p => (nth nul r p == k) && ~~ rmvp r p)); last first.
+  move=> p _ /=.
+  case: ifP => hr /=; last by rewrite andbT.
+  by rewrite andbF eq_sym (negbTE hk).
+have hall : count (fun p => nth nul r p == k) (iota 0 (size r)) = count_mem k r.
+  exact: (count_nth_iota nul).
+have hsplit := count_split (iota 0 (size r)) (fun p => nth nul r p == k) (rmvp r).
+have hbad : count (fun p => (nth nul r p == k) && rmvp r p) (iota 0 (size r))
+          = (odd (count_mem k r) : nat).
+  case: (boolP (odd (count_mem k r))) => ho; last first.
+    rewrite (@eq_in_count _ _ pred0) ?count_pred0 // => p _ /=.
+    apply/negP => /andP[/eqP hnp /and3P[_ ho' _]].
+    by move: ho'; rewrite hnp (negbTE ho).
+  have hin : k \in r by rewrite -has_pred1 has_count; case: (count_mem k r) ho.
+  rewrite (@eq_in_count _ _ (pred1 (index k r))); last first.
+    move=> p _ /=; apply/idP/idP.
+      by move=> /andP[/eqP hnp /and3P[_ _ /eqP heq]]; rewrite -hnp heq.
+    move=> /eqP ->; rewrite nth_index //= eqxx /rmvp nth_index //.
+    by rewrite hk ho eqxx.
+  by rewrite count_uniq_mem ?iota_uniq // mem_iota /= add0n index_mem hin.
+rewrite -hall hsplit hbad.
+have hc : count_mem k r = (odd (count_mem k r) : nat)
+        + count (fun p => (nth nul r p == k) && ~~ rmvp r p) (iota 0 (size r)).
+  by rewrite -hbad -hsplit hall.
+rewrite -hc.
+have hle : (odd (count_mem k r) : nat) <= count_mem k r.
+  by case: (boolP (odd (count_mem k r))) => ho; [case: (count_mem k r) ho|].
+apply/eqP; rewrite -(eqn_add2r ((odd (count_mem k r)) : nat)) (subnK hle).
+by rewrite [X in _ == X]hc addnC.
+Qed.
+
+Lemma csq_even (r : seq TY) (k : TY) : 2 %| count_mem k (csq r).
+Proof.
+rewrite /csq count_cat dvdn2.
+case: (altP (k =P nul)) => [->|hk].
+  by rewrite count_nseq /= eqxx mul1n oddD; case: (odd _).
+rewrite count_nseq.
+rewrite /= eq_sym (negbTE hk) mul0n addn0 count_retys //.
+case: (boolP (odd (count_mem k r))) => ho; last by rewrite subn0 (negbTE ho).
+by rewrite oddB ?ho //; case: (count_mem k r) ho.
+Qed.
+
+Lemma card_TY : #|TY| = (2 * m.+1).+1.
+Proof. by rewrite card_ord card_TT. Qed.
+
+Lemma size_class_types :
+  size [seq k <- enum TY | [&& k != nul, k != tix false ord0 & k != tix true ord0]]
+  = 2 * m.
+Proof.
+have h1 : (nul == tix false ord0) = false by rewrite eq_sym tix_null.
+have h2 : (nul == tix true ord0) = false by rewrite eq_sym tix_null.
+have h3 : (tix false (@ord0 m) == tix true (@ord0 m)) = false by rewrite tixE.
+pose L : seq TY := [:: nul; tix false ord0; tix true ord0].
+have hu : uniq L by rewrite /L /= !inE h1 h2 h3.
+have hmem : L =i [seq k <- enum TY | k \in L].
+  by move=> x; rewrite mem_filter mem_enum andbT.
+have hsz := uniq_size_uniq hu hmem.
+have hsz3 : size [seq k <- enum TY | k \in L] = 3.
+  by apply/eqP; rewrite -hsz filter_uniq // enum_uniq.
+have hC := count_predC (fun k : TY => k \in L) (enum TY).
+rewrite -!size_filter -cardE card_TY hsz3 in hC.
+rewrite (@eq_filter _ _ [predC L]); last by move=> k; rewrite /L /= !inE !negb_or.
+by apply/eqP; rewrite -(eqn_add2l 3) hC; apply/eqP; rewrite mulnS.
+Qed.
+
+(** Only the [2m] *class* types can be removed at a bead that is not the head
+    of its group: the head beads are exactly the ones carrying a *size* type. *)
+Lemma count_rmvp_class (r : seq TY) :
+  (forall q s, q %% m.+1 != 0 -> nth nul r q != tix s ord0) ->
+  count (fun q => rmvp r q && (q %% m.+1 != 0)) (iota 0 (size r)) <= 2 * m.
+Proof.
+move=> hcl; rewrite -size_filter.
+apply: (leq_trans (_ : _ <= size [seq k <- enum TY |
+          [&& k != nul, k != tix false ord0 & k != tix true ord0]])); last first.
+  by rewrite size_class_types.
+rewrite -(size_map (fun q => nth nul r q)).
+apply: uniq_leq_size.
+  rewrite map_inj_in_uniq ?filter_uniq ?iota_uniq // => q1 q2.
+  rewrite !mem_filter => /andP[/andP[/and3P[_ _ /eqP hp] _] _].
+  by move=> /andP[/andP[/and3P[_ _ /eqP hq] _] _] heq; rewrite -hp -hq heq.
+move=> k /mapP[q]; rewrite mem_filter mem_filter.
+move=> /andP[/andP[/and3P[hn _ _] hmod] _] ->.
+by rewrite mem_enum andbT hn (hcl q false hmod) (hcl q true hmod).
+Qed.
+
+(** Superseded by [count_rmvp_class]; kept as the coarse bound over all the
+    [2m+2] real types. *)
+Lemma count_rmvp (r : seq TY) : count (rmvp r) (iota 0 (size r)) <= 2 * m + 2.
+Proof.
+rewrite -size_filter.
+apply: (leq_trans (_ : _ <= size [seq k <- enum TY | k != nul])); last first.
+  rewrite size_filter.
+  have hcp := count_predC (pred1 nul) (enum TY).
+  rewrite count_uniq_mem ?enum_uniq // mem_enum /= -cardE card_TY in hcp.
+  rewrite (@eq_count _ _ (predC (pred1 nul))); last by move=> x /=.
+  move: hcp; set X := count _ _ => hcp.
+  by move: hcp; rewrite add1n mulnS => [] [->]; rewrite addnC.
+rewrite -(size_map (fun p => nth nul r p)).
+apply: uniq_leq_size.
+  rewrite map_inj_in_uniq ?filter_uniq ?iota_uniq // => p q.
+  rewrite !mem_filter => /andP[/and3P[_ _ /eqP hp] _] /andP[/and3P[_ _ /eqP hq] _] heq.
+  by rewrite -hp -hq heq.
+move=> k /mapP[p]; rewrite mem_filter mem_filter.
+by move=> /andP[/and3P[hn _ _] _] ->; rewrite mem_enum andbT.
+Qed.
+
+(** *** the pairs of one round, with a shared thief sequence *)
+
+Fixpoint rmatch (a : seq 'I_2) (rm : pred nat) (off : nat) (ps : seq (MM * MM)) : seq MM :=
+  if ps is p :: ps' then rCr f m p.1 p.2 a rm off :: rmatch a rm (off + plen p) ps'
+  else [::].
+
+Definition Ycnt (a : seq 'I_2) (gty : nat -> TY) (s : bool) (l : 'I_m.+1)
+    (off n : nat) : nat :=
+  count (fun q => (gty (off + q) == tix s l) && (nth ord0 a (off + q) == gd s)) (iota 0 n).
+
+Fixpoint gok (gty : nat -> TY) (rm : pred nat) (off : nat) (ps : seq (MM * MM)) : Prop :=
+  if ps is p :: ps'
+  then (forall q, q < plen p ->
+          gty (off + q) = (if rm (off + q) then nul else beadty f p.1 p.2 W q))
+       /\ gok gty rm (off + plen p) ps'
+  else True.
+
+Lemma YcntE (a : seq 'I_2) (gty : nat -> TY) (s : bool) (l : 'I_m.+1)
+    (off : nat) (p : MM * MM) :
+  Ycnt a gty s l off (plen p) = rYc f p.1 p.2 a gty off s l.
+Proof. by []. Qed.
+
+Lemma Ycnt_split (a : seq 'I_2) (gty : nat -> TY) (s : bool) (l : 'I_m.+1)
+    (off n1 n2 : nat) :
+  Ycnt a gty s l off (n1 + n2) = Ycnt a gty s l off n1 + Ycnt a gty s l (off + n1) n2.
+Proof.
+rewrite /Ycnt count_iota_split; congr (_ + _).
+by apply: eq_in_count => i _; rewrite addnA.
+Qed.
+
+Lemma round_ind (a : seq 'I_2) (gty : nat -> TY) (rm : pred nat)
+    (ps : seq (MM * MM)) (off : nat) :
+  (forall p, p \in ps -> matching p.1) -> (forall p, p \in ps -> matching p.2) ->
+  off + \sum_(p <- ps) plen p <= size a ->
+  gok gty rm off ps ->
+  [/\ size (rmatch a rm off ps) = size ps,
+      (forall C, C \in rmatch a rm off ps -> matching C),
+      (forall l : 'I_m.+1,
+        \sum_(C <- rmatch a rm off ps) #|[set e in C | wpred W l e]|
+        <= \sum_(p <- ps) #|[set e in p.1 :&: p.2 | wpred W l e]|
+           + Ycnt a gty false l off (\sum_(p <- ps) plen p)
+           + Ycnt a gty true l off (\sum_(p <- ps) plen p)) &
+      \sum_(p <- ps) #|p.1 :&: p.2|
+      + Ycnt a gty false ord0 off (\sum_(p <- ps) plen p)
+      + Ycnt a gty true ord0 off (\sum_(p <- ps) plen p)
+      <= \sum_(C <- rmatch a rm off ps) #|C|
+         + (2 * cuts_seq (take (\sum_(p <- ps) plen p) (drop off a))
+            + count (fun q => rm (off + q) && (q %% m.+1 != 0))
+                    (iota 0 (\sum_(p <- ps) plen p)))].
+Proof.
+elim: ps off => [|p ps IH] off hmA hmB hsz hg.
+  rewrite !big_nil /Ycnt /=.
+  split; [by [] | by move=> C | by move=> l; rewrite !big_nil | by []].
+rewrite !big_cons /= Ycnt_split [Ycnt a gty true _ _ _]Ycnt_split.
+have hmp1 : matching p.1 by apply: hmA; rewrite in_cons eqxx.
+have hmp2 : matching p.2 by apply: hmB; rewrite in_cons eqxx.
+have hmtA : forall q, q \in ps -> matching q.1.
+  by move=> q hq; apply: hmA; rewrite in_cons hq orbT.
+have hmtB : forall q, q \in ps -> matching q.2.
+  by move=> q hq; apply: hmB; rewrite in_cons hq orbT.
+move: hg => /= [hgp hgt].
+have hszt : off + plen p + \sum_(j <- ps) plen j <= size a.
+  by move: hsz; rewrite big_cons addnA.
+have hszp : off + plen p <= size a by apply: leq_trans hszt; exact: leq_addr.
+have [hs1 hs2 hs3 hs4] := IH (off + plen p) hmtA hmtB hszt hgt.
+have hcut : cuts_seq (take (plen p) (drop off a))
+          + cuts_seq (take (\sum_(j <- ps) plen j) (drop (off + plen p) a))
+         <= cuts_seq (take (plen p + \sum_(j <- ps) plen j) (drop off a)).
+  rewrite takeD drop_drop [plen p + off]addnC; exact: cuts_seq_cat.
+have hrm : count (fun q => rm (off + q) && (q %% m.+1 != 0))
+                 (iota 0 (plen p + \sum_(j <- ps) plen j))
+         = count (fun q => rm (off + q) && (q %% m.+1 != 0)) (iota 0 (plen p))
+         + count (fun q => rm (off + plen p + q) && (q %% m.+1 != 0))
+                 (iota 0 (\sum_(j <- ps) plen j)).
+  rewrite count_iota_split; congr (_ + _).
+  apply: eq_in_count => i _ /=; rewrite addnA.
+  by rewrite /plen modnMDl.
+split; first by rewrite hs1.
+- move=> C; rewrite in_cons => /orP[/eqP ->|hC]; last exact: hs2.
+  exact: (@rCr_matching _ f m bipf p.1 p.2 hmp1 hmp2 a rm off).
+- move=> l; rewrite !big_cons !Ycnt_split !YcntE.
+  have h1 := @rCr_card_le _ f m bipf p.1 p.2 hmp1 hmp2 a rm off (wpred W l).
+  have h2 := @r_count_class _ f m W bipf p.1 p.2 hmp1 hmp2 a gty rm off hgp l.
+  have h3 := hs3 l.
+  apply: (leq_trans (leq_add h1 h3)).
+  apply: (leq_trans (leq_add (leq_add (leqnn _) h2) (leqnn _))).
+  apply: eq_leq.
+  set D := #|[set e in p.1 :&: p.2 | wpred W l e]|.
+  set Rf := rYc f p.1 p.2 a gty off false l.
+  set Rt := rYc f p.1 p.2 a gty off true l.
+  set Sp := \sum_(p0 <- ps) #|[set e in p0.1 :&: p0.2 | wpred W l e]|.
+  set Yf := Ycnt a gty false l (off + plen p) (\sum_(p0 <- ps) plen p0).
+  set Yt := Ycnt a gty true l (off + plen p) (\sum_(p0 <- ps) plen p0).
+  by rewrite -!plusE; lia.
+rewrite !YcntE.
+have hge := @rCr_card_ge _ f m bipf p.1 p.2 hmp1 hmp2 a rm off
+              (@rhnr _ f m p.1 p.2 rm off).
+rewrite (@set_rhnr _ f m p.1 p.2 rm off) in hge.
+have hRs : #|[set e in rCr f m p.1 p.2 a rm off | @rhnr _ f m p.1 p.2 rm off e]|
+           <= #|rCr f m p.1 p.2 a rm off|.
+  by apply: subset_leq_card; apply/subsetP => e; rewrite memsetP => /andP[].
+have hsz0 := @r_count_size _ f m W bipf p.1 p.2 hmp1 hmp2 a gty rm off hgp.
+have hPs := @r_Pk_cuts _ f m bipf p.1 p.2 hmp1 hmp2 a rm off hszp.
+have hkp := @r_keep_count _ f m bipf p.1 p.2 hmp1 hmp2 a rm off.
+have hnu := @r_nonunan_int _ f m p.1 p.2 a off.
+have hrd := @r_rmd_count _ f m p.1 p.2 rm off.
+have hspl := @r_cuts_split _ f m p.1 p.2 a off hszp.
+rewrite -[size (bl f p.1 p.2) * m.+1]/(plen p) in hPs hnu hrd hspl.
+set I := #|p.1 :&: p.2|.
+set SI := \sum_(j <- ps) #|j.1 :&: j.2|.
+set Zf := rYc f p.1 p.2 a gty off false ord0.
+set Zt := rYc f p.1 p.2 a gty off true ord0.
+set Zf' := Ycnt a gty false ord0 (off + plen p) (\sum_(j <- ps) plen j).
+set Zt' := Ycnt a gty true ord0 (off + plen p) (\sum_(j <- ps) plen j).
+set R := #|rCr f m p.1 p.2 a rm off|.
+set R' := #|[set e in rCr f m p.1 p.2 a rm off | @rhnr _ f m p.1 p.2 rm off e]|.
+set SC := \sum_(j <- rmatch a rm (off + plen p) ps) #|j|.
+set cp := cuts_seq (take (plen p) (drop off a)).
+set ct := cuts_seq (take (\sum_(j <- ps) plen j) (drop (off + plen p) a)).
+set ca := cuts_seq (take (plen p + \sum_(j <- ps) plen j) (drop off a)).
+set rp := count (fun q : nat => rm (off + q) && (q %% m.+1 != 0)) (iota 0 (plen p)).
+set rt := count (fun q : nat => rm (off + plen p + q) && (q %% m.+1 != 0))
+                (iota 0 (\sum_(j <- ps) plen j)).
+set ra := count (fun q : nat => rm (off + q) && (q %% m.+1 != 0))
+                (iota 0 (plen p + \sum_(j <- ps) plen j)).
+set P := #|rPk f m p.1 p.2 a rm off|.
+set qb := count (rQbnd f m p.1 p.2 a off) (iota 0 (plen p)).
+set qi := count (rQint f m p.1 p.2 a off) (iota 0 (plen p)).
+set K := count (fun e : {set G} => @rhnr _ f m p.1 p.2 rm off e
+                                  && ~~ rkeepE f m p.1 p.2 a rm off e) (bl f p.1 p.2).
+set CS := count (fun e : {set G} => sel f p.1 p.2 m (drop off a) e
+                                    && @rhnr _ f m p.1 p.2 rm off e) (bl f p.1 p.2).
+set nu := count (fun j : nat => ~~ runan m a off j) (iota 0 (size (bl f p.1 p.2))).
+set rd := count [eta rrmdc m rm off] (iota 0 (size (bl f p.1 p.2))).
+have hge' : I + CS <= R' + P + K by exact: hge.
+have hRs' : R' <= R by exact: hRs.
+have hsz0' : Zf + Zt <= CS by exact: hsz0.
+have hPs' : P <= qb + cp by exact: hPs.
+have hspl' : qb + qi = cp by exact: hspl.
+have hkp' : K <= nu + rd by exact: hkp.
+have hnu' : nu <= qi by exact: hnu.
+have hrd' : rd <= rp by exact: hrd.
+have hs4' : SI + Zf' + Zt' <= SC + (2 * ct + rt) by exact: hs4.
+have hcut' : cp + ct <= ca by exact: hcut.
+have hrm' : ra = rp + rt by exact: hrm.
+move/leP: hge' => hge'; move/leP: hsz0' => hsz0'; move/leP: hPs' => hPs';
+  move/leP: hkp' => hkp'; move/leP: hnu' => hnu'; move/leP: hrd' => hrd';
+  move/leP: hs4' => hs4'; move/leP: hcut' => hcut'; move/leP: hRs' => hRs';
+  apply/leP.
+rewrite -!plusE -!multE in hge' hsz0' hPs' hkp' hnu' hrd' hs4' hcut' hrm' hspl'
+  hRs' *.
+lia.
+Qed.
+
+(** *** instantiating [gok] and the type counts on the concatenation *)
+
+Lemma gok_gtys (rm : pred nat) (gty : nat -> TY) (ps : seq (MM * MM)) (r0 : seq TY) :
+  (forall q, q < size (r0 ++ gtys ps) ->
+     gty q = (if rm q then nul else nth nul (r0 ++ gtys ps) q)) ->
+  gok gty rm (size r0) ps.
+Proof.
+elim: ps r0 => [|p ps IH] r0 //= hg; split.
+  move=> q hq.
+  have hlt : size r0 + q < size (r0 ++ (creal f p.1 p.2 W ++ gtys ps)).
+    rewrite size_cat size_cat size_creal ltn_add2l.
+    by apply: leq_trans hq _; exact: leq_addr.
+  rewrite (hg _ hlt) nth_cat ltnNge leq_addr /= addKn nth_cat size_creal hq.
+  by rewrite nth_creal.
+have -> : size r0 + plen p = size (r0 ++ creal f p.1 p.2 W).
+  by rewrite size_cat size_creal.
+apply: IH => q hq.
+by rewrite -catA; apply: hg; move: hq; rewrite -catA.
+Qed.
+
+Lemma count_gtys (k : TY) (ps : seq (MM * MM)) :
+  count_mem k (gtys ps) = \sum_(p <- ps) count_mem k (creal f p.1 p.2 W).
+Proof.
+by elim: ps => [|p ps IH]; [rewrite big_nil | rewrite /= count_cat IH big_cons].
+Qed.
+
+(** In [gtys ps] a *size* type [tix s ord0] can only sit at the head bead of a
+    group: each [plen p] is a multiple of [m.+1], and inside a group the bead at
+    offset [l] carries the statistic [inord l]. *)
+Lemma gtys_class (ps : seq (MM * MM)) (q : nat) (s : bool) :
+  q %% m.+1 != 0 -> nth nul (gtys ps) q != tix s ord0.
+Proof.
+elim: ps q => [|p ps IH] q hq; first by rewrite nth_nil eq_sym tix_null.
+rewrite /= nth_cat size_creal.
+case: ltnP => hlt; last first.
+  apply: IH; move: hq.
+  by rewrite -{1}(subnKC hlt) modnMDl.
+rewrite nth_creal // /beadty.
+case: ifP => hw; last by rewrite eq_sym tix_null.
+rewrite tixE; apply/negP => /andP[_ /eqP hl].
+have := congr1 (@nat_of_ord m.+1) hl.
+by rewrite inordK ?ltn_pmod // => h0; rewrite h0 eqxx in hq.
+Qed.
+
+Lemma card_splitW (A B : {set {set G}}) :
+  matching A -> matching B -> forall P : pred {set G},
+  #|[set e in A | P e]| + #|[set e in B | P e]|
+  = 2 * #|[set e in A :&: B | P e]| + count P (bl f A B).
+Proof.
+move=> mA mB P.
+exact: (@card_split _ f A B m W bipf mA mB (nseq (size (cs f A B W)) ord0)
+                    (size_nseq _ _) P).
+Qed.
+
+(** *** one round *)
+
+Theorem round_exists (ps : seq (MM * MM)) :
+  (forall p, p \in ps -> matching p.1) -> (forall p, p \in ps -> matching p.2) ->
+  exists cs : seq MM,
+    [/\ size cs = size ps,
+        (forall C, C \in cs -> matching C),
+        (forall l : 'I_m.+1,
+           2 * \sum_(C <- cs) #|[set e in C | wpred W l e]|
+           <= \sum_(p <- ps) (#|[set e in p.1 | wpred W l e]|
+                              + #|[set e in p.2 | wpred W l e]|)) &
+        \sum_(p <- ps) (#|p.1| + #|p.2|) <= 2 * \sum_(C <- cs) #|C| + (12 * m + 14)].
+Proof.
+move=> hmA hmB.
+pose raw := gtys ps.
+pose CS := csq raw.
+have [a [hsza hcuts hshare]] := splitting_necklace_seq (ltn0Sn 1) (fun k => csq_even raw k).
+have hszraw : size raw = \sum_(p <- ps) plen p by exact: size_gtys.
+have hsz1 : 0 + \sum_(p <- ps) plen p <= size a.
+  by rewrite add0n -hszraw hsza; exact: size_csq.
+have hgok : gok (nth nul CS) (rmvp raw) 0 ps.
+  have hh := @gok_gtys (rmvp raw) (nth nul CS) ps [::].
+  rewrite /= in hh.
+  by apply: hh => q hq; rewrite nth_csq.
+have [h1 h2 h3 h4] := round_ind hmA hmB hsz1 hgok.
+have hpad : forall i, nth nul CS (size raw + i) = nul.
+  move=> i; rewrite /CS /csq nth_cat size_retys ltnNge leq_addr /= addKn nth_nseq.
+  by case: ifP.
+have hszCS : size CS = size raw + (odd (count_mem nul (retys raw)) : nat).
+  by rewrite /CS /csq size_cat size_retys size_nseq.
+have hYc : forall (s : bool) (l : 'I_m.+1),
+    Ycnt a (nth nul CS) s l 0 (\sum_(p <- ps) plen p) = count_mem (tix s l) CS %/ 2.
+  move=> s l.
+  rewrite -(hshare (tix s l) (gd s)) (count_pair_pos nul ord0 (tix s l) (gd s) hsza).
+  rewrite -/CS hszCS count_iota_split.
+  have hz : count (fun i : nat => (nth nul CS (size raw + i) == tix s l)
+                                  && (nth ord0 a (size raw + i) == gd s))
+                  (iota 0 (odd (count_mem nul (retys raw)) : nat)) = 0.
+    case: (odd (count_mem nul (retys raw))) => //=.
+    by rewrite hpad eq_sym tix_null.
+  rewrite hz addn0 /Ycnt hszraw.
+  by apply: eq_in_count => q _; rewrite !add0n.
+have hCSc : forall (s : bool) (l : 'I_m.+1),
+    count_mem (tix s l) CS
+    = count_mem (tix s l) raw - (odd (count_mem (tix s l) raw) : nat).
+  move=> s l; rewrite /CS /csq count_cat count_nseq.
+  rewrite /= eq_sym tix_null mul0n addn0 count_retys //.
+  by rewrite tix_null.
+have hsplitc : forall l : 'I_m.+1,
+    \sum_(p <- ps) count (wpred W l) (bl f p.1 p.2)
+    = count_mem (tix false l) raw + count_mem (tix true l) raw.
+  move=> l; rewrite /raw !count_gtys -big_split /=.
+  apply: eq_big_seq => p _.
+  rewrite !count_creal_tix.
+  rewrite (count_split (bl f p.1 p.2) (wpred W l) (fun e => sd p.2 e == false)).
+  by congr (_ + _); apply: eq_count => e /=; case: (sd p.2 e).
+exists (rmatch a (rmvp raw) 0 ps); split => //.
+  move=> l.
+  have hRHS : \sum_(p <- ps) (#|[set e in p.1 | wpred W l e]|
+                              + #|[set e in p.2 | wpred W l e]|)
+            = 2 * \sum_(p <- ps) #|[set e in p.1 :&: p.2 | wpred W l e]|
+              + \sum_(p <- ps) count (wpred W l) (bl f p.1 p.2).
+    rewrite big_distrr -big_split /=; apply: eq_big_seq => p hp.
+    exact: (card_splitW (hmA p hp) (hmB p hp) (wpred W l)).
+  rewrite hRHS hsplitc.
+  have h2f : 2 * Ycnt a (nth nul CS) false l 0 (\sum_(p <- ps) plen p)
+             <= count_mem (tix false l) raw.
+    rewrite hYc mulnC divnK; last exact: csq_even.
+    by rewrite hCSc; exact: leq_subr.
+  have h2t : 2 * Ycnt a (nth nul CS) true l 0 (\sum_(p <- ps) plen p)
+             <= count_mem (tix true l) raw.
+    rewrite hYc mulnC divnK; last exact: csq_even.
+    by rewrite hCSc; exact: leq_subr.
+  apply: (leq_trans (_ : _ <= 2 * (\sum_(p <- ps) #|[set e in p.1 :&: p.2 | wpred W l e]|
+                                   + Ycnt a (nth nul CS) false l 0 (\sum_(p <- ps) plen p)
+                                   + Ycnt a (nth nul CS) true l 0 (\sum_(p <- ps) plen p)))).
+    by rewrite leq_mul2l; apply/orP; right; exact: h3.
+  rewrite !mulnDr addnA.
+  by apply: leq_add; [rewrite leq_add2l | ].
+have hRHS0 : \sum_(p <- ps) (#|p.1| + #|p.2|)
+           = 2 * \sum_(p <- ps) #|p.1 :&: p.2|
+             + \sum_(p <- ps) count (wpred W ord0) (bl f p.1 p.2).
+  rewrite big_distrr -big_split /=; apply: eq_big_seq => p hp.
+  have hh := card_splitW (hmA p hp) (hmB p hp) (wpred W ord0).
+  by rewrite !set_wpred0 in hh.
+rewrite hRHS0 hsplitc.
+have hcf : forall s : bool,
+    count_mem (tix s ord0) raw
+    <= 2 * Ycnt a (nth nul CS) s ord0 0 (\sum_(p <- ps) plen p) + 1.
+  move=> s; rewrite hYc mulnC divnK; last exact: csq_even.
+  rewrite hCSc; case: (odd (count_mem (tix s ord0) raw)) => /=.
+    by case: (count_mem (tix s ord0) raw) => [|n] //=; rewrite subn1 /= addn1.
+  by rewrite subn0 addn1.
+have herr : 2 * cuts_seq (take (\sum_(p <- ps) plen p) (drop 0 a))
+          + count (fun q : nat => rmvp raw (0 + q) && (q %% m.+1 != 0))
+                  (iota 0 (\sum_(p <- ps) plen p))
+          <= 6 * m + 6.
+  have hc1 : cuts_seq (take (\sum_(p <- ps) plen p) (drop 0 a)) <= 2 * m + 3.
+    apply: (leq_trans (_ : _ <= cuts_seq a)).
+      by rewrite drop0; apply: cuts_seq_subseq; exact: take_subseq.
+    apply: (leq_trans hcuts).
+    rewrite card_TT muln1.
+    by rewrite -!plusE -!multE; apply/leP; lia.
+  have hc2 : count (fun q : nat => rmvp raw (0 + q) && (q %% m.+1 != 0))
+                   (iota 0 (\sum_(p <- ps) plen p)) <= 2 * m.
+    rewrite (@eq_in_count _ _ (fun q => rmvp raw q && (q %% m.+1 != 0)));
+      last by move=> q _ /=; rewrite add0n.
+    rewrite -hszraw; apply: count_rmvp_class => q s hq.
+    exact: gtys_class.
+  move/leP: hc1 => hc1; move/leP: hc2 => hc2; apply/leP.
+  by rewrite -!plusE -!multE in hc1 hc2 *; lia.
+set SI := \sum_(p <- ps) #|p.1 :&: p.2|.
+set SC := \sum_(C <- rmatch a (rmvp raw) 0 ps) #|C|.
+set Zf := Ycnt a (nth nul CS) false ord0 0 (\sum_(p <- ps) plen p).
+set Zt := Ycnt a (nth nul CS) true ord0 0 (\sum_(p <- ps) plen p).
+set cf := count_mem (tix false ord0) raw.
+set ct := count_mem (tix true ord0) raw.
+set E := 2 * cuts_seq (take (\sum_(p <- ps) plen p) (drop 0 a))
+       + count (fun q : nat => rmvp raw (0 + q) && (q %% m.+1 != 0))
+               (iota 0 (\sum_(p <- ps) plen p)).
+have h4' : SI + Zf + Zt <= SC + E by exact: h4.
+have hcf' : cf <= 2 * Zf + 1 by exact: (hcf false).
+have hct' : ct <= 2 * Zt + 1 by exact: (hcf true).
+have herr' : E <= 6 * m + 6 by exact: herr.
+move/leP: h4' => h4'; move/leP: hcf' => hcf'; move/leP: hct' => hct';
+  move/leP: herr' => herr'; apply/leP.
+rewrite -!plusE -!multE in h4' hcf' hct' herr' *.
+lia.
+Qed.
+
+(** *** the rounds *)
+
+Fixpoint pairup (s : seq MM) : seq (MM * MM) :=
+  if s is x :: y :: s' then (x, y) :: pairup s' else [::].
+
+Lemma size_pairup (n : nat) (s : seq MM) : size s = n.*2 -> size (pairup s) = n.
+Proof.
+elim: n s => [|n IH] s hs.
+  by move/eqP: hs; rewrite size_eq0 => /eqP ->.
+case: s hs => [|x [|y s']]; rewrite ?doubleS //= => -[] hs.
+by rewrite (IH _ hs).
+Qed.
+
+Lemma pairup_sum (g : MM -> nat) (n : nat) (s : seq MM) : size s = n.*2 ->
+  \sum_(p <- pairup s) (g p.1 + g p.2) = \sum_(M <- s) g M.
+Proof.
+elim: n s => [|n IH] s hs.
+  by move/eqP: hs; rewrite size_eq0 => /eqP ->; rewrite !big_nil.
+case: s hs => [|x [|y s']]; rewrite ?doubleS //= => -[] hs.
+by rewrite !big_cons (IH _ hs) addnA.
+Qed.
+
+Lemma pairup_mem (n : nat) (s : seq MM) (p : MM * MM) :
+  size s = n.*2 -> p \in pairup s -> (p.1 \in s) && (p.2 \in s).
+Proof.
+elim: n s => [|n IH] s hs.
+  by move/eqP: hs; rewrite size_eq0 => /eqP ->.
+case: s hs => [|x [|y s']]; rewrite ?doubleS //= => -[] hs.
+rewrite in_cons => /orP[/eqP ->|hp].
+  by rewrite /= !in_cons !eqxx orbT.
+have /andP[h1 h2] := IH s' hs hp.
+by rewrite !in_cons h1 h2 !orbT.
+Qed.
+
+Theorem rounds_exists (L : nat) (s : seq MM) :
+  size s = 2 ^ L -> (forall M, M \in s -> matching M) ->
+  exists C, [/\ matching C,
+      \sum_(M <- s) #|M| <= 2 ^ L * #|C| + (2 ^ L - 1) * (12 * m + 14) &
+      forall l : 'I_m.+1,
+        2 ^ L * #|[set e in C | wpred W l e]|
+        <= \sum_(M <- s) #|[set e in M | wpred W l e]|].
+Proof.
+elim: L s => [|L IH] s hs hm.
+  move: hs; rewrite expn0 => hs.
+  case: s hs hm => [|x [|y s']] //= _ hm.
+  exists x; split; first by apply: hm; rewrite in_cons eqxx.
+    by rewrite big_cons big_nil mul1n subnn mul0n !addn0.
+  by move=> l; rewrite mul1n big_cons big_nil addn0.
+have hsz2 : size s = (2 ^ L).*2 by rewrite hs expnS mul2n.
+have hmp1 : forall p, p \in pairup s -> matching p.1.
+  by move=> p hp; apply: hm; case/andP: (pairup_mem hsz2 hp).
+have hmp2 : forall p, p \in pairup s -> matching p.2.
+  by move=> p hp; apply: hm; case/andP: (pairup_mem hsz2 hp).
+have [cs [hc1 hc2 hc3 hc4]] := round_exists hmp1 hmp2.
+have hcs : size cs = 2 ^ L by rewrite hc1 (size_pairup hsz2).
+have [C [hC1 hC2 hC3]] := IH cs hcs hc2.
+exists C; split => //.
+  apply: (leq_trans (_ : _ <= 2 * \sum_(C0 <- cs) #|C0| + (12 * m + 14))).
+    by rewrite -(pairup_sum (fun M => #|M|) hsz2).
+  have hpos : 1 <= 2 ^ L by rewrite expn_gt0.
+  set E := 2 ^ L.
+  set K := 12 * m + 14.
+  set X := #|C|.
+  set SC := \sum_(C0 <- cs) #|C0|.
+  have hC2' : SC <= E * X + (E - 1) * K by exact: hC2.
+  have hpos' : 1 <= E by exact: hpos.
+  rewrite expnS -/E.
+  move/leP: hC2' => hC2'; move/leP: hpos' => hpos'; apply/leP.
+  rewrite -!plusE -!multE -!minusE in hC2' hpos' *.
+  nia.
+move=> l.
+apply: (leq_trans (_ : _ <= 2 * \sum_(C0 <- cs) #|[set e in C0 | wpred W l e]|)).
+  by rewrite expnS -mulnA leq_mul2l hC3 orbT.
+by rewrite -(pairup_sum (fun M => #|[set e in M | wpred W l e]|) hsz2).
+Qed.
+
+End Round.
+
+(** ** Assembly: the colour classes as the leaves of the mixing tree *)
+
+Lemma matching0 (G : sgraph) : matching (set0 : {set {set G}}).
+Proof. by split => [e|e1 e2]; rewrite ?in_set0. Qed.
+
+Lemma big_nseq_sum (T : Type) (q : nat) (u : T) (F : T -> nat) :
+  \sum_(x <- nseq q u) F x = q * F u.
+Proof. by elim: q => [|q IH]; rewrite ?big_nil // /= big_cons IH mulSn. Qed.
+
+Lemma size_flatten_nseq (T : Type) (q : nat) (u : seq T) :
+  size (flatten (nseq q u)) = q * size u.
+Proof. by elim: q => [|q IH] //=; rewrite size_cat IH mulSn. Qed.
+
+Theorem approx_fair_rounds (G : sgraph) (f : G -> bool) (m : nat)
+    (E : 'I_m -> {set {set G}}) :
+  (forall x y : G, x -- y -> f x != f y) ->
+  (forall i : 'I_m, E i \subset E(G)) ->
+  forall D : nat, 0 < D ->
+  forall col : {set G} -> nat,
+  (forall e : {set G}, e \in E(G) -> col e < D) ->
+  (forall j : nat, matching [set e in E(G) | col e == j]) ->
+  exists C : {set {set G}},
+    [/\ matching C,
+        #|E(G)| %/ D <= #|C| + (12 * m + 14) &
+        forall i : 'I_m, #|C :&: E i| <= ceil_div #|E i| D].
+Proof.
+move=> bipf subE D D_gt0 col col_lt col_match.
+pose K := 12 * m + 14.
+pose ee := #|E(G)|.
+pose L := D * (ee + K + 1).
+pose P := 2 ^ L.
+pose q := P %/ D.
+pose lv := flatten (nseq q [seq cls col j | j <- enum 'I_D]) ++ nseq (P - q * D) set0.
+have hqD : q * D <= P by rewrite /q leq_divM.
+have hsize : size lv = P.
+  rewrite /lv size_cat size_flatten_nseq size_map size_enum_ord size_nseq.
+  by rewrite subnKC.
+have hsubl : forall M, M \in lv -> M \subset E(G).
+  move=> M; rewrite /lv mem_cat => /orP[].
+    move=> /flattenP[u hu hM].
+    move: hu; rewrite mem_nseq => /andP[_ /eqP hu].
+    by move: hM; rewrite hu => /mapP[j _ ->]; exact: cls_sub.
+  by rewrite mem_nseq => /andP[_ /eqP ->]; exact: sub0set.
+have hmatch : forall M, M \in lv -> matching M.
+  move=> M; rewrite /lv mem_cat => /orP[].
+    move=> /flattenP[u hu hM].
+    move: hu; rewrite mem_nseq => /andP[_ /eqP hu].
+    by move: hM; rewrite hu => /mapP[j _ ->]; exact: (cls_matching col_match).
+  by rewrite mem_nseq => /andP[_ /eqP ->]; exact: matching0.
+have hsum : forall X : {set {set G}}, X \subset E(G) ->
+    \sum_(M <- lv) #|M :&: X| = q * #|X|.
+  move=> X hX.
+  rewrite /lv big_cat /= big_flatten /= big_nseq_sum big_nseq_sum.
+  have -> : #|(set0 : {set {set G}}) :&: X| = 0 by rewrite set0I cards0.
+  rewrite muln0 addn0 big_map -(cls_partition col_lt hX).
+  congr (q * _); rewrite big_enum; apply: eq_bigr => j _.
+  by rewrite setIC.
+have [C [hC1 hC2 hC3]] := rounds_exists E bipf hsize hmatch.
+rewrite -/P -/K in hC2.
+have hCsz : #|C| <= ee.
+  case: hC1 => hsub _; apply: subset_leq_card; apply/subsetP => e he.
+  exact: hsub.
+have hPL : L < P by rewrite /P; exact: ltn_expl.
+have hq1 : ee + K + 1 <= q.
+  rewrite /q -(mulKn (ee + K + 1) D_gt0).
+  by apply: leq_div2r; rewrite -/L; exact: ltnW.
+have hq : ee + K < q by rewrite -addn1.
+have hq0 : 0 < q by apply: leq_trans hq.
+have hPub : P < (q + 1) * D.
+  rewrite mulnDl mul1n {1}(divn_eq P D) -/q ltn_add2l.
+  exact: ltn_pmod.
+exists C; split => //.
+  have hszsum : \sum_(M <- lv) #|M| = q * ee.
+    rewrite -(hsum E(G) (subxx _)); apply: eq_big_seq => M hM.
+    by rewrite (setIidPl (hsubl M hM)).
+  rewrite hszsum in hC2.
+  have hkey : q * (ee %/ D) <= (q + 1) * (#|C| + K).
+    have h1 : q * (ee %/ D) * D <= q * ee.
+      by rewrite -mulnA leq_mul2l; apply/orP; right; exact: leq_divM.
+    have h2 : q * ee <= P * (#|C| + K).
+      apply: (leq_trans hC2); rewrite mulnDr leq_add2l.
+      by rewrite leq_mul2r; apply/orP; right; exact: leq_subr.
+    have h3 : P * (#|C| + K) <= (q + 1) * D * (#|C| + K).
+      by rewrite leq_mul2r; apply/orP; right; exact: ltnW.
+    have h4 : q * (ee %/ D) * D <= (q + 1) * D * (#|C| + K).
+      by apply: leq_trans h3; apply: leq_trans h2.
+    rewrite -(leq_pmul2r D_gt0); apply: leq_trans h4 _.
+    by rewrite -!mulnA [D * _]mulnC !mulnA.
+  rewrite leqNgt; apply/negP => hgt.
+  move: hkey; rewrite leqNgt => /negP; apply.
+  have hge : #|C| + K + 1 <= ee %/ D by rewrite addn1.
+  have hXq : #|C| + K < q by apply: leq_ltn_trans hq; rewrite leq_add2r.
+  rewrite mulnDl mul1n.
+  apply: (@leq_trans (q * (#|C| + K) + q)); last first.
+    by rewrite -[q in _ + q]muln1 -mulnDr leq_mul2l hge orbT.
+  by rewrite ltn_add2l.
+move=> i.
+have hWset : forall X : {set {set G}},
+    [set e in X | wpred E (lift ord0 i) e] = X :&: E i.
+  by move=> X; apply/setP => e; rewrite !inE /wpred liftK.
+have := hC3 (lift ord0 i).
+rewrite hWset.
+have -> : \sum_(M <- lv) #|[set e in M | wpred E (lift ord0 i) e]|
+        = \sum_(M <- lv) #|M :&: E i|.
+  by apply: eq_big_seq => M _; rewrite hWset.
+rewrite (hsum (E i) (subE i)) => hkey.
+have hDx : D * #|C :&: E i| <= #|E i|.
+  rewrite -(leq_pmul2l hq0) [q * (D * _)]mulnA.
+  apply: (leq_trans (_ : _ <= P * #|C :&: E i|)); last exact: hkey.
+  by rewrite leq_mul2r; apply/orP; right.
+apply: (leq_trans (_ : _ <= #|E i| %/ D)).
+  by rewrite leq_divRL // mulnC.
+rewrite /ceil_div; apply: leq_div2r.
+by rewrite -addnBA // leq_addr.
+Qed.
+
+(** ** The linear-constant fair matching, in the vocabulary of [X15] *)
+
+Theorem x15_rounds_instance (m : nat) (G : sgraph) (E : 'I_m -> {set {set G}}) :
+  bipartite G -> 0 < Delta G -> x15_edge_family E ->
+  exists S : {set {set G}},
+    x15_matching S /\
+    (#|sg_edge_set G| %/ Delta G <= #|S| + (12 * m + 14))%N /\
+    forall i : 'I_m, #|S :&: E i| <= ceil_div #|E i| (Delta G).
+Proof.
+move=> [f fP] dpos famE.
 have D_deg (v : G) : #|N(v)| <= Delta G by exact: leq_bigmax.
 have [col [col_lt col_match]] := line_colouring_E fP D_deg.
 have subE (i : 'I_m) : E i \subset E(G).
   by move: (famE i); rewrite x15_edge_setE.
-have [C [mC hsz hcl]] := approx_fair_core fP subE dpos col_lt col_match.
-exists C; split; first exact: matching_x15.
-split; first by rewrite x15_edge_setE.
-move=> i; apply: leq_trans (hcl i) _; rewrite leq_add2r.
-by rewrite /ceil_div; apply: leq_div2r; rewrite -addnBA // leq_addr.
+have [C [mC hsz hcl]] := approx_fair_rounds fP subE dpos col_lt col_match.
+by exists C; split; [exact: matching_x15 | split].
 Qed.
 
-Lemma Bmix_le (m : nat) : Bmix m <= 32 * (m + 1)^2.
+Theorem x15_llm3_proof : bipartite_matching_underrepresentation_llm3_statement.
 Proof.
-have h1 : 0 < m + 1 by rewrite addn1.
-rewrite /Bmix -addn1 expnS expn1 mulnCA leq_pmul2l //.
-by rewrite -!plusE -!multE; apply/leP; lia.
+move=> m; exists (12 * m + 14); split; first by [].
+exact: x15_rounds_instance.
+Qed.
+
+Theorem x15_llm2_proof : bipartite_matching_underrepresentation_llm2_statement.
+Proof.
+move=> m; exists (12 * m + 14); split.
+  have h1 : 12 * m + 14 <= 16 * m + 29 by rewrite -!plusE -!multE; apply/leP; lia.
+  by apply: leq_trans h1 _; apply: leq_pmull; rewrite expn_gt0 addn1.
+move=> G E bipG dpos famE; exact: x15_rounds_instance.
 Qed.
 
 Theorem x15_llm_proof : bipartite_matching_underrepresentation_llm_statement.
 Proof.
-apply: x15_approx_fair_llm => m G E bipG dpos famE.
-have [C [mC [sC fC]]] := @x15_approx_fair_proof m G E bipG dpos famE.
-exists C; split => //; split.
-  by apply: leq_trans sC _; rewrite leq_add2l Bmix_le.
-by move=> i; apply: leq_trans (fC i) _; rewrite leq_add2l Bmix_le.
+move=> m; exists (12 * m + 14); split.
+  have h1 : 12 * m + 14 <= 32 * (m + 1).
+    by rewrite mulnDr muln1 -!plusE -!multE; apply/leP; lia.
+  apply: leq_trans h1 _; rewrite leq_pmul2l // -{1}(expn1 (m + 1)).
+  by apply: leq_pexp2l; rewrite ?addn1.
+move=> G E bipG dpos famE; rewrite x15_edge_setE.
+exact: x15_rounds_instance.
 Qed.
 
-(** The constant this development actually reaches, one factor [m+1] below the
-    [32(m+1)^3] claimed by the attack: [Bmix m] on the approximate fair matching
-    of [x15_approx_fair_proof], times [m+1] for the trimming. *)
-Theorem x15_llm2_proof : bipartite_matching_underrepresentation_llm2_statement.
-Proof.
-move=> m; exists ((m + 1) * Bmix m); split.
-  by rewrite /Bmix expnS expn1 -mulnA !addn1.
-move=> G E bipG dpos famE.
-exact: x15_trim_instance (@x15_approx_fair_proof m G E bipG dpos famE).
-Qed.
-
-(** Conjecture 1.15 itself, without the explicit constant. *)
 Corollary bipartite_matching_underrepresentation :
   bipartite_matching_underrepresentation_statement.
 Proof. by move=> m; have [c [_ hc]] := x15_llm_proof m; exists c. Qed.
 
 Print Assumptions x15_big_matching.
-Print Assumptions trim_exists.
-Print Assumptions x15_approx_fair_llm.
-Print Assumptions x15_llm_instance0.
-Print Assumptions x15_approx_fair_proof.
-Print Assumptions x15_llm_proof.
+Print Assumptions round_exists.
+Print Assumptions rounds_exists.
+Print Assumptions approx_fair_rounds.
+Print Assumptions x15_rounds_instance.
+Print Assumptions x15_llm3_proof.
 Print Assumptions x15_llm2_proof.
+Print Assumptions x15_llm_proof.
 Print Assumptions bipartite_matching_underrepresentation.
