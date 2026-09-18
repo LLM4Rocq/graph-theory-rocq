@@ -24,6 +24,73 @@ Built on [`coq-graph-theory`](https://github.com/rocq-community/graph-theory) (u
 MathComp. The roadmap + the validated 227-problem manifest live in **`meta/`**. Verify the
 statement-complete claim with `make audit` (toolchain-free) or the full `make gate` (Coq builds).
 
+## Building
+
+Everything here is Rocq 9.1 + MathComp 2.5 + [`coq-graph-theory`](https://github.com/rocq-community/graph-theory) 0.9.7.
+A full clean build of the whole corpus takes about six minutes.
+
+### 1. One-time toolchain setup
+
+```sh
+opam switch create digraph ocaml-base-compiler.5.2.1
+eval $(opam env --switch=digraph)
+opam repo add rocq-released https://rocq-prover.org/opam/released
+opam install coq-graph-theory.0.9.7 rocq-mathcomp-classical.1.16.0
+```
+
+Those two packages pull in everything else: `rocq-core` 9.1.1, `rocq-stdlib` 9.0.0,
+MathComp 2.5.0 (`ssreflect`/`algebra`/`fingroup`/`finmap`) and Hierarchy-Builder 1.10.2.
+Budget 15-30 minutes — opam builds it all from source.
+
+Name the switch `digraph` if you can: the gates in `meta/` look for `~/.opam/digraph` by
+default. Any other name works too, as long as you either put it on `PATH` (`eval $(opam env)`)
+or point the gates at it explicitly with `ROCQ_OPAM_SWITCH=<switch-name>`.
+
+### 2. Build
+
+```sh
+make all -j4              # base + classical-lemmas + the 13 area packages
+make digraph-theory -j4   # the absorbed Digraph package
+```
+
+`make all` is 356 files, ~3.5 min; `digraph-theory` is 118 files, ~2.5 min (4 cores, warm
+switch — roughly double that on CI-class hardware). `digraph-theory` is kept out of `all`
+because its proofs are the heaviest in the repo; its P9 milestone is still covered by
+`make gate`.
+
+Build one package on its own with `make chromatic-theory`, and start over with `make clean`.
+Each package target is just `rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq`
+run inside that directory, so you can drop down to `Makefile.coq` for a single file.
+
+### 3. Check the corpus claims
+
+```sh
+make audit    # no Rocq needed — python3 only, a few seconds
+```
+
+`make audit` verifies that the committed manifest, leg-state overlay, dependency graph and
+`meta/CORPUS_STATUS.md` are mutually consistent. This is what CI runs.
+
+The full acceptance gate additionally builds every landed milestone and checks it is
+axiom-free with `Print Assumptions` clean:
+
+```sh
+git clone https://github.com/graph-theory-AI/graph-conjectures ../../graph-conjectures
+make gate
+```
+
+`make gate` regenerates the manifest from the upstream conjecture source, so it needs that
+checkout. It is looked for at `../../graph-conjectures` relative to this repo (i.e. a sibling
+of this repo's parent); override with `GRAPH_CONJECTURES=/path/to/graph-conjectures`. Pin it to
+`f6901fb371155678980a84306f6208fa0f166a6b` to reproduce the committed manifest exactly.
+
+### Note on `digraph-theory/theories/applications/ck_path`
+
+Those DRUP certificate files are **generated, not committed** — `scripts/generate_ckpath_certificates.py`
+writes them and `.gitignore` excludes them. A fresh clone builds the 118 tracked `Digraph` files in
+~2.5 min; if you have generated the certificates locally, the same command builds ~1,400 files
+instead and takes considerably longer.
+
 ## Checked formal resolutions
 
 Six source records have checked formal resolutions: five new formalizations and a bridge to the existing Question 5.9 counterexample family. The latest additions disprove directed Kneser existence at `(5,3)` and the printed Alon–Tarsi Question 6.1. All six have closed assumptions.
