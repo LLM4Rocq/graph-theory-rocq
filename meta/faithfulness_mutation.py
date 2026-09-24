@@ -211,6 +211,53 @@ Definition strongly_colorable (G : sgraph) (r : nat) : Prop :=
         expected_signature="[FAIL] package compiles",
         note="flips strongly_colorable from all partitions to one partition",
     ),
+    Mutant(
+        name="cycle_subdeg_counts_loop_once",
+        phase="X212",
+        package="cycle-theory",
+        replacements=(
+            Replacement(
+                "cycle-theory/theories/foundations/connectivity.v",
+                "subdeg",
+                """
+Definition subdeg (G : mgraph) (H : {set edge G}) (v : G) : nat :=
+  #|edges_at v :&: H|.
+""",
+            ),
+        ),
+        appendices=(),
+        expected_signature="[FAIL] package compiles",
+        note=("reverts subdeg to the incidence count, giving a LOOP degree 1 instead of the "
+              "textbook 2; killed inside the foundation by connectivity.subdeg_loop and "
+              "downstream by grounding_U6.mdeg_Gloop / grounding_X212.x212_mdeg_Lp, the "
+              "lemmas that make the one-vertex one-loop multigraph a circuit and an even "
+              "subgraph"),
+    ),
+    Mutant(
+        name="base_surface_vertices_orbit_count",
+        phase="X213",
+        package="chromatic-theory",
+        replacements=(
+            Replacement(
+                "base/theories/surface.v",
+                "surface_embedding_vertices",
+                """
+Definition surface_embedding_vertices (E : surface_embedding) : nat :=
+  #|porbits (surface_erot E)|.
+""",
+            ),
+        ),
+        appendices=(),
+        expected_signature="[FAIL] package compiles",
+        note=("reverts the Euler-formula vertex count of base/theories/surface.v to the "
+              "rotation-orbit count repaired on 2026-09-23, which by surface_erot_vertex sees "
+              "only the vertices CARRYING A DART: isolated vertices become invisible and every "
+              "edgeless graph is pushed to genus 1, so surface_euler_genus overstates the genus "
+              "of any graph with an isolated vertex and the surface rows (X150/X152/X164/X210/"
+              "X213/X219, X167, X138/X202) silently admit fewer graphs than intended; killed "
+              "inside the foundation by surface.surface_edgeless_genus0 and the canary "
+              "surface.surface_embeddable_K1 (K_1 is planar)"),
+    ),
 ]
 
 

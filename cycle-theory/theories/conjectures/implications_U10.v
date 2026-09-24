@@ -74,12 +74,14 @@ Unset Printing Implicit Defensive.
 
 (** ** The carried bridge fact: the Petersen graph's own Berge–Fulkerson cover *)
 
-(** A list of six edge-sets of the Petersen graph such that (i) each
-    mutually-adjacent triple of Petersen edges (= a claw, the Petersen graph
-    being cubic and triangle-free) is met in EXACTLY one edge by every member,
-    and (ii) every Petersen edge lies in exactly two members.  This is a fixed
-    finite property of THE Petersen graph (its six perfect matchings); it does
-    not mention any host graph [G]. *)
+(** No corpus row: this is not a conjecture of the corpus but an EXTERNAL, cited finite
+    fact about THE Petersen graph, declared as an explicit hypothesis of the scheduled
+    implication edge below so that the edge is proved without any axiom. It states that
+    there is a list of six sets of Petersen edges such that every mutually adjacent triple
+    of Petersen edges, which is a claw since the Petersen graph is cubic and
+    triangle-free, meets each member of the list in exactly one edge, and every Petersen
+    edge lies in exactly two members; these are the six perfect matchings of the Petersen
+    graph. It mentions no host graph. *)
 Definition external_petersen_BF_cover_statement : Prop :=
   exists LP : seq {set Pedge},
     [/\ size LP = 6,
@@ -125,13 +127,13 @@ Proof.
 move=> [LP [Hsize Hone Htwice]] Hpc G Hn Hcb.
 have [f Hf] := Hpc G Hn Hcb.
 have [Hcubic _] := Hcb.
-have [_ Hreg] := Hcubic.
+have [Hll Hreg] := Hcubic.
 exists (map (fun S : {set Pedge} => [set e : edge G | f e \in S]) LP).
 split.
 - by rewrite size_map.
 - (* every pullback member is a perfect matching of G *)
   move=> M /mapP[S HS ->] v.
-  have Hd3 : #|edges_at v| = 3 by exact: (Hreg v).
+  have Hd3 : #|edges_at v| = 3 by rewrite -(mdeg_loopless v Hll); exact: (Hreg v).
   have [e1 [e2 [e3 [n12 n13 n23 Heq]]]] := set3 Hd3.
   have inc : forall e : edge G, e \in edges_at v -> incident v e.
     by move=> e; rewrite inE.
@@ -149,7 +151,7 @@ split.
     + by apply: (line _ _ m1 m3 n13).
   have mp := Hf e1 e2 e3 ml.
   have Hsum := Hone S (f e1) (f e2) (f e3) HS mp.
-  rewrite /subdeg -preliminaries.sum_cardI.
+  rewrite (subdeg_loopless _ _ Hll) -preliminaries.sum_cardI.
   rewrite (eq_bigr (fun e => (f e \in S : nat))); last by move=> e _; rewrite inE.
   rewrite Heq.
   have h1 : e1 \notin [set e2; e3] by rewrite !inE negb_or n12 n13.

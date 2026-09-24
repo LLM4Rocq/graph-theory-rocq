@@ -87,7 +87,7 @@
 
 Cross-area primitives every area may reuse (promoted only when ≥2 areas need them):
 
-`mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
+`minor`, `strict_minor`, `minor_map`, `minor_rmap`, `mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
 
 ## Per-area foundation modules
 
@@ -95,23 +95,42 @@ Area-local foundations (each area builds these on top of `base`):
 
 | area | foundation modules |
 |---|---|
-| chromatic-theory | `alon_tarsi` |
+| chromatic-theory | `alon_tarsi`, `chi_bounding` |
 | cycle-theory | `connectivity` |
 | digraph-theory | `interop_graph_theory`, `prelude` |
-| extremal-graph-theory | `circular_colouring`, `list_ramsey` |
-| graph-theory-misc | `complexity` |
+| extremal-graph-theory | `circular_colouring`, `edge_colourings`, `list_ramsey` |
+| graph-theory-misc | `complexity`, `cops` |
+| hypergraph-theory | `hypergraph` |
 | infinite-graph-theory | `igraph` |
+| minor-theory | `containment`, `width_params` |
 | packing-theory | `fair_matching` |
 | spectral-graph-theory | `spectral` |
 | topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `signed_embedding` |
 
 ## Conjecture dependency graph
 
-- **46 edges** — by status {'candidate': 27, 'refuted-direction': 16, 'verified': 3}, by kind {'equiv': 0, 'implies': 45, 'refutes': 0, 'specializes': 1}; 3 Qed-proved relative theorems.
+- **97 edges** — by status {'candidate': 61, 'refuted-direction': 16, 'verified': 20}, by kind {'equiv': 3, 'implies': 93, 'refutes': 0, 'specializes': 1}; 20 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
+  - `delta122_hero_k1_plus_dipath2_free_statement` implies `delta122_hero_oriented_complete_multipartite_statement` (digraph-theory/implications_X221.v)
+  - `epsilon_bounded_h_free_anticomplete_pair_statement` implies `triangle_free_eps_bounded_anticomplete_pair_statement` (extremal-graph-theory/implications_X223.v)
+  - `erdos_sos_tree_embedding_statement` implies `burr_erdos_tree_ramsey_statement` (extremal-graph-theory/implications_X215.v)
+  - `eta_bounded_forest_free_classes_statement` implies `eta_bounded_path_free_classes_statement` (packing-theory/implications_X226.v)
+  - `eta_bounded_forest_free_classes_statement` implies `eta_bounded_two_stars_free_classes_statement` (packing-theory/implications_X226.v)
+  - `every_forest_is_good_statement` implies `every_forest_is_multibounding_statement` (chromatic-theory/implications_X218.v)
   - `faithful_cycle_covers_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
+  - `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` implies `triangle_free_induced_tree_chi_bounded_statement` (chromatic-theory/implications_X213.v)
+  - `hadwiger_chromatic_clique_minor_statement` implies `hadwiger_independence_minor_statement` (minor-theory/implications_X214.v)
+  - `hadwiger_chromatic_clique_minor_statement` implies `seagull_statement` (minor-theory/implications_X214.v)
+  - `half_flow_pair_statement` implies `five_flow_statement` (cycle-theory/implications_X228.v)
+  - `hat_guessing_degree_degeneracy_bounds_statement` implies `hat_guessing_degeneracy_bounded_statement` (graph-theory-misc/implications_X227.v)
   - `jaegers_modular_orientation_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)
+  - `kt_minor_free_hypergraph_chromatic_three_halves_statement` implies `k3_minor_free_hypergraph_three_colourable_statement` (hypergraph-theory/implications_X225.v)
+  - `matthews_sumner_four_connected_claw_free_statement` implies `hamiltonian_cycles_in_line_graphs_statement` (hamiltonicity-theory/implications_X211.v)
   - `petersen_coloring_statement` implies `the_berge_fulkerson_statement` (cycle-theory/implications_U10.v)
+  - `polynomial_gyarfas_sumner_tree_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_X218.v)
+  - `ramsey_nice_forest_family_eventual_statement` implies `ramsey_nice_forest_family_infinite_statement` (extremal-graph-theory/implications_X223.v)
+  - `smith_two_longest_cycles_statement` equiv `smith_longest_cycles_r_connected_statement` (cycle-theory/implications_X212.v)
+  - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
 
 ## Verifying this claim
 
@@ -136,12 +155,12 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
-- **1745 tracked rows** — by corpus tag: arxiv 762, arxiv-studied 568, derived 138, erdos 277; **116 alias rows** (no statement owed).
-- Statement legs over the 1629 non-alias rows: **332 done** · 10 partial · 36 blocked · 1251 todo.
+- **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
+- Statement legs over the 1673 non-alias rows: **414 done** · 10 partial · 47 blocked · 1202 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
-| X1 | 21 | 0 | 0 | 0 | 21 |
+| X1 | 20 | 0 | 0 | 0 | 20 |
 | X10 | 2 | 0 | 0 | 0 | 2 |
 | X100 | 1 | 0 | 0 | 0 | 1 |
 | X101 | 1 | 0 | 0 | 0 | 1 |
@@ -247,8 +266,8 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X192 | 1 | 0 | 0 | 0 | 1 |
 | X193 | 1 | 0 | 0 | 0 | 1 |
 | X194 | 1 | 0 | 0 | 0 | 1 |
-| X195 | 0 | 0 | 1 | 0 | 1 |
-| X196 | 0 | 0 | 1 | 0 | 1 |
+| X195 | 1 | 0 | 0 | 0 | 1 |
+| X196 | 1 | 0 | 0 | 0 | 1 |
 | X197 | 0 | 0 | 1 | 0 | 1 |
 | X198 | 1 | 0 | 0 | 0 | 1 |
 | X199 | 0 | 0 | 1 | 0 | 1 |
@@ -266,7 +285,24 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X209 | 0 | 1 | 0 | 0 | 1 |
 | X21 | 3 | 0 | 0 | 0 | 3 |
 | X210 | 0 | 0 | 1 | 0 | 1 |
+| X211 | 6 | 0 | 1 | 0 | 7 |
+| X212 | 8 | 0 | 0 | 0 | 8 |
+| X213 | 6 | 0 | 0 | 0 | 6 |
+| X214 | 4 | 0 | 0 | 0 | 4 |
+| X215 | 3 | 0 | 2 | 0 | 5 |
+| X216 | 2 | 0 | 2 | 0 | 4 |
+| X217 | 2 | 0 | 0 | 0 | 2 |
+| X218 | 5 | 0 | 1 | 0 | 6 |
+| X219 | 6 | 0 | 1 | 0 | 7 |
 | X22 | 1 | 0 | 0 | 0 | 1 |
+| X220 | 10 | 0 | 0 | 0 | 10 |
+| X221 | 6 | 0 | 1 | 0 | 7 |
+| X223 | 5 | 0 | 1 | 0 | 6 |
+| X225 | 4 | 0 | 0 | 0 | 4 |
+| X226 | 4 | 0 | 0 | 0 | 4 |
+| X227 | 4 | 0 | 3 | 0 | 7 |
+| X228 | 5 | 0 | 1 | 0 | 6 |
+| X229 | 1 | 0 | 0 | 0 | 1 |
 | X23 | 2 | 0 | 0 | 0 | 2 |
 | X24 | 1 | 0 | 0 | 0 | 1 |
 | X25 | 1 | 0 | 0 | 0 | 1 |
@@ -353,4 +389,13 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X99 | 1 | 0 | 0 | 0 | 1 |
 | XE1 | 33 | 0 | 0 | 0 | 33 |
 | XE2 | 43 | 0 | 0 | 0 | 43 |
+
+## Corpus relations (graph-conjectures data/relations.json)
+
+> Upstream relations between corpus rows (adversarial AI review of the statements + literature), resolved against the manifests by `meta/build_corpus_relations.py` into `meta/corpus_relations.json`. **Not machine-checked** — the formally verified graph is the dependency graph above; these edges only say where an implication theorem is worth attempting (`cite="gc:<edge_id>"` on the resulting `@EDGE`).
+
+- **225 edges** from clone `b72c585` — by relation equivalent_to 8, implies 159, related_only 42, same_conjecture 16; by verdict confirmed 214, plausible 11; 0 endpoints without a manifest row.
+- **108 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
+- **60 edges are already mirrored by a Rocq `@EDGE`** (implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never mirrored).
+- **80 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
 

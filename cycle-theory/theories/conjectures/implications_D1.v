@@ -105,11 +105,13 @@ Qed.
 (** ================================================================= *)
 (** ** External duality (cited, separately formalised — NOT [Admitted]) *)
 
-(** Tutte's modular-orientation ⇄ nowhere-zero-flow duality: an orientation
-    whose vertex imbalance is [≡ 0 (mod 2k+1)] everywhere yields a nowhere-zero
-    [(2k+1)]-flow.  This is the standard flow/tension theorem; it is the bridge
-    Jaeger's conjecture needs to reach Tutte's 3-flow conjecture, declared here
-    as an explicit hypothesis. *)
+(** No corpus row: this is not a conjecture of the corpus but an EXTERNAL, cited
+    classical fact used as an explicit hypothesis of the scheduled implication edge below,
+    so that the edge is proved without any axiom. It states Tutte's
+    modular-orientation to nowhere-zero-flow duality: if a multigraph has an orientation
+    whose imbalance, indegree minus outdegree, is a multiple of 2k+1 at every vertex, then
+    it has a nowhere-zero (2k+1)-flow. This is the bridge that Jaeger's modular
+    orientation conjecture needs in order to reach Tutte's 3-flow conjecture. *)
 Definition external_modular_orientation_to_flow_statement : Prop :=
   forall (k : nat) (G : mgraph),
     (exists o : edge G -> bool,

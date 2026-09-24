@@ -137,6 +137,11 @@ theories/conjectures/X136.v
 theories/conjectures/X166.v
 theories/conjectures/X179.v
 theories/conjectures/X193.v
+theories/conjectures/X216.v
+theories/conjectures/grounding_X216.v
+theories/conjectures/X221.v
+theories/conjectures/grounding_X221.v
+theories/conjectures/implications_X221.v
 
 # Checked formal resolutions (2026-09-05)
 theories/applications/color_avoiding_benchmark.v

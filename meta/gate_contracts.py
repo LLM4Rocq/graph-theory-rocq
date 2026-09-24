@@ -54,6 +54,32 @@ def strip_comments(src: str) -> str:
     return "".join(out)
 
 
+def comment_spans(src: str) -> list[tuple[int, int]]:
+    """Offsets ``(start, end)`` of every top-level Rocq comment (``end`` exclusive).
+
+    Same nesting walk as :func:`strip_comments`; nested comments are folded into the
+    enclosing top-level span, and an unterminated comment yields no span. Used by the
+    statement-doc gate to pick the comment attached to a declaration.
+    """
+    spans: list[tuple[int, int]] = []
+    i = depth = 0
+    start = -1
+    while i < len(src):
+        if src.startswith("(*", i):
+            if depth == 0:
+                start = i
+            depth += 1
+            i += 2
+        elif depth and src.startswith("*)", i):
+            depth -= 1
+            i += 2
+            if depth == 0:
+                spans.append((start, i))
+        else:
+            i += 1
+    return spans
+
+
 def sentence_from(src: str, start: int) -> str:
     """Return the Rocq command beginning at ``start`` through its final period."""
     i = start

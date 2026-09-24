@@ -5,6 +5,7 @@ Deterministic from the committed sources of truth, routed by meta/corpus_registr
   - meta/opg_corpus_manifest.json + meta/opg_legs_state.json   (the frozen v1 OPG corpus)
   - meta/v2_corpus_manifest.json  + meta/v2_legs_state.json    (the growing v2 corpus, from X0b)
   - meta/dependency_graph.json     (the federation edge graph)
+  - meta/corpus_relations.json     (upstream corpus relations, once built; NOT machine-checked)
   - base/theories/base.v           (the cross-area base surfaces)
 
 Default: regenerate meta/CORPUS_STATUS.md (OPG section always; v2 section once its manifest
@@ -183,6 +184,42 @@ if v2m is not None:
             w(f"| {ph} | {c['done']} | {c['partial']} | {c['blocked']} | {c['todo']} | {len(v2_phases[ph])} |")
     w("")
 
+# ── corpus relations (upstream graph-conjectures data/relations.json, resolved to manifest rows
+# by meta/build_corpus_relations.py; the file exists only once that builder has run) ──
+CREL = os.path.join(META, "corpus_relations.json")
+crel = json.load(open(CREL)) if os.path.exists(CREL) else None
+DONE_LEGS = ("done", "opg-done")
+crel_impl, crel_both, crel_mirrored, crel_open_ends = [], [], [], []
+if crel is not None:
+    cedges = crel["edges"]
+    cprov = crel.get("provenance", {})
+    crel_impl = [e for e in cedges if e["relation"] in ("implies", "equivalent_to")]
+    crel_both = [e for e in crel_impl if e["both_formalized"]]
+    crel_mirrored = [e for e in cedges if e.get("rocq_edge")]
+    crel_open_ends = sorted({e[f"{s}_row"] for e in crel_impl if e["verdict"] == "confirmed"
+                             for s in ("from", "to")
+                             if not (e[f"{s}_formal_name"] and e[f"{s}_leg"] in DONE_LEGS)})
+    w("## Corpus relations (graph-conjectures data/relations.json)\n")
+    w("> Upstream relations between corpus rows (adversarial AI review of the statements + "
+      "literature), resolved against the manifests by `meta/build_corpus_relations.py` into "
+      "`meta/corpus_relations.json`. **Not machine-checked** — the formally verified graph is the "
+      "dependency graph above; these edges only say where an implication theorem is worth "
+      "attempting (`cite=\"gc:<edge_id>\"` on the resulting `@EDGE`).\n")
+    w(f"- **{len(cedges)} edges** from clone `{(cprov.get('graph_conjectures_commit') or '?')[:7]}` "
+      "— by relation " + ", ".join(f"{k} {v}" for k, v in sorted(cprov.get("by_relation", {}).items()))
+      + "; by verdict " + ", ".join(f"{k} {v}" for k, v in sorted(cprov.get("by_verdict", {}).items()))
+      + f"; {cprov.get('n_unmapped_endpoints', 0)} endpoints without a manifest row.")
+    w(f"- **{len(crel_both)} of the {len(crel_impl)} implies/equivalent_to edges have both "
+      f"endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool "
+      f"for `implications_X2nn.v`.")
+    w(f"- **{len(crel_mirrored)} edges are already mirrored by a Rocq `@EDGE`** "
+      f"(implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never "
+      f"mirrored).")
+    w(f"- **{len(crel_open_ends)} distinct endpoints of *confirmed* implies/equivalent_to edges "
+      f"own no done statement** — each is a row whose formalization would unlock at least one "
+      f"cross-check.")
+    w("")
+
 report = "\n".join(L) + "\n"
 
 GATE_STATUSES = {"open", "partial", "solved", "disproved"}  # exact-type-gate vocabulary (v1)
@@ -245,6 +282,46 @@ if "--check" in sys.argv:
                     unver.append(f"{r['slug']}: {e}")
         if unver:
             errs.append(f"{len(unver)} v2 statement=done verification-tuple violations: {unver[:6]}")
+    # ── corpus relations vs the manifests ──
+    # corpus_relations.json is derived data (build_corpus_relations.py); here we only assert that
+    # it still AGREES with the committed manifests: every endpoint it claims to have resolved
+    # names a real row, and the formal_name/leg it cached is the one the manifest carries. A
+    # manifest rebuild that renames or reclassifies a row must invalidate the relations file.
+    if crel is not None:
+        if crel.get("schema_version") != 1:
+            errs.append(f"corpus_relations.json schema_version {crel.get('schema_version')!r} "
+                        "unknown to this report (expected 1)")
+        if crel.get("provenance", {}).get("graph_conjectures_pin") != REG.GRAPH_CONJECTURES_PIN:
+            errs.append("corpus_relations.json was built against graph_conjectures_pin "
+                        f"{crel.get('provenance', {}).get('graph_conjectures_pin')!r} != "
+                        f"{REG.GRAPH_CONJECTURES_PIN!r} (rebuild it)")
+        by_slug = {("opg", r["slug"]): r for r in rows}
+        by_slug.update({("v2", r["slug"]): r for r in v2rows})
+        bad_rel = []
+        for e in crel["edges"]:
+            for s in ("from", "to"):
+                slug = e[f"{s}_slug"]
+                if slug is None:                       # endpoint without a manifest row (expected)
+                    if e[f"{s}_formal_name"] or e[f"{s}_leg"]:
+                        bad_rel.append(f"{e['edge_id']}: unmapped {s} endpoint carries a "
+                                       f"formal_name/leg")
+                    continue
+                corpus = "opg" if e[f"{s}_row"].startswith("opg:") else "v2"
+                row = by_slug.get((corpus, slug))
+                if row is None:
+                    bad_rel.append(f"{e['edge_id']}: {s}_slug {slug!r} is not a {corpus} row")
+                    continue
+                if (row.get("formal_name") or None) != e[f"{s}_formal_name"]:
+                    bad_rel.append(f"{e['edge_id']}: {s} formal_name {e[f'{s}_formal_name']!r} != "
+                                   f"manifest {row.get('formal_name')!r} ({slug})")
+                leg = row.get("legs", {}).get("statement", "todo")
+                want = f"opg-{leg}" if corpus == "opg" else leg
+                if e[f"{s}_leg"] != want:
+                    bad_rel.append(f"{e['edge_id']}: {s} leg {e[f'{s}_leg']!r} != manifest "
+                                   f"{want!r} ({slug})")
+        if bad_rel:
+            errs.append(f"{len(bad_rel)} corpus_relations.json inconsistencies with the manifests "
+                        f"(rebuild with `python3 meta/build_corpus_relations.py`): {bad_rel[:6]}")
     committed = open(OUT).read() if os.path.exists(OUT) else ""
     if committed != report:
         errs.append("CORPUS_STATUS.md is stale — run `python3 meta/report_corpus_status.py`")

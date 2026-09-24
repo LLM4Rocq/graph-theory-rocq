@@ -16,19 +16,19 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 46,
+  "edges": 97,
   "by_status": {
-   "candidate": 27,
+   "candidate": 61,
    "refuted-direction": 16,
-   "verified": 3
+   "verified": 20
   },
   "by_kind": {
-   "equiv": 0,
-   "implies": 45,
+   "equiv": 3,
+   "implies": 93,
    "refutes": 0,
    "specializes": 1
   },
-  "proved_theorems": 3
+  "proved_theorems": 20
  },
  "edges": [
   {
@@ -43,6 +43,17 @@
    ]
   },
   {
+   "from": "asymmetric_bipartite_list_colouring_statement",
+   "to": "list_chromatic_number_and_maximum_degree_of_bipartit_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e025",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X219.v"
+   ]
+  },
+  {
    "from": "bene_conjecture_graph_theoretic_form_0_statement",
    "to": "shuffle_exchange_conjecture_statement",
    "kind": "implies",
@@ -51,6 +62,39 @@
    "proof": "",
    "sources": [
     "graph-theory-misc/implications_U13.v"
+   ]
+  },
+  {
+   "from": "bounded_degree_induced_wall_or_line_wall_statement",
+   "to": "bounded_degree_even_hole_free_bounded_treewidth_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e053",
+   "proof": "",
+   "sources": [
+    "minor-theory/implications_X220.v"
+   ]
+  },
+  {
+   "from": "bounded_layered_treewidth_bounded_queue_number_statement",
+   "to": "planar_graphs_bounded_queue_number_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e126",
+   "proof": "",
+   "sources": [
+    "minor-theory/implications_X228.v"
+   ]
+  },
+  {
+   "from": "bounded_tree_mu_polynomial_biclique_tree_alpha_statement",
+   "to": "tree_mu_ktt_free_polynomial_tree_alpha_statement",
+   "kind": "equiv",
+   "status": "candidate",
+   "cite": "gc:e072",
+   "proof": "",
+   "sources": [
+    "minor-theory/implications_X220.v"
    ]
   },
   {
@@ -87,6 +131,17 @@
    ]
   },
   {
+   "from": "conj_9",
+   "to": "kextension_linear_unavoidability_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e106",
+   "proof": "",
+   "sources": [
+    "digraph-theory/implications_X221.v"
+   ]
+  },
+  {
    "from": "counting_3_colorings_of_the_hex_lattice_statement",
    "to": "exact_colorings_of_graphs_statement",
    "kind": "implies",
@@ -117,6 +172,28 @@
    "proof": "",
    "sources": [
     "topological-graph-theory/implications_U13.v"
+   ]
+  },
+  {
+   "from": "delta122_hero_k1_plus_dipath2_free_statement",
+   "to": "delta122_hero_oriented_complete_multipartite_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e105",
+   "proof": "delta122_hero_k1_plus_dipath2_free_implies_delta122_hero_oriented_complete_multipartite",
+   "sources": [
+    "digraph-theory/implications_X221.v"
+   ]
+  },
+  {
+   "from": "directed_forcing_cyclic_statement",
+   "to": "directed_sidorenko_bipartite_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e109",
+   "proof": "",
+   "sources": [
+    "extremal-graph-theory/implications_X223.v"
    ]
   },
   {
@@ -153,6 +230,127 @@
    ]
   },
   {
+   "from": "edge_list_coloring_statement",
+   "to": "list_chromatic_index_even_clique_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e039",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X219.v"
+   ]
+  },
+  {
+   "from": "epsilon_bounded_h_free_anticomplete_pair_statement",
+   "to": "triangle_free_eps_bounded_anticomplete_pair_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e076",
+   "proof": "epsilon_bounded_h_free_anticomplete_pair_implies_triangle_free_eps_bounded_anticomplete_pair",
+   "sources": [
+    "extremal-graph-theory/implications_X223.v"
+   ]
+  },
+  {
+   "from": "erdos_lovasz_tihany_statement",
+   "to": "double_critical_graph_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e228",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X213.v"
+   ]
+  },
+  {
+   "from": "erdos_sos_tree_embedding_statement",
+   "to": "burr_erdos_tree_ramsey_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e239",
+   "proof": "erdos_sos_implies_burr_erdos_tree_ramsey",
+   "sources": [
+    "extremal-graph-theory/implications_X215.v"
+   ]
+  },
+  {
+   "from": "eta_bounded_forest_free_classes_statement",
+   "to": "eta_bounded_path_free_classes_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e012; arXiv:2302.04986, Conjecture 1.8 specialised to H = P_t (a path is a forest)",
+   "proof": "eta_bounded_forest_free_classes_implies_eta_bounded_path_free_classes",
+   "sources": [
+    "packing-theory/implications_X226.v"
+   ]
+  },
+  {
+   "from": "eta_bounded_forest_free_classes_statement",
+   "to": "eta_bounded_two_stars_free_classes_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e013; arXiv:2302.04986, Conjecture 1.8 specialised to H = S_a u S_b (a disjoint union of two stars is a forest)",
+   "proof": "eta_bounded_forest_free_classes_implies_eta_bounded_two_stars_free_classes",
+   "sources": [
+    "packing-theory/implications_X226.v"
+   ]
+  },
+  {
+   "from": "even_hole_diamond_free_bounded_tree_alpha_statement",
+   "to": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e050",
+   "proof": "",
+   "sources": [
+    "minor-theory/implications_X220.v"
+   ]
+  },
+  {
+   "from": "every_forest_is_good_statement",
+   "to": "conj2_1605_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e170",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "every_forest_is_good_statement",
+   "to": "every_forest_is_multibounding_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e171",
+   "proof": "every_forest_is_good_implies_every_forest_is_multibounding",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "every_forest_is_good_statement",
+   "to": "good_trees_disjoint_union_good_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e036",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "every_forest_is_multibounding_statement",
+   "to": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e035",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
    "from": "exact_colorings_of_graphs_statement",
    "to": "counting_3_colorings_of_the_hex_lattice_statement",
    "kind": "implies",
@@ -183,6 +381,39 @@
    "proof": "",
    "sources": [
     "cycle-theory/implications_D1.v"
+   ]
+  },
+  {
+   "from": "forest_free_polynomial_chi_bound_statement",
+   "to": "every_forest_is_multibounding_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e034",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "forest_free_polynomial_chi_bound_statement",
+   "to": "polynomial_gyarfas_sumner_tree_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e033",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "four_family_free_logarithmic_treewidth_statement",
+   "to": "even_hole_kt_free_logarithmic_treewidth_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e052",
+   "proof": "",
+   "sources": [
+    "minor-theory/implications_X220.v"
    ]
   },
   {
@@ -219,6 +450,83 @@
    ]
   },
   {
+   "from": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+   "to": "triangle_free_induced_tree_chi_bounded_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e229",
+   "proof": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_implies_triangle_free_induced_tree_chi_bounded",
+   "sources": [
+    "chromatic-theory/implications_X213.v"
+   ]
+  },
+  {
+   "from": "h_free_eps_bounded_sparse_pair_statement",
+   "to": "epsilon_bounded_h_free_anticomplete_pair_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e077",
+   "proof": "",
+   "sources": [
+    "extremal-graph-theory/implications_X223.v"
+   ]
+  },
+  {
+   "from": "hadwiger_chromatic_clique_minor_statement",
+   "to": "hadwiger_independence_minor_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e240",
+   "proof": "hadwiger_chromatic_clique_minor_statement_implies_hadwiger_independence_minor_statement",
+   "sources": [
+    "minor-theory/implications_X214.v"
+   ]
+  },
+  {
+   "from": "hadwiger_chromatic_clique_minor_statement",
+   "to": "seagull_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e224",
+   "proof": "hadwiger_chromatic_clique_minor_statement_implies_seagull_statement",
+   "sources": [
+    "minor-theory/implications_X214.v"
+   ]
+  },
+  {
+   "from": "half_flow_pair_statement",
+   "to": "five_flow_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e174; Workshop on Cycles and Colourings 2025, arXiv:2511.02892 Conjecture 6.1 and its context; Goddyn-Tarsi-Zhang, On (k,d)-colorings and fractional nowhere-zero flows, J. Graph Theory 28 (1998) 155-161 (flow number = ceiling of circular flow number)",
+   "proof": "half_flow_pair_implies_five_flow",
+   "sources": [
+    "cycle-theory/implications_X228.v"
+   ]
+  },
+  {
+   "from": "hamiltonian_cycles_in_line_graphs_statement",
+   "to": "matthews_sumner_four_connected_claw_free_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "Ryjacek, On a closure concept in claw-free graphs, JCTB 70 (1997) 217-224; corpus relation e234 (equivalent_to, confirmed)",
+   "proof": "",
+   "sources": [
+    "hamiltonicity-theory/implications_X211.v"
+   ]
+  },
+  {
+   "from": "hat_guessing_degree_degeneracy_bounds_statement",
+   "to": "hat_guessing_degeneracy_bounded_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e061",
+   "proof": "hat_guessing_degree_degeneracy_bounds_implies_hat_guessing_degeneracy_bounded",
+   "sources": [
+    "graph-theory-misc/implications_X227.v"
+   ]
+  },
+  {
    "from": "high_connectivity_no_k_n_statement",
    "to": "jorgensens_statement",
    "kind": "implies",
@@ -227,6 +535,28 @@
    "proof": "",
    "sources": [
     "minor-theory/implications_U7.v"
+   ]
+  },
+  {
+   "from": "hypergraph_cop_number_sqrt_n_over_k_statement",
+   "to": "meyniel_cop_number_sqrt_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e243",
+   "proof": "",
+   "sources": [
+    "hypergraph-theory/implications_X217.v"
+   ]
+  },
+  {
+   "from": "independent_set_correlated_gap_statement",
+   "to": "independent_set_binomial_gap_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e152",
+   "proof": "",
+   "sources": [
+    "graph-theory-misc/implications_X227.v"
    ]
   },
   {
@@ -260,6 +590,39 @@
    "proof": "",
    "sources": [
     "minor-theory/implications_U7.v"
+   ]
+  },
+  {
+   "from": "kpartite_hypergraph_turan_exponent_dmax_statement",
+   "to": "latin_square_hypergraph_turan_exponent_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e145",
+   "proof": "",
+   "sources": [
+    "hypergraph-theory/implications_X225.v"
+   ]
+  },
+  {
+   "from": "kt_minor_free_hypergraph_chromatic_three_halves_statement",
+   "to": "k3_minor_free_hypergraph_three_colourable_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e049",
+   "proof": "kt_minor_free_hypergraph_chromatic_three_halves_implies_k3_minor_free_hypergraph_three_colourable",
+   "sources": [
+    "hypergraph-theory/implications_X225.v"
+   ]
+  },
+  {
+   "from": "levine_hat_monotone_success_vanishes_statement",
+   "to": "levine_hat_intersecting_success_vanishes_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e149",
+   "proof": "",
+   "sources": [
+    "graph-theory-misc/implications_X227.v"
    ]
   },
   {
@@ -319,6 +682,17 @@
    ]
   },
   {
+   "from": "matthews_sumner_four_connected_claw_free_statement",
+   "to": "hamiltonian_cycles_in_line_graphs_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e234; Matthews & Sumner 1984; Ryjacek, JCTB 70 (1997) 217-224 (closure)",
+   "proof": "matthews_sumner_four_connected_claw_free_implies_hamiltonian_cycles_in_line_graphs",
+   "sources": [
+    "hamiltonicity-theory/implications_X211.v"
+   ]
+  },
+  {
    "from": "multicolour_erdos_hajnal_statement",
    "to": "the_erdos_hajnal_statement",
    "kind": "specializes",
@@ -327,6 +701,50 @@
    "proof": "",
    "sources": [
     "extremal-graph-theory/implications_D2ram.v"
+   ]
+  },
+  {
+   "from": "odd_minor_free_defective_clustered_treedepth_statement",
+   "to": "clustered_chromatic_minor_class_treedepth_bound_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e168",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "orientable_five_cycle_double_cover_statement",
+   "to": "cycle_double_cover_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e218; Archdeacon 1984 / Jaeger 1985, orientable five cycle double cover conjecture",
+   "proof": "",
+   "sources": [
+    "cycle-theory/implications_X212.v"
+   ]
+  },
+  {
+   "from": "orientable_five_cycle_double_cover_statement",
+   "to": "five_flow_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e246; Oum, A proof of the cycle double cover conjecture by OpenAI: an exposition, arXiv:2607.16356v3 Section 9.3 Conjecture 21 and Lemma 22; C.-Q. Zhang, Integer Flows and Cycle Covers of Graphs, Lemma 13.1.5",
+   "proof": "",
+   "sources": [
+    "cycle-theory/implications_X212.v"
+   ]
+  },
+  {
+   "from": "oriented_triangle_free_acyclic_number_theta_statement",
+   "to": "oriented_triangle_free_dichromatic_theta_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e158",
+   "proof": "",
+   "sources": [
+    "digraph-theory/implications_X221.v"
    ]
   },
   {
@@ -385,6 +803,39 @@
    ]
   },
   {
+   "from": "planar_fractional_vertex_arboricity_two_statement",
+   "to": "large_induced_forest_in_a_planar_graph_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e121",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X219.v"
+   ]
+  },
+  {
+   "from": "polynomial_gyarfas_sumner_tree_statement",
+   "to": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e175",
+   "proof": "polynomial_gyarfas_sumner_tree_implies_graphs_with_a_forbidden_induced_tree_are_chi_bounded",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "polynomial_gyarfas_sumner_tree_statement",
+   "to": "path_induced_rooted_tree_polynomial_chi_bound_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e041",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
    "from": "ptas_for_feedback_arc_set_in_tournaments_statement",
    "to": "algorithm_for_graph_homomorphisms_statement",
    "kind": "implies",
@@ -393,6 +844,28 @@
    "proof": "",
    "sources": [
     "graph-theory-misc/implications_D7.v"
+   ]
+  },
+  {
+   "from": "ramsey_nice_forest_family_eventual_statement",
+   "to": "ramsey_nice_forest_family_infinite_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e160",
+   "proof": "ramsey_nice_forest_family_eventual_implies_ramsey_nice_forest_family_infinite",
+   "sources": [
+    "extremal-graph-theory/implications_X223.v"
+   ]
+  },
+  {
+   "from": "random_embedding_expected_faces_third_statement",
+   "to": "random_embedding_expected_faces_linear_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e125",
+   "proof": "",
+   "sources": [
+    "topological-graph-theory/implications_X228.v"
    ]
   },
   {
@@ -426,6 +899,39 @@
    "proof": "",
    "sources": [
     "chromatic-theory/implications_U1.v"
+   ]
+  },
+  {
+   "from": "small_cycle_double_cover_statement",
+   "to": "cycle_double_cover_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e209; Bondy 1990, small cycle double cover conjecture; its own corpus context says it strengthens the CDC conjecture",
+   "proof": "",
+   "sources": [
+    "cycle-theory/implications_X212.v"
+   ]
+  },
+  {
+   "from": "small_hereditary_class_bounded_twin_width_statement",
+   "to": "polynomial_expansion_bounded_twin_width_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e078",
+   "proof": "",
+   "sources": [
+    "minor-theory/implications_X220.v"
+   ]
+  },
+  {
+   "from": "smith_two_longest_cycles_statement",
+   "to": "smith_longest_cycles_r_connected_statement",
+   "kind": "equiv",
+   "status": "verified",
+   "cite": "Smith's conjecture on longest cycles, Bondy-Murty Appendix A #64 (bm:bm-064) and the studies slice studies:std_smith_s_conjecture_longest_cycles_in_r_connected (X10.v); see Grotschel 1984",
+   "proof": "smith_two_longest_cycles_equiv_smith_longest_cycles_r_connected",
+   "sources": [
+    "cycle-theory/implications_X212.v"
    ]
   },
   {
@@ -473,6 +979,28 @@
    ]
   },
   {
+   "from": "the_erdos_hajnal_statement",
+   "to": "vc_dimension_erdos_hajnal_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e116",
+   "proof": "",
+   "sources": [
+    "extremal-graph-theory/implications_X223.v"
+   ]
+  },
+  {
+   "from": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+   "to": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e051",
+   "proof": "",
+   "sources": [
+    "minor-theory/implications_X220.v"
+   ]
+  },
+  {
    "from": "three_flow_statement",
    "to": "five_flow_statement",
    "kind": "implies",
@@ -481,6 +1009,39 @@
    "proof": "",
    "sources": [
     "cycle-theory/implications_D1.v"
+   ]
+  },
+  {
+   "from": "toroidal_five_choosability_critical_iff_six_critical_statement",
+   "to": "toroidal_five_choosable_iff_five_colourable_statement",
+   "kind": "equiv",
+   "status": "candidate",
+   "cite": "gc:e027",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X219.v"
+   ]
+  },
+  {
+   "from": "toroidal_five_choosable_iff_five_colourable_statement",
+   "to": "toroidal_edge_width_four_five_choosable_statement",
+   "kind": "implies",
+   "status": "candidate",
+   "cite": "gc:e123",
+   "proof": "",
+   "sources": [
+    "chromatic-theory/implications_X219.v"
+   ]
+  },
+  {
+   "from": "triangle_free_planar_large_induced_two_degenerate_statement",
+   "to": "triangle_free_planar_five_sixths_two_degenerate_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e082",
+   "proof": "triangle_free_planar_large_induced_two_degenerate_implies_triangle_free_planar_five_sixths_two_degenerate",
+   "sources": [
+    "chromatic-theory/implications_X219.v"
    ]
   },
   {
@@ -541,7 +1102,7 @@
  ],
  "legacy": {
   "repo": "digraph-theory (absorbed)",
-  "implies_theorems_in_source": 50,
+  "implies_theorems_in_source": 51,
   "committed_dependency_graph_edges": 34,
   "note": "Legacy digraph-only graph: source _implies_ theorem count vs the committed graph differ (theorem-name pattern includes helper lemmas; the old extractor filtered). Reconcile within digraph-theory separately; it does NOT define the federation format."
  }

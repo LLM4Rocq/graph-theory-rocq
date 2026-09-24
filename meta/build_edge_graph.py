@@ -71,19 +71,26 @@ for pkg in PACKAGES:
 # via corpus_registry — a v2-endpoint edge hosted in a digraph file must survive this filter.
 corpus_nodes = REG.all_corpus_nodes()
 if os.path.isdir(os.path.join(MONO, "digraph-theory", "theories", "conjectures")):
-    dg_edges, _dg_thms = scan("digraph-theory")
+    dg_edges, dg_thms = scan("digraph-theory")
     # Dropping is EXPECTED for legacy internal digraph edges, but an endpoint that follows the
     # corpus `*_statement` convention and is still unknown is suspicious (typo, or a row that
     # should exist in a manifest) — warn loudly instead of silently truncating the graph.
+    kept_proofs = set()
     for e in dg_edges:
         if e["from"] in corpus_nodes and e["to"] in corpus_nodes:
             all_edges.append(e)
+            if e.get("proof"):
+                kept_proofs.add(e["proof"])
             continue
         odd = [n for n in (e["from"], e["to"]) if n.endswith("_statement") and n not in corpus_nodes]
         if odd:
             sys.stderr.write(f"WARNING: digraph-hosted @EDGE dropped ({e['file']}): "
                              f"{e['from']} -> {e['to']} — corpus-looking non-corpus endpoint(s) "
                              f"{odd} (add the row to a manifest, or rename if internal)\n")
+    # Digraph-hosted theorems are taken ONLY when a kept corpus edge names them as its proof
+    # (waves X216/X221 onward host corpus implications in digraph-theory); legacy internal
+    # `_implies_` theorems stay out of the federation graph.
+    all_thms += [t for t in dg_thms if t["name"] in kept_proofs]
 
 # Alias rows own no statements and may never be edge endpoints (plan §1.4): reject any edge
 # touching a formal_name that belongs to an alias_of row (should not exist; fail loudly if it does).
@@ -102,6 +109,50 @@ for e in all_edges:
     need(e["from"] and e["to"] and e["kind"] and e["status"], f"edge missing field: {e}")
     need(e["kind"] in KINDS, f"bad kind {e['kind']!r} in {e['file']}")
     need(e["status"] in STATUSES, f"bad status {e['status']!r} in {e['file']}")
+
+# ── optional corpus-relation citation:  cite="gc:<edge_id>" ──
+# An @EDGE may cite the upstream graph-conjectures relation (meta/corpus_relations.json, built by
+# build_corpus_relations.py from the clone's data/relations.json) that it formalizes. That file is
+# derived data and may be absent (no clone / not yet built): then a gc: cite is free text, exactly
+# as before. When it IS present the cited relation must exist and its two endpoints must be this
+# annotation's from/to — an upstream renumbering or a repointed relation must break the gate
+# rather than leave a Rocq edge carrying someone else's argument. (An `equivalent_to` relation is
+# symmetric, so an `equiv` annotation may cite it in either orientation.)
+GC_CITE_RE = re.compile(r"^gc:(e\d+)\s*(?:[;,]\s*.*)?$", re.S)
+CORPUS_RELATIONS = os.path.join(META, "corpus_relations.json")
+gc_rel = ({e["edge_id"]: e for e in json.load(open(CORPUS_RELATIONS))["edges"]}
+          if os.path.exists(CORPUS_RELATIONS) else None)
+for e in all_edges:
+    cite = (e.get("cite") or "").strip()
+    if not cite.startswith("gc:"):
+        continue
+    m = GC_CITE_RE.match(cite)
+    if not m or gc_rel is None:
+        msg = (f"malformed corpus-relation cite {cite!r} in {e['file']} "
+               f"(expected cite=\"gc:eNNN\", optionally followed by ; free text)")
+        if not m and gc_rel is not None:
+            sys.exit("EDGE-GRAPH INVARIANT VIOLATED: " + msg)
+        if not m:   # nothing to check against: report, do not fail (pre-corpus-relations behaviour)
+            sys.stderr.write(f"WARNING: {msg}; meta/corpus_relations.json absent, cite unchecked\n")
+        continue
+    eid = m.group(1)
+    rel = gc_rel.get(eid)
+    if rel is None:
+        sys.exit(f"EDGE-GRAPH INVARIANT VIOLATED: @EDGE in {e['file']} cites corpus relation "
+                 f"{eid!r}, which is not in meta/corpus_relations.json (rebuild it, or fix the cite)")
+    ends = [(rel["from_formal_name"], rel["to_formal_name"])]
+    if e["kind"] == "equiv" and rel["relation"] == "equivalent_to":
+        ends.append((rel["to_formal_name"], rel["from_formal_name"]))
+    if (e["from"], e["to"]) not in ends:
+        sys.exit(f"EDGE-GRAPH INVARIANT VIOLATED: @EDGE {e['from']} -> {e['to']} ({e['file']}) "
+                 f"cites corpus relation {eid}, whose endpoints are "
+                 f"{rel['from_formal_name']} -> {rel['to_formal_name']} "
+                 f"(rows {rel['from_row']} -> {rel['to_row']}); point the edge at the cited "
+                 f"relation or cite the right one")
+    if rel["relation"] not in ("implies", "equivalent_to"):
+        sys.stderr.write(f"WARNING: @EDGE in {e['file']} cites corpus relation {eid} of type "
+                         f"{rel['relation']!r}, which asserts no implication\n")
+
 # a verified implies/equiv edge must name its backing Theorem (proof=<name>), and that EXACT
 # theorem must exist in the edge's file with the right kind AND endpoints consistent with from/to
 # (guards against a stale/mismatched annotation that a same-kind-in-file check would wave through).

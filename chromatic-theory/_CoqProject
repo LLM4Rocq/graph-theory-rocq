@@ -2,6 +2,8 @@
 -Q ../base/theories GTBase
 -arg -w -arg -notation-overridden
 
+theories/foundations/chi_bounding.v
+
 theories/conjectures/U1.v
 theories/conjectures/grounding_U1.v
 theories/conjectures/implications_U1.v
@@ -75,6 +77,15 @@ theories/conjectures/X203.v
 theories/conjectures/X204.v
 theories/conjectures/X206.v
 theories/conjectures/X210.v
+theories/conjectures/X213.v
+theories/conjectures/grounding_X213.v
+theories/conjectures/implications_X213.v
+theories/conjectures/X218.v
+theories/conjectures/grounding_X218.v
+theories/conjectures/implications_X218.v
+theories/conjectures/X219.v
+theories/conjectures/grounding_X219.v
+theories/conjectures/implications_X219.v
 
 # Checked formal resolutions (2026-09-05)
 theories/applications/cochromatic_gap/clique_bounds.v

@@ -30,12 +30,13 @@
       (ii) [p] is ADMISSIBLE: across every cut [δ(S)] the total is
              [\sum_(f in δS) 2 = 2·|δS|], which is even, and for each
              [e ∈ δS] one needs [2·p(e) = 4 ≤ 2·|δS|], i.e. [|δS| ≥ 2].
-           A cut of size 1 around [e] would mean every (directed) walk between
+           A cut of size 1 around [e] would mean every UNDIRECTED walk between
            the endpoints of [e] crosses [δS] only through [e] — i.e. [e] is a
-           bridge ([eseparates]).  Since [G] is bridgeless, no cut containing an
-           edge is a singleton, so [|δS| ≥ 2] ([bridgeless_cut2] below, via the
-           combinatorial [walk_crosses]: a walk whose endpoints straddle [S]
-           must use a [δS]-edge).
+           bridge, a genuine cut edge ([ueseparates] over [uwalk], see
+           [Cycle.foundations.connectivity]).  Since [G] is bridgeless, no cut
+           containing an edge is a singleton, so [|δS| ≥ 2]
+           ([bridgeless_cut2] below, via the combinatorial [uwalk_crosses]: an
+           undirected walk whose endpoints straddle [S] must use a [δS]-edge).
     A faithful cover for [p ≡ 2] is, by definition, a list of circuits covering
     each edge exactly [p(e) = 2] times — that is exactly a cycle double cover.
 
@@ -75,26 +76,6 @@ Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(** ** A directed walk straddling [S] must cross the cut [δS] *)
-
-(** If [walk x y w] and [x], [y] lie on opposite sides of [S], then some edge of
-    [w] has exactly one endpoint in [S], i.e. lies in [cut S]. *)
-Lemma walk_crosses (G : mgraph) (S : {set G}) (w : seq (edge G)) (x y : G) :
-  walk x y w -> (x \in S) != (y \in S) ->
-  exists2 f, f \in w & f \in cut S.
-Proof.
-elim: w x y => [|e w IH] x y /=.
-- by move=> /eqP <-; rewrite eqxx.
-- move=> /andP[/eqP Hsx Hw] Hne.
-  case Hcmp: ((target e \in S) == (x \in S)).
-  + have Hne' : (target e \in S) != (y \in S) by rewrite (eqP Hcmp).
-    have [f Hfw Hfc] := IH (target e) y Hw Hne'.
-    by exists f => //; rewrite inE Hfw orbT.
-  + exists e; first by rewrite inE eqxx.
-    rewrite /cut inE Hsx.
-    by move/negbT: Hcmp; case: (x \in S); case: (target e \in S).
-Qed.
-
 (** ** Bridgeless ⟹ every cut around an edge has size ≥ 2 *)
 
 Lemma bridgeless_cut2 (G : mgraph) (S : {set G}) (e : edge G) :
@@ -110,7 +91,7 @@ have Heq : cut S = [set e].
 apply: (Hbl e); rewrite /is_bridge => w Hw.
 have Hxy : (source e \in S) != (target e \in S).
   by move: Hin; rewrite inE; case: (source e \in S); case: (target e \in S).
-have [f Hfw Hfc] := walk_crosses Hw Hxy.
+have [f Hfw Hfc] := uwalk_crosses Hw Hxy.
 by exists f; [rewrite -Heq | exact: Hfw].
 Qed.
 

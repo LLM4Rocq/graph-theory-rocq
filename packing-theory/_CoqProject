@@ -22,3 +22,8 @@ theories/conjectures/XE1.v
 theories/conjectures/X111.v
 theories/conjectures/X155.v
 theories/conjectures/X178.v
+theories/conjectures/X214.v
+theories/conjectures/grounding_X214.v
+theories/conjectures/X226.v
+theories/conjectures/grounding_X226.v
+theories/conjectures/implications_X226.v
