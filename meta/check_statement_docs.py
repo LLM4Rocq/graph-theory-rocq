@@ -20,6 +20,20 @@ Keys in that order; `Notes:` optional. `Site:`/`Review:` must equal
 site page: erdos / derived / studies). A statement with no corpus row instead carries
 `(** No corpus row: <reason> *)`.
 
+A third block kind documents an EXTERNAL, cited classical fact that the development carries as an
+explicit hypothesis (`Definition external_*_statement : Prop`, never an `Axiom`, never `Admitted`
+— the shape a `status=conditional` @EDGE depends on, see meta/external_theorems.json):
+
+    (** External theorem: <authors>, <title/venue> <year>, <link>.
+        Claim: <what the cited theorem says, and which instance the Prop below states>.
+        Not formalized here. *)
+    Definition external_circular_5_flow_statement : Prop :=
+
+`External theorem:` and `Claim:` are the only keys of that block; the `External theorem:` value is
+the citation line and must carry a year. It is accepted ONLY on definitions named
+`external_*_statement`, and never on a corpus formal_name (a corpus row's statement is a
+conjecture of the corpus, not a cited theorem).
+
 Targets are `Definition`/`Let` declarations whose name ends in `_statement` or is a
 `formal_name` of either corpus manifest; files named `_assum_*`, `_faith_*` or
 `rocq_mcp_cache_*` are skipped. Manifests are read through `corpus_registry.load_manifest`
@@ -56,8 +70,14 @@ BASELINE_PATH = os.path.join(META, "statement_docs_baseline.json")
 # Order-significant grammar of the doc block.
 ROW_KEYS = ("Corpus row", "Site", "Review", "English statement", "Definitions", "Notes")
 OPTIONAL_KEYS = ("Notes",)
+# the `External theorem:` block (a cited classical fact carried as an explicit hypothesis)
+EXTERNAL_KEYS = ("External theorem", "Claim")
+EXTERNAL_NAME_RE = re.compile(r"^external_[A-Za-z0-9_']*_statement$")
+# a citation line names a year; without one "External theorem: it is known that ..." would pass
+CITATION_YEAR_RE = re.compile(r"\b(?:1[89]|20)\d{2}\b")
 KEY_RE = re.compile(
-    r"^\s*(No corpus row|Corpus row|Site|Review|English statement|Definitions|Notes)\s*:\s*(.*)$"
+    r"^\s*(No corpus row|Corpus row|Site|Review|English statement|Definitions|Notes"
+    r"|External theorem|Claim)\s*:\s*(.*)$"
 )
 
 # WP4b: local vocabulary duplicating a coq-graph-theory / GTBase notion (warning only).
@@ -186,7 +206,7 @@ def attached_comment(src, spans, start):
 def parse_block(text):
     """Parse a comment body into (kind, values, errors).
 
-    kind is 'row', 'orphan' or None (no recognisable doc block).
+    kind is 'row', 'orphan', 'external' or None (no recognisable doc block).
     """
     inner = text
     if inner.startswith("(*"):
@@ -219,8 +239,27 @@ def parse_block(text):
             errors.append("doc block: `No corpus row:` needs a reason")
         return "orphan", joined, errors
 
+    if order[0] == "External theorem":
+        extra = [k for k in order if k not in EXTERNAL_KEYS]
+        if extra:
+            errors.append(f"doc block: an `External theorem:` block may only use "
+                          f"{list(EXTERNAL_KEYS)} (found {extra})")
+        for key in EXTERNAL_KEYS:
+            if key not in values:
+                errors.append(f"doc block: missing key `{key}:`")
+            elif not joined[key]:
+                errors.append(f"doc block: `{key}:` is empty")
+        if joined.get("External theorem") and not CITATION_YEAR_RE.search(joined["External theorem"]):
+            errors.append("doc block: `External theorem:` must be a citation line "
+                          "(authors, title/venue, year, link); no year found")
+        return "external", joined, errors
+
     if "No corpus row" in order:
         errors.append("doc block: `No corpus row:` mixed with corpus keys")
+    for key in EXTERNAL_KEYS:
+        if key in order:
+            errors.append(f"doc block: `{key}:` mixed with corpus keys (an `External theorem:` "
+                          "block starts with that key and carries no corpus row)")
     expected = [k for k in ROW_KEYS if k in order]
     present = [k for k in order if k in ROW_KEYS]
     for key in ROW_KEYS:
@@ -241,6 +280,18 @@ def check_block(target, kind, values, index):
     if kind == "orphan":
         if name in index.formal_names:
             errors.append(f"`No corpus row` on {name}, which is a corpus formal_name")
+        return errors, None
+
+    if kind == "external":
+        # the block kind is reserved for the cited-classical-fact hypotheses: a corpus conjecture
+        # documented as an "external theorem" would silently launder a conjecture into a theorem.
+        if not EXTERNAL_NAME_RE.match(name):
+            errors.append(f"`External theorem:` block on {name}, which is not an "
+                          "`external_*_statement` definition (that block kind documents a cited "
+                          "classical fact carried as an explicit hypothesis)")
+        if name in index.formal_names:
+            errors.append(f"`External theorem:` on {name}, which is a corpus formal_name "
+                          "(a corpus row states a conjecture, not a cited theorem)")
         return errors, None
 
     row_id = values.get("Corpus row", "")

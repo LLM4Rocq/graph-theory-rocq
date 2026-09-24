@@ -47,8 +47,9 @@ move: w2; case: (ω([set: G])) => [|[|[|k]]] //= _.
 - by rewrite leq_addl.
 Qed.
 
-(** ** Erdos-Lovasz Tihany ==> the double-critical graph conjecture ********)
+(** ** Erdos-Lovasz Tihany ==> the double-critical graph conjecture ********
+    The edge is VERIFIED and lives in [implications_U1.v], whose wave owns the
+    target row [double_critical_graph_statement]; see the annotation there. *)
 
-(*@EDGE from=erdos_lovasz_tihany_statement to=double_critical_graph_statement kind=implies status=candidate proved=false cite="gc:e228" note="Corpus relation e228 (confirmed, Bondy-Murty A.45 implies the Open Problem Garden double-critical row). The mathematical route is: a connected double-critical k-chromatic graph is vertex-critical; a vertex-critical k-chromatic graph containing K_k equals K_k; otherwise it has no k-clique and Erdos-Lovasz Tihany with k1 = 2, k2 = k - 1 yields two vertex-disjoint subgraphs of chromatic numbers 2 and k-1, which contradicts double-criticality. Two bridge facts are missing under the present encodings and cannot be asserted here: (a) 'double_critical G implies vertex-critical' and (b) 'a vertex-critical k-chromatic graph with a k-clique is isomorphic to K_n' -- both are genuine chromatic-number theorems about chi_mem, not consequences of either statement, so the edge stays candidate." *)
 
 Print Assumptions graphs_with_a_forbidden_induced_tree_are_chi_bounded_implies_triangle_free_induced_tree_chi_bounded.

@@ -62,11 +62,17 @@ Definition min_outdegree_at_least (D : diGraphType) (m : nat) : Prop :=
 Definition min_semidegree_at_least (D : diGraphType) (m : nat) : Prop :=
   forall v : D, (m <= outdeg v)%N /\ (m <= indeg v)%N.
 
+(** The host [D] is guarded by [0 < #|D|]: see the GUARD REPAIR notes of the two
+    rows below.  A pointwise minimum-degree condition is satisfied VACUOUSLY by the
+    empty digraph, which contains no subdivision of a nonempty [F], so without the
+    guard no [m] is ever a bound and both rows are refutable. *)
 Definition mader_delta_plus_bound (F : diGraphType) (m : nat) : Prop :=
-  forall D : diGraphType, min_outdegree_at_least D m -> contains_subdivision F D.
+  forall D : diGraphType, (0 < #|D|)%N ->
+    min_outdegree_at_least D m -> contains_subdivision F D.
 
 Definition mader_delta_zero_bound (F : diGraphType) (m : nat) : Prop :=
-  forall D : diGraphType, min_semidegree_at_least D m -> contains_subdivision F D.
+  forall D : diGraphType, (0 < #|D|)%N ->
+    min_semidegree_at_least D m -> contains_subdivision F D.
 
 Definition delta_plus_maderian (F : diGraphType) : Prop :=
   exists m : nat, mader_delta_plus_bound F m.
@@ -79,22 +85,32 @@ Definition least_mader_delta_zero (F : diGraphType) (m : nat) : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1610.00876__00/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1610.00876__00.json
     English statement: (Aboulker, Cohen, Havet, Lochet, Moura, Thomasse 2016, Subdivisions in digraphs of large out-degree or large dichromatic number, arXiv:1610.00876, Conjecture 3)
-      For every k there is a LEAST natural number m such that every finite digraph whose minimum
-      semidegree (the smaller of its minimum in-degree and its minimum out-degree) is at least m
-      contains a subdivision of the transitive tournament on k vertices.
+      For every k there is a LEAST natural number m such that every finite NON-EMPTY digraph
+      whose minimum semidegree (the smaller of its minimum in-degree and its minimum out-degree)
+      is at least m contains a subdivision of the transitive tournament on k vertices.
     Definitions: [contains_subdivision F D] - there are injective branch vertices in D and, for
       every arc u -> v of F, a nonempty directed path from the branch vertex of u to that of v
       whose internal vertices avoid every branch vertex and are disjoint from the internal
       vertices of every other replacement path (this file); [min_outdegree_at_least D m] and
       [min_semidegree_at_least D m] - every out-degree, resp. every out-degree and every
-      in-degree, is at least m (this file); [mader_delta_zero_bound F m] - every digraph of
-      minimum semidegree at least m contains a subdivision of F (this file);
+      in-degree, is at least m (this file); [mader_delta_zero_bound F m] - every NON-EMPTY
+      digraph of minimum semidegree at least m contains a subdivision of F (this file);
       [least_mader_delta_zero F m] - m is such a bound and is minimal among them (this file);
       [TT k] - the transitive tournament on k vertices (core/tournament.v); [indeg]
       (conjectures/classic_core.v); [outdeg] (core/oriented.v).
     Notes: The corpus phrase there exists a least integer mader is encoded literally by the
       minimality clause of [least_mader_delta_zero], so the content is that SOME finite bound
-      exists (a least one then exists by well-ordering). *)
+      exists (a least one then exists by well-ordering).
+      GUARD REPAIR (2026-09-24, wave E4): [mader_delta_zero_bound] now guards its host by
+      0 < #|D|. Without that guard the row is FALSE for every k >= 1, refuted by the EMPTY
+      digraph: [min_semidegree_at_least D m] is a pointwise condition, so it holds VACUOUSLY on a
+      digraph with no vertex, while [contains_subdivision (TT k) D] needs an injective branch map
+      out of the nonempty TT k; hence no m is a bound at all (wave-E3 scratch refutation
+      degeneracy.v: X2_mader_delta0_false, kept in the wave report, not committed). The paper
+      quantifies over digraphs of minimum semidegree at least mader, i.e. over digraphs that HAVE
+      vertices of that degree; the guard excludes exactly the vertexless degenerate host that the
+      pointwise encoding admits, and nothing else. Teeth and non-vacuity:
+      grounding_X2.v (x2_delta0_unguarded_false, x2_delta0_hyps_nonvacuous). *)
 Definition mader_delta0_transitive_tournament_statement : Prop :=
   forall k : nat, exists m : nat, least_mader_delta_zero (TT k) m.
 
@@ -109,20 +125,29 @@ Definition oriented_tree (F : orientedDigraph) : Prop :=
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1610.00876__01.json
     English statement: (Aboulker, Cohen, Havet, Lochet, Moura, Thomasse 2016, Subdivisions in digraphs of large out-degree or large dichromatic number, arXiv:1610.00876, Conjecture 4)
       Every oriented tree F, that is every nonempty orientation of a tree, is
-      delta-plus-maderian: there is a natural number m such that every finite digraph of minimum
-      out-degree at least m contains a subdivision of F.
+      delta-plus-maderian: there is a natural number m such that every finite NON-EMPTY digraph
+      of minimum out-degree at least m contains a subdivision of F.
     Definitions: [contains_subdivision F D] - there are injective branch vertices in D and, for
       every arc u -> v of F, a nonempty directed path from the branch vertex of u to that of v
       whose internal vertices avoid every branch vertex and are disjoint from the internal
       vertices of every other replacement path (this file); [min_outdegree_at_least D m] and
       [min_semidegree_at_least D m] - every out-degree, resp. every out-degree and every
       in-degree, is at least m (this file); [delta_plus_maderian F] - some minimum out-degree
-      bound forces a subdivision of F (this file); [oriented_tree F] - nonempty, asymmetric arc
+      bound forces a subdivision of F in every NON-EMPTY host (this file); [oriented_tree F] - nonempty, asymmetric arc
       relation, and underlying simple graph both a forest and connected (this file);
       [chi_bounded.underlying] and [chi_bounded.oriented_dg] (conjectures/chi_bounded.v);
       [is_forest] and [connected] (coq-graph-theory).
     Notes: Being a tree is stated as forest plus connected on the underlying simple graph, which
-      avoids counting arcs. *)
+      avoids counting arcs.
+      GUARD REPAIR (2026-09-24, wave E4): [mader_delta_plus_bound] now guards its host by
+      0 < #|D|, for the same reason as row arxiv:1610.00876#00: the EMPTY digraph satisfies the
+      pointwise [min_outdegree_at_least D m] vacuously for every m and contains no subdivision of
+      a nonempty F, so without the guard the row is FALSE already for the one-vertex oriented tree
+      (wave-E3 scratch refutation degeneracy.v: X2_trees_delta_plus_false, kept in the wave
+      report, not committed). Mader's conjecture speaks of digraphs of large minimum out-degree,
+      which have vertices; the guard removes exactly the vertexless host. Teeth and non-vacuity:
+      grounding_X2.v (x2_delta_plus_unguarded_false, x2_delta_plus_hyps_nonvacuous,
+      x2_oriented_tree_TT2). *)
 Definition oriented_trees_delta_plus_maderian_statement : Prop :=
   forall F : orientedDigraph, oriented_tree F -> delta_plus_maderian F.
 
@@ -152,7 +177,12 @@ End DisjointUnion.
       delta-plus-maderian too.
     Definitions: [delta_plus_maderian F] (this file); [x2_disjoint_union D1 D2] - the digraph on
       the sum type whose arcs are the arcs of D1 and of D2, with no arc between the two sides
-      (this file). *)
+      (this file).
+    Notes: The body is unchanged by the wave-E4 guard repair, but it inherits it through
+      [delta_plus_maderian]: the hosts are now the NON-EMPTY digraphs of minimum out-degree at
+      least m. The repair strictly strengthens this row - with the unguarded notion
+      [delta_plus_maderian F] is false for every nonempty F, so the implication was vacuously
+      true. *)
 Definition delta_plus_maderian_disjoint_union_statement : Prop :=
   forall F1 F2 : diGraphType,
     delta_plus_maderian F1 -> delta_plus_maderian F2 ->

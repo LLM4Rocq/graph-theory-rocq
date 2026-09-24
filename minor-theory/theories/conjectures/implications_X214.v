@@ -4,8 +4,9 @@
     [implies] edges of meta/corpus_relations.json: e223, e224 and e240.
 
     - e223 targets [fractional_hadwiger_statement], which lives in
-      extremal-graph-theory; minor-theory cannot import it, so NO [@EDGE] record
-      is committed for it here (it belongs to a cross-package implications file).
+      extremal-graph-theory; minor-theory cannot import it, so its [@EDGE] record
+      and proof live in atlas/theories/conjectures/implications_A1.v, where it is
+      VERIFIED (wave A1, 2026-09-24).
     - e224 and e240 target [seagull_statement] (Minor.conjectures.U7) and
       [hadwiger_independence_minor_statement] (Minor.conjectures.X5); both are
       PROVED below, so both edges are recorded as status=verified.

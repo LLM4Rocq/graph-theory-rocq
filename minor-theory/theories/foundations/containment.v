@@ -222,3 +222,52 @@ move=> xy; apply/card_gt0P.
 have hE : [set x; y] \in E(W) by rewrite in_edges.
 by exists (exist (fun e : {set W} => e \in E(W)) [set x; y] hE).
 Qed.
+
+(** ** Decidability of [has_induced_copy], and monotonicity for ['K_t,t] ****
+
+    [has_induced_copy G H] is [inhabited (H ⇀ G)], a [Prop]; on finite simple
+    graphs it is DECIDABLE, because an [isubgraph] is a function [H -> G] (a
+    finite type once tabulated as a [{ffun ...}]) subject to two Boolean
+    conditions.  [has_induced_copyP] is the reflection; it is what lets a maximum
+    over the [t] with an induced ['K_t,t] be formed by [ex_maxn] (the induced
+    biclique number of X220) without any classical axiom. *)
+
+Definition isubgraphb (H G : sgraph) : bool :=
+  [exists f : {ffun H -> G},
+     injectiveb f && [forall x : H, forall y : H, (f x -- f y) == (x -- y)]].
+
+Lemma has_induced_copyP (G H : sgraph) :
+  reflect (has_induced_copy G H) (isubgraphb H G).
+Proof.
+apply: (iffP idP) => [/existsP[f /andP[/injectiveP finj /forallP mono]]|[i]].
+- have mono' : {mono (f : H -> G) : x y / x -- y >-> x -- y}.
+    by move=> x y; apply/eqP; move: (mono x) => /forallP /(_ y).
+  by split; exact: (@ISubgraph H G (f : H -> G) finj mono').
+- apply/existsP; exists (finfun (isubgraph_fun i)); apply/andP; split.
+  + apply/injectiveP => x y; rewrite !ffunE; exact: (isubgraph_inj i).
+  + apply/forallP => x; apply/forallP => y; rewrite !ffunE; apply/eqP.
+    exact: isubgraph_mono.
+Qed.
+
+(** ['K_n,m] has [n + m] vertices. *)
+Lemma card_KB (n m : nat) : #|KB n m| = n + m.
+Proof. by rewrite card_sum !card_ord. Qed.
+
+(** ['K_t,t] is an induced subgraph of ['K_s,s] for [t <= s]: widen both sides. *)
+Lemma isubgraph_KB (t s : nat) : t <= s -> (KB t t) ⇀ (KB s s).
+Proof.
+move=> ts.
+pose f (u : KB t t) : KB s s :=
+  match u with inl i => inl (widen_ord ts i) | inr i => inr (widen_ord ts i) end.
+have finj : injective f by move=> [a|a] [b|b] //= [] /val_inj ->.
+by apply: (@ISubgraph _ _ f finj) => [[a|a] [b|b]].
+Qed.
+
+Lemma has_induced_copy_KB_le (G : sgraph) (t s : nat) :
+  t <= s -> has_induced_copy G (KB s s) -> has_induced_copy G (KB t t).
+Proof.
+by move=> ts [i]; split; exact: (@isubgraph_comp _ _ _ (isubgraph_KB ts) i).
+Qed.
+
+Print Assumptions has_induced_copyP.
+Print Assumptions has_induced_copy_KB_le.

@@ -75,6 +75,48 @@ move=> [B hB]; exists B => D [ocm df]; apply: hB; split.
 - exact: df.
 Qed.
 
+(** ** The converse class bridge (the reverse of e105)
+
+    Within ORIENTED digraphs the two class descriptions coincide: if
+    non-adjacency were not transitive there would be vertices [u], [v], [w] with
+    [u], [v] non-adjacent, [v], [w] non-adjacent and [u], [w] adjacent, which is
+    an induced arc plus a vertex non-adjacent to both its ends.  (The degenerate
+    equalities are discharged by the adjacency of [u] and [w].) *)
+Lemma x221_no_arrow_ocm (D : diGraphType) :
+  oriented_dg D -> no_induced_arrowK2_K1 D ->
+  x221_oriented_complete_multipartite D.
+Proof.
+move=> Dor naf.
+have arc_neq : forall x y : D, x --> y -> x != y.
+  move=> x y xy; apply/eqP => e; rewrite -e in xy.
+  by apply: (negP (Dor _ _ xy)).
+have key : forall a b c : D, a --> b ->
+    ~~ (a --> c) -> ~~ (c --> a) -> ~~ (b --> c) -> ~~ (c --> b) -> False.
+  move=> a b c ab nac nca nbc ncb; apply: naf; exists a, b, c.
+  have hab : a != b := arc_neq _ _ ab.
+  have hac : a != c.
+    by apply/eqP => e; rewrite -e in ncb; apply: (negP ncb).
+  have hbc : b != c.
+    by apply/eqP => e; rewrite -e in nac; apply: (negP nac).
+  exact: (conj hab (conj hac (conj hbc (conj ab
+            (conj (Dor _ _ ab) (conj nac (conj nca (conj nbc ncb)))))))).
+split; first exact: Dor.
+move=> u v w; rewrite /x221_nonadj => /andP[nuv nvu] /andP[nvw nwv].
+apply/andP; split; apply/negP => harc.
+- exact: (key u w v harc nuv nvu nwv nvw).
+- exact: (key w u v harc nwv nvw nuv nvu).
+Qed.
+
+(*@EDGE from=delta122_hero_oriented_complete_multipartite_statement to=delta122_hero_k1_plus_dipath2_free_statement kind=implies status=verified proof=delta122_hero_oriented_complete_multipartite_implies_delta122_hero_k1_plus_dipath2_free cite="audit: meta/X211-X229_faithfulness_audit.md:178 (corpus e105 is the other direction)" note="Converse class bridge: within oriented digraphs 'no induced arc-plus-isolated-vertex' IMPLIES that non-adjacency is transitive (a non-transitivity witness u,v,w is exactly such an induced pattern), so the two guarded classes are equal and the single dicolouring bound transfers back. Together with the e105 direction the two Props are equivalent; the corpus nevertheless lists the source row disproved and the target row open." *)
+
+Theorem delta122_hero_oriented_complete_multipartite_implies_delta122_hero_k1_plus_dipath2_free :
+  delta122_hero_oriented_complete_multipartite_statement ->
+  delta122_hero_k1_plus_dipath2_free_statement.
+Proof.
+move=> [B hB]; exists B => D [Dor naf df]; apply: hB; split=> //.
+exact: x221_no_arrow_ocm.
+Qed.
+
 (*@EDGE from=conj_9 to=kextension_linear_unavoidability_statement kind=implies status=candidate proved=false cite="gc:e106" note="Literature argument (the target's own context says it 'would follow from Conjecture 9'): delete the k added vertices one at a time and apply unvd(E) <= C * unvd(E-v) at each step, giving unvd(E) <= C^k * unvd(D) <= C^k * c * |V(E)|. Over the RELATIONAL unvd of conjectures/unvd.v this needs, for each intermediate digraph, that an unavoidability value EXISTS and that deleting a vertex of the k-set keeps the digraph acyclic and lands in the chain; neither is derivable from the two Props alone, so the edge is not Qed-closed here." *)
 
 (*@EDGE from=oriented_triangle_free_acyclic_number_theta_statement to=oriented_triangle_free_dichromatic_theta_statement kind=implies status=candidate proved=false cite="gc:e158" note="Source argument: t-vec(n) >= n / a-vec(n) turns the a-vec upper bound into the missing t-vec lower bound, and the matching t-vec upper bound (sqrt 2 + o(1)) sqrt(n/log n) is already proved in arXiv:2403.02298. Both inputs are external to the two statements (the first is the chi-vec >= |V|/alpha-vec bound, the second a theorem of the paper); adding them as hypotheses would smuggle in the conclusion, so the edge stays a candidate." *)
@@ -83,3 +125,5 @@ Qed.
 
 Print Assumptions x221_ocm_no_arrow.
 Print Assumptions delta122_hero_k1_plus_dipath2_free_implies_delta122_hero_oriented_complete_multipartite.
+Print Assumptions x221_no_arrow_ocm.
+Print Assumptions delta122_hero_oriented_complete_multipartite_implies_delta122_hero_k1_plus_dipath2_free.

@@ -6,8 +6,8 @@ theories/foundations/hypergraph.v
 
 theories/conjectures/U12.v
 theories/conjectures/grounding_U12.v
-theories/conjectures/implications_U12.v
 theories/conjectures/X6.v
+theories/conjectures/implications_U12.v
 theories/conjectures/X72.v
 theories/conjectures/X73.v
 theories/conjectures/X104.v
@@ -25,3 +25,5 @@ theories/conjectures/implications_X217.v
 theories/conjectures/X225.v
 theories/conjectures/grounding_X225.v
 theories/conjectures/implications_X225.v
+
+theories/conjectures/vocabulary_hypergraph.v

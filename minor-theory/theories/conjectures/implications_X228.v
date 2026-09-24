@@ -31,6 +31,6 @@ move=> mn [ord [q [oinj qlt nest]]]; exists ord, q; split=> //.
 by move=> e eE; exact: leq_trans (qlt e eE) mn.
 Qed.
 
-(*@EDGE from=bounded_layered_treewidth_bounded_queue_number_statement to=planar_graphs_bounded_queue_number_statement kind=implies status=candidate proved=false cite="gc:e126" note="Corpus argument: planar graphs have layered treewidth at most 3 (Dujmovic, Morin, Wood, JCTB 2017), so the source statement applied at k = 3 gives them queue number at most f(3). Not closed here: the layered-treewidth bound for planar graphs is an external theorem, and the target statement lives in topological-graph-theory, which this package does not import." *)
+(* cross-package edge bounded_layered_treewidth_bounded_queue_number_statement -> planar_graphs_bounded_queue_number_statement: annotation and proof now live in atlas/theories/conjectures/implications_A1.v or A2.v (wave A1, 2026-09-24) *)
 
 Print Assumptions queue_number_leW.

@@ -75,7 +75,9 @@ by rewrite /edge_rel /= /x218_multipartite_rel (ord1 x.1) (ord1 y.1) eqxx.
 Qed.
 
 (** Structural law: multiboundedness is used at a fixed [d], and then bounds
-    every [H]-free graph with no [K_d(t)] subgraph. *)
+    every [H]-free graph with no [K_d(t)] subgraph.  After the 2026-09-24
+    re-encoding the coefficients come from the two bounding FUNCTIONS, read at
+    that [d]. *)
 Lemma x218_multibounding_at (H : sgraph) :
   x218_multibounding H ->
   exists c e : nat,
@@ -83,7 +85,53 @@ Lemma x218_multibounding_at (H : sgraph) :
       1 <= t -> ~ has_induced H G ->
       ~ has_subgraph G (x218_complete_multipartite 2 t) ->
       χ([set: G]) <= c * t ^ e.
-Proof. by move=> /(_ 2 isT). Qed.
+Proof. by move=> [c [e Hce]]; exists (c 2), (e 2); exact: (Hce 2 isT). Qed.
+
+(** The OLD, un-Skolemised reading of multiboundedness -- the body of
+    [x218_multibounding] BEFORE the 2026-09-24 re-encoding: for every [d >= 1]
+    SOME pair of coefficients works, with no function of [d] produced. *)
+Definition x218_multibounding_pointwise (H : sgraph) : Prop :=
+  forall d : nat, 1 <= d ->
+    exists c e : nat,
+      forall (t : nat) (G : sgraph),
+        1 <= t ->
+        ~ has_induced H G ->
+        ~ has_subgraph G (x218_complete_multipartite d t) ->
+        χ([set: G]) <= c * t ^ e.
+
+(** The re-encoded form IMPLIES the old one: read the two coefficient functions
+    at [d].  So the re-encoding is (at least) as strong as the body it replaces.
+    The converse needs countable choice -- a choice of one coefficient pair per
+    [d] -- which is exactly why the old body could not produce the single
+    chi-bounding function that corpus edge e035 asks for. *)
+Lemma x218_multibounding_pointwiseP (H : sgraph) :
+  x218_multibounding H -> x218_multibounding_pointwise H.
+Proof. by move=> [c [e Hce]] d dpos; exists (c d), (e d); exact: (Hce d dpos). Qed.
+
+(** Non-vacuity: every NONEMPTY graph contains an induced copy of ['K_1] (the
+    image of the one-vertex isubgraph picking that vertex). *)
+Lemma x218_has_induced_K1 (G : sgraph) (x : G) : has_induced 'K_1 G.
+Proof.
+have inj1 : injective (fun _ : 'K_1 => x).
+  by move=> a b _; rewrite (ord1 a) (ord1 b).
+have mono1 : {mono (fun _ : 'K_1 => x) : a b / a -- b}.
+  by move=> a b; rewrite (ord1 a) (ord1 b) !sg_irrefl.
+by exists [set y in codom (ISubgraph inj1 mono1)]; constructor; exact: isubgraph_induced.
+Qed.
+
+(** Non-vacuity of the RE-ENCODED [x218_multibounding]: ['K_1] is multibounding,
+    with both coefficient functions constantly zero.  A ['K_1]-free graph has no
+    vertex at all, so its chromatic number is zero and every bound holds.  This
+    shows the new existential form is satisfiable (and ['K_1] is a forest, so the
+    conclusion of [every_forest_is_multibounding_statement] is satisfiable at one
+    of its instances). *)
+Lemma x218_multibounding_K1 : x218_multibounding 'K_1.
+Proof.
+exists (fun _ => 0), (fun _ => 0) => d _ t G _ nind _.
+apply: leq_trans (leq_chi _) _; rewrite mul0n leqn0 cards_eq0.
+apply/eqP/setP => y.
+by case: (nind (x218_has_induced_K1 y)).
+Qed.
 
 (** ** [x218_odd_minor] **************************************************)
 
@@ -178,6 +226,8 @@ Print Assumptions polynomial_gyarfas_sumner_tree_statement.
 Print Assumptions every_forest_is_multibounding_statement.
 Print Assumptions odd_minor_free_defective_clustered_treedepth_statement.
 Print Assumptions kr_free_degenerate_fractional_chromatic_sublinear_statement.
+Print Assumptions x218_multibounding_pointwiseP.
+Print Assumptions x218_multibounding_K1.
 Print Assumptions x218_path_induced_copy_K1.
 Print Assumptions x218_odd_minor_refl.
 Print Assumptions x218_no_odd_minor_K2_in_K1.

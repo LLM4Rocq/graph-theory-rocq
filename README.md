@@ -34,6 +34,20 @@ vacuity sweep) is green. **Total cost: 10,832,396 tokens** metered over 42 Claud
 sub-agents, plus the orchestrating Claude session (not metered, of the order of one million
 tokens).
 
+**Implication programme (2026-09-24, branch `conjecture-relations`)** — every implication relation
+between formalized conjectures (the corpus's `implies`/`equivalent_to` relations plus the ones this
+repository identified) now has a machine-checked disposition: **66 verified** (Qed, `Print
+Assumptions` closed under the global context; 20 before), **13 conditional** (Qed under one of 10
+registered, second-read external theorems such as Tutte's flow theorems, Jaeger's CDC reductions
+or Dujmović–Morin–Wood's layered treewidth; `meta/external_theorems.json`), **33 refuted
+directions** documented with their reason, and 32 candidates blocked on a named ingredient.
+Cross-package edges live in the new `atlas/` package; the `edges` legs are derived from the edge
+graph (`meta/sync_edge_legs.py`) and every proved edge is re-checked for its exact type and
+axiom-freedom by `meta/check_edges.py` in `make gate`. The proofs exposed and repaired seven
+unfaithful statements (empty-digraph guards, Behzad's row, the multibounding quantifier order,
+the vacuous fractional-Hadwiger row). **Cost: 7,242,533 tokens** metered over 26 Claude Opus 5
+sub-agents, plus the orchestrating session (not metered).
+
 A monorepo of Rocq/MathComp **graph-theory** libraries — the math-comp model (one repo,
 many independently-installable opam packages). Each `<area>-theory/` subdir states the open
 conjectures of one area of graph theory (and gains their proofs over time).
@@ -134,6 +148,24 @@ repairs of the 2026-09-23 update.
 
 The scope and token cost of that update are summarised in the "Latest update" paragraph at the
 top of this file.
+
+**Relations.** [github.com/graph-theory-ai/graph-conjectures](https://github.com/graph-theory-ai/graph-conjectures)
+(`data/relations.json`) records 225 relations between its conjectures: 159 `implies`, 8
+`equivalent_to`, 16 `same_conjecture` (aliases) and 42 `related_only`. Of the 167 implications
+and equivalences, 112 have both endpoints formalized here and every one has a machine-checked
+disposition: 62 are Qed theorems, 15 hold conditionally on a registered external theorem (the ten
+theorems still to formalize are listed in [`classical-lemmas/TODO.md`](classical-lemmas/TODO.md)), 2 are
+refuted as encoded, 24 are candidates blocked on a named ingredient, and 9 are kept as candidates
+in the registry only (deep classical theorems such as Ryjáček's closure, or the unproved half of
+an equivalence). The other 55 cannot be attempted yet: 33 join two rows with no statement (rows
+parked as needing a computation model, a probability layer, or a proposition the source does not
+state), 11 have one such endpoint, and 11 touch a statement that is itself a blocked placeholder.
+On top of those, the repository's own audits contributed 5 verified Rocq-only relations, 31
+documented non-edges and 4 further candidates (`meta/dependency_graph.json`, registry
+`meta/edge_waves.json`, upstream feedback `meta/CORPUS_FEEDBACK.md`). Getting to this state cost
+**18,074,929 metered sub-agent tokens** in total: 10,832,396 for the corpus re-sync, doc blocks,
+base layer and waves X211–X229, and 7,242,533 for the implication programme (68 agents), plus the
+two orchestrating Claude sessions, which are not metered.
 
 ### Note on `digraph-theory/theories/applications/ck_path`
 

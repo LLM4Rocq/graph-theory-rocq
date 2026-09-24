@@ -207,3 +207,19 @@ def verification_tuple_errors(row):
             and row["source_verified_by"] == row["implemented_by"]:
         errs.append("source_verified_by == implemented_by (second reader required)")
     return errs
+
+
+def status_by_formal_name():
+    """formal_name -> the corpus `status` of its row ('open' / 'partial' / 'solved' / 'disproved').
+
+    Union over every existing corpus manifest. formal_names are unique across the manifests (both
+    builders enforce it), so the map is unambiguous; a row without a formal_name or without a
+    status contributes nothing. Used by the edge-graph status tripwire (build_edge_graph.py): a
+    verified/conditional implies edge may not point at a row the corpus calls `disproved`."""
+    out = {}
+    for name in existing_corpora():
+        for r in load_manifest(name)["rows"]:
+            fn, st = r.get("formal_name"), r.get("status")
+            if fn and st and fn not in out:
+                out[fn] = st
+    return out

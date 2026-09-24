@@ -81,6 +81,99 @@ have : χ([set: G]) <= c.
 by rewrite leqNgt clt.
 Qed.
 
+(** ** Shared helpers for the chi-bounding edges (wave X218/X65/X66 edge pass)
+
+    Four reusable facts, none of which exists in coq-graph-theory or GTBase:
+
+      [chi_le_palette]        -- a proper colouring into a finite palette [C]
+                                 bounds [chi] by [#|C|];
+      [chi_le_choosable]      -- a [k]-choosable graph is [k]-colourable
+                                 (constant lists), so [chi <= k];
+      [omega_le2_triangle_free] -- a triangle-free graph has clique number <= 2;
+      [horner_nat_dom]        -- HORNER DOMINATION: a coefficient list evaluated
+                                 by Horner at [t >= 1] is at most (sum of the
+                                 coefficients) * t ^ (degree).  This is the
+                                 arithmetic bridge between the two encodings of
+                                 "polynomially chi-bounded" (an arbitrary
+                                 coefficient list, X3.v's [x3_poly_eval], versus
+                                 the normal form [c * t ^ d] of
+                                 [poly_chi_bounded]); the graph-level conversion
+                                 built on it lives in [poly_forms.v]. *)
+
+(** A proper colouring of [G] by a finite palette [C] bounds [chi] by [#|C|].
+    The colour classes are the [preim_partition] of the colouring map; each is
+    stable exactly because the map is proper, and there are at most [#|C|] of
+    them. *)
+Lemma chi_le_palette (G : sgraph) (C : finType) (f : G -> C) :
+  (forall x y : G, x -- y -> f x != f y) -> χ([set: G]) <= #|C|.
+Proof.
+move=> hf.
+pose P := preim_partition f [set: G].
+have hp : coloring P [set: G].
+  apply/andP; split; first exact: preim_partitionP.
+  apply/forall_inP=> A /imsetP[x _ ->]; apply/stableP.
+  move=> y z; rewrite !inE /= => /eqP hy /eqP hz.
+  by apply/negP=> hyz; have := hf y z hyz; rewrite -hy -hz eqxx.
+apply: leq_trans (color_bound hp) _.
+pose fiber c := [set x : G | c == f x].
+have hsub : P \subset [set fiber c | c in [set: C]].
+  apply/subsetP=> A /imsetP[x _ ->]; apply/imsetP.
+  exists (f x); first by rewrite inE.
+  by apply/setP=> y; rewrite /fiber !inE.
+apply: leq_trans (subset_leq_card hsub) _.
+by have := leq_imset_card fiber [set: C]; rewrite cardsT.
+Qed.
+
+(** A [k]-choosable graph is [k]-colourable: run choosability on the CONSTANT
+    list assignment [L v = 'I_k]. *)
+Lemma chi_le_choosable (G : sgraph) (k : nat) : choosable G k -> χ([set: G]) <= k.
+Proof.
+move=> ch.
+have hL : forall v : G, k <= #|[set: 'I_k]| by move=> v; rewrite cardsT card_ord.
+have [f [_ hf]] := ch 'I_k (fun _ => [set: 'I_k]) hL.
+by have := chi_le_palette hf; rewrite card_ord.
+Qed.
+
+(** A triangle-free graph has clique number at most two: a clique on three
+    vertices is a triangle. *)
+Lemma omega_le2_triangle_free (G : sgraph) : triangle_free G -> ω([set: G]) <= 2.
+Proof.
+move=> tf; case: omegaP => K KM.
+rewrite leqNgt; apply/negP => /card_gt2P [x [y [z [[xK yK zK] [xy yz zx]]]]].
+have cl := maxclique_clique KM.
+by apply: (tf x y z); apply: cl.
+Qed.
+
+(** ** Horner domination (F4) *******************************************)
+
+(** Horner evaluation of a coefficient list, the shape of [X3.x3_poly_eval]
+    (kept here as a [foldr] so that this foundation file depends on no
+    conjecture file; [poly_forms.v] identifies the two). *)
+Definition horner_nat (p : seq nat) (x : nat) : nat :=
+  foldr (fun a r => a + x * r) 0 p.
+
+(** F4: for [t >= 1] a Horner evaluation is dominated by the normal form
+    (sum of the coefficients) * t ^ (size p - 1).  The guard [1 <= t] is
+    necessary: at [t = 0] the evaluation is the constant coefficient while the
+    right-hand side vanishes as soon as [p] has two or more coefficients. *)
+Lemma horner_nat_dom (p : seq nat) (t : nat) :
+  1 <= t -> horner_nat p t <= (\sum_(i <- p) i) * t ^ (size p).-1.
+Proof.
+move=> t1; elim: p => [|a p IH] //=.
+have ht k : 1 <= t ^ k by rewrite expn_gt0 t1.
+case: p IH => [|b q] IH /=.
+  by rewrite muln0 addn0 big_cons big_nil addn0 expn0 muln1.
+rewrite big_cons mulnDl; apply: leq_add.
+  by rewrite -{1}(muln1 a) leq_mul2l ht orbT.
+apply: leq_trans (leq_mul (leqnn t) IH) _.
+by rewrite mulnCA -expnS.
+Qed.
+
 Print Assumptions poly_chi_bounded_small.
 Print Assumptions poly_chi_boundedW.
 Print Assumptions not_poly_chi_bounded_of_unbounded.
+
+Print Assumptions chi_le_palette.
+Print Assumptions chi_le_choosable.
+Print Assumptions omega_le2_triangle_free.
+Print Assumptions horner_nat_dom.

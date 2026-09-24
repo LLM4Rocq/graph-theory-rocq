@@ -934,7 +934,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1004,7 +1004,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2032,7 +2032,7 @@
    "legs": {
     "statement": "blocked",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2102,7 +2102,7 @@
    "legs": {
     "statement": "blocked",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2243,7 +2243,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2737,7 +2737,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2808,7 +2808,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2880,7 +2880,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2952,7 +2952,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3023,7 +3023,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3095,7 +3095,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3721,7 +3721,7 @@
    "legs": {
     "statement": "blocked",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3966,7 +3966,7 @@
    "implemented_by": "Codex X2 clean-11 statement authoring pass",
    "source_verified_by": "Codex X2 clean-11 source readback pass",
    "source_verified_at": "2026-07-08",
-   "verification_note": "Authored in X2.v:mader_delta0_transitive_tournament_statement. Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k.",
+   "verification_note": "Authored in X2.v:mader_delta0_transitive_tournament_statement. Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the 0 < #|D| guard is the minimal faithful repair (the pointwise semidegree condition admits the vertexless host, which cannot contain a subdivision of the nonempty TT k; paper Conjecture 3 of arXiv:1610.00876 speaks of digraphs with delta^0 >= m). Teeth (x2_delta0_unguarded_false spells the old body inline and refutes it at k = 1) and non-vacuity (x2_delta0_hyp",
    "status_verified_at": null,
    "status": "open",
    "status_semantics": null,
@@ -4038,7 +4038,7 @@
    "implemented_by": "Codex X2 clean-11 statement authoring pass",
    "source_verified_by": "Codex X2 clean-11 source readback pass",
    "source_verified_at": "2026-07-08",
-   "verification_note": "Authored in X2.v:oriented_trees_delta_plus_maderian_statement. Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision.",
+   "verification_note": "Authored in X2.v:oriented_trees_delta_plus_maderian_statement. Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS -- minimal guard 0 < #|D| inside mader_delta_plus_bound; Conjecture 4 of arXiv:1610.00876 ('every oriented tree is delta^+-maderian') quantifies over digraphs of large minimum out-degree, which have vertices. x2_delta_plus_unguarded_false refutes the old body at the one-vertex tree, x2_delta_plus_hyps_nonvacuous and x2_oriented_tree_TT2 inhabit the hypotheses. The guarded row is n",
    "status_verified_at": null,
    "status": "open",
    "status_semantics": null,
@@ -4067,7 +4067,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4110,7 +4110,7 @@
    "implemented_by": "Codex X2 clean-11 statement authoring pass",
    "source_verified_by": "Codex X2 clean-11 source readback pass",
    "source_verified_at": "2026-07-08",
-   "verification_note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union.",
+   "verification_note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the body is unchanged and inherits the guard through delta_plus_maderian; this STRENGTHENS the row from vacuously true (unguarded delta_plus_maderian F was false for every nonempty F) to the genuine Conjecture 7 of arXiv:1610.00876. The inheritance note in the doc block is accurate.",
    "status_verified_at": null,
    "status": "open",
    "status_semantics": null,
@@ -4182,7 +4182,7 @@
    "implemented_by": "Codex X52 digraph clean-1 pass",
    "source_verified_by": "Codex X52 source readback pass",
    "source_verified_at": "2026-07-11",
-   "verification_note": "Authored in X52.v:oriented_tree_mader_chi_linear_bound_statement. Encodes Conjecture 11: every oriented tree T of order k has chromatic Mader threshold at most 2k-2.",
+   "verification_note": "Authored in X52.v:oriented_tree_mader_chi_linear_bound_statement. Encodes Conjecture 11: every oriented tree T of order k has chromatic Mader threshold at most 2k-2. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS -- guard 0 < #|D| inside x52_mader_chi_bound; Conjecture 11 of arXiv:1610.00876 (mader_chi(T) <= 2k-2 for every oriented tree of order k, no lower bound on k) is a threshold on the chromatic number of digraphs that have vertices. x52_unguarded_false refutes the old body at k = 1 on the empty host, x52_k1_holds shows the guard needs no extra 2 <= k, x52_hyps_nonvacuous inhabit",
    "status_verified_at": null,
    "status": "solved",
    "status_semantics": "Conjecture 11 states that for every oriented tree T of order k, mader_chi(T) <= 2k-2. The 2020 paper arXiv:2008.09888 (Gishboliner, Steiner, Szabó) proves the stronger result mader_chi(F) = v(F) for all orientations of cactus graphs (Corollary 8 per internal references); since every tree is a cactus graph (trees have no cycles, so the cactus condition is vacuously satisfied), this implies mader_chi(T) = k <= 2k-2 for every oriented tree T of order k >= 2, resolving Conjecture 11. The abstract of 2008.09888 confirms results for orientations of cactus graphs and bioriented forests, consistent with this claim.",
@@ -4211,7 +4211,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5274,7 +5274,7 @@
    "legs": {
     "statement": "blocked",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7188,7 +7188,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7262,7 +7262,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7531,7 +7531,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7599,7 +7599,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8817,7 +8817,7 @@
    "legs": {
     "statement": "blocked",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8886,7 +8886,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8955,7 +8955,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9024,7 +9024,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9438,7 +9438,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10416,7 +10416,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -11108,7 +11108,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -11311,7 +11311,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -11379,7 +11379,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -11450,7 +11450,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -11521,7 +11521,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -11938,7 +11938,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -12968,7 +12968,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -13310,7 +13310,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -14215,7 +14215,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -15302,7 +15302,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -15440,7 +15440,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -17154,7 +17154,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -17906,7 +17906,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -19694,7 +19694,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -20865,7 +20865,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -20936,7 +20936,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -21900,7 +21900,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -23339,7 +23339,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -24971,7 +24971,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -27366,7 +27366,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -27635,7 +27635,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -27974,7 +27974,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -28251,7 +28251,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -28390,7 +28390,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -28595,7 +28595,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -29221,7 +29221,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -29291,7 +29291,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -30610,7 +30610,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -30677,7 +30677,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -31429,7 +31429,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -34533,7 +34533,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -34602,7 +34602,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -34807,7 +34807,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -34946,7 +34946,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -35015,7 +35015,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -35259,7 +35259,7 @@
    "implemented_by": "Claude Opus 5 subagent, wave X218 (session 01P75Y6ikkgDyzUzzoef316Z)",
    "source_verified_by": "Claude Opus 5 second reader, session 01P75Y6ikkgDyzUzzoef316Z",
    "source_verified_at": "2026-09-23",
-   "verification_note": "Authored in X218.v:every_forest_is_multibounding_statement. Nguyen-Scott-Seymour VIII, Conjecture 1.6: every forest is multibounding, where for every d >= 1 there are c, e with chi(G) <= c*t^e for every t >= 1 and every H-free G containing no K_d(t) SUBGRAPH. K_d(t) is the local x218_complete_multipartite on 'I_d * 'I_t.",
+   "verification_note": "Authored in X218.v:every_forest_is_multibounding_statement. Nguyen-Scott-Seymour VIII, Conjecture 1.6: every forest is multibounding, where for every d >= 1 there are c, e with chi(G) <= c*t^e for every t >= 1 and every H-free G containing no K_d(t) SUBGRAPH. K_d(t) is the local x218_complete_multipartite on 'I_d * 'I_t. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the re-encoded x218_multibounding (exists c e : nat -> nat, forall d >= 1, t >= 1, G H-free with no K_d(t) SUBGRAPH, chi <= c d * t^(e d)) still gives, for each FIXED d, a polynomial c d * t^(e d) in t with c",
    "status_verified_at": null,
    "status": "open",
    "status_semantics": null,
@@ -35288,7 +35288,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -36042,7 +36042,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -36115,7 +36115,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -36331,7 +36331,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -36611,7 +36611,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -37180,7 +37180,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -47002,7 +47002,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -50155,7 +50155,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -50298,7 +50298,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -50367,7 +50367,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -53205,7 +53205,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -53278,7 +53278,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -53735,7 +53735,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -53999,7 +53999,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -54292,7 +54292,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -54385,7 +54385,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -54531,7 +54531,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -54667,7 +54667,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -55087,7 +55087,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -55369,7 +55369,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -80994,7 +80994,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -88525,7 +88525,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -88581,7 +88581,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -108664,7 +108664,7 @@
    "legs": {
     "statement": "done",
     "grounding": "todo",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },

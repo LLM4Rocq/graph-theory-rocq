@@ -49,6 +49,108 @@ have bt : #|D t| <= width D by rewrite /width; exact: leq_bigmax.
 by move: le2; rewrite ltnNge (leq_trans bt w).
 Qed.
 
+(** Monotone in the bound. *)
+Lemma tw_leW (G : sgraph) (k k' : nat) : k <= k' -> tw_le G k -> tw_le G k'.
+Proof.
+move=> le [T [D [dec w]]]; exists T, D; split; first exact: dec.
+have h : k.+1 <= k'.+1 by rewrite ltnS.
+exact: leq_trans w h.
+Qed.
+
+(** *** From a FOREST index to a TREE index *******************************
+
+    [tw_le] indexes its tree decomposition by a [forest], while other encodings
+    of treewidth in the corpus (X27's [x27_treewidth_at_most], X42) ask for a
+    decomposition indexed by a TREE.  The two are equivalent, and the nontrivial
+    direction is this one: joining every component of the index forest to one
+    fresh node carrying the EMPTY bag yields a CONNECTED forest -- a tree -- with
+    the same width.  The library supplies the forest part ([tlink] /
+    [link_is_forest] / [decomp_link]); what is done here is the choice of one
+    representative per component ([frep], constant on components because [pick]
+    depends only on the extension of its predicate, [eq_pick]) and the
+    connectedness of the result.
+
+    [tw_le_tree] is the reusable half of the bridge F1; the [x27]-shaped wrapper
+    lives with the edges that need it (Minor.conjectures.implications_X42). *)
+
+Section ForestRep.
+Variable T : sgraph.
+
+Definition frep (t : T) : T := odflt t [pick s : T | connect (@sedge T) s t].
+
+Lemma frep_connect (t : T) : connect (@sedge T) (frep t) t.
+Proof. rewrite /frep; case: pickP => [s cs|_] //=; exact: connect0. Qed.
+
+Lemma frep_eq (t t' : T) : connect (@sedge T) t t' -> frep t = frep t'.
+Proof.
+move=> tt'.
+have pe : [pick s : T | connect (@sedge T) s t]
+        = [pick s : T | connect (@sedge T) s t'].
+  apply: eq_pick => s /=; apply/idP/idP => h.
+  - exact: connect_trans h tt'.
+  - by apply: connect_trans h _; rewrite sconnect_sym.
+rewrite /frep -pe; case: pickP => [s _|hn] //=.
+by move: (hn t); rewrite connect0.
+Qed.
+
+Definition freps : {set T} := [set t : T | frep t == t].
+
+Lemma frep_mem (t : T) : frep t \in freps.
+Proof. by rewrite inE; apply/eqP; apply: frep_eq; exact: frep_connect. Qed.
+
+Lemma freps_disc :
+  {in freps &, forall x y : T, x != y -> ~~ connect (@sedge T) x y}.
+Proof.
+move=> x y; rewrite !inE => /eqP hx /eqP hy xy; apply/negP => c.
+by move: (frep_eq c); rewrite hx hy => /eqP; rewrite (negbTE xy).
+Qed.
+
+End ForestRep.
+
+Lemma connect_add_node (T : sgraph) (U : {set T}) (x y : T) :
+  connect (@sedge T) x y -> connect (@sedge (add_node T U)) (Some x) (Some y).
+Proof.
+case/connectP => p pth ->; apply/connectP.
+exists (map Some p); last by rewrite last_map.
+elim: p x pth => [//|a l IH] x /= /andP[xa pl].
+by rewrite (IH a pl) andbT.
+Qed.
+
+Lemma connect_add_node_None (T : sgraph) (U : {set T}) (t u : T) :
+  u \in U -> connect (@sedge T) u t ->
+  connect (@sedge (add_node T U)) None (Some t).
+Proof.
+move=> uU ut; apply: (@connect_trans _ _ (Some u)).
+- by apply: connect1; exact: uU.
+- exact: connect_add_node.
+Qed.
+
+Lemma tw_le_tree (G : sgraph) (k : nat) :
+  tw_le G k ->
+  exists (T : forest) (D : T -> {set G}),
+    [/\ sdecomp T G D, width D <= k.+1 & connected [set: T]].
+Proof.
+case=> T [D [dec w]].
+have U_disc := @freps_disc T.
+exists (@tlink T (freps T) U_disc), (decompL D set0); split.
+- by apply: (@decomp_link T (freps T) U_disc G D set0); [exact: sub0set|exact: dec].
+- rewrite /width; apply/bigmax_leqP => t _.
+  case: t => [t|]; last by rewrite cards0.
+  apply: leq_trans w; rewrite /width; exact: leq_bigmax.
+- apply: connectedTI => x y.
+  have hN : forall t : T, connect (@sedge (add_node T (freps T))) None (Some t).
+    by move=> t; exact: (connect_add_node_None (frep_mem t) (frep_connect t)).
+  have hN' : forall t : T, connect (@sedge (add_node T (freps T))) (Some t) None.
+    by move=> t; rewrite sconnect_sym; exact: hN.
+  case: x => [x|]; case: y => [y|].
+  + exact: (@connect_trans _ _ None _ _ (hN' x) (hN y)).
+  + exact: hN' x.
+  + exact: hN y.
+  + exact: connect0.
+Qed.
+
+Print Assumptions tw_le_tree.
+
 (** ** Tree-independence number ********************************************)
 
 (** Tree-alpha at most [k]: some tree decomposition has independence number at most
@@ -59,6 +161,13 @@ Definition tree_alpha_le (G : sgraph) (k : nat) : Prop :=
 (** Non-vacuity: the one-bag decomposition works whenever [α(G) <= k]. *)
 Lemma tree_alpha_le_all (G : sgraph) (k : nat) : α([set: G]) <= k -> tree_alpha_le G k.
 Proof. by move=> le; exists tunit, (fun _ => [set: G]); split=> //; exact: triv_sdecomp. Qed.
+
+(** Monotone in the bound: a decomposition witnessing [k] witnesses every [k' >= k]. *)
+Lemma tree_alpha_leW (G : sgraph) (k k' : nat) :
+  k <= k' -> tree_alpha_le G k -> tree_alpha_le G k'.
+Proof.
+by move=> le [T [D [dec ab]]]; exists T, D; split=> // t; exact: leq_trans (ab t) le.
+Qed.
 
 (** Guard has teeth: tree-alpha 0 forces the graph to have no vertex, since every
     vertex lies in a bag and a bag with a vertex has independence number at least 1. *)
@@ -88,6 +197,14 @@ Definition tree_mu_le (G : sgraph) (m : nat) : Prop :=
       induced_matching M ->
       (exists t : T, forall e : {set G}, e \in M -> exists2 x : G, x \in e & x \in D t) ->
       #|M| <= m.
+
+(** Monotone in the bound. *)
+Lemma tree_mu_leW (G : sgraph) (m m' : nat) :
+  m <= m' -> tree_mu_le G m -> tree_mu_le G m'.
+Proof.
+move=> le [T [D [dec bnd]]]; exists T, D; split=> // M im cov.
+exact: leq_trans (bnd M im cov) le.
+Qed.
 
 (** Guard has teeth: [tree_mu_le G 0] rules out every edge, since a single edge is an
     induced matching of size 1 and lies in a bag. *)
@@ -157,3 +274,7 @@ Proof.
 case=> ord [q] [_ qlt _]; apply/negP => xy.
 by have := qlt [set x; y]; rewrite in_edges => /(_ xy).
 Qed.
+
+Print Assumptions tree_alpha_leW.
+Print Assumptions tree_mu_leW.
+Print Assumptions tw_leW.

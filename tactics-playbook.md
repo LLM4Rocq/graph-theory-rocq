@@ -2334,3 +2334,1765 @@ way: the gate checks the KEY ORDER (`Corpus row`/`Site`/`Review`/`English
 statement`/`Definitions`/`Notes`) and the URL bytes, and `Notes:` is free text,
 so appending a sentence before the closing `*)` — indented so that it cannot be
 read as a new key — never breaks the gate.
+
+### 233. Skolemising `forall d, exists c, ...` — remember the `/=`
+
+Re-encoding a statement from `forall d, 1 <= d -> exists c e : nat, P d c e` to
+`exists c e : nat -> nat, forall d, 1 <= d -> P d (c d) (e d)` keeps every
+existing proof, but the instantiated goal now contains BETA-REDEXES
+(`(fun d => c * d ^ e) d`), and ssreflect's keyed matching fails on them. Close
+the intro pattern with `/=`:
+
+```coq
+exists (fun d : nat => c * d ^ e), (fun _ : nat => e) => d dpos t G tpos nind nsub /=.
+```
+
+after which `rewrite -mulnA -expnMn leq_mul2l` matches exactly as before. The
+converse direction of the re-encoding (old body from new) is `move=> [c [e H]] d
+dpos; exists (c d), (e d)`; the OTHER direction is the one that needs countable
+choice, so the new body is strictly stronger constructively and must be recorded
+as a re-encoding, not a reformatting.
+
+### 234. `apply: contraNneq H` leaves a BOOLEAN goal
+
+`apply: contraNneq ab` on a goal `x != y`, with `ab : u != v`, leaves
+`x = y -> u == v` — the conclusion is the `==` form. Do not "tidy" it with
+`apply/eqP`: lemmas whose RHS is `eq_op` then no longer apply, and
+
+```
+Error: The RHS of pair_eqE eq_op does not match any subterm of the goal
+```
+
+is exactly that mistake. Keep the `==` and split the pair with `-pair_eqE`:
+
+```coq
+apply: contraNneq ab => e1.
+by rewrite -pair_eqE /= e1 (ord1 a.2) (ord1 b.2) !eqxx.
+```
+
+`-pair_eqE` turns `a == b` (for `a b : T1 * T2`, not necessarily literal pairs)
+into `(a.1 == b.1) && (a.2 == b.2)`, which is the cheap way to say "two vertices
+of `'I_d * 'I_1` differing at all differ in their first coordinate".
+
+### 235. An induced copy of a one-vertex graph, without hand-rolling a `Diso`
+
+`has_induced 'K_1 G` for a pointed `G` needs an isomorphism onto some `induced
+S`; building it by `Diso''` means four cancellation/homomorphism proofs. Use
+coq-graph-theory's `isubgraph_induced (i : F ⇀ G) : F ≃ induced [set x in codom
+i]` instead and let `S` be that codomain set:
+
+```coq
+have inj1 : injective (fun _ : 'K_1 => x) by move=> a b _; rewrite (ord1 a) (ord1 b).
+have mono1 : {mono (fun _ : 'K_1 => x) : a b / a -- b}.
+  by move=> a b; rewrite (ord1 a) (ord1 b) !sg_irrefl.
+by exists [set y in codom (ISubgraph inj1 mono1)]; constructor; exact: isubgraph_induced.
+```
+
+`{mono h : a b / a -- b}` is an EQUALITY of booleans, and for a one-vertex
+source both sides are `false` by `sg_irrefl` — no case analysis needed. The dual
+fact ("a `'K_1`-free graph has no vertex, so `χ = 0`") is
+`apply: leq_trans (leq_chi _) _; rewrite leqn0 cards_eq0; apply/eqP/setP => y`
+followed by `case: (nind (...y))`.
+
+### 236. From a subgraph copy back to `ω`: `clique_bound` on an image set
+
+`has_subgraph G H` unfolds to `exists2 f, injective f & hom_s f`, and `hom_s f`
+is `forall x y, x -- y -> f x != f y -> f x -- f y` — TWO hypotheses, so
+discharge it positionally, never with a bare `//`:
+
+```coq
+case=> f finj fhom.
+have card_im : #|f @: [set: x218_complete_multipartite d 1]| = d.
+  by rewrite card_imset // cardsT card_prod !card_ord muln1.
+rewrite -card_im; apply: clique_bound; rewrite inE subsetT /=.
+apply/cliqueP => u v /imsetP[a _ ->] /imsetP[b _ ->] ne.
+have ab : a != b by apply: contraNneq ne => ->.
+by apply: fhom; [exact: x218_multipartite1_edge | exact: ne].
+```
+
+`clique_bound : K \in cliques A -> #|K| <= ω(A)` is the converse companion of
+`omegaP`-based constructions: `rewrite inE subsetT /=` reduces membership in
+`cliques [set: G]` to `cliqueb K`, and `card_imset` needs only the injectivity
+already in hand. This is the missing half of a `d*t <= ω -> has_subgraph`
+lemma, and at `t = 1` it gives `d <= ω(G)`, which contradicts `ltnn` when
+`d = ω(G).+1` — the standard way to apply a `K_d`-free hypothesis at the clique
+number.
+
+### 257. Two convertible vertex types, one failing `rewrite`
+
+`sdel_edge G e` (U11) is `SGraph sde_sym sde_irrefl` over the vertices of `G`,
+so `{set sdel_edge e}` and `{set G}` are CONVERTIBLE but not syntactically
+equal. `apply/setP => f` on `E(sdel_edge e) = E(G) :\ e` hands you an `f` typed
+in the *deleted* graph, and every later `rewrite lemma` whose pattern carries
+the vertex type in an implicit argument dies with
+
+```
+Error: The LHS of in_edges ([set _; _] \in E(_)) does not match any subterm of the goal
+```
+
+Rules that worked:
+
+* conversion-based tactics (`exact:`, `apply:`, `by []`, `exists x`) cross the
+  boundary silently — `rewrite` does not;
+* if the lemma's graph appears as an explicit head (`E(?G)`), pin it:
+  `rewrite (in_sg_edge_set (G := @sdel_edge G e))` matched where a bare
+  `rewrite in_sg_edge_set` and `rewrite in_edges` both failed;
+* to reach a set-level statement, prove the pointwise one with the types you
+  want and hand it over by conversion:
+
+```coq
+suff H : forall f : {set G}, (f \in E(@sdel_edge G e)) = (f \in E(G) :\ e).
+  by apply/setP => f; exact: H f.
+```
+
+* to USE a `valP`-style hypothesis at the other typing, re-derive it by
+  ascription instead of rewriting it:
+  `have H : (val f : {set G}) \in E(@sdel_edge G (val e0)) := valP f.`
+  Now `rewrite in_edge_set_sdel in H` matches.
+
+### 258. `in_edges` is the wrong tool on a mixed-type edge-set goal
+
+`in_edges : [set u; v] \in E(G) = (u -- v)` keys on the *doubleton*, whose
+implicit type argument is the vertex type — exactly what differs in 257. The
+boolean-existential presentation of `E(G)` from `GTBase.common` has the graph in
+head position and survives:
+
+```coq
+rewrite (in_sg_edge_set (G := @sdel_edge G e)) => /existsP[x /existsP[y]].
+rewrite sdel_adjE -andbA => /and3P[xy nef /eqP Ef]; rewrite Ef nef andbT.
+rewrite (in_sg_edge_set (G := G)); apply/existsP; exists x; apply/existsP.
+by exists y; rewrite xy eqxx.
+```
+
+The witnesses `x`, `y` are vertices of the deleted graph, and `exists x` accepts
+them for `exists x : G` by conversion. (`reconstruction-theory/theories/
+foundations/kelly.v`, `in_edge_set_sdel`.)
+
+### 259. A `Diso` for free when both adjacencies unfold to the same formula
+
+`vdel_card (sline_graph G) e` and `sline_graph (sdel_edge G (val e))` are two
+sig-type wrappings of the same set of edges, and BOTH adjacency relations reduce
+to `(val a != val b) && (val a :&: val b != set0)`. So the hard-looking
+isomorphism is three one-liners: `Diso'` wants two `cancel`s and one `mono`,
+
+```coq
+Lemma lcfK : cancel lcf lcb.  Proof. by move=> x; apply: val_inj; apply: val_inj. Qed.
+Lemma lcf_mono : {mono lcf : x y / x -- y}.  Proof. by []. Qed.
+Proof. exact: Diso' lcfK lcbK lcf_mono. Qed.
+```
+
+`apply: val_inj` once per sig layer (twice for `{x : sline_graph G | x != e}`),
+and the whole `mono` goal is `by []`. Build the two maps as `Sub _ proof` with
+the membership proofs proved as separate `Lemma`s first — an inline proof term
+inside the `Definition` is far harder to fix when it breaks.
+
+### 260. `imsetI`, `bij_injective`: the two argument traps of an `imset` diso
+
+`imsetI : {in A & B, injective f} -> f @: (A :&: B) = f @: A :&: f @: B`, and
+`exact: in2W (bij_injective h)` does NOT discharge that side condition
+(`Cannot apply lemma in2W`: its higher-order `P2` will not unify with
+`injective`). Wrap the global version once, hypothesis FIRST so it is
+rewrite-ready:
+
+```coq
+Lemma imsetI_inj (aT rT : finType) (f : aT -> rT) :
+  injective f -> forall A B : {set aT}, f @: (A :&: B) = f @: A :&: f @: B.
+Proof. by move=> inj_f A B; apply: imsetI => x y _ _; exact: (inj_f x y). Qed.
+```
+
+Second trap: `bij_injective` has EVERY argument implicit
+(`Arguments bij_injective [A B] [f x1 x2] _`), so `bij_injective h` reads `h` as
+the equation — `The term "h" has type "G ≃ H" while it is expected to have type
+"?f0 ?x1 = ?f0 ?x2"`. Name it instead:
+`have inj_h : injective h := @bij_injective _ _ (diso_v h).` By contrast
+`bij_bijective` takes `f` explicitly (`bij_bijective (diso_v k)`), and
+`bij_card_eq` (GraphTheory.preliminaries) turns that into `#|G| = #|H|` — mind
+the name, mathcomp's `bij_eq_card` is a different lemma. With `inj_h` in hand,
+`rewrite -(imsetI_inj inj_h) (inj_eq (imset_inj inj_h)) imset_eq0` reduces a
+line-graph adjacency to its preimage in one line.
+
+### 261. A conditional theorem is worth nothing until its premise is TRUE
+
+Reducing an open conjecture to a cited classical theorem produces
+`Theorem foo : premise -> A -> B`, and the whole value of that `Qed` sits in
+`premise` being a true statement of the literature. A premise that is FALSE
+makes the theorem vacuous while still compiling, still printing "Closed under
+the global context", and still passing every gate. So brute-force the premise on
+small graphs BEFORE building on it. Doing that caught a first shot at Whitney's
+line-graph theorem:
+
+```
+4 <= #|E(G)| -> #|G| = #|H| -> L(G) ≃ L(H) -> G ≃ H     (* FALSE *)
+```
+
+`K_3 + K_1 + K_2` and `K_{1,3} + K_2` have six vertices and four edges each,
+both have line graph `K_3 + K_1`, and they are not isomorphic: an isolated
+vertex pays for the `K_3`-versus-`K_{1,3}` exchange, and Whitney's theorem is a
+statement about CONNECTED graphs. The repaired premise keeps the deck
+hypothesis (`same_edge_deck G H`, which those two graphs fail), and the
+counterexample now sits in the file's header so the next reader cannot
+"simplify" it away. A 20-line Python check over all graphs of the shape in
+question is cheap insurance; a vacuous conditional edge is not.
+
+### 262. `Set Implicit Arguments` also eats a THEOREM's leading graph arguments
+
+With `Set Implicit Arguments` / `Unset Strict Implicit` (every conjectures file),
+`Theorem t : P -> forall G H : sgraph, (3 <= #|E(G)|)%N -> ...` gets `G` and `H`
+IMPLICIT — they occur in the type of a later argument. `apply: (t RC G H)` then
+fails with `Cannot apply lemma (t RC G H)` because `G` is read as the proof of
+`3 <= #|E(?G)|`. Just let unification fill them: `apply: (t RC); last exact: d.`
+Same phenomenon on the U11 constructions: `sdel_edge`'s section variable `G` is
+implicit, so it is `@sdel_edge G e` or `sdel_edge e`, never `sdel_edge G e`
+(`The term "G" has type "sgraph" while it is expected to have type "{set ?G}"`).
+When a premise has several hypotheses and `//` would guess wrong, spell the
+order out: `apply: W; [exact: mG | exact: dGH |].`
+
+### 263. `girth_geq G 4 -> triangle_free G`: build the 3-cycle by computation
+
+A triangle is the `ucycle` `[:: x; y; z]`; base's `girth_geq` then gives
+`4 <= 3`. Everything reduces by `/=` once the three distinctness facts are in
+hand (`sedge` is irreflexive, so each edge gives one):
+
+```coq
+move=> Hg x y z xy yz zx.
+have xNy : x != y by apply: contraTneq xy => ->; rewrite sg_irrefl.
+have yNz : y != z by apply: contraTneq yz => ->; rewrite sg_irrefl.
+have zNx : z != x by apply: contraTneq zx => ->; rewrite sg_irrefl.
+have Hc : ucycle (@sedge G) [:: x; y; z].
+  by rewrite /ucycle /= xy yz zx /= !inE negb_or xNy /= eq_sym zNx yNz.
+by have := Hg _ Hc isT.
+```
+
+`/ucycle /=` turns `cycle` into `path _ x (rcons [:: y; z] x)` and computes it;
+the `uniq` half needs `!inE negb_or` and `eq_sym` for the `z != x` vs `x != z`
+mismatch. The `isT` discharges `2 < size [:: x; y; z]`.
+
+### 264. Three distinct elements out of `3 <= #|S|`: `card_gt0P` + `cardsD1`
+
+No mathcomp lemma hands you `x != y != z` directly; peel them off one at a time,
+each step shrinking the set and the bound:
+
+```coq
+have /card_gt0P [x xS] : 0 < #|S| by apply: leq_trans S3.
+have S2 : 2 <= #|S :\ x| by rewrite (cardsD1 x) xS add1n ltnS in S3.
+have /card_gt0P [y yS] : 0 < #|S :\ x| by apply: leq_trans S2.
+have S1 : 1 <= #|(S :\ x) :\ y| by rewrite (cardsD1 y) yS add1n ltnS in S2.
+have /card_gt0P [z zS] : 0 < #|(S :\ x) :\ y| by [].
+move: yS zS; rewrite !inE => /andP[yNx yS] /andP[zNy /andP[zNx zS]].
+```
+
+`rewrite (cardsD1 x) xS add1n ltnS in S3` is the idiom: `cardsD1` rewrites
+`#|S|` as `(x \in S) + #|S :\ x|`, `xS` collapses the indicator, `add1n ltnS`
+strips the successor. With `clique S` this refutes triangle-freeness (a clique on
+3 vertices IS a triangle) — the standard way to kill the "large clique" disjunct
+of a dichotomy under a girth/triangle-free hypothesis.
+
+### 265. `Set Implicit Arguments` + a transparent `Prop` definition eats your argument list
+
+`Definition vc_dim_leq G d := forall S, shattered S -> #|S| <= d.` is
+transparent, so in `Lemma L (i : F ⇀ G) d : vc_dim_leq G d -> vc_dim_leq F d`
+the implicit-argument computation looks THROUGH the conclusion: `About L` prints
+`forall [F G], F ⇀ G -> forall [d], vc_dim_leq G d -> forall [S], shattered S -> ...`,
+i.e. `S` became an extra implicit argument. Consequently `L i H` silently tries
+to use `H` as the `shattered S` argument and fails with the unhelpful
+`Cannot apply lemma ...` / `Cannot apply view ...`. Two fixes, both needed in
+practice:
+
+- at the call site, saturate explicitly: `exact: (@vc_dim_leq_isubgraph _ _ i d Hvc)`;
+- when a hypothesis of such a definitional `Prop` must be applied, pre-build its
+  argument with a separate `have H1 : shattered (i @: S) by exact: lemma.` and
+  then `HG _ H1` — inlining the proof term is what breaks.
+
+Same trap for section variables: `Lemma not_vc_dim_leq_shatter_graph (d : nat)`
+in a section over `Variable n` prints as `forall [d]`, so write
+`apply: (@not_vc_dim_leq_shatter_graph d)`.
+
+### 266. `card_imset`: let unification pick the `{pred}` argument
+
+`card_imset : forall [aT rT] [f] (D : {pred aT}), injective f -> #|[set f x | x in D]| = #|D|`
+takes `D` EXPLICIT. Passing a `{set T}` there (`card_imset S inj`) inserts the
+`mem` coercion at a place where the resulting `#|D|` no longer matches the
+goal's `#|S|`, and the following `exact:` fails. Always write
+`rewrite (card_imset _ (isubgraph_inj i))` / `rewrite -(card_imset _ inj)` with
+`_` for `D` and let the goal drive unification.
+
+### 267. `case/andP => H /imsetP[u uS ->]` fails when the first hypothesis mentions the subject
+
+`->` substitutes the image variable, which is still referred to by the earlier
+hypothesis: `Error: _x_ is used in hypothesis ivx`. Name the equation and
+rewrite by hand, in the hypothesis AND the goal:
+
+```coq
+case/andP => xN /imsetP[u uS Ex]; rewrite Ex in xN; rewrite Ex.
+```
+
+Reversing the two views is not an option (the conjunction order is fixed), and
+`->{x}` only helps when nothing else depends on `x`.
+
+### 268. Import order re-shadows your own foundation lemmas
+
+`GraphTheory.dom` already has an `alpha_witness` (a section `Fact` with a weight
+function), so
+
+```coq
+From Extremal.foundations Require Import ramsey.   (* defines alpha_witness *)
+From Extremal.conjectures Require Import D2ram.    (* re-exports GTBase.base -> dom *)
+```
+
+makes `alpha_witness [set: G]` resolve to dom's, with the baffling
+`The term "[set: G]" ... expected to have type "?G -> nat"`. A later
+`Require Import` re-imports transitively exported modules and wins. Do not rely
+on import order: give foundation lemmas unshadowable names (here
+`clique_witness` / `stable_witness`).
+
+### 269. A hand-rolled `SGraph`'s adjacency does not reduce under `/=`
+
+For `Definition H := SGraph sym irrefl` the goal keeps `inr A -- inl i` after
+`rewrite /= inE`, because `--` goes through the `edge_rel` structure projection.
+Add the definitional bridge once and rewrite with it:
+
+```coq
+Lemma shatter_adj (A : {set 'I_n}) (i : 'I_n) :
+  ((inr A : shatter_graph) -- inl i) = (i \in A).
+Proof. by []. Qed.
+```
+
+Companion idiom for membership in an `imset`-defined vertex set: prove
+`(x \in shatter_side) = if x is inl _ then true else false` once
+(`exact: (imset_f _ (in_setT i))` for the positive case, and
+`apply/negbTE/negP => /imsetP[j _ E]; discriminate E` for the negative one —
+the intro pattern `[]` on `inr A = inl j` works but emits a
+`spurious-ssr-injection` warning).
+
+## Wave E8b edges (packing / hypergraph / topological / misc corpus relations, 2026-09-24)
+
+### 271. `forestT_unique` has already eaten its vertex arguments
+
+`Check @forestT_unique` prints
+`forall G, is_forest [set: G] -> forall x y, preliminaries.unique (fun p : Path x y => irred p)`,
+which reads as "two vertices then two paths". It is not: `G` is implicit and
+`preliminaries.unique P = forall p q, P p -> P q -> p = q`, so with
+`Set Implicit Arguments` the endpoints `x y` are inferred FROM the two `irred`
+proofs. The only form that applies is
+
+```coq
+have E : p = edgep xz := forestT_unique forestG Ip (irred_edge xz).
+```
+
+`forestT_unique forestG _ _ Ip ...` and `forestT_unique forestG x z p q` both fail
+with `Cannot apply lemma` / `"x" has type "Finite.sort G" while it is expected to
+have type "is_true (irred ?x0)"`. Same shape for any `unique`-valued lemma of
+graph-theory (`unique` lives in `preliminaries.v`, NOT the stdlib `unique`, whose
+`Check` output is the misleading `forall A, (A -> Prop) -> A -> Prop`).
+
+### 272. `restrict` is a Notation of `preliminaries.v`, not re-exported by `base`
+
+`connect (restrict (~: [set v]) (--))` fails with `The reference restrict was not
+found` even though `GTBase.base` exports `digraph sgraph coloring connectivity
+treewidth dom`: `Notation restrict A := (restrict_mem (mem A))` is declared in
+`GraphTheory.preliminaries`, which those files `Require` but do not `Export`. Add
+`From GraphTheory Require Import preliminaries.` next to the `base` import.
+
+### 273. `inE` on a path membership silently unfolds `pcat`
+
+`digraph.v` redefines `Definition inE := (inE,mem_pcat,path_begin,path_end)`, so
+inside a graph-theory context `rewrite !inE` turns `t \in q` (with
+`q := pcat p (edgep wz)`) into `(t \in p) || (t \in edgep wz)`. Symptom: a later
+`rewrite mem_pcat` dies with `The LHS of mem_pcat (_ \in pcat _ _) does not match
+any subterm`. Either stop rewriting with `!inE` before the path membership, or
+work with the already-split disjunction (`apply: contraNN tNq => tp; rewrite tp
+orTb`). When debugging such a goal, `Show.` inside the script prints it under
+`coqc` — cheaper than guessing.
+
+### 274. Dependent hypotheses block `move: xa` ("xa is used in hypothesis up")
+
+After `case: (splitL p xy) => a [xa] [q [def_p _]]; subst p`, the edge proof `xa :
+x -- a` appears in the TYPE of every hypothesis mentioning `pcat (edgep xa) q`,
+so `move: xa` / `rewrite ... in xa` is refused. Derive the same disequality from a
+non-dependent fact instead: `a != x` follows from `x \notin q` plus
+`path_begin q`:
+
+```coq
+have aNx : a != x by apply: contraNneq xNq => e; rewrite -e; exact: path_begin.
+```
+
+### 275. Extremal arguments on paths: induct on the size of the complement
+
+To get "every branch at `v` contains a leaf" without a finType of paths, take
+`n` with `#|~: [set z in p]| <= n` as the induction measure and extend the path:
+the base case `n = 0` is the CONTRADICTION `v \in p` (`leqn0`, `cards0_eq`, then
+`rewrite H0 in_set0` on `v \notin ~: [set z in p]`), and the step adds a vertex
+`z \notin p`, whose measure step is
+
+```coq
+have sub : ~: [set t in q] \subset (~: [set t in p]) :\ z.
+apply: (leq_trans (subset_leq_card sub)).
+have H2 : (z \in ~: [set t in p]) + #|(~: [set t in p]) :\ z| <= n.+1
+  by rewrite -cardsD1; exact: Hn.
+by move: H2; rewrite zin /= ltnS.
+```
+
+(`cardsD1` backwards is the cheap way to turn `#|A| <= n.+1` into
+`#|A :\ z| <= n`; `/=` reduces the `nat_of_bool` addend.)
+
+### 276. Surjection instead of injection for `#|A| <= #|B|`
+
+To bound a max degree by a leaf count, do NOT build an injection needing choice:
+build a total map `br : G -> G` out of `pick` and bound by its image.
+
+```coq
+pose br (w : G) : G := odflt v [pick u | (v -- u) && branch_conn v u w].
+apply: (@leq_trans #|br @: L|); last exact: leq_imset_card.
+apply: subset_leq_card; apply/subsetP => u; rewrite in_opn => vu.
+... have brw : br w = u.
+      rewrite /br; case: pickP => [u' /andP[vu' Bu']|/(_ u)]; last by rewrite vu Bvw.
+      by rewrite (uniqueness vu vu' Bvw Bu').
+by rewrite -brw; apply: imset_f; rewrite inE.
+```
+
+The `pick` predicate must be BOOLEAN: use `connect (restrict ...)` ("same
+component of `G - v`") rather than "there is a `Path`", and convert with
+`connectRI q` (its path argument is positional — `connectRI (p := q)` fails with
+`Wrong argument name p (possible names: D A x y)`).
+
+### 277. `leq_bigmax` / `leq_pmull`: pass the index, not the function
+
+For a monotone majorant `majorant f m := \max_(d < m.+1) f d`:
+
+```coq
+Lemma leq_majorant f k m : k <= m -> f k <= majorant f m.
+Proof. move=> km; have kk : k < m.+1 by rewrite ltnS.
+by rewrite /majorant; apply: (leq_bigmax (Ordinal kk)). Qed.
+```
+
+`leq_bigmax (fun d : 'I_m.+1 => f d) (Ordinal kk)` fails (`F` is implicit:
+`Arguments leq_bigmax [I F]`), and `Ordinal (ltnS k m km)` fails because `ltnS` is
+an EQUATION, not an implication. Likewise `leq_pmull t 3 isT` is refused where
+`have step : t <= 3 * t by apply: leq_pmull.` works (the side goal `0 < 3` is
+closed by `by`), and this mathcomp has only the conditional `leq_pmul2l`
+(`0 < m -> ...`), not the `(m == 0) || ...` form — prefer `leq_mul` +
+`leq_pmulr`.
+
+### 278. `ex_minnP` is applied as a VIEW on the existence proof
+
+`case: ex_minnP => m Pm minm` fails with `Pattern (ex_minnP _) was not completely
+instantiated`: `P` and `exP` are section variables. The working idiom (as in
+`GraphTheory.arc`) is
+
+```coq
+have Pex : exists n, [exists X : {set T}, hg_coverb X E && (#|X| == n)] := ...
+have /ex_minnP [m Pm minm] := Pex.
+```
+
+which is how a minimum cover (or any "attained and extremal" number of an
+`is_*_number` row) is constructed: prove the boolean predicate is satisfied
+(`X := [set: T]`, `setTI`), then `minm` gives the lower bound directly with
+`apply: minm`.
+
+### 279. Definitionally equal vocabularies still deserve a bridge lemma
+
+`x6_matching`/`hg_matching`, `x6_matching_number`/`is_matching_number` and
+`x6_r_partite_uniform`/`r_partite_uniform` (X6.v vs U12.v) have byte-identical
+bodies, so a cross-file implication can pass one where the other is expected. Do
+record the bridges anyway — `Proof. by split=> H; exact: H. Qed.` — so that a
+future edit of one vocabulary breaks the implications file instead of silently
+changing what the edge means. Same idiom proves an alias `equiv` edge between two
+corpus rows with identical bodies: `by split=> H V d hV hd; apply: H.`
+
+### 280. An `@EDGE` naming rule you cannot see in the file
+
+`meta/build_edge_graph.py` splits `proof=<name>` at `_<kind>_` and demands that
+each half contain, or be contained in, the corresponding endpoint's core name
+(formal name minus `_statement`). So an alias equivalence between
+`chen_chvatal_metric_lines_statement` and
+`chen_chvatal_guarded_metric_lines_statement` MUST be called
+`chen_chvatal_metric_lines_equiv_chen_chvatal_guarded_metric_lines` — a
+corpus-row-key name (`std_chen_chvatal_equiv_std_chen_chvatal_146`) aborts the
+edge-graph build even though the file compiles and the milestone gate is ACCEPTED.
+Check the annotation with the same regex the script uses
+(`\(\*@EDGE\s+(.*?)\*\)` plus `(\w+)=(?:"([^"]*)"|(\S+))`) before handing off.
+
+## Wave E3 (digraph-theory: corpus implication edges e016-e173, 2026-09-24)
+
+### 237. The EMPTY digraph refutes every "pointwise min-degree ⇒ contains a subdivision" body
+`min_outdegree_at_least D m` / `min_semidegree_at_least D m` are `forall v : D, …`, so they
+hold VACUOUSLY on a digraph with no vertex, while `contains_subdivision F D` /
+`subdivides D H` need an injective `branch : F -> D`, impossible for `F` nonempty.  Building
+the witness costs three lines
+(`Definition emptyD := 'I_0.` + `Finite.on` + `HasArc.Build emptyD (fun _ _ => false)`),
+and it killed three statements at once (X2 `mader_delta0_…`, X2
+`oriented_trees_delta_plus_maderian_…`, P9 `subdivision_of_a_transitive_tournament_…`); the
+X52 chromatic version dies at `k = 1` because `2 * 1 - 2 = 0 <= χ` of ANYTHING.  Always probe
+a new "large degree forces a substructure" row on the empty carrier BEFORE trying an edge into
+it.  Keep the refutation in a SCRATCH file: `check_milestone`'s faithfulness probe rejects a
+committed constant whose exact type is `~ <row not called disproved>`.
+
+### 238. `case: (posnP m) => [->|h]` rewrites `(m != 0)` in the goal to `~~ false`
+`posnP` is a `Variant … : eqn0_xor_gt0 n (n == 0) (0 < n)`, so BOTH booleans are substituted in
+the goal.  A goal `… <= (m != 0)` becomes `… <= ~~ false` and `rewrite -lt0n h` then fails with
+*The RHS of lt0n does not match any subterm*.  Drop the rewrite: `nat_of_bool (~~ false)` is
+CONVERTIBLE to `1`, so `apply: leq_trans (lemma_giving_le_1)` closes it directly.
+
+### 239. `ex_maxnP` for "take a longest object", and how to make the predicate boolean
+`ex_maxn`/`ex_maxnP` need `(exP : exists n, P n)` and `(ubP : forall n, P n -> n <= m)` — the
+upper bound is NOT an `exists` (that shape fails with *expected forall i : nat, Q i -> i <= ?m*).
+To get a `pred nat` out of "there is a duplicate-free walk of length n", use
+`fun n => [exists t : n.-tuple G, walk_in S (val t)]`: tuples give the finType, `size_tuple`
+gives the length back, and `#|s| = size s` (`card_uniqP`) + `max_card` give the bound `#|G|`.
+`have [m /existsP[t ht] maxm] := ex_maxnP exQ ubQ.` then delivers the longest walk AND its
+maximality in one line.
+
+### 240. `drop_sorted` / `cat_sorted2` are only available for a TRANSITIVE relation
+Both live inside `path.v`'s `Section Transitive`, so they are unusable for a graph adjacency.
+Re-derive the one instance needed in three lines:
+```
+move: ss; rewrite -{1}(cat_take_drop i s).
+case: (take i s) => [//|b l] /=.
+by rewrite cat_path => /andP[_]; exact: path_sorted.
+```
+Likewise `last x (drop i s) = last x s` is NOT in `seq.v` (entry 245).
+
+### 241. `rewrite h` with `h : sorted e (a :: s)` does not fire on a goal showing `path e a s`
+`sorted e (a :: s)` only reduces to `path e a s` by iota, so it is not a syntactic subterm.
+Finish such goals with `exact: h` (conversion) instead of rewriting; e.g.
+`sorted_rcons_edge`: `by rewrite rcons_cons /= rcons_path h2 andbT; exact: h1.`
+
+### 242. Do NOT `pose` the sequence you are going to rewrite in
+`pose sq := a :: s'` adds a local definition but leaves the goal/hypotheses printing
+`a :: s'`, so every later `rewrite` whose pattern mentions `sq` fails (and `set` cannot help
+when the term is not yet in the goal).  Spelling `(a :: s')` out everywhere — verbose but
+rewrite-stable — was what made `min_deg2_has_cycle` go through.
+
+### 243. `case/orP: h => /andP[_ ->]` applies the SAME pattern to BOTH branches
+(The `=>`-side twin of entry 43.)  `by case/orP: (cross _ _ harc) => /andP[_ ->] //` fails in
+the second branch with *The LHS of __top_assumption_ does not match* because there the second
+conjunct is a different membership.  Name the pieces and branch explicitly:
+`case/orP: … => /andP[h1 h2]; first by rewrite h2.` then use `h1`.
+
+### 244. Instantiating a statement whose premises mention sets the conclusion does not
+`apply: (H k an ad bn bd hk)` against a conclusion `exists c : seq D, …` fixes `D` but leaves
+`?A ?B` as metavariables: they are resolved by the FIRST remaining premise goal that mentions
+them (here `x53_bipartition ?A ?B`).  So discharge the premises in the source's order and make
+that goal explicit — `by split; [exact: dAB | split; [exact: cov | exact: cross]]` — rather
+than `split=> //`, which tries `done` on `[disjoint A & B]` and reports the useless
+*Unable to unify "true" with …*.
+
+### 245. `last x (drop i s) = last x s` (i < size s), and `done` on a false premise
+Not in `seq.v`; the induction needs `/=` BEFORE `rewrite ltn0` (the goal keeps `i < size [::]`,
+whose LHS `?n < 0` matches only after simplification), and `done` does close a goal of the form
+`false -> G` (its `case not_locked_false_eq_true; assumption` clause), so
+```
+elim: s i => [i|b l IH i]; first by rewrite ltn0.
+case: i => [_|i hi]; first by rewrite drop0.
+by rewrite /= (IH i hi); move: hi {IH}; case: l => [|c l'] /=.
+```
+is the whole proof (`{IH}` is needed: `move: hi; case: l` fails with *l is used in hypothesis IH*).
+
+### 246. Gate rules for a `(*@EDGE … status=verified *)` that are easy to miss
+`meta/build_edge_graph.py` requires (i) the `proof=` theorem to be declared in the SAME `.v`
+file as the annotation — restating an already-proved edge under the canonical
+`<from-core>_implies_<to-core>` name in `implications_<PHASE>.v` with `exact: <old name>.` is
+the cheap way to satisfy it; (ii) BOTH endpoints to own a `legs.statement = "done"` row; and
+(iii) a verified `implies` edge may not point at a corpus-`disproved` row unless its source is
+disproved too (pointing FROM a disproved row is fine — that is how the reverse of e105 lands).
+And a judgement call: when the TARGET body is refutable but the SOURCE is refutable too, the
+implication is provable only by ex falso — record `status=candidate` + `note="BLOCKED: …"`
+(with the scratch refutation) instead of a `verified` edge that carries none of the argument.
+
+### 247. "Let h be the LARGEST k with …" in a corpus argument: decide the predicate, do not go classical
+Corpus arguments routinely say *let h be the largest k such that G has a K_k minor; then G has
+no K_(h+1) minor, so the source applies*.  Formalised naively this needs `~~ P -> P`, i.e.
+excluded middle.  The fix is that these predicates are DECIDABLE on finite simple graphs, and
+the decision procedure is short once the right library form is used:
+```coq
+Definition minor_rmapb (phi : {ffun H -> {set G}}) : bool :=
+  [&& [forall x : H, phi x != set0],
+      [forall x : H, connectedb (phi x)],
+      [forall x y : H, (x != y) ==> [disjoint phi x & phi y]] &
+      [forall x y : H, (x -- y) ==> neighbor (phi x) (phi y)]].
+Definition minorb := [exists phi : {ffun H -> {set G}}, minor_rmapb phi].
+Lemma minorP : reflect (minor G H) minorb.   (* minorRE / minor_of_rmap + connectedP *)
+Lemma minorNN : ~ ~ minor G H -> minor G H.
+```
+Go through `minor_rmap` (H -> {set G}), never `minor_map` (G -> option H): every clause of
+`minor_rmap` already has a Boolean counterpart (`connectedb`/`connectedP`, `neighbor`,
+`[disjoint _ & _]`).  Same recipe for `has_induced_copy G H = inhabited (H ⇀ G)`:
+`[exists f : {ffun H -> G}, injectiveb f && [forall x y, (f x -- f y) == (x -- y)]]`.  With
+`minorNN` in hand, "h := largest k" is not even needed — apply the source at the single value
+`t = ceil_div #|G| 2 - 1` (see `hadwiger_independence_minor_implies_seagull`).
+(Foundations: `minor-theory/theories/foundations/minor_dec.v`.)
+
+### 248. `restrict` is a NOTATION, and `[pred t | …]` vs `[set t | …]` block each other
+`restrict A e` is `Notation restrict A := (restrict_mem (mem A))`, so `rewrite /restrict` fails
+with *Abbreviation is not applied enough* — unfold `/restrict_mem`.  Worse, `sdecomp`'s
+`sbag_conn` states connectedness with the PREDICATE `[pred t | x \in B t]` while a hand-rolled
+`x27_tree_decomposition` states it with the SET `[set t | x \in bag t]`; the two `connect`s are
+not convertible.  One mediating lemma settles both directions:
+```coq
+Lemma restrict_bag (G T : sgraph) (D : T -> {set G}) (v : G) :
+  restrict [pred t : T | v \in D t] (@sedge T) =2 restrict [set t : T | v \in D t] (@sedge T).
+Proof. by move=> a b; rewrite /restrict_mem /= !inE. Qed.
+```
+then `rewrite (eq_connect (@restrict_bag G T D v))` (or `-(…)` for the other direction).
+Also: `restrict` needs `From GraphTheory Require Import preliminaries.` — `GTBase.base` alone
+does not put the notation in scope.
+
+### 249. `sbag_conn`'s vertex and node arguments are IMPLICIT
+`sbag_conn : sdecomp T G B -> forall [x] [t1 t2], x \in B t1 -> x \in B t2 -> connect …`.
+Only the decomposition is explicit, so `apply: sbag_conn dec v t1 t2` reports *Cannot apply
+lemma sbag_conn*; write `exact: (sbag_conn dec h1 h2)` with `h1 : v \in D t1`.  (Unlike
+`sbag_cover dec x` / `sbag_edge dec xy`, where the extra argument IS explicit.)
+
+### 250. `width (decompL D A)` is indexed by `option T`, the goal by `tlink U_disc`
+`width_link : width (decompL D A) <= maxn (width D) #|A|` is stated with the index finType
+`option T`, but after `exists (@tlink T U U_disc), (decompL D set0)` the goal's `width` is
+indexed by the *forest record* `tlink U_disc`.  `exact:`/`apply:` then report *Cannot apply
+lemma (width_link …)* even though the two finTypes are convertible.  Do not fight it — the bag
+bound is three lines by hand:
+```coq
+rewrite /width; apply/bigmax_leqP => t _.
+case: t => [t|]; last by rewrite cards0.
+apply: leq_trans w; rewrite /width; exact: leq_bigmax.
+```
+`decomp_link` itself applies fine (its conclusion mentions `tlink` explicitly).
+
+### 251. Turning a `forest` index into a TREE index: one representative per component by `pick`
+`tw_le` decomposes over a `forest`; `x27_treewidth_at_most` wants an index graph that
+`is_tree` (= `is_forest` AND `connected`).  Join every component to one fresh node carrying the
+EMPTY bag: `tlink`/`link_is_forest`/`decomp_link` give the forest half for free, so all that is
+needed is a choice of representative, and `pick` is already constant on components because it
+depends only on the EXTENSION of its predicate:
+```coq
+Definition frep (t : T) : T := odflt t [pick s : T | connect (@sedge T) s t].
+Lemma frep_eq t t' : connect sedge t t' -> frep t = frep t'.   (* eq_pick + connect_trans *)
+Definition freps : {set T} := [set t : T | frep t == t].       (* the U for tlink *)
+```
+`freps_disc` (the `U_disc` hypothesis) is then immediate from `frep_eq`, and connectedness of
+`add_node T (freps T)` needs only `connect_add_node` (lift a `connectP` path through `map Some`)
+plus one `connect1` to `None`.  Full proof: `foundations/width_params.v`, `tw_le_tree`.
+
+### 252. `apply: leq_trans w` fails where `exact: leq_trans w h` works
+On a goal `width D <= k'.+1` with `w : width D <= k.+1`, `apply: leq_trans w` reports *Cannot
+apply lemma leq_trans* (ssreflect's `apply:` with a trailing argument does not leave the second
+premise as a subgoal here).  Either produce the second premise first —
+`have h : k.+1 <= k'.+1 by rewrite ltnS. exact: leq_trans w h.` — or use the application form
+`apply: (leq_trans w)`.  The idiom that DOES work with a subgoal left over is
+`apply: leq_trans (proof_of_first_premise) _`.
+
+### 253. Finite Ramsey: state the clique hypothesis as `#|S| != s`, not `#|S| < s`
+```coq
+Lemma ramsey_bound (s : nat) : forall a : nat, exists N : nat,
+  forall (G : sgraph) (A : {set G}),
+    α(A) <= a -> (forall S : {set G}, S \subset A -> clique S -> #|S| != s) -> #|A| <= N.
+```
+Two reasons.  (i) It is the WEAKER hypothesis, and it is what callers have: "no INDUCED `'K_s`"
+only forbids cliques of size exactly `s`, and turning `#|S| >= s` into a subset of size exactly
+`s` is an extra (missing) mathcomp step.  (ii) The induction goes through unchanged: with
+`v \in A`, `A1 := [set x in A | x -- v]` and `A2 := [set x in A | (x != v) && ~~ (x -- v)]`,
+`clique_addv`/`stable_addv` give `#|v |: S| = #|S|.+1` and `-eqSS` (resp. `-ltnS`) closes the
+two recursive hypotheses.  `elim: s => [|s IHs] a` then `elim: a` gives the double induction;
+`A \subset [set v] :|: (A1 :|: A2)` closes by `apply/subsetP => x xA; rewrite !inE xA;
+by case: (x == v); case: (x -- v)` (case-splitting the two Booleans beats hand-rolled `orP`
+gymnastics — note `x != v` is `~~ (x == v)`, so `case: (x == v)` reaches it too), and the two
+`#|_ :|: _|` steps by `(leq_card_setU _ _).1` (there is no `leqif_le`).  Maximum stable sets:
+`case: (alphaP A) => S HS` (it REWRITES `α(A)` to `#|S|` in the goal, which is what you want),
+then `maxstabsetS` / `maxstabset_stable` / `stabset_bound`.
+(`foundations/ramsey_small.v`; `ramsey_bound 4 k` is what closes edge e050.)
+
+### 254. `case` on `inl (widen_ord le a) = inl (widen_ord le b)` injects all the way to `val`
+Proving `(KB t t) ⇀ (KB s s)` for `t <= s` by widening both sides, the injectivity goal
+`f (inl a) = f (inl b) -> inl a = inl b` is closed by `move=> [a|a] [b|b] //= [] /val_inj ->`:
+ssreflect's `[]` chains injection through `inl` AND through `Ordinal`, landing on
+`nat_of_ord a = nat_of_ord b` (which PRINTS as `a = b`, so the intermediate error messages are
+misleading — *The LHS of __top_assumption_ (nat_of_ord a)* is the giveaway).  There is no
+`widen_ord_inj`.  The `{mono …}` half is `by move=> [a|a] [b|b]` — `kb_rel` computes.
+Reminder: `{mono f : x y / x -- y >-> x -- y}` is `forall a b, (f a -- f b) = (a -- b)`.
+
+### 255. Shifting a polynomial given as a coefficient list needs LIST addition
+`x220_poly_eval p x = foldr (fun a acc => a + x * acc) 0 p` (Horner).  To turn
+`tree_alpha_le G (p t.+1)` into `tree_alpha_le G (p' t)` you need `p'` with
+`eval p' t = eval p t.+1`, and no per-coefficient map does it: `eval (a :: q) x.+1 =
+(a + R) + x * R` with `R = eval q x.+1`, and `a + R` is not a constant.  So add lists:
+```coq
+Fixpoint poly_add p q := if p is a :: p' then (if q is b :: q' then (a + b) :: poly_add p' q' else p) else q.
+Lemma poly_addE p q x : eval (poly_add p q) x = eval p x + eval q x.   (* mulnDr addnACA *)
+Fixpoint poly_shift p := if p is a :: q then poly_add (poly_add [:: a] (poly_shift q)) (0 :: poly_shift q) else [::].
+```
+`addnACA : m + n + (p + q) = m + p + (n + q)` is exactly the additivity step.  Trap: do NOT
+`rewrite /=` BEFORE `poly_addE` — `/=` turns `poly_add [:: a] (poly_shift q)` into a `match`
+on `poly_shift q` and `poly_addE` then no longer matches.  Fold the step by hand first
+(`have e : poly_shift (a :: q) = poly_add (poly_add [:: a] (poly_shift q)) (0 :: poly_shift q)
+by []`), `rewrite e !poly_addE`, and only then `/=`.
+
+### 256. Quantifier ORDER can make an edge unprovable in Rocq's logic (AC_00), independently of the mathematics
+Before hunting for the graph theory of an edge, compare the two quantifier prefixes.  If the
+SOURCE reads `forall d, exists f : nat -> nat, …` and the TARGET reads
+`exists f : nat -> nat, forall d, …` (X220's wall row vs X27's bounded-degree row, edge e053),
+then even granting every containment the derivation stalls at
+`forall d, exists B, P d B ⊢ exists F, forall d, P d (F d)` — countable choice, which Rocq does
+not provide.  The usual escape, `ex_minn` on the least such `B`, is unavailable when `P d B`
+quantifies over ALL `sgraph`s (not a Boolean predicate, and not a finite quantification).
+Record the edge as `status=candidate` with the choice obstruction named FIRST in the note: it is
+a property of how the two rows are stated, not a gap in the formalisation, and no amount of
+extra combinatorics removes it.  (Contrast e051, where the source's `exists c` is reached at a
+FIXED `t = 4`, so no choice is needed and only the mathematics is missing.)
+
+### 270. Building an `isubgraph` (a `Type` record) from a `Prop` existential
+
+`contains_pattern chi col` is `exists g, injective g /\ ...` — a `Prop` — while
+`H ⇀ G` is a RECORD IN `Type`. So
+
+```coq
+Lemma bad : contains_pattern (@chi H) gcol -> H ⇀ G.
+Proof. case=> g [g_inj Hg].   (* Error: Incorrect elimination in the inductive
+                                 type "ex": the return type has sort "Type" *)
+```
+
+State the conclusion in `Prop` instead — `has_induced_copy H G`
+(= `inhabited (H ⇀ G)`) — destruct there, and only THEN cross into `Type`:
+
+```coq
+Proof. case=> g [g_inj Hg]; apply: inhabits. (* goal: H ⇀ G, with g in context *)
+```
+
+The reverse direction needs no trick: a lemma whose conclusion IS `H ⇀ G` may
+freely use boolean hypotheses and `reflect` views (`/cliqueP`, `/stableP`), since
+those only produce `Prop`s, they do not eliminate one.
+
+Three more traps from the same proof (multicolour Erdős–Hajnal => Erdős–Hajnal):
+
+- **Never `rewrite -(_ : #|[set c1; c2]| = 2)` in a goal mentioning `'I_2`**: the
+  `2` of `'I_2` is rewritten too and you get a *Dependent type error in rewrite*
+  (`palette_on ... 'I__pattern_value_`). Use the cardinal the other way round:
+  `have h2c := subset_leq_card sub2; rewrite cards2 ne /= in h2c.` The `/=` is
+  load-bearing — `cards2` leaves `(nat_of_bool true).+1`, which is convertible to
+  `2` but does NOT match a `1 < _` pattern until simplified.
+- **Absurd-inequality closing idiom**: with `h2c : 1 < #|X|` and
+  `Hpal : #|X| <= 1`, use `by move: Hpal; rewrite leqNgt h2c.` (ssreflect's
+  `done` closes a `false -> _` goal via `not_locked_false_eq_true`). The same
+  idiom kills `2 <= 1` after `cards2`.
+- **The `'I_#|G|` dictionary** between a graph and a colouring of `K_n` is
+  `enum_val`/`enum_rank` (`enum_rankK`, `enum_val_inj`, `enum_rank_inj`,
+  `widen_ord` for `#|H| <= #|K|`): writing `enum_val i` at an expected type
+  `'I_#|G| -> G` resolves its `{pred}` argument by itself, so
+  `Definition gcol (x y : 'I_#|G|) := b2o (enum_val x -- enum_val y)` typechecks
+  as is. Section variables that a definition does NOT use are not generalised, so
+  `palette_clique_or_stable (H:=H)` fails with *Wrong argument name H* — check
+  with `About` before passing named arguments.
+
+Mathematical warning recorded with the same edge: for Erdős–Hajnal-shaped bounds
+the DIAGONAL Ramsey bound `R(k,k) <= 4^k` is useless (it gives a clique/stable set
+of size ~log n where a POLYNOMIAL one is needed). The lemma to prove is the
+off-diagonal Erdős–Szekeres form `ω(A) <= k -> #|A| <= (α(A) + 1) ^ k`
+(`Extremal.foundations.ramsey.ramsey_card_leq`), by induction on `k`: a MAXIMUM
+stable set dominates `A`, so `A ⊆ ⋃_{s ∈ S} N[s] ∩ A` (union bound
+`card_bigcup_leq`, reproved here because mathcomp's `card_big_setU` lives in the
+axiom-bearing classical layer), each `N(s) :&: A` has `ω` one smaller
+(`cliqueU1` + `clique_bound`), and `α * ((α+1)^(k-1) + 1) <= (α+1)^k`. Two base
+cases are needed (`k = 0` via `omega_eq0`, `k = 1` via "ω(A) <= 1 -> stable A"):
+the inductive step genuinely fails at `k = 1`. Also note `alpha_compl` is
+**Aborted** in coq-graph-theory's `coloring.v` (only `omega_compl` is proved);
+it is reproved in `foundations/ramsey.v` via `stable_compl` and `eq_bigl`.
+
+## 293–304 — chromatic-theory edge pass of 2026-09-24 (X65/X66/X218/U1/U8 edges)
+
+**293.** `coloring.chiD1` takes exactly ONE explicit set argument: it is
+`chiD1 H : stable S -> χ(H) <= χ(H :\: S).+1` with `S` inferred from the
+`stable S` proof. `chiD1 A A st` fails with *"The term A has type {set G} while
+it is expected to have type is_true (stable ?S)"*; write `chiD1 A st`. The
+`χ(A) <= 1` for a stable `A` is then `by have := chiD1 A st; rewrite setDv chi0`.
+
+**294.** To build `K \in cliques A` (needed for `clique_bound`), the working
+incantation is `rewrite inE subsetT /=; apply/cliqueP` — the `/=` is load-bearing
+because after `subsetT` the conjunct that survives is `true && cliqueb K`, so
+`andbT` does NOT match (`rewrite inE subsetT andbT` fails with *"The LHS of andbT
+(_ && true) does not match any subterm of the goal"*). Same trap for
+`eqEsubset`: `rewrite eqEsubset subsetT /=`, never `... andbT`.
+
+**295.** For membership in a set difference prefer the reflection view over
+`inE` gymnastics: `apply/setDP; split` (goals `x \in A` then `x \notin B`) is
+robust, whereas `rewrite !inE andbT` depends on the normalised conjunct order and
+breaks.
+
+**296.** `disjointE` and `disjointP` (coq-graph-theory `preliminaries.v`) are NOT
+reachable through `GTBase.base` — *"The reference disjointP was not found"*. Turn
+`[disjoint A & B]` into a usable fact with mathcomp only:
+`have disI : A :&: B = set0 by apply/eqP; rewrite setI_eq0; exact: dis.` and then
+`by move=> z zA zB; move: (in_set0 z); rewrite -disI !inE zA zB.`
+
+**297.** Section `Hypothesis`es become LEADING explicit arguments of every lemma
+that uses them, and `Set Implicit Arguments` does not make a binder implicit when
+it occurs only in the CONCLUSION (typically a `nth` default). Hence
+`exact: forest_run_nonadj Tf pth uq hj hij` fails (*"Cannot apply lemma"*) while
+`exact: (@forest_run_nonadj T Tf p r r i j pth uq hj hij)` works. Check with
+`Check @name` / `About name` before applying.
+
+**298.** Backwards rewrites of a successor are dangerous: `rewrite -add1n` on a
+goal `n <= m` freshly turned into `n < m.+1` by `-ltnS` matches the `n.+1` hidden
+inside `<` (`m < n` is `m.+1 <= n`) instead of the intended `m.+1`, and the
+following rewrite then fails. Rewrite FORWARDS on a reverted hypothesis instead:
+`by move: lt; rewrite cd add1n ltnS.`
+
+**299.** `//` is a legal rewrite item and discharges the side conditions of
+conditional rewrite rules: `have h1 : χ(A) <= (Delta G + 4) %/ 2 by rewrite
+leq_divRL.` needs `0 < 2`, and `rewrite addnC (_ : 4 = 2 * 2) // divnMDl //
+addnC` is the idiomatic way to get `(Delta G + 4) %/ 2 = Delta G %/ 2 + 2`.
+`ceil_div a 2 = (a + 1) %/ 2` is reached with `rewrite /ceil_div; apply:
+leq_div2r; rewrite addnS subn1 /= leq_addr`.
+
+**300.** Applying a `reflect` as a rewrite view can fail with *"Could not fill
+dependent hole in apply"* when the reflected statement mentions a coerced
+structure (`#|s|` for a seq): `move/card_uniqP: uq => ->` fails. Prove the
+equation in a `have` with the OTHER direction of the same reflection instead
+(`by apply/card_uniqP; apply: take_uniq; exact: enum_uniq`), or avoid seq
+cardinalities altogether (see 301).
+
+**301.** AXIOM-FREE finite choice: `xchoose`/`xchooseP` turn
+`forall v, exists S : {set C}, P v S` (any `choiceType` codomain, `P` boolean)
+into a genuine function `fun v => xchoose (ex v)` with no classical axiom. Always
+pass the existence proof explicitly — `exact: (xchooseP (ex v))`; bare
+`exact: xchooseP` cannot infer the predicate. Companion: "a finite set has a
+subset of every smaller size" is not in mathcomp; prove
+`n <= #|A| -> exists S, (S \subset A) && (#|S| == n)` by induction on a bound for
+`#|A|`, peeling one element with `cardsD1` + `subD1set`.
+
+**302.** `#|\bigcup_(i : I) F i| <= \sum_(i : I) #|F i|` is not in the
+non-classical library (mathcomp's `card_big_setU` is in the axiom-bearing
+classical layer). Either `apply: (big_ind2 (fun (A : {set C}) (n : nat) =>
+#|A| <= n))` — base `cards0`, step `-cardsUI leq_addr` then `leq_add` — or
+induct over the index list with `big_cons`. To finish, `\sum_(i : I) k = #|I| * k`
+IS in the library: `rewrite sum_nat_const mulnC` (it matches the unfiltered
+`\sum_(i : I)` form up to conversion).
+
+**303.** Two sgraphs built by `SGraph` from *convertible* relations but different
+symmetry/irreflexivity proofs are interchangeable for `is_forest`, `Path`,
+`irred`, …, because those only look at the vertex type and the edge relation.
+So X66's `x66_disjoint_union H1 H2` (a hand-rolled copy of coq-graph-theory's
+`sjoin`) inherits the library lemma directly:
+`exact: (@join_is_forest (@Forest H1 f1) (@Forest H2 f2))` typechecks by
+conversion — no `diso` transfer needed. (`join_is_forest` lives in
+`GraphTheory.treewidth` and takes the RECORD type `forest`, hence the two
+`Forest` wrappers; the X218 note claiming there is no disjoint-union forest
+lemma is stale.)
+
+**304.** "Every path of a forest is induced" (needed for the X218 e041 edge) has
+no ready-made form in coq-graph-theory; the short route is
+`forestT_unique : is_forest [set: G] -> forall x y, unique (fun p : Path x y =>
+irred p)` (no subset side condition, unlike `is_forest` itself) applied to
+`Path_of_path pth` and `edgep xy`; `irred (Path_of_path pth)` is
+`rewrite irredE nodesE` + the `uniq (x :: s)` hypothesis, `irred (edgep xy)` is
+the sgraph-level `irred_edge` (unconditional — in a simple graph `x -- y` already
+gives `x != y`), and the contradiction comes from `f_equal val`, since
+`val (edgep xy) = [:: y]` has size 1 while the path has size >= 2. The general
+"non-consecutive vertices of a uniq path" form follows by induction on the seq
+with `take`/`size_takel`/`nth_take`/`nth_last`, keeping the `nth` DEFAULT as a
+free parameter so the induction hypothesis applies to the tail unchanged.
+
+## Wave V — vocabulary equivalence lemmas (8 packages, 2026-09-24)
+
+Thirty-five `<->` / `=` bridges between a conjecture file's local notion and the
+canonical library / GTBase / foundations notion (see the
+"## Vocabulary equivalences proved (wave V, 2026-09-24)" section of
+`meta/STATEMENT_IMPROVEMENTS.md`).  Most are one-liners; the entries below are
+the failures that cost a compile round.
+
+**323.** Two definitions with the *same body* under different names are
+convertible but `by []` does NOT close an `iff` goal (`done` never introduces).
+The idiom that does is `Proof. by split=> H; exact: H. Qed.` — `exact` checks up
+to conversion, so it crosses the delta step.  For a `=` between two convertible
+*terms* (not Props) plain `Proof. by []. Qed.` is enough
+(`x6_hg_degree E v = hg_degree E v`, `x117_image_edge f e = x108_image_edge f e`).
+Note this is only sound when the bodies really are convertible: `hg_cover` vs
+`x72_vertex_cover` differ (`X :&: e != set0` vs `~~ [disjoint X & e]`) and need
+`rewrite -setI_eq0` plus `apply: contraNN` on one side.
+
+**324.** Two `ex_minn` copies of the same predicate (X119's `x119_sqrt` vs
+`GTBase.asymptotics.sqrt_ceil`) are equal by `eq_ex_minn`, which only needs the
+predicates to be `=1`: `Proof. by apply: eq_ex_minn. Qed.` — the different
+existence PROOF terms are irrelevant.  Do not try `rewrite /x119_sqrt`: the
+`ex_minn` bodies do not reduce.
+
+**325.** To state "the q-colour machinery at `q = 2` is the two-colour one"
+(X119 vs X108/X117, X195 vs X215) you need a `bool <-> 'I_2` pair.  The cheapest
+pair that typechecks is
+`Definition b2i2 (b : bool) : 'I_2 := @Ordinal 2 b (leq_b1 b).` (works because
+`b < 2` is convertible to `leq_b1`'s `b <= 1`) and
+`Definition i22b (i : 'I_2) : bool := (i : nat) == 1.`  Then `cancel b2i2 i22b`
+is `by case` and `cancel i22b b2i2` is
+`by move=> i; apply/val_inj; case: i => -[|[|m]]`.  Transport a colour-indexed
+statement with `rewrite -[col _]i22bK (fcol e eE)` rather than by case analysis
+on the colour.
+
+**326.** `{S : {set T} | #|S| == ell}` IS a MathComp subType (`sig` is), so
+`val`, `valP`, `val_inj` all work — but `rewrite` of a nat that occurs in the
+INDEX of such a dependent type fails with
+`Dependent type error in rewrite of (fun _pattern_value_ => …)`, because the
+motive abstracts the nat that `S`'s own type mentions.  Concretely
+`rewrite -(eqP (valP S))` and `rewrite -{2}(prednK G0)` both fail on a goal
+mentioning `S : x21_l_deck_index G #|G|.-1`.  Fix: never rewrite the index —
+rewrite FORWARD in a hypothesis (`move: (cardsC (val S)); rewrite (eqP (valP S))`,
+which abstracts `#|val S|`, a term absent from `S`'s type) and factor the
+arithmetic into a standalone lemma over plain nats
+(`pred_addn1 : 0 < n -> n.-1 + x = n -> x = 1`, proved by
+`rewrite -{2}(prednK n0) -addn1; exact: addnI`).
+
+**327.** `xchoose` needs a BOOLEAN predicate.  `exists v, val S = [set~ v]` gives
+`cannot unify "{set G}" and "bool"`; state the existence with `==`
+(`exists v, val S == [set~ v]`) and read it back with `eqP (xchooseP …)`.  With
+that, an explicit inverse plus `Bijective`-style `cancel` pairs replaces any
+injective-plus-cardinality argument: `cancel d i` is
+`symmetry; apply: dinj; apply/val_inj => /=; exact: (eqP (xchooseP …))`.
+
+**328.** `[set u : T | u != v]` and `[set~ v]` are NOT convertible (`finset` is
+locked), so a `vdel_card`-style definition has to be normalised once:
+`Lemma vdel_card_setC1 (K : sgraph) (v : K) : vdel_card v = induced [set~ v].
+Proof. by rewrite /vdel_card; congr induced; apply/setP => u; rewrite !inE. Qed.`
+After that `cardsC1 : #|[set~ a]| = #|T|.-1` and `cards1P` give the whole
+"(n-1)-subsets are complements of singletons" bijection, and the set equality can
+be `rewrite`n inside `inhabited (induced _ ≃ induced _)` (the motive typechecks —
+`induced` is just a function applied to the set).
+
+**329.** `Diso'`'s `{mono f : x y / x -- y}` cannot be stated as a standalone
+`have`: the notation expands the same syntax at TWO different graph types, which
+only elaborates when the expected type is known.  Use `Diso''` (two plain
+`is_dhom` conditions) instead, and pass its graphs EXPLICITLY — `F` and `G` are
+not implicit:
+`exact: (@Diso'' (sgraph_of rG') (sgraph_of rG) s (s^-1)%g (permK s) (permKV s) h1 h2)`.
+`Cannot apply lemma (Diso'' …)` with no further detail is the symptom.
+
+**330.** Inside a file that imports `all_algebra` AFTER `GraphTheory.bij`, the
+`^-1` of a `bij`/`diso` is shadowed by the ring inverse: `h^-1` reports
+`expected to have type "GRing.UnitRing.sort ?s"`.  Two escapes, both used in
+`spectral-graph-theory/theories/foundations/spectral.v`: write a permutation
+inverse as `(s^-1)%g` (group scope), and avoid `h^-1` on a `diso` entirely by
+taking `pose h' := diso_sym h` and using `bijK h'` / `edge_diso h'` in place of
+`bijK' h` / `edge_diso' h`.
+
+**331.** Adjacency of a graph built by `SGraph e` is convertible to `e x y` but
+not syntactically equal, so `rewrite` fails with
+`The LHS … does not match any subterm of the goal`.  Add the one-line bridge
+`Lemma sgraph_ofE (i j : 'I_n) : (i : sgraph_of) -- j = r (i, j). Proof. by []. Qed.`
+and rewrite with it (and with `-[r' _]sgraph_ofE` to fold the other direction).
+Same trick for any `SGraph`-built local graph family.
+
+**332.** Counting bridges between an ORDERED-pair set and a 2-SET edge set
+(`x223_edges_between A B = #|E(A,B)|` on disjoint `A`, `B`): prove the set
+equality `S = (fun p : G * G => [set p.1; p.2]) @: P` first with
+`apply/setP => e; rewrite !inE; apply/idP/imsetP`, then close with
+`rewrite /x223_edges_between key card_in_imset //`.  Four details that each cost
+a round: (i) `[&& a, b & c]` is `a && (b && c)` while `(a && b) && c` is a
+different term — `apply: eq_card => p; rewrite !inE andbA` bridges them;
+(ii) get distinctness from disjointness with `disjointFr`
+(`move: (disjointFr dAB xA); rewrite exy yB`), not `contraTneq`; (iii) after
+`case/edgesP => x [y] [exy xy]` do NOT try to prove `e = [set a; b]` — case on
+`a \in [set x; y]` and `b \in [set x; y]` and hand back the pair `(a,b)` or
+`(b,a)` directly (`setUC` for the swapped case, `sg_sym` for the adjacency);
+(iv) `case: p` fails with `p is used in hypothesis …` — `clear` every hypothesis
+mentioning the pair first, then `case: p H1 H2 => a b /= -> ->; by case: q`.
+Related library views worth knowing: `card_le1_eqP` turns "at most one member per
+vertex" into "two members sharing a vertex are equal" (the `x15_matching` /
+`x14_matching` vs `connectivity.matching` bridges), `cards2P` + `cliqueP` turn
+"2-element clique" into "adjacent pair" (`x102_edge_set G = E(G)`), and
+`{in D &, forall x y, P}` has its `x`/`y` EXPLICIT, so calls need `_ _` before
+the two membership proofs.
+
+## Wave E5 (cycle-theory edge wave: cycle space, F27, component collapse, 2026-09-24)
+
+### 281. `//` inside an ssr intro pattern is `try done`, so a surviving branch eats the NEXT tactic
+
+`elim: w x => [x /eqP -> //|e w IH x h]; rewrite rev_cons -cats1.` failed with
+
+```
+The LHS of rev_cons (rev (_ :: _)) does not match any subterm of the goal
+```
+
+pointing at the `rewrite`, not at the `//`.  The nil branch's goal was
+`uwalk y y (rev [::])`, i.e. `y == y`, which `done` does NOT close (no `eqxx`
+hint), so `//` silently left it open and the following `rewrite` was applied to
+*that* goal.  Whenever an error names a rewrite that obviously matches the branch
+you were thinking of, suspect an earlier `//` that did not fire.  Fix: close the
+degenerate branch explicitly, `first by rewrite /= eqxx`.
+
+### 282. `rewrite (eq_bigr F2)` is always wrong: the first explicit argument is the PROOF
+
+`eq_bigr : (forall i, P i -> F1 i = F2 i) -> \big F1 = \big F2` takes the
+pointwise proof, not the new body, so `rewrite (eq_bigr (fun v => …))` type-checks
+the *function* as a proof and reports the baffling
+
+```
+Error: The RHS of __top_assumption_ v does not match any subterm of the goal
+```
+
+Never rewrite with `eq_bigr`.  Use
+`transitivity (\sum_(i <- …) F2 i). by apply: eq_bigr => i _; …` — one extra line
+that also documents the intermediate shape.  (`under eq_bigr do …` works too but
+is harder to read in long chains.)
+
+### 283. `About` before you pass positional arguments, twice over
+
+Two traps met in one file:
+
+* `count_uniq_mem` is `[T] [s] x : uniq s -> count_mem x s = (x \in s)`: the SEQ is
+  implicit and the element explicit, so `count_uniq_mem (map f r) v uh` fails with
+  *the term `v` … is expected to have type `is_true (uniq ?s)`*.  Write
+  `count_uniq_mem v uh`.
+* after `rewrite (bigD1 a aS) eqxx zero` the `+` of the big operator prints as
+  `ssrnat_addn__canonical__SemiGroup_ComLaw true 0`, so `addn0` does **not** match;
+  the goal is nevertheless closed by `by []`.  Never chain `addn0`/`add0n` onto a
+  `bigD1` without looking at the goal first.
+
+A lemma whose parameter occurs only in the CONCLUSION is explicit even under
+`Set Implicit Arguments` + `Unset Strict Implicit` (implicitness is inferred from
+later argument *types* only): `pr_eqE (r0 v w : G) : … -> (pr r0 w == v) = (w == v)`
+must be applied as `pr_eqE _ hr0 hv`.
+
+### 284. Convertible-but-not-syntactic `{set …}` shapes: `exact:` works where `rewrite` fails, and `congr` may close the goal
+
+`ends_at H b v`, `[set e in H | Q e]` and `H :&: A` are all convertible in
+mathcomp (`setI A B` *is* `[set x in A | x \in B]`), which cuts both ways:
+
+* `Proof. rewrite -card_setIsum; congr #|pred_of_set _|. apply/setP => e; rewrite !inE.`
+  fails with **`Error: No such goal`** — `congr` had already closed everything by
+  conversion.  Use `Proof. exact: (card_setIsum C (fun e => e \in A)). Qed.`
+* conversely `rewrite ue` with `ue : uniq (redges r)` fails on a goal spelling
+  `uniq (map (fun a => a.1) r)`: `redges` is a plain `Definition`, so the terms are
+  convertible but not syntactically equal.  Finish such goals with
+  `apply/andP; split; [exact: … | exact: …]`, never with `rewrite`.
+
+### 285. `rewrite !inE` peels set-builders NESTED inside the membership
+
+On `e \in cut (mcomp x) = (e \in set0)`, `rewrite !inE` unfolded not only `cut S`
+but also the `source e \in mcomp x` it exposes (`mcomp x := [set y | connect …]`),
+so a subsequent `case E1: (source e \in mcomp x)` had nothing to case on and the
+`by` after it reported *No applicable tactic*.  Peel exactly one layer:
+`rewrite in_set0 /cut in_set`.
+
+### 286. The route (oriented-walk) toolkit, and how to find a circuit with it
+
+`GTBase.base.uwalk` does not record the direction of each traversal, which makes
+degree computations along a walk impossible.  `Cycle.foundations.cycle_space` adds
+a thin oriented layer — a step is `(e, b) : edge G * bool`, traversed from
+`rtl (e,b) = endpoint b e` to `rhd (e,b) = endpoint (~~ b) e` — with
+`rwalk x r`, `rlast x r`, `redges r`, `eset r`, `rrev r` and the lemmas
+`rwalk_cat`, `rwalk_rcons`, `rlast_cat`, `rlast_rcons`, `rwalk_uwalk`
+(route ⟹ `uwalk`), `rwalk_rrev` and `rwalk_tails`
+(`map rtl r ++ [:: rlast x r] = x :: map rhd r`, the identity behind every parity
+argument).  The payoff is
+
+```coq
+Lemma subdeg_eset r v : uniq (redges r) ->
+  subdeg (eset r) v = count (fun a => rtl a == v) r + count (fun a => rhd a == v) r.
+```
+
+from which: a CLOSED route with `uniq (redges r)` and `uniq (map rhd r)` has a
+2-regular connected edge set (`closed_route_circuit`), and a maximal SIMPLE route
+in an edge set `C` with no vertex of `C`-degree 1 must close up
+(`spath_step`, `has_circuit`).  Do not introduce a bespoke `Fixpoint` for cycles:
+this route layer is what lets `even_circuit_decomposition` (F14, every even
+subgraph splits into circuits) be a 30-line induction on `#|C|`.
+
+### 287. Collapsing components: an ad-hoc `mgraph` on a SUBTYPE carrier keeps the EDGE TYPE
+
+To reduce a statement about CONNECTED bridgeless multigraphs to all bridgeless
+ones, do not add edges (the new edges pollute every degree and every cover).
+Collapse instead: pick `mroot v` in each component (`odflt v [pick y | y \in mcomp v]`
+is constant on components), and take
+
+```coq
+Definition Vsub (G : mgraph) (r0 : G) : finType := {v : G | (mroot v != v) || (v == r0)}.
+Definition Hc (G : mgraph) (r0 : G) : mgraph :=
+  @Graph unit unit (Vsub r0) (edge G) (fun b e => prj r0 (endpoint b e)) vfun vfun.
+```
+
+`edge (Hc r0)` is *definitionally* `edge G`, so `{set edge (Hc r0)}` and a whole
+`seq {set edge G}` cover transfer with `exists L` and no bookkeeping at all.
+`Sub`/`val`/`SubK`/`val_inj`/`val_eqE` on `{v : G | p v}` work exactly as in
+`grounding_U10`'s `petersenV`.  Degrees: at a NON-representative `v` the two
+subgraph-degrees are literally equal (`(prj r0 w == Sub v h) = (w == v)`), and at a
+representative the `G`-degree is even because the degree sum over its whole
+component is even — no `G`-edge crosses a component (`cut (mcomp x) = set0`) — while
+every other summand is.
+
+### 288. Bridgelessness transports only CONTRAPOSITIVELY
+
+`bridgeless G` is `forall e, ~ is_bridge e`, and `~ is_bridge e` is a NEGATED
+universal: it yields no detour witness constructively.  So never try to "get the
+detour from `G` and map it to `H`".  Prove instead
+`is_bridge (Hc r0) e -> is_bridge e` (every `G`-walk maps to an `H`-walk, so an
+`H`-bridge is a `G`-bridge) and conclude `bridgeless G -> bridgeless (Hc r0)` by
+`move=> e hbr; apply: (Hbl e)`.  The same asymmetry decides the direction of every
+collapse/contraction argument in this area.
+
+### 289. `coloring` / `stable` on `line_graph G`: give the sgraph explicitly, and avoid `forall_inP`
+
+`{set {set edge G}}` does NOT unify with `{set {set line_graph G}}`: the finType
+coercion paths differ (`…__canonical__fintype_Finite (edge G)` versus
+`rel_car (digraph_of ?G)`), and Coq reports *The term `P` has type … while it is
+expected to have type …* with an unresolved `?G` that it tries to solve as an
+mgraph whose VERTEX type is `edge G`.  Two fixes, both needed:
+
+```coq
+have [P hcol hPk] : exists2 P : {set {set edge G}},
+    @coloring (line_graph G) P [set: edge G] & #|P| = k.
+  move: hci; rewrite /chromatic_index; case: chiP => P hcol hmin hPk. by exists P.
+have hstab' : forall M : {set edge G}, M \in P -> @stable (line_graph G) M.
+  move=> M hM; move: (forallP hstab M); rewrite hM /=. by [].
+```
+
+i.e. write `@coloring (line_graph G) …` / `@stable (line_graph G) …`, and get the
+per-class stability through `forallP` + `rewrite hM /=` rather than `forall_inP`
+(whose `{in A, …}` shape re-triggers the same unification).  `case: chiP` needs the
+goal to MENTION `χ(A)`, so push the hypothesis into the goal (`move: hci`) before
+unfolding `chromatic_index`.
+
+### 290. A `foundations` file that `Require Export`s `GTBase.base` must be imported BEFORE `all_algebra`
+
+Playbook 174 again, from a new direction: adding
+`From Cycle.foundations Require Import matchings_cuts.` *after*
+`From mathcomp Require Import all_algebra` in `implications_D1.v` re-imported
+base's notations on top of the algebra ones and broke an unrelated `1` inside an
+existing `Definition` (`The term "1" has type "BaseUMagma.sort ?s0"`).  Put every
+`Cycle.foundations` import above the `all_algebra` line.
+
+### 291. `index_enum T` is definitionally `Finite.enum T` — the cheap enum identities
+
+`\sum_(x : T) F x` iterates over `index_enum T`, and
+
+```coq
+Lemma card_count_enum (T : finType) (P : pred T) : #|P| = count P (index_enum T).
+Proof. by rewrite cardE /enum_mem size_filter. Qed.
+Lemma size_index_enum_ord n : size (index_enum 'I_n) = n.
+Proof. by rewrite -count_predT -card_count_enum card_ord. Qed.
+```
+
+Both are one-liners, whereas the same statements with `enum T` are not
+(`enumT`/`enum_mem` leave a `filter (mem T)` behind).  This is what turns an
+`'I_5`-indexed family with `#|[set i | e \in C i]| = 2` into a 5-element LIST with
+`count … = 2`: `map C (index_enum 'I_5)`, `size_map`, `count_map`, then
+`-card_count_enum -cardsE`.
+
+### 292. Quantify an `external_*_statement` as tightly as the cited theorem: `forall k` can make it REFUTABLE
+
+`external_modular_orientation_to_flow_statement` was
+
+```coq
+forall (k : nat) (G : mgraph),
+  (exists o, forall v, exists q, imbalance o v = ((2 * k + 1)%N)%:R * q) ->
+  has_nz_kflow G (2 * k + 1).
+```
+
+At `k = 0` the hypothesis is VACUOUS (every integer is a multiple of 1) while the
+conclusion `has_nz_kflow G 1` demands `1 <= |phi e| <= 0`, so the Prop is
+axiom-free refutable on any multigraph with an edge — and the "conditional" edge
+built on it was vacuous, not conditional.  The fix is a `(0 < k)%N ->` guard (the
+edge only ever uses `k = 1`).  Check every external at the boundary of its
+numeric quantifiers — `k = 0`, `t = 0`, the empty graph, the edgeless graph —
+before accepting it; `meta/vacuity_probe.py` does not catch this, because the
+probe looks for a PROOF of the statement, not for a refutation.
+
+## Wave E7b (minor-theory: even holes inside theta / prism / C_4 / K_{s,s}, 2026-09-24)
+
+### 305. `#|T|` needs `{: T}` when `T` is a bare `Type` alias
+
+`Definition dense_dg n : Type := 'I_n.+1` plus an `HB.instance … HasArc.Build` gives a
+digraph, but `#|dense_dg n|` fails with
+
+```
+The term "dense_dg n" has type "Type" while it is expected to have type "pred_sort ?pT".
+```
+
+Write `#|{: dense_dg n}|`.  `#|D|` parses only when `D`'s type is a STRUCTURE
+(`D : diGraphType`, `D : finType`), because then the coercion to `predType` fires.
+Both spellings are convertible, so a guard `(0 < #|D|)%N` stated on `D : diGraphType`
+is discharged by `rewrite card_dense` on the `{: _}` form without extra glue.
+
+### 306. Same carrier, different eqType: ascribe every `==` / `!=` / `#|_|`
+
+`chi_bounded.underlying F : sgraph` has the SAME carrier as `F : orientedDigraph`, so
+`(v : chi_bounded.underlying F)` inserts no coercion function — the term stays `v`, and
+`rewrite (e : v = y)` works across the two views.  But `v != r` does not: `==` picks the
+eqType INSTANCE, and
+
+```
+The term "hvu" has type "is_true (negb (@eq_op (oriented_Oriented__to__eqtype_Equality F) v r))"
+while it is expected to have type "is_true (negb (@eq_op (fintype_Finite__to__eqtype_Equality (rel_car (digraph_of ?G))) ?v ?r))"
+```
+
+is what an `apply:` reports.  Two remedies, both needed in practice: state every boolean
+(in)equality with the sgraph ascription, `have h : (v : chi_bounded.underlying F) != r`,
+and prove the two bridges once, by conversion:
+
+```coq
+Lemma eqUG (F : orientedDigraph) (u v : F) :
+  ((u : chi_bounded.underlying F) == (v : chi_bounded.underlying F)) = (u == v).
+Proof. by []. Qed.
+Lemma cardUG (F : orientedDigraph) : #|chi_bounded.underlying F| = #|F|.
+Proof. by []. Qed.
+```
+
+`cardUG` is what turns `cardsC1`'s `#|underlying F|.-1` into the `#|F|.-1` a P9-style
+arc count wants.
+
+### 307. `path (--) v s` does not elaborate from a digraph vertex
+
+`(--)` is the `edge_rel` of a `relType`; with `v : F` a digraph vertex Rocq cannot guess
+the sgraph and reports `expected to have type "Finite.sort (rel_car ?r)"`.  Ascribe the
+ENDPOINT (the seq usually comes from a lemma and already carries the right type):
+`path (--) (v : chi_bounded.underlying F) (y :: p)`, and likewise
+`uniq ((v : chi_bounded.underlying F) :: y :: p)`.  To reach `x -- y` from a digraph arc,
+`rewrite /edge_rel/= /chi_bounded.urel` first (entry 172's idiom), then supply the
+distinctness conjunct.
+
+### 308. Section variables get implicit arguments, `move=>`-introduced hypotheses do not
+
+`Hypothesis hor : chi_bounded.oriented_dg F` inside a section is applied as `hor h`
+(`u v` are implicit, being inferable from `h : u --> v`), but the SAME statement
+introduced by `move=> hor` in a lemma whose conclusion quantifies it is applied as
+`hor _ _ h`.  Mixing them up gives
+
+```
+The expression "hor ?i" of type "is_true (~~ ?v --> ?u)" cannot be applied to the term "?y"
+```
+
+or, in the other direction, `The term "h" has type "is_true (u --> u)" while it is
+expected to have type "DiGraph.sort T"`.  See also entry 320 for which section variables
+become implicit at `End`.
+
+### 309. `rewrite -{2}(cat_take_drop i s)` counts occurrences you did not mean
+
+In a goal about `drop (index u s).+1 s` the term `s` occurs inside `index u s` as well,
+so positional occurrence selectors silently pick the wrong one:
+
+```
+The LHS of last_cat (last _ (_ ++ _)) does not match any subterm of the goal
+```
+
+Use the contextual pattern instead of a number:
+`rewrite -[X in last w X](cat_take_drop (index u s).+1 s) last_cat`.
+
+### 310. `nth_take` takes `x0` explicitly and `n0`/`i` implicitly
+
+`nth_take : forall (n0 : nat) (T : Type) (x0 : T) (i : nat), i < n0 -> forall s, nth x0 (take n0 s) i = nth x0 s i`
+has `n0` and `i` IMPLICIT after `Set Implicit Arguments`, so `rewrite (nth_take (ltnSn i))`
+passes the proof as `x0` and reports `LHS … (nth (ltnSn (index u s)) (take _ _) _)`.
+The working call names the default first: `rewrite (nth_take w (ltnSn (index u s)))`.
+Symptom to recognise: the printed LHS has a PROOF where an element should be.
+
+### 311. Fixing both endpoints of a `Path`: `Build_Path (pathpI …)`, not `Path_of_path`
+
+`forestT_unique Gf : forall x y, unique (fun p : Path x y => irred p)` needs two paths of
+the SAME type `Path x y`.  `Path_of_path pth : Path x (last x s)` therefore does not
+apply to two seq paths that are only KNOWN to share an endpoint (`last x s = y` and
+`last x t = y`): the indices differ syntactically and transporting them is a dependent
+rewrite.  Build the packaged path with the endpoint you want instead:
+
+```coq
+Lemma pathpI (x y : G) (s : seq G) : path (--) x s -> last x s = y -> pathp x y s.
+Proof. by move=> ps ls; rewrite /pathp ps ls eqxx. Qed.
+
+Lemma forest_upath_eq (Gf : is_forest [set: G]) (x y : G) (s t : seq G) :
+  path (--) x s -> uniq (x :: s) -> last x s = y ->
+  path (--) x t -> uniq (x :: t) -> last x t = y -> s = t.
+Proof.
+move=> ps us ls pt ut lt.
+have i1 : irred (Build_Path (pathpI ps ls)) by rewrite irredE nodesE.
+have i2 : irred (Build_Path (pathpI pt lt)) by rewrite irredE nodesE.
+by move: (forestT_unique Gf i1 i2) => /(f_equal val).
+Qed.
+```
+
+`irred` of a `Build_Path` unfolds to `uniq (x :: s)` by `rewrite irredE nodesE`, and
+`f_equal val` drops the packaging.  This one lemma replaces all further `Path` reasoning
+in a forest: uniqueness of tree paths at the seq level.
+
+### 312. GraphTheory's `preliminaries` names are NOT re-exported, and carry positional side conditions
+
+`restrict`, `disjointP` and `connect_restrictP` are only reachable qualified:
+`preliminaries.restrict (~: [set u]) (--)`, `apply/preliminaries.disjointP => z hz1 hz2`
+(its statement is `forall x, x \in A -> x \in B -> False`, so BOTH memberships are
+introduced), and
+
+```coq
+move/(@preliminaries.connect_restrictP _ _ _ _ _ hvr): hc => [p [hp hl hup hsub]].
+```
+
+— the `x != y` premise of `connect_restrictP` must be passed positionally after five
+underscores; writing `(preliminaries.connect_restrictP hvr)` makes ssreflect treat `hvr`
+as the boolean subject (`expected to have type is_true (connect …)`).  Note
+`connect (restrict A e) x y` with `y \notin A` and `x != y` is FALSE, which is how
+`fsep r r v` (the root separates everything) is proved: the extracted path's subset
+condition contains its own endpoint.
+
+### 313. `case/shortenP` only works when the goal mentions `last x p`
+
+`shortenP` is indexed by `last x p'`, so `case`-ing on it rewrites `last x p` in the GOAL.
+With `connectP` giving `eu : u = last v p` and a goal of `False`, the information is
+lost and the shortened path has an unusable endpoint.  Put the hypothesis that mentions
+it into the goal first:
+
+```coq
+move=> huv; apply/negP => /connectP [p pth eu].
+move: huv; rewrite eu.                      (* goal: last v p --> v -> False *)
+by case/shortenP: pth => s pth' uq _; apply/negP; exact: no_arc_back_uniq.
+```
+
+For the plain existence of a duplicate-free path, the same trick reads
+`rewrite lastp; case/shortenP: pth => s pth' uq _; by exists s`.
+
+### 314. "there is a LEAST m such that P m" is not provable for a Prop-valued `P`: `ex_minn` is for `pred nat`
+
+`ex_minn` needs `P : pred nat` (BOOLEAN).  A conjecture body of the shape
+`exists m, P m /\ forall c, P c -> m <= c` where `P c` quantifies over all digraphs
+(`mader_delta_zero_bound (TT k) c`) is therefore not reachable from `exists m, P m`, and
+the gap is not a missing lemma but excluded middle: for `P n := (1 <= n) \/ A` the
+predicate is upward closed and nonempty, and a least element DECIDES `A` (a least `m`
+must be `0` or `1`; `m = 0` gives `A`, `m = 1` gives `~A` since `P 0` would force
+`1 <= 0`).  So a `least_…` clause makes an edge unprovable in a package that forbids
+`boolp`; record the edge as `candidate` with that reason (as
+`implications_X2.v`/e173 and `implications_X27.v`/e053 do) and prove the
+"some bound exists" half as a separate Qed lemma.
+
+### 315. `rewrite !r1 !r2` does ONE pass each: an alternating `cons`/`cat` membership stays half-expanded
+
+`z \in B w0 :: P w0 w1 ++ B w1 :: P w1 w2 ++ …` needs `in_cons` and `mem_cat`
+ALTERNATELY, and `rewrite !in_cons !mem_cat` stops after the first `mem_cat`
+because `!in_cons` is not retried once `mem_cat` has exposed a new `_ :: _`:
+
+```coq
+(* leaves  [|| z == B w0, z \in P w0 w1 | z \in B w1 :: P w1 w2 ++ …] *)
+rewrite /fch_cycle !in_cons !mem_cat.
+(* full expansion: *)
+rewrite /fch_cycle; do 4!(rewrite ?in_cons ?mem_cat).
+```
+
+Same for `size_cat` on a four-block concatenation (`do 4!(rewrite ?size_cat /=)`).
+`?` inside the loop keeps each iteration from failing when one of the two rules has
+nothing left to do.  Also: `-!orbA` FAILS (`!` needs one success) on a term that
+`in_cons` already built right-associated — use `-?orbA` or drop it.
+
+### 316. `by t1; t2` swallows the `;` inside `try` / `first [ … ]` chains
+
+`try by rewrite eqxx in nxy; try by rewrite xy in nac; …` silently becomes ONE
+tactic (`by` takes the whole `;`-sequence), so only the first alternative is ever
+attempted and 15 of 16 goals survive with no error message.  Write
+
+```coq
+case/or4P => /eqP->; case/or4P => /eqP-> uv hc;
+  first [ by rewrite hc ?orTb ?orbT
+        | by rewrite (flip _ _ e01 hc) ?orTb ?orbT
+        | by move: uv; rewrite sg_irrefl
+        | by rewrite uv in m02 ].
+```
+
+with every alternative `;`-free (parenthesise if one really needs a `;`).  While
+debugging a 16-case split, replace the `first [ … ]` by the same alternatives as
+separate `try by (…)` lines WITH parentheses and end with `Show.` to see which
+goals are left; `first`'s only diagnostic is `No applicable tactic`.
+
+### 317. A `rewrite` that needs iota-reduction to match DESTROYS the goal: use an abstract helper lemma
+
+`rewrite blocksE !cat_uniq !has_cat !negb_or` on
+`uniq ((B w0 :: P w0 w1) ++ (B w1 :: P w1 w2) ++ …)` unfolds `has` and `mem` into
+raw `fix` terms, because `has (mem C0) (B w1 :: P w1 w2)` iota-reduces when the
+second argument is a `cons`, and every later `rewrite` then fails with
+"does not match any subterm".  Do the `cat_uniq` step inside a lemma whose
+sequences are VARIABLES, so no reduction is possible:
+
+```coq
+Lemma uniq_cat2 (T : eqType) (s t : seq T) :
+  uniq s -> uniq t -> (forall z : T, z \in t -> z \notin s) -> uniq (s ++ t).
+Proof. move=> us ut h; rewrite cat_uniq us ut /= andbT; apply/hasPn => z hz; exact: h. Qed.
+```
+
+and then `apply: uniq_cat2` three times.  Note the last step: `apply/hasPn => z hz`
+leaves `~~ mem s z`, NOT `z \notin s`, so a fully applied `exact: (h z hz)` is
+refused — `exact: h` (letting `apply:` unify and `done` find `hz`) works.
+
+### 318. `/eqP->` rewrites the GOAL only; generalise the hypotheses first, and `move: a b` puts `a` OUTERMOST
+
+In a 16-case analysis over `x, y \in [:: a; b; c; d]` the contradictions live in the
+hypotheses `xy : x -- y` and `nxy : x != y`, which `case/or4P => /eqP->` leaves
+untouched (all 16 goals then look unprovable).  Push them into the goal BEFORE the
+split and re-introduce them after:
+
+```coq
+move: hx hy xy nxy; rewrite !inE -!orbA.
+case/or4P => /eqP->; case/or4P => /eqP-> xy nxy; …
+```
+
+`move: hx hy xy nxy` produces `hx -> hy -> xy -> nxy -> goal` (leftmost argument =
+outermost premise), so the two `case/or4P`s consume `hx` and `hy` in that order.
+
+### 319. Section hypotheses cannot be rewritten in: copy them with `have`
+
+`rewrite uv in n02` where `n02 : ~~ (w0 -- w2)` is a `Hypothesis` of the open
+section fails with `Can't clear section hypothesis n02`.  Open the proof with
+`have m02 : ~~ (w0 -- w2) := n02.` and rewrite in `m02`.  For the reversed
+orientation, `have m20 : ~~ (w2 -- w0) by rewrite sg_sym.` (`sgP` is the PAIR
+`(sg_sym, sg_irrefl)`, so `rewrite sgP` may pick either rule; name the one meant).
+
+### 320. Which section variables become implicit after `End`: check with `About`, never `Check`
+
+With `Set Implicit Arguments`, closing a section makes a `Variable` implicit exactly
+when it occurs in the type of a LATER argument.  For
+
+```coq
+Section FourCycleModel.
+Variables (K G : sgraph) (m : subdiv_model K G).
+Hypothesis rep : subdiv_rep m.
+Variables w0 w1 w2 w3 : K.
+Hypothesis e01 : w0 -- w1.  (* … *)
+```
+
+`K G m w0 w1 w2 w3` all end up IMPLICIT (each occurs in a later hypothesis) while
+`rep` and the edge hypotheses are explicit: the call is
+`fch_hole rep e01 e12 e23 e30 n02 n13 d02 d13`.  `Check fch_hole` prints
+`forall (K G : sgraph) …` exactly as if they were explicit, so `fch_hole _ _ m rep …`
+looks right and fails with the unhelpful `Cannot apply lemma`.  `About fch_hole`
+prints the real `Arguments fch_hole [K G] [m] rep [w0 w1 w2 w3] e01 …` line.
+Same trap for a hypothesis whose conclusion binds `forall z`, `z` occurring in the
+next premise: `fch_blocks_disj uv u'v' uu' su hz`, with `z` implicit.
+
+### 321. `rewrite h` closes a disjunctive goal only in the FIRST position
+
+Given `h : b2` and goal `[|| b1, b2, b3 | b4]`, `by rewrite h` FAILS: the result
+`b1 || (true || …)` reduces to `b1 || true`, which is not `true` by conversion.
+Append the normalisation: `by rewrite h ?orTb ?orbT` (first collapse `true || _`,
+then `_ || true`, repeatedly).  Only `h : b1` works bare.  The same asymmetry makes
+`[&& …]` goals need `?andbT ?andTb`.
+
+### 322. Concrete finite graphs decide their own adjacency: `@Ordinal n k isT` plus `done`
+
+`KB n m` (`kb_rel x y = is_inl x (+) is_inl y`), `el_graph n es`
+(`(i != j) && ((val i, val j) \in es || …)`) and `cycle_graph n`
+(`(i != j) && ((i.+1 %% n == j) || …)`) all COMPUTE on closed vertices, so
+
+```coq
+have e2 : (@Ordinal 6 3 isT : x220_prism3) -- @Ordinal 6 4 isT by [].
+have na : ~~ ((inl (@Ordinal 2 0 isT) : KB 2 3) -- inl (@Ordinal 2 1 isT)) by [].
+apply: four_cycle_hole; rewrite ?E ?D.   (* E/D = isubgraph_mono / inj_eq, then `done` *)
+```
+
+discharges the eight edge/non-edge/distinctness premises of an induced 4-cycle in
+one line (`isT : true` typechecks as `is_true (k < n)` because the guard reduces).
+With a VARIABLE ordinal the sum eqType still reduces one step: `inr j != inr k`
+becomes `j != k` by `rewrite /=`.  For the diagonal case of a 16-way split prefer
+`move: uv; rewrite sg_irrefl` over `move: (sg_edgeNeq uv); rewrite eqxx` — the
+latter leaves `true = false` in the goal, which `done` does NOT close (it only
+knows `false = true`).
+
+### 333. `rewrite !leqNgt` (or `!ltnNge`) NEVER terminates — and eats all RAM
+
+`leqNgt : (m <= n) = ~~ (n < m)` and `n < m` IS `n.+1 <= m`, so the `!` iterates
+forever; the compile grew past 3 GB in seconds (E2, `kn_srtC`).  Rewrite ONCE and
+kill the new comparison immediately: `rewrite eqn_leq leqNgt h2 leqNgt h1`.  Grep
+for `!leqNgt` / `!ltnNge` before compiling anything under the memory cap.
+
+### 334. `if @idP (u < v) is ReflectT p then Some (exist _ (u, v) p)` does not typecheck
+
+With the boolean given explicitly the match generalises it and `p : is_true b`
+no longer unifies with the sig predicate `(u, v).1 < (u, v).2`.  Either write
+`if idP is ReflectT p then …` and let the expected type fix the boolean (that is
+how `insub` itself is defined), or, simpler to reason about, build the option with
+`insub (kn_srt u v)` on a sorted representative and destruct it with
+`case: insubP => [e _ ve | nP]` (`ve : val e = …`, usable where `sval e = …` is
+expected by `exact:` — `val` and `sval` are convertible, not syntactically equal).
+
+### 335. `fst` / `snd` are SHADOWED under `From GraphTheory Require Import …`
+
+After importing GraphTheory, `fst` is a path projection (`forall G, pathS G -> G`),
+so `congr1 fst h` fails with a baffling scope error.  Write `Datatypes.fst`.  Also:
+`case: h => q1 q2` on `h : (u, v) = (u, w)` does NOT give two equations (the
+trivial component is dropped); use
+`move: (congr1 Datatypes.fst h) (congr1 Datatypes.snd h) => /= q1 q2`.
+
+### 336. Bounding `#|\bigcup_(v) L v|` by `k * #|G|`: avoid `eq_bigr` on the sum
+
+`apply: leq_trans (card_bigcup_leq_sum …); rewrite (eq_bigr (fun _ => k)) …` sent
+the unifier into a blowup that never finished (>280 s in E1, killed by the cap in
+E2).  Prove the constant form directly by induction over the index sequence,
+`#|\bigcup_(i <- s) F i| <= k * size s` (`big_cons`, `cardsUI`, `mulnS`, `leq_add`),
+and convert with `size (index_enum T) = #|T|`:
+`by rewrite [index_enum T]unlock -enumT -cardT`.  Whole palette-canonicalisation
+file (choice number existence) then compiles in 5 s.
+
+### 337. `case: (eqVneq b N) => [bE|bne]` has ALREADY rewritten `b == N` in the goal
+
+Follow-ups like `rewrite bE eqxx` or `rewrite (negbTE bne)` fail with "LHS does
+not match".  Make them optional and reduce: `rewrite ?bE ?eqxx ?(negbTE bne) /=`.
+
+### 338. `ex_minnP` is a spec: `case: (ex_minnP ex) => m Pm Pmin`
+
+`have [Pm Pmin] := ex_minnP ex` fails (it is an indexed `Variant` in `Type`).
+Destruct it with `case:`; the goal need not mention `ex_minn`.  Same pattern for
+`arg_maxnP` inside a proof: `case: arg_maxnP` after unfolding the `arg max`, with
+the `P i0` side goal closed by `//` from a hypothesis.
+
+### 339. Choosability as a boolean (template for "least k with a Prop over all palettes")
+
+`choosable G k` quantifies over every `finType`, so no `ex_minn`.  Canonicalise:
+(1) lists of size exactly k suffice (`subset_of_cardW` + `xchoose`); (2) the union
+of the lists has `<= k * #|G|` colours (entry 336), inject it into
+`'I_(k * #|G|)` by `widen_ord Ule (enum_rank_in c0U c)`; (3) transport colourings
+back along the injection; (4) state the canonical instance with
+`[forall L : {ffun G -> {set 'I_n}}, … ==> [exists f : {ffun G -> 'I_n}, …]]`.
+Nonemptiness: `choosable G #|G|` by a greedy SDR along `enum [set: G]`.  Same
+recipe for partial colourings (`{ffun G -> option C}`, preimages by `[pick c in
+L v | iota c == d]`, no choice needed) and for `\max`-defined counts
+(`\max_(W | lcob L W) #|W|`, attained via `bigmax_eq_arg`).
+
+### 340. `leq_bigmax` / `leq_bigmax_cond` against a DEFINED max: unfold, then give `@`
+
+Goal `#|edges_at x| <= mDelta G` is not matched by `leq_bigmax` until
+`rewrite /mDelta`; for a filtered max give the predicate literally:
+`exact: (@leq_bigmax_cond _ (fun W => lcob L W) (fun W => #|W|) W hW)`.
+
+### 341. `sedge (usimple G) x y` does not `/=`-reduce to `madj x y`
+
+Use `change (madj x y); rewrite /madj` before rewriting with `lo e : source e !=
+target e`.  (Base's `line_graph` does reduce: `rewrite /= /line_rel /share_endpoint`.)
+
+### 342. An `sgraph` statement over the EMPTY carrier: check the corner before proving an edge
+
+`behzads_statement` (U5) has no `0 < #|G|` guard; the empty multigraph is simple
+and has total chromatic number 0, so `(mDelta G).+1 <= …` fails.  Refutation in
+three lines: `pose G : mgraph := @void_graph unit unit`, a colouring into `'I_0`
+by `case=> -[]`, then `chi_le_palette` and `card_ord`.  Any edge INTO such a row is
+unprovable (unless the source is refuted) — prove the guarded version and flag the
+statement.
+
+### 343. Guard repair for an empty-carrier refutation: keep teeth + non-vacuity in grounding
+
+Fix of 342 (wave E2b): add `(0 < #|G|)%N ->` right after the carrier guard
+(`msimple G ->`), then in `grounding_<M>.v` prove `~ (<OLD body inline>)` (never
+name the row, so the milestone faithfulness probe does not see a refutation of a
+committed statement) plus `exists G, msimple G /\ (0 < #|G|)%N` (`unit_graph tt`,
+`apply/card_gt0P; exists tt`).  The guarded edge is then the old `_nonempty`
+theorem with its conclusion folded: `move=> X G sG gpos` intros through the
+`Definition` without unfolding.  Note: `meta/vacuity_probe.py` on multigraph
+total-colouring rows blows past 2.5 GB in the `now firstorder` branch (old and new
+body alike) — under a 3 GB memcap probe the other ladder branches one by one.
+
+### 345. `(1 : int)` fails with "has type BaseUMagma.sort ?s": import order
+
+Importing a Cycle file that does NOT load the algebra library (`comp_reduce`,
+`X212`, any foundations file re-exporting `GTBase.base`) AFTER
+`all_algebra` hides the ring structure of `int`.  Put every such import
+BEFORE `From mathcomp Require Import all_algebra`, and the algebra-loading
+conjecture files (`D1`) after it (wave E6, implications_D1.v).
+
+### 346. `rewrite !exchange_big` loops forever
+
+`exchange_big` is its own inverse, so the `!` multiplier never stops (coqc just
+hangs).  Rewrite each side once: `rewrite exchange_big [RHS]exchange_big`.
+
+### 347. Kirchhoff from a balanced orientation (`x212_balanced`) — no cardinality algebra
+
+Split every sum by the orientation with `(bigID d)`; on `P e && d e` the tail is
+the source, on `P e && ~~ d e` the target (`eq_bigl`, `case: (d e)`), and
+`\sum_(e | P e) (if e \in C then 1 else 0 : int) = #|[set e in C | P e]|%:R`
+(`card_setIsum`, `natr_sum`, `[RHS]big_mkcond`) turns the balance hypothesis
+into `A + B' = A' + B`; close `A - B = A' - B'` by `apply/eqP; rewrite subr_eq`
+and `addrAC subrK addrK`.
+
+### 348. A flow on a quotient graph with the SAME edge type transfers back
+
+For `comp_reduce.Hc r0`, Kirchhoff at a non-representative is `eq_bigl` +
+`Hc_ep -val_eqE val_prj SubK pr_eqE`; at a representative sum over its
+component: `\sum_(v in S) \sum_(e | endpoint b e == v) phi e =
+\sum_(e | endpoint b e \in S) phi e` by `exchange_big_dep` + `big_pred1`, the two
+sides agree since `cut_mcomp`, then `bigD1` and `/addIr`.
+
+### 349. `bigID` over the full index: the second summand's predicate is already simplified
+
+After `rewrite (bigID Q) /=` on `\sum_(i : T) F i` the conditions are `Q i` and
+`~~ Q i` (the `true &&` is gone), so `move=> k /andP[_ h]` fails with
+"Illegal application (Non-functional construction)"; use `move=> k /h ->`.
+
+### 350. Finite Petersen / small-set facts: reflect to 5-bit CODES, check with `compute`
+
+Never compute on `{set 'I_5}`, sigma types or `Pedge`.  Code a subset as
+`\sum_(i < 5) (i \in X) * 2 ^ i` (`sum5` via `big_ord_recl` + `inordK`),
+prove once `pbit i (pcode X) = (i \in X)` by `case` on the five booleans
+(32 cases), then state the finite fact as a closed `all ... (seq nat)` boolean
+and prove it `by compute` (ten 2-sets, 270 claw triples: 11 s, 750 MB).
+
+### 351. `move/allP: h => /(_ _ hx) /= /allP` : `/=` also unrolls `all` over a literal list
+
+After instantiating nested `all` checks, a `/=` turns the innermost
+`all f (iota 0 5)` into a `[&& f 0, … & true]` chain (note the trailing
+`true`), so a following `/allP` fails.  Either stop before `/=`, or destruct the
+chain: `case: k => [|[|[|[|[|k]]]]] hk // /and5P[h0 h1 h2 h3 /andP[h4 _]]`.
+
+### 352. `[set a; b; c]` is LEFT-nested
+
+`[set a; b; c] = [set a; b] :|: [set c]`, not `a |: [set b; c]`: state
+three-element sets you will peel with `big_setU1` explicitly as
+`a |: [set b; c]`, and build them with `rewrite -h setD1K` from
+`h : A :\ a = [set b; c]`.
+
+### 353. A 2-regular-subgraph hypothesis can often be discharged by `S = set0`
+
+`subgraph_kregular set0 2` holds (degree 0, `subdeg0`), `connected_del_edges set0`
+is plain connectivity, and `cycle_decomposition_of set0 [::]` is trivial:
+rows "CDC containing a prescribed 2-regular S" imply the plain CDC on their
+carrier class without Tutte's non-separating-circuit theorem (gc:e098).
+
+### 357. `Order.*` qualified names fail in files importing coq-graph-theory: use full paths
+
+`Order.le_lt_trans`, `Order.POrderTheory.le_trans` and even
+`Order.PreorderTheory.le_lt_trans` are "not found" once GraphTheory/GTBase is
+imported (a local `Order` shadows mathcomp's module).  `Locate le_lt_trans`
+in a bare `all_algebra` file gives the real path; write
+`mathcomp.order.preorder.Order.PreorderTheory.le_lt_trans` and
+`mathcomp.order.order.Order.TotalTheory.leNgt` (atlas fractional.v).
+
+### 358. Some imported rows leave `ring_scope` open: `(isT : 0 < 3)` fails
+
+After importing many area rows at once (atlas implications_A1.v), `0 < 3`
+parsed in `ring_scope` and `isT` no longer checked.  Put
+`Local Open Scope nat_scope.` after the imports and wrap the one rational
+proof in `Section S. Import GRing.Theory Num.Theory. Local Open Scope
+ring_scope. ... End S.` (both the Import and the scope end with the section).
+
+### 359. `%:Q` on a nat is `(Posz n)%:~R`: compare with `ler_int lez_nat`, sum with `pmulrn`
+
+`n%:Q <= h%:Q` is not `ler_nat` material; `rewrite ler_int lez_nat`.
+`\sum_(i < n) (1 : rat) = n%:Q`: `rewrite sumr_const card_ord pmulrn`.
+`1 *+ k <= 1`: `rewrite -[X in _ <= X](mulr1n 1) ler_pMn2l ?ltr01`.
+
+### 360. `card_le1P` is `{in A, forall x, A =i pred1 x}` in MathComp 2.5: use `card_le1_eqP`
+
+For "at most one element" by pairwise equality use
+`apply/card_le1_eqP => i j hi hj` (goal `i = j`); `move/card_le1_eqP: T1; apply.`
+turns `#|T| <= 1` into `x = y` for vertices of `T`.  Check the goal ORDER
+(`j = i` vs `i = j`) before applying a lemma like `rmap_disjE`.
+
+### 361. Minors from explicit branch sets: go through a "key" map for disjointness
+
+To build `minor_rmap phi` with case-split branch sets (`if i < n then [set a i;
+b i] else ...`), prove disjointness via a function `g : H -> nat` with
+`x \in phi i -> g x = i` (one case analysis), then
+`rewrite -setI_eq0; apply/eqP/setP => x; rewrite in_setI in_set0;
+apply/negbTE/negP => /andP[/gphi xi /gphi xj]`.  Neighbour obligations close by
+`first [ by exists (a i), (b j); rewrite !inE ?eqxx ?orbT | ... ]` over the
+candidate witnesses.  `'K_n` adjacency `i -- j` is `i != j` up to conversion:
+`have {}ij : (i : nat) != j by exact: ij.` (complete_minors.v).
+
+### 362. Least element of a Prop-valued game predicate: prove a horizon bound first
+
+`hg_is_cop_number` (least c with `exists m C, ...`) cannot be obtained by
+`ex_minn` directly (upward-closed Prop least-element = LEM, cf. E4 e173).  For a
+finite game, show the winning-position sets `[set p | capture t p.1 p.2]` are
+monotone, stable once two consecutive agree (`congr (_ || _); apply:
+eq_existsb; ... eq_forallb`), and hence stable by `#|positions|` (if no
+`t : 'I_N.+1` has `W t == W t.+1`, `#|W t| >= t` by `proper_card`); then the
+predicate is the boolean `cops_win_within k N` and `ex_minn` applies
+(atlas cops_bridge.v).
+
+### 363. `sorted_ltn_index` takes the two elements explicitly
+
+`sorted_ltn_index tr ss a b (ma : a \in s) (mb : b \in s) h` (a `{in s &,
+...}` lemma: elements first, memberships after).  Sorting `enum G` by an
+injective key gives `index a s < index b s = key a < key b`
+(queue_layouts.sort_index_lt); equal indices give equal elements by
+`nth_index`.
+
+### 364. `have [x hx] := set0Pn _ S0`: the set is an explicit argument; name the proof
+
+`set0Pn` is `forall A, reflect (exists x, x \in A) (A != set0)`, so
+`set0Pn S0` fails ("S0 has type ... expected {set _}").  Also
+`have [c] := set0Pn _ m` silently DROPS the membership proof: always name it,
+`have [c cm] := set0Pn _ m; move: cm; rewrite !inE`.  `inE` on
+`c \in [set a; b] :&: ~: [set v]` yields `((c == a) || (c == b)) && (c != v)`
+(set part first).
+
+### 365. X47-style "parts sharing an edge are equal" -> exact-count decomposition: `undup`
+
+Lists of parts with "sharing an edge => equal" allow repetitions; the
+exact-count form `count (fun A => e \in A) D = (e \in E(G))` follows for
+`D := undup parts` by
+`rewrite (@eq_in_count _ _ (pred1 F)) ?count_uniq_mem ?undup_uniq ?mem_undup`
+(tree_decompositions.x47_decomposition_x212).  Cut-form edge connectivity from
+deletion form: a walk leaving `S` crosses an undeleted cut edge
+(`connect_crossing`, induction on the `connectP` path).
+
+### 366. `have [|f hf] := IH X` with TWO premises needs `[||f hf]`
+
+`IH : forall S, #|S| <= n -> P S -> exists f, ...` instantiated at `X` leaves
+two side goals; the intro pattern must have two empty branches, else
+"Incorrect number of goals (expected 3 tactics)".
+
+### 367. A row whose LP "maximum" admits an empty feasible part may be VACUOUS
+
+`is_fractional_hadwiger` (D2chr) quantifies over families of branch sets that
+may be empty; one index with the empty set has no adjacency constraint, is
+`connected` (`connected0`) and covers no vertex, so its weight is unbounded and
+the attained maximum never exists (atlas `is_fractional_hadwiger_unsat`).
+Before using an "attained optimum" hypothesis, try to refute its satisfiability
+with a degenerate feasible point.
+
+### 368. Choose the SAME value for both sides of an asymmetric hypothesis to absorb thresholds
+
+X219 (ii) needs `D0 <= DA`, `D0 <= DB`; `x219_max_degree_on A D` is an UPPER
+bound, so apply it with `DA = DB = maxn (Delta G) D0` and absorb the threshold
+in the target's existential constant (`c := C * D0`, case split `leqP D0
+(Delta G)`); `trunc_logP : 1 < p -> 0 < n -> p ^ trunc_log p n <= n`,
+`ltn_expl : 1 < m -> n < m ^ n`.
+
+### 369. Importing a conjecture file that re-exports `base` AFTER `all_algebra` breaks `1 : rat`
+
+With `From mathcomp Require Import all_algebra. From Extremal.conjectures Require
+Import D2chr.` (D2chr does `Require Export base`), `Check (1 : rat)` fails with
+"The term 1 has type BaseUMagma.sort ?s while it is expected to have type rat"
+(`0 : rat` still works).  Fix: re-import `all_algebra` AFTER the conjecture file
+(`From mathcomp Require Import all_algebra.` once more), as grounding_D2chr.v now does.
+
+### 370. `seq.allP` needs an eqType: encode LP constraints as `(seq rat * rat)`
+
+`move=> /allP H` on `all p s` with `s : seq ((nat -> rat) * rat)` fails with the
+opaque "Illegal application (Non-functional construction): allP ?i ?s0 ?i0" —
+function-valued elements are not an `eqType`.  Store coefficients as `seq rat`
+read through `nth 0` (Extremal.foundations.lp_rational: `lhs N a x =
+\sum_(i < N) nth 0 a i * x i`, `mkseq` for combined rows + `nth_mkseq`).
+
+### 371. `{homo ...}` lemmas take the two points BEFORE the hypothesis
+
+`ler_wpM2l : 0 <= z -> {homo *%R z : x y / x <= y}` expands to `forall x y, x <= y
+-> ...`, so `exact: ler_wpM2l nN hp` fails ("Cannot apply lemma"); write
+`ler_wpM2l nN _ _ hp`, or avoid it: `rewrite -subr_ge0 -mulrBr; apply: mulr_ge0`.
+For reordering linear sums without algebra-tactics, isolate the identity and close
+it with `congr (_ - _); congr (_ + _); apply: mulrC` after `mulrBl opprB addrACA -opprD`.
+
+### 372. `%:Q` on a nat is `intmul 1 (Posz n)`: convert with `-pmulrn` before `natr_sum`
+
+`a%:Q` unfolds to `1 *~ Posz a`, so `natr_sum`/`natrM` do not match it;
+`pmulrn : x *+ n = x *~ n`, hence `rewrite -!pmulrn natr_sum` turns
+`(Posz (\sum_i k i))%:~R` into `\sum_i (k i)%:R`.  Also `natr_absz` +
+`ger0_norm`/`normr_denq` + `numqE` clear rational denominators
+(`(`|numq x|%N)%:R * (`|denq x|%N)%:R^-1 = x`-style facts).
+
+### 373. Sums over a sig finType need the binder typed; `#|T|` needs `{: T}`
+
+With `Local Notation bsT Bs := {S : {set G} | S \in Bs}`, `\sum_(S | v \in val S) X S`
+leaves `S : ?t` ("has type Finite.sort ?t while expected ..."); write
+`\sum_(S : bsT Bs | v \in val S)`.  `#|{S : {set G} | S \in Bs}|` is rejected
+("has type Type while expected pred_sort ?pT"): use `#|{: bsT Bs}|`.  When a
+lemma quantifies over a finType, pass the type through unification:
+`@sum_enum_val _ (fun S : bsT Bs => ...) X`.  Build elements with an explicit
+predicate: `exist (fun I : {set G} => stable I) _ (stab c)`.
+
+### 374. "Attained optimum" hypotheses: prove existence by Fourier-Motzkin, not by ex_maxn
+
+A row taking chi_f / had_f as parameters `is_fractional_chromatic G xf`
+(`is_fractional_hadwiger G hf`) cannot be instantiated in an implication proof
+until the optimum is shown to EXIST; the candidate set (all a/b, all weightings)
+is infinite, so `ex_maxn`-style arguments do not apply.  Route used for
+e003/e042 (wave E10): Fourier-Motzkin elimination over `rat`
+(`fm_sound`/`fm_complete`, ~200 lines) gives `lp_max` (a feasible LP bounded above
+attains its max: eliminate every variable but the objective value `t`, whose
+feasible set is `{t | a_j t <= b_j}`); `lp_max_fin` indexes it by finTypes; the
+combinatorial side (pairwise-adjacent branch sets) is handled by an arg-max over
+the finitely many "brambles" (`list_argmax` with a boolean `goodb`), and the
+chi_f LP optimum is turned back into an (a:b)-colouring by clearing
+denominators (palette = `flatten [seq nseq (k I) I | I <- enum stT]`).

@@ -3,11 +3,15 @@
 -arg -w -arg -notation-overridden
 
 theories/foundations/containment.v
+theories/foundations/hole_containments.v
 theories/foundations/width_params.v
+theories/foundations/minor_dec.v
+theories/foundations/ramsey_small.v
 theories/conjectures/U7.v
 theories/conjectures/grounding_U7.v
 theories/conjectures/implications_U7.v
 theories/conjectures/X5.v
+theories/conjectures/implications_X5.v
 theories/conjectures/X8.v
 theories/conjectures/X11.v
 theories/conjectures/X27.v
@@ -34,3 +38,5 @@ theories/conjectures/implications_X220.v
 theories/conjectures/X228.v
 theories/conjectures/grounding_X228.v
 theories/conjectures/implications_X228.v
+theories/conjectures/implications_X42.v
+theories/conjectures/implications_X27.v

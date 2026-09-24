@@ -47,16 +47,21 @@ Open Scope ring_scope.
 (** ================================================================= *)
 (** ** External circular-to-integer flow duality (cited, NOT [Admitted]) *)
 
-(** No corpus row: this is not a conjecture of the corpus but an EXTERNAL, cited
-    classical fact, used as an explicit hypothesis of the scheduled implication
-    edge below so that the edge is proved without any axiom. It states the
-    circular-to-integer step of the flow-number theorem of Goddyn, Tarsi and
-    Zhang (the flow number of a graph is the ceiling of its circular flow
-    number), in the denominator-free form: if a multigraph carries an integer
-    edge weighting that is Kirchhoff-conservative at every vertex and whose
-    absolute value lies between 2 and 8 on every edge — equivalently, half of
-    which is a nowhere-zero circular 5-flow — then it has a nowhere-zero
-    integer 5-flow. *)
+(** External theorem: L. A. Goddyn, M. Tarsi and C.-Q. Zhang, "On (k,d)-colorings
+    and fractional nowhere-zero flows", Journal of Graph Theory 28 (1998)
+    155-161 (the flow number of a graph is the ceiling of its circular flow
+    number).
+    Claim: a graph carrying a circular 5-flow — a real-valued Kirchhoff flow
+    whose value has absolute value in [1,4] on every edge — has a nowhere-zero
+    integer 5-flow. The Prop below states exactly the instance used here, in the
+    denominator-free form obtained by scaling by two: if an integer edge
+    weighting [chi] of a multigraph is Kirchhoff-conservative at every vertex
+    and satisfies [2 <= |chi e| <= 8] on every edge — equivalently, [chi/2] is a
+    nowhere-zero circular 5-flow — then the multigraph has a nowhere-zero
+    integer 5-flow.
+    Not formalized here: it is carried as an explicit hypothesis of the
+    conditional edge below (never an [Axiom], never [Admitted]), which is why
+    that edge is [status=conditional external=...] rather than [verified]. *)
 Definition external_circular_5_flow_statement : Prop :=
   forall (G : mgraph) (chi : edge G -> int),
     iconservative chi ->
@@ -115,7 +120,7 @@ Qed.
 (** ================================================================= *)
 (** ** The scheduled edge *)
 
-(*@EDGE from=half_flow_pair_statement to=five_flow_statement kind=implies status=verified-literature proved=true proof=half_flow_pair_implies_five_flow cite="gc:e174; Workshop on Cycles and Colourings 2025, arXiv:2511.02892 Conjecture 6.1 and its context; Goddyn-Tarsi-Zhang, On (k,d)-colorings and fractional nowhere-zero flows, J. Graph Theory 28 (1998) 155-161 (flow number = ceiling of circular flow number)" note="From a 1/2-flow-pair (phi2,phi4) the integer circulation chi = 5*phi2 + phi4 satisfies 2 <= |chi| <= 8 on every edge, i.e. chi/2 is a nowhere-zero circular 5-flow; the circular-to-integer step is the cited external hypothesis external_circular_5_flow_statement" *)
+(*@EDGE from=half_flow_pair_statement to=five_flow_statement kind=implies status=conditional external="external_circular_5_flow_statement" proof=half_flow_pair_implies_five_flow cite="gc:e174; Workshop on Cycles and Colourings 2025, arXiv:2511.02892 Conjecture 6.1 and its context; Goddyn-Tarsi-Zhang, On (k,d)-colorings and fractional nowhere-zero flows, J. Graph Theory 28 (1998) 155-161 (flow number = ceiling of circular flow number)" note="From a 1/2-flow-pair (phi2,phi4) the integer circulation chi = 5*phi2 + phi4 satisfies 2 <= |chi| <= 8 on every edge, i.e. chi/2 is a nowhere-zero circular 5-flow; the circular-to-integer step is the cited external hypothesis external_circular_5_flow_statement" *)
 Theorem half_flow_pair_implies_five_flow :
   external_circular_5_flow_statement ->
   half_flow_pair_statement -> five_flow_statement.

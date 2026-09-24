@@ -2381,3 +2381,124 @@ chromatic-theory/theories/conjectures/X219.v` → **13 probed · 0 FLAGGED**
 `faithfulness_mutation.py --mutant base_surface_vertices_orbit_count` 1/1
 killed by `[FAIL] package compiles`. Recorded in `tactics-playbook.md`
 (entries 229–232).
+
+## Vocabulary equivalences proved (wave V, 2026-09-24)
+
+Wave V discharges the "duplicated vocabulary" obligations of the eight packages
+`extremal-graph-theory`, `hypergraph-theory`, `reconstruction-theory`,
+`spectral-graph-theory`, `homomorphism-theory`, `packing-theory`,
+`topological-graph-theory`, `graph-theory-misc`: for each group of copies listed
+in the per-package sections above (and in the `x223` / `x215` ledger items of
+`meta/X211-X229_faithfulness_audit.md`), ONE `Qed`-closed lemma now ties the
+local spelling to the canonical notion.  **No statement body was changed**;
+every lemma is `Print Assumptions`-clean ("Closed under the global context"),
+and all eight packages still build (`make <pkg>` exit 0), with
+`check_milestone` ACCEPTED for U3 / U11 / X215 / X223 / D5,
+`check_statement_docs` 0 errors for all eight, and
+`check_edges --assumptions --package extremal-graph-theory` ACCEPTED (3/3).
+
+**Placement convention.**  A lemma mentioning only foundation/library notions
+went to a `theories/foundations/` file; a lemma mentioning a notion of a
+`theories/conjectures/X*.v` file went to the conjectures layer, since a
+foundations file must not import a conjectures file.  Where the phase already
+had an `implications_<phase>.v` file the lemma went there (U3, U11, X215, X223);
+the remaining phases (X5, X6, X14, X15, X18, X20, X25, X26, X37, X38, X47, X72,
+X73, X77, X102, X104, X108, X113, X117, X119, X137, X158, X209, XE1) have no
+`implications_`/`grounding_` file, so the bridges were collected in one new
+`theories/conjectures/vocabulary_<pkg>.v` per package rather than in
+twenty-four new per-phase files.  Three new files were added to
+`theories/foundations/`: `extremal-graph-theory/.../degree_bounds.v`,
+`topological-graph-theory/.../girth.v` (both registered in the package
+`_CoqProject`), plus a new section at the end of
+`spectral-graph-theory/theories/foundations/spectral.v`.
+
+### Lemmas
+
+| lemma | file | statement | retires |
+| --- | --- | --- | --- |
+| `k_uniform_equiv_hg_uniform` | `hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v` | `k_uniform E k <-> hg_uniform E k` | U12's `k_uniform` |
+| `x6_uniform_equiv_hg_uniform` | idem | `x6_uniform E r <-> hg_uniform E r` | X6's `x6_uniform` |
+| `x104_uniform_equiv_hg_uniform` | idem | `x104_uniform E r <-> hg_uniform E r` | X104's copy |
+| `x108_uniform_equiv_hg_uniform` | idem | `x108_uniform E r <-> hg_uniform E r` | X108's copy |
+| `x119_uniform_equiv_hg_uniform` | idem | `x119_uniform E r <-> hg_uniform E r` | X119's copy |
+| `x137_uniform_equiv_hg_uniform` | idem | `x137_uniform F r <-> hg_uniform F r` | X137's copy |
+| `x209_uniform_equiv_hg_uniform` | idem | `x209_uniform E k <-> hg_uniform E k` | X209's copy (all seven "k-uniform" copies now bridged to `foundations/hypergraph.hg_uniform`) |
+| `x72_vertex_cover_equiv_hg_cover` | idem | `x72_vertex_cover E X <-> hg_cover X E` | the `~~ [disjoint X & e]` vs `X :&: e != set0` split |
+| `x72_transversal_number_equiv_is_cover_number` | idem | `x72_transversal_number E tau <-> is_cover_number E tau` | X72's cover-number wrapper |
+| `x6_hg_degreeE`, `x73_hyperdegreeE`, `x73_hyperdegree_equiv_x6_hg_degree` | idem | `x6_hg_degree E v = hg_degree E v`, `x73_hyperdegree E v = hg_degree E v`, and the two local copies agree | the two hyperedge-degree copies |
+| `x119_sqrtE` | idem | `x119_sqrt m = sqrt_ceil m` | X119's verbatim copy of `GTBase.asymptotics.sqrt_ceil` |
+| `x117_image_edgeE`, `x119_image_edgeE` | idem | `x117_image_edge f e = x108_image_edge f e`, `x119_image_edge f e = x108_image_edge f e` | two of the three hyperedge-image copies |
+| `x117_monochromatic_copyE`, `x117_forces_mono_equiv_x108` | idem | the X117 two-colour Ramsey-host notions are the X108 ones | the X117 copies |
+| `x108_two_colour_ramsey_at_most_equiv_x119_forces_mono`, `x117_forces_mono_equiv_x119_forces_mono` | idem | `x108_two_colour_ramsey_at_most E N <-> x119_forces_mono E 2 N` (and the X117 form) | states the instance: the X119 q-colour machinery at `q = 2` IS the X108/X117 two-colour machinery |
+| `bipartite_relE`, `bipartite_rel_equiv_bipartite` | `homomorphism-theory/theories/conjectures/implications_U3.v` | `bipartite_rel (G := G) (--) = bipartite G` (and `<->`) | U3's relation-level `bipartite_rel` at the adjacency instance |
+| `same_deck_equiv_x21_same_l_deck` | `reconstruction-theory/theories/conjectures/implications_U11.v` | `0 < #\|G\| -> #\|H\| = #\|G\| -> (same_deck G H <-> x21_same_l_deck G H #\|G\|.-1)` | the duplication of the deck vocabulary between U11 and X21 (`vdel_card_setC1` and `pred_addn1` are its helpers) |
+| `liso_equiv_sgraph_of` | `spectral-graph-theory/theories/foundations/spectral.v` | `liso r r' <-> inhabited (sgraph_of rG ≃ sgraph_of rG')` | the gap between the labelled isomorphism of the "almost all graphs" row and the `sgraph`-level `≃` used by `determined_by_spectrum`; `sgraph_of` / `sgraph_ofE` are new |
+| `Delta_lt_of_cln_lt` | `extremal-graph-theory/theories/foundations/degree_bounds.v` | `0 < #\|G\| -> (forall v, d * #\|N[v]\| < p * #\|G\|) -> d * Delta G < p * #\|G\|` | the closed-neighbourhood-to-`Delta` step that was inlined in the e076 edge proof |
+| `x223_eps_bounded_implies_x58_epsilon_bounded` | `extremal-graph-theory/theories/conjectures/implications_X223.v` | `0 < #\|G\| -> x223_eps_bounded G p d -> x58_epsilon_bounded G p d` | the two spellings of eps-boundedness (X223 closed neighbourhood, X58 maximum degree); the e076 proof now calls it |
+| `x118_edges_betweenE`, `x120_edges_betweenE` | idem | `x118_edges_between A B = x223_edges_between A B`, same for `x120_` | the three verbatim ordered-pair cross-edge counters |
+| `x223_edges_between_card_cross` | idem | `[disjoint A & B] -> x223_edges_between A B = #\|[set e in E(G) \| (e :&: A != set0) && (e :&: B != set0)]\|` | the audit's disjoint-case identity `x223_edges_between A B = #\|E(A,B)\|`, with `E(A,B)` spelled with the library's `E(G)` |
+| `x215_arrows_equiv_x195_arrows`, `x215_ramsey_number_equiv_x195_ramsey_number` | `extremal-graph-theory/theories/conjectures/implications_X215.v` | `x215_arrows N k <-> x195_arrows 'K_N 2 (fun _ : 'I_1 => 'K_k)` (and the Ramsey-number wrappers) | the X215 diagonal two-colour arrow as an instance of the X195 family arrow |
+| `edge_setGE`, `x5_edge_setE`, `x15_edge_setE`, `x25_edge_setE`, `x47_edge_setE`, `xe1_edge_setE` | `packing-theory/theories/conjectures/vocabulary_packing.v` | `..._edge_set G = E(G)` | the six tracked `*_edge_set` copies of packing-theory (`X15alone.v`'s seventh is untracked by `_CoqProject` and deliberately not imported) |
+| `hamiltonian_cycleGE` | idem | `hamiltonian_cycleG G c = hamiltonian_cycle G c` | U9's copy of `GTBase.common.hamiltonian_cycle` (itself `ucycleb (--) c && (size c == #\|G\|)`) |
+| `x5_is_triangle_equiv_is_triangle`, `x5_tri_edgesE` | idem | the X5 and U9 triangle notions agree | the byte-identical `is_triangle` / `tri_edges` pairs |
+| `x18_independent_set_equiv_xe1_stable_set` | idem | `x18_independent_set S <-> xe1_stable_set S` | the two names for one notion |
+| `x26_ballE` | idem | `x26_ball r x = x111_ball r x` | the duplicated ball `Fixpoint` |
+| `x15_matching_equiv_matching` | idem | `x15_matching M <-> matching M` | X15's edge-set matching vs `connectivity.matching` |
+| `x18_perfect_matching_equiv_x25_perfect_matching` | idem | the two perfect-matching copies agree | X18 / X25 duplication |
+| `girth_geq4_equiv_triangle_free` | `topological-graph-theory/theories/foundations/girth.v` | `girth_geq G 4 <-> triangle_free G` | the X138 note "triangle-freeness is written `girth_geq G 4` rather than base's `triangle_free`" (`triangle_ucycle` / `ucycle3_triangle` are its halves) |
+| `x158_edge_setE` | `topological-graph-theory/theories/conjectures/vocabulary_topological.v` | `x158_edge_set G = E(G)` | X158's `*_edge_set` copy |
+| `x14_edge_setE`, `x20_edge_setE`, `x37_edge_setE`, `x38_edge_setE`, `x77_edge_setE`, `x102_edge_setE` | `graph-theory-misc/theories/conjectures/vocabulary_misc.v` | `..._edge_set G = E(G)` | the six `*_edge_set` copies of graph-theory-misc, including `x102_edge_set` = "2-element cliques" |
+| `x113_is_cycleE`, `x113_is_cycle_equiv_xe1_rel_cycle` | idem | `x113_is_cycle c = (ucycle (--) c /\ 2 < size c)`, and `x113_is_cycle c <-> xe1_rel_cycle (--) c` | the two `ucycle` wrappers the ledger calls "literally `ucycle r c /\ 2 < size c`" |
+| `x14_matching_equiv_matching` | idem | `x14_matching M <-> matching M` | X14's pairwise-disjoint matching vs `connectivity.matching` |
+
+### Findings: claimed duplications that are NOT plain equivalences
+
+- **`same_deck G H <-> x21_same_l_deck G H #\|G\|.-1` needs two hypotheses.**  It
+  is FALSE without `0 < #|G|`: at `ell = #|G|.-1 = 0` the index type
+  `{S : {set K} | #|S| == 0}` is the singleton `{set0}` for EVERY `K`, so
+  `x21_same_l_deck G H 0` holds for every `H` whatsoever while `same_deck G H`
+  still forces a vertex bijection `G -> H`.  The same collapse occurs at
+  `#|G| = 1`.  With `0 < #|G|` and `#|H| = #|G|` (the hypothesis
+  `x21_l_reconstructible` already carries) the equivalence holds and is proved.
+  For `2 <= #|G|` the cardinality hypothesis is in fact derivable — an
+  `ell`-deck bijection forces `C(#|H|, #|G|-1) = #|G|`, hence `#|H| = #|G|` —
+  but that counting argument is not formalised.
+- **X223 vs X58 eps-boundedness is an IMPLICATION, not an equivalence.**  X223
+  bounds every closed neighbourhood, X58 the maximum degree; since
+  `Delta G < #|N[v]|` for a vertex `v` of maximum degree, only
+  `x223_eps_bounded -> x58_epsilon_bounded` holds (and it needs `0 < #|G|`).
+  The converse fails, so the ledger's "two spellings" are not interchangeable
+  and the X223 row is the stronger hypothesis.
+- **`x223_edges_between A B = #\|E(A,B)\|` needs `[disjoint A & B]`.**  Without
+  disjointness an edge inside `A :&: B` is counted twice as an ordered pair (as
+  `(a,b)` and as `(b,a)`) but once as a 2-set, so the two counts differ; the
+  in-file comment of X223.v already says so and the lemma now carries the guard.
+  Note also that coq-graph-theory / GTBase have NO `edges_between` notion: the
+  canonical form of `|E(A,B)|` had to be spelled with the library's `E(G)` as
+  `#|[set e in E(G) | (e :&: A != set0) && (e :&: B != set0)]|`.
+- **`x23_genuine_path` (topological, X23.v) is a re-encoding, not a copy.**  It is
+  a non-empty `seq` carrying `uniq` and `path (--)`, whereas coq-graph-theory's
+  `upath` / `Path` are indexed by their two ENDPOINTS; there is no equality or
+  `<->` at equal arguments, only a translation that has to name the endpoints.
+  No lemma stated.  The same holds for the other `seq`-vs-`Path` entries of the
+  per-package "path" groups (`x116_ST_path`, `x39_xy_path`, `x146_A_path`, …).
+- **`D3D6_unblocked.v:181 proper_minor` is not a duplicate**: it wraps
+  coq-graph-theory's `minor` with a strictness condition, so it is a new notion.
+- **`x25_perfect_matching` vs `GTBase.common.perfect_matching` was not bridged.**
+  The local copies are "every vertex lies in exactly one member"; base's is
+  `matching M /\ cover M = [set: G]`.  The equivalence is true but needs the
+  `cover`/`bigcup` layer; the two LOCAL copies are bridged to each other and to
+  `connectivity.matching` instead, which is what the rows use.  Left as a
+  follow-up.
+- **`U9.v:187 is_matching_edges` and `n_edges` were not bridged.**
+  `is_matching_edges` is `x15_matching` with the "member is an edge" clause
+  spelled existentially rather than by `\subset`; `U13.v:46 n_edges` is
+  `#|oedges G|`, already tied to `#|E(G)|` by
+  `grounding_U13.oedges_card_edges`, so no new lemma adds information.  Both
+  left as follow-ups.
+- **The three `r_partite_uniform` / matching / matching-number bridges were
+  already proved** by wave E8b in
+  `hypergraph-theory/theories/conjectures/implications_U12.v`
+  (`x6_r_partite_uniform_equiv_r_partite_uniform`,
+  `x6_matching_equiv_hg_matching`,
+  `x6_matching_number_equiv_is_matching_number`) and are NOT duplicated here.

@@ -45,17 +45,21 @@ Proof. by move=> x; rewrite /x218_multipartite_rel eqxx. Qed.
 Definition x218_complete_multipartite (d t : nat) : sgraph :=
   SGraph (@x218_multipartite_sym d t) (@x218_multipartite_irrefl d t).
 
-(** [H] is MULTIBOUNDING: for every [d >= 1] there is a polynomial [c * t ^ e]
-    bounding the chromatic number of every [H]-free graph containing no
-    [K_d(t)] SUBGRAPH, uniformly in [t >= 1]. *)
+(** [H] is MULTIBOUNDING: two coefficient FUNCTIONS [c] and [e] of the
+    parameter [d] -- an explicit bounding function, given in the polynomial
+    normal form -- such that for every [d >= 1] the polynomial [c d * t ^ e d]
+    bounds the chromatic number of every [H]-free graph containing no [K_d(t)]
+    SUBGRAPH, uniformly in [t >= 1].  This is the SKOLEMISED form of "for every
+    [d >= 1] there is a polynomial": see the RE-ENCODING note of
+    [every_forest_is_multibounding_statement]. *)
 Definition x218_multibounding (H : sgraph) : Prop :=
-  forall d : nat, 1 <= d ->
-    exists c e : nat,
+  exists c e : nat -> nat,
+    forall d : nat, 1 <= d ->
       forall (t : nat) (G : sgraph),
         1 <= t ->
         ~ has_induced H G ->
         ~ has_subgraph G (x218_complete_multipartite d t) ->
-        χ([set: G]) <= c * t ^ e.
+        χ([set: G]) <= c d * t ^ e d.
 
 (** An ODD MINOR model of [H] in [G]: branch sets that are nonempty, connected
     and pairwise disjoint, together with a 2-colouring of [G] making every edge
@@ -165,20 +169,30 @@ Definition polynomial_gyarfas_sumner_tree_statement : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2303.11766__00/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2303.11766__00.json
     English statement: (Nguyen, Scott and Seymour 2023, Conjecture 1.6, arXiv:2303.11766)
-      Every finite simple graph H that is a forest is multibounding: for every d at least one there
-      are naturals c and e such that, for every t at least one, every graph with no induced
-      subgraph isomorphic to H and with no subgraph isomorphic to the complete d-partite graph with
-      all parts of size t has chromatic number at most c times the e-th power of t.
+      Every finite simple graph H that is a forest is multibounding: there are two functions c and
+      e from naturals to naturals such that, for every d at least one, every t at least one and
+      every graph with no induced subgraph isomorphic to H and with no subgraph isomorphic to the
+      complete d-partite graph with all parts of size t, the chromatic number of that graph is at
+      most c of d times the (e of d)-th power of t.
     Definitions: [x218_multibounding H] - the displayed property of H (this file);
       [x218_complete_multipartite d t] - the graph on pairs (part, index) in which two vertices are
       adjacent exactly when their parts differ, i.e. K_d(t) (this file); [has_subgraph G H] - G
       contains H as a not necessarily induced subgraph (GTBase common.v); [has_induced H G]
       (U8.v); [is_forest [set: H]] (coq-graph-theory sgraph.v via GTBase).
     Notes: K_d(t) is excluded as a SUBGRAPH, not as an induced subgraph, as in the source. The
-      polynomial f(t) of the source is put in the normal form c * t^e, and c, e are chosen after d
-      and before t and G, matching "for every d >= 1 there is a polynomial f such that for all
-      t >= 1 ...". The guards d >= 1 and t >= 1 are the source's. Corpus status: open (paths,
-      brooms and disjoint unions of multibounding forests are known). *)
+      polynomial f(t) of the source is put in the normal form c * t^e, and its two coefficients are
+      given as FUNCTIONS of d, so that the whole bounding datum c, e is chosen before d, t and G:
+      the Skolemised reading of the source's "for every d >= 1 there is a polynomial f such that
+      for all t >= 1 ...". The guards d >= 1 and t >= 1 are the source's; the bounding data depend
+      on H and d only, never on the graph.
+      RE-ENCODING (2026-09-24): explicit bounding function; the earlier forall-d-exists-c form
+      needed countable choice to yield the function used by e035; equivalent classically, strictly
+      stronger constructively. [grounding_X218.v] proves the new form implies the old one
+      ([x218_multibounding_pointwise]) and exhibits a witness, and the re-encoded body is what
+      makes the corpus edge e035 to U8's Gyarfas-Sumner statement machine-checkable
+      ([implications_X218.v]).
+      Corpus status: open (paths, brooms and disjoint unions of multibounding forests are
+      known). *)
 Definition every_forest_is_multibounding_statement : Prop :=
   forall H : sgraph,
     is_forest [set: H] ->

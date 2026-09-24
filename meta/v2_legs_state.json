@@ -125,7 +125,7 @@
   "axv_1507_01120_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x151-x170-batch1",
@@ -135,7 +135,7 @@
   "axv_1507_08208_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x47-packing-clean1",
@@ -276,7 +276,7 @@
   "axv_1604_07976_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x151-x170-batch1",
@@ -286,7 +286,7 @@
   "axv_1604_07976_01": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x151-x170-batch1",
@@ -306,7 +306,7 @@
   "axv_1605_07411_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -376,7 +376,7 @@
   "axv_1606_06810_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "asymptotics-foundation-retarget",
@@ -386,7 +386,7 @@
   "axv_1608_03040_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -396,7 +396,7 @@
   "axv_1608_03040_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -406,7 +406,7 @@
   "axv_1608_03040_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x45-digraph-clean1",
@@ -416,7 +416,7 @@
   "axv_1608_03040_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -426,7 +426,7 @@
   "axv_1608_03040_04": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -501,7 +501,7 @@
   "axv_1609_00314_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x171-x190-batch1",
@@ -540,17 +540,17 @@
    "audit_page": "todo",
    "commit": "x2-clean11",
    "package": "digraph-theory",
-   "note": "Authored in X2.v:mader_delta0_transitive_tournament_statement. Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k."
+   "note": "Authored in X2.v:mader_delta0_transitive_tournament_statement. Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the 0 < #|D| guard is the minimal faithful repair (the pointwise semidegree condition admits the vertexless host, which cannot contain a subdivision of the nonempty TT k; paper Conjecture 3 of arXiv:1610.00876 speaks of digraphs with delta^0 >= m). Teeth (x2_delta0_unguarded_false spells the old body inline and refutes it at k = 1) and non-vacuity (x2_delta0_hyp"
   },
   "axv_1610_00876_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x2-clean11",
    "package": "digraph-theory",
-   "note": "Authored in X2.v:oriented_trees_delta_plus_maderian_statement. Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision."
+   "note": "Authored in X2.v:oriented_trees_delta_plus_maderian_statement. Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS -- minimal guard 0 < #|D| inside mader_delta_plus_bound; Conjecture 4 of arXiv:1610.00876 ('every oriented tree is delta^+-maderian') quantifies over digraphs of large minimum out-degree, which have vertices. x2_delta_plus_unguarded_false refutes the old body at the one-vertex tree, x2_delta_plus_hyps_nonvacuous and x2_oriented_tree_TT2 inhabit the hypotheses. The guarded row is n"
   },
   "axv_1610_00876_02": {
    "statement": "done",
@@ -560,17 +560,17 @@
    "audit_page": "todo",
    "commit": "x2-clean11",
    "package": "digraph-theory",
-   "note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union."
+   "note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the body is unchanged and inherits the guard through delta_plus_maderian; this STRENGTHENS the row from vacuously true (unguarded delta_plus_maderian F was false for every nonempty F) to the genuine Conjecture 7 of arXiv:1610.00876. The inheritance note in the doc block is accurate."
   },
   "axv_1610_00876_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x52-digraph-clean1",
    "package": "digraph-theory",
-   "note": "Authored in X52.v:oriented_tree_mader_chi_linear_bound_statement. Encodes Conjecture 11: every oriented tree T of order k has chromatic Mader threshold at most 2k-2."
+   "note": "Authored in X52.v:oriented_tree_mader_chi_linear_bound_statement. Encodes Conjecture 11: every oriented tree T of order k has chromatic Mader threshold at most 2k-2. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS -- guard 0 < #|D| inside x52_mader_chi_bound; Conjecture 11 of arXiv:1610.00876 (mader_chi(T) <= 2k-2 for every oriented tree of order k, no lower bound on k) is a threshold on the chromatic number of digraphs that have vertices. x52_unguarded_false refutes the old body at k = 1 on the empty host, x52_k1_holds shows the guard needs no extra 2 <= k, x52_hyps_nonvacuous inhabit"
   },
   "axv_1610_00876_04": {
    "statement": "todo",
@@ -703,7 +703,7 @@
   "axv_1701_05597_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x171-x190-batch1",
@@ -944,7 +944,7 @@
   "axv_1708_07369_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x223-conjecture-relations",
@@ -954,7 +954,7 @@
   "axv_1708_07369_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x223-conjecture-relations",
@@ -985,7 +985,7 @@
   "axv_1709_04036_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x32-chromatic-clean1",
@@ -995,7 +995,7 @@
   "axv_1709_04036_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x219-conjecture-relations",
@@ -1142,7 +1142,7 @@
   "axv_1802_03727_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x191-x210-batch1",
@@ -1152,7 +1152,7 @@
   "axv_1802_03727_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x13-extremal-clean2",
@@ -1162,7 +1162,7 @@
   "axv_1802_03727_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x30-extremal-clean1",
@@ -1172,7 +1172,7 @@
   "axv_1802_03727_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x13-extremal-clean2",
@@ -1226,7 +1226,7 @@
   "axv_1803_01051_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x7-chromatic-clean5",
@@ -1339,7 +1339,7 @@
   "axv_1806_00825_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x9-cycle-clean2",
@@ -1412,7 +1412,7 @@
   "axv_1808_01605_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x31-chromatic-clean1",
@@ -1436,7 +1436,7 @@
   "axv_1809_08324_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x46-digraph-clean1",
@@ -1446,7 +1446,7 @@
   "axv_1809_08324_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x53-digraph-clean1",
@@ -1456,7 +1456,7 @@
   "axv_1810_00058_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x58-extremal-clean1",
@@ -1466,7 +1466,7 @@
   "axv_1810_00058_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x223-conjecture-relations",
@@ -1517,7 +1517,7 @@
   "axv_1810_08314_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x228-conjecture-relations",
@@ -1628,7 +1628,7 @@
   "axv_1812_09752_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x227-conjecture-relations",
@@ -1666,7 +1666,7 @@
   "axv_1902_07018_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x219-conjecture-relations",
@@ -1760,7 +1760,7 @@
   "axv_1904_12060_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x33-chromatic-clean1",
@@ -1875,7 +1875,7 @@
   "axv_1907_11600_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x48-packing-clean1",
@@ -1892,7 +1892,7 @@
   "axv_1907_12999_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x5-structural",
@@ -2073,7 +2073,7 @@
   "axv_1912_02342_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x223-conjecture-relations",
@@ -2153,7 +2153,7 @@
   "axv_2001_01607_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x42-minor-clean1",
@@ -2347,7 +2347,7 @@
   "axv_2004_07457_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x219-conjecture-relations",
@@ -2469,7 +2469,7 @@
   "axv_2006_09877_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x220-conjecture-relations",
@@ -2479,7 +2479,7 @@
   "axv_2006_09877_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x220-conjecture-relations",
@@ -2586,7 +2586,7 @@
   "axv_2009_12189_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x219-conjecture-relations",
@@ -2745,7 +2745,7 @@
   "axv_2103_05036_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x228-conjecture-relations",
@@ -2916,7 +2916,7 @@
   "axv_2107_05995_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x227-conjecture-relations",
@@ -3188,7 +3188,7 @@
   "axv_2201_09115_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x8-minor-list-clean2",
@@ -3222,7 +3222,7 @@
   "axv_2202_05557_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x65-chromatic-clean1",
@@ -3260,7 +3260,7 @@
   "axv_2202_07746_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x228-conjecture-relations",
@@ -3291,7 +3291,7 @@
   "axv_2202_09118_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x66-chromatic-clean1",
@@ -3308,7 +3308,7 @@
   "axv_2202_10412_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x218-conjecture-relations",
@@ -3332,7 +3332,7 @@
   "axv_2202_13306_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x221-conjecture-relations",
@@ -3404,7 +3404,7 @@
   "axv_2204_10119_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x5-structural",
@@ -3414,7 +3414,7 @@
   "axv_2204_10119_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x5-structural",
@@ -3556,7 +3556,7 @@
   "axv_2206_13635_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x225-conjecture-relations",
@@ -3566,7 +3566,7 @@
   "axv_2206_13635_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x225-conjecture-relations",
@@ -3652,7 +3652,7 @@
   "axv_2208_06858_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x227-conjecture-relations",
@@ -3985,7 +3985,7 @@
   "axv_2302_04986_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x226-conjecture-relations",
@@ -3995,7 +3995,7 @@
   "axv_2302_04986_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x226-conjecture-relations",
@@ -4019,7 +4019,7 @@
   "axv_2302_04986_04": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x226-conjecture-relations",
@@ -4036,7 +4036,7 @@
   "axv_2302_08922_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x218-conjecture-relations",
@@ -4046,7 +4046,7 @@
   "axv_2302_08922_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x218-conjecture-relations",
@@ -4080,12 +4080,12 @@
   "axv_2303_11766_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x218-conjecture-relations",
    "package": "chromatic-theory",
-   "note": "Authored in X218.v:every_forest_is_multibounding_statement. Nguyen-Scott-Seymour VIII, Conjecture 1.6: every forest is multibounding, where for every d >= 1 there are c, e with chi(G) <= c*t^e for every t >= 1 and every H-free G containing no K_d(t) SUBGRAPH. K_d(t) is the local x218_complete_multipartite on 'I_d * 'I_t."
+   "note": "Authored in X218.v:every_forest_is_multibounding_statement. Nguyen-Scott-Seymour VIII, Conjecture 1.6: every forest is multibounding, where for every d >= 1 there are c, e with chi(G) <= c*t^e for every t >= 1 and every H-free G containing no K_d(t) SUBGRAPH. K_d(t) is the local x218_complete_multipartite on 'I_d * 'I_t. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the re-encoded x218_multibounding (exists c e : nat -> nat, forall d >= 1, t >= 1, G H-free with no K_d(t) SUBGRAPH, chi <= c d * t^(e d)) still gives, for each FIXED d, a polynomial c d * t^(e d) in t with c"
   },
   "axv_2304_01281_00": {
    "statement": "todo",
@@ -4160,7 +4160,7 @@
   "axv_2305_15585_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x2-clean11",
@@ -4170,7 +4170,7 @@
   "axv_2305_15585_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x2-clean11",
@@ -4194,7 +4194,7 @@
   "axv_2305_16258_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x220-conjecture-relations",
@@ -4228,7 +4228,7 @@
   "axv_2306_04710_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x221-conjecture-relations",
@@ -4290,7 +4290,7 @@
   "axv_2307_15512_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x217-conjecture-relations",
@@ -5365,7 +5365,7 @@
   "axv_2505_05339_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x6-hypergraph-spectral-topological",
@@ -5716,7 +5716,7 @@
   "axv_2511_02892_06": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x228-conjecture-relations",
@@ -5733,7 +5733,7 @@
   "axv_2511_03864_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x220-conjecture-relations",
@@ -5743,7 +5743,7 @@
   "axv_2511_03864_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x220-conjecture-relations",
@@ -6045,7 +6045,7 @@
   "bm_011": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x212-conjecture-relations",
@@ -6055,7 +6055,7 @@
   "bm_013": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x212-conjecture-relations",
@@ -6105,7 +6105,7 @@
   "bm_026": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x212-conjecture-relations",
@@ -6139,7 +6139,7 @@
   "bm_033": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x215-conjecture-relations",
@@ -6179,7 +6179,7 @@
   "bm_039": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x215-conjecture-relations",
@@ -6189,7 +6189,7 @@
   "bm_041": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x214-conjecture-relations",
@@ -6209,7 +6209,7 @@
   "bm_045": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x213-conjecture-relations",
@@ -6229,7 +6229,7 @@
   "bm_050": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x213-conjecture-relations",
@@ -6286,7 +6286,7 @@
   "bm_064": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x212-conjecture-relations",
@@ -6326,7 +6326,7 @@
   "bm_079": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x211-conjecture-relations",
@@ -9502,7 +9502,7 @@
   "oth_meyniels_conjecture": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x217-conjecture-relations",
@@ -10422,7 +10422,7 @@
   "std_chen_chv_tal_conjecture": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x55-misc-clean1",
@@ -10432,7 +10432,7 @@
   "std_chen_chv_tal_conjecture_146": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x110-misc-clean1",
@@ -12735,7 +12735,7 @@
   "std_smith_s_conjecture_longest_cycles_in_r_connected": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x10-cycle-clean2",

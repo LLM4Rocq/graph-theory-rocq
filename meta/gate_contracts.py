@@ -163,3 +163,23 @@ def forbidden_exact_types(
     if status in ("open", "partial") and (statement, candidate, "prove") not in verified_resolutions:
         cases.append(("direct-proof-undecided", statement))
     return cases
+
+
+def incl_flags_from_cqp(cqp_txt: str) -> list[str]:
+    """``-Q``/``-R`` include flags of a ``_CoqProject``, as an argv list.
+
+    Copied verbatim (behaviour-wise) from the private helper of
+    ``check_milestone.py`` so that ``check_edges.py`` can compile a probe with a
+    package's own logical paths without importing the milestone gate. Returned as
+    a list so no path is ever interpolated into a shell string.
+    """
+    incl_flags: list[str] = []
+    for m in re.findall(r"-[QR]\s+\S+\s+\S+", cqp_txt):
+        incl_flags += m.split()
+    return incl_flags
+
+
+def namespace_from_cqp(cqp_txt: str) -> str | None:
+    """The package's own logical namespace: the ``-R theories <NS>`` binding."""
+    m = re.search(r"^\s*-R\s+theories\s+(\S+)", cqp_txt, re.M)
+    return m.group(1) if m else None

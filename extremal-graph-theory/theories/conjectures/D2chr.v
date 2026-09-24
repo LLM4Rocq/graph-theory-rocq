@@ -23,7 +23,8 @@
 
     PARTIAL / abstraction notes:
       - Row 1 [is_fractional_hadwiger] gives the LP relaxation of the (clique-minor)
-        Hadwiger number — a faithful but definitional choice of the fractional value.
+        Hadwiger number — a faithful but definitional choice of the fractional value;
+        branch sets are NON-EMPTY (wave-E10 guard repair, see the row's Notes).
       - Row 2 (mixing) is PARTIAL: the genuine object M_c(G) is a REAL number and the
         question is whether it is rational; with no real-number / recolouring-dynamics
         layer we model the recolouring graph by single-vertex moves under [connect] and
@@ -54,7 +55,7 @@ Local Open Scope ring_scope.
         attained (rational for finite G);
       - [is_hadwiger] : had(G) = largest h with a K_h minor (via base [minor]);
       - [frac_clique_minor]/[is_fractional_hadwiger] : had_f(G) = the LP relaxation —
-        rational weights on connected, pairwise-adjacent branch sets, each vertex
+        rational weights on non-empty connected, pairwise-adjacent branch sets, each vertex
         covered with total weight ≤ 1, maximise the total weight (0/1 weights recover
         a clique minor, so the optimum is had_f ≥ had). *)
 Definition bfold_colouring (G : sgraph) (a b : nat) (f : G -> {set 'I_a}) : Prop :=
@@ -70,7 +71,7 @@ Definition is_hadwiger (G : sgraph) (h : nat) : Prop :=
 Definition frac_clique_minor (G : sgraph) (n : nat)
     (B : 'I_n -> {set G}) (w : 'I_n -> rat) (r : rat) : Prop :=
   [/\ (forall i, 0 <= w i),
-      (forall i, connected (B i)),
+      (forall i, B i != set0 /\ connected (B i)),
       (forall i j, i != j -> exists x y : G, [/\ x \in B i, y \in B j & x -- y]),
       (forall v : G, (\sum_(i | v \in B i) w i <= 1)%R)
     & r = \sum_i w i].
@@ -85,23 +86,48 @@ Definition is_fractional_hadwiger (G : sgraph) (r : rat) : Prop :=
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/fractional_hadwiger.json
     English statement: (Open Problem Garden, "Fractional Hadwiger")
       For every non-empty finite graph G, if xf is its fractional chromatic number, h its
-      Hadwiger number and hf its fractional Hadwiger number, then all three inequalities
-      hold: xf <= h, chi(G) <= hf, and xf <= hf.
+      Hadwiger number and hf its fractional Hadwiger number (the maximum total weight of a
+      non-negative weighting of non-empty connected vertex sets, any two of them joined by an
+      edge, such that every vertex is covered by total weight at most 1), then all three
+      inequalities hold: xf <= h, chi(G) <= hf, and xf <= hf.
     Definitions: [bfold_colouring G a b f] - an (a:b)-colouring: every vertex gets a b-element subset
       of an a-element palette and adjacent vertices get disjoint subsets (D2chr.v);
       [is_fractional_chromatic G r] - r is the attained minimum of a/b over (a:b)-colourings
       with b > 0 (D2chr.v); [is_hadwiger G h] - h is the largest integer with a K_h minor,
       using coq-graph-theory's [minor] (D2chr.v); [frac_clique_minor B w r] - the LP
       relaxation of a clique minor: non-negative rational weights w on branch sets B i that
-      are connected and pairwise joined by an edge, with every vertex covered by total weight
-      at most 1, and r the total weight (D2chr.v); [is_fractional_hadwiger G r] - r is the
+      are non-empty, connected and pairwise joined by an edge, with every vertex covered by
+      total weight at most 1, and r the total weight (D2chr.v); [is_fractional_hadwiger G r] - r is the
       attained maximum of that LP (D2chr.v); [chi] - chromatic number (coq-graph-theory).
     Notes: the fractional Hadwiger number is defined here as the LP relaxation of the
-      clique-minor number; 0/1 weights recover an ordinary clique minor, so had_f >= had.
-      Branch sets are not required to be pairwise disjoint (that is the point of the
-      relaxation) and are allowed to be empty, which only makes had_f >= 1 for every graph.
-      All three values are passed as parameters constrained by attainment predicates, so an
-      instance where the optimum is not attained is vacuous. *)
+      clique-minor number (Fox; Pedersen; Harvey-Wood): the maximum total weight of a
+      non-negative weighting of non-empty connected vertex sets that pairwise touch, with
+      every vertex covered by total weight at most 1; 0/1 weights recover an ordinary clique
+      minor, so had_f >= had. Branch sets are not required to be pairwise disjoint (that is
+      the point of the relaxation). The encoding asks two distinct branch sets to be joined
+      by an EDGE rather than merely to touch (share a vertex or be joined by an edge); for
+      non-empty connected sets the two notions differ only for two indices carrying the same
+      singleton, which can be merged (their weights add under the same vertex constraint),
+      so the optimum is unchanged. All three values are passed as parameters constrained by
+      attainment predicates; for every finite graph these optima exist (rational LP optima:
+      atlas fractional.frac_chromatic_exists and fractional.frac_hadwiger_exists, via the
+      Fourier-Motzkin attainment lemma Extremal.foundations.lp_rational.lp_max_fin), so no
+      instance is vacuous.
+      GUARD REPAIR (2026-09-24, wave E10): [frac_clique_minor] now requires every branch
+      set to be NON-EMPTY (B i != set0). Without it [is_fractional_hadwiger G hf] held for
+      NO graph and NO hf, so the row was VACUOUSLY TRUE: a single EMPTY branch set is
+      [connected], meets no adjacency constraint (only one index) and covers no vertex, so
+      its weight is unbounded and the LP has no maximum (wave-A1 witness
+      atlas fractional.is_fractional_hadwiger_unsat, now ported as
+      grounding_D2chr.old_is_fractional_hadwiger_unsat on the old body spelled out inline).
+      The paper's branch sets are connected SUBGRAPHS, hence non-empty; nonemptiness also
+      forces each weight to be at most 1, as in the source. [is_fractional_chromatic] has no
+      such defect (it ranges over (a:b)-colourings with b > 0, not over weighted sets) and
+      is unchanged. Teeth and non-vacuity: grounding_D2chr.v
+      (old_is_fractional_hadwiger_unsat, frac_clique_minor_le_card,
+      is_fractional_hadwiger_K1, is_fractional_hadwiger_K2,
+      fractional_hadwiger_hyps_K2, fractional_hadwiger_instance_K2,
+      fractional_hadwiger_conclusion_has_content). *)
 Definition fractional_hadwiger_statement : Prop :=
   forall (G : sgraph) (xf hf : rat) (h : nat),
     (0 < #|G|)%N ->

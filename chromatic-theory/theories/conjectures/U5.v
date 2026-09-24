@@ -472,9 +472,9 @@ Definition star_chromatic_index_of_cubic_graphs_statement : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/behzads_conjecture/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/behzads_conjecture.json
     English statement: (Behzad 1965 and Vizing 1964; Open Problem Garden, "Total Colouring Conjecture")
-      For every multigraph G that is simple, i.e. loopless and without parallel edges, the total
-      chromatic number of G is at least Delta(G) + 1 and at most Delta(G) + 2, which is the source's
-      "the total chromatic number equals Delta + 1 or Delta + 2".
+      For every multigraph G that is simple, i.e. loopless and without parallel edges, and has at
+      least one vertex, the total chromatic number of G is at least Delta(G) + 1 and at most
+      Delta(G) + 2, which is the source's "the total chromatic number equals Delta + 1 or Delta + 2".
     Definitions: [msimple G] - G is loopless and the endpoint-pair map on edges is injective, so G
       has no parallel edges (this file); [edge_ends e] - the set of endpoints of e (this file);
       [total_chromatic_number G] - chi of the total graph of G (GTBase base/theories/base.v);
@@ -484,7 +484,11 @@ Definition star_chromatic_index_of_cubic_graphs_statement : Prop :=
       is loopless with Delta = 2p but has total chromatic number at least chi' = 3p > 2p + 2 for p
       >= 3. The guard [msimple G] restricts the statement to exactly the open conjecture while
       reusing the multigraph total-colouring machinery of base. The disjunction "Delta+1 or Delta+2"
-      is stated as the equivalent two-sided bound. *)
+      is stated as the equivalent two-sided bound.
+      GUARD REPAIR (2026-09-24, wave E2b): the unguarded body was axiom-free refutable on the empty
+      multigraph (the empty multigraph is simple with mDelta = 0 and total chromatic number 0, so
+      the lower bound 1 <= 0 fails); the guard [0 < #|G|] excludes only the empty graph, where
+      Behzad's lower bound Delta + 1 <= chi'' is meaningless. *)
 Definition behzads_statement : Prop :=
-  forall G : mgraph, msimple G ->
+  forall G : mgraph, msimple G -> (0 < #|G|)%N ->
     (mDelta G).+1 <= total_chromatic_number G <= (mDelta G).+2.

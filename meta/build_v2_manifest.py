@@ -580,6 +580,9 @@ if os.path.exists(RECON_PATH):
             "commit": "x1-reconcile", "package": RC["repo"],
             "note": r["verification_note"],
         }
+        for lg in ("grounding", "edges", "correspondence", "audit_page"):   # overlay is the source of truth for the other legs
+            if slug in prior_entries:
+                recon_overlay[slug][lg] = prior_entries[slug].get(lg, "todo")
         r["legs"] = {lg: recon_overlay[slug][lg] for lg in LEGS}
 
 # ── Statement waves after X1 (meta/v2_statement_waves.json): new authored statement files.
@@ -644,6 +647,9 @@ if os.path.exists(WAVES_PATH):
                 "commit": wave.get("commit", phase.lower()), "package": repo,
                 "note": r["verification_note"],
             }
+            for lg in ("grounding", "edges", "correspondence", "audit_page"):   # overlay is the source of truth for the other legs
+                if slug in prior_entries:
+                    wave_overlay[slug][lg] = prior_entries[slug].get(lg, "todo")
             r["legs"] = {lg: wave_overlay[slug][lg] for lg in LEGS}
 
 # public URLs (site page + per-record review file on GitHub) for EVERY row; the statement-doc

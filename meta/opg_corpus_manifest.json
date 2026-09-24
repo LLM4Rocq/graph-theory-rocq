@@ -281,7 +281,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -326,7 +326,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -374,7 +374,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -465,7 +465,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -556,7 +556,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -600,7 +600,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1058,7 +1058,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1240,7 +1240,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1285,7 +1285,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1376,7 +1376,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1559,7 +1559,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2023,7 +2023,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2069,7 +2069,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2484,7 +2484,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2529,7 +2529,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2710,7 +2710,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2799,7 +2799,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2889,7 +2889,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3026,7 +3026,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3717,7 +3717,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3855,7 +3855,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4413,7 +4413,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4458,7 +4458,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4637,7 +4637,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4727,7 +4727,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5092,7 +5092,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5183,7 +5183,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5363,7 +5363,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5548,7 +5548,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5827,7 +5827,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5964,7 +5964,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6283,7 +6283,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6328,7 +6328,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6420,7 +6420,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6555,7 +6555,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7198,7 +7198,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7557,7 +7557,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7603,7 +7603,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7649,7 +7649,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8244,7 +8244,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8381,7 +8381,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8520,7 +8520,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8844,7 +8844,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9172,7 +9172,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9267,7 +9267,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9493,7 +9493,7 @@
    "legs": {
     "statement": "partial",
     "grounding": "partial",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9631,7 +9631,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9676,7 +9676,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9770,7 +9770,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9912,7 +9912,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10183,7 +10183,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10319,7 +10319,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },

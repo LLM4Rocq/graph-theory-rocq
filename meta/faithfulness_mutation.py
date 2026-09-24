@@ -67,8 +67,8 @@ MUTANTS = [
         replacements=(
             Replacement(
                 "chromatic-theory/theories/conjectures/U4.v",
-                "partial_list_coloring_0_statement",
-                "Definition partial_list_coloring_0_statement : Prop :=\n  True.",
+                "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
+                "Definition choice_number_of_k_chromatic_graphs_of_bounded_order_statement : Prop :=\n  True.",
             ),
         ),
         appendices=(
@@ -79,14 +79,14 @@ MUTANTS = [
 (** MUTATION TEST CANARY: this lemma is written only in a temporary copy.
     If committed, it would prove an open row directly and must be rejected by
     the exact-type faithfulness gate. *)
-Lemma mutation_direct_proof_partial_list_coloring_0_statement :
-  partial_list_coloring_0_statement.
+Lemma mutation_direct_proof_choice_number_of_k_chromatic_graphs_of_bounded_order_statement :
+  choice_number_of_k_chromatic_graphs_of_bounded_order_statement.
 Proof. exact I. Qed.
 """,
             ),
         ),
         expected_signature="direct-proof-undecided",
-        note="trivializes an open row to True and commits a direct proof",
+        note="trivializes an open row (no dependent theorem, so the exact-type gate is what must catch it) to True and commits a direct proof",
     ),
     Mutant(
         name="u4_open_row_false_unconditional_refutation",
@@ -95,8 +95,8 @@ Proof. exact I. Qed.
         replacements=(
             Replacement(
                 "chromatic-theory/theories/conjectures/U4.v",
-                "partial_list_coloring_0_statement",
-                "Definition partial_list_coloring_0_statement : Prop :=\n  False.",
+                "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
+                "Definition choice_number_of_k_chromatic_graphs_of_bounded_order_statement : Prop :=\n  False.",
             ),
         ),
         appendices=(
@@ -107,8 +107,8 @@ Proof. exact I. Qed.
 (** MUTATION TEST CANARY: this lemma is written only in a temporary copy.
     If committed, it would refute a non-disproved row unconditionally and must
     be rejected by the exact-type faithfulness gate. *)
-Lemma mutation_refutes_partial_list_coloring_0_statement :
-  ~ partial_list_coloring_0_statement.
+Lemma mutation_refutes_choice_number_of_k_chromatic_graphs_of_bounded_order_statement :
+  ~ choice_number_of_k_chromatic_graphs_of_bounded_order_statement.
 Proof. by []. Qed.
 """,
             ),

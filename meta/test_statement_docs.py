@@ -37,6 +37,13 @@ GOOD_BLOCK = f"""(** Corpus row: {ROW_ID}
 Definition fake_statement : Prop := True.
 """
 
+EXTERNAL_BLOCK = """(** External theorem: A. Author and B. Author, "A fake duality",
+    Journal of Fake Results 28 (1998) 155-161.
+    Claim: every fake object of weight two carries a fake flow.
+    Not formalized here. *)
+Definition external_fake_duality_statement : Prop := True.
+"""
+
 
 class DocGateCanaries(unittest.TestCase):
     def setUp(self):
@@ -166,6 +173,34 @@ class DocGateCanaries(unittest.TestCase):
         code, output = self.gate()
         self.assertEqual(code, 1)
         self.assertIn("expected 'none'", output)
+
+    # ── external-theorem blocks ─────────────────────────────────────────────────────────
+    def test_external_theorem_block_passes(self):
+        self.source.write_text(EXTERNAL_BLOCK)
+        code, output = self.gate()
+        self.assertEqual(code, 0, output)
+        self.assertIn("1 target(s), 1 documented", output)
+
+    def test_external_theorem_block_without_claim_fails(self):
+        self.source.write_text("\n".join(l for l in EXTERNAL_BLOCK.splitlines()
+                                         if not l.strip().startswith("Claim:")) + "\n")
+        code, output = self.gate()
+        self.assertEqual(code, 1)
+        self.assertIn("missing key `Claim:`", output)
+
+    def test_external_theorem_block_on_a_non_external_definition_fails(self):
+        self.source.write_text(EXTERNAL_BLOCK.replace("external_fake_duality_statement",
+                                                      "fake_helper_statement"))
+        code, output = self.gate()
+        self.assertEqual(code, 1)
+        self.assertIn("is not an `external_*_statement` definition", output)
+
+    def test_external_theorem_block_without_a_year_fails(self):
+        self.source.write_text(EXTERNAL_BLOCK.replace(
+            "Journal of Fake Results 28 (1998) 155-161", "Journal of Fake Results, to appear"))
+        code, output = self.gate()
+        self.assertEqual(code, 1)
+        self.assertIn("must be a citation line", output)
 
     # ── baseline rollout ────────────────────────────────────────────────────────────────
     def test_baseline_shields_then_must_shrink(self):

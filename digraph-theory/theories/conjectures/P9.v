@@ -320,18 +320,26 @@ Definition monochromatic_reachability_vs_rainbow_triangles_statement : Prop :=
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/subdivision_of_a_transitive_tournament_in_digraphs_with_large_outdegree.json
     English statement: (Open Problem Garden, Subdivision of a transitive tournament in digraphs with large outdegree)
       There is a function f from naturals to naturals such that for every k and every finite
-      digraph D in which every vertex has out-degree at least f(k), D contains a subdivision of
-      the transitive tournament on k vertices: injective branch vertices together with, for each
-      arc of the tournament, a directed path of D joining the corresponding branch vertices,
-      whose interiors avoid all branch vertices and are pairwise disjoint.
+      NON-EMPTY digraph D in which every vertex has out-degree at least f(k), D contains a
+      subdivision of the transitive tournament on k vertices: injective branch vertices together
+      with, for each arc of the tournament, a directed path of D joining the corresponding branch
+      vertices, whose interiors avoid all branch vertices and are pairwise disjoint.
     Definitions: [subdivides D H] - D contains a subdivision of H in the above sense (this
       file); [TT k] - the transitive tournament on k vertices, ordered by the ordinals
       (core/tournament.v); [outdeg v] (core/oriented.v); [dipath] (core/dipath.v).
     Notes: The quantifier order is the corpus one: a single f works for every k and every D. The
-      minimum out-degree condition is phrased pointwise. *)
+      minimum out-degree condition is phrased pointwise.
+      GUARD REPAIR (2026-09-24, wave E4): the host carries the guard 0 < #|D|. Without it the row
+      is FALSE: the pointwise condition [forall v : D, f k <= outdeg v] holds VACUOUSLY on the
+      EMPTY digraph, whereas [subdivides D (TT k)] needs an injective branch map out of the
+      nonempty TT k, so no f can work (wave-E3 scratch refutation degeneracy.v:
+      P9_subdivision_TT_false, kept in the wave report, not committed). Mader's question is about
+      digraphs of large minimum out-degree, which have vertices; the guard excludes exactly the
+      vertexless host that a pointwise degree condition admits. Teeth and non-vacuity:
+      grounding_P9.v (p9_subdivision_TT_unguarded_false, p9_outdeg_host_nonvacuous). *)
 Definition subdivision_of_a_transitive_tournament_in_digraphs_w_statement : Prop :=
   exists f : nat -> nat,
-    forall (k : nat) (D : diGraphType),
+    forall (k : nat) (D : diGraphType), (0 < #|D|)%N ->
       (forall v : D, f k <= outdeg v) -> subdivides D (TT k : diGraphType).
 
 (** Corpus row: opg:antidirected_trees_in_digraphs

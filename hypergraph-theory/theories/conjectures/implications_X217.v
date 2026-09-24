@@ -44,4 +44,4 @@ Unset Printing Implicit Defensive.
     constant and no assumption. *)
 Check hypergraph_cop_number_sqrt_n_over_k_statement : Prop.
 
-(*@EDGE from=hypergraph_cop_number_sqrt_n_over_k_statement to=meyniel_cop_number_sqrt_statement kind=implies status=candidate proved=false cite="gc:e243" note="CROSS-PACKAGE: the target, Meyniel's conjecture (others:meyniels-conjecture), is authored concurrently in graph-theory-misc (wave X217:graph-theory-misc), which hypergraph-theory does not and must not depend on, so the node is not in scope here and nothing is proved. At k=2 the hypergraph game is the graph game, so the implication is expected to hold; closing it needs a bridge lemma between the two packages cops-and-robbers primitives plus the constant bookkeeping c^2*2 <= C^2*n ==> c^2 <= C^2*n." *)
+(* cross-package edge hypergraph_cop_number_sqrt_n_over_k_statement -> meyniel_cop_number_sqrt_statement: annotation and proof now live in atlas/theories/conjectures/implications_A1.v or A2.v (wave A1, 2026-09-24) *)
